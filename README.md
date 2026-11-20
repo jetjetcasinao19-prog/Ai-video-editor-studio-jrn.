@@ -47,7 +47,8 @@ model switching) and `CLAUDE.md` (project rules).
 `node tests/caption-style.test.js`, `node tests/scene-detection.test.js`,
 `node tests/transitions.test.js`, `node tests/music.test.js`,
 `node tests/templates.test.js`, `node tests/assistant.test.js`,
-`node tests/mp4-export.test.js` and `node tests/projects.test.js` (needs ffmpeg
+`node tests/mp4-export.test.js`, `node tests/projects.test.js` and
+`node tests/capcut.test.js` (needs ffmpeg
 with flite, Playwright, internet). Runs automatically on
 GitHub Actions for every push.
 
