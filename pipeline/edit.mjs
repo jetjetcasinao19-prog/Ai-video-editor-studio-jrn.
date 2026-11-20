@@ -18,6 +18,9 @@
 //   --max-length 60      cut the result to at most N seconds
 //   --music FILE         background music (ducked under speech)
 //   --music-volume 0.25  0..1
+//   --music auto         use the first song in brand/music/
+//   --brand FILE / --no-brand   brand kit (default: brand/brand.json): colours,
+//                        caption style, logo watermark, outro card with @handle
 //   --title "TEXT"       render an animated HyperFrames intro card with this title
 //   --subtitle "TEXT"    second line on the intro card
 //   --json               print the report as JSON at the end
@@ -25,14 +28,16 @@ import { spawn, execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadBrand, assColor, brandLogo, pickMusic } from './brand.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const FONTS = path.join(HERE, 'fonts');
+const DEFAULT_BRAND_FILE = path.join(HERE, '..', 'brand', 'brand.json');
 const SIZES = { '9:16': [1080, 1920], '16:9': [1920, 1080], '1:1': [1080, 1080] };
 
 // ---------- small helpers ----------
 function parseArgs(argv) {
-  const o = { format: '9:16', captions: 'creator', transcriber: 'auto', cutPauses: true, minPause: 0.6, musicVolume: 0.25 };
+  const o = { format: '9:16', transcriber: 'auto', cutPauses: true, minPause: 0.6, brand: DEFAULT_BRAND_FILE };
   const rest = [];
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i], next = () => argv[++i];
@@ -48,6 +53,9 @@ function parseArgs(argv) {
     else if (a === '--music') o.music = next();
     else if (a === '--music-volume') o.musicVolume = Number(next());
     else if (a === '--title') o.title = next();
+    else if (a === '--brand') o.brand = next();
+    else if (a === '--no-brand') o.brand = null;
+    else if (a === '--words') o.wordsFile = next(); // ready-made word timings (used by the brand preview)
     else if (a === '--subtitle') o.subtitle = next();
     else if (a === '--json') o.json = true;
     else if (a.startsWith('--')) throw new Error('Unknown option ' + a);
@@ -56,7 +64,7 @@ function parseArgs(argv) {
   o.input = rest[0];
   if (!o.input) throw new Error('Usage: node pipeline/edit.mjs <video> [options]');
   if (!SIZES[o.format]) throw new Error('--format must be 9:16, 16:9 or 1:1');
-  if (!['creator', 'box', 'classic', 'none'].includes(o.captions)) throw new Error('--captions must be creator, box, classic or none');
+  if (o.captions !== undefined && !['creator', 'box', 'classic', 'none'].includes(o.captions)) throw new Error('--captions must be creator, box, classic or none');
   if (!['auto', 'groq', 'local', 'none'].includes(o.transcriber)) throw new Error('--transcriber must be auto, groq, local or none');
   return o;
 }
@@ -211,8 +219,9 @@ function assTime(t) {
 }
 const assEsc = s => s.replace(/[{}\\]/g, '').replace(/\n/g, ' ');
 
-export function buildAss(words, style, [W, H]) {
-  const st = STYLES[style];
+export function buildAss(words, style, [W, H], colors) {
+  const st = { ...STYLES[style] };
+  if (colors) { st.color = assColor(colors.captionText); if (style !== 'classic') st.hi = assColor(colors.captionHighlight); }
   const size = Math.round(W * st.size * (W > H ? 0.75 : 1));
   const marginV = Math.round(H * (1 - st.pos));
   const head = `[Script Info]\nScriptType: v4.00+\nPlayResX: ${W}\nPlayResY: ${H}\nWrapStyle: 0\nScaledBorderAndShadow: yes\n\n` +
@@ -242,24 +251,25 @@ export function buildSrt(words) {
   return groupLines(words, 42, 0.8, 4).map((l, i) => `${i + 1}\n${t(l[0].start)} --> ${t(l[l.length - 1].end)}\n${l.map(w => w.w).join(' ')}\n`).join('\n');
 }
 
-// ---------- 5. HyperFrames intro card ----------
-async function renderIntro(out, [W, H], title, subtitle) {
-  const dir = path.join(out, 'intro-project');
+// ---------- 5. HyperFrames cards (intro / outro) ----------
+async function renderCard(kind, out, [W, H], vars, seconds, logoFile) {
+  const dir = path.join(out, kind + '-project');
   fs.rmSync(dir, { recursive: true, force: true });
-  fs.cpSync(path.join(HERE, 'hyperframes', 'intro'), dir, { recursive: true });
+  fs.cpSync(path.join(HERE, 'hyperframes', kind), dir, { recursive: true });
   fs.cpSync(FONTS, path.join(dir, 'fonts'), { recursive: true });
   const html = path.join(dir, 'index.html');
-  fs.writeFileSync(html, fs.readFileSync(html, 'utf8').replaceAll('__W__', W).replaceAll('__H__', H));
+  fs.writeFileSync(html, fs.readFileSync(html, 'utf8').replaceAll('__W__', W).replaceAll('__H__', H).replaceAll('__D__', seconds));
+  if (logoFile) { fs.copyFileSync(logoFile, path.join(dir, 'logo' + path.extname(logoFile).toLowerCase())); vars = { ...vars, logo: 'logo' + path.extname(logoFile).toLowerCase() }; }
   const browser = process.env.HYPERFRAMES_BROWSER_PATH || findHeadlessChrome();
   const env = { ...process.env, HYPERFRAMES_NO_TELEMETRY: '1', HYPERFRAMES_NO_UPDATE_CHECK: '1', HYPERFRAMES_SKIP_SKILLS: '1' };
   if (browser) env.HYPERFRAMES_BROWSER_PATH = browser;
   const bin = path.join(HERE, 'node_modules', '.bin', 'hyperframes');
-  const file = path.join(out, 'intro.mp4');
+  const file = path.join(out, kind + '.mp4');
   await new Promise((resolve, reject) => {
     const p = spawn(bin, ['render', dir, '-o', file, '-q', 'delivery', '--quiet', '--no-wait', '--strict',
-      '--variables', JSON.stringify({ title, subtitle: subtitle || '' })], { env, stdio: ['ignore', 'pipe', 'pipe'] });
+      '--variables', JSON.stringify(vars)], { env, stdio: ['ignore', 'pipe', 'pipe'] });
     let err = ''; p.stderr.on('data', d => { err += d; }); p.stdout.on('data', d => { err += d; });
-    p.on('close', c => c === 0 && fs.existsSync(file) ? resolve() : reject(new Error('HyperFrames render failed: ' + err.slice(-1200))));
+    p.on('close', c => c === 0 && fs.existsSync(file) ? resolve() : reject(new Error('HyperFrames ' + kind + ' render failed: ' + err.slice(-1200))));
   });
   fs.rmSync(dir, { recursive: true, force: true });
   return file;
@@ -289,6 +299,20 @@ export async function editVideo(opts) {
   const report = { input: path.basename(input), output: out, options: { ...opts, input: undefined }, steps: [] };
   const step = (s, info) => { report.steps.push({ step: s, ...info }); log(s, info ? JSON.stringify(info) : ''); };
 
+  // Brand kit (colours, caption style, watermark, outro, music volume).
+  const brand = loadBrand(opts.brand && fs.existsSync(opts.brand) ? opts.brand : null);
+  const useBrand = !!(opts.brand && fs.existsSync(opts.brand));
+  opts.captions = opts.captions || (useBrand ? brand.captions.style : 'creator');
+  if (opts.musicVolume === undefined) opts.musicVolume = useBrand ? brand.music.volume : 0.25;
+  if (opts.music === 'auto') {
+    opts.music = useBrand ? pickMusic(brand) : null;
+    if (!opts.music) step('music', { note: 'no song found in brand/music/, continuing without music' });
+  }
+  const logo = useBrand && brand.watermark.enabled ? brandLogo(brand, path.join(out, '.brand-cache'), FONTS) : null;
+  const outroOn = useBrand && brand.outro.enabled && !!(brand.handle || brand.name);
+  step('brand', useBrand ? { file: path.relative(process.cwd(), opts.brand), name: brand.name || '(not set)', handle: brand.handle || '(not set)',
+    captions: opts.captions, watermark: logo ? (logo.generated ? 'initials logo' : path.basename(logo.file)) : 'off', outro: outroOn ? 'on' : 'off (needs a name or handle)' } : { file: 'none' });
+
   // 1. probe
   const src = probe(input);
   step('probe', src);
@@ -296,7 +320,13 @@ export async function editVideo(opts) {
   // 2. audio (16 kHz mono WAV for analysis, small MP3 for Groq)
   const wav = path.join(out, 'audio16k.wav'), mp3 = path.join(out, 'audio.mp3');
   let words = [], transcript = { engine: 'none', text: '', words: [] };
-  if (src.hasAudio) {
+  if (opts.wordsFile) {
+    transcript = { engine: 'given words', language: '', ...JSON.parse(fs.readFileSync(opts.wordsFile, 'utf8')) };
+    transcript.text = transcript.text || transcript.words.map(w => w.w).join(' ');
+    words = transcript.words;
+    step('transcribe', { engine: transcript.engine, words: words.length });
+    if (src.hasAudio) await run('ffmpeg', ['-y', '-i', input, '-vn', '-ac', '1', '-ar', '16000', '-c:a', 'pcm_s16le', wav]);
+  } else if (src.hasAudio) {
     await run('ffmpeg', ['-y', '-i', input, '-vn', '-ac', '1', '-ar', '16000', '-c:a', 'pcm_s16le', wav]);
     // 3. transcribe
     const want = opts.captions === 'none' && opts.transcriber === 'auto' ? 'none' : opts.transcriber;
@@ -339,57 +369,88 @@ export async function editVideo(opts) {
   if (mapped.length) fs.writeFileSync(path.join(out, 'captions.srt'), buildSrt(mapped));
   const ass = path.join(out, 'captions.ass');
   const useCaptions = opts.captions !== 'none' && mapped.length > 0;
-  if (useCaptions) fs.writeFileSync(ass, buildAss(mapped, opts.captions, [W, H]));
+  if (useCaptions) fs.writeFileSync(ass, buildAss(mapped, opts.captions, [W, H], useBrand ? brand.colors : null));
 
   // 5. one FFmpeg pass: cut + reframe + captions + music + loudness
   const sel = keep.map(([a, b]) => `between(t,${a},${b})`).join('+');
   const vf = [`[0:v]select='${sel}',setpts=N/FRAME_RATE/TB,fps=30,split[a][b]`,
     `[a]scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},boxblur=30:3,eq=brightness=-0.08[bg]`,
     `[b]scale=${W}:${H}:force_original_aspect_ratio=decrease[fg]`,
-    `[bg][fg]overlay=(W-w)/2:(H-h)/2,format=yuv420p` + (useCaptions ? `,subtitles=filename='${ass.replace(/'/g, "\\'")}':fontsdir='${FONTS}'` : '') + '[v]'];
+    `[bg][fg]overlay=(W-w)/2:(H-h)/2` + (logo ? '[base]' : `,format=yuv420p` + (useCaptions ? `,subtitles=filename='${ass.replace(/'/g, "\\'")}':fontsdir='${FONTS}'` : '') + '[v]')];
   const args = ['-y', '-i', input];
+  let nextInput = 1;
+  if (logo) {
+    // Logo watermark in a corner, under the captions.
+    const lw = Math.round(Math.min(W, H) * brand.watermark.size), m = Math.round(Math.min(W, H) * 0.04);
+    const pos = { 'top-right': [`W-w-${m}`, `${m}`], 'top-left': [`${m}`, `${m}`], 'bottom-right': [`W-w-${m}`, `H-h-${m}`], 'bottom-left': [`${m}`, `H-h-${m}`] }[brand.watermark.position];
+    args.push('-loop', '1', '-i', logo.file);
+    vf.push(`[${nextInput}:v]scale=${lw}:-1,format=rgba,colorchannelmixer=aa=${brand.watermark.opacity}[wm]`,
+      `[base][wm]overlay=${pos[0]}:${pos[1]}:shortest=1,format=yuv420p` + (useCaptions ? `,subtitles=filename='${ass.replace(/'/g, "\\'")}':fontsdir='${FONTS}'` : '') + '[v]');
+    nextInput++;
+  }
   const af = [];
   if (src.hasAudio) af.push(`[0:a]aselect='${sel}',asetpts=N/SR/TB,aresample=48000,aformat=channel_layouts=stereo[voice]`);
   if (opts.music) {
     args.push('-stream_loop', '-1', '-i', path.resolve(opts.music));
     const fadeOut = Math.max(0, kept - 2);
-    af.push(`[1:a]atrim=0:${kept},asetpts=N/SR/TB,aresample=48000,aformat=channel_layouts=stereo,volume=${opts.musicVolume},afade=t=in:d=1,afade=t=out:st=${fadeOut}:d=2[mus]`);
+    af.push(`[${nextInput}:a]atrim=0:${kept},asetpts=N/SR/TB,aresample=48000,aformat=channel_layouts=stereo,volume=${opts.musicVolume},afade=t=in:d=1,afade=t=out:st=${fadeOut}:d=2[mus]`);
     if (src.hasAudio) {
       af.push('[voice]asplit[v1][v2]', '[mus][v2]sidechaincompress=threshold=0.03:ratio=8:attack=20:release=400[duck]',
         '[v1][duck]amix=inputs=2:duration=first:normalize=0,loudnorm=I=-14:TP=-1.5:LRA=11[aout]');
     } else af.push('[mus]loudnorm=I=-14:TP=-1.5:LRA=11[aout]');
   } else if (src.hasAudio) af.push('[voice]loudnorm=I=-14:TP=-1.5:LRA=11[aout]');
-  const main = path.join(out, opts.title ? 'main.mp4' : 'final.mp4');
+  const withCards = !!(opts.title && (!useBrand || brand.intro.enabled)) || outroOn;
+  const main = path.join(out, withCards ? 'main.mp4' : 'final.mp4');
   args.push('-filter_complex', [...vf, ...af].join(';'), '-map', '[v]');
   if (af.length) args.push('-map', '[aout]', '-c:a', 'aac', '-b:a', '160k', '-ar', '48000');
   args.push('-t', String(kept), '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '20', '-movflags', '+faststart', main);
   await run('ffmpeg', args);
-  step('render', { file: path.basename(main), size: W + 'x' + H, captions: useCaptions ? opts.captions : 'none', music: !!opts.music });
+  step('render', { file: path.basename(main), size: W + 'x' + H, captions: useCaptions ? opts.captions : 'none',
+    music: opts.music ? path.basename(opts.music) : false, watermark: !!logo });
 
-  // 6. HyperFrames intro card, joined in front
+  // 6. HyperFrames cards: intro (with --title) in front, outro (brand) at the end
   let final = main;
-  if (opts.title) {
-    const intro = await renderIntro(out, [W, H], opts.title, opts.subtitle);
+  const colors = useBrand ? brand.colors : { background: '#0b0e14', text: '#ffffff', accent: '#ffe600' };
+  const parts = [];
+  if (opts.title && (!useBrand || brand.intro.enabled)) {
+    parts.push({ file: await renderCard('intro', out, [W, H], { title: opts.title, subtitle: opts.subtitle || brand.tagline || '',
+      bg: colors.background, ink: colors.text, accent: colors.accent }, 2.5), seconds: 2.5 });
+    step('intro', { engine: 'hyperframes', title: opts.title });
+  }
+  parts.push({ file: main, seconds: null });
+  if (outroOn) {
+    const sec = brand.outro.seconds;
+    parts.push({ file: await renderCard('outro', out, [W, H], { text: brand.outro.text, handle: brand.handle, name: brand.name,
+      bg: colors.background, ink: colors.text, accent: colors.accent }, sec, logo && logo.file), seconds: sec });
+    step('outro', { engine: 'hyperframes', text: brand.outro.text, handle: brand.handle || brand.name });
+  }
+  if (parts.length > 1) {
     final = path.join(out, 'final.mp4');
     const hasA = af.length > 0;
-    const fc = hasA
-      ? '[0:v]fps=30,format=yuv420p,setsar=1[iv];anullsrc=r=48000:cl=stereo,atrim=0:2.5[ia];[1:v]setsar=1[mv];[iv][ia][mv][1:a]concat=n=2:v=1:a=1[v][a]'
-      : '[0:v]fps=30,format=yuv420p,setsar=1[iv];[1:v]setsar=1[mv];[iv][mv]concat=n=2:v=1:a=0[v]';
-    const cargs = ['-y', '-i', intro, '-i', main, '-filter_complex', fc, '-map', '[v]'];
+    const cargs = ['-y'];
+    parts.forEach(p => cargs.push('-i', p.file));
+    const fc = [], seq = [];
+    parts.forEach((p, i) => {
+      fc.push(`[${i}:v]fps=30,format=yuv420p,setsar=1[v${i}]`);
+      if (hasA) fc.push(p.seconds ? `anullsrc=r=48000:cl=stereo,atrim=0:${p.seconds}[a${i}]` : `[${i}:a]anull[a${i}]`);
+      seq.push(`[v${i}]` + (hasA ? `[a${i}]` : ''));
+    });
+    fc.push(seq.join('') + `concat=n=${parts.length}:v=1:a=${hasA ? 1 : 0}[v]` + (hasA ? '[a]' : ''));
+    cargs.push('-filter_complex', fc.join(';'), '-map', '[v]');
     if (hasA) cargs.push('-map', '[a]', '-c:a', 'aac', '-b:a', '160k');
     cargs.push('-c:v', 'libx264', '-preset', 'veryfast', '-crf', '20', '-movflags', '+faststart', final);
     await run('ffmpeg', cargs);
-    fs.rmSync(main); fs.rmSync(intro);
-    step('intro', { engine: 'hyperframes', title: opts.title });
+    parts.forEach(p => fs.rmSync(p.file, { force: true }));
   }
 
   // 7. thumbnail
   const finalInfo = probe(final);
-  const thumbAt = opts.title ? 1.2 : Math.min(1, finalInfo.duration / 3);
+  const thumbAt = parts[0].seconds && opts.title ? 1.2 : Math.min(1, finalInfo.duration / 3);
   await run('ffmpeg', ['-y', '-ss', String(thumbAt), '-i', final, '-frames:v', '1', '-q:v', '3', path.join(out, 'thumbnail.jpg')]);
 
   // 8. report
   for (const f of [wav, mp3]) fs.rmSync(f, { force: true });
+  fs.rmSync(path.join(out, '.brand-cache'), { recursive: true, force: true });
   report.final = { file: 'final.mp4', duration: r2(finalInfo.duration), width: finalInfo.width, height: finalInfo.height, sizeMB: r2(finalInfo.size / 1048576) };
   report.transcript = (transcript.text || '').trim();
   report.seconds = r2((Date.now() - t0) / 1000);

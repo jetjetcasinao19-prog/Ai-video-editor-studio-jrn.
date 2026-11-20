@@ -22,10 +22,17 @@ Claude asks you before it posts or schedules anything on a social platform.
 That only happens if you say yes and a publishing tool is connected (for
 example OpusClip with your social accounts); otherwise you upload by hand.
 
+## Your brand
+Every video uses the brand kit in `brand/` (see `brand/README.md`): your
+colours, caption style, a logo watermark and an outro card with your @handle.
+Post text follows `brand/voice.md`. Fill in your name and handle to switch on
+the watermark and outro; until then they are left out.
+
 ## Examples
 - "edit this" (with a video attached) → 9:16 Reel, max 60 s, creator captions
 - "edit this for YouTube" → 16:9, no length limit, box captions
 - "edit this in Tagalog with inbox/song.mp3" → Tagalog captions + music
+- "edit this with my brand music" → uses the song in `brand/music/`
 - "edit this, no captions, max 30 seconds"
 
 ## What is installed
@@ -47,7 +54,8 @@ to requests to api.groq.com. GitHub's automatic tests install FFmpeg the same wa
 cd pipeline && npm ci
 node edit.mjs ../inbox/myvideo.mp4 --format 9:16 --max-length 60 --title "My hook"
 node edit.mjs --help   # all options are listed at the top of edit.mjs
-npm test               # 24 automated checks
+node brand-preview.mjs # picture of your brand look → brand/preview.png
+npm test               # 38 automated checks
 ```
 
 ## Limits (honest)

@@ -47,6 +47,14 @@ Groq Whisper or local Whisper + HyperFrames intro), writes post copy to
 `cd pipeline && npm test`. Never post to social media without the owner's
 explicit yes in the conversation. Guide: `docs/AI-WORKFLOW.md`.
 
+## Brand kit
+`brand/brand.json` (name, @handle, colours, caption style, intro, outro,
+watermark, music volume, hashtags), `brand/voice.md` (how posts sound),
+`brand/logo.png` (optional; otherwise an initials logo is made),
+`brand/music/` (licensed songs). The pipeline applies it automatically
+(`--no-brand` turns it off). Preview: `node pipeline/brand-preview.mjs` →
+`brand/preview.png`. All writing must follow `brand/voice.md`.
+
 ## Team
 Agents live in `.claude/agents/`. In Claude Code, ask for one by name, for
 example: "use the planner agent to plan subtitle styling".

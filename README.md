@@ -35,7 +35,8 @@ Single-file, in-browser video editor built for Android Chrome. Open `index.html`
 Say "edit this" to Claude with a video: it transcribes (Groq Whisper), cuts
 pauses, reframes, burns in captions, adds music and an animated HyperFrames
 intro, writes the post copy and adds it to the schedule. See
-`docs/AI-WORKFLOW.md`; code in `pipeline/`.
+`docs/AI-WORKFLOW.md`; code in `pipeline/`. Your look and voice live in
+`brand/` (see `brand/README.md`).
 
 ## Team and workflow
 See `docs/TEAM-GUIDE.md` (AI team agents, issue templates, posting schedule,

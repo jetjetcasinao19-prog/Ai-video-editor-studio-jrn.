@@ -1,0 +1,19 @@
+{
+  "name": "",
+  "handle": "",
+  "tagline": "",
+  "colors": {
+    "background": "#0b0e14",
+    "text": "#ffffff",
+    "accent": "#ffe600",
+    "captionText": "#ffffff",
+    "captionHighlight": "#ffe600"
+  },
+  "captions": { "style": "creator" },
+  "intro": { "enabled": true },
+  "outro": { "enabled": true, "text": "Follow for more", "seconds": 2.5 },
+  "watermark": { "enabled": true, "position": "top-right", "size": 0.14, "opacity": 0.85 },
+  "logo": "logo.png",
+  "music": { "volume": 0.2 },
+  "hashtags": []
+}

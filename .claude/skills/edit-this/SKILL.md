@@ -28,26 +28,34 @@ command -v ffmpeg && node -v          # needs ffmpeg and Node 22+
 [ -d pipeline/node_modules ] || (cd pipeline && npm ci)
 ```
 
-## 3. Choose the options (defaults in brackets)
+## 3. Use the brand kit
+The pipeline reads `brand/brand.json` automatically: brand colours, caption
+style, logo watermark and the outro card with the owner's @handle. Read
+`brand/voice.md` before writing any title, description or hashtag, and add
+`hashtags` from `brand.json` to every post. If `brand.json` has no `name` and
+`handle` yet, mention once that filling them in adds the watermark and outro.
+If the owner asks for music and `brand/music/` has a song, use `--music auto`.
+
+## 4. Choose the options (defaults in brackets)
 Read the owner's request: platform → format, any length or style wishes.
 - Format: Reels / TikTok / Shorts / Stories → `9:16` [default];
   YouTube → `16:9`; feed post → `1:1`.
-- Captions: `creator` [default, word highlight], `box`, `classic`, `none`.
+- Captions: from the brand kit [default `creator`, word highlight]; `box`, `classic`, `none` when asked.
 - `--max-length 60` for Shorts/Reels unless they asked otherwise; TikTok up to
   `--max-length 90`; YouTube: no limit.
 - Language: `--language tl` for Tagalog/Filipino, `en` for English; leave it
   out if unsure (auto-detect).
-- Music: only if they gave a file or asked for music and one exists in
-  `inbox/` (`--music inbox/song.mp3`). Only use music they have the right to use.
+- Music: only if they gave a file or asked for music: `--music inbox/song.mp3`,
+  or `--music auto` for the brand song. Only use music they have the right to use.
 
-## 4. First pass (no intro yet)
+## 5. First pass (no intro yet)
 ```bash
 node pipeline/edit.mjs "<video>" --out output/<slug> --format 9:16 --max-length 60
 ```
 Transcription uses Groq (`whisper-large-v3-turbo`) when its key works and
 falls back to local Whisper automatically; the report says which one ran.
 
-## 5. Write the content (you, using the transcript)
+## 6. Write the content (you, using the transcript and brand/voice.md)
 Read `output/<slug>/report.md` (transcript, what was cut). Then, as the
 `publisher` agent describes:
 - A short, specific hook title (max ~40 characters for the intro card).
@@ -55,7 +63,7 @@ Read `output/<slug>/report.md` (transcript, what was cut). Then, as the
 - Fix obvious transcription mistakes in `output/<slug>/captions.srt` if the
   owner will upload captions separately.
 
-## 6. Final pass with the HyperFrames intro card
+## 7. Final pass with the HyperFrames intro card (and brand outro)
 ```bash
 node pipeline/edit.mjs "<video>" --out output/<slug> --format 9:16 --max-length 60 \
   --title "<hook title>" --subtitle "<optional second line>"
@@ -66,10 +74,11 @@ ffmpeg -loglevel error -y -i output/<slug>/final.mp4 \
   -vf "fps=1/2,scale=216:-1,tile=6x2:padding=4" -frames:v 1 output/<slug>/contact.png
 ```
 Look at `contact.png` and `thumbnail.jpg` with the Read tool: intro readable,
-captions readable and not covering faces, picture framed well. If something
+captions readable and not covering faces, watermark not covering anything
+important, outro shows the right @handle, picture framed well. If something
 is wrong, change the options and render again. Say what you checked.
 
-## 7. Save the post and schedule it
+## 8. Save the post and schedule it
 - Write `content/posts/<YYYY-MM-DD>-<slug>.md` with: the video name, the
   transcript summary, and the per-platform title/description/hashtags.
 - Add a row to `content/schedule.md` with status `planned` and a suggested
@@ -81,7 +90,7 @@ is wrong, change the options and render again. Say what you checked.
   scheduled where. If no such tool is connected, tell them the files are ready
   to upload by hand and mark the row `ready`.
 
-## 8. Deliver
+## 9. Deliver
 - Send `output/<slug>/final.mp4`, `thumbnail.jpg` and the post file to the
   owner with SendUserFile (videos are not committed to Git; `output/` is ignored).
 - Commit `content/posts/…` and `content/schedule.md` and push to the working branch.
