@@ -1,0 +1,3 @@
+output/
+inbox/*
+!inbox/README.md

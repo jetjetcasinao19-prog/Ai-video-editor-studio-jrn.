@@ -31,6 +31,12 @@ Single-file, in-browser video editor built for Android Chrome. Open `index.html`
 - Export to MP4 (H.264 video, AAC or Opus sound, depending on the phone) or WebM;
   falls back to WebM with a message if the browser cannot make MP4
 
+## "Edit this" automatic workflow
+Say "edit this" to Claude with a video: it transcribes (Groq Whisper), cuts
+pauses, reframes, burns in captions, adds music and an animated HyperFrames
+intro, writes the post copy and adds it to the schedule. See
+`docs/AI-WORKFLOW.md`; code in `pipeline/`.
+
 ## Team and workflow
 See `docs/TEAM-GUIDE.md` (AI team agents, issue templates, posting schedule,
 model switching) and `CLAUDE.md` (project rules).

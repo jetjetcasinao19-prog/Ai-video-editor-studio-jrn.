@@ -1,0 +1,17 @@
+{
+  "name": "ai-video-pipeline",
+  "private": true,
+  "description": "Server-side 'edit this' workflow: FFmpeg + Groq + HyperFrames",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "edit": "node edit.mjs",
+    "test": "node test/pipeline.test.mjs"
+  },
+  "dependencies": {
+    "hyperframes": "0.9.17",
+    "@huggingface/transformers": "3.7.5"
+  }
+}
