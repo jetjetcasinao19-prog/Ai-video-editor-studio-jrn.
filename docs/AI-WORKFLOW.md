@@ -37,8 +37,10 @@ example OpusClip with your social accounts); otherwise you upload by hand.
 | transformers.js Whisper (local) | backup transcription when Groq is unavailable |
 | Claude team agents | hook title, post copy, schedule |
 
-The cloud environment **ai-video-editor-studio** installs the pipeline in every
-new session (setup script) and adds your Groq key to requests to api.groq.com.
+The cloud environment **ai-video-editor-studio** prepares every new session with
+a setup script: it installs FFmpeg if it is missing (`apt-get install ffmpeg`)
+and the pipeline packages (`npm ci` in `pipeline/`). It also adds your Groq key
+to requests to api.groq.com. GitHub's automatic tests install FFmpeg the same way.
 
 ## Run it yourself
 ```bash
