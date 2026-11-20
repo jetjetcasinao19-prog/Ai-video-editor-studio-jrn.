@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en"
+  data-composition-variables='[{"id":"text","type":"string","label":"Call to action","default":"Follow for more"},{"id":"handle","type":"string","label":"Handle","default":""},{"id":"name","type":"string","label":"Name","default":""},{"id":"bg","type":"string","label":"Background","default":"#0b0e14"},{"id":"ink","type":"string","label":"Text","default":"#ffffff"},{"id":"accent","type":"string","label":"Accent","default":"#ffe600"},{"id":"logo","type":"string","label":"Logo file","default":""}]'>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=__W__, height=__H__">
+<!-- __D__ s outro card used by pipeline/edit.mjs (__W__/__H__/__D__ are filled in). -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<style>
+@font-face{font-family:"Montserrat";font-weight:800;src:url("fonts/Montserrat.ttf") format("truetype")}
+:root{--ground:#0b0e14;--ink:#ffffff;--accent:#ffe600}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:__W__px;height:__H__px;overflow:hidden;background:var(--ground)}
+#root{position:relative;width:100%;height:100%;font-family:"Montserrat",sans-serif;
+ background:radial-gradient(circle at 50% 45%,color-mix(in srgb,var(--ground) 70%,#ffffff 18%) 0%,var(--ground) 70%)}
+#card{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:calc(__W__px * 0.035)}
+#logo{width:calc(min(__W__px,__H__px) * 0.28);height:calc(min(__W__px,__H__px) * 0.28);object-fit:contain;border-radius:50%}
+#text{color:var(--ink);font-weight:800;font-size:calc(min(__W__px,__H__px) * 0.075);text-align:center;padding:0 8%;line-height:1.1}
+#handle{color:var(--ground);background:var(--accent);font-weight:800;font-size:calc(min(__W__px,__H__px) * 0.055);
+ padding:0.25em 0.8em;border-radius:999px}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="__D__" data-width="__W__" data-height="__H__">
+ <div id="card" class="clip" data-start="0" data-duration="__D__" data-track-index="0">
+  <img id="logo" alt="">
+  <p id="text"></p>
+  <p id="handle"></p>
+ </div>
+</div>
+<script>
+const v=(window.__hyperframes&&window.__hyperframes.getVariables&&window.__hyperframes.getVariables())||{};
+const hex=c=>/^#[0-9a-fA-F]{6}$/.test(c||"");
+const rs=document.documentElement.style;
+if(hex(v.bg)) rs.setProperty("--ground",v.bg);
+if(hex(v.ink)) rs.setProperty("--ink",v.ink);
+if(hex(v.accent)) rs.setProperty("--accent",v.accent);
+const logo=document.getElementById("logo");
+if(v.logo) logo.src=v.logo; else logo.style.display="none";
+document.getElementById("text").textContent=v.text||"Follow for more";
+const h=document.getElementById("handle");
+h.textContent=v.handle||v.name||"";
+if(!h.textContent) h.style.display="none";
+const D=__D__;
+const tl=gsap.timeline({paused:true});
+tl.fromTo("#root",{opacity:0},{opacity:1,duration:0.3,ease:"power2.out"},0)
+  .fromTo("#logo",{scale:0.6,opacity:0},{scale:1,opacity:1,duration:0.5,ease:"back.out(1.7)"},0.1)
+  .fromTo("#text",{y:40,opacity:0},{y:0,opacity:1,duration:0.5,ease:"power3.out"},0.3)
+  .fromTo("#handle",{scale:0.8,opacity:0},{scale:1,opacity:1,duration:0.45,ease:"back.out(1.6)"},0.55)
+  .to("#root",{opacity:0,duration:0.3,ease:"power2.in"},D-0.3);
+window.__timelines["main"]=tl;
+tl.seek(0);
+</script>
+</body>
+</html>

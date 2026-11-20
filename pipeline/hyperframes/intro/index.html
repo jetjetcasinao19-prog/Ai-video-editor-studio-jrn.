@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"
-  data-composition-variables='[{"id":"title","type":"string","label":"Title","default":"My video"},{"id":"subtitle","type":"string","label":"Subtitle","default":""}]'>
+  data-composition-variables='[{"id":"title","type":"string","label":"Title","default":"My video"},{"id":"subtitle","type":"string","label":"Subtitle","default":""},{"id":"bg","type":"string","label":"Background","default":"#0b0e14"},{"id":"ink","type":"string","label":"Text","default":"#ffffff"},{"id":"accent","type":"string","label":"Accent","default":"#ffe600"}]'>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=__W__, height=__H__">
@@ -12,12 +12,12 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{width:__W__px;height:__H__px;overflow:hidden;background:var(--ground)}
 #root{position:relative;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;
- font-family:"Montserrat",sans-serif;background:radial-gradient(circle at 50% 40%,#22304d 0%,#0b0e14 70%)}
+ font-family:"Montserrat",sans-serif;background:radial-gradient(circle at 50% 40%,color-mix(in srgb,var(--ground) 70%,#ffffff 18%) 0%,var(--ground) 70%)}
 #card{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
 #bar{width:18%;height:calc(__W__px * 0.012);background:var(--accent);border-radius:99px;margin-bottom:calc(__W__px * 0.05)}
 #title{color:var(--ink);font-weight:800;font-size:calc(__W__px * 0.085);line-height:1.08;text-align:center;
  padding:0 8%;letter-spacing:-0.02em;overflow-wrap:anywhere}
-#subtitle{color:#c9d3e6;font-weight:800;font-size:calc(__W__px * 0.04);margin-top:calc(__W__px * 0.04);text-align:center;padding:0 10%}
+#subtitle{color:color-mix(in srgb,var(--ink) 78%,var(--ground));font-weight:800;font-size:calc(__W__px * 0.04);margin-top:calc(__W__px * 0.04);text-align:center;padding:0 10%}
 </style>
 </head>
 <body>
@@ -30,6 +30,11 @@ html,body{width:__W__px;height:__H__px;overflow:hidden;background:var(--ground)}
 </div>
 <script>
 const v=(window.__hyperframes&&window.__hyperframes.getVariables&&window.__hyperframes.getVariables())||{};
+const hex=c=>/^#[0-9a-fA-F]{6}$/.test(c||"");
+const rs=document.documentElement.style;
+if(hex(v.bg)) rs.setProperty("--ground",v.bg);
+if(hex(v.ink)) rs.setProperty("--ink",v.ink);
+if(hex(v.accent)) rs.setProperty("--accent",v.accent);
 document.getElementById("title").textContent=v.title||"My video";
 const sub=document.getElementById("subtitle");
 sub.textContent=v.subtitle||"";

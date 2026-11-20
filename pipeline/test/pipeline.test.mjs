@@ -71,8 +71,9 @@ function longestQuiet(pcm, from, to, thr = 0.003) {
 const norm = s => s.toLowerCase().replace(/[^a-z\s]/g, ' ').split(/\s+/).filter(Boolean);
 
 // ---------- full edit: 9:16, creator captions, music, HyperFrames intro ----------
+// (General checks use --no-brand so they do not depend on the owner's brand file.)
 try {
-  const rep = edit([VIDEO, '--out', path.join(tmp, 'out'), '--music', SONG, '--title', 'Three Easy Tips', '--subtitle', 'Phone editing']);
+  const rep = edit([VIDEO, '--no-brand', '--out', path.join(tmp, 'out'), '--music', SONG, '--title', 'Three Easy Tips', '--subtitle', 'Phone editing']);
   const out = path.join(tmp, 'out');
   const fin = path.join(out, 'final.mp4');
   const info = probe(fin);
@@ -102,9 +103,62 @@ try {
   check('temporary audio files cleaned up', !fs.existsSync(path.join(out, 'audio16k.wav')) && !fs.existsSync(path.join(out, 'intro.mp4')) && !fs.existsSync(path.join(out, 'intro-project')));
 } catch (e) { check('full edit run', false, e.message); }
 
+// ---------- brand kit ----------
+function pixels(file, t, crop) {
+  const raw = ff(['-ss', String(t), '-i', file, '-frames:v', '1', '-vf', (crop ? 'crop=' + crop + ',' : '') + 'scale=64:64', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-']);
+  const px = []; for (let i = 0; i < raw.length; i += 3) px.push([raw[i], raw[i + 1], raw[i + 2]]); return px;
+}
+const isPink = ([r, g, b]) => r > 200 && g < 120 && b > 100 && b < 190;   // brand accent #ff4d8d
+try {
+  const bdir = path.join(tmp, 'brandkit');
+  fs.mkdirSync(path.join(bdir, 'music'), { recursive: true });
+  fs.copyFileSync(SONG, path.join(bdir, 'music', 'theme.mp3'));
+  fs.writeFileSync(path.join(bdir, 'brand.json'), JSON.stringify({ name: 'Sample Studio', handle: 'samplestudio', tagline: 'Phone tips',
+    colors: { background: '#1a0b2e', accent: '#ff4d8d', captionHighlight: '#ff4d8d' }, outro: { text: 'Follow for daily tips' } }));
+  const wordsFile = path.join(tmp, 'words.json');
+  fs.writeFileSync(wordsFile, JSON.stringify({ words: 'Welcome back to my channel today I will show you three easy tips'.split(' ').map((w, k) => ({ w, start: 1.6 + k * 0.4, end: 1.9 + k * 0.4 })) }));
+  const rep = edit([VIDEO, '--out', path.join(tmp, 'branded'), '--brand', path.join(bdir, 'brand.json'), '--words', wordsFile, '--music', 'auto', '--title', 'Brand test']);
+  const fin = path.join(tmp, 'branded', 'final.mp4');
+  const info = probe(fin);
+  const b = rep.steps.find(s => s.step === 'brand'), cut = rep.steps.find(s => s.step === 'cut');
+  check('brand loaded: name, @handle added, initials logo, outro on', b.name === 'Sample Studio' && b.handle === '@samplestudio' && b.watermark === 'initials logo' && b.outro === 'on', JSON.stringify(b));
+  check('branded length = intro 2.5 s + video + outro 2.5 s', near(info.duration, 5 + cut.keptSeconds, 0.3), info.duration + ' vs ' + (5 + cut.keptSeconds));
+  const introBg = pixels(fin, 0.5, 'iw:ih*0.2:0:0').reduce((a, p) => [a[0] + p[0], a[1] + p[1], a[2] + p[2]], [0, 0, 0]).map(v => v / 4096);
+  check('intro uses the brand background (purple)', introBg[2] > introBg[1] + 8 && introBg[0] > introBg[1], introBg.map(Math.round).join(','));
+  const wm = pixels(fin, 4.5, 'iw*0.25:iw*0.25:iw*0.75:0').filter(isPink).length;
+  check('logo watermark in the top-right corner (brand pink)', wm > 300, wm + ' pink px');
+  const wmLeft = pixels(fin, 4.5, 'iw*0.25:iw*0.25:0:0').filter(isPink).length;
+  check('no watermark in the top-left corner', wmLeft < 20, wmLeft);
+  const ass = fs.readFileSync(path.join(tmp, 'branded', 'captions.ass'), 'utf8');
+  check('captions highlight the spoken word in the brand colour', ass.includes('{\\c&H008D4DFF}'), (ass.match(/\{\\c&H[0-9A-F]+\}/) || [''])[0]);
+  const outro = pixels(fin, info.duration - 1.0).filter(isPink).length;
+  check('outro card at the end (logo and handle in brand pink)', outro > 80, outro + ' pink px');
+  check('music picked from brand/music', rep.steps.find(s => s.step === 'render').music === 'theme.mp3');
+  const tone = (() => { const pcm = audioOf(fin); const a = Math.floor(3 * 16000), e = Math.floor((info.duration - 3) * 16000), k = 2 * Math.cos(2 * Math.PI * 220 / 16000);
+    let s1 = 0, s2 = 0; for (let i = a; i < e; i++) { const s0 = pcm[i] + k * s1 - s2; s2 = s1; s1 = s0; } return 2 * Math.sqrt(Math.max(0, s1 * s1 + s2 * s2 - k * s1 * s2)) / (e - a); })();
+  check('brand music is in the video', tone > 0.005, tone.toFixed(4));
+
+  const plain = edit([VIDEO, '--out', path.join(tmp, 'nobrand'), '--no-brand', '--words', wordsFile]);
+  const pinfo = probe(path.join(tmp, 'nobrand', 'final.mp4'));
+  check('--no-brand: no watermark, no outro', !plain.steps.find(s => s.step === 'outro') && pixels(path.join(tmp, 'nobrand', 'final.mp4'), 2, 'iw*0.25:iw*0.25:iw*0.75:0').filter(isPink).length < 20 &&
+    near(pinfo.duration, plain.steps.find(s => s.step === 'cut').keptSeconds, 0.2));
+
+  fs.writeFileSync(path.join(bdir, 'empty.json'), JSON.stringify({ name: '', handle: '' }));
+  const blank = edit([VIDEO, '--out', path.join(tmp, 'blank'), '--brand', path.join(bdir, 'empty.json'), '--words', wordsFile]); // a brand with no name yet
+  const bb = blank.steps.find(s => s.step === 'brand');
+  check('empty brand name: no watermark and no outro yet', bb.watermark === 'off' && bb.outro.startsWith('off'), JSON.stringify(bb));
+
+  fs.writeFileSync(path.join(bdir, 'bad.json'), JSON.stringify({ colors: { accent: 'yellow' } }));
+  const bad = spawnSync(process.execPath, [EDIT, VIDEO, '--brand', path.join(bdir, 'bad.json')], { encoding: 'utf8' });
+  check('a wrong brand colour gives a clear message', bad.status === 1 && /colors\.accent must look like "#ffe600"/.test(bad.stderr), bad.stderr.trim().slice(0, 90));
+  fs.writeFileSync(path.join(bdir, 'broken.json'), '{ "name": "x", }');
+  const broken = spawnSync(process.execPath, [EDIT, VIDEO, '--brand', path.join(bdir, 'broken.json')], { encoding: 'utf8' });
+  check('a broken brand.json gives a clear message', broken.status === 1 && /not valid JSON/.test(broken.stderr), broken.stderr.trim().slice(0, 90));
+} catch (e) { check('brand kit run', false, e.message); }
+
 // ---------- other options ----------
 try {
-  const rep = edit([VIDEO, '--out', path.join(tmp, 'wide'), '--format', '16:9', '--captions', 'box', '--max-length', '6']);
+  const rep = edit([VIDEO, '--no-brand', '--out', path.join(tmp, 'wide'), '--format', '16:9', '--captions', 'box', '--max-length', '6']);
   const info = probe(path.join(tmp, 'wide', 'final.mp4'));
   check('16:9 + box captions + max length 6 s', info.width === 1920 && info.height === 1080 && near(info.duration, 6, 0.2), info.width + 'x' + info.height + ', ' + info.duration + ' s');
   check('max length: captions stop at 6 s', !/00:00:0[7-9]|00:00:1\d/.test(fs.readFileSync(path.join(tmp, 'wide', 'captions.srt'), 'utf8')));
@@ -114,7 +168,7 @@ try {
 try {
   const silent = path.join(tmp, 'silent.mp4');
   ff(['-f', 'lavfi', '-i', 'testsrc2=size=720x1280:rate=30:duration=3', '-c:v', 'libx264', '-preset', 'ultrafast', '-pix_fmt', 'yuv420p', silent]);
-  const rep = edit([silent, '--out', path.join(tmp, 'silent'), '--format', '1:1']);
+  const rep = edit([silent, '--no-brand', '--out', path.join(tmp, 'silent'), '--format', '1:1']);
   const info = probe(path.join(tmp, 'silent', 'final.mp4'));
   check('video without sound: 1:1 output, no captions, no crash', info.width === 1080 && info.height === 1080 && near(info.duration, 3, 0.2) &&
     rep.steps.find(s => s.step === 'transcribe').engine === 'none', info.width + 'x' + info.height + ' ' + info.duration);
