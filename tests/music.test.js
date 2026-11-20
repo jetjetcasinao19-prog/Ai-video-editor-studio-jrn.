@@ -159,15 +159,17 @@ const r3 = x => Math.round(x * 1000) / 1000;
     if (E.level(1000, 0.5, 1.5) < 0.1) console.log('     music state during export:', JSON.stringify(lastSnaps));
     await set('musicLoop', true);
 
-    // Recovery: a broken music player (error state) is reloaded automatically.
-    await page.evaluate(() => { music.el.src = 'blob:broken'; });
-    await page.waitForFunction(() => !!music.el.error);
-    const R = await exportRange(0, 3);
-    check('broken music player recovers automatically', R.level(1000, 1.5, 2.8) > 0.1, r3(R.level(1000, 1.5, 2.8)));
-
     // Timeline export includes the music.
     await loadMusic(SONG);
     await set('musicFadeIn', 0);
+
+    // Recovery: a broken music player (error state) is reloaded automatically.
+    await page.evaluate(() => { music.el.src = 'blob:broken'; });
+    await page.waitForFunction(() => !!music.el.error);
+    const R = await exportRange(0, 3.5);
+    const backAt = [0.25, 0.75, 1.25, 1.75].find(t => R.level(1000, t - 0.25, t + 0.25) > 0.15);
+    check('broken music player recovers automatically', R.level(1000, 1.8, 3.2) > 0.15,
+      r3(R.level(1000, 1.8, 3.2)) + ', music back by ' + backAt + ' s');
     await page.fill('#start', '0'); await page.fill('#end', '2'); await page.click('#tlAddRange');
     await page.fill('#start', '5'); await page.fill('#end', '7'); await page.click('#tlAddRange');
     await page.click('#export');
