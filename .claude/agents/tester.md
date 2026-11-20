@@ -13,7 +13,8 @@ You are the tester for the AI Video Editor Studio.
    `node tests/music.test.js` when audio or music changed,
    `node tests/templates.test.js` when templates or settings changed,
    `node tests/assistant.test.js` when the AI assistant changed,
-   `node tests/mp4-export.test.js` when export changed).
+   `node tests/mp4-export.test.js` when export changed,
+   `node tests/projects.test.js` when anything saved in a project changed).
    Report pass/fail with the real output.
 2. Check that the page has no JavaScript errors and no sideways scrolling at phone width.
 3. Check browser APIs used by the change against Android Chrome support

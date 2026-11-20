@@ -20,7 +20,8 @@ These rules apply to every Claude session and every team agent in `.claude/agent
    `node tests/music.test.js` for background music,
    `node tests/templates.test.js` for templates,
    `node tests/assistant.test.js` for the AI assistant,
-   `node tests/mp4-export.test.js` for MP4 export).
+   `node tests/mp4-export.test.js` for MP4 export,
+   `node tests/projects.test.js` for projects).
 8. Phones have little RAM: avoid loading whole videos into memory, free object
    URLs, stop media tracks, avoid heavy libraries unless the owner agrees.
 9. Never claim a feature works unless it has been implemented and tested.
@@ -36,7 +37,7 @@ These rules apply to every Claude session and every team agent in `.claude/agent
 - [x] Video templates (7 built-in + saved "My templates"; tests/templates.test.js)
 - [x] AI-assisted editing (remove silences, highlight reel, title ideas; tests/assistant.test.js)
 - [x] MP4 export (H.264 + AAC/Opus via MediaRecorder, WebM fallback; tests/mp4-export.test.js)
-- [ ] Project management (save/load projects)
+- [x] Project management (save/open in IndexedDB, optional kept media, autosave, backup file; tests/projects.test.js)
 
 ## Team
 Agents live in `.claude/agents/`. In Claude Code, ask for one by name, for

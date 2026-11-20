@@ -3,6 +3,8 @@
 Single-file, in-browser video editor built for Android Chrome. Open `index.html`.
 
 ## Working features
+- Projects: save and open your work on the phone (optionally with the video and
+  music kept), autosave every 30 s, backup file to restore on any phone
 - Import a video from the phone, canvas preview, play/pause
 - Formats 9:16 / 16:9 / 1:1, fill or fit
 - Trim with start/end time (preview stops at the end time)
@@ -37,10 +39,10 @@ model switching) and `CLAUDE.md` (project rules).
 `node tests/editor.test.js`, `node tests/ai-captions.test.js`,
 `node tests/caption-style.test.js`, `node tests/scene-detection.test.js`,
 `node tests/transitions.test.js`, `node tests/music.test.js`,
-`node tests/templates.test.js`, `node tests/assistant.test.js` and
-`node tests/mp4-export.test.js` (needs ffmpeg
+`node tests/templates.test.js`, `node tests/assistant.test.js`,
+`node tests/mp4-export.test.js` and `node tests/projects.test.js` (needs ffmpeg
 with flite, Playwright, internet). Runs automatically on
 GitHub Actions for every push.
 
-## Roadmap (not implemented yet)
-Project management.
+## Roadmap
+All planned features are built. Next ideas come from testing on real phones.

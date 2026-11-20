@@ -94,6 +94,9 @@ input[type=color]{height:44px;padding:4px}
 .tpl span{font-size:11px;font-weight:normal;color:#b9c3d6;line-height:1.35}
 .tpl.active{outline:2px solid #526dff;background:#253055}
 #myTplList .clip{margin-bottom:8px}
+#projList .clip{margin-bottom:8px}
+#projList .clip.active{border-color:#526dff}
+.check label{line-height:1.4}
 .sub2{display:block;margin-top:16px;font-size:14px}
 .idea{text-align:left;font-weight:normal}
 .del{background:#5a2733}
@@ -107,6 +110,33 @@ progress{width:100%;height:10px;margin-top:10px;accent-color:#526dff}
 
 <h1>VIDEO STUDIO</h1>
 <div class="sub">AI MEDIA PRODUCTION • EDITING DEPARTMENT</div>
+
+<section class="panel" id="projBox">
+<h3>Projects</h3>
+<p id="projCurrent" class="note">Current project: not saved yet.</p>
+<label for="projName">Project name</label>
+<input id="projName" maxlength="50" placeholder="e.g. Beach vlog">
+<div class="check">
+<input id="projKeepMedia" type="checkbox" checked>
+<label for="projKeepMedia">Keep a copy of the video and music on this phone, so the project opens with one tap (uses phone storage)</label>
+</div>
+<div class="row">
+<button id="projSave">SAVE PROJECT</button>
+<button id="projNew" class="secondary">NEW PROJECT</button>
+</div>
+<p id="projStatus" class="note"></p>
+<button id="projRelinkBtn" class="secondary" hidden>CHOOSE VIDEO</button>
+<input id="projRelink" type="file" accept="video/*" hidden>
+<details id="projListBox">
+<summary>Saved projects (<span id="projCount">0</span>)</summary>
+<p id="projEmpty" class="note">No saved projects yet.</p>
+<div id="projList"></div>
+<p id="projStorage" class="note"></p>
+<button id="projExport" class="secondary">DOWNLOAD BACKUP FILE</button>
+<label for="projImport">Restore a project from a backup file (.json)</label>
+<input id="projImport" type="file" accept=".json,application/json">
+</details>
+</section>
 
 <section class="panel">
 <h3>01 — Import Video</h3>
@@ -1306,10 +1336,15 @@ function animate(){
 $("file").addEventListener("change",e=>{
  const file=e.target.files[0];
  if(!file)return;
+ loadVideoFile(file).catch(()=>{});
+});
 
+// Load a video file into the editor. Resolves when it is ready
+// (after the loadedmetadata handler has set Start/End).
+function loadVideoFile(file){
  if(!file.type.startsWith("video/")){
   alert("Please select a video file.");
-  return;
+  return Promise.reject(new Error("not a video"));
  }
 
  video.pause();
@@ -1326,10 +1361,12 @@ $("file").addEventListener("change",e=>{
  tlStatus("");
  sceneStatus("");
  videoURL=URL.createObjectURL(file);
+ const ready=waitEvent(video,"loadedmetadata",30000);
  video.src=videoURL;
 
  $("status").textContent="Loading video...";
-});
+ return ready;
+}
 
 video.addEventListener("loadedmetadata",()=>{
  $("start").value=0;
@@ -2438,9 +2475,14 @@ function musicLabels(){
 $("musicFile").addEventListener("change",async e=>{
  const file=e.target.files[0];
  if(!file) return;
- if(busy){ alert("Wait until the current preview or export has finished."); e.target.value=""; return; }
- const m=getMixer(); // created during this tap, so Android allows sound
- if(!m){ alert("This browser cannot mix audio."); e.target.value=""; return; }
+ try{ await loadMusicFile(file); }finally{ e.target.value=""; }
+});
+
+// Load a music file. Returns true when it can be played.
+async function loadMusicFile(file){
+ if(busy){ alert("Wait until the current preview or export has finished."); return false; }
+ const m=getMixer(); // created during a tap, so Android allows sound
+ if(!m){ alert("This browser cannot mix audio."); return false; }
  resumeMixer();
  if(!music.el){
   music.el=document.createElement("audio");
@@ -2458,22 +2500,25 @@ $("musicFile").addEventListener("change",async e=>{
   await ready;
   if(!Number.isFinite(music.el.duration)) throw new Error("unknown length");
   music.loaded=true;
+  music.file=file;
   $("musicInfo").textContent="♪ "+file.name+" ("+music.el.duration.toFixed(1)+" s). Press PLAY in section 02 to hear the mix.";
   $("musicControls").hidden=false;
+  return true;
  }catch(err){
   music.el.removeAttribute("src"); music.el.load();
   URL.revokeObjectURL(music.url); music.url=null;
+  music.file=null;
   $("musicInfo").textContent="Could not read this music file. Try an MP3 or M4A file.";
   $("musicControls").hidden=true;
- }finally{
-  e.target.value="";
+  return false;
  }
-});
+}
 
 $("musicRemove").addEventListener("click",()=>{
  if(busy) return;
  musicStop();
  music.loaded=false;
+ music.file=null;
  if(music.el){ music.el.removeAttribute("src"); music.el.load(); }
  if(music.url){ URL.revokeObjectURL(music.url); music.url=null; }
  if(mixer){ mixer.videoGain.gain.value=1; mixer.tlIn.gain.value=1; }
@@ -2558,7 +2603,15 @@ function currentTemplateSettings(){
 
 function applyTemplate(t){
  if(busy){ tplStatus("Wait until the current preview or export has finished."); return; }
- const s=t.s;
+ applySettings(t.s,true);
+ try{ localStorage.setItem("aves.lastTemplate",t.name); }catch(e){}
+ document.querySelectorAll(".tpl").forEach(el=>el.classList.toggle("active",el.dataset.name===t.name));
+ tplStatus("Template “"+t.name+"” applied"+(timeline.length?" (also to the "+timeline.length+" timeline clips)":"")+".");
+}
+
+// Apply look-and-feel settings (from a template or a saved project).
+// updateClips: also give clips already in the timeline the new transition.
+function applySettings(s,updateClips){
  for(const k in TEMPLATE_CONTROLS){
   if(!(k in s)) continue;
   const el=$(TEMPLATE_CONTROLS[k]);
@@ -2580,17 +2633,13 @@ function applyTemplate(t){
  saveStyle();
  ensureCaptionFont();
 
- // Transitions: also update clips already in the timeline.
  $("tlDurVal").textContent=Number($("tlDur").value).toFixed(1);
- timeline.forEach(c=>{ c.trans=$("tlType").value; });
+ if(updateClips) timeline.forEach(c=>{ c.trans=$("tlType").value; });
  renderTimeline();
  musicLabels();
  if(mixer && music.loaded) mixer.videoGain.gain.value=Number($("videoVol").value)/100;
 
  updatePreview();
- try{ localStorage.setItem("aves.lastTemplate",t.name); }catch(e){}
- document.querySelectorAll(".tpl").forEach(el=>el.classList.toggle("active",el.dataset.name===t.name));
- tplStatus("Template “"+t.name+"” applied"+(timeline.length?" (also to the "+timeline.length+" timeline clips)":"")+".");
 }
 
 function renderTemplates(){
@@ -2867,6 +2916,334 @@ $("assistTitles").addEventListener("click",()=>{
 
 $("assistGap").addEventListener("input",()=>{ $("assistGapVal").textContent=Number($("assistGap").value).toFixed(1); });
 $("assistTarget").addEventListener("input",()=>{ $("assistTargetVal").textContent=$("assistTarget").value; });
+
+/* ---------- PROJECTS (save / open / autosave / backup) ---------- */
+
+// Projects are stored in the browser's IndexedDB on this phone. The project
+// itself is small (settings, captions, scenes, timeline). Optionally the
+// video and music files are kept too, so a project opens with one tap.
+const PROJ_DB="aves-projects";
+const PROJ_VERSION=1;
+let currentProjectId=null;
+let pendingOpen=null;     // project waiting for its video to be chosen again
+let saveInFlight=null;   // the save that is running now, if any
+
+function projStatus(t){ $("projStatus").textContent=t; }
+
+function projDB(){
+ return new Promise((resolve,reject)=>{
+  if(!window.indexedDB){ reject(new Error("This browser cannot save projects.")); return; }
+  const r=indexedDB.open(PROJ_DB,1);
+  r.onupgradeneeded=()=>{
+   const db=r.result;
+   if(!db.objectStoreNames.contains("projects")) db.createObjectStore("projects",{keyPath:"id"});
+   if(!db.objectStoreNames.contains("media")) db.createObjectStore("media");
+  };
+  r.onsuccess=()=>resolve(r.result);
+  r.onerror=()=>reject(r.error||new Error("Could not open project storage."));
+  r.onblocked=()=>reject(new Error("Project storage is busy. Close other tabs of this app."));
+ });
+}
+
+// Run one request in a transaction and resolve with its result when done.
+async function idb(store,mode,fn){
+ const db=await projDB();
+ return new Promise((resolve,reject)=>{
+  let out;
+  const tx=db.transaction(store,mode);
+  const req=fn(tx.objectStore(store));
+  if(req) req.onsuccess=()=>{ out=req.result; };
+  tx.oncomplete=()=>{ db.close(); resolve(out); };
+  tx.onerror=tx.onabort=()=>{ db.close(); reject(tx.error||new Error("Storage error.")); };
+ });
+}
+const projGetAll=()=>idb("projects","readonly",st=>st.getAll());
+const projGet=id=>idb("projects","readonly",st=>st.get(id));
+const projPut=rec=>idb("projects","readwrite",st=>st.put(rec));
+const mediaGet=key=>idb("media","readonly",st=>st.get(key));
+const mediaPut=(key,blob)=>idb("media","readwrite",st=>st.put(blob,key));
+const mediaDel=key=>idb("media","readwrite",st=>st.delete(key));
+
+function fileInfo(f){ return f?{name:f.name,size:f.size,type:f.type}:null; }
+const MB=n=>(n/1048576).toFixed(1)+" MB";
+
+function collectState(){
+ const s=currentTemplateSettings();
+ s.musicOffset=Number($("musicOffset").value)||0;
+ s.title=$("overlay").value;
+ s.start=Number($("start").value)||0;
+ s.end=Number($("end").value)||0;
+ s.sceneSens=$("sceneSens").value;
+ s.exportFormat=$("exportFormat").value;
+ return {
+  version:PROJ_VERSION,
+  video:currentFile?{...fileInfo(currentFile),duration:video.duration}:null,
+  music:music.loaded?fileInfo(music.file):null,
+  settings:s,
+  captions:captions.map(c=>({start:c.start,end:c.end,text:c.text})),
+  scenes:scenes.map(c=>({start:c.start,end:c.end,thumb:c.thumb})),
+  timeline:timeline.map(c=>({start:c.start,end:c.end,thumb:c.thumb,trans:c.trans}))
+ };
+}
+
+// Clean a state that came from storage or a backup file.
+function cleanState(st){
+ if(!st || typeof st!=="object" || st.version!==PROJ_VERSION) throw new Error("This is not a project file from this app.");
+ const num=(v,d=0)=>Number.isFinite(Number(v))&&Number(v)>=0?Number(v):d;
+ const img=t=>typeof t==="string"&&/^data:image\/(jpeg|png|webp);base64,/.test(t)&&t.length<200000?t:null;
+ const range=(c)=>({start:num(c&&c.start),end:num(c&&c.end)});
+ const list=(a,max)=>Array.isArray(a)?a.slice(0,max):[];
+ return {
+  version:PROJ_VERSION,
+  video:st.video&&typeof st.video.name==="string"?{name:String(st.video.name).slice(0,200),size:num(st.video.size),type:String(st.video.type||""),duration:num(st.video.duration)}:null,
+  music:st.music&&typeof st.music.name==="string"?{name:String(st.music.name).slice(0,200),size:num(st.music.size),type:String(st.music.type||"")}:null,
+  settings:st.settings&&typeof st.settings==="object"?st.settings:{},
+  captions:list(st.captions,5000).map(c=>({...range(c),text:String((c&&c.text)||"").slice(0,500)})).filter(c=>c.end>c.start),
+  scenes:list(st.scenes,1000).map(c=>({...range(c),thumb:img(c&&c.thumb)})).filter(c=>c.end>c.start),
+  timeline:list(st.timeline,500).map(c=>({...range(c),thumb:img(c&&c.thumb),
+   trans:TRANSITION_NAMES[c&&c.trans]?c.trans:"cut"})).filter(c=>c.end>c.start)
+ };
+}
+
+function restoreState(st){
+ const s=st.settings||{};
+ applySettings(s,false);
+ if(typeof s.title==="string") $("overlay").value=s.title.slice(0,70);
+ const dur=video.duration||0;
+ if(Number.isFinite(s.start)&&Number.isFinite(s.end)&&s.end>s.start&&s.end<=dur+0.05){
+  $("start").value=s.start; $("end").value=Math.min(s.end,dur).toFixed(2);
+ }
+ if(Number.isFinite(s.musicOffset)) $("musicOffset").value=s.musicOffset;
+ if(["low","normal","high"].includes(s.sceneSens)) $("sceneSens").value=s.sceneSens;
+ if(s.exportFormat==="mp4"||s.exportFormat==="webm"){ $("exportFormat").value=s.exportFormat; updateFormatNote(); }
+ const inVideo=c=>c.end<=dur+0.05;
+ captions=st.captions.slice(); sortCaptions(); renderCaptionList();
+ scenes=st.scenes.filter(inVideo); renderScenes();
+ timeline=st.timeline.filter(inVideo); renderTimeline();
+ updatePreview();
+}
+
+function newId(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,8); }
+
+// A manual save waits for a running autosave and then saves; an autosave
+// is skipped while another save is running.
+async function saveProject(auto){
+ if(saveInFlight){
+  if(auto) return;
+  try{ await saveInFlight; }catch(e){}
+ }
+ const run=doSaveProject(auto);
+ saveInFlight=run;
+ try{ await run; }finally{ if(saveInFlight===run) saveInFlight=null; }
+}
+
+async function doSaveProject(auto){
+ const name=$("projName").value.trim().slice(0,50);
+ if(!auto && !name){ projStatus("Type a name for your project first."); $("projName").focus(); return; }
+ if(!currentFile){ if(!auto) projStatus("Import a video first (section 01)."); return; }
+ try{
+  const all=await projGetAll();
+  // Autosave updates the open project. A manual save goes to the project
+  // with that name: the open one, another one (after asking), or a new one.
+  let rec=null;
+  if(auto){
+   rec=all.find(p=>p.id===currentProjectId)||null;
+   if(!rec) return;
+  }else{
+   const same=all.find(p=>p.name.toLowerCase()===name.toLowerCase());
+   if(same && same.id!==currentProjectId &&
+      !confirm("Replace the saved project “"+same.name+"”?")){ projStatus("Not saved."); return; }
+   rec=same||null;
+  }
+  const id=rec?rec.id:newId();
+  const state=collectState();
+  const keep=$("projKeepMedia").checked;
+  const out={id,name:auto?(rec?rec.name:name):name,savedAt:Date.now(),state,
+   keptVideo:rec&&rec.keptVideo||null,keptMusic:rec&&rec.keptMusic||null};
+  let note="";
+  const same=(a,f)=>a&&f&&a.name===f.name&&a.size===f.size;
+  if(keep){
+   if(!auto && navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(()=>{});
+   try{
+    if(!same(out.keptVideo,currentFile)){ await mediaPut(id+"/video",currentFile); out.keptVideo=fileInfo(currentFile); }
+    if(music.loaded && music.file){
+     if(!same(out.keptMusic,music.file)){ await mediaPut(id+"/music",music.file); out.keptMusic=fileInfo(music.file); }
+    }else if(out.keptMusic){ await mediaDel(id+"/music"); out.keptMusic=null; }
+   }catch(err){
+    note=" The video could not be kept on the phone (not enough storage), so you will be asked to choose it when you open the project.";
+    await mediaDel(id+"/video").catch(()=>{}); await mediaDel(id+"/music").catch(()=>{});
+    out.keptVideo=null; out.keptMusic=null;
+   }
+  }else if(!auto){
+   if(out.keptVideo){ await mediaDel(id+"/video"); out.keptVideo=null; }
+   if(out.keptMusic){ await mediaDel(id+"/music"); out.keptMusic=null; }
+  }
+  await projPut(out);
+  currentProjectId=id;
+  $("projName").value=out.name;
+  const time=new Date(out.savedAt).toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"});
+  $("projCurrent").textContent="Current project: “"+out.name+"” (autosaves every 30 s).";
+  projStatus((auto?"Autosaved at ":"Saved at ")+time+"."+note);
+  renderProjects();
+ }catch(err){
+  projStatus("Could not save the project: "+err.message);
+ }
+}
+
+async function finishOpen(rec){
+ restoreState(rec.state);
+ currentProjectId=rec.id;
+ $("projName").value=rec.name;
+ $("projCurrent").textContent="Current project: “"+rec.name+"” (autosaves every 30 s).";
+ let note="";
+ if(rec.state.music){
+  const f=rec.keptMusic?await mediaGet(rec.id+"/music").catch(()=>null):null;
+  if(f && await loadMusicFile(f)){
+   $("musicOffset").value=Number.isFinite(rec.state.settings.musicOffset)?rec.state.settings.musicOffset:0;
+  }else note=" Add the music “"+rec.state.music.name+"” again in Background music (section 03).";
+ }
+ projStatus("Opened “"+rec.name+"”."+note);
+ $("projRelinkBtn").hidden=true;
+ pendingOpen=null;
+}
+
+async function openProject(id){
+ if(busy||aiBusy||sceneBusy){ projStatus("Wait until the current task has finished."); return; }
+ if(currentFile && id!==currentProjectId && !confirm("Open another project? Changes since the last save of the current one will be lost.")) return;
+ try{
+  const raw=await projGet(id);
+  if(!raw){ projStatus("That project no longer exists."); renderProjects(); return; }
+  const rec={...raw,state:cleanState(raw.state)};
+  const f=rec.keptVideo?await mediaGet(id+"/video").catch(()=>null):null;
+  if(f){
+   projStatus("Opening “"+rec.name+"”…");
+   await loadVideoFile(f);
+   await finishOpen(rec);
+  }else{
+   pendingOpen=rec;
+   const v=rec.state.video;
+   projStatus("The video of “"+rec.name+"” is not kept on this phone. Tap CHOOSE VIDEO and pick “"+
+    (v?v.name+"” ("+MB(v.size)+")":"the video”")+".");
+   $("projRelinkBtn").hidden=false;
+  }
+ }catch(err){
+  projStatus("Could not open the project: "+err.message);
+ }
+}
+
+$("projRelinkBtn").addEventListener("click",()=>$("projRelink").click());
+$("projRelink").addEventListener("change",async e=>{
+ const f=e.target.files[0];
+ e.target.value="";
+ if(!f || !pendingOpen) return;
+ const v=pendingOpen.state.video;
+ if(v && (f.name!==v.name || f.size!==v.size) &&
+    !confirm("This is not the same file as before (“"+v.name+"”, "+MB(v.size)+"). Use it anyway? Times may not match.")) return;
+ try{
+  await loadVideoFile(f);
+  await finishOpen(pendingOpen);
+ }catch(err){
+  projStatus("Could not open the video: "+err.message);
+ }
+});
+
+async function deleteProject(rec){
+ if(!confirm("Delete the project “"+rec.name+"”? This cannot be undone.")) return;
+ try{
+  await idb("projects","readwrite",st=>st.delete(rec.id));
+  await mediaDel(rec.id+"/video"); await mediaDel(rec.id+"/music");
+  if(currentProjectId===rec.id){ currentProjectId=null; $("projCurrent").textContent="Current project: not saved yet."; }
+  projStatus("Deleted “"+rec.name+"”.");
+  renderProjects();
+ }catch(err){ projStatus("Could not delete: "+err.message); }
+}
+
+async function renderProjects(){
+ let all=[];
+ try{ all=await projGetAll(); }catch(err){ projStatus(err.message); }
+ all.sort((a,b)=>b.savedAt-a.savedAt);
+ $("projCount").textContent=all.length;
+ const frag=document.createDocumentFragment();
+ all.forEach(rec=>{
+  const row=document.createElement("div");
+  row.className="clip";
+  const img=document.createElement("img");
+  img.alt="";
+  const t=(rec.state.timeline&&rec.state.timeline.find(c=>c.thumb))||(rec.state.scenes&&rec.state.scenes.find(c=>c.thumb));
+  if(t && typeof t.thumb==="string" && t.thumb.startsWith("data:image/")) img.src=t.thumb;
+  const info=document.createElement("div");
+  info.className="info";
+  const b=document.createElement("b"); b.textContent=rec.name;
+  const d=document.createElement("div");
+  const kept=rec.keptVideo?"video kept ("+MB(rec.keptVideo.size+(rec.keptMusic?rec.keptMusic.size:0))+")":"video not kept";
+  d.textContent=new Date(rec.savedAt).toLocaleString([], {dateStyle:"medium",timeStyle:"short"})+" · "+
+   (rec.state.timeline||[]).length+" clips · "+kept;
+  info.append(b,d);
+  const open=document.createElement("button");
+  open.textContent="OPEN";
+  open.addEventListener("click",()=>openProject(rec.id));
+  const del=document.createElement("button");
+  del.className="del"; del.textContent="✕"; del.title="Delete project";
+  del.addEventListener("click",()=>deleteProject(rec));
+  row.append(img,info,open,del);
+  if(rec.id===currentProjectId) row.classList.add("active");
+  frag.append(row);
+ });
+ $("projList").replaceChildren(frag);
+ $("projEmpty").hidden=all.length>0;
+ if(navigator.storage && navigator.storage.estimate){
+  navigator.storage.estimate().then(e=>{
+   $("projStorage").textContent="This app uses "+MB(e.usage||0)+" of phone storage"+(e.quota?" (up to "+MB(e.quota)+" available).":".");
+  }).catch(()=>{});
+ }
+}
+
+$("projSave").addEventListener("click",()=>saveProject(false));
+$("projNew").addEventListener("click",()=>{
+ if(busy){ projStatus("Wait until the current task has finished."); return; }
+ if(!confirm("Start a new project? Changes since the last save will be lost.")) return;
+ location.reload();
+});
+
+// Autosave: every 30 s and when the app goes to the background.
+setInterval(()=>{ if(currentProjectId && !busy && !aiBusy && !sceneBusy && !document.hidden) saveProject(true); },30000);
+document.addEventListener("visibilitychange",()=>{ if(document.hidden && currentProjectId && !busy) saveProject(true); });
+
+// Backup file: the project without the video/music files.
+$("projExport").addEventListener("click",()=>{
+ if(!currentFile){ projStatus("Import a video first."); return; }
+ const name=($("projName").value.trim()||"project").slice(0,50);
+ const data=JSON.stringify({app:"ai-video-editor-studio",name,savedAt:Date.now(),state:collectState()});
+ const url=URL.createObjectURL(new Blob([data],{type:"application/json"}));
+ const a=document.createElement("a");
+ a.href=url; a.download=name.replace(/[^\p{L}\p{N} _-]+/gu,"").trim().replace(/\s+/g,"-")+".project.json";
+ document.body.append(a); a.click(); a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),10000);
+ projStatus("Backup file downloaded (video and music are not included).");
+});
+
+$("projImport").addEventListener("change",async e=>{
+ const f=e.target.files[0];
+ e.target.value="";
+ if(!f) return;
+ try{
+  if(f.size>20*1024*1024) throw new Error("The file is too big to be a project backup.");
+  const data=JSON.parse(await f.text());
+  if(!data || data.app!=="ai-video-editor-studio") throw new Error("This is not a project file from this app.");
+  const state=cleanState(data.state);
+  const all=await projGetAll();
+  let name=String(data.name||"Restored project").slice(0,40);
+  if(all.some(p=>p.name.toLowerCase()===name.toLowerCase())) name+=" (restored)";
+  await projPut({id:newId(),name,savedAt:Date.now(),state,keptVideo:null,keptMusic:null});
+  $("projListBox").open=true;
+  renderProjects();
+  projStatus("Restored “"+name+"”. Tap OPEN and choose its video.");
+ }catch(err){
+  projStatus("Could not restore: "+(err instanceof SyntaxError?"the file is damaged.":err.message));
+ }
+});
+
+renderProjects();
 
 window.addEventListener("beforeunload",()=>{
  if(videoURL)URL.revokeObjectURL(videoURL);
