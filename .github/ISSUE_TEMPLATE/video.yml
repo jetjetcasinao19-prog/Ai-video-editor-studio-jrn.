@@ -1,0 +1,31 @@
+name: Video project
+description: Plan a new video through research, script, edit, review and publish
+labels: [video]
+body:
+  - type: input
+    id: topic
+    attributes:
+      label: Topic
+    validations:
+      required: true
+  - type: dropdown
+    id: format
+    attributes:
+      label: Format
+      options: ["9:16 Shorts/Reels/TikTok", "16:9 YouTube", "1:1 Square"]
+  - type: input
+    id: date
+    attributes:
+      label: Target posting date
+  - type: checkboxes
+    id: stages
+    attributes:
+      label: Stages
+      options:
+        - label: Research (researcher)
+        - label: Script (scriptwriter)
+        - label: Edit plan (video-editor)
+        - label: Edited in app
+        - label: Review (reviewer)
+        - label: Scheduled (publisher)
+        - label: Posted

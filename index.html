@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Video Editor Studio</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#0b0e14;color:#fff;
+ font-family:Arial,sans-serif;padding:16px
+}
+main{max-width:850px;margin:auto}
+h1{font-size:25px;margin-bottom:4px}
+.sub{color:#929bad;font-size:12px}
+.panel{
+ background:#151b27;border:1px solid #293449;
+ padding:15px;border-radius:13px;margin:15px 0
+}
+label{display:block;margin-top:12px;font-size:13px;color:#c5ccda}
+input,select,button{
+ width:100%;padding:12px;margin-top:7px;
+ border:1px solid #36435a;border-radius:8px;
+ background:#0d1320;color:white;font-size:14px
+}
+button{
+ background:#526dff;border:0;
+ font-weight:bold;cursor:pointer
+}
+button:disabled{opacity:.45}
+.secondary{background:#303b51}
+canvas{
+ width:100%;max-height:540px;
+ object-fit:contain;background:#000;
+ border-radius:10px;display:block
+}
+video{display:none}
+.row{display:flex;gap:10px}
+.row>*{flex:1;min-width:0}
+.note{color:#9ba8bb;font-size:12px;line-height:1.6}
+#status{color:#91b7ff;font-size:13px;margin-top:12px}
+a{color:#9ab1ff;word-break:break-all}
+.check{display:flex;align-items:center;gap:10px;margin-top:12px}
+.check input{width:auto;margin:0}
+.check label{margin:0}
+#capList{margin-top:12px;max-height:420px;overflow-y:auto}
+.cap{
+ border:1px solid #293449;border-radius:10px;
+ padding:8px 10px 10px;margin-bottom:10px;background:#101624
+}
+.cap .row{align-items:flex-end}
+.cap label{margin-top:0;font-size:11px}
+.cap input{margin-top:4px;padding:10px}
+.cap button{margin-top:4px;padding:10px 0}
+.cap .del{background:#5a2733}
+.cap .row>.btn{flex:0 0 52px}
+#capCount{margin-top:8px}
+.ai{
+ border:1px solid #36435a;border-radius:10px;
+ padding:4px 12px 10px;margin:14px 0;background:#101624
+}
+.ai h4{margin:10px 0 4px}
+.del{background:#5a2733}
+progress{width:100%;height:10px;margin-top:10px;accent-color:#526dff}
+[hidden]{display:none!important}
+</style>
+</head>
+
+<body>
+<main>
+
+<h1>VIDEO STUDIO</h1>
+<div class="sub">AI MEDIA PRODUCTION • EDITING DEPARTMENT</div>
+
+<section class="panel">
+<h3>01 — Import Video</h3>
+<input id="file" type="file" accept="video/*">
+<p class="note">
+Choose a video from your Android phone.
+Processing happens inside your browser.
+</p>
+</section>
+
+<section class="panel">
+<h3>02 — Video Preview</h3>
+<video id="video" playsinline preload="metadata"></video>
+<canvas id="canvas" width="720" height="1280"></canvas>
+
+<div class="row">
+<button id="play" class="secondary" disabled>PLAY</button>
+<button id="pause" class="secondary" disabled>PAUSE</button>
+</div>
+
+<p id="duration" class="note">No video loaded.</p>
+</section>
+
+<section class="panel">
+<h3>03 — Editing Controls</h3>
+
+<label>Video Format</label>
+<select id="ratio">
+<option value="9:16">Vertical 9:16 — Shorts/Reels</option>
+<option value="16:9">Horizontal 16:9 — YouTube</option>
+<option value="1:1">Square 1:1</option>
+</select>
+
+<label>Video Fit</label>
+<select id="fit">
+<option value="cover">Fill frame (crop edges)</option>
+<option value="contain">Fit entire video</option>
+</select>
+
+<label>Start Time (seconds)</label>
+<input id="start" type="number" min="0" step="0.1" value="0">
+
+<label>End Time (seconds)</label>
+<input id="end" type="number" min="0" step="0.1" value="0">
+
+<label>Text Overlay</label>
+<input id="overlay" maxlength="70"
+placeholder="Enter your video title">
+
+<label>Text Position</label>
+<select id="position">
+<option value="bottom">Bottom</option>
+<option value="center">Center</option>
+<option value="top">Top</option>
+</select>
+
+<label>Text Color</label>
+<select id="color">
+<option value="#ffffff">White</option>
+<option value="#ffff00">Yellow</option>
+<option value="#00e5ff">Cyan</option>
+</select>
+
+<button id="preview" class="secondary" disabled>
+UPDATE PREVIEW
+</button>
+</section>
+
+<section class="panel">
+<h3>04 — Captions</h3>
+<p class="note">
+Captions are burned into the preview and the exported video.
+Times are in seconds of the original video.
+Generate them with AI, add them by hand, or import an .srt / .vtt file.
+</p>
+
+<div class="ai">
+<h4>AI automatic captions</h4>
+<p class="note">
+Uses the Whisper speech-recognition model running inside your browser.
+Your video never leaves your phone. The first run downloads the model
+(see sizes below); keep Chrome open on this tab while it works.
+Only the Start–End range from section 03 is transcribed.
+</p>
+
+<label for="aiLang">Spoken language</label>
+<select id="aiLang">
+<option value="">Auto-detect</option>
+<option value="english">English</option>
+<option value="tagalog">Tagalog / Filipino</option>
+<option value="spanish">Spanish</option>
+<option value="indonesian">Indonesian</option>
+<option value="malay">Malay</option>
+<option value="vietnamese">Vietnamese</option>
+<option value="thai">Thai</option>
+<option value="hindi">Hindi</option>
+<option value="japanese">Japanese</option>
+<option value="korean">Korean</option>
+<option value="chinese">Chinese</option>
+<option value="arabic">Arabic</option>
+<option value="portuguese">Portuguese</option>
+<option value="french">French</option>
+<option value="german">German</option>
+</select>
+
+<label for="aiModel">Model</label>
+<select id="aiModel">
+<option value="onnx-community/whisper-tiny">Tiny · 41 MB · fastest</option>
+<option value="onnx-community/whisper-base">Base · 77 MB · slower</option>
+</select>
+
+<div class="row">
+<button id="aiRun" disabled>GENERATE CAPTIONS</button>
+<button id="aiCancel" class="del" hidden>CANCEL</button>
+</div>
+<progress id="aiProgress" max="100" value="0" hidden></progress>
+<p id="aiStatus" class="note"></p>
+</div>
+
+<div class="check">
+<input id="showCaptions" type="checkbox" checked>
+<label for="showCaptions">Show captions</label>
+</div>
+
+<div class="row">
+<button id="addCap" class="secondary" disabled>+ ADD AT CURRENT TIME</button>
+</div>
+
+<label for="capFile">Import subtitles (.srt or .vtt)</label>
+<input id="capFile" type="file" accept=".srt,.vtt,text/vtt,application/x-subrip,text/plain">
+
+<div class="row">
+<button id="downloadSrt" class="secondary" disabled>DOWNLOAD .SRT</button>
+<button id="clearCaps" class="secondary" disabled>CLEAR ALL</button>
+</div>
+
+<p id="capCount" class="note">No captions yet.</p>
+<div id="capList"></div>
+</section>
+
+<section class="panel">
+<h3>05 — Export Video</h3>
+<p class="note">
+Export your edited clip as a WebM video.
+Keep the browser open during export.
+</p>
+<button id="export" disabled>EXPORT VIDEO</button>
+<div id="status">Waiting for video...</div>
+<div id="result"></div>
+</section>
+
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+
+const video = $("video");
+const canvas = $("canvas");
+const ctx = canvas.getContext("2d");
+
+let videoURL = null;
+let currentFile = null; // the imported File, kept for AI audio extraction
+let exportURL = null;
+let animationFrame = null;
+let busy = false;
+
+function dimensions(){
+ const ratio = $("ratio").value;
+ if(ratio === "9:16"){
+  canvas.width=720;
+  canvas.height=1280;
+ }else if(ratio === "16:9"){
+  canvas.width=1280;
+  canvas.height=720;
+ }else{
+  canvas.width=1080;
+  canvas.height=1080;
+ }
+}
+
+function draw(){
+ const w=canvas.width;
+ const h=canvas.height;
+
+ ctx.fillStyle="#000";
+ ctx.fillRect(0,0,w,h);
+
+ if(video.videoWidth && video.videoHeight){
+  const vw=video.videoWidth;
+  const vh=video.videoHeight;
+  const fit=$("fit").value;
+
+  const scale=fit==="cover"
+   ?Math.max(w/vw,h/vh)
+   :Math.min(w/vw,h/vh);
+
+  const dw=vw*scale;
+  const dh=vh*scale;
+
+  ctx.drawImage(
+   video,(w-dw)/2,(h-dh)/2,dw,dh
+  );
+ }
+
+ const title=$("overlay").value.trim();
+
+ if(title){
+  const fontSize=Math.max(24,Math.round(w*0.055));
+  const y=$("position").value==="top"
+   ?h*0.15
+   :$("position").value==="center"
+   ?h*0.5:h*0.85;
+
+  ctx.font="bold "+fontSize+"px Arial";
+  ctx.textAlign="center";
+  ctx.textBaseline="middle";
+  ctx.lineWidth=fontSize*0.12;
+  ctx.strokeStyle="#000";
+  ctx.fillStyle=$("color").value;
+
+  ctx.strokeText(title,w/2,y,w*0.88);
+  ctx.fillText(title,w/2,y,w*0.88);
+ }
+
+ drawCaption(w,h,title);
+}
+
+/* ---------- CAPTIONS ---------- */
+
+let captions=[]; // {start,end,text}, times in seconds of the source video
+
+function currentCaption(t){
+ for(let i=0;i<captions.length;i++){
+  const c=captions[i];
+  if(t>=c.start && t<c.end && c.text.trim()) return c;
+ }
+ return null;
+}
+
+function wrapLines(text,maxWidth,maxLines){
+ const out=[];
+ text.split("\n").forEach(para=>{
+  const words=para.trim().split(/\s+/).filter(Boolean);
+  let line="";
+  words.forEach(word=>{
+   const test=line?line+" "+word:word;
+   if(line && ctx.measureText(test).width>maxWidth){
+    out.push(line);
+    line=word;
+   }else{
+    line=test;
+   }
+  });
+  if(line) out.push(line);
+ });
+ return out.slice(0,maxLines);
+}
+
+function drawCaption(w,h,title){
+ if(!$("showCaptions").checked) return;
+ const c=currentCaption(video.currentTime);
+ if(!c) return;
+
+ const fontSize=Math.max(20,Math.round(w*0.045));
+ const lineHeight=fontSize*1.25;
+ ctx.font="bold "+fontSize+"px Arial";
+ ctx.textAlign="center";
+ ctx.textBaseline="middle";
+
+ const maxWidth=w*0.86;
+ const lines=wrapLines(c.text,maxWidth,3);
+ if(!lines.length) return;
+
+ // Keep clear of the title when it sits at the bottom.
+ const bottom=(title && $("position").value==="bottom")?h*0.76:h*0.9;
+ const firstY=bottom-(lines.length-1)*lineHeight;
+
+ ctx.lineWidth=fontSize*0.14;
+ ctx.lineJoin="round";
+ ctx.strokeStyle="#000";
+ ctx.fillStyle="#fff";
+ lines.forEach((line,i)=>{
+  const y=firstY+i*lineHeight;
+  ctx.strokeText(line,w/2,y,maxWidth);
+  ctx.fillText(line,w/2,y,maxWidth);
+ });
+}
+
+function round1(n){return Math.round(n*10)/10}
+
+function sortCaptions(){
+ captions.sort((a,b)=>a.start-b.start);
+}
+
+function redrawIfPaused(){
+ if(video.paused) draw();
+}
+
+function renderCaptionList(){
+ const list=$("capList");
+ const frag=document.createDocumentFragment();
+
+ captions.forEach((c,index)=>{
+  const box=document.createElement("div");
+  box.className="cap";
+
+  const row=document.createElement("div");
+  row.className="row";
+
+  function timeField(name,key){
+   const wrap=document.createElement("div");
+   const lab=document.createElement("label");
+   lab.textContent=name;
+   const inp=document.createElement("input");
+   inp.type="number";inp.min="0";inp.step="any";
+   inp.inputMode="decimal";
+   inp.value=c[key];
+   inp.addEventListener("input",()=>{
+    const v=Number(inp.value);
+    if(Number.isFinite(v) && v>=0){
+     c[key]=v;
+     redrawIfPaused();
+    }
+   });
+   inp.addEventListener("change",()=>{
+    sortCaptions();
+    renderCaptionList();
+   });
+   wrap.append(lab,inp);
+   return wrap;
+  }
+
+  const go=document.createElement("button");
+  go.className="secondary btn";
+  go.textContent="GO";
+  go.title="Jump to this caption";
+  go.addEventListener("click",()=>{
+   video.pause();
+   video.currentTime=Math.min(c.start+0.01,video.duration||c.start);
+  });
+
+  const del=document.createElement("button");
+  del.className="del btn";
+  del.textContent="✕";
+  del.title="Delete caption";
+  del.addEventListener("click",()=>{
+   captions.splice(index,1);
+   renderCaptionList();
+   redrawIfPaused();
+  });
+
+  row.append(timeField("Start","start"),timeField("End","end"),go,del);
+
+  const text=document.createElement("input");
+  text.type="text";
+  text.maxLength=200;
+  text.placeholder="Caption text";
+  text.value=c.text;
+  text.addEventListener("input",()=>{
+   c.text=text.value;
+   redrawIfPaused();
+  });
+
+  box.append(row,text);
+  frag.append(box);
+ });
+
+ list.replaceChildren(frag);
+
+ const n=captions.length;
+ $("capCount").textContent=n?n+" caption"+(n===1?"":"s")+".":"No captions yet.";
+ $("downloadSrt").disabled=!n;
+ $("clearCaps").disabled=!n;
+}
+
+function parseTimestamp(s){
+ const parts=s.trim().replace(",",".").split(":").map(Number);
+ if(parts.some(p=>!Number.isFinite(p))) return NaN;
+ return parts.reduce((total,p)=>total*60+p,0);
+}
+
+function parseSubtitles(text){
+ const result=[];
+ const blocks=text.replace(/^﻿/,"").replace(/\r/g,"").split(/\n\s*\n/);
+ blocks.forEach(block=>{
+  const lines=block.split("\n");
+  const i=lines.findIndex(l=>l.includes("-->"));
+  if(i<0) return;
+  const m=lines[i].match(/([\d:.,]+)\s*-->\s*([\d:.,]+)/);
+  if(!m) return;
+  const start=parseTimestamp(m[1]);
+  const end=parseTimestamp(m[2]);
+  const body=lines.slice(i+1).join("\n")
+   .replace(/<[^>]*>/g,"").replace(/\{\\[^}]*\}/g,"").trim();
+  if(Number.isFinite(start) && Number.isFinite(end) && end>start && body){
+   result.push({start,end,text:body});
+  }
+ });
+ return result;
+}
+
+function srtTime(sec){
+ const ms=Math.max(0,Math.round(sec*1000));
+ const h=Math.floor(ms/3600000);
+ const m=Math.floor(ms%3600000/60000);
+ const s=Math.floor(ms%60000/1000);
+ const r=ms%1000;
+ const p=(n,l)=>String(n).padStart(l,"0");
+ return p(h,2)+":"+p(m,2)+":"+p(s,2)+","+p(r,3);
+}
+
+function buildSrt(){
+ return captions.map((c,i)=>
+  (i+1)+"\n"+srtTime(c.start)+" --> "+srtTime(c.end)+"\n"+c.text.trim()+"\n"
+ ).join("\n");
+}
+
+$("addCap").addEventListener("click",()=>{
+ const start=round1(video.currentTime||0);
+ const dur=Number.isFinite(video.duration)?video.duration:start+2;
+ const end=round1(Math.min(dur,start+2));
+ captions.push({start,end:end>start?end:start+2,text:""});
+ sortCaptions();
+ renderCaptionList();
+ const inputs=$("capList").querySelectorAll('input[type="text"]');
+ const idx=captions.findIndex(c=>c.start===start && c.text==="");
+ if(inputs[idx]) inputs[idx].focus();
+});
+
+$("capFile").addEventListener("change",async e=>{
+ const file=e.target.files[0];
+ if(!file) return;
+ try{
+  if(file.size>2*1024*1024) throw new Error("File is larger than 2 MB.");
+  const parsed=parseSubtitles(await file.text());
+  if(!parsed.length) throw new Error("No captions found in this file.");
+  if(captions.length && !confirm("Replace the current "+captions.length+" captions?")){
+   return;
+  }
+  captions=parsed;
+  sortCaptions();
+  renderCaptionList();
+  redrawIfPaused();
+  $("status").textContent="Imported "+parsed.length+" captions.";
+ }catch(err){
+  alert("Could not import subtitles: "+err.message);
+ }finally{
+  e.target.value="";
+ }
+});
+
+$("downloadSrt").addEventListener("click",()=>{
+ if(!captions.length) return;
+ const url=URL.createObjectURL(new Blob([buildSrt()],{type:"application/x-subrip"}));
+ const a=document.createElement("a");
+ a.href=url;
+ a.download="captions.srt";
+ document.body.append(a);
+ a.click();
+ a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),10000);
+});
+
+$("clearCaps").addEventListener("click",()=>{
+ if(!captions.length || !confirm("Delete all captions?")) return;
+ captions=[];
+ renderCaptionList();
+ redrawIfPaused();
+});
+
+$("showCaptions").addEventListener("change",redrawIfPaused);
+
+/* ---------- AI CAPTIONS (Whisper, on-device) ---------- */
+
+// transformers.js runs Whisper in the browser (WebAssembly). It is loaded
+// only when the user taps GENERATE, inside a Web Worker so the page stays
+// responsive. The worker is closed after each run to give the RAM back.
+const TRANSFORMERS_URL=
+ "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.7.5/dist/transformers.min.js";
+
+const WORKER_CODE=`
+import { pipeline, env } from "${TRANSFORMERS_URL}";
+env.allowLocalModels = false;
+// data: workers (page opened from phone files) have no Cache Storage.
+try { if (!self.caches) env.useBrowserCache = false; } catch (e) { env.useBrowserCache = false; }
+self.onmessage = async (e) => {
+ const { model, audio, language } = e.data;
+ try {
+  const asr = await pipeline("automatic-speech-recognition", model, {
+   device: "wasm",
+   dtype: { encoder_model: "q8", decoder_model_merged: "q8" },
+   progress_callback: (p) => self.postMessage({ type: "progress", p })
+  });
+  self.postMessage({ type: "transcribing" });
+  const options = {
+   task: "transcribe",
+   return_timestamps: true,
+   chunk_length_s: 30,
+   stride_length_s: 5
+  };
+  if (language) options.language = language;
+  const out = await asr(audio, options);
+  self.postMessage({ type: "done", chunks: out.chunks || [], text: out.text || "" });
+ } catch (err) {
+  self.postMessage({ type: "error", message: String((err && err.message) || err) });
+ }
+};
+`;
+
+let aiBusy=false;
+let aiWorker=null;
+let aiTimer=null;
+const AI_RATE=16000; // Whisper expects 16 kHz mono audio
+
+function aiStatus(text){ $("aiStatus").textContent=text; }
+
+function aiStopWorker(){
+ if(aiWorker){ aiWorker.terminate(); aiWorker=null; }
+ if(aiTimer){ clearInterval(aiTimer); aiTimer=null; }
+}
+
+function aiFinish(){
+ aiStopWorker();
+ aiBusy=false;
+ $("aiRun").disabled=!currentFile;
+ $("aiCancel").hidden=true;
+ $("aiProgress").hidden=true;
+ $("export").disabled=!currentFile || busy;
+}
+
+// Decode the video's audio track, resampled to 16 kHz, and return mono
+// samples for [start,end] only. Uses an OfflineAudioContext so the browser
+// resamples during decoding (far less RAM than the original 44/48 kHz).
+async function extractAudio(file,start,end){
+ const Offline=window.OfflineAudioContext||window.webkitOfflineAudioContext;
+ if(!Offline) throw new Error("This browser cannot decode audio.");
+ let data=await file.arrayBuffer();
+ const actx=new Offline(1,AI_RATE,AI_RATE);
+ let decoded;
+ try{
+  decoded=await actx.decodeAudioData(data);
+ }catch(e){
+  throw new Error("Could not read the audio. The video may have no sound track or an unsupported audio format.");
+ }
+ data=null;
+ if(decoded.sampleRate!==AI_RATE) throw new Error("Audio resampling is not supported on this browser.");
+ const from=Math.max(0,Math.floor(start*decoded.sampleRate));
+ const to=Math.min(decoded.length,Math.ceil(end*decoded.sampleRate));
+ if(to-from<decoded.sampleRate*0.5) throw new Error("The selected range is too short.");
+ const mono=new Float32Array(to-from);
+ const chs=decoded.numberOfChannels;
+ for(let c=0;c<chs;c++){
+  const ch=decoded.getChannelData(c);
+  for(let i=0;i<mono.length;i++) mono[i]+=ch[from+i]/chs;
+ }
+ return mono;
+}
+
+// Loudness per 50 ms frame, used to trim silence that Whisper includes
+// at the start/end of its timestamps. Small: 20 numbers per second.
+const ENV_STEP=0.05;
+function loudnessEnvelope(samples){
+ const n=Math.round(AI_RATE*ENV_STEP);
+ const env=new Float32Array(Math.ceil(samples.length/n));
+ for(let f=0;f<env.length;f++){
+  let sum=0;
+  const a=f*n,b=Math.min(samples.length,a+n);
+  for(let i=a;i<b;i++) sum+=samples[i]*samples[i];
+  env[f]=Math.sqrt(sum/Math.max(1,b-a));
+ }
+ const sorted=Array.from(env).sort((x,y)=>x-y);
+ const loud=sorted[Math.floor(sorted.length*0.95)]||0;
+ return {env,threshold:Math.max(0.003,loud*0.1)};
+}
+
+function trimSilence(s,e,loud){
+ if(!loud) return [s,e];
+ const {env,threshold}=loud;
+ let a=Math.floor(s/ENV_STEP), b=Math.min(env.length,Math.ceil(e/ENV_STEP))-1;
+ while(a<b && env[a]<threshold) a++;
+ while(b>a && env[b]<threshold) b--;
+ if(b<=a) return [s,e]; // no clear speech found: keep Whisper's times
+ return [Math.max(s,a*ENV_STEP-0.1),Math.min(e,(b+1)*ENV_STEP+0.15)];
+}
+
+// Split text into n lines of similar length (no single-word leftovers).
+function splitEvenly(text,maxLen){
+ const words=text.split(/\s+/);
+ const n=Math.max(1,Math.ceil(text.length/maxLen));
+ const target=text.length/n;
+ const lines=[];
+ let cur="";
+ words.forEach(w=>{
+  const t=cur?cur+" "+w:w;
+  if(cur && lines.length<n-1 && (t.length>maxLen || t.length>target*1.15)){
+   lines.push(cur); cur=w;
+  }else cur=t;
+ });
+ if(cur) lines.push(cur);
+ return lines;
+}
+
+// Whisper returns sentence-sized chunks. Split them into short caption
+// lines (max ~42 characters) and share the chunk's time between them.
+function chunksToCaptions(chunks,offset,rangeLength,loud){
+ const out=[];
+ const r2=n=>Math.round(n*100)/100;
+ chunks.forEach((ch,i)=>{
+  const text=(ch.text||"").trim();
+  if(!text || /^[\[(].*[\])]$/.test(text)) return; // skip "[Music]", "(silence)"
+  let [s,e]=ch.timestamp||[];
+  if(!Number.isFinite(s)) return;
+  if(!Number.isFinite(e) || e<=s){
+   const next=chunks[i+1]&&chunks[i+1].timestamp&&chunks[i+1].timestamp[0];
+   e=Number.isFinite(next)&&next>s?next:Math.min(rangeLength,s+4);
+  }
+  e=Math.min(e,rangeLength);
+  if(e<=s) return;
+  [s,e]=trimSilence(s,e,loud);
+  const groups=splitEvenly(text,42);
+  const total=groups.reduce((n,g)=>n+g.length,0);
+  let t=s;
+  groups.forEach(g=>{
+   const d=(e-s)*g.length/total;
+   out.push({start:r2(offset+t),end:r2(offset+t+d),text:g});
+   t+=d;
+  });
+ });
+ return out;
+}
+
+$("aiRun").addEventListener("click",async()=>{
+ if(aiBusy||busy) return;
+ if(!currentFile||!Number.isFinite(video.duration)){ alert("Import a video first."); return; }
+
+ const start=Math.max(0,Number($("start").value)||0);
+ const end=Math.min(video.duration,Number($("end").value)||video.duration);
+ if(end<=start){ alert("Please enter valid start and end times in section 03."); return; }
+
+ if(currentFile.size>300*1024*1024 &&
+    !confirm("This video is large ("+Math.round(currentFile.size/1048576)+
+     " MB). Reading its audio may crash the tab on phones with little RAM. Continue?")) return;
+ if(end-start>600 &&
+    !confirm("Transcribing "+Math.round((end-start)/60)+" minutes can take a long time on a phone. Tip: set a shorter Start–End range. Continue?")) return;
+ if(captions.length &&
+    !confirm("Replace the current "+captions.length+" captions with AI captions?")) return;
+
+ aiBusy=true;
+ video.pause();
+ $("aiRun").disabled=true;
+ $("export").disabled=true;
+ $("aiCancel").hidden=false;
+ const bar=$("aiProgress");
+ bar.hidden=false;
+ bar.removeAttribute("value");
+
+ try{
+  aiStatus("Reading audio from the video…");
+  const audio=await extractAudio(currentFile,start,end);
+  if(!aiBusy) return; // cancelled
+  const loud=loudnessEnvelope(audio);
+
+  aiStatus("Loading AI model…");
+  // A blob: worker shares the site's storage, so the model download is
+  // cached. Pages opened from the phone's files (file://) cannot start
+  // blob: workers, so they use a data: worker (model is not cached there).
+  if(location.protocol==="file:"){
+   aiWorker=new Worker("data:text/javascript;charset=utf-8,"+
+    encodeURIComponent(WORKER_CODE),{type:"module"});
+  }else{
+   const blobURL=URL.createObjectURL(new Blob([WORKER_CODE],{type:"text/javascript"}));
+   aiWorker=new Worker(blobURL,{type:"module"});
+   setTimeout(()=>URL.revokeObjectURL(blobURL),60000);
+  }
+
+  const files={};
+  const result=await new Promise((resolve,reject)=>{
+   aiWorker.onerror=e=>reject(new Error(
+    (e&&e.message)||"Could not start the AI. Check your internet connection for the first run."));
+   aiWorker.onmessage=e=>{
+    const m=e.data;
+    if(m.type==="progress"){
+     const p=m.p;
+     if(p.status==="progress" && p.file && p.total){
+      files[p.file]={loaded:p.loaded,total:p.total};
+      let loaded=0,total=0;
+      Object.values(files).forEach(f=>{loaded+=f.loaded;total+=f.total;});
+      bar.value=Math.round(loaded/total*100);
+      aiStatus("Downloading AI model: "+(loaded/1048576).toFixed(1)+" / "+
+       (total/1048576).toFixed(1)+" MB (only the first time)");
+     }else if(p.status==="ready"){
+      aiStatus("Model ready.");
+     }
+    }else if(m.type==="transcribing"){
+     bar.removeAttribute("value");
+     const t0=Date.now();
+     const len=Math.round(end-start);
+     const tick=()=>aiStatus("Listening and writing captions… "+
+      Math.round((Date.now()-t0)/1000)+" s (audio length "+len+" s)");
+     tick();
+     aiTimer=setInterval(tick,1000);
+    }else if(m.type==="done"){
+     resolve(m);
+    }else if(m.type==="error"){
+     reject(new Error(m.message));
+    }
+   };
+   aiWorker.postMessage({model:$("aiModel").value,audio,language:$("aiLang").value},[audio.buffer]);
+  });
+
+  const made=chunksToCaptions(result.chunks,start,end-start,loud);
+  if(!made.length){
+   aiStatus("No speech was found in the selected range.");
+   return;
+  }
+  captions=made;
+  sortCaptions();
+  renderCaptionList();
+  redrawIfPaused();
+  aiStatus("Done: "+made.length+" captions created. Please check and correct them below — AI can make mistakes.");
+ }catch(err){
+  if(aiBusy) aiStatus("AI captions failed: "+err.message);
+ }finally{
+  if(aiBusy) aiFinish();
+ }
+});
+
+$("aiCancel").addEventListener("click",()=>{
+ if(!aiBusy) return;
+ aiFinish();
+ aiStatus("Cancelled.");
+});
+
+/* ---------- END CAPTIONS ---------- */
+
+function updatePreview(){
+ dimensions();
+ draw();
+}
+
+function stopAnimation(){
+ if(animationFrame){
+  cancelAnimationFrame(animationFrame);
+  animationFrame=null;
+ }
+}
+
+function animate(){
+ // Stop preview playback at the End Time (export uses its own loop).
+ if(!busy && video.currentTime>=Number($("end").value)){
+  video.pause();
+ }
+ draw();
+ if(!video.paused && !video.ended){
+  animationFrame=requestAnimationFrame(animate);
+ }else{
+  animationFrame=null;
+ }
+}
+
+$("file").addEventListener("change",e=>{
+ const file=e.target.files[0];
+ if(!file)return;
+
+ if(!file.type.startsWith("video/")){
+  alert("Please select a video file.");
+  return;
+ }
+
+ video.pause();
+
+ if(videoURL) URL.revokeObjectURL(videoURL);
+
+ currentFile=file;
+ videoURL=URL.createObjectURL(file);
+ video.src=videoURL;
+
+ $("status").textContent="Loading video...";
+});
+
+video.addEventListener("loadedmetadata",()=>{
+ $("start").value=0;
+ $("end").value=video.duration.toFixed(1);
+
+ $("duration").textContent=
+  "Duration: "+video.duration.toFixed(2)+" seconds";
+
+ $("play").disabled=false;
+ $("pause").disabled=false;
+ $("preview").disabled=false;
+ $("export").disabled=false;
+ $("addCap").disabled=false;
+ if(!aiBusy) $("aiRun").disabled=false;
+
+ updatePreview();
+ $("status").textContent="Video ready.";
+});
+
+$("play").addEventListener("click",async()=>{
+ try{
+  const end=Number($("end").value);
+  if(video.currentTime>=end){
+   video.currentTime=Number($("start").value);
+  }
+  await video.play();
+  stopAnimation();
+  animate();
+ }catch(e){
+  $("status").textContent="Unable to play video.";
+ }
+});
+
+$("pause").addEventListener("click",()=>{
+ video.pause();
+ draw();
+});
+
+video.addEventListener("seeked",draw);
+video.addEventListener("pause",()=>{
+ stopAnimation();
+ draw();
+});
+
+$("preview").addEventListener("click",updatePreview);
+
+["ratio","fit","overlay","position","color"].forEach(id=>{
+ $(id).addEventListener("change",updatePreview);
+});
+
+// Live title preview while typing (no canvas resize needed).
+$("overlay").addEventListener("input",redrawIfPaused);
+
+async function seek(time){
+ return new Promise((resolve,reject)=>{
+  if(Math.abs(video.currentTime-time)<0.02){
+   resolve();
+   return;
+  }
+  const timeout=setTimeout(()=>{
+   reject(new Error("Video seek timed out."));
+  },10000);
+  video.addEventListener("seeked",()=>{
+   clearTimeout(timeout);
+   resolve();
+  },{once:true});
+  video.currentTime=time;
+ });
+}
+
+$("export").addEventListener("click",async()=>{
+ if(busy||aiBusy)return;
+
+ const start=Number($("start").value);
+ const end=Number($("end").value);
+
+ if(!video.src || !Number.isFinite(video.duration)){
+  alert("Import a video first.");
+  return;
+ }
+
+ if(start<0 || end>video.duration || end<=start){
+  alert("Please enter valid start and end times.");
+  return;
+ }
+
+ if(!window.MediaRecorder ||
+    !canvas.captureStream){
+  alert("Your browser does not support video export.");
+  return;
+ }
+
+ const mimeTypes=[
+  "video/webm;codecs=vp9",
+  "video/webm;codecs=vp8",
+  "video/webm"
+ ];
+
+ const mimeType=mimeTypes.find(type=>
+  MediaRecorder.isTypeSupported(type)
+ );
+
+ if(!mimeType){
+  alert("WebM export is not supported.");
+  return;
+ }
+
+ busy=true;
+ $("export").disabled=true;
+ $("status").textContent="Preparing export...";
+
+ let recorder;
+ let chunks=[];
+ let canvasStream;
+ let sourceStream;
+ let finished=false;
+
+ try{
+  video.pause();
+  stopAnimation();
+  updatePreview();
+
+  await seek(start);
+
+  const tracks=[];
+
+  canvasStream=canvas.captureStream(30);
+  tracks.push(...canvasStream.getVideoTracks());
+
+  if(typeof video.captureStream==="function"){
+   sourceStream=video.captureStream();
+   tracks.push(...sourceStream.getAudioTracks());
+  }else{
+   $("status").textContent=
+    "Exporting without audio: browser audio capture unavailable.";
+  }
+
+  const output=new MediaStream(tracks);
+
+  recorder=new MediaRecorder(output,{
+   mimeType,
+   videoBitsPerSecond:4000000
+  });
+
+  recorder.ondataavailable=e=>{
+   if(e.data && e.data.size>0){
+    chunks.push(e.data);
+   }
+  };
+
+  const recording=new Promise((resolve,reject)=>{
+   recorder.onstop=()=>resolve();
+   recorder.onerror=()=>reject(
+    new Error("Recording failed.")
+   );
+  });
+
+  recorder.start(1000);
+
+  await video.play();
+
+  $("status").textContent="Recording video...";
+
+  await new Promise((resolve,reject)=>{
+   function frame(){
+    draw();
+
+    if(video.currentTime>=end || video.ended){
+     video.pause();
+     draw();
+     resolve();
+     return;
+    }
+
+    if(video.paused){
+     reject(new Error("Playback stopped unexpectedly."));
+     return;
+    }
+
+    requestAnimationFrame(frame);
+   }
+
+   requestAnimationFrame(frame);
+  });
+
+  if(recorder.state!=="inactive"){
+   recorder.stop();
+  }
+
+  await recording;
+  finished=true;
+
+  const blob=new Blob(chunks,{type:mimeType});
+
+  if(blob.size===0){
+   throw new Error("Empty video export.");
+  }
+
+  if(exportURL) URL.revokeObjectURL(exportURL);
+  exportURL=URL.createObjectURL(blob);
+
+  const link=document.createElement("a");
+  link.href=exportURL;
+  link.download="edited-video.webm";
+  link.textContent="DOWNLOAD YOUR VIDEO";
+
+  $("result").replaceChildren(link);
+  $("status").textContent=
+   "Export completed! File size: "+
+   (blob.size/1024/1024).toFixed(2)+" MB";
+
+ }catch(error){
+  if(recorder && recorder.state!=="inactive"){
+   recorder.stop();
+  }
+  $("status").textContent="Export error: "+error.message;
+
+ }finally{
+  if(!finished && recorder && recorder.state!=="inactive"){
+   try{recorder.stop()}catch(e){}
+  }
+
+  if(canvasStream){
+   canvasStream.getTracks().forEach(t=>t.stop());
+  }
+  if(sourceStream){
+   sourceStream.getTracks().forEach(t=>t.stop());
+  }
+
+  video.pause();
+  draw();
+  busy=false;
+  $("export").disabled=false;
+ }
+});
+
+window.addEventListener("beforeunload",()=>{
+ if(videoURL)URL.revokeObjectURL(videoURL);
+ if(exportURL)URL.revokeObjectURL(exportURL);
+});
+</script>
+</body>
+</html>

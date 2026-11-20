@@ -1,0 +1,15 @@
+name: App feature
+description: Request a new feature for the video editor app
+labels: [feature]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What should the feature do?
+    validations:
+      required: true
+  - type: textarea
+    id: phone
+    attributes:
+      label: Phone / browser it must work on
+      placeholder: e.g. Samsung A14, Android Chrome
