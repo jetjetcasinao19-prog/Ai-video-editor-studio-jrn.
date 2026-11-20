@@ -491,9 +491,15 @@ Your style is remembered on this phone.</p>
 <section class="panel">
 <h3>05 — Export Video</h3>
 <p class="note">
-Export your edited clip as a WebM video.
+Export your edited clip as a video file.
 Keep the browser open during export.
 </p>
+<label for="exportFormat">File format</label>
+<select id="exportFormat">
+<option value="mp4">MP4 — best for phones and social apps</option>
+<option value="webm">WebM</option>
+</select>
+<p id="formatNote" class="note"></p>
 <p id="exportMode" class="note">Export will use: the Start–End range.</p>
 <button id="export" disabled>EXPORT VIDEO</button>
 <div id="status">Waiting for video...</div>
@@ -1425,18 +1431,11 @@ $("export").addEventListener("click",async()=>{
   return;
  }
 
- const mimeTypes=[
-  "video/webm;codecs=vp9",
-  "video/webm;codecs=vp8",
-  "video/webm"
- ];
-
- const mimeType=mimeTypes.find(type=>
-  MediaRecorder.isTypeSupported(type)
- );
+ const fmt=exportFormatInfo();
+ const mimeType=fmt.mime;
 
  if(!mimeType){
-  alert("WebM export is not supported.");
+  alert("Video export is not supported in this browser.");
   return;
  }
 
@@ -1530,24 +1529,13 @@ $("export").addEventListener("click",async()=>{
   await recording;
   finished=true;
 
-  const blob=new Blob(chunks,{type:mimeType});
+  const blob=new Blob(chunks,{type:recorder.mimeType||mimeType});
 
   if(blob.size===0){
    throw new Error("Empty video export.");
   }
 
-  if(exportURL) URL.revokeObjectURL(exportURL);
-  exportURL=URL.createObjectURL(blob);
-
-  const link=document.createElement("a");
-  link.href=exportURL;
-  link.download="edited-video.webm";
-  link.textContent="DOWNLOAD YOUR VIDEO";
-
-  $("result").replaceChildren(link);
-  $("status").textContent=
-   "Export completed! File size: "+
-   (blob.size/1024/1024).toFixed(2)+" MB";
+  showExportResult(blob,fmt);
 
  }catch(error){
   if(recorder && recorder.state!=="inactive"){
@@ -1995,11 +1983,81 @@ function drawTransition(type,a,b,p){
  }
 }
 
-function pickMime(){
- if(!window.MediaRecorder) return null;
- return ["video/webm;codecs=vp9","video/webm;codecs=vp8","video/webm"]
-  .find(t=>MediaRecorder.isTypeSupported(t))||null;
+/* ---------- EXPORT FORMAT (MP4 / WebM) ---------- */
+
+// Chrome's own recorder makes MP4 (H.264 video). AAC sound is tried first
+// (plays everywhere); where the phone has no AAC encoder, Opus sound in MP4
+// is used. If MP4 is not possible at all, WebM is used and the user is told.
+const EXPORT_FORMATS={
+ mp4:["video/mp4;codecs=avc1,mp4a.40.2","video/mp4;codecs=avc1.42E01E,mp4a.40.2",
+  "video/mp4;codecs=avc1,opus","video/mp4"],
+ webm:["video/webm;codecs=vp9","video/webm;codecs=vp8","video/webm"]
+};
+const FORMAT_KEY="aves.exportFormat";
+
+function firstSupported(list){
+ if(!window.MediaRecorder || !MediaRecorder.isTypeSupported) return null;
+ return list.find(t=>{ try{ return MediaRecorder.isTypeSupported(t); }catch(e){ return false; } })||null;
 }
+
+function exportFormatInfo(){
+ const want=$("exportFormat").value==="webm"?"webm":"mp4";
+ let mime=firstSupported(EXPORT_FORMATS[want]);
+ let fallback=false;
+ if(!mime && want==="mp4"){ mime=firstSupported(EXPORT_FORMATS.webm); fallback=!!mime; }
+ return {mime,ext:mime && mime.startsWith("video/mp4")?"mp4":"webm",fallback};
+}
+
+function describeMime(m){
+ m=(m||"").toLowerCase();
+ if(m.startsWith("video/mp4")){
+  if(/mp4a|aac/.test(m)) return "MP4 (H.264 video, AAC sound)";
+  if(/opus/.test(m)) return "MP4 (H.264 video, Opus sound)";
+  return "MP4";
+ }
+ return "WebM";
+}
+
+function showExportResult(blob,fmt){
+ if(exportURL) URL.revokeObjectURL(exportURL);
+ exportURL=URL.createObjectURL(blob);
+ const link=document.createElement("a");
+ link.href=exportURL;
+ link.download="edited-video."+fmt.ext;
+ link.textContent="DOWNLOAD YOUR VIDEO (."+fmt.ext.toUpperCase()+")";
+ $("result").replaceChildren(link);
+ $("status").textContent="Export completed! "+describeMime(blob.type||fmt.mime)+", "+
+  (blob.size/1024/1024).toFixed(2)+" MB"+
+  (fmt.fallback?". This browser cannot make MP4, so it was saved as WebM.":"");
+}
+
+function updateFormatNote(){
+ const mp4=firstSupported(EXPORT_FORMATS.mp4);
+ const aac=mp4 && /mp4a/.test(mp4);
+ let note;
+ if($("exportFormat").value==="webm"){
+  note="WebM plays in Chrome, on Android and on YouTube, but some apps (for example Instagram and iPhones) do not accept it.";
+ }else if(!mp4){
+  note="This browser cannot make MP4 files, so WebM will be used. Updating Chrome may add MP4 support.";
+ }else if(aac){
+  note="MP4 with AAC sound: plays on phones, computers and social apps.";
+ }else{
+  note="This browser makes MP4 with Opus sound. It plays on Android, in Chrome and in VLC; some apps and older devices may not play Opus sound.";
+ }
+ $("formatNote").textContent=note;
+}
+
+(function initExportFormat(){
+ let saved=null;
+ try{ saved=localStorage.getItem(FORMAT_KEY); }catch(e){}
+ if(saved==="webm"||saved==="mp4") $("exportFormat").value=saved;
+ else if(!firstSupported(EXPORT_FORMATS.mp4)) $("exportFormat").value="webm";
+ updateFormatNote();
+ $("exportFormat").addEventListener("change",()=>{
+  try{ localStorage.setItem(FORMAT_KEY,$("exportFormat").value); }catch(e){}
+  updateFormatNote();
+ });
+})();
 
 // Plays the timeline into the canvas. With record=true, returns a Blob.
 async function runTimeline(record,mimeType,onProgress){
@@ -2133,7 +2191,7 @@ async function runTimeline(record,mimeType,onProgress){
    if(recorder.state!=="inactive") recorder.stop();
    await stopped;
    if(tlStop) return null;
-   const blob=new Blob(chunks,{type:mimeType});
+   const blob=new Blob(chunks,{type:recorder.mimeType||mimeType});
    if(!blob.size) throw new Error("Empty video export.");
    return blob;
   }
@@ -2185,7 +2243,8 @@ $("tlPlay").addEventListener("click",async()=>{
 $("tlStop").addEventListener("click",()=>{ tlStop=true; });
 
 async function exportTimeline(){
- const mimeType=pickMime();
+ const fmt=exportFormatInfo();
+ const mimeType=fmt.mime;
  if(!mimeType || !canvas.captureStream){
   alert("Your browser does not support video export.");
   return;
@@ -2200,14 +2259,7 @@ async function exportTimeline(){
    $("status").textContent="Recording timeline… "+g.toFixed(1)+" / "+total.toFixed(1)+" s";
   });
   if(!blob){ $("status").textContent="Export stopped."; return; }
-  if(exportURL) URL.revokeObjectURL(exportURL);
-  exportURL=URL.createObjectURL(blob);
-  const link=document.createElement("a");
-  link.href=exportURL;
-  link.download="edited-video.webm";
-  link.textContent="DOWNLOAD YOUR VIDEO";
-  $("result").replaceChildren(link);
-  $("status").textContent="Export completed! File size: "+(blob.size/1024/1024).toFixed(2)+" MB";
+  showExportResult(blob,fmt);
  }catch(err){
   $("status").textContent="Export error: "+err.message;
  }finally{
