@@ -15,7 +15,8 @@ These rules apply to every Claude session and every team agent in `.claude/agent
 6. Explain exactly how to update the GitHub repository from a phone.
 7. Test before saying something works: run `node tests/editor.test.js`
    (and `node tests/ai-captions.test.js` for AI captions, `node tests/caption-style.test.js`
-   for subtitle styling; both need internet).
+   for subtitle styling; both need internet; `node tests/scene-detection.test.js`
+   for scene detection).
 8. Phones have little RAM: avoid loading whole videos into memory, free object
    URLs, stop media tracks, avoid heavy libraries unless the owner agrees.
 9. Never claim a feature works unless it has been implemented and tested.
@@ -25,7 +26,7 @@ These rules apply to every Claude session and every team agent in `.claude/agent
 - [x] Captions track (manual, SRT/VTT import, SRT download, burned into export)
 - [x] AI automatic captions (Whisper on-device via transformers.js; tests/ai-captions.test.js)
 - [x] Subtitle styling (presets, fonts, colours, box, position; tests/caption-style.test.js)
-- [ ] Automatic scene detection
+- [x] Automatic scene detection (hard cuts; tests/scene-detection.test.js)
 - [ ] Video transitions
 - [ ] Background music controls
 - [ ] Video templates

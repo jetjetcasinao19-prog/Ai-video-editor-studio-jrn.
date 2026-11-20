@@ -64,6 +64,17 @@ input[type=color]{height:44px;padding:4px}
  padding:4px 12px 10px;margin:14px 0;background:#101624
 }
 .ai h4{margin:10px 0 4px}
+#sceneList{margin-top:10px;max-height:460px;overflow-y:auto}
+.scene{
+ display:flex;gap:10px;align-items:center;
+ border:1px solid #293449;border-radius:10px;
+ padding:8px;margin-bottom:8px;background:#0d1320
+}
+.scene.active{border-color:#526dff}
+.scene img{width:64px;height:64px;object-fit:cover;border-radius:6px;flex:0 0 64px;background:#000}
+.scene .info{flex:1;min-width:0;font-size:13px;line-height:1.4}
+.scene .info b{display:block}
+.scene button{width:auto;flex:0 0 auto;margin:0;padding:10px 12px}
 .del{background:#5a2733}
 progress{width:100%;height:10px;margin-top:10px;accent-color:#526dff}
 [hidden]{display:none!important}
@@ -96,6 +107,28 @@ Processing happens inside your browser.
 </div>
 
 <p id="duration" class="note">No video loaded.</p>
+
+<div id="sceneBox" class="ai">
+<h4>Scene detection</h4>
+<p class="note">
+Finds where the shots change in your video, so you can jump to a scene or
+trim to it. Runs on your phone. Keep this tab open while it scans.
+Slow fades and dissolves may not be detected.
+</p>
+<label for="sceneSens">Sensitivity</label>
+<select id="sceneSens">
+<option value="low">Low — only big changes</option>
+<option value="normal" selected>Normal</option>
+<option value="high">High — catch smaller changes</option>
+</select>
+<div class="row">
+<button id="sceneRun" disabled>DETECT SCENES</button>
+<button id="sceneCancel" class="del" hidden>CANCEL</button>
+</div>
+<progress id="sceneProgress" max="100" value="0" hidden></progress>
+<p id="sceneStatus" class="note"></p>
+<div id="sceneList"></div>
+</div>
 </section>
 
 <section class="panel">
@@ -835,7 +868,7 @@ function aiFinish(){
  $("aiRun").disabled=!currentFile;
  $("aiCancel").hidden=true;
  $("aiProgress").hidden=true;
- $("export").disabled=!currentFile || busy;
+ $("export").disabled=!currentFile || busy || sceneBusy;
 }
 
 // Decode the video's audio track, resampled to 16 kHz, and return mono
@@ -940,7 +973,7 @@ function chunksToCaptions(chunks,offset,rangeLength,loud){
 }
 
 $("aiRun").addEventListener("click",async()=>{
- if(aiBusy||busy) return;
+ if(aiBusy||busy||sceneBusy) return;
  if(!currentFile||!Number.isFinite(video.duration)){ alert("Import a video first."); return; }
 
  const start=Math.max(0,Number($("start").value)||0);
@@ -1082,6 +1115,11 @@ $("file").addEventListener("change",e=>{
  if(videoURL) URL.revokeObjectURL(videoURL);
 
  currentFile=file;
+ // New video: forget old scenes and stop any scan of the previous one.
+ sceneStop=true;
+ scenes=[];
+ renderScenes();
+ sceneStatus("");
  videoURL=URL.createObjectURL(file);
  video.src=videoURL;
 
@@ -1100,7 +1138,8 @@ video.addEventListener("loadedmetadata",()=>{
  $("preview").disabled=false;
  $("export").disabled=false;
  $("addCap").disabled=false;
- if(!aiBusy) $("aiRun").disabled=false;
+ if(!aiBusy && !sceneBusy) $("aiRun").disabled=false;
+ if(!sceneBusy) $("sceneRun").disabled=false;
 
  updatePreview();
  $("status").textContent="Video ready.";
@@ -1158,7 +1197,7 @@ async function seek(time){
 }
 
 $("export").addEventListener("click",async()=>{
- if(busy||aiBusy)return;
+ if(busy||aiBusy||sceneBusy)return;
 
  const start=Number($("start").value);
  const end=Number($("end").value);
@@ -1323,6 +1362,262 @@ $("export").addEventListener("click",async()=>{
   $("export").disabled=false;
  }
 });
+
+/* ---------- SCENE DETECTION ---------- */
+
+// A hidden, muted copy of the video is played at 4x speed. Each frame is
+// shrunk to 64x36 pixels and compared with the previous one (colour
+// histogram + pixel difference). Candidate cuts are then refined by
+// seeking, so a scene starts on its own first frame.
+const SCAN_W=64, SCAN_H=36, SCAN_RATE=4, MIN_SCENE=0.5;
+const SCENE_THRESHOLD={low:0.45,normal:0.3,high:0.2};
+let scenes=[];          // {start,end,thumb}
+let sceneBusy=false;
+let sceneStop=false;
+
+function sceneStatus(t){ $("sceneStatus").textContent=t; }
+
+function frameSignature(v,sctx){
+ sctx.drawImage(v,0,0,SCAN_W,SCAN_H);
+ const d=sctx.getImageData(0,0,SCAN_W,SCAN_H).data;
+ const hist=new Float32Array(64);
+ const gray=new Uint8Array(SCAN_W*SCAN_H);
+ for(let i=0,p=0;i<d.length;i+=4,p++){
+  const r=d[i],g=d[i+1],b=d[i+2];
+  hist[(r>>6)*16+(g>>6)*4+(b>>6)]++;
+  gray[p]=(r*77+g*150+b*29)>>8;
+ }
+ return {hist,gray};
+}
+
+// 0 = identical frames, 1 = completely different.
+function signatureDiff(a,b){
+ const n=SCAN_W*SCAN_H;
+ let h=0;
+ for(let i=0;i<64;i++) h+=Math.abs(a.hist[i]-b.hist[i]);
+ h/=2*n;
+ let p=0;
+ for(let i=0;i<n;i++) p+=Math.abs(a.gray[i]-b.gray[i]);
+ p/=n*255;
+ return 0.65*h+0.35*Math.min(1,p*2);
+}
+
+function median(arr){
+ if(!arr.length) return 0;
+ const s=[...arr].sort((x,y)=>x-y);
+ return s[Math.floor(s.length/2)];
+}
+
+function makeThumb(v){
+ const c=document.createElement("canvas");
+ c.width=96; c.height=96;
+ const vw=v.videoWidth||96, vh=v.videoHeight||96;
+ const sc=Math.max(96/vw,96/vh);
+ c.getContext("2d").drawImage(v,(96-vw*sc)/2,(96-vh*sc)/2,vw*sc,vh*sc);
+ return c.toDataURL("image/jpeg",0.6);
+}
+
+function waitEvent(el,ok,ms){
+ return new Promise((resolve,reject)=>{
+  const t=setTimeout(()=>{cleanup();reject(new Error("The video did not respond in time."));},ms);
+  const onOk=()=>{cleanup();resolve();};
+  const onErr=()=>{cleanup();reject(new Error("Could not read the video."));};
+  function cleanup(){clearTimeout(t);el.removeEventListener(ok,onOk);el.removeEventListener("error",onErr);}
+  el.addEventListener(ok,onOk,{once:true});
+  el.addEventListener("error",onErr,{once:true});
+ });
+}
+
+async function seekScan(v,t){
+ if(Math.abs(v.currentTime-t)<0.001) return;
+ const p=waitEvent(v,"seeked",10000);
+ v.currentTime=t;
+ await p;
+}
+
+function renderScenes(){
+ const list=$("sceneList");
+ const frag=document.createDocumentFragment();
+ const s0=Number($("start").value), e0=Number($("end").value);
+ scenes.forEach((s,i)=>{
+  const row=document.createElement("div");
+  row.className="scene";
+  if(Math.abs(s.start-s0)<0.01 && Math.abs(s.end-e0)<0.01) row.classList.add("active");
+
+  const img=document.createElement("img");
+  img.alt="Scene "+(i+1);
+  if(s.thumb) img.src=s.thumb;
+
+  const info=document.createElement("div");
+  info.className="info";
+  const title=document.createElement("b");
+  title.textContent="Scene "+(i+1);
+  const time=document.createElement("div");
+  time.textContent=s.start.toFixed(2)+" – "+s.end.toFixed(2)+" s";
+  const len=document.createElement("div");
+  len.textContent="Length "+(s.end-s.start).toFixed(1)+" s";
+  info.append(title,time,len);
+
+  const go=document.createElement("button");
+  go.className="secondary";
+  go.textContent="GO";
+  go.addEventListener("click",()=>{
+   video.pause();
+   video.currentTime=Math.min(s.start+0.001,video.duration);
+  });
+
+  const trim=document.createElement("button");
+  trim.textContent="TRIM";
+  trim.title="Set Start and End to this scene";
+  trim.addEventListener("click",()=>{
+   $("start").value=s.start.toFixed(2);
+   $("end").value=s.end.toFixed(2);
+   video.pause();
+   video.currentTime=Math.min(s.start+0.001,video.duration);
+   renderScenes();
+   sceneStatus("Start/End set to scene "+(i+1)+". Export will use only this scene.");
+  });
+
+  row.append(img,info,go,trim);
+  frag.append(row);
+ });
+ list.replaceChildren(frag);
+}
+
+function sceneFinish(v){
+ sceneBusy=false;
+ if(v){
+  try{ v.pause(); v.removeAttribute("src"); v.load(); }catch(e){}
+  v.remove();
+ }
+ $("sceneRun").disabled=!currentFile;
+ $("sceneCancel").hidden=true;
+ $("sceneProgress").hidden=true;
+ $("export").disabled=!currentFile||busy||aiBusy;
+ if(currentFile && !aiBusy) $("aiRun").disabled=false;
+}
+
+async function detectScenes(){
+ if(sceneBusy||busy||aiBusy||!videoURL) return;
+ sceneBusy=true; sceneStop=false;
+ $("sceneRun").disabled=true;
+ $("export").disabled=true;
+ $("aiRun").disabled=true;
+ $("sceneCancel").hidden=false;
+ const bar=$("sceneProgress");
+ bar.hidden=false; bar.value=0;
+ sceneStatus("Preparing…");
+
+ const threshold=SCENE_THRESHOLD[$("sceneSens").value]||SCENE_THRESHOLD.normal;
+ const v=document.createElement("video");
+ v.muted=true; v.playsInline=true; v.preload="auto";
+ v.style.display="none";
+ document.body.append(v);
+
+ const onHidden=()=>{ if(document.hidden) v.pause(); else if(sceneBusy && !v.ended) v.play().catch(()=>{}); };
+
+ try{
+  const loaded=waitEvent(v,"loadeddata",20000);
+  v.src=videoURL;
+  await loaded;
+  const dur=v.duration;
+  if(!Number.isFinite(dur)||dur<=0) throw new Error("Unknown video length.");
+
+  const sc=document.createElement("canvas");
+  sc.width=SCAN_W; sc.height=SCAN_H;
+  const sctx=sc.getContext("2d",{willReadFrequently:true});
+
+  const firstThumb=makeThumb(v);
+  let prev=frameSignature(v,sctx), prevT=0, lastCut=0;
+  const recent=[], cuts=[];
+
+  function consider(t){
+   const sig=frameSignature(v,sctx);
+   const score=signatureDiff(prev,sig);
+   const base=median(recent);
+   if(score>threshold && score>base*2.5+0.02 && t-lastCut>=MIN_SCENE && dur-t>=0.1){
+    cuts.push({a:prevT,b:t,before:prev,after:sig,thumb:makeThumb(v)});
+    lastCut=t;
+   }
+   recent.push(score); if(recent.length>15) recent.shift();
+   prev=sig; prevT=t;
+   bar.value=Math.round(t/dur*80);
+   sceneStatus("Scanning… "+Math.round(t)+" / "+Math.round(dur)+" s, "+(cuts.length+1)+" scenes so far");
+  }
+
+  // Pass 1: fast playback. Falls back to stepping by seeking if the
+  // browser refuses to play.
+  let played=true;
+  v.playbackRate=SCAN_RATE;
+  try{ await v.play(); }catch(e){ played=false; }
+  if(played){
+   document.addEventListener("visibilitychange",onHidden);
+   await new Promise((resolve,reject)=>{
+    let lastProgress=Date.now(), lastT=-1;
+    v.addEventListener("error",()=>reject(new Error("Could not read the video.")),{once:true});
+    function step(){
+     if(sceneStop){ resolve(); return; }
+     const t=v.currentTime;
+     if(t>prevT+0.02){ consider(t); }
+     if(t!==lastT){ lastT=t; lastProgress=Date.now(); }
+     else if(!document.hidden && Date.now()-lastProgress>15000){
+      reject(new Error("Video playback stalled.")); return;
+     }
+     if(v.ended||t>=dur-0.01){ resolve(); return; }
+     requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+   });
+   document.removeEventListener("visibilitychange",onHidden);
+   v.pause();
+  }else{
+   for(let t=0.25;t<dur && !sceneStop;t+=0.25){
+    await seekScan(v,t);
+    consider(t);
+   }
+  }
+  if(sceneStop) throw new Error("cancelled");
+
+  // Pass 2: find each cut's exact frame (binary search by seeking).
+  for(let i=0;i<cuts.length;i++){
+   if(sceneStop) throw new Error("cancelled");
+   sceneStatus("Refining cut "+(i+1)+" of "+cuts.length+"…");
+   bar.value=80+Math.round(i/cuts.length*20);
+   const c=cuts[i];
+   let a=Math.max(0,c.a-0.1), b=c.b;
+   for(let k=0;k<8 && b-a>0.01;k++){
+    const m=(a+b)/2;
+    await seekScan(v,m);
+    const sig=frameSignature(v,sctx);
+    if(signatureDiff(sig,c.before)<=signatureDiff(sig,c.after)) a=m; else b=m;
+   }
+   c.t=Math.ceil(b*100)/100;
+  }
+
+  const times=[0];
+  cuts.forEach(c=>{ if(c.t-times[times.length-1]>=MIN_SCENE*0.5) times.push(c.t); });
+  const thumbs=[firstThumb,...cuts.map(c=>c.thumb)];
+  scenes=times.map((t,i)=>({
+   start:t,
+   end:i+1<times.length?times[i+1]:Math.round(dur*100)/100,
+   thumb:thumbs[i]
+  }));
+  renderScenes();
+  sceneStatus(scenes.length===1
+   ?"No scene changes found."+($("sceneSens").value==="high"?"":" Try High sensitivity if you expected some.")
+   :"Found "+scenes.length+" scenes. Tap GO to view one, or TRIM to use only that scene.");
+ }catch(err){
+  if(err.message==="cancelled") sceneStatus("Cancelled.");
+  else sceneStatus("Scene detection failed: "+err.message);
+ }finally{
+  document.removeEventListener("visibilitychange",onHidden);
+  sceneFinish(v);
+ }
+}
+
+$("sceneRun").addEventListener("click",detectScenes);
+$("sceneCancel").addEventListener("click",()=>{ sceneStop=true; });
+["start","end"].forEach(id=>$(id).addEventListener("change",()=>{ if(scenes.length) renderScenes(); }));
 
 window.addEventListener("beforeunload",()=>{
  if(videoURL)URL.revokeObjectURL(videoURL);
