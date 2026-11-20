@@ -43,7 +43,8 @@ Read the owner's request: platform → format, any length or style wishes.
 - Captions: from the brand kit [default `creator`, word highlight]; `box`, `classic`, `none` when asked.
 - `--max-length 60` for Shorts/Reels unless they asked otherwise; TikTok up to
   `--max-length 90`; YouTube: no limit.
-- Language: `--language tl` for Tagalog/Filipino, `en` for English; leave it
+- Language: the target audience is the US, so use `--language en` unless the
+  owner says the video is in another language; `--language tl` for Tagalog. Leave it
   out if unsure (auto-detect).
 - Music: only if they gave a file or asked for music: `--music inbox/song.mp3`,
   or `--music auto` for the brand song. Only use music they have the right to use.
@@ -86,7 +87,8 @@ is wrong, change the options and render again. Say what you checked.
 - Write `content/posts/<YYYY-MM-DD>-<slug>.md` with: the video name, the
   transcript summary, and the per-platform title/description/hashtags.
 - Add a row to `content/schedule.md` with status `planned` and a suggested
-  date/time (say it is general guidance, not from their analytics).
+  date/time for the **US audience**: in US Eastern Time with the owner's
+  Philippine time next to it (say it is general guidance, not from their analytics).
 - **Posting to social media is the owner's decision.** Never post or
   schedule on a platform without their explicit "yes" in this conversation.
   If they say yes and a connected tool can publish (for example the OpusClip

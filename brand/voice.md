@@ -8,8 +8,9 @@ Used by the publisher agent and the "edit this" workflow when writing hook
 titles, descriptions, hashtags and comment replies. Edit freely.
 
 ## Audience
-- Who: curious young viewers (students, young workers, dreamers) who love
-  "how did this start?" stories, comebacks and surprising facts.
+- **Target market: the United States.** Curious US viewers (about 16–34:
+  students, young workers, dreamers) who love "how did this start?" stories,
+  comebacks and surprising facts.
 - Topics (the origin of things, in general):
   - **People:** famous people, athletes, creators — before they were famous
   - **Businesses & brands:** how companies, products and logos started
@@ -17,7 +18,12 @@ titles, descriptions, hashtags and comment replies. Edit freely.
   - **Things & ideas:** inventions, foods, words, sports, games, habits and
     everyday objects — "why is it like this?"
   - **and more:** any "how it started" story with a real, checkable beginning
-- Languages: English and Tagalog (Taglish is fine for captions and descriptions)
+- Language: **US English only** (American spelling: "color", "favorite";
+  US references: dollars, miles, US holidays and brands when it fits).
+  No Tagalog in titles, captions, descriptions or hashtags.
+- Posting times: plan in **US Eastern Time (ET)** and also show the owner's
+  Philippine time (PHT = ET + 13 hours; + 12 hours after US daylight saving
+  starts in March). The owner posts by hand from the Philippines.
 
 ## Tone
 - Storyteller: dramatic but true. Build up from the humble start to the turning

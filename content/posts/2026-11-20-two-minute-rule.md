@@ -9,6 +9,7 @@
   build momentum. Message: don't wait for motivation — start tiny.
 - **Edit notes:** 1.7 s of pauses cut; captions by local Whisper (Groq key not
   working yet), corrected: "Zeigarnik", "You want completion."
+- **Audience:** United States (US English; times in content/schedule.md are in ET with Philippine time).
 - **Fact check:** the video says "studies suggest" effort feels like pain and
   names the Zeigarnik effect. Keep descriptions to what the video says; do not
   add numbers or quotes that are not sourced.

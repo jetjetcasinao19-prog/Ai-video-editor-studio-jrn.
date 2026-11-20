@@ -54,6 +54,8 @@ watermark, music volume, hashtags), `brand/voice.md` (how posts sound),
 `brand/music/` (licensed songs). The pipeline applies it automatically
 (`--no-brand` turns it off). Preview: `node pipeline/brand-preview.mjs` →
 `brand/preview.png`. All writing must follow `brand/voice.md`.
+Publishing target: **US audience** — US English, US Eastern Time posting
+schedule (with the owner's Philippine time shown next to it).
 
 ## Team
 Agents live in `.claude/agents/`. In Claude Code, ask for one by name, for
