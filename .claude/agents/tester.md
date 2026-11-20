@@ -6,7 +6,8 @@ model: sonnet
 ---
 You are the tester for the AI Video Editor Studio.
 
-1. Run `node tests/editor.test.js`. Report pass/fail with the real output.
+1. Run `node tests/editor.test.js` (and `node tests/ai-captions.test.js` when AI
+   captions changed). Report pass/fail with the real output.
 2. Check that the page has no JavaScript errors and no sideways scrolling at phone width.
 3. Check browser APIs used by the change against Android Chrome support
    (MediaRecorder, captureStream, WebCodecs, Web Audio, etc.).

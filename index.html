@@ -56,6 +56,14 @@ a{color:#9ab1ff;word-break:break-all}
 .cap .del{background:#5a2733}
 .cap .row>.btn{flex:0 0 52px}
 #capCount{margin-top:8px}
+.ai{
+ border:1px solid #36435a;border-radius:10px;
+ padding:4px 12px 10px;margin:14px 0;background:#101624
+}
+.ai h4{margin:10px 0 4px}
+.del{background:#5a2733}
+progress{width:100%;height:10px;margin-top:10px;accent-color:#526dff}
+[hidden]{display:none!important}
 </style>
 </head>
 
@@ -137,9 +145,51 @@ UPDATE PREVIEW
 <p class="note">
 Captions are burned into the preview and the exported video.
 Times are in seconds of the original video.
-AI automatic transcription is not built yet; for now, add captions
-by hand or import an .srt / .vtt file.
+Generate them with AI, add them by hand, or import an .srt / .vtt file.
 </p>
+
+<div class="ai">
+<h4>AI automatic captions</h4>
+<p class="note">
+Uses the Whisper speech-recognition model running inside your browser.
+Your video never leaves your phone. The first run downloads the model
+(see sizes below); keep Chrome open on this tab while it works.
+Only the Start–End range from section 03 is transcribed.
+</p>
+
+<label for="aiLang">Spoken language</label>
+<select id="aiLang">
+<option value="">Auto-detect</option>
+<option value="english">English</option>
+<option value="tagalog">Tagalog / Filipino</option>
+<option value="spanish">Spanish</option>
+<option value="indonesian">Indonesian</option>
+<option value="malay">Malay</option>
+<option value="vietnamese">Vietnamese</option>
+<option value="thai">Thai</option>
+<option value="hindi">Hindi</option>
+<option value="japanese">Japanese</option>
+<option value="korean">Korean</option>
+<option value="chinese">Chinese</option>
+<option value="arabic">Arabic</option>
+<option value="portuguese">Portuguese</option>
+<option value="french">French</option>
+<option value="german">German</option>
+</select>
+
+<label for="aiModel">Model</label>
+<select id="aiModel">
+<option value="onnx-community/whisper-tiny">Tiny · 41 MB · fastest</option>
+<option value="onnx-community/whisper-base">Base · 77 MB · slower</option>
+</select>
+
+<div class="row">
+<button id="aiRun" disabled>GENERATE CAPTIONS</button>
+<button id="aiCancel" class="del" hidden>CANCEL</button>
+</div>
+<progress id="aiProgress" max="100" value="0" hidden></progress>
+<p id="aiStatus" class="note"></p>
+</div>
 
 <div class="check">
 <input id="showCaptions" type="checkbox" checked>
@@ -183,6 +233,7 @@ const canvas = $("canvas");
 const ctx = canvas.getContext("2d");
 
 let videoURL = null;
+let currentFile = null; // the imported File, kept for AI audio extraction
 let exportURL = null;
 let animationFrame = null;
 let busy = false;
@@ -335,7 +386,7 @@ function renderCaptionList(){
    const lab=document.createElement("label");
    lab.textContent=name;
    const inp=document.createElement("input");
-   inp.type="number";inp.min="0";inp.step="0.1";
+   inp.type="number";inp.min="0";inp.step="any";
    inp.inputMode="decimal";
    inp.value=c[key];
    inp.addEventListener("input",()=>{
@@ -493,6 +544,267 @@ $("clearCaps").addEventListener("click",()=>{
 
 $("showCaptions").addEventListener("change",redrawIfPaused);
 
+/* ---------- AI CAPTIONS (Whisper, on-device) ---------- */
+
+// transformers.js runs Whisper in the browser (WebAssembly). It is loaded
+// only when the user taps GENERATE, inside a Web Worker so the page stays
+// responsive. The worker is closed after each run to give the RAM back.
+const TRANSFORMERS_URL=
+ "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.7.5/dist/transformers.min.js";
+
+const WORKER_CODE=`
+import { pipeline, env } from "${TRANSFORMERS_URL}";
+env.allowLocalModels = false;
+// data: workers (page opened from phone files) have no Cache Storage.
+try { if (!self.caches) env.useBrowserCache = false; } catch (e) { env.useBrowserCache = false; }
+self.onmessage = async (e) => {
+ const { model, audio, language } = e.data;
+ try {
+  const asr = await pipeline("automatic-speech-recognition", model, {
+   device: "wasm",
+   dtype: { encoder_model: "q8", decoder_model_merged: "q8" },
+   progress_callback: (p) => self.postMessage({ type: "progress", p })
+  });
+  self.postMessage({ type: "transcribing" });
+  const options = {
+   task: "transcribe",
+   return_timestamps: true,
+   chunk_length_s: 30,
+   stride_length_s: 5
+  };
+  if (language) options.language = language;
+  const out = await asr(audio, options);
+  self.postMessage({ type: "done", chunks: out.chunks || [], text: out.text || "" });
+ } catch (err) {
+  self.postMessage({ type: "error", message: String((err && err.message) || err) });
+ }
+};
+`;
+
+let aiBusy=false;
+let aiWorker=null;
+let aiTimer=null;
+const AI_RATE=16000; // Whisper expects 16 kHz mono audio
+
+function aiStatus(text){ $("aiStatus").textContent=text; }
+
+function aiStopWorker(){
+ if(aiWorker){ aiWorker.terminate(); aiWorker=null; }
+ if(aiTimer){ clearInterval(aiTimer); aiTimer=null; }
+}
+
+function aiFinish(){
+ aiStopWorker();
+ aiBusy=false;
+ $("aiRun").disabled=!currentFile;
+ $("aiCancel").hidden=true;
+ $("aiProgress").hidden=true;
+ $("export").disabled=!currentFile || busy;
+}
+
+// Decode the video's audio track, resampled to 16 kHz, and return mono
+// samples for [start,end] only. Uses an OfflineAudioContext so the browser
+// resamples during decoding (far less RAM than the original 44/48 kHz).
+async function extractAudio(file,start,end){
+ const Offline=window.OfflineAudioContext||window.webkitOfflineAudioContext;
+ if(!Offline) throw new Error("This browser cannot decode audio.");
+ let data=await file.arrayBuffer();
+ const actx=new Offline(1,AI_RATE,AI_RATE);
+ let decoded;
+ try{
+  decoded=await actx.decodeAudioData(data);
+ }catch(e){
+  throw new Error("Could not read the audio. The video may have no sound track or an unsupported audio format.");
+ }
+ data=null;
+ if(decoded.sampleRate!==AI_RATE) throw new Error("Audio resampling is not supported on this browser.");
+ const from=Math.max(0,Math.floor(start*decoded.sampleRate));
+ const to=Math.min(decoded.length,Math.ceil(end*decoded.sampleRate));
+ if(to-from<decoded.sampleRate*0.5) throw new Error("The selected range is too short.");
+ const mono=new Float32Array(to-from);
+ const chs=decoded.numberOfChannels;
+ for(let c=0;c<chs;c++){
+  const ch=decoded.getChannelData(c);
+  for(let i=0;i<mono.length;i++) mono[i]+=ch[from+i]/chs;
+ }
+ return mono;
+}
+
+// Loudness per 50 ms frame, used to trim silence that Whisper includes
+// at the start/end of its timestamps. Small: 20 numbers per second.
+const ENV_STEP=0.05;
+function loudnessEnvelope(samples){
+ const n=Math.round(AI_RATE*ENV_STEP);
+ const env=new Float32Array(Math.ceil(samples.length/n));
+ for(let f=0;f<env.length;f++){
+  let sum=0;
+  const a=f*n,b=Math.min(samples.length,a+n);
+  for(let i=a;i<b;i++) sum+=samples[i]*samples[i];
+  env[f]=Math.sqrt(sum/Math.max(1,b-a));
+ }
+ const sorted=Array.from(env).sort((x,y)=>x-y);
+ const loud=sorted[Math.floor(sorted.length*0.95)]||0;
+ return {env,threshold:Math.max(0.003,loud*0.1)};
+}
+
+function trimSilence(s,e,loud){
+ if(!loud) return [s,e];
+ const {env,threshold}=loud;
+ let a=Math.floor(s/ENV_STEP), b=Math.min(env.length,Math.ceil(e/ENV_STEP))-1;
+ while(a<b && env[a]<threshold) a++;
+ while(b>a && env[b]<threshold) b--;
+ if(b<=a) return [s,e]; // no clear speech found: keep Whisper's times
+ return [Math.max(s,a*ENV_STEP-0.1),Math.min(e,(b+1)*ENV_STEP+0.15)];
+}
+
+// Split text into n lines of similar length (no single-word leftovers).
+function splitEvenly(text,maxLen){
+ const words=text.split(/\s+/);
+ const n=Math.max(1,Math.ceil(text.length/maxLen));
+ const target=text.length/n;
+ const lines=[];
+ let cur="";
+ words.forEach(w=>{
+  const t=cur?cur+" "+w:w;
+  if(cur && lines.length<n-1 && (t.length>maxLen || t.length>target*1.15)){
+   lines.push(cur); cur=w;
+  }else cur=t;
+ });
+ if(cur) lines.push(cur);
+ return lines;
+}
+
+// Whisper returns sentence-sized chunks. Split them into short caption
+// lines (max ~42 characters) and share the chunk's time between them.
+function chunksToCaptions(chunks,offset,rangeLength,loud){
+ const out=[];
+ const r2=n=>Math.round(n*100)/100;
+ chunks.forEach((ch,i)=>{
+  const text=(ch.text||"").trim();
+  if(!text || /^[\[(].*[\])]$/.test(text)) return; // skip "[Music]", "(silence)"
+  let [s,e]=ch.timestamp||[];
+  if(!Number.isFinite(s)) return;
+  if(!Number.isFinite(e) || e<=s){
+   const next=chunks[i+1]&&chunks[i+1].timestamp&&chunks[i+1].timestamp[0];
+   e=Number.isFinite(next)&&next>s?next:Math.min(rangeLength,s+4);
+  }
+  e=Math.min(e,rangeLength);
+  if(e<=s) return;
+  [s,e]=trimSilence(s,e,loud);
+  const groups=splitEvenly(text,42);
+  const total=groups.reduce((n,g)=>n+g.length,0);
+  let t=s;
+  groups.forEach(g=>{
+   const d=(e-s)*g.length/total;
+   out.push({start:r2(offset+t),end:r2(offset+t+d),text:g});
+   t+=d;
+  });
+ });
+ return out;
+}
+
+$("aiRun").addEventListener("click",async()=>{
+ if(aiBusy||busy) return;
+ if(!currentFile||!Number.isFinite(video.duration)){ alert("Import a video first."); return; }
+
+ const start=Math.max(0,Number($("start").value)||0);
+ const end=Math.min(video.duration,Number($("end").value)||video.duration);
+ if(end<=start){ alert("Please enter valid start and end times in section 03."); return; }
+
+ if(currentFile.size>300*1024*1024 &&
+    !confirm("This video is large ("+Math.round(currentFile.size/1048576)+
+     " MB). Reading its audio may crash the tab on phones with little RAM. Continue?")) return;
+ if(end-start>600 &&
+    !confirm("Transcribing "+Math.round((end-start)/60)+" minutes can take a long time on a phone. Tip: set a shorter Start–End range. Continue?")) return;
+ if(captions.length &&
+    !confirm("Replace the current "+captions.length+" captions with AI captions?")) return;
+
+ aiBusy=true;
+ video.pause();
+ $("aiRun").disabled=true;
+ $("export").disabled=true;
+ $("aiCancel").hidden=false;
+ const bar=$("aiProgress");
+ bar.hidden=false;
+ bar.removeAttribute("value");
+
+ try{
+  aiStatus("Reading audio from the video…");
+  const audio=await extractAudio(currentFile,start,end);
+  if(!aiBusy) return; // cancelled
+  const loud=loudnessEnvelope(audio);
+
+  aiStatus("Loading AI model…");
+  // A blob: worker shares the site's storage, so the model download is
+  // cached. Pages opened from the phone's files (file://) cannot start
+  // blob: workers, so they use a data: worker (model is not cached there).
+  if(location.protocol==="file:"){
+   aiWorker=new Worker("data:text/javascript;charset=utf-8,"+
+    encodeURIComponent(WORKER_CODE),{type:"module"});
+  }else{
+   const blobURL=URL.createObjectURL(new Blob([WORKER_CODE],{type:"text/javascript"}));
+   aiWorker=new Worker(blobURL,{type:"module"});
+   setTimeout(()=>URL.revokeObjectURL(blobURL),60000);
+  }
+
+  const files={};
+  const result=await new Promise((resolve,reject)=>{
+   aiWorker.onerror=e=>reject(new Error(
+    (e&&e.message)||"Could not start the AI. Check your internet connection for the first run."));
+   aiWorker.onmessage=e=>{
+    const m=e.data;
+    if(m.type==="progress"){
+     const p=m.p;
+     if(p.status==="progress" && p.file && p.total){
+      files[p.file]={loaded:p.loaded,total:p.total};
+      let loaded=0,total=0;
+      Object.values(files).forEach(f=>{loaded+=f.loaded;total+=f.total;});
+      bar.value=Math.round(loaded/total*100);
+      aiStatus("Downloading AI model: "+(loaded/1048576).toFixed(1)+" / "+
+       (total/1048576).toFixed(1)+" MB (only the first time)");
+     }else if(p.status==="ready"){
+      aiStatus("Model ready.");
+     }
+    }else if(m.type==="transcribing"){
+     bar.removeAttribute("value");
+     const t0=Date.now();
+     const len=Math.round(end-start);
+     const tick=()=>aiStatus("Listening and writing captions… "+
+      Math.round((Date.now()-t0)/1000)+" s (audio length "+len+" s)");
+     tick();
+     aiTimer=setInterval(tick,1000);
+    }else if(m.type==="done"){
+     resolve(m);
+    }else if(m.type==="error"){
+     reject(new Error(m.message));
+    }
+   };
+   aiWorker.postMessage({model:$("aiModel").value,audio,language:$("aiLang").value},[audio.buffer]);
+  });
+
+  const made=chunksToCaptions(result.chunks,start,end-start,loud);
+  if(!made.length){
+   aiStatus("No speech was found in the selected range.");
+   return;
+  }
+  captions=made;
+  sortCaptions();
+  renderCaptionList();
+  redrawIfPaused();
+  aiStatus("Done: "+made.length+" captions created. Please check and correct them below — AI can make mistakes.");
+ }catch(err){
+  if(aiBusy) aiStatus("AI captions failed: "+err.message);
+ }finally{
+  if(aiBusy) aiFinish();
+ }
+});
+
+$("aiCancel").addEventListener("click",()=>{
+ if(!aiBusy) return;
+ aiFinish();
+ aiStatus("Cancelled.");
+});
+
 /* ---------- END CAPTIONS ---------- */
 
 function updatePreview(){
@@ -533,6 +845,7 @@ $("file").addEventListener("change",e=>{
 
  if(videoURL) URL.revokeObjectURL(videoURL);
 
+ currentFile=file;
  videoURL=URL.createObjectURL(file);
  video.src=videoURL;
 
@@ -551,6 +864,7 @@ video.addEventListener("loadedmetadata",()=>{
  $("preview").disabled=false;
  $("export").disabled=false;
  $("addCap").disabled=false;
+ if(!aiBusy) $("aiRun").disabled=false;
 
  updatePreview();
  $("status").textContent="Video ready.";
@@ -608,7 +922,7 @@ async function seek(time){
 }
 
 $("export").addEventListener("click",async()=>{
- if(busy)return;
+ if(busy||aiBusy)return;
 
  const start=Number($("start").value);
  const end=Number($("end").value);

@@ -16,5 +16,7 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
       - name: Install Playwright Chromium
         run: npm install --no-save playwright@1.48.2 && npx playwright install --with-deps chromium
-      - name: Run tests
+      - name: Editor tests
         run: node tests/editor.test.js
+      - name: AI captions test (downloads Whisper Tiny, ~41 MB)
+        run: node tests/ai-captions.test.js

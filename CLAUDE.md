@@ -13,7 +13,8 @@ These rules apply to every Claude session and every team agent in `.claude/agent
 4. Keep the layout mobile responsive (no sideways scrolling at 360px width).
 5. Give complete replacement files when the owner has to copy code by hand.
 6. Explain exactly how to update the GitHub repository from a phone.
-7. Test before saying something works: run `node tests/editor.test.js`.
+7. Test before saying something works: run `node tests/editor.test.js`
+   (and `node tests/ai-captions.test.js` for AI captions; needs internet).
 8. Phones have little RAM: avoid loading whole videos into memory, free object
    URLs, stop media tracks, avoid heavy libraries unless the owner agrees.
 9. Never claim a feature works unless it has been implemented and tested.
@@ -21,7 +22,7 @@ These rules apply to every Claude session and every team agent in `.claude/agent
 
 ## Feature roadmap (in order)
 - [x] Captions track (manual, SRT/VTT import, SRT download, burned into export)
-- [ ] AI automatic captions (speech-to-text) — engine choice pending owner decision
+- [x] AI automatic captions (Whisper on-device via transformers.js; tests/ai-captions.test.js)
 - [ ] Subtitle styling
 - [ ] Automatic scene detection
 - [ ] Video transitions
