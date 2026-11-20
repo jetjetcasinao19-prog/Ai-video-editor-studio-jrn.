@@ -159,6 +159,12 @@ const r3 = x => Math.round(x * 1000) / 1000;
     if (E.level(1000, 0.5, 1.5) < 0.1) console.log('     music state during export:', JSON.stringify(lastSnaps));
     await set('musicLoop', true);
 
+    // Recovery: a broken music player (error state) is reloaded automatically.
+    await page.evaluate(() => { music.el.src = 'blob:broken'; });
+    await page.waitForFunction(() => !!music.el.error);
+    const R = await exportRange(0, 3);
+    check('broken music player recovers automatically', R.level(1000, 1.5, 2.8) > 0.1, r3(R.level(1000, 1.5, 2.8)));
+
     // Timeline export includes the music.
     await loadMusic(SONG);
     await set('musicFadeIn', 0);

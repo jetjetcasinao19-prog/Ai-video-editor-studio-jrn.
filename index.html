@@ -2213,7 +2213,7 @@ $("tlDur").addEventListener("input",()=>{
 //   videoGain + tlIn ─► analyser (speech level, for ducking)
 // The music is streamed by an <audio> element, not decoded into RAM.
 let mixer=null;
-const music={el:null,url:null,loaded:false,duck:1,hold:0,lastTick:0};
+const music={el:null,url:null,loaded:false,duck:1,hold:0,lastTick:0,lastRecover:0};
 
 function getMixer(){
  if(mixer) return mixer;
@@ -2273,6 +2273,20 @@ function musicTick(pt,len,k=1){
  mixer.videoGain.gain.value=s.videoVol;
  mixer.tlIn.gain.value=s.videoVol;
 
+ // Some Chrome versions break the player when a song reaches its end and
+ // is restarted (error code 2). Reload the same file and continue (the
+ // position is corrected by the sync below once it has loaded).
+ if(el.error){
+  const nowS=performance.now()/1000;
+  if(nowS-music.lastRecover>1){
+   music.lastRecover=nowS;
+   el.src=music.url;
+   el.load();
+   el.play().catch(()=>{});
+  }
+  return;
+ }
+
  const dur=el.duration;
  const span=dur-s.offset;
  let pos=s.offset+Math.max(0,pt);
@@ -2286,6 +2300,8 @@ function musicTick(pt,len,k=1){
   mixer.musicGain.gain.value=0;
   return;
  }
+ // When looping, jump back just before the end so the player never stops.
+ if(s.loop && !el.paused && dur-el.currentTime<0.06) el.currentTime=s.offset;
  if(el.paused){
   el.currentTime=pos;
   el.play().catch(()=>{});
@@ -2316,6 +2332,7 @@ function musicTick(pt,len,k=1){
 function musicStop(){
  if(!music.el) return;
  music.el.pause();
+ if(music.el.error && music.url && music.loaded){ music.el.src=music.url; music.el.load(); } // repair a broken player
  music.duck=1; music.hold=0; music.lastTick=0;
  if(mixer) mixer.musicGain.gain.value=0;
 }
