@@ -59,9 +59,13 @@ const r3 = x => Math.round(x * 1000) / 1000;
     if (el.type === 'checkbox') el.checked = v; else el.value = v;
     el.dispatchEvent(new Event('input')); el.dispatchEvent(new Event('change'));
   }, [id, v]);
+  // Wait for THIS file's result (the previous song's message may still be shown).
   const loadMusic = async f => {
     await page.setInputFiles('#musicFile', f);
-    await page.waitForFunction(() => /^(♪|Could not)/.test(document.getElementById('musicInfo').textContent));
+    await page.waitForFunction(name => {
+      const t = document.getElementById('musicInfo').textContent;
+      return t.startsWith('♪ ' + name + ' (') || t.startsWith('Could not');
+    }, path.basename(f));
   };
   let n = 0;
   const exportRange = async (a, b) => {
