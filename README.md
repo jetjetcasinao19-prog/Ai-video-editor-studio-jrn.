@@ -22,6 +22,8 @@ Single-file, in-browser video editor built for Android Chrome. Open `index.html`
 - Background music: MP3/M4A/OGG/WAV, music and video volume, start offset,
   loop, fade in/out, automatic lowering under speech (ducking); in preview,
   timeline and export
+- Templates: 7 built-in looks (Reels/TikTok, YouTube vlog, tutorial, montage,
+  story, square, cinematic) and your own saved templates
 - Export to WebM with audio
 
 ## Team and workflow
@@ -31,9 +33,10 @@ model switching) and `CLAUDE.md` (project rules).
 ## Tests
 `node tests/editor.test.js`, `node tests/ai-captions.test.js`,
 `node tests/caption-style.test.js`, `node tests/scene-detection.test.js`,
-`node tests/transitions.test.js` and `node tests/music.test.js` (needs ffmpeg
+`node tests/transitions.test.js`, `node tests/music.test.js` and
+`node tests/templates.test.js` (needs ffmpeg
 with flite, Playwright, internet). Runs automatically on
 GitHub Actions for every push.
 
 ## Roadmap (not implemented yet)
-Templates, AI-assisted editing, MP4 export, project management.
+AI-assisted editing, MP4 export, project management.
