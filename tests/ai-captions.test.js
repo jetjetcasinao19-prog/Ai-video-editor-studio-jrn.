@@ -48,7 +48,9 @@ function wordAccuracy(text) {
   await new Promise(r => server.listen(0, '127.0.0.1', r));
   const port = server.address().port;
   const proxy = process.env.HTTPS_PROXY ? { server: process.env.HTTPS_PROXY, bypass: 'localhost,127.0.0.1' } : undefined;
-  const browser = await chromium.launch({ proxy });
+  // MP4/H.264 needs real Google Chrome (like Android Chrome); open-source
+  // Chromium cannot play it. CI sets PW_CHANNEL=chrome.
+  const browser = await chromium.launch({ proxy, channel: process.env.PW_CHANNEL || undefined });
 
   async function run(label, url) {
     const page = await (await browser.newContext({ ...devices['Pixel 7'] })).newPage();

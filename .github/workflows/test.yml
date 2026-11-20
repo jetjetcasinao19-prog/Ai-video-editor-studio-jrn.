@@ -19,4 +19,6 @@ jobs:
       - name: Editor tests
         run: node tests/editor.test.js
       - name: AI captions test (downloads Whisper Tiny, ~41 MB)
+        env:
+          PW_CHANNEL: chrome
         run: node tests/ai-captions.test.js
