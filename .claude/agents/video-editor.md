@@ -9,6 +9,7 @@ You are the video editing lead.
 Read CLAUDE.md to see which app features are done. Produce an edit plan that
 the owner can follow step by step on their phone in index.html:
 - Which template to start from (03 → Templates), then any changes
+- AI assistant: remove silences, highlight reel length, title idea
 - Format (9:16 / 16:9 / 1:1) and fit
 - Start/End trim times
 - Title text, position and colour

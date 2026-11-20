@@ -94,6 +94,8 @@ input[type=color]{height:44px;padding:4px}
 .tpl span{font-size:11px;font-weight:normal;color:#b9c3d6;line-height:1.35}
 .tpl.active{outline:2px solid #526dff;background:#253055}
 #myTplList .clip{margin-bottom:8px}
+.sub2{display:block;margin-top:16px;font-size:14px}
+.idea{text-align:left;font-weight:normal}
 .del{background:#5a2733}
 progress{width:100%;height:10px;margin-top:10px;accent-color:#526dff}
 [hidden]{display:none!important}
@@ -170,6 +172,41 @@ settings. Your video, captions text, clips and music file stay as they are.
 <p id="myTplNote" class="note">No saved templates yet.</p>
 <div id="myTplList"></div>
 </details>
+</div>
+
+<div id="assistBox" class="ai">
+<h4>AI assistant</h4>
+<p class="note">
+Editing helpers that analyse your video's sound and scenes on this phone
+(no internet). Their results go into the timeline below, where you can
+still change everything.
+</p>
+
+<b class="sub2">Remove silences</b>
+<p class="note">Cuts out pauses in the Start–End range and keeps the parts with sound.</p>
+<label for="assistLevel">What counts as silence</label>
+<select id="assistLevel">
+<option value="gentle">Gentle — only very quiet parts</option>
+<option value="normal" selected>Normal</option>
+<option value="strong">Strong — also soft background noise</option>
+</select>
+<label for="assistGap">Shortest pause to cut: <span id="assistGapVal">0.6</span> s</label>
+<input id="assistGap" type="range" min="0.3" max="2" step="0.1" value="0.6">
+<button id="assistSilence" class="secondary" disabled>REMOVE SILENCES</button>
+
+<b class="sub2">Highlight reel</b>
+<p class="note">Picks the liveliest scenes (finds scenes first if needed) and keeps them in order.</p>
+<label for="assistTarget">Target length: <span id="assistTargetVal">30</span> s</label>
+<input id="assistTarget" type="range" min="5" max="90" step="1" value="30">
+<button id="assistHighlight" class="secondary" disabled>MAKE HIGHLIGHT REEL</button>
+
+<b class="sub2">Title ideas</b>
+<p class="note">Suggestions from your captions (simple word analysis). Tap one to use it.</p>
+<button id="assistTitles" class="secondary">SUGGEST TITLES</button>
+<div id="assistTitleList"></div>
+
+<progress id="assistProgress" hidden></progress>
+<p id="assistStatus" class="note"></p>
 </div>
 
 <label>Video Format</label>
@@ -1302,6 +1339,7 @@ video.addEventListener("loadedmetadata",()=>{
  $("addCap").disabled=false;
  if(!aiBusy && !sceneBusy) $("aiRun").disabled=false;
  if(!sceneBusy) $("sceneRun").disabled=false;
+ if(!busy){ $("assistSilence").disabled=false; $("assistHighlight").disabled=false; }
  updateTimelineButtons();
 
  updatePreview();
@@ -2566,6 +2604,217 @@ $("tplSave").addEventListener("click",()=>{
 });
 
 renderTemplates();
+
+/* ---------- AI-ASSISTED EDITING ---------- */
+
+// On-device helpers. They analyse the sound (and scenes) of the video and
+// build a timeline or suggest a title. Nothing is uploaded.
+const SILENCE_LEVEL={gentle:0.05,normal:0.1,strong:0.18};
+
+function assistStatus(t){ $("assistStatus").textContent=t; }
+
+function assistSetBusy(on){
+ busy=on;
+ ["assistSilence","assistHighlight","assistTitles","export","aiRun","sceneRun","tlPlay"].forEach(id=>{
+  const el=$(id); if(el) el.disabled=on||!currentFile;
+ });
+ if(!on){ updateTimelineButtons(); }
+ $("assistProgress").hidden=!on;
+}
+
+function assistLoaded(){
+ const ok=!!currentFile && !busy && !aiBusy && !sceneBusy;
+ if(!ok) assistStatus(currentFile?"Wait until the current task has finished.":"Import a video first (section 01).");
+ return ok;
+}
+
+// Loudness of the video's sound, 20 values per second.
+async function analyseSound(start,end){
+ if(currentFile.size>300*1024*1024 &&
+    !confirm("This video is large ("+Math.round(currentFile.size/1048576)+" MB). Reading its sound may crash the tab on phones with little RAM. Continue?")) return null;
+ const audio=await extractAudio(currentFile,start,end);
+ const {env}=loudnessEnvelope(audio);
+ const sorted=Array.from(env).sort((a,b)=>a-b);
+ return {env,p95:sorted[Math.floor(sorted.length*0.95)]||0};
+}
+
+// Parts with sound, as [start,end] in seconds from the start of the range.
+function soundSegments(env,p95,factor,minGap,pad,len){
+ const thr=Math.max(0.003,p95*factor);
+ const runs=[];
+ let s=-1;
+ for(let f=0;f<=env.length;f++){
+  const loud=f<env.length && env[f]>=thr;
+  if(loud && s<0) s=f;
+  if(!loud && s>=0){ runs.push([s*ENV_STEP,f*ENV_STEP]); s=-1; }
+ }
+ const merged=[];
+ runs.forEach(r=>{
+  const last=merged[merged.length-1];
+  if(last && r[0]-last[1]<minGap) last[1]=r[1]; else merged.push(r.slice());
+ });
+ const padded=[];
+ merged.forEach(([a,b])=>{
+  a=Math.max(0,a-pad); b=Math.min(len,b+pad);
+  const last=padded[padded.length-1];
+  if(last && a<=last[1]) last[1]=Math.max(last[1],b); else padded.push([a,b]);
+ });
+ return padded.filter(([a,b])=>b-a>=0.25);
+}
+
+function replaceTimeline(clips,label){
+ if(timeline.length && !confirm("Replace the "+timeline.length+" clips in your timeline with the "+label+"?")) return false;
+ timeline=clips;
+ renderTimeline();
+ return true;
+}
+
+$("assistSilence").addEventListener("click",async()=>{
+ if(!assistLoaded()) return;
+ const start=Math.max(0,Number($("start").value)||0);
+ const end=Math.min(video.duration,Number($("end").value)||video.duration);
+ if(end-start<1){ assistStatus("Set a Start–End range of at least 1 second (section 03)."); return; }
+ assistSetBusy(true);
+ assistStatus("Listening to the video…");
+ try{
+  const a=await analyseSound(start,end);
+  if(!a) { assistStatus("Cancelled."); return; }
+  if(a.p95<0.003){ assistStatus("No sound found in this range, so there is nothing to cut."); return; }
+  const factor=SILENCE_LEVEL[$("assistLevel").value]||SILENCE_LEVEL.normal;
+  const minGap=Number($("assistGap").value);
+  const segs=soundSegments(a.env,a.p95,factor,minGap,0.12,end-start);
+  const kept=segs.reduce((n,[x,y])=>n+y-x,0);
+  if(!segs.length){ assistStatus("Everything is quiet at this level. Try “Gentle”."); return; }
+  if(end-start-kept<0.3){ assistStatus("No pauses longer than "+minGap.toFixed(1)+" s found. Nothing to cut."); return; }
+  const r2=n=>Math.round(n*100)/100;
+  const clips=segs.map(([x,y])=>({start:r2(start+x),end:r2(start+y),thumb:null,trans:"cut"}));
+  if(!replaceTimeline(clips,"silence-free clips")){ assistStatus("Cancelled."); return; }
+  assistStatus("Kept "+clips.length+" part"+(clips.length===1?"":"s")+" with sound: "+kept.toFixed(1)+" s of "+(end-start).toFixed(1)+
+   " s (removed "+(end-start-kept).toFixed(1)+" s of pauses). The timeline in section 03 is ready: PREVIEW TIMELINE or EXPORT.");
+ }catch(err){
+  assistStatus("Could not remove silences: "+err.message);
+ }finally{
+  assistSetBusy(false);
+ }
+});
+
+$("assistHighlight").addEventListener("click",async()=>{
+ if(!assistLoaded()) return;
+ const target=Number($("assistTarget").value);
+ const dur=video.duration;
+ if(dur<=target+0.5){ assistStatus("The video is already "+dur.toFixed(1)+" s, not longer than "+target+" s."); return; }
+ if(!scenes.length){
+  assistStatus("Finding scenes first…");
+  await detectScenes();
+  if(!scenes.length){ assistStatus("Scene detection did not finish."); return; }
+ }
+ assistSetBusy(true);
+ assistStatus("Listening to each scene…");
+ try{
+  const a=await analyseSound(0,dur);
+  if(!a){ assistStatus("Cancelled."); return; }
+  const env=a.env, ref=Math.max(a.p95,0.003);
+  const maxClip=Math.max(2,Math.min(8,target/2));
+  const frames=t=>Math.min(env.length,Math.max(0,Math.round(t/ENV_STEP)));
+  const cands=scenes.map((s,i)=>{
+   // Use the loudest maxClip-long part of long scenes.
+   let st=s.start, en=s.end;
+   if(en-st>maxClip+0.1){
+    const w=frames(maxClip), f0=frames(st), f1=frames(en);
+    let sum=0,best=-1,bestF=f0;
+    for(let f=f0;f<f1;f++){
+     sum+=env[f]||0;
+     if(f-f0>=w) sum-=env[f-w]||0;
+     if(f-f0>=w-1 && sum>best){ best=sum; bestF=f-w+1; }
+    }
+    st=bestF*ENV_STEP; en=st+maxClip;
+   }
+   let sum=0,active=0;
+   const f0=frames(st), f1=Math.max(f0+1,frames(en));
+   for(let f=f0;f<f1;f++){ sum+=env[f]||0; if((env[f]||0)>=ref*0.1) active++; }
+   const n=f1-f0;
+   const score=Math.min(1,sum/n/ref)*0.7+active/n*0.3;
+   return {i,start:Math.round(st*100)/100,end:Math.round(en*100)/100,score,thumb:s.thumb};
+  }).filter(c=>c.end-c.start>=0.5);
+
+  const T=$("tlType").value==="cut"?0:tlDuration();
+  const picked=[];
+  let total=0;
+  [...cands].sort((x,y)=>y.score-x.score||x.start-y.start).forEach(c=>{
+   const remaining=target-total+(picked.length?T:0);
+   if(remaining<1.5) return;
+   const len=c.end-c.start;
+   if(len>remaining){ c.end=Math.round((c.start+remaining)*100)/100; }
+   picked.push(c);
+   total+=(c.end-c.start)-(picked.length>1?Math.min(T,(c.end-c.start)/2):0);
+  });
+  picked.sort((x,y)=>x.start-y.start);
+  const clips=picked.map(c=>({start:c.start,end:c.end,thumb:c.thumb,trans:$("tlType").value}));
+  if(!clips.length){ assistStatus("Could not pick any scenes."); return; }
+  if(!replaceTimeline(clips,"highlight clips")){ assistStatus("Cancelled."); return; }
+  assistStatus("Highlight reel: "+clips.length+" of "+scenes.length+" scenes, "+timelineLength().toFixed(1)+
+   " s (scenes "+picked.map(c=>c.i+1).join(", ")+"). The timeline in section 03 is ready: PREVIEW TIMELINE or EXPORT.");
+ }catch(err){
+  assistStatus("Could not make a highlight reel: "+err.message);
+ }finally{
+  assistSetBusy(false);
+ }
+});
+
+// Title ideas from the captions (simple word analysis, works offline).
+const STOP_WORDS=new Set(("a an the and or but if so to of in on at by for with from as is are was were be been am i you he she it we they me my your our "+
+ "this that these those there here what which who how why when where not no yes do does did done have has had will would can could should just "+
+ "very really also too about into than then them their its it's i'm you're don't can't let's okay ok uh um like get got go going gonna want "+
+ "ang ng sa na at mga ko mo ito yung yun po ay si ni kay din rin lang naman pa ba siya sila kami tayo ako ikaw ka natin namin nila niya "+
+ "hindi oo may wala para kung pero kasi dito diyan doon").split(/\s+/));
+
+function titleCase(s){ return s.replace(/(^|\s)(\p{L})/gu,(m,a,b)=>a+b.toUpperCase()); }
+function shorten(s,max){
+ s=s.replace(/\s+/g," ").trim().replace(/[.,;:!?…]+$/,"");
+ if(s.length<=max) return s;
+ const cut=s.slice(0,max+1);
+ return cut.slice(0,cut.lastIndexOf(" ")>20?cut.lastIndexOf(" "):max).replace(/[.,;:]+$/,"");
+}
+
+function titleIdeas(text){
+ const ideas=[];
+ const sentences=text.split(/(?<=[.!?])\s+/).map(x=>x.trim()).filter(x=>x.split(/\s+/).length>=3);
+ const words=(text.toLowerCase().match(/[\p{L}'][\p{L}'-]*/gu)||[]).filter(w=>w.length>=3 && !STOP_WORDS.has(w));
+ const freq=new Map();
+ words.forEach(w=>freq.set(w,(freq.get(w)||0)+1));
+ const top=[...freq.entries()].sort((a,b)=>b[1]-a[1]||words.indexOf(a[0])-words.indexOf(b[0])).slice(0,3).map(e=>e[0]);
+
+ const how=text.match(/\bhow to ([^.!?,]{3,60})/i);
+ if(how) ideas.push(shorten("How to "+how[1],60));
+ if(sentences.length) ideas.push(shorten(sentences[0].charAt(0).toUpperCase()+sentences[0].slice(1),60));
+ if(top.length>=2) ideas.push(titleCase(top.join(" · ")));
+ if(top.length) ideas.push(shorten(titleCase(top[0])+": "+(sentences[1]||sentences[0]||top.slice(1).join(" ")),60));
+ return [...new Set(ideas.filter(x=>x && x.length>=3))].slice(0,3);
+}
+
+$("assistTitles").addEventListener("click",()=>{
+ const text=[...captions].sort((a,b)=>a.start-b.start).map(c=>c.text.trim()).filter(Boolean).join(" ");
+ const box=$("assistTitleList");
+ box.replaceChildren();
+ if(!text){ assistStatus("Add captions first (section 04): tap GENERATE CAPTIONS, add them by hand or import a file."); return; }
+ const ideas=titleIdeas(text);
+ if(!ideas.length){ assistStatus("Not enough words in the captions for title ideas."); return; }
+ ideas.forEach(t=>{
+  const b=document.createElement("button");
+  b.className="secondary idea";
+  b.textContent=t;
+  b.addEventListener("click",()=>{
+   $("overlay").value=t.slice(0,70);
+   redrawIfPaused();
+   assistStatus("Title set to “"+t+"”. You can edit it in Text Overlay above.");
+  });
+  box.append(b);
+ });
+ assistStatus("Tap an idea to use it as the video title.");
+});
+
+$("assistGap").addEventListener("input",()=>{ $("assistGapVal").textContent=Number($("assistGap").value).toFixed(1); });
+$("assistTarget").addEventListener("input",()=>{ $("assistTargetVal").textContent=$("assistTarget").value; });
 
 window.addEventListener("beforeunload",()=>{
  if(videoURL)URL.revokeObjectURL(videoURL);

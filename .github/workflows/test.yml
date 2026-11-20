@@ -18,6 +18,8 @@ jobs:
         run: npm install --no-save playwright@1.48.2 && npx playwright install --with-deps chromium
       - name: Editor tests
         run: node tests/editor.test.js
+      - name: AI assistant test
+        run: node tests/assistant.test.js
       - name: Templates test
         run: node tests/templates.test.js
       - name: Background music test
