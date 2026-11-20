@@ -44,7 +44,8 @@ These rules apply to every Claude session and every team agent in `.claude/agent
 ## "Edit this" workflow (server side)
 When the owner says "edit this", use the `edit-this` skill
 (`.claude/skills/edit-this/SKILL.md`). It runs `pipeline/edit.mjs` (FFmpeg +
-Groq Whisper or local Whisper + HyperFrames intro), writes post copy to
+Groq Whisper or local Whisper + HyperFrames intro; effects: zoom, B-roll from
+files or Pexels, text pop-ups, sound effects, progress bar), writes post copy to
 `content/posts/` and adds a row to `content/schedule.md`. Test it with
 `cd pipeline && npm test`. Never post to social media without the owner's
 explicit yes in the conversation. Guide: `docs/AI-WORKFLOW.md`.
@@ -56,6 +57,8 @@ watermark, music volume, hashtags), `brand/voice.md` (how posts sound),
 `brand/music/` (licensed songs). The pipeline applies it automatically
 (`--no-brand` turns it off). Preview: `node pipeline/brand-preview.mjs` →
 `brand/preview.png`. All writing must follow `brand/voice.md`.
+Publishing target: **US audience** — US English, US Eastern Time posting
+schedule (with the owner's Philippine time shown next to it).
 
 ## Team
 Agents live in `.claude/agents/`. In Claude Code, ask for one by name, for

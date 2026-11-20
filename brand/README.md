@@ -24,6 +24,9 @@ Open `brand/brand.json`, tap the pencil (Edit), change the values, then
 | `watermark.enabled`, `position`, `size`, `opacity` | Logo in a corner during the video | `"top-right"`, `0.14`, `0.85` |
 | `logo` | Your logo file in this folder (PNG with a transparent background is best) | `"logo.png"` |
 | `music.volume` | Music level (0–1) when using `brand/music/` | `0.2` |
+| `effects.zoom` | `punch` (zoom in/out at cuts and sentences), `slow` (gentle push-in) or `none` | `"punch"` |
+| `effects.sfx` | Whoosh on zooms and B-roll, pop on text pop-ups | `true` |
+| `effects.progressBar` | Thin bar at the top in the accent colour | `true` |
 | `hashtags` | Always-used hashtags for post copy | `["#travelph", "#budgettravel"]` |
 
 Colours are written as `#` + 6 letters/digits (pick them at htmlcolorcodes.com).

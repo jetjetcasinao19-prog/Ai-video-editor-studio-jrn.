@@ -21,6 +21,16 @@
 //   --music auto         use the first song in brand/music/
 //   --brand FILE / --no-brand   brand kit (default: brand/brand.json): colours,
 //                        caption style, logo watermark, outro card with @handle
+//   --zoom punch|slow|none   punch-in zooms at cuts and sentences, or a slow
+//                        push-in (default: brand effects.zoom, else none)
+//   --plan FILE.json     B-roll and text pop-ups on the output timeline:
+//                        {"broll":[{"at":3,"duration":2.5,"query":"brain"} or
+//                         {"at":9,"duration":3,"file":"inbox/broll/x.mp4"}],
+//                         "popups":[{"at":12,"text":"2 MINUTES"}]}
+//   --sfx / --no-sfx     whoosh on zooms and B-roll, pop on pop-ups
+//   --progress-bar / --no-progress-bar   thin bar at the top in the accent colour
+//   --fix "wrong=right"  correct caption words before they are burned in
+//                        (repeatable; several words allowed on each side)
 //   --title "TEXT"       render an animated HyperFrames intro card with this title
 //   --subtitle "TEXT"    second line on the intro card
 //   --json               print the report as JSON at the end
@@ -29,6 +39,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadBrand, assColor, brandLogo, pickMusic } from './brand.mjs';
+import { zoomPlan, zoomFilter, zoomMoments, resolveBroll, makeSfx } from './effects.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const FONTS = path.join(HERE, 'fonts');
@@ -56,6 +67,17 @@ function parseArgs(argv) {
     else if (a === '--brand') o.brand = next();
     else if (a === '--no-brand') o.brand = null;
     else if (a === '--words') o.wordsFile = next(); // ready-made word timings (used by the brand preview)
+    else if (a === '--zoom') o.zoom = next();
+    else if (a === '--plan') o.plan = next();
+    else if (a === '--sfx') o.sfx = true;
+    else if (a === '--no-sfx') o.sfx = false;
+    else if (a === '--progress-bar') o.progressBar = true;
+    else if (a === '--no-progress-bar') o.progressBar = false;
+    else if (a === '--fix') {
+      const f = next() || '', i = f.indexOf('=');
+      if (i < 1) throw new Error('--fix needs the form "wrong words=right words"');
+      (o.fixes = o.fixes || []).push([f.slice(0, i).trim(), f.slice(i + 1).trim()]);
+    }
     else if (a === '--subtitle') o.subtitle = next();
     else if (a === '--json') o.json = true;
     else if (a.startsWith('--')) throw new Error('Unknown option ' + a);
@@ -65,6 +87,7 @@ function parseArgs(argv) {
   if (!o.input) throw new Error('Usage: node pipeline/edit.mjs <video> [options]');
   if (!SIZES[o.format]) throw new Error('--format must be 9:16, 16:9 or 1:1');
   if (o.captions !== undefined && !['creator', 'box', 'classic', 'none'].includes(o.captions)) throw new Error('--captions must be creator, box, classic or none');
+  if (o.zoom !== undefined && !['punch', 'slow', 'none'].includes(o.zoom)) throw new Error('--zoom must be punch, slow or none');
   if (!['auto', 'groq', 'local', 'none'].includes(o.transcriber)) throw new Error('--transcriber must be auto, groq, local or none');
   return o;
 }
@@ -138,6 +161,28 @@ async function transcribeLocal(audioWav, language) {
   }
   await asr.dispose?.();
   return { engine: 'local whisper-base', language: language || 'auto', text: out.text || '', words };
+}
+
+// ---------- corrections ----------
+// Replace a run of words (matched without case or punctuation) by new words;
+// the new words share the time span of the words they replace.
+export function applyFixes(words, fixes = []) {
+  const norm = w => w.toLowerCase().replace(/[^\p{L}\p{N}']/gu, '');
+  let out = words.slice(), count = 0;
+  for (const [from, to] of fixes) {
+    const pat = from.split(/\s+/).map(norm).filter(Boolean), repl = to.split(/\s+/).filter(Boolean);
+    if (!pat.length) continue;
+    const next = [];
+    for (let i = 0; i < out.length; i++) {
+      if (pat.every((p, k) => out[i + k] && norm(out[i + k].w) === p)) {
+        const a = out[i].start, b = out[i + pat.length - 1].end, d = (b - a) / Math.max(1, repl.length);
+        repl.forEach((w, k) => next.push({ w, start: r2(a + k * d), end: r2(a + (k + 1) * d) }));
+        i += pat.length - 1; count++;
+      } else next.push(out[i]);
+    }
+    out = next;
+  }
+  return { words: out, count };
 }
 
 // ---------- 3. pauses → parts to keep ----------
@@ -219,17 +264,23 @@ function assTime(t) {
 }
 const assEsc = s => s.replace(/[{}\\]/g, '').replace(/\n/g, ' ');
 
-export function buildAss(words, style, [W, H], colors) {
-  const st = { ...STYLES[style] };
+export function buildAss(words, style, [W, H], colors, popups = []) {
+  const st = { ...STYLES[style === 'none' ? 'creator' : style] };
   if (colors) { st.color = assColor(colors.captionText); if (style !== 'classic') st.hi = assColor(colors.captionHighlight); }
   const size = Math.round(W * st.size * (W > H ? 0.75 : 1));
   const marginV = Math.round(H * (1 - st.pos));
   const head = `[Script Info]\nScriptType: v4.00+\nPlayResX: ${W}\nPlayResY: ${H}\nWrapStyle: 0\nScaledBorderAndShadow: yes\n\n` +
     `[V4+ Styles]\nFormat: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding\n` +
-    `Style: Cap,${st.font},${size},${st.color},${st.color},&H00000000,&H99000000,0,0,0,0,100,100,0,0,${st.box ? 3 : 1},${st.box ? Math.round(size * 0.25) : st.outline},0,2,${Math.round(W * 0.08)},${Math.round(W * 0.08)},${marginV},1\n\n` +
+    `Style: Cap,${st.font},${size},${st.color},${st.color},&H00000000,&H99000000,0,0,0,0,100,100,0,0,${st.box ? 3 : 1},${st.box ? Math.round(size * 0.25) : st.outline},0,2,${Math.round(W * 0.08)},${Math.round(W * 0.08)},${marginV},1\n` +
+    `Style: Pop,Anton,${Math.round(Math.min(W, H) * 0.13)},${colors ? assColor(colors.captionHighlight) : '&H0000E6FF'},&H00FFFFFF,&H00000000,&H99000000,0,0,0,0,100,100,1,0,1,${Math.round(Math.min(W, H) * 0.011)},0,8,${Math.round(W * 0.06)},${Math.round(W * 0.06)},${Math.round(H * 0.12)},1\n\n` +
     `[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\n`;
   const ev = [];
-  for (const line of groupLines(words, W > H ? st.chars + 10 : st.chars)) {
+  // Text pop-ups: big word, pops in (scale 60% → 112% → 100%) and fades out.
+  for (const p of popups) {
+    const a = p.at, b = p.at + (p.duration || 1.4);
+    ev.push(`Dialogue: 1,${assTime(a)},${assTime(b)},Pop,,0,0,0,,{\\fad(60,180)\\fscx60\\fscy60\\t(0,140,\\fscx112\\fscy112)\\t(140,240,\\fscx100\\fscy100)}${assEsc(String(p.text)).toUpperCase()}`);
+  }
+  for (const line of (style === 'none' ? [] : groupLines(words, W > H ? st.chars + 10 : st.chars))) {
     const t0 = line[0].start, t1 = line[line.length - 1].end;
     if (style === 'creator') {
       // One event per word: the line with the spoken word highlighted.
@@ -303,6 +354,14 @@ export async function editVideo(opts) {
   const brand = loadBrand(opts.brand && fs.existsSync(opts.brand) ? opts.brand : null);
   const useBrand = !!(opts.brand && fs.existsSync(opts.brand));
   opts.captions = opts.captions || (useBrand ? brand.captions.style : 'creator');
+  if (opts.zoom === undefined) opts.zoom = useBrand ? brand.effects.zoom : 'none';
+  if (opts.sfx === undefined) opts.sfx = useBrand ? brand.effects.sfx : false;
+  if (opts.progressBar === undefined) opts.progressBar = useBrand ? brand.effects.progressBar : false;
+  let plan = { broll: [], popups: [] };
+  if (opts.plan) {
+    try { plan = { broll: [], popups: [], ...JSON.parse(fs.readFileSync(opts.plan, 'utf8')) }; }
+    catch (e) { throw new Error('The plan file could not be read (' + e.message + ').'); }
+  }
   if (opts.musicVolume === undefined) opts.musicVolume = useBrand ? brand.music.volume : 0.25;
   if (opts.music === 'auto') {
     opts.music = useBrand ? pickMusic(brand) : null;
@@ -348,6 +407,13 @@ export async function editVideo(opts) {
     step('transcribe', { engine: 'none', reason: 'video has no sound' });
   }
 
+  if (opts.fixes && opts.fixes.length) {
+    const r = applyFixes(words, opts.fixes);
+    words = r.words;
+    transcript.text = words.map(w => w.w).join(' ');
+    step('fix', { corrections: r.count, rules: opts.fixes.map(f => f.join(' → ')) });
+  }
+
   // 4. pauses → parts to keep
   let keep = [[0, r2(src.duration)]];
   if (opts.cutPauses && src.hasAudio) {
@@ -368,27 +434,72 @@ export async function editVideo(opts) {
   fs.writeFileSync(path.join(out, 'transcript.json'), JSON.stringify({ ...transcript, words: mapped }, null, 1));
   if (mapped.length) fs.writeFileSync(path.join(out, 'captions.srt'), buildSrt(mapped));
   const ass = path.join(out, 'captions.ass');
+  const popups = (plan.popups || []).filter(p => p && p.text && Number(p.at) >= 0 && Number(p.at) < total - 0.3)
+    .map(p => ({ at: Number(p.at), duration: Math.min(Number(p.duration) || 1.4, 3), text: String(p.text).slice(0, 24) }));
   const useCaptions = opts.captions !== 'none' && mapped.length > 0;
-  if (useCaptions) fs.writeFileSync(ass, buildAss(mapped, opts.captions, [W, H], useBrand ? brand.colors : null));
+  const useAss = useCaptions || popups.length > 0;
+  if (useAss) fs.writeFileSync(ass, buildAss(useCaptions ? mapped : [], useCaptions ? opts.captions : 'none', [W, H], useBrand ? brand.colors : null, popups));
+
+  // Zoom plan and B-roll (all on the output timeline).
+  const cutsOut = []; { let acc = 0; for (let i = 0; i < keep.length - 1; i++) { acc += keep[i][1] - keep[i][0]; cutsOut.push(r2(acc)); } }
+  const zkeys = zoomPlan(opts.zoom, cutsOut, kept, mapped);
+  const broll = await resolveBroll(plan.broll, { total: kept, orientation: W < H ? 'portrait' : W > H ? 'landscape' : 'square',
+    cacheDir: path.join(out, '.broll-cache'), baseDir: process.cwd(), log: step });
+  if (zkeys.length) step('zoom', { style: opts.zoom, changes: zoomMoments(zkeys).length });
+  if (broll.length) step('broll', { clips: broll.map(b => ({ at: b.at, duration: r2(b.duration), source: b.source, credit: b.credit })) });
+  if (popups.length) step('popups', { count: popups.length, words: popups.map(p => p.text) });
 
   // 5. one FFmpeg pass: cut + reframe + captions + music + loudness
   const sel = keep.map(([a, b]) => `between(t,${a},${b})`).join('+');
+  const subs = `subtitles=filename='${ass.replace(/'/g, "\\'")}':fontsdir='${FONTS}'`;
   const vf = [`[0:v]select='${sel}',setpts=N/FRAME_RATE/TB,fps=30,split[a][b]`,
     `[a]scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},boxblur=30:3,eq=brightness=-0.08[bg]`,
     `[b]scale=${W}:${H}:force_original_aspect_ratio=decrease[fg]`,
-    `[bg][fg]overlay=(W-w)/2:(H-h)/2` + (logo ? '[base]' : `,format=yuv420p` + (useCaptions ? `,subtitles=filename='${ass.replace(/'/g, "\\'")}':fontsdir='${FONTS}'` : '') + '[v]')];
+    `[bg][fg]overlay=(W-w)/2:(H-h)/2` + zoomFilter(zkeys, W, H) + '[c0]'];
   const args = ['-y', '-i', input];
-  let nextInput = 1;
+  let nextInput = 1, cur = 'c0', n = 0;
+  const label = () => 'c' + (++n);
+  // B-roll on top of the (zoomed) video, under watermark and captions.
+  for (const b of broll) {
+    if (b.image) args.push('-loop', '1', '-t', String(b.duration), '-i', b.file);
+    else args.push('-stream_loop', '-1', '-t', String(b.duration), '-i', b.file);
+    const fo = Math.max(0, b.duration - 0.2).toFixed(2);
+    const kb = b.image ? `,scale=w='trunc(${W}*(1+0.08*t/${b.duration.toFixed(2)})/2)*2':h='trunc(${H}*(1+0.08*t/${b.duration.toFixed(2)})/2)*2':eval=frame,crop=${W}:${H}` : '';
+    const o = label();
+    vf.push(`[${nextInput}:v]scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},fps=30,setsar=1${kb},format=yuva420p,` +
+      `fade=t=in:st=0:d=0.2:alpha=1,fade=t=out:st=${fo}:d=0.2:alpha=1,setpts=PTS-STARTPTS+${b.at.toFixed(3)}/TB[br${nextInput}]`,
+      `[${cur}][br${nextInput}]overlay=0:0:eof_action=pass:enable='between(t,${b.at.toFixed(3)},${(b.at + b.duration).toFixed(3)})'[${o}]`);
+    cur = o; nextInput++;
+  }
   if (logo) {
     // Logo watermark in a corner, under the captions.
     const lw = Math.round(Math.min(W, H) * brand.watermark.size), m = Math.round(Math.min(W, H) * 0.04);
     const pos = { 'top-right': [`W-w-${m}`, `${m}`], 'top-left': [`${m}`, `${m}`], 'bottom-right': [`W-w-${m}`, `H-h-${m}`], 'bottom-left': [`${m}`, `H-h-${m}`] }[brand.watermark.position];
     args.push('-loop', '1', '-i', logo.file);
+    const o = label();
     vf.push(`[${nextInput}:v]scale=${lw}:-1,format=rgba,colorchannelmixer=aa=${brand.watermark.opacity}[wm]`,
-      `[base][wm]overlay=${pos[0]}:${pos[1]}:shortest=1,format=yuv420p` + (useCaptions ? `,subtitles=filename='${ass.replace(/'/g, "\\'")}':fontsdir='${FONTS}'` : '') + '[v]');
-    nextInput++;
+      `[${cur}][wm]overlay=${pos[0]}:${pos[1]}:shortest=1[${o}]`);
+    cur = o; nextInput++;
   }
+  if (opts.progressBar) {
+    // Thin bar at the top that fills up as the video plays.
+    const accent = (useBrand ? brand.colors.accent : '#ffe600').slice(1);
+    const bh = Math.max(6, Math.round(H * 0.006));
+    args.push('-f', 'lavfi', '-i', `color=c=0x${accent}:s=${W}x${bh}:r=30`);
+    const o = label();
+    vf.push(`[${cur}][${nextInput}:v]overlay=x='-W+W*t/${kept.toFixed(3)}':y=0:shortest=1[${o}]`);
+    cur = o; nextInput++;
+  }
+  vf.push(`[${cur}]format=yuv420p` + (useAss ? ',' + subs : '') + '[v]');
   const af = [];
+  // Sound effects: whoosh on zoom moves and B-roll starts, pop on pop-ups.
+  const sfxAt = { whoosh: [], pop: [] };
+  if (opts.sfx) {
+    sfxAt.whoosh = [...zoomMoments(zkeys).filter(t => t > 0.4), ...broll.map(b => b.at)].map(t => Math.max(0, t - 0.15)).sort((a, b) => a - b)
+      .filter((t, i, a) => i === 0 || t - a[i - 1] > 0.6).slice(0, 40);
+    sfxAt.pop = popups.map(p => p.at).slice(0, 30);
+  }
+  const sfxN = sfxAt.whoosh.length + sfxAt.pop.length;
   if (src.hasAudio) af.push(`[0:a]aselect='${sel}',asetpts=N/SR/TB,aresample=48000,aformat=channel_layouts=stereo[voice]`);
   if (opts.music) {
     args.push('-stream_loop', '-1', '-i', path.resolve(opts.music));
@@ -396,9 +507,26 @@ export async function editVideo(opts) {
     af.push(`[${nextInput}:a]atrim=0:${kept},asetpts=N/SR/TB,aresample=48000,aformat=channel_layouts=stereo,volume=${opts.musicVolume},afade=t=in:d=1,afade=t=out:st=${fadeOut}:d=2[mus]`);
     if (src.hasAudio) {
       af.push('[voice]asplit[v1][v2]', '[mus][v2]sidechaincompress=threshold=0.03:ratio=8:attack=20:release=400[duck]',
-        '[v1][duck]amix=inputs=2:duration=first:normalize=0,loudnorm=I=-14:TP=-1.5:LRA=11[aout]');
-    } else af.push('[mus]loudnorm=I=-14:TP=-1.5:LRA=11[aout]');
-  } else if (src.hasAudio) af.push('[voice]loudnorm=I=-14:TP=-1.5:LRA=11[aout]');
+        '[v1][duck]amix=inputs=2:duration=first:normalize=0[mix]');
+    } else af.push('[mus]anull[mix]');
+  } else if (src.hasAudio) af.push('[voice]anull[mix]');
+  else if (sfxN) af.push(`anullsrc=r=48000:cl=stereo,atrim=0:${kept.toFixed(3)}[mix]`);
+  if (af.length) {
+    if (sfxN) {
+      const fx = makeSfx(path.join(out, '.fx-cache')), labels = [];
+      for (const kind of ['whoosh', 'pop']) {
+        const times = sfxAt[kind];
+        if (!times.length) continue;
+        args.push('-i', fx[kind]);
+        const ins = times.map((_, i) => `[${kind}${i}]`).join('');
+        af.push(`[${nextInput}:a]volume=${kind === 'whoosh' ? 0.6 : 0.6},asplit=${times.length}${ins}`);
+        times.forEach((t, i) => { const ms = Math.round(t * 1000); af.push(`[${kind}${i}]adelay=${ms}|${ms}[${kind}d${i}]`); labels.push(`[${kind}d${i}]`); });
+        nextInput++;
+      }
+      af.push(`[mix]${labels.join('')}amix=inputs=${labels.length + 1}:duration=first:normalize=0,loudnorm=I=-14:TP=-1.5:LRA=11[aout]`);
+      step('sfx', { whoosh: sfxAt.whoosh.length, pop: sfxAt.pop.length });
+    } else af.push('[mix]loudnorm=I=-14:TP=-1.5:LRA=11[aout]');
+  }
   const withCards = !!(opts.title && (!useBrand || brand.intro.enabled)) || outroOn;
   const main = path.join(out, withCards ? 'main.mp4' : 'final.mp4');
   args.push('-filter_complex', [...vf, ...af].join(';'), '-map', '[v]');
@@ -406,7 +534,9 @@ export async function editVideo(opts) {
   args.push('-t', String(kept), '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '20', '-movflags', '+faststart', main);
   await run('ffmpeg', args);
   step('render', { file: path.basename(main), size: W + 'x' + H, captions: useCaptions ? opts.captions : 'none',
-    music: opts.music ? path.basename(opts.music) : false, watermark: !!logo });
+    music: opts.music ? path.basename(opts.music) : false, watermark: !!logo, zoom: zkeys.length ? opts.zoom : 'none',
+    broll: broll.length, popups: popups.length, sfx: sfxN, progressBar: !!opts.progressBar });
+  report.credits = broll.filter(b => b.credit).map(b => ({ credit: b.credit, url: b.url }));
 
   // 6. HyperFrames cards: intro (with --title) in front, outro (brand) at the end
   let final = main;
@@ -450,7 +580,7 @@ export async function editVideo(opts) {
 
   // 8. report
   for (const f of [wav, mp3]) fs.rmSync(f, { force: true });
-  fs.rmSync(path.join(out, '.brand-cache'), { recursive: true, force: true });
+  for (const d of ['.brand-cache', '.fx-cache', '.broll-cache']) fs.rmSync(path.join(out, d), { recursive: true, force: true });
   report.final = { file: 'final.mp4', duration: r2(finalInfo.duration), width: finalInfo.width, height: finalInfo.height, sizeMB: r2(finalInfo.size / 1048576) };
   report.transcript = (transcript.text || '').trim();
   report.seconds = r2((Date.now() - t0) / 1000);
