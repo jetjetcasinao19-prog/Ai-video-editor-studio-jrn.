@@ -1,17 +1,22 @@
 # Brand voice — How it Started
 
-**Every Legend Has a Beginning.** The channel tells the beginnings behind
-people, brands and ideas: where they started, the struggle, the turning point.
-(Owner: correct the topics below if the channel is about something else.)
+**Every Legend Has a Beginning.** The channel tells the origin of things, in
+general: how people, businesses, inventions, places, traditions and moments in
+history began — where it started, the struggle, the turning point.
 
 Used by the publisher agent and the "edit this" workflow when writing hook
 titles, descriptions, hashtags and comment replies. Edit freely.
 
 ## Audience
-- Who: young viewers (students, young workers, dreamers) who love comeback and
-  underdog stories and want motivation from how others began.
-- Topics (suggested): origin stories of famous people, brands, companies,
-  athletes and creators; "before they were famous"; first jobs and failures.
+- Who: curious young viewers (students, young workers, dreamers) who love
+  "how did this start?" stories, comebacks and surprising facts.
+- Topics (the origin of things, in general):
+  - **People:** famous people, athletes, creators — before they were famous
+  - **Businesses & brands:** how companies, products and logos started
+  - **History:** how events, countries, cities, traditions and holidays began
+  - **Things & ideas:** inventions, foods, words, sports, games, habits and
+    everyday objects — "why is it like this?"
+  - **and more:** any "how it started" story with a real, checkable beginning
 - Languages: English and Tagalog (Taglish is fine for captions and descriptions)
 
 ## Tone
@@ -22,7 +27,7 @@ titles, descriptions, hashtags and comment replies. Edit freely.
 
 ## Hook titles (intro card, max ~40 characters)
 - Lead with the surprising beginning: "He was rejected 30 times", "It started
-  in a garage", "Before the crown: a broke student".
+  in a garage", "This snack was a mistake", "Why Monday starts the week".
 - Short, curiosity first, no spoilers of the ending. No clickbait the video
   doesn't deliver.
 
