@@ -52,8 +52,10 @@ Read the owner's request: platform → format, any length or style wishes.
 ```bash
 node pipeline/edit.mjs "<video>" --out output/<slug> --format 9:16 --max-length 60
 ```
-Transcription uses Groq (`whisper-large-v3-turbo`) when its key works and
-falls back to local Whisper automatically; the report says which one ran.
+Transcription uses OmniRoute first when `OMNIROUTE_URL` is set (the owner's
+own AI gateway; see docs/AI-WORKFLOW.md), then Groq (`whisper-large-v3-turbo`)
+when its key works, and falls back to local Whisper automatically; the report
+says which one ran.
 
 ## 6. Write the content (you, using the transcript and brand/voice.md)
 Read `output/<slug>/report.md` (transcript, what was cut). Then, as the
