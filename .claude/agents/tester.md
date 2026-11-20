@@ -10,7 +10,8 @@ You are the tester for the AI Video Editor Studio.
    captions changed, `node tests/caption-style.test.js` when caption styling
    changed, `node tests/scene-detection.test.js` when scene detection changed,
    `node tests/transitions.test.js` when the timeline or export changed,
-   `node tests/music.test.js` when audio or music changed).
+   `node tests/music.test.js` when audio or music changed,
+   `node tests/templates.test.js` when templates or settings changed).
    Report pass/fail with the real output.
 2. Check that the page has no JavaScript errors and no sideways scrolling at phone width.
 3. Check browser APIs used by the change against Android Chrome support

@@ -88,6 +88,12 @@ input[type=color]{height:44px;padding:4px}
 .trans{display:flex;align-items:center;gap:8px;margin:6px 0 6px 14px;font-size:12px;color:#9ba8bb}
 .trans select{margin:0;padding:8px;font-size:13px;flex:1}
 #tlList{margin-top:10px}
+#tplGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.tpl{margin:0;text-align:left;padding:10px;display:flex;flex-direction:column;gap:4px;min-height:84px}
+.tpl b{font-size:13px}
+.tpl span{font-size:11px;font-weight:normal;color:#b9c3d6;line-height:1.35}
+.tpl.active{outline:2px solid #526dff;background:#253055}
+#myTplList .clip{margin-bottom:8px}
 .del{background:#5a2733}
 progress{width:100%;height:10px;margin-top:10px;accent-color:#526dff}
 [hidden]{display:none!important}
@@ -146,6 +152,25 @@ Slow fades and dissolves may not be detected.
 
 <section class="panel">
 <h3>03 — Editing Controls</h3>
+
+<div id="tplBox" class="ai">
+<h4>Templates</h4>
+<p class="note">
+One tap sets the format, caption style, title look, transitions and music
+settings. Your video, captions text, clips and music file stay as they are.
+</p>
+<div id="tplGrid"></div>
+<p id="tplStatus" class="note"></p>
+<details>
+<summary>My templates</summary>
+<p class="note">Save your current settings to reuse them. Saved on this phone.</p>
+<label for="tplName">Template name</label>
+<input id="tplName" maxlength="40" placeholder="e.g. My channel style">
+<button id="tplSave" class="secondary">SAVE CURRENT SETTINGS</button>
+<p id="myTplNote" class="note">No saved templates yet.</p>
+<div id="myTplList"></div>
+</details>
+</div>
 
 <label>Video Format</label>
 <select id="ratio">
@@ -2356,6 +2381,174 @@ $("musicRemove").addEventListener("click",()=>{
  if(mixer && music.loaded) mixer.videoGain.gain.value=Number($("videoVol").value)/100;
 }));
 musicLabels();
+
+/* ---------- VIDEO TEMPLATES ---------- */
+
+// A template is a set of look-and-feel settings. Applying one never changes
+// the video, captions text, clips, Start/End, title text or music file.
+const TEMPLATE_CONTROLS={
+ ratio:"ratio",fit:"fit",titlePos:"position",titleColor:"color",showCaptions:"showCaptions",
+ tlType:"tlType",tlDur:"tlDur",tlFadeIn:"tlFadeIn",tlFadeOut:"tlFadeOut",
+ musicVol:"musicVol",videoVol:"videoVol",musicLoop:"musicLoop",musicFadeIn:"musicFadeIn",
+ musicFadeOut:"musicFadeOut",musicDuck:"musicDuck",musicDuckLevel:"musicDuckLevel"
+};
+
+const BUILTIN_TEMPLATES=[
+ {id:"reels",name:"Reels / TikTok / Shorts",desc:"Vertical, bold creator captions, quick crossfades",
+  s:{ratio:"9:16",fit:"cover",titlePos:"top",titleColor:"#ffffff",showCaptions:true,capPreset:"creator",
+   tlType:"fade",tlDur:0.4,tlFadeIn:false,tlFadeOut:true,musicVol:35,videoVol:100,musicLoop:true,
+   musicFadeIn:0.5,musicFadeOut:1.5,musicDuck:true,musicDuckLevel:25}},
+ {id:"vlog",name:"YouTube vlog",desc:"Horizontal, captions on a box, soft fades",
+  s:{ratio:"16:9",fit:"cover",titlePos:"bottom",titleColor:"#ffffff",showCaptions:true,capPreset:"box",
+   tlType:"fade",tlDur:0.6,tlFadeIn:true,tlFadeOut:true,musicVol:25,videoVol:100,musicLoop:true,
+   musicFadeIn:2,musicFadeOut:3,musicDuck:true,musicDuckLevel:20}},
+ {id:"tutorial",name:"Tutorial / how-to",desc:"Horizontal, whole picture visible, wipes, quiet music",
+  s:{ratio:"16:9",fit:"contain",titlePos:"top",titleColor:"#00e5ff",showCaptions:true,capPreset:"box",
+   tlType:"wipe",tlDur:0.5,tlFadeIn:true,tlFadeOut:true,musicVol:15,videoVol:100,musicLoop:true,
+   musicFadeIn:1,musicFadeOut:2,musicDuck:true,musicDuckLevel:15}},
+ {id:"montage",name:"Fast montage",desc:"Vertical, quick slides, loud music, no captions",
+  s:{ratio:"9:16",fit:"cover",titlePos:"center",titleColor:"#ffff00",showCaptions:false,capPreset:"bold",
+   tlType:"slideleft",tlDur:0.3,tlFadeIn:false,tlFadeOut:true,musicVol:80,videoVol:30,musicLoop:true,
+   musicFadeIn:0,musicFadeOut:1.5,musicDuck:false,musicDuckLevel:30}},
+ {id:"story",name:"Story / quote",desc:"Vertical, big centred text, fades through black",
+  s:{ratio:"9:16",fit:"cover",titlePos:"center",titleColor:"#ffff00",showCaptions:true,capPreset:"bold",
+   tlType:"black",tlDur:0.8,tlFadeIn:true,tlFadeOut:true,musicVol:45,videoVol:80,musicLoop:true,
+   musicFadeIn:2,musicFadeOut:3,musicDuck:true,musicDuckLevel:30}},
+ {id:"square",name:"Square post",desc:"1:1 for feeds, classic captions, crossfades",
+  s:{ratio:"1:1",fit:"cover",titlePos:"top",titleColor:"#ffffff",showCaptions:true,capPreset:"classic",
+   tlType:"fade",tlDur:0.5,tlFadeIn:true,tlFadeOut:true,musicVol:30,videoVol:100,musicLoop:true,
+   musicFadeIn:1,musicFadeOut:2,musicDuck:true,musicDuckLevel:25}},
+ {id:"cinematic",name:"Cinematic",desc:"Horizontal, minimal captions, slow fades through black",
+  s:{ratio:"16:9",fit:"cover",titlePos:"center",titleColor:"#ffffff",showCaptions:true,capPreset:"minimal",
+   tlType:"black",tlDur:1.2,tlFadeIn:true,tlFadeOut:true,musicVol:50,videoVol:70,musicLoop:true,
+   musicFadeIn:3,musicFadeOut:4,musicDuck:true,musicDuckLevel:35}}
+];
+const MY_TEMPLATES_KEY="aves.templates";
+
+function tplStatus(t){ $("tplStatus").textContent=t; }
+
+function loadMyTemplates(){
+ try{
+  const list=JSON.parse(localStorage.getItem(MY_TEMPLATES_KEY)||"[]");
+  return Array.isArray(list)?list.filter(t=>t && typeof t.name==="string" && t.s):[];
+ }catch(e){ return []; }
+}
+function saveMyTemplates(list){
+ try{ localStorage.setItem(MY_TEMPLATES_KEY,JSON.stringify(list)); return true; }
+ catch(e){ return false; }
+}
+
+function currentTemplateSettings(){
+ const s={};
+ for(const k in TEMPLATE_CONTROLS){
+  const el=$(TEMPLATE_CONTROLS[k]);
+  s[k]=el.type==="checkbox"?el.checked:(el.type==="range"?Number(el.value):el.value);
+ }
+ s.capPreset=$("capPreset").value;
+ s.capStyle={...capStyle};
+ return s;
+}
+
+function applyTemplate(t){
+ if(busy){ tplStatus("Wait until the current preview or export has finished."); return; }
+ const s=t.s;
+ for(const k in TEMPLATE_CONTROLS){
+  if(!(k in s)) continue;
+  const el=$(TEMPLATE_CONTROLS[k]);
+  if(el.type==="checkbox") el.checked=!!s[k];
+  else if(el.tagName==="SELECT"){
+   if([...el.options].some(o=>o.value===String(s[k]))) el.value=String(s[k]);
+  }else el.value=s[k];
+ }
+ // Caption style: a saved custom style, or a quick-style preset.
+ if(s.capStyle && typeof s.capStyle==="object"){
+  capStyle={...CAP_PRESETS.classic,...s.capStyle};
+  if(!CAP_FONTS[capStyle.font]) capStyle.font="sans";
+  $("capPreset").value=CAP_PRESETS[s.capPreset]?s.capPreset:"custom";
+ }else if(CAP_PRESETS[s.capPreset]){
+  capStyle={...CAP_PRESETS[s.capPreset]};
+  $("capPreset").value=s.capPreset;
+ }
+ styleToControls(capStyle);
+ saveStyle();
+ ensureCaptionFont();
+
+ // Transitions: also update clips already in the timeline.
+ $("tlDurVal").textContent=Number($("tlDur").value).toFixed(1);
+ timeline.forEach(c=>{ c.trans=$("tlType").value; });
+ renderTimeline();
+ musicLabels();
+ if(mixer && music.loaded) mixer.videoGain.gain.value=Number($("videoVol").value)/100;
+
+ updatePreview();
+ try{ localStorage.setItem("aves.lastTemplate",t.name); }catch(e){}
+ document.querySelectorAll(".tpl").forEach(el=>el.classList.toggle("active",el.dataset.name===t.name));
+ tplStatus("Template “"+t.name+"” applied"+(timeline.length?" (also to the "+timeline.length+" timeline clips)":"")+".");
+}
+
+function renderTemplates(){
+ const grid=$("tplGrid");
+ const frag=document.createDocumentFragment();
+ BUILTIN_TEMPLATES.forEach(t=>{
+  const b=document.createElement("button");
+  b.className="tpl secondary";
+  b.dataset.name=t.name;
+  const n=document.createElement("b"); n.textContent=t.name;
+  const d=document.createElement("span"); d.textContent=t.desc;
+  b.append(n,d);
+  b.addEventListener("click",()=>applyTemplate(t));
+  frag.append(b);
+ });
+ grid.replaceChildren(frag);
+
+ const mine=loadMyTemplates();
+ const list=$("myTplList");
+ const f2=document.createDocumentFragment();
+ mine.forEach((t,i)=>{
+  const row=document.createElement("div");
+  row.className="clip";
+  const info=document.createElement("div");
+  info.className="info";
+  const n=document.createElement("b"); n.textContent=t.name;
+  const d=document.createElement("div");
+  d.textContent=[t.s.ratio,TRANSITION_NAMES[t.s.tlType]||"",t.s.showCaptions?"captions":"no captions"].join(" · ");
+  info.append(n,d);
+  const apply=document.createElement("button");
+  apply.textContent="APPLY";
+  apply.addEventListener("click",()=>applyTemplate(t));
+  const del=document.createElement("button");
+  del.className="del"; del.textContent="✕"; del.title="Delete template";
+  del.addEventListener("click",()=>{
+   if(!confirm("Delete the template “"+t.name+"”?")) return;
+   const l=loadMyTemplates(); l.splice(i,1); saveMyTemplates(l);
+   renderTemplates(); tplStatus("Template deleted.");
+  });
+  row.append(info,apply,del);
+  f2.append(row);
+ });
+ list.replaceChildren(f2);
+ $("myTplNote").textContent=mine.length?"":"No saved templates yet.";
+ let last=null;
+ try{ last=localStorage.getItem("aves.lastTemplate"); }catch(e){}
+ document.querySelectorAll(".tpl").forEach(el=>el.classList.toggle("active",el.dataset.name===last));
+}
+
+$("tplSave").addEventListener("click",()=>{
+ const name=$("tplName").value.trim().slice(0,40);
+ if(!name){ tplStatus("Type a name for your template first."); $("tplName").focus(); return; }
+ const list=loadMyTemplates();
+ const i=list.findIndex(t=>t.name.toLowerCase()===name.toLowerCase());
+ if(i>=0 && !confirm("Replace your template “"+list[i].name+"”?")) return;
+ const t={name,s:currentTemplateSettings()};
+ if(i>=0) list[i]=t; else list.push(t);
+ if(list.length>30){ tplStatus("You can keep up to 30 templates. Delete one first."); return; }
+ if(!saveMyTemplates(list)){ tplStatus("Could not save on this phone (storage blocked or full)."); return; }
+ $("tplName").value="";
+ renderTemplates();
+ tplStatus("Template “"+name+"” saved on this phone.");
+});
+
+renderTemplates();
 
 window.addEventListener("beforeunload",()=>{
  if(videoURL)URL.revokeObjectURL(videoURL);
