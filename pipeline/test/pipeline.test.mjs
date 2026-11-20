@@ -71,8 +71,9 @@ function longestQuiet(pcm, from, to, thr = 0.003) {
 const norm = s => s.toLowerCase().replace(/[^a-z\s]/g, ' ').split(/\s+/).filter(Boolean);
 
 // ---------- full edit: 9:16, creator captions, music, HyperFrames intro ----------
+// (General checks use --no-brand so they do not depend on the owner's brand file.)
 try {
-  const rep = edit([VIDEO, '--out', path.join(tmp, 'out'), '--music', SONG, '--title', 'Three Easy Tips', '--subtitle', 'Phone editing']);
+  const rep = edit([VIDEO, '--no-brand', '--out', path.join(tmp, 'out'), '--music', SONG, '--title', 'Three Easy Tips', '--subtitle', 'Phone editing']);
   const out = path.join(tmp, 'out');
   const fin = path.join(out, 'final.mp4');
   const info = probe(fin);
@@ -142,7 +143,8 @@ try {
   check('--no-brand: no watermark, no outro', !plain.steps.find(s => s.step === 'outro') && pixels(path.join(tmp, 'nobrand', 'final.mp4'), 2, 'iw*0.25:iw*0.25:iw*0.75:0').filter(isPink).length < 20 &&
     near(pinfo.duration, plain.steps.find(s => s.step === 'cut').keptSeconds, 0.2));
 
-  const blank = edit([VIDEO, '--out', path.join(tmp, 'blank'), '--words', wordsFile]); // the repo's brand.json (no name yet)
+  fs.writeFileSync(path.join(bdir, 'empty.json'), JSON.stringify({ name: '', handle: '' }));
+  const blank = edit([VIDEO, '--out', path.join(tmp, 'blank'), '--brand', path.join(bdir, 'empty.json'), '--words', wordsFile]); // a brand with no name yet
   const bb = blank.steps.find(s => s.step === 'brand');
   check('empty brand name: no watermark and no outro yet', bb.watermark === 'off' && bb.outro.startsWith('off'), JSON.stringify(bb));
 
@@ -156,7 +158,7 @@ try {
 
 // ---------- other options ----------
 try {
-  const rep = edit([VIDEO, '--out', path.join(tmp, 'wide'), '--format', '16:9', '--captions', 'box', '--max-length', '6']);
+  const rep = edit([VIDEO, '--no-brand', '--out', path.join(tmp, 'wide'), '--format', '16:9', '--captions', 'box', '--max-length', '6']);
   const info = probe(path.join(tmp, 'wide', 'final.mp4'));
   check('16:9 + box captions + max length 6 s', info.width === 1920 && info.height === 1080 && near(info.duration, 6, 0.2), info.width + 'x' + info.height + ', ' + info.duration + ' s');
   check('max length: captions stop at 6 s', !/00:00:0[7-9]|00:00:1\d/.test(fs.readFileSync(path.join(tmp, 'wide', 'captions.srt'), 'utf8')));
@@ -166,7 +168,7 @@ try {
 try {
   const silent = path.join(tmp, 'silent.mp4');
   ff(['-f', 'lavfi', '-i', 'testsrc2=size=720x1280:rate=30:duration=3', '-c:v', 'libx264', '-preset', 'ultrafast', '-pix_fmt', 'yuv420p', silent]);
-  const rep = edit([silent, '--out', path.join(tmp, 'silent'), '--format', '1:1']);
+  const rep = edit([silent, '--no-brand', '--out', path.join(tmp, 'silent'), '--format', '1:1']);
   const info = probe(path.join(tmp, 'silent', 'final.mp4'));
   check('video without sound: 1:1 output, no captions, no crash', info.width === 1080 && info.height === 1080 && near(info.duration, 3, 0.2) &&
     rep.steps.find(s => s.step === 'transcribe').engine === 'none', info.width + 'x' + info.height + ' ' + info.duration);

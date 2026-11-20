@@ -1,19 +1,19 @@
 {
-  "name": "",
-  "handle": "",
-  "tagline": "",
+  "name": "How it Started",
+  "handle": "@HOWITSTARTED-YT1",
+  "tagline": "Every Legend Has a Beginning",
   "colors": {
-    "background": "#0b0e14",
+    "background": "#000000",
     "text": "#ffffff",
-    "accent": "#ffe600",
+    "accent": "#f5c400",
     "captionText": "#ffffff",
-    "captionHighlight": "#ffe600"
+    "captionHighlight": "#f5c400"
   },
   "captions": { "style": "creator" },
   "intro": { "enabled": true },
-  "outro": { "enabled": true, "text": "Follow for more", "seconds": 2.5 },
-  "watermark": { "enabled": true, "position": "top-right", "size": 0.14, "opacity": 0.85 },
+  "outro": { "enabled": true, "text": "Subscribe for more origin stories", "seconds": 2.5 },
+  "watermark": { "enabled": true, "position": "top-right", "size": 0.14, "opacity": 0.9 },
   "logo": "logo.png",
   "music": { "volume": 0.2 },
-  "hashtags": []
+  "hashtags": ["#HowItStarted", "#EveryLegendHasABeginning"]
 }
