@@ -2062,10 +2062,62 @@ function showExportResult(blob,fmt){
  link.href=exportURL;
  link.download="edited-video."+fmt.ext;
  link.textContent="DOWNLOAD YOUR VIDEO (."+fmt.ext.toUpperCase()+")";
- $("result").replaceChildren(link);
+ $("result").replaceChildren(link,capcutControls(blob,fmt));
  $("status").textContent="Export completed! "+describeMime(blob.type||fmt.mime)+", "+
   (blob.size/1024/1024).toFixed(2)+" MB"+
   (fmt.fallback?". This browser cannot make MP4, so it was saved as WebM.":"");
+}
+
+// ---- Send to CapCut ----
+// CapCut has no public import API, so the finished video is handed over
+// through Android's share sheet (Web Share API): the owner picks CapCut and
+// it opens the video in a new CapCut project. If sharing files is not
+// supported, an Android intent link opens the CapCut app (or its Play Store
+// page) so the downloaded file can be imported there.
+const CAPCUT_PACKAGE="com.lemon.lvoverseas";
+const CAPCUT_STORE="https://play.google.com/store/apps/details?id="+CAPCUT_PACKAGE;
+const CAPCUT_INTENT="intent://#Intent;package="+CAPCUT_PACKAGE+
+ ";S.browser_fallback_url="+encodeURIComponent(CAPCUT_STORE)+";end";
+
+function capcutControls(blob,fmt){
+ const box=document.createElement("div");
+ box.id="capcutBox";
+ const btn=document.createElement("button");
+ btn.id="sendCapcut";
+ btn.type="button";
+ btn.textContent="SEND TO CAPCUT";
+ btn.style.marginTop="12px";
+ const open=document.createElement("a");
+ open.id="openCapcut";
+ open.href=/Android/i.test(navigator.userAgent)?CAPCUT_INTENT:CAPCUT_STORE;
+ open.target="_blank";
+ open.rel="noopener";
+ open.textContent="OPEN THE CAPCUT APP";
+ const note=document.createElement("p");
+ note.id="capcutNote";
+ note.className="note";
+ note.textContent="Tap SEND TO CAPCUT, then choose CapCut in the share list. "+
+  (captions.length?"Captions are already burned into the video. ":"")+
+  "If CapCut is not in the list, download the video, open CapCut and import it from your gallery.";
+ btn.addEventListener("click",async()=>{
+  // Wrap the existing blob (no copy) so the share sheet gets a named video file.
+  const file=new File([blob],"edited-video."+fmt.ext,{type:(blob.type||fmt.mime||"video/mp4").split(";")[0]});
+  const data={files:[file],title:"Edited video"};
+  if(!navigator.share || !navigator.canShare || !navigator.canShare(data)){
+   note.textContent="This browser cannot send files to other apps. Download the video, then tap OPEN THE CAPCUT APP and import it from your gallery.";
+   return;
+  }
+  try{
+   await navigator.share(data);
+   note.textContent="Sent. Carry on in CapCut.";
+  }catch(err){
+   note.textContent=err && err.name==="AbortError"
+    ? "Sharing cancelled. Tap SEND TO CAPCUT to try again."
+    : "Could not share: "+(err && err.message || err)+". Download the video and import it in CapCut.";
+  }
+ });
+ box.append(btn,note,open);
+ return box;
 }
 
 function updateFormatNote(){
