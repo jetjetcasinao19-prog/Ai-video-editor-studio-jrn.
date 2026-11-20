@@ -18,6 +18,10 @@ jobs:
         run: npm install --no-save playwright@1.48.2 && npx playwright install --with-deps chromium
       - name: Editor tests
         run: node tests/editor.test.js
+      - name: MP4 export test (Google Chrome, like Chrome on Android)
+        env:
+          PW_CHANNEL: chrome
+        run: node tests/mp4-export.test.js
       - name: AI assistant test
         run: node tests/assistant.test.js
       - name: Templates test

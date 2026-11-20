@@ -26,7 +26,8 @@ Single-file, in-browser video editor built for Android Chrome. Open `index.html`
   story, square, cinematic) and your own saved templates
 - AI assistant (on the phone, offline): remove silences (jump cuts), highlight
   reel of the liveliest scenes to a target length, title ideas from captions
-- Export to WebM with audio
+- Export to MP4 (H.264 video, AAC or Opus sound, depending on the phone) or WebM;
+  falls back to WebM with a message if the browser cannot make MP4
 
 ## Team and workflow
 See `docs/TEAM-GUIDE.md` (AI team agents, issue templates, posting schedule,
@@ -36,9 +37,10 @@ model switching) and `CLAUDE.md` (project rules).
 `node tests/editor.test.js`, `node tests/ai-captions.test.js`,
 `node tests/caption-style.test.js`, `node tests/scene-detection.test.js`,
 `node tests/transitions.test.js`, `node tests/music.test.js`,
-`node tests/templates.test.js` and `node tests/assistant.test.js` (needs ffmpeg
+`node tests/templates.test.js`, `node tests/assistant.test.js` and
+`node tests/mp4-export.test.js` (needs ffmpeg
 with flite, Playwright, internet). Runs automatically on
 GitHub Actions for every push.
 
 ## Roadmap (not implemented yet)
-MP4 export, project management.
+Project management.
