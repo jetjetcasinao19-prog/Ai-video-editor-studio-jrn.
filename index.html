@@ -75,6 +75,19 @@ input[type=color]{height:44px;padding:4px}
 .scene .info{flex:1;min-width:0;font-size:13px;line-height:1.4}
 .scene .info b{display:block}
 .scene button{width:auto;flex:0 0 auto;margin:0;padding:10px 12px}
+.scene .btns{display:grid;grid-template-columns:1fr 1fr;gap:6px;flex:0 0 auto}
+.scene .btns button:last-child{grid-column:1 / span 2}
+.clip{
+ display:flex;gap:8px;align-items:center;
+ border:1px solid #293449;border-radius:10px;
+ padding:8px;background:#0d1320
+}
+.clip img{width:48px;height:48px;object-fit:cover;border-radius:6px;flex:0 0 48px;background:#000}
+.clip .info{flex:1;min-width:0;font-size:13px;line-height:1.4}
+.clip button{width:auto;margin:0;padding:10px 11px}
+.trans{display:flex;align-items:center;gap:8px;margin:6px 0 6px 14px;font-size:12px;color:#9ba8bb}
+.trans select{margin:0;padding:8px;font-size:13px;flex:1}
+#tlList{margin-top:10px}
 .del{background:#5a2733}
 progress{width:100%;height:10px;margin-top:10px;accent-color:#526dff}
 [hidden]{display:none!important}
@@ -174,6 +187,57 @@ placeholder="Enter your video title">
 <button id="preview" class="secondary" disabled>
 UPDATE PREVIEW
 </button>
+
+<div id="tlBox" class="ai">
+<h4>Timeline &amp; transitions</h4>
+<p class="note">
+Put several clips in order and choose a transition between them.
+Add clips with <b>+ADD</b> in the scene list (section 02) or from the
+Start/End times above. When the timeline has clips, <b>Export</b> uses the
+timeline; when it is empty, Export uses Start–End as before.
+</p>
+
+<div class="row">
+<button id="tlAddRange" class="secondary" disabled>+ ADD START–END</button>
+<button id="tlAddScenes" class="secondary" disabled>+ ALL SCENES</button>
+</div>
+
+<label for="tlType">Transition for new clips</label>
+<select id="tlType">
+<option value="cut">Cut (no transition)</option>
+<option value="fade" selected>Crossfade</option>
+<option value="black">Fade through black</option>
+<option value="white">Fade through white</option>
+<option value="slideleft">Slide left</option>
+<option value="slideup">Slide up</option>
+<option value="wipe">Wipe</option>
+<option value="zoom">Zoom</option>
+</select>
+
+<label for="tlDur">Transition length: <span id="tlDurVal">0.5</span> s</label>
+<input id="tlDur" type="range" min="0.2" max="2" step="0.1" value="0.5">
+
+<div class="check">
+<input id="tlFadeIn" type="checkbox">
+<label for="tlFadeIn">Fade in from black at the start</label>
+</div>
+<div class="check">
+<input id="tlFadeOut" type="checkbox">
+<label for="tlFadeOut">Fade out to black at the end</label>
+</div>
+
+<p id="tlInfo" class="note">Timeline is empty.</p>
+<div id="tlList"></div>
+
+<div class="row">
+<button id="tlPlay" class="secondary" disabled>▶ PREVIEW TIMELINE</button>
+<button id="tlStop" class="del" hidden>■ STOP</button>
+</div>
+<div class="row">
+<button id="tlClear" class="secondary" disabled>CLEAR TIMELINE</button>
+</div>
+<p id="tlStatus" class="note"></p>
+</div>
 </section>
 
 <section class="panel">
@@ -322,6 +386,7 @@ Your style is remembered on this phone.</p>
 Export your edited clip as a WebM video.
 Keep the browser open during export.
 </p>
+<p id="exportMode" class="note">Export will use: the Start–End range.</p>
 <button id="export" disabled>EXPORT VIDEO</button>
 <div id="status">Waiting for video...</div>
 <div id="result"></div>
@@ -357,29 +422,48 @@ function dimensions(){
 }
 
 function draw(){
+ ctx.fillStyle="#000";
+ ctx.fillRect(0,0,canvas.width,canvas.height);
+ drawVideoLayer(video);
+ drawOverlays(video.currentTime);
+}
+
+// Draw one video frame with the chosen fit. Used by the normal preview and
+// by timeline transitions (opacity, offset and zoom).
+function drawVideoLayer(el,alpha=1,dx=0,dy=0,zoom=1){
+ if(!el.videoWidth || !el.videoHeight || alpha<=0) return;
  const w=canvas.width;
  const h=canvas.height;
+ const vw=el.videoWidth;
+ const vh=el.videoHeight;
+ const fit=$("fit").value;
 
- ctx.fillStyle="#000";
- ctx.fillRect(0,0,w,h);
+ const scale=(fit==="cover"
+  ?Math.max(w/vw,h/vh)
+  :Math.min(w/vw,h/vh))*zoom;
 
- if(video.videoWidth && video.videoHeight){
-  const vw=video.videoWidth;
-  const vh=video.videoHeight;
-  const fit=$("fit").value;
+ const dw=vw*scale;
+ const dh=vh*scale;
 
-  const scale=fit==="cover"
-   ?Math.max(w/vw,h/vh)
-   :Math.min(w/vw,h/vh);
-
-  const dw=vw*scale;
-  const dh=vh*scale;
-
-  ctx.drawImage(
-   video,(w-dw)/2,(h-dh)/2,dw,dh
-  );
+ const moved=dx!==0||dy!==0;
+ if(alpha<1||moved) ctx.save();
+ if(moved){
+  // A moving layer (slide transition) stays inside its own frame-sized box,
+  // even when "Fill frame" makes the video wider than the canvas.
+  ctx.beginPath(); ctx.rect(dx,dy,w,h); ctx.clip();
+  ctx.fillStyle="#000"; ctx.fillRect(dx,dy,w,h);
  }
+ if(alpha<1) ctx.globalAlpha=alpha;
+ ctx.drawImage(
+  el,(w-dw)/2+dx,(h-dh)/2+dy,dw,dh
+ );
+ if(alpha<1||moved) ctx.restore();
+}
 
+// Title and captions. t = time in the source video (for captions).
+function drawOverlays(t){
+ const w=canvas.width;
+ const h=canvas.height;
  const title=$("overlay").value.trim();
 
  if(title){
@@ -400,7 +484,7 @@ function draw(){
   ctx.fillText(title,w/2,y,w*0.88);
  }
 
- drawCaption(w,h,title);
+ drawCaption(w,h,title,t);
 }
 
 /* ---------- CAPTIONS ---------- */
@@ -572,9 +656,9 @@ function initCaptionStyle(){
  });
 }
 
-function drawCaption(w,h,title){
+function drawCaption(w,h,title,t=video.currentTime){
  if(!$("showCaptions").checked) return;
- const c=currentCaption(video.currentTime);
+ const c=currentCaption(t);
  if(!c) return;
  const s=capStyle;
 
@@ -1119,6 +1203,9 @@ $("file").addEventListener("change",e=>{
  sceneStop=true;
  scenes=[];
  renderScenes();
+ timeline=[];
+ renderTimeline();
+ tlStatus("");
  sceneStatus("");
  videoURL=URL.createObjectURL(file);
  video.src=videoURL;
@@ -1140,6 +1227,7 @@ video.addEventListener("loadedmetadata",()=>{
  $("addCap").disabled=false;
  if(!aiBusy && !sceneBusy) $("aiRun").disabled=false;
  if(!sceneBusy) $("sceneRun").disabled=false;
+ updateTimelineButtons();
 
  updatePreview();
  $("status").textContent="Video ready.";
@@ -1198,6 +1286,9 @@ async function seek(time){
 
 $("export").addEventListener("click",async()=>{
  if(busy||aiBusy||sceneBusy)return;
+
+ // Timeline has clips: export the timeline with transitions instead.
+ if(timeline.length){ exportTimeline(); return; }
 
  const start=Number($("start").value);
  const end=Number($("end").value);
@@ -1478,10 +1569,22 @@ function renderScenes(){
    sceneStatus("Start/End set to scene "+(i+1)+". Export will use only this scene.");
   });
 
-  row.append(img,info,go,trim);
+  const add=document.createElement("button");
+  add.className="secondary";
+  add.textContent="+ADD";
+  add.title="Add this scene to the timeline (section 03)";
+  add.addEventListener("click",()=>{
+   if(addClip(s.start,s.end,s.thumb)) sceneStatus("Scene "+(i+1)+" added to the timeline (section 03).");
+  });
+
+  const btns=document.createElement("div");
+  btns.className="btns";
+  btns.append(go,trim,add);
+  row.append(img,info,btns);
   frag.append(row);
  });
  list.replaceChildren(frag);
+ if(typeof updateTimelineButtons==="function") updateTimelineButtons();
 }
 
 function sceneFinish(v){
@@ -1618,6 +1721,400 @@ async function detectScenes(){
 $("sceneRun").addEventListener("click",detectScenes);
 $("sceneCancel").addEventListener("click",()=>{ sceneStop=true; });
 ["start","end"].forEach(id=>$(id).addEventListener("change",()=>{ if(scenes.length) renderScenes(); }));
+
+/* ---------- TIMELINE & TRANSITIONS ---------- */
+
+// Clips are ranges of the source video, played in order. Each clip's
+// "trans" is the transition INTO the next clip. During a transition two
+// hidden players overlap: the end of clip A and the start of clip B play at
+// the same time, and the picture and sound are blended.
+let timeline=[]; // {start,end,thumb,trans}
+let tlStop=false;
+let tlRunning=false;
+let tlStopReason="";
+
+const TRANSITION_NAMES={cut:"Cut",fade:"Crossfade",black:"Fade through black",
+ white:"Fade through white",slideleft:"Slide left",slideup:"Slide up",wipe:"Wipe",zoom:"Zoom"};
+
+function tlStatus(t){ $("tlStatus").textContent=t; }
+function tlDuration(){ return Number($("tlDur").value); }
+function clipLen(c){ return c.end-c.start; }
+
+// Length of the transition between clip i and clip i+1 (0 = cut).
+function transLen(i){
+ if(i>=timeline.length-1 || timeline[i].trans==="cut") return 0;
+ return Math.max(0,Math.min(tlDuration(),clipLen(timeline[i])/2,clipLen(timeline[i+1])/2));
+}
+
+function timelineLength(){
+ let t=0;
+ timeline.forEach((c,i)=>{ t+=clipLen(c)-transLen(i); });
+ return t;
+}
+
+function addClip(start,end,thumb){
+ if(!Number.isFinite(video.duration)) return false;
+ start=Math.max(0,Math.round(start*100)/100);
+ end=Math.min(video.duration,Math.round(end*100)/100);
+ if(!(end-start>=0.2)){
+  tlStatus("That clip is too short (minimum 0.2 s).");
+  return false;
+ }
+ timeline.push({start,end,thumb:thumb||null,trans:$("tlType").value});
+ renderTimeline();
+ tlStatus("Clip "+timeline.length+" added.");
+ return true;
+}
+
+function updateTimelineButtons(){
+ const has=timeline.length>0;
+ const idle=!busy && !aiBusy && !sceneBusy;
+ $("tlPlay").disabled=!has || !idle;
+ $("tlClear").disabled=!has || tlRunning;
+ $("tlAddRange").disabled=!currentFile || tlRunning;
+ $("tlAddScenes").disabled=!scenes.length || tlRunning;
+ $("exportMode").textContent=has
+  ?"Export will use: the timeline ("+timeline.length+" clip"+(timeline.length===1?"":"s")+", "+timelineLength().toFixed(1)+" s)."
+  :"Export will use: the Start–End range.";
+}
+
+function renderTimeline(){
+ const list=$("tlList");
+ const frag=document.createDocumentFragment();
+ timeline.forEach((c,i)=>{
+  const row=document.createElement("div");
+  row.className="clip";
+
+  const img=document.createElement("img");
+  img.alt="Clip "+(i+1);
+  if(c.thumb) img.src=c.thumb;
+
+  const info=document.createElement("div");
+  info.className="info";
+  const b=document.createElement("b");
+  b.textContent="Clip "+(i+1);
+  const t=document.createElement("div");
+  t.textContent=c.start.toFixed(2)+" – "+c.end.toFixed(2)+" s ("+clipLen(c).toFixed(1)+" s)";
+  info.append(b,t);
+
+  const mk=(label,title,fn,cls)=>{
+   const btn=document.createElement("button");
+   btn.className=cls||"secondary";
+   btn.textContent=label; btn.title=title;
+   btn.disabled=tlRunning;
+   btn.addEventListener("click",fn);
+   return btn;
+  };
+  const up=mk("↑","Move up",()=>{ [timeline[i-1],timeline[i]]=[timeline[i],timeline[i-1]]; renderTimeline(); });
+  up.disabled=tlRunning||i===0;
+  const down=mk("↓","Move down",()=>{ [timeline[i+1],timeline[i]]=[timeline[i],timeline[i+1]]; renderTimeline(); });
+  down.disabled=tlRunning||i===timeline.length-1;
+  const del=mk("✕","Remove clip",()=>{ timeline.splice(i,1); renderTimeline(); },"del");
+
+  row.append(img,info,up,down,del);
+  frag.append(row);
+
+  if(i<timeline.length-1){
+   const tr=document.createElement("div");
+   tr.className="trans";
+   const lab=document.createElement("span");
+   lab.textContent="↓ then";
+   const sel=document.createElement("select");
+   sel.setAttribute("aria-label","Transition after clip "+(i+1));
+   Object.entries(TRANSITION_NAMES).forEach(([v,name])=>{
+    const o=document.createElement("option");
+    o.value=v; o.textContent=name;
+    sel.append(o);
+   });
+   sel.value=c.trans;
+   sel.disabled=tlRunning;
+   sel.addEventListener("change",()=>{ c.trans=sel.value; renderTimeline(); });
+   const len=document.createElement("span");
+   const L=transLen(i);
+   len.textContent=L?L.toFixed(1)+" s":"";
+   tr.append(lab,sel,len);
+   frag.append(tr);
+  }
+ });
+ list.replaceChildren(frag);
+ $("tlInfo").textContent=timeline.length
+  ?timeline.length+" clip"+(timeline.length===1?"":"s")+" · total "+timelineLength().toFixed(1)+" s"
+  :"Timeline is empty.";
+ updateTimelineButtons();
+}
+
+function drawTransition(type,a,b,p){
+ const w=canvas.width,h=canvas.height;
+ switch(type){
+  case "fade":
+   drawVideoLayer(a); drawVideoLayer(b,p); break;
+  case "black":
+  case "white":{
+   drawVideoLayer(p<0.5?a:b);
+   const k=p<0.5?p*2:(1-p)*2;
+   ctx.fillStyle=(type==="black"?"rgba(0,0,0,":"rgba(255,255,255,")+k+")";
+   ctx.fillRect(0,0,w,h);
+   break;
+  }
+  case "slideleft":
+   drawVideoLayer(a,1,-p*w,0); drawVideoLayer(b,1,(1-p)*w,0); break;
+  case "slideup":
+   drawVideoLayer(a,1,0,-p*h); drawVideoLayer(b,1,0,(1-p)*h); break;
+  case "wipe":
+   drawVideoLayer(a);
+   ctx.save(); ctx.beginPath(); ctx.rect(0,0,w*p,h); ctx.clip();
+   ctx.fillStyle="#000"; ctx.fillRect(0,0,w,h);
+   drawVideoLayer(b);
+   ctx.restore();
+   break;
+  case "zoom":
+   drawVideoLayer(a,1-p,0,0,1+p*0.6); drawVideoLayer(b,p,0,0,1.3-p*0.3); break;
+  default:
+   drawVideoLayer(p<0.5?a:b);
+ }
+}
+
+function pickMime(){
+ if(!window.MediaRecorder) return null;
+ return ["video/webm;codecs=vp9","video/webm;codecs=vp8","video/webm"]
+  .find(t=>MediaRecorder.isTypeSupported(t))||null;
+}
+
+// Plays the timeline into the canvas. With record=true, returns a Blob.
+async function runTimeline(record,mimeType,onProgress){
+ const clips=timeline.map(c=>({...c}));
+ const n=clips.length;
+ const T=clips.map((c,i)=>transLen(i));
+ const fade=tlDuration();
+ const fadeIn=$("tlFadeIn").checked, fadeOut=$("tlFadeOut").checked;
+ const startG=[];
+ let acc=0;
+ clips.forEach((c,i)=>{ startG.push(acc); acc+=clipLen(c)-T[i]; });
+ const total=acc;
+
+ // Audio: both players go through their own gain (for crossfades) into
+ // a master gain (for fade in/out). Created now, while the tap counts as
+ // a user gesture, so Android Chrome allows sound.
+ const AC=window.AudioContext||window.webkitAudioContext;
+ const actx=AC?new AC():null;
+ const players=[0,1].map(()=>{
+  const v=document.createElement("video");
+  v.playsInline=true; v.preload="auto"; v.style.display="none";
+  document.body.append(v);
+  return v;
+ });
+ let gains=[null,null], master=null, dest=null;
+ if(actx){
+  master=actx.createGain();
+  gains=players.map(v=>{
+   const src=actx.createMediaElementSource(v);
+   const g=actx.createGain();
+   src.connect(g); g.connect(master);
+   return g;
+  });
+  if(record){ dest=actx.createMediaStreamDestination(); master.connect(dest); }
+  else master.connect(actx.destination);
+ }else{
+  players.forEach(v=>{ v.muted=!!record; });
+ }
+ const setGain=(k,val)=>{
+  if(gains[k]) gains[k].gain.value=val; else players[k].volume=Math.max(0,Math.min(1,val));
+ };
+
+ let recorder=null, cstream=null;
+ const chunks=[];
+ const onHidden=()=>{ if(document.hidden){ tlStopReason="hidden"; tlStop=true; } };
+ document.addEventListener("visibilitychange",onHidden);
+
+ try{
+  if(actx) await actx.resume().catch(()=>{});
+  await Promise.all(players.map(v=>{ const p=waitEvent(v,"loadeddata",20000); v.src=videoURL; return p; }));
+
+  let ci=0;            // index of the player showing the current clip
+  let i=0;             // current clip
+  await seekScan(players[0],clips[0].start);
+  if(n>1) await seekScan(players[1],clips[1].start);
+  setGain(0,1); setGain(1,0);
+
+  if(record){
+   cstream=canvas.captureStream(30);
+   const tracks=[...cstream.getVideoTracks()];
+   if(dest) tracks.push(...dest.stream.getAudioTracks());
+   recorder=new MediaRecorder(new MediaStream(tracks),{mimeType,videoBitsPerSecond:4000000});
+   recorder.ondataavailable=e=>{ if(e.data && e.data.size>0) chunks.push(e.data); };
+   recorder.start(1000);
+  }
+
+  await players[0].play();
+  let nextStarted=false;
+  let prep=Promise.resolve();
+
+  await new Promise((resolve,reject)=>{
+   let lastT=-1, lastMove=Date.now();
+   function frame(){
+    if(tlStop){ resolve(); return; }
+    const cur=players[ci], nxt=players[1-ci];
+    const c=clips[i];
+    const t=cur.currentTime;
+    const Ti=T[i];
+    const g=startG[i]+(t-c.start);
+
+    ctx.fillStyle="#000";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    if(i<n-1 && Ti>0 && t>=c.end-Ti){
+     if(!nextStarted){ nextStarted=true; nxt.play().catch(()=>{}); }
+     const p=Math.min(1,Math.max(0,(t-(c.end-Ti))/Ti));
+     drawTransition(c.trans,cur,nxt,p);
+     setGain(ci,1-p); setGain(1-ci,p);
+     drawOverlays(p<0.5?t:nxt.currentTime);
+    }else{
+     drawVideoLayer(cur);
+     drawOverlays(t);
+    }
+
+    // Fade in / fade out of the whole timeline (picture and sound).
+    let k=0;
+    if(fadeIn && g<fade) k=Math.max(k,1-g/fade);
+    if(fadeOut && total-g<fade) k=Math.max(k,1-(total-g)/fade);
+    if(k>0){
+     ctx.fillStyle="rgba(0,0,0,"+Math.min(1,k)+")";
+     ctx.fillRect(0,0,canvas.width,canvas.height);
+    }
+    if(master) master.gain.value=1-Math.min(1,k);
+
+    if(onProgress) onProgress(Math.min(g,total),total);
+
+    if(t!==lastT){ lastT=t; lastMove=Date.now(); }
+    else if(Date.now()-lastMove>15000){ reject(new Error("Video playback stalled.")); return; }
+
+    if(t>=c.end-0.005 || cur.ended){
+     if(i===n-1){ resolve(); return; }
+     if(!nextStarted) nxt.play().catch(()=>{});   // plain cut
+     cur.pause();
+     setGain(ci,0); setGain(1-ci,1);
+     ci=1-ci; i++; nextStarted=false;
+     // Get the now-free player ready for the clip after next.
+     if(i+1<n){ const idle=players[1-ci]; const st=clips[i+1].start; prep=prep.then(()=>seekScan(idle,st)).catch(()=>{}); }
+    }
+    requestAnimationFrame(frame);
+   }
+   requestAnimationFrame(frame);
+  });
+
+  if(tlStop && tlStopReason==="hidden") throw new Error("The screen was turned off or Chrome was left. Keep this tab open and try again.");
+
+  if(recorder){
+   const stopped=new Promise(r=>{ recorder.onstop=r; });
+   if(recorder.state!=="inactive") recorder.stop();
+   await stopped;
+   if(tlStop) return null;
+   const blob=new Blob(chunks,{type:mimeType});
+   if(!blob.size) throw new Error("Empty video export.");
+   return blob;
+  }
+  return null;
+ }finally{
+  document.removeEventListener("visibilitychange",onHidden);
+  if(recorder && recorder.state!=="inactive"){ try{ recorder.stop(); }catch(e){} }
+  if(cstream) cstream.getTracks().forEach(tr=>tr.stop());
+  players.forEach(v=>{ try{ v.pause(); v.removeAttribute("src"); v.load(); }catch(e){} v.remove(); });
+  if(actx) actx.close().catch(()=>{});
+ }
+}
+
+function timelineStart(){
+ busy=true; tlRunning=true; tlStop=false; tlStopReason="";
+ video.pause();
+ stopAnimation();
+ $("tlStop").hidden=false;
+ ["export","aiRun","sceneRun","play","pause"].forEach(id=>$(id).disabled=true);
+ renderTimeline();
+}
+
+function timelineEnd(){
+ busy=false; tlRunning=false;
+ $("tlStop").hidden=true;
+ const loaded=!!currentFile;
+ ["export","play","pause"].forEach(id=>$(id).disabled=!loaded);
+ $("aiRun").disabled=!loaded||aiBusy;
+ $("sceneRun").disabled=!loaded||sceneBusy;
+ renderTimeline();
+ draw();
+}
+
+$("tlPlay").addEventListener("click",async()=>{
+ if(busy||aiBusy||sceneBusy||!timeline.length) return;
+ timelineStart();
+ tlStatus("Playing timeline…");
+ try{
+  await runTimeline(false,null,(g,total)=>tlStatus("Playing timeline… "+g.toFixed(1)+" / "+total.toFixed(1)+" s"));
+  tlStatus(tlStop?"Stopped.":"Preview finished.");
+ }catch(err){
+  tlStatus("Preview failed: "+err.message);
+ }finally{
+  timelineEnd();
+ }
+});
+
+$("tlStop").addEventListener("click",()=>{ tlStop=true; });
+
+async function exportTimeline(){
+ const mimeType=pickMime();
+ if(!mimeType || !canvas.captureStream){
+  alert("Your browser does not support video export.");
+  return;
+ }
+ timelineStart();
+ $("status").textContent="Exporting timeline…";
+ $("result").replaceChildren();
+ try{
+  await ensureCaptionFont();
+  updatePreview();
+  const blob=await runTimeline(true,mimeType,(g,total)=>{
+   $("status").textContent="Recording timeline… "+g.toFixed(1)+" / "+total.toFixed(1)+" s";
+  });
+  if(!blob){ $("status").textContent="Export stopped."; return; }
+  if(exportURL) URL.revokeObjectURL(exportURL);
+  exportURL=URL.createObjectURL(blob);
+  const link=document.createElement("a");
+  link.href=exportURL;
+  link.download="edited-video.webm";
+  link.textContent="DOWNLOAD YOUR VIDEO";
+  $("result").replaceChildren(link);
+  $("status").textContent="Export completed! File size: "+(blob.size/1024/1024).toFixed(2)+" MB";
+ }catch(err){
+  $("status").textContent="Export error: "+err.message;
+ }finally{
+  timelineEnd();
+ }
+}
+
+$("tlAddRange").addEventListener("click",()=>{
+ addClip(Number($("start").value),Number($("end").value),null);
+});
+
+$("tlAddScenes").addEventListener("click",()=>{
+ if(!scenes.length) return;
+ if(timeline.length && !confirm("Add all "+scenes.length+" scenes to the end of the timeline?")) return;
+ scenes.forEach(s=>{
+  if(s.end-s.start>=0.2) timeline.push({start:s.start,end:s.end,thumb:s.thumb,trans:$("tlType").value});
+ });
+ renderTimeline();
+ tlStatus(scenes.length+" scenes added.");
+});
+
+$("tlClear").addEventListener("click",()=>{
+ if(!timeline.length || !confirm("Remove all clips from the timeline?")) return;
+ timeline=[];
+ renderTimeline();
+ tlStatus("");
+});
+
+$("tlDur").addEventListener("input",()=>{
+ $("tlDurVal").textContent=Number($("tlDur").value).toFixed(1);
+ renderTimeline();
+});
 
 window.addEventListener("beforeunload",()=>{
  if(videoURL)URL.revokeObjectURL(videoURL);
