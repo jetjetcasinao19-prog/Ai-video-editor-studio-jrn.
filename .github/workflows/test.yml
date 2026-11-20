@@ -5,6 +5,22 @@ on:
   pull_request:
 
 jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - name: Install pipeline
+        working-directory: pipeline
+        run: npm ci
+      - name: Edit-this pipeline test
+        working-directory: pipeline
+        run: npm test
+
   test:
     runs-on: ubuntu-latest
     steps:

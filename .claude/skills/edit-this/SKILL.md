@@ -1,0 +1,89 @@
+---
+name: edit-this
+description: The owner's one-command video workflow. Use when the owner says "edit this", "edit this video", "make this a reel/short", or sends a video and asks for it to be edited, captioned, made into content or scheduled. Runs the FFmpeg + Groq + HyperFrames pipeline, writes the post copy and adds it to the posting schedule.
+---
+
+# "Edit this" — from raw video to a scheduled post
+
+You are the owner's whole production team. When they say **"edit this"**, do
+every step below without asking questions you can answer yourself. Ask only
+for things that are truly theirs to decide (see step 7). Follow CLAUDE.md
+(honesty: never say something worked unless you checked it).
+
+## 1. Find the video
+In this order:
+1. A video file the owner attached or named in this conversation.
+2. A video link they gave: download it with `curl -L -o inbox/<name>.mp4 <url>`
+   only if it is their own video or they say they have the right to use it.
+3. The newest video in `inbox/`.
+
+If there is no video, say so in one line and offer two choices:
+upload one (attach it or put it in `inbox/`), or "make content from a topic"
+(then use the researcher → scriptwriter agents to write a script and a shot
+list they can film, and stop there — this workflow edits real footage).
+
+## 2. Make sure the tools are installed
+```bash
+command -v ffmpeg && node -v          # needs ffmpeg and Node 22+
+[ -d pipeline/node_modules ] || (cd pipeline && npm ci)
+```
+
+## 3. Choose the options (defaults in brackets)
+Read the owner's request: platform → format, any length or style wishes.
+- Format: Reels / TikTok / Shorts / Stories → `9:16` [default];
+  YouTube → `16:9`; feed post → `1:1`.
+- Captions: `creator` [default, word highlight], `box`, `classic`, `none`.
+- `--max-length 60` for Shorts/Reels unless they asked otherwise; TikTok up to
+  `--max-length 90`; YouTube: no limit.
+- Language: `--language tl` for Tagalog/Filipino, `en` for English; leave it
+  out if unsure (auto-detect).
+- Music: only if they gave a file or asked for music and one exists in
+  `inbox/` (`--music inbox/song.mp3`). Only use music they have the right to use.
+
+## 4. First pass (no intro yet)
+```bash
+node pipeline/edit.mjs "<video>" --out output/<slug> --format 9:16 --max-length 60
+```
+Transcription uses Groq (`whisper-large-v3-turbo`) when its key works and
+falls back to local Whisper automatically; the report says which one ran.
+
+## 5. Write the content (you, using the transcript)
+Read `output/<slug>/report.md` (transcript, what was cut). Then, as the
+`publisher` agent describes:
+- A short, specific hook title (max ~40 characters for the intro card).
+- Per platform: title, description (2–3 lines, a call to action), 3–8 hashtags.
+- Fix obvious transcription mistakes in `output/<slug>/captions.srt` if the
+  owner will upload captions separately.
+
+## 6. Final pass with the HyperFrames intro card
+```bash
+node pipeline/edit.mjs "<video>" --out output/<slug> --format 9:16 --max-length 60 \
+  --title "<hook title>" --subtitle "<optional second line>"
+```
+Then **check the result yourself** before showing it:
+```bash
+ffmpeg -loglevel error -y -i output/<slug>/final.mp4 \
+  -vf "fps=1/2,scale=216:-1,tile=6x2:padding=4" -frames:v 1 output/<slug>/contact.png
+```
+Look at `contact.png` and `thumbnail.jpg` with the Read tool: intro readable,
+captions readable and not covering faces, picture framed well. If something
+is wrong, change the options and render again. Say what you checked.
+
+## 7. Save the post and schedule it
+- Write `content/posts/<YYYY-MM-DD>-<slug>.md` with: the video name, the
+  transcript summary, and the per-platform title/description/hashtags.
+- Add a row to `content/schedule.md` with status `planned` and a suggested
+  date/time (say it is general guidance, not from their analytics).
+- **Posting to social media is the owner's decision.** Never post or
+  schedule on a platform without their explicit "yes" in this conversation.
+  If they say yes and a connected tool can publish (for example the OpusClip
+  connector with their social accounts), use it and report exactly what was
+  scheduled where. If no such tool is connected, tell them the files are ready
+  to upload by hand and mark the row `ready`.
+
+## 8. Deliver
+- Send `output/<slug>/final.mp4`, `thumbnail.jpg` and the post file to the
+  owner with SendUserFile (videos are not committed to Git; `output/` is ignored).
+- Commit `content/posts/…` and `content/schedule.md` and push to the working branch.
+- Finish with a short summary: what was cut (seconds), which transcriber ran,
+  the hook title, where the post is planned, and anything not done.

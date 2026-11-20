@@ -39,6 +39,14 @@ These rules apply to every Claude session and every team agent in `.claude/agent
 - [x] MP4 export (H.264 + AAC/Opus via MediaRecorder, WebM fallback; tests/mp4-export.test.js)
 - [x] Project management (save/open in IndexedDB, optional kept media, autosave, backup file; tests/projects.test.js)
 
+## "Edit this" workflow (server side)
+When the owner says "edit this", use the `edit-this` skill
+(`.claude/skills/edit-this/SKILL.md`). It runs `pipeline/edit.mjs` (FFmpeg +
+Groq Whisper or local Whisper + HyperFrames intro), writes post copy to
+`content/posts/` and adds a row to `content/schedule.md`. Test it with
+`cd pipeline && npm test`. Never post to social media without the owner's
+explicit yes in the conversation. Guide: `docs/AI-WORKFLOW.md`.
+
 ## Team
 Agents live in `.claude/agents/`. In Claude Code, ask for one by name, for
 example: "use the planner agent to plan subtitle styling".
