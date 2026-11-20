@@ -21,6 +21,8 @@
 //   --music auto         use the first song in brand/music/
 //   --brand FILE / --no-brand   brand kit (default: brand/brand.json): colours,
 //                        caption style, logo watermark, outro card with @handle
+//   --fix "wrong=right"  correct caption words before they are burned in
+//                        (repeatable; several words allowed on each side)
 //   --title "TEXT"       render an animated HyperFrames intro card with this title
 //   --subtitle "TEXT"    second line on the intro card
 //   --json               print the report as JSON at the end
@@ -56,6 +58,11 @@ function parseArgs(argv) {
     else if (a === '--brand') o.brand = next();
     else if (a === '--no-brand') o.brand = null;
     else if (a === '--words') o.wordsFile = next(); // ready-made word timings (used by the brand preview)
+    else if (a === '--fix') {
+      const f = next() || '', i = f.indexOf('=');
+      if (i < 1) throw new Error('--fix needs the form "wrong words=right words"');
+      (o.fixes = o.fixes || []).push([f.slice(0, i).trim(), f.slice(i + 1).trim()]);
+    }
     else if (a === '--subtitle') o.subtitle = next();
     else if (a === '--json') o.json = true;
     else if (a.startsWith('--')) throw new Error('Unknown option ' + a);
@@ -138,6 +145,28 @@ async function transcribeLocal(audioWav, language) {
   }
   await asr.dispose?.();
   return { engine: 'local whisper-base', language: language || 'auto', text: out.text || '', words };
+}
+
+// ---------- corrections ----------
+// Replace a run of words (matched without case or punctuation) by new words;
+// the new words share the time span of the words they replace.
+export function applyFixes(words, fixes = []) {
+  const norm = w => w.toLowerCase().replace(/[^\p{L}\p{N}']/gu, '');
+  let out = words.slice(), count = 0;
+  for (const [from, to] of fixes) {
+    const pat = from.split(/\s+/).map(norm).filter(Boolean), repl = to.split(/\s+/).filter(Boolean);
+    if (!pat.length) continue;
+    const next = [];
+    for (let i = 0; i < out.length; i++) {
+      if (pat.every((p, k) => out[i + k] && norm(out[i + k].w) === p)) {
+        const a = out[i].start, b = out[i + pat.length - 1].end, d = (b - a) / Math.max(1, repl.length);
+        repl.forEach((w, k) => next.push({ w, start: r2(a + k * d), end: r2(a + (k + 1) * d) }));
+        i += pat.length - 1; count++;
+      } else next.push(out[i]);
+    }
+    out = next;
+  }
+  return { words: out, count };
 }
 
 // ---------- 3. pauses → parts to keep ----------
@@ -346,6 +375,13 @@ export async function editVideo(opts) {
     step('transcribe', { engine: transcript.engine, language: transcript.language, words: words.length });
   } else {
     step('transcribe', { engine: 'none', reason: 'video has no sound' });
+  }
+
+  if (opts.fixes && opts.fixes.length) {
+    const r = applyFixes(words, opts.fixes);
+    words = r.words;
+    transcript.text = words.map(w => w.w).join(' ');
+    step('fix', { corrections: r.count, rules: opts.fixes.map(f => f.join(' → ')) });
   }
 
   // 4. pauses → parts to keep

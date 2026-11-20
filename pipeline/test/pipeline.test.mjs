@@ -6,7 +6,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { keepSegments, mapTime, limitLength, groupLines, buildSrt, probe } from '../edit.mjs';
+import { keepSegments, mapTime, limitLength, groupLines, buildSrt, probe, applyFixes } from '../edit.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const EDIT = path.join(HERE, '..', 'edit.mjs');
@@ -29,6 +29,11 @@ check('mapTime: a cut moment moves to the next part (no lost words)', near(mapTi
 check('limitLength: trims to the maximum', JSON.stringify(limitLength([[0, 5], [6, 10]], 7)) === '[[0,5],[6,8]]');
 const lines = groupLines('one two three four five six seven eight nine ten. eleven'.split(' ').map((w, i) => ({ w, start: i * 0.3, end: i * 0.3 + 0.25 })), 18);
 check('groupLines: short lines, break after a full stop', lines.every(l => l.map(x => x.w).join(' ').length <= 18) && lines.some(l => l[l.length - 1].w === 'ten.'), lines.map(l => l.map(x => x.w).join(' ')).join(' | '));
+const fx = applyFixes(['a', 'concept', 'called', 'the', 'zygarnic', 'effect.', 'You', 'want', 'complete', 'taking', 'tiny'].map((w, i) => ({ w, start: i, end: i + 0.9 })),
+  [['zygarnic', 'Zeigarnik'], ['complete taking', 'completion. Taking']]);
+check('applyFixes: corrects single and multi-word mistakes, keeps timing', fx.count === 2 &&
+  fx.words.map(w => w.w).join(' ') === 'a concept called the Zeigarnik effect. You want completion. Taking tiny' &&
+  fx.words[4].start === 4 && fx.words[8].start === 8 && fx.words[9].end === 9.9, fx.words.map(w => w.w).join(' '));
 check('buildSrt: valid timestamps', /00:00:00,000 --> 00:00:0\d,\d{3}/.test(buildSrt([{ w: 'Hi', start: 0, end: 0.5 }])));
 
 // ---------- test media ----------

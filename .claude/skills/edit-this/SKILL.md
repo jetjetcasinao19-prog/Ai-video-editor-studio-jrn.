@@ -60,13 +60,17 @@ Read `output/<slug>/report.md` (transcript, what was cut). Then, as the
 `publisher` agent describes:
 - A short, specific hook title (max ~40 characters for the intro card).
 - Per platform: title, description (2–3 lines, a call to action), 3–8 hashtags.
-- Fix obvious transcription mistakes in `output/<slug>/captions.srt` if the
-  owner will upload captions separately.
+- Check the transcript for mistakes (names, terms like "Zeigarnik"). If unsure,
+  cross-check a phrase with a bigger Whisper model. Fix them for the burned-in
+  captions with `--fix "wrong words=right words"` (repeatable) in the final pass.
+- Decide whether an intro card helps: skip it when the video already opens with
+  a strong spoken hook (an intro delays the hook); keep the total under 60 s for
+  Shorts/Reels.
 
 ## 7. Final pass with the HyperFrames intro card (and brand outro)
 ```bash
 node pipeline/edit.mjs "<video>" --out output/<slug> --format 9:16 --max-length 60 \
-  --title "<hook title>" --subtitle "<optional second line>"
+  --title "<hook title>" --subtitle "<optional second line>" --fix "wrong=right"
 ```
 Then **check the result yourself** before showing it:
 ```bash
