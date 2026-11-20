@@ -13,6 +13,7 @@ export const DEFAULT_BRAND = {
   watermark: { enabled: true, position: 'top-right', size: 0.14, opacity: 0.85 },
   logo: 'logo.png',
   music: { volume: 0.2 },
+  effects: { zoom: 'none', sfx: false, progressBar: false },
   hashtags: []
 };
 const HEX = /^#[0-9a-fA-F]{6}$/;
@@ -61,6 +62,14 @@ export function loadBrand(file) {
   if (typeof raw.logo === 'string' && raw.logo) b.logo = raw.logo;
   const vol = Number(raw.music && raw.music.volume);
   if (Number.isFinite(vol)) b.music.volume = Math.min(1, Math.max(0, vol));
+  if (raw.effects) {
+    if (raw.effects.zoom !== undefined) {
+      if (!['punch', 'slow', 'none'].includes(raw.effects.zoom)) throw new Error('brand.json effects.zoom must be punch, slow or none.');
+      b.effects.zoom = raw.effects.zoom;
+    }
+    if (raw.effects.sfx !== undefined) b.effects.sfx = raw.effects.sfx === true;
+    if (raw.effects.progressBar !== undefined) b.effects.progressBar = raw.effects.progressBar === true;
+  }
   if (Array.isArray(raw.hashtags)) b.hashtags = raw.hashtags.filter(h => typeof h === 'string').map(h => h.startsWith('#') ? h : '#' + h).slice(0, 15);
   return b;
 }

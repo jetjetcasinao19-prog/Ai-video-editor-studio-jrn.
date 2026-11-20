@@ -22,6 +22,18 @@ Claude asks you before it posts or schedules anything on a social platform.
 That only happens if you say yes and a publishing tool is connected (for
 example OpusClip with your social accounts); otherwise you upload by hand.
 
+## Effects
+Claude plans these from the transcript for every video:
+- **Zoom**: punch-in zooms at cuts and sentences (talking/live footage) or a
+  slow push-in (animation, slides).
+- **B-roll**: short clips over the video where they match what is said — your
+  own clips (put them in `inbox/broll/`) or free Pexels stock video (needs a
+  free Pexels API key).
+- **Text pop-ups**: key words and numbers pop in at the top in your gold.
+- **Sound effects**: whoosh and pop, made by the pipeline (no licence needed).
+- **Progress bar**: thin gold bar at the top.
+Say "no zoom", "no B-roll", "no sound effects" etc. to leave any of them out.
+
 ## Your brand
 Every video uses the brand kit in `brand/` (see `brand/README.md`): your
 colours, caption style, a logo watermark and an outro card with your @handle.

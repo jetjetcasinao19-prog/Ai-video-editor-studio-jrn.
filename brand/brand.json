@@ -9,11 +9,34 @@
     "captionText": "#ffffff",
     "captionHighlight": "#f5c400"
   },
-  "captions": { "style": "creator" },
-  "intro": { "enabled": true },
-  "outro": { "enabled": true, "text": "Subscribe for more origin stories", "seconds": 2.5 },
-  "watermark": { "enabled": true, "position": "top-right", "size": 0.14, "opacity": 0.9 },
+  "captions": {
+    "style": "creator"
+  },
+  "intro": {
+    "enabled": true
+  },
+  "outro": {
+    "enabled": true,
+    "text": "Subscribe for more origin stories",
+    "seconds": 2.5
+  },
+  "watermark": {
+    "enabled": true,
+    "position": "top-right",
+    "size": 0.14,
+    "opacity": 0.9
+  },
+  "effects": {
+    "zoom": "punch",
+    "sfx": true,
+    "progressBar": true
+  },
   "logo": "logo.png",
-  "music": { "volume": 0.2 },
-  "hashtags": ["#HowItStarted", "#EveryLegendHasABeginning"]
+  "music": {
+    "volume": 0.2
+  },
+  "hashtags": [
+    "#HowItStarted",
+    "#EveryLegendHasABeginning"
+  ]
 }

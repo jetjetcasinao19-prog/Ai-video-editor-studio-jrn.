@@ -7,6 +7,8 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { keepSegments, mapTime, limitLength, groupLines, buildSrt, probe, applyFixes } from '../edit.mjs';
+import { zoomPlan, zoomExpr, zoomMoments, pexelsClip } from '../effects.mjs';
+import http from 'node:http';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const EDIT = path.join(HERE, '..', 'edit.mjs');
@@ -34,6 +36,12 @@ const fx = applyFixes(['a', 'concept', 'called', 'the', 'zygarnic', 'effect.', '
 check('applyFixes: corrects single and multi-word mistakes, keeps timing', fx.count === 2 &&
   fx.words.map(w => w.w).join(' ') === 'a concept called the Zeigarnik effect. You want completion. Taking tiny' &&
   fx.words[4].start === 4 && fx.words[8].start === 8 && fx.words[9].end === 9.9, fx.words.map(w => w.w).join(' '));
+const zk = zoomPlan('punch', [5.2, 11], 20, [{ w: 'Hi.', end: 2 }, { w: 'yes.', end: 7.5 }, { w: 'ok.', end: 15.8 }]);
+check('zoomPlan punch: zooms at cuts and sentence ends ≥ 4 s apart', JSON.stringify(zoomMoments(zk)) === '[5.2,7.5,11,15.8]', JSON.stringify(zoomMoments(zk)));
+const zf = t => Function('t', 'const lt=(a,b)=>a<b?1:0,pow=Math.pow; const iff=(c,a,b)=>c?a:b; return ' + zoomExpr(zk).replace(/if\(/g, 'iff('))(t);
+check('zoomExpr: 1.0 before, smooth move, 1.15 after', zf(5) === 1 && zf(5.325) > 1.05 && zf(5.325) < 1.1 && Math.abs(zf(6) - 1.15) < 1e-9 && zf(8) === 1, [zf(5), zf(5.325).toFixed(3), zf(6), zf(8)].join(', '));
+check('zoomPlan slow: push-in per part', JSON.stringify(zoomPlan('slow', [5], 10).map(k => k.z)) === '[1,1.08,1,1.08]');
+check('zoomPlan none: no zoom', zoomPlan('none', [5], 10).length === 0);
 check('buildSrt: valid timestamps', /00:00:00,000 --> 00:00:0\d,\d{3}/.test(buildSrt([{ w: 'Hi', start: 0, end: 0.5 }])));
 
 // ---------- test media ----------
@@ -160,6 +168,79 @@ try {
   const broken = spawnSync(process.execPath, [EDIT, VIDEO, '--brand', path.join(bdir, 'broken.json')], { encoding: 'utf8' });
   check('a broken brand.json gives a clear message', broken.status === 1 && /not valid JSON/.test(broken.stderr), broken.stderr.trim().slice(0, 90));
 } catch (e) { check('brand kit run', false, e.message); }
+
+// ---------- effects: zoom, B-roll, pop-ups, sound effects, progress bar ----------
+try {
+  const fx = path.join(tmp, 'fx'); fs.mkdirSync(fx, { recursive: true });
+  ff(['-f', 'lavfi', '-i', 'color=c=red:s=720x1280:d=4', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', path.join(fx, 'red.mp4')]);
+  ff(['-f', 'lavfi', '-i', 'color=c=0x00aa44:s=1200x800', '-frames:v', '1', path.join(fx, 'green.png')]);
+  const words = path.join(fx, 'words.json');
+  fs.writeFileSync(words, JSON.stringify({ words: 'Welcome back to my channel. Today I will show you three easy tips. First cut the long pauses. Second add big captions. Third keep it short.'
+    .split(' ').map((w, k) => ({ w, start: 1.6 + k * 0.42, end: 1.95 + k * 0.42 })) }));
+  const planFile = path.join(fx, 'plan.json');
+  fs.writeFileSync(planFile, JSON.stringify({ broll: [{ at: 2, duration: 2, file: path.join(fx, 'red.mp4') }, { at: 6, duration: 2, file: path.join(fx, 'green.png') },
+    { at: 9, duration: 1, file: path.join(fx, 'missing.mp4') }], popups: [{ at: 4.3, text: '3 tips' }, { at: 8.6, text: 'keep it short' }] }));
+  const rep = edit([VIDEO, '--no-brand', '--out', path.join(tmp, 'fxout'), '--words', words, '--zoom', 'punch', '--plan', planFile, '--sfx', '--progress-bar']);
+  const plain = edit([VIDEO, '--no-brand', '--out', path.join(tmp, 'fxplain'), '--words', words]);
+  const fin = path.join(tmp, 'fxout', 'final.mp4'), ref = path.join(tmp, 'fxplain', 'final.mp4');
+  const step = n => rep.steps.find(s => s.step === n);
+  check('effects run: B-roll, pop-ups, zoom, sound effects, progress bar', step('broll').clips.length === 2 && step('popups').count === 2 &&
+    step('zoom').changes >= 1 && step('sfx').whoosh >= 2 && step('sfx').pop === 2 && step('render').progressBar === true, JSON.stringify(step('render')));
+  check('missing B-roll file is skipped with a note (no crash)', rep.steps.some(s => s.step === 'broll-skip' && /missing\.mp4/.test(s.reason)));
+  const px = (f, t, crop) => pixels(f, t, crop);
+  const red = p => p[0] > 200 && p[1] < 60 && p[2] < 60, green = p => p[1] > 140 && p[0] < 60 && p[2] < 110;
+  check('video B-roll covers the frame at its time', px(fin, 3, 'iw:ih*0.4:0:0').filter(red).length > 2000 && px(fin, 1, 'iw:ih*0.4:0:0').filter(red).length < 300,
+    px(fin, 3, 'iw:ih*0.4:0:0').filter(red).length + ' vs ' + px(fin, 1, 'iw:ih*0.4:0:0').filter(red).length);
+  check('image B-roll covers the frame at its time', px(fin, 7, 'iw:ih*0.4:0:0').filter(green).length > 1500, px(fin, 7, 'iw:ih*0.4:0:0').filter(green).length);
+  const gold = p => p[0] > 200 && p[1] > 170 && p[2] < 80;
+  const diff = (a, b) => a.reduce((n, p, i) => n + Math.abs(p[0] - b[i][0]) + Math.abs(p[1] - b[i][1]) + Math.abs(p[2] - b[i][2]), 0) / a.length;
+  // Compared with the same video rendered without effects (only the pop-up differs there at 4.8 s).
+  const popAt = diff(px(fin, 4.8, 'iw:ih*0.1:0:ih*0.11'), px(ref, 4.8, 'iw:ih*0.1:0:ih*0.11')), popOff = diff(px(fin, 1, 'iw:ih*0.1:0:ih*0.11'), px(ref, 1, 'iw:ih*0.1:0:ih*0.11'));
+  check('text pop-up appears near the top (below the watermark)', popAt > 15 && popOff < 3, popAt.toFixed(1) + ' vs ' + popOff.toFixed(1));
+  const cutT = rep.steps.find(s => s.step === 'cut') && 5.6;
+  const before = diff(px(fin, 1, 'iw:ih*0.5:0:ih*0.25'), px(ref, 1, 'iw:ih*0.5:0:ih*0.25'));
+  const after = diff(px(fin, 9.5, 'iw:ih*0.3:0:ih*0.35'), px(ref, 9.5, 'iw:ih*0.3:0:ih*0.35'));
+  check('zoom: same picture before the first zoom, zoomed later', before < 12 && after > 20, before.toFixed(1) + ' / ' + after.toFixed(1));
+  void cutT;
+  // Progress bar measured on a plain black video (gold on black is unmistakable).
+  const black = path.join(fx, 'black.mp4');
+  ff(['-f', 'lavfi', '-i', 'color=c=black:s=1080x1920:r=30:d=10', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', black]);
+  edit([black, '--no-brand', '--out', path.join(tmp, 'barout'), '--captions', 'none', '--progress-bar']);
+  const bar = t => { const raw = ff(['-ss', String(t), '-i', path.join(tmp, 'barout', 'final.mp4'), '-frames:v', '1', '-vf', 'crop=iw:4:0:2,scale=100:1', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-']);
+    let c = 0; for (let i = 0; i < raw.length; i += 3) if (raw[i] > 180 && raw[i + 1] > 150 && raw[i + 2] < 90) c++; return c; };
+  const b1 = bar(2.5), b2 = bar(7.5);
+  check('progress bar grows with the video (≈25% at 2.5 s, ≈75% at 7.5 s of 10 s)', Math.abs(b1 - 25) <= 6 && Math.abs(b2 - 75) <= 6, b1 + '% → ' + b2 + '%');
+  const hiss = f => { const raw = ff(['-i', f, '-vn', '-af', 'highpass=f=2500,pan=mono|c0=c0', '-ar', '16000', '-f', 'f32le', '-']);
+    const pcm = new Float32Array(raw.buffer, raw.byteOffset, raw.length / 4); let s2 = 0; const a = Math.floor(1.7 * 16000), b = Math.floor(2.3 * 16000);
+    for (let i = a; i < b; i++) s2 += pcm[i] * pcm[i]; return Math.sqrt(s2 / (b - a)); };
+  check('whoosh sound effect at the B-roll start (clearly audible)', hiss(fin) > hiss(ref) * 1.5 + 0.001, hiss(fin).toFixed(4) + ' vs ' + hiss(ref).toFixed(4));
+  const bad = spawnSync(process.execPath, [EDIT, VIDEO, '--zoom', 'spin'], { encoding: 'utf8' });
+  check('a wrong --zoom value gives a clear message', bad.status === 1 && /--zoom must be punch, slow or none/.test(bad.stderr));
+} catch (e) { check('effects run', false, e.message); }
+
+// Pexels stock B-roll, tested against a local stand-in for the Pexels API.
+try {
+  const clip = path.join(tmp, 'stock.mp4');
+  ff(['-f', 'lavfi', '-i', 'color=c=blue:s=360x640:d=3', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', clip]);
+  let seenAuth = '', seenQuery = '';
+  const server = http.createServer((req, res) => {
+    if (req.url.startsWith('/videos/search')) {
+      seenAuth = req.headers.authorization || ''; seenQuery = new URL(req.url, 'http://x').searchParams.get('query');
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ videos: [{ id: 42, duration: 8, url: 'https://www.pexels.com/video/42/', user: { name: 'Test Maker' },
+        video_files: [{ file_type: 'video/mp4', width: 360, height: 640, link: `http://127.0.0.1:${server.address().port}/file.mp4` }] }] }));
+    } else if (req.url === '/file.mp4') { res.writeHead(200); res.end(fs.readFileSync(clip)); }
+    else { res.writeHead(404); res.end(); }
+  });
+  await new Promise(r => server.listen(0, '127.0.0.1', r));
+  process.env.PEXELS_API_BASE = `http://127.0.0.1:${server.address().port}`;
+  process.env.PEXELS_API_KEY = 'test-key';
+  const got = await pexelsClip('old brain', 'portrait', path.join(tmp, 'pexels'));
+  check('Pexels: searches the keyword, sends the key, downloads the clip, keeps the credit', seenQuery === 'old brain' && seenAuth === 'test-key' &&
+    fs.statSync(got.file).size > 1000 && got.credit === 'Test Maker on Pexels', JSON.stringify({ seenQuery, credit: got.credit }));
+  server.close();
+  delete process.env.PEXELS_API_BASE; delete process.env.PEXELS_API_KEY;
+} catch (e) { check('Pexels stand-in', false, e.message); }
 
 // ---------- other options ----------
 try {

@@ -42,7 +42,8 @@ These rules apply to every Claude session and every team agent in `.claude/agent
 ## "Edit this" workflow (server side)
 When the owner says "edit this", use the `edit-this` skill
 (`.claude/skills/edit-this/SKILL.md`). It runs `pipeline/edit.mjs` (FFmpeg +
-Groq Whisper or local Whisper + HyperFrames intro), writes post copy to
+Groq Whisper or local Whisper + HyperFrames intro; effects: zoom, B-roll from
+files or Pexels, text pop-ups, sound effects, progress bar), writes post copy to
 `content/posts/` and adds a row to `content/schedule.md`. Test it with
 `cd pipeline && npm test`. Never post to social media without the owner's
 explicit yes in the conversation. Guide: `docs/AI-WORKFLOW.md`.
