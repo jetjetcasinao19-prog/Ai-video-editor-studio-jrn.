@@ -12,6 +12,7 @@ the owner can follow step by step on their phone in index.html:
 - Start/End trim times
 - Title text, position and colour
 - Captions (point to the SRT from the script)
-For features not built yet (transitions, music, scene detection, etc.) list them
+- Timeline clips in order and the transition between each pair
+For features not built yet (music, scene detection, etc.) list them
 under "Needs a tool outside the app for now" — never pretend the app does them.
 Append the plan to the script file in content/scripts/.

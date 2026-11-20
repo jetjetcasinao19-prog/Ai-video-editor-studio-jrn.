@@ -18,6 +18,8 @@ jobs:
         run: npm install --no-save playwright@1.48.2 && npx playwright install --with-deps chromium
       - name: Editor tests
         run: node tests/editor.test.js
+      - name: Transitions test
+        run: node tests/transitions.test.js
       - name: Scene detection test
         run: node tests/scene-detection.test.js
       - name: Subtitle styling test
