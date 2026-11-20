@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,6 +41,21 @@ video{display:none}
 .note{color:#9ba8bb;font-size:12px;line-height:1.6}
 #status{color:#91b7ff;font-size:13px;margin-top:12px}
 a{color:#9ab1ff;word-break:break-all}
+.check{display:flex;align-items:center;gap:10px;margin-top:12px}
+.check input{width:auto;margin:0}
+.check label{margin:0}
+#capList{margin-top:12px;max-height:420px;overflow-y:auto}
+.cap{
+ border:1px solid #293449;border-radius:10px;
+ padding:8px 10px 10px;margin-bottom:10px;background:#101624
+}
+.cap .row{align-items:flex-end}
+.cap label{margin-top:0;font-size:11px}
+.cap input{margin-top:4px;padding:10px}
+.cap button{margin-top:4px;padding:10px 0}
+.cap .del{background:#5a2733}
+.cap .row>.btn{flex:0 0 52px}
+#capCount{margin-top:8px}
 </style>
 </head>
 
@@ -119,7 +133,37 @@ UPDATE PREVIEW
 </section>
 
 <section class="panel">
-<h3>04 — Export Video</h3>
+<h3>04 — Captions</h3>
+<p class="note">
+Captions are burned into the preview and the exported video.
+Times are in seconds of the original video.
+AI automatic transcription is not built yet; for now, add captions
+by hand or import an .srt / .vtt file.
+</p>
+
+<div class="check">
+<input id="showCaptions" type="checkbox" checked>
+<label for="showCaptions">Show captions</label>
+</div>
+
+<div class="row">
+<button id="addCap" class="secondary" disabled>+ ADD AT CURRENT TIME</button>
+</div>
+
+<label for="capFile">Import subtitles (.srt or .vtt)</label>
+<input id="capFile" type="file" accept=".srt,.vtt,text/vtt,application/x-subrip,text/plain">
+
+<div class="row">
+<button id="downloadSrt" class="secondary" disabled>DOWNLOAD .SRT</button>
+<button id="clearCaps" class="secondary" disabled>CLEAR ALL</button>
+</div>
+
+<p id="capCount" class="note">No captions yet.</p>
+<div id="capList"></div>
+</section>
+
+<section class="panel">
+<h3>05 — Export Video</h3>
 <p class="note">
 Export your edited clip as a WebM video.
 Keep the browser open during export.
@@ -200,7 +244,256 @@ function draw(){
   ctx.strokeText(title,w/2,y,w*0.88);
   ctx.fillText(title,w/2,y,w*0.88);
  }
+
+ drawCaption(w,h,title);
 }
+
+/* ---------- CAPTIONS ---------- */
+
+let captions=[]; // {start,end,text}, times in seconds of the source video
+
+function currentCaption(t){
+ for(let i=0;i<captions.length;i++){
+  const c=captions[i];
+  if(t>=c.start && t<c.end && c.text.trim()) return c;
+ }
+ return null;
+}
+
+function wrapLines(text,maxWidth,maxLines){
+ const out=[];
+ text.split("\n").forEach(para=>{
+  const words=para.trim().split(/\s+/).filter(Boolean);
+  let line="";
+  words.forEach(word=>{
+   const test=line?line+" "+word:word;
+   if(line && ctx.measureText(test).width>maxWidth){
+    out.push(line);
+    line=word;
+   }else{
+    line=test;
+   }
+  });
+  if(line) out.push(line);
+ });
+ return out.slice(0,maxLines);
+}
+
+function drawCaption(w,h,title){
+ if(!$("showCaptions").checked) return;
+ const c=currentCaption(video.currentTime);
+ if(!c) return;
+
+ const fontSize=Math.max(20,Math.round(w*0.045));
+ const lineHeight=fontSize*1.25;
+ ctx.font="bold "+fontSize+"px Arial";
+ ctx.textAlign="center";
+ ctx.textBaseline="middle";
+
+ const maxWidth=w*0.86;
+ const lines=wrapLines(c.text,maxWidth,3);
+ if(!lines.length) return;
+
+ // Keep clear of the title when it sits at the bottom.
+ const bottom=(title && $("position").value==="bottom")?h*0.76:h*0.9;
+ const firstY=bottom-(lines.length-1)*lineHeight;
+
+ ctx.lineWidth=fontSize*0.14;
+ ctx.lineJoin="round";
+ ctx.strokeStyle="#000";
+ ctx.fillStyle="#fff";
+ lines.forEach((line,i)=>{
+  const y=firstY+i*lineHeight;
+  ctx.strokeText(line,w/2,y,maxWidth);
+  ctx.fillText(line,w/2,y,maxWidth);
+ });
+}
+
+function round1(n){return Math.round(n*10)/10}
+
+function sortCaptions(){
+ captions.sort((a,b)=>a.start-b.start);
+}
+
+function redrawIfPaused(){
+ if(video.paused) draw();
+}
+
+function renderCaptionList(){
+ const list=$("capList");
+ const frag=document.createDocumentFragment();
+
+ captions.forEach((c,index)=>{
+  const box=document.createElement("div");
+  box.className="cap";
+
+  const row=document.createElement("div");
+  row.className="row";
+
+  function timeField(name,key){
+   const wrap=document.createElement("div");
+   const lab=document.createElement("label");
+   lab.textContent=name;
+   const inp=document.createElement("input");
+   inp.type="number";inp.min="0";inp.step="0.1";
+   inp.inputMode="decimal";
+   inp.value=c[key];
+   inp.addEventListener("input",()=>{
+    const v=Number(inp.value);
+    if(Number.isFinite(v) && v>=0){
+     c[key]=v;
+     redrawIfPaused();
+    }
+   });
+   inp.addEventListener("change",()=>{
+    sortCaptions();
+    renderCaptionList();
+   });
+   wrap.append(lab,inp);
+   return wrap;
+  }
+
+  const go=document.createElement("button");
+  go.className="secondary btn";
+  go.textContent="GO";
+  go.title="Jump to this caption";
+  go.addEventListener("click",()=>{
+   video.pause();
+   video.currentTime=Math.min(c.start+0.01,video.duration||c.start);
+  });
+
+  const del=document.createElement("button");
+  del.className="del btn";
+  del.textContent="✕";
+  del.title="Delete caption";
+  del.addEventListener("click",()=>{
+   captions.splice(index,1);
+   renderCaptionList();
+   redrawIfPaused();
+  });
+
+  row.append(timeField("Start","start"),timeField("End","end"),go,del);
+
+  const text=document.createElement("input");
+  text.type="text";
+  text.maxLength=200;
+  text.placeholder="Caption text";
+  text.value=c.text;
+  text.addEventListener("input",()=>{
+   c.text=text.value;
+   redrawIfPaused();
+  });
+
+  box.append(row,text);
+  frag.append(box);
+ });
+
+ list.replaceChildren(frag);
+
+ const n=captions.length;
+ $("capCount").textContent=n?n+" caption"+(n===1?"":"s")+".":"No captions yet.";
+ $("downloadSrt").disabled=!n;
+ $("clearCaps").disabled=!n;
+}
+
+function parseTimestamp(s){
+ const parts=s.trim().replace(",",".").split(":").map(Number);
+ if(parts.some(p=>!Number.isFinite(p))) return NaN;
+ return parts.reduce((total,p)=>total*60+p,0);
+}
+
+function parseSubtitles(text){
+ const result=[];
+ const blocks=text.replace(/^﻿/,"").replace(/\r/g,"").split(/\n\s*\n/);
+ blocks.forEach(block=>{
+  const lines=block.split("\n");
+  const i=lines.findIndex(l=>l.includes("-->"));
+  if(i<0) return;
+  const m=lines[i].match(/([\d:.,]+)\s*-->\s*([\d:.,]+)/);
+  if(!m) return;
+  const start=parseTimestamp(m[1]);
+  const end=parseTimestamp(m[2]);
+  const body=lines.slice(i+1).join("\n")
+   .replace(/<[^>]*>/g,"").replace(/\{\\[^}]*\}/g,"").trim();
+  if(Number.isFinite(start) && Number.isFinite(end) && end>start && body){
+   result.push({start,end,text:body});
+  }
+ });
+ return result;
+}
+
+function srtTime(sec){
+ const ms=Math.max(0,Math.round(sec*1000));
+ const h=Math.floor(ms/3600000);
+ const m=Math.floor(ms%3600000/60000);
+ const s=Math.floor(ms%60000/1000);
+ const r=ms%1000;
+ const p=(n,l)=>String(n).padStart(l,"0");
+ return p(h,2)+":"+p(m,2)+":"+p(s,2)+","+p(r,3);
+}
+
+function buildSrt(){
+ return captions.map((c,i)=>
+  (i+1)+"\n"+srtTime(c.start)+" --> "+srtTime(c.end)+"\n"+c.text.trim()+"\n"
+ ).join("\n");
+}
+
+$("addCap").addEventListener("click",()=>{
+ const start=round1(video.currentTime||0);
+ const dur=Number.isFinite(video.duration)?video.duration:start+2;
+ const end=round1(Math.min(dur,start+2));
+ captions.push({start,end:end>start?end:start+2,text:""});
+ sortCaptions();
+ renderCaptionList();
+ const inputs=$("capList").querySelectorAll('input[type="text"]');
+ const idx=captions.findIndex(c=>c.start===start && c.text==="");
+ if(inputs[idx]) inputs[idx].focus();
+});
+
+$("capFile").addEventListener("change",async e=>{
+ const file=e.target.files[0];
+ if(!file) return;
+ try{
+  if(file.size>2*1024*1024) throw new Error("File is larger than 2 MB.");
+  const parsed=parseSubtitles(await file.text());
+  if(!parsed.length) throw new Error("No captions found in this file.");
+  if(captions.length && !confirm("Replace the current "+captions.length+" captions?")){
+   return;
+  }
+  captions=parsed;
+  sortCaptions();
+  renderCaptionList();
+  redrawIfPaused();
+  $("status").textContent="Imported "+parsed.length+" captions.";
+ }catch(err){
+  alert("Could not import subtitles: "+err.message);
+ }finally{
+  e.target.value="";
+ }
+});
+
+$("downloadSrt").addEventListener("click",()=>{
+ if(!captions.length) return;
+ const url=URL.createObjectURL(new Blob([buildSrt()],{type:"application/x-subrip"}));
+ const a=document.createElement("a");
+ a.href=url;
+ a.download="captions.srt";
+ document.body.append(a);
+ a.click();
+ a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),10000);
+});
+
+$("clearCaps").addEventListener("click",()=>{
+ if(!captions.length || !confirm("Delete all captions?")) return;
+ captions=[];
+ renderCaptionList();
+ redrawIfPaused();
+});
+
+$("showCaptions").addEventListener("change",redrawIfPaused);
+
+/* ---------- END CAPTIONS ---------- */
 
 function updatePreview(){
  dimensions();
@@ -215,6 +508,10 @@ function stopAnimation(){
 }
 
 function animate(){
+ // Stop preview playback at the End Time (export uses its own loop).
+ if(!busy && video.currentTime>=Number($("end").value)){
+  video.pause();
+ }
  draw();
  if(!video.paused && !video.ended){
   animationFrame=requestAnimationFrame(animate);
@@ -253,6 +550,7 @@ video.addEventListener("loadedmetadata",()=>{
  $("pause").disabled=false;
  $("preview").disabled=false;
  $("export").disabled=false;
+ $("addCap").disabled=false;
 
  updatePreview();
  $("status").textContent="Video ready.";
@@ -288,6 +586,9 @@ $("preview").addEventListener("click",updatePreview);
 ["ratio","fit","overlay","position","color"].forEach(id=>{
  $(id).addEventListener("change",updatePreview);
 });
+
+// Live title preview while typing (no canvas resize needed).
+$("overlay").addEventListener("input",redrawIfPaused);
 
 async function seek(time){
  return new Promise((resolve,reject)=>{
