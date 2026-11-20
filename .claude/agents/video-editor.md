@@ -13,6 +13,8 @@ the owner can follow step by step on their phone in index.html:
 - Title text, position and colour
 - Captions (point to the SRT from the script)
 - Timeline clips in order and the transition between each pair
-For features not built yet (music, scene detection, etc.) list them
+- Background music: volume, start offset, fades, ducking under speech
+For features not built yet (check the roadmap in CLAUDE.md, e.g. templates or
+MP4 export) list them
 under "Needs a tool outside the app for now" — never pretend the app does them.
 Append the plan to the script file in content/scripts/.

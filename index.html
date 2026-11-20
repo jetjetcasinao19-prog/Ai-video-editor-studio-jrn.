@@ -238,6 +238,52 @@ timeline; when it is empty, Export uses Start–End as before.
 </div>
 <p id="tlStatus" class="note"></p>
 </div>
+
+<div id="musicBox" class="ai">
+<h4>Background music</h4>
+<p class="note">
+Add a song or sound from your phone. It is mixed with the video's own sound
+in the preview (PLAY in section 02), the timeline and the export.
+Only use music you have the right to use.
+</p>
+<label for="musicFile">Music file (MP3, M4A, OGG, WAV…)</label>
+<input id="musicFile" type="file" accept="audio/*,.mp3,.m4a,.aac,.ogg,.opus,.wav">
+<p id="musicInfo" class="note">No music added.</p>
+
+<div id="musicControls" hidden>
+<label for="musicVol">Music volume: <span id="musicVolVal">40</span>%</label>
+<input id="musicVol" type="range" min="0" max="100" step="5" value="40">
+
+<label for="videoVol">Video's own sound: <span id="videoVolVal">100</span>%</label>
+<input id="videoVol" type="range" min="0" max="100" step="5" value="100">
+
+<label for="musicOffset">Start the music at (seconds into the song)</label>
+<input id="musicOffset" type="number" min="0" step="0.5" value="0" inputmode="decimal">
+
+<div class="check">
+<input id="musicLoop" type="checkbox" checked>
+<label for="musicLoop">Repeat the music if the video is longer</label>
+</div>
+
+<div class="row">
+<div><label for="musicFadeIn">Fade in: <span id="musicFadeInVal">1</span> s</label>
+<input id="musicFadeIn" type="range" min="0" max="5" step="0.5" value="1"></div>
+<div><label for="musicFadeOut">Fade out: <span id="musicFadeOutVal">2</span> s</label>
+<input id="musicFadeOut" type="range" min="0" max="5" step="0.5" value="2"></div>
+</div>
+
+<div class="check">
+<input id="musicDuck" type="checkbox" checked>
+<label for="musicDuck">Lower the music when people talk</label>
+</div>
+<label for="musicDuckLevel">Music level while talking: <span id="musicDuckLevelVal">30</span>%</label>
+<input id="musicDuckLevel" type="range" min="0" max="80" step="5" value="30">
+
+<div class="row">
+<button id="musicRemove" class="del">REMOVE MUSIC</button>
+</div>
+</div>
+</div>
 </section>
 
 <section class="panel">
@@ -1178,6 +1224,10 @@ function animate(){
   video.pause();
  }
  draw();
+ if(!busy){
+  const s0=Number($("start").value), e0=Number($("end").value);
+  if(!video.paused && !video.ended) musicTick(video.currentTime-s0,e0-s0);
+ }
  if(!video.paused && !video.ended){
   animationFrame=requestAnimationFrame(animate);
  }else{
@@ -1239,6 +1289,7 @@ $("play").addEventListener("click",async()=>{
   if(video.currentTime>=end){
    video.currentTime=Number($("start").value);
   }
+  resumeMixer();
   await video.play();
   stopAnimation();
   animate();
@@ -1254,6 +1305,7 @@ $("pause").addEventListener("click",()=>{
 
 video.addEventListener("seeked",draw);
 video.addEventListener("pause",()=>{
+ if(!busy) musicStop();
  stopAnimation();
  draw();
 });
@@ -1286,6 +1338,7 @@ async function seek(time){
 
 $("export").addEventListener("click",async()=>{
  if(busy||aiBusy||sceneBusy)return;
+ resumeMixer(); // during the tap, so Android allows sound
 
  // Timeline has clips: export the timeline with transitions instead.
  if(timeline.length){ exportTimeline(); return; }
@@ -1347,7 +1400,10 @@ $("export").addEventListener("click",async()=>{
   canvasStream=canvas.captureStream(30);
   tracks.push(...canvasStream.getVideoTracks());
 
-  if(typeof video.captureStream==="function"){
+  if(mixer && music.loaded){
+   resumeMixer();
+   tracks.push(...mixer.recDest.stream.getAudioTracks());
+  }else if(typeof video.captureStream==="function"){
    sourceStream=video.captureStream();
    tracks.push(...sourceStream.getAudioTracks());
   }else{
@@ -1384,6 +1440,7 @@ $("export").addEventListener("click",async()=>{
   await new Promise((resolve,reject)=>{
    function frame(){
     draw();
+    musicTick(video.currentTime-start,end-start);
 
     if(video.currentTime>=end || video.ended){
      video.pause();
@@ -1448,6 +1505,7 @@ $("export").addEventListener("click",async()=>{
   }
 
   video.pause();
+  musicStop();
   draw();
   busy=false;
   $("export").disabled=false;
@@ -1895,8 +1953,9 @@ async function runTimeline(record,mimeType,onProgress){
  // Audio: both players go through their own gain (for crossfades) into
  // a master gain (for fade in/out). Created now, while the tap counts as
  // a user gesture, so Android Chrome allows sound.
+ const useMixer=!!(mixer && music.loaded);
  const AC=window.AudioContext||window.webkitAudioContext;
- const actx=AC?new AC():null;
+ const actx=useMixer?mixer.ctx:(AC?new AC():null);
  const players=[0,1].map(()=>{
   const v=document.createElement("video");
   v.playsInline=true; v.preload="auto"; v.style.display="none";
@@ -1912,7 +1971,8 @@ async function runTimeline(record,mimeType,onProgress){
    src.connect(g); g.connect(master);
    return g;
   });
-  if(record){ dest=actx.createMediaStreamDestination(); master.connect(dest); }
+  if(useMixer){ master.connect(mixer.tlIn); dest=record?mixer.recDest:null; }
+  else if(record){ dest=actx.createMediaStreamDestination(); master.connect(dest); }
   else master.connect(actx.destination);
  }else{
   players.forEach(v=>{ v.muted=!!record; });
@@ -1982,6 +2042,7 @@ async function runTimeline(record,mimeType,onProgress){
      ctx.fillRect(0,0,canvas.width,canvas.height);
     }
     if(master) master.gain.value=1-Math.min(1,k);
+    musicTick(g,total,1-Math.min(1,k));
 
     if(onProgress) onProgress(Math.min(g,total),total);
 
@@ -2019,7 +2080,8 @@ async function runTimeline(record,mimeType,onProgress){
   if(recorder && recorder.state!=="inactive"){ try{ recorder.stop(); }catch(e){} }
   if(cstream) cstream.getTracks().forEach(tr=>tr.stop());
   players.forEach(v=>{ try{ v.pause(); v.removeAttribute("src"); v.load(); }catch(e){} v.remove(); });
-  if(actx) actx.close().catch(()=>{});
+  if(useMixer){ musicStop(); try{ master.disconnect(); }catch(e){} }
+  else if(actx) actx.close().catch(()=>{});
  }
 }
 
@@ -2115,6 +2177,185 @@ $("tlDur").addEventListener("input",()=>{
  $("tlDurVal").textContent=Number($("tlDur").value).toFixed(1);
  renderTimeline();
 });
+
+/* ---------- BACKGROUND MUSIC ---------- */
+
+// The mixer is created only when music is added, so without music the app
+// plays and exports exactly as before. Graph:
+//   main video ─► videoGain ─┐
+//   timeline players ─► tlIn ─┼─► bus ─► speakers
+//   music <audio> ─► musicGain ┘      └─► recDest (export)
+//   videoGain + tlIn ─► analyser (speech level, for ducking)
+// The music is streamed by an <audio> element, not decoded into RAM.
+let mixer=null;
+const music={el:null,url:null,loaded:false,duck:1,hold:0,lastTick:0};
+
+function getMixer(){
+ if(mixer) return mixer;
+ const AC=window.AudioContext||window.webkitAudioContext;
+ if(!AC) return null;
+ const ctx=new AC();
+ const bus=ctx.createGain();
+ const recDest=ctx.createMediaStreamDestination();
+ bus.connect(ctx.destination);
+ bus.connect(recDest);
+ const analyser=ctx.createAnalyser();
+ analyser.fftSize=1024;
+ const videoGain=ctx.createGain();
+ const tlIn=ctx.createGain();
+ const musicGain=ctx.createGain();
+ musicGain.gain.value=0;
+ videoGain.connect(bus); tlIn.connect(bus); musicGain.connect(bus);
+ videoGain.connect(analyser); tlIn.connect(analyser);
+ // From now on the main video's sound goes through the mixer.
+ ctx.createMediaElementSource(video).connect(videoGain);
+ mixer={ctx,bus,recDest,analyser,videoGain,tlIn,musicGain,buf:new Float32Array(analyser.fftSize)};
+ return mixer;
+}
+
+function resumeMixer(){
+ if(mixer && mixer.ctx.state!=="running") mixer.ctx.resume().catch(()=>{});
+}
+
+function musicSettings(){
+ return {
+  vol:Number($("musicVol").value)/100,
+  videoVol:Number($("videoVol").value)/100,
+  offset:Math.max(0,Number($("musicOffset").value)||0),
+  loop:$("musicLoop").checked,
+  fadeIn:Number($("musicFadeIn").value),
+  fadeOut:Number($("musicFadeOut").value),
+  duck:$("musicDuck").checked,
+  duckLevel:Number($("musicDuckLevel").value)/100
+ };
+}
+
+function speechLevel(){
+ const m=mixer;
+ m.analyser.getFloatTimeDomainData(m.buf);
+ let sum=0;
+ for(let i=0;i<m.buf.length;i++) sum+=m.buf[i]*m.buf[i];
+ return Math.sqrt(sum/m.buf.length);
+}
+
+// Called every frame while the program plays.
+// pt = program time (seconds since the start of the output),
+// len = program length, k = extra fade factor (timeline fade in/out).
+function musicTick(pt,len,k=1){
+ if(!music.loaded || !mixer) return;
+ const s=musicSettings();
+ const el=music.el;
+ mixer.videoGain.gain.value=s.videoVol;
+ mixer.tlIn.gain.value=s.videoVol;
+
+ const dur=el.duration;
+ const span=dur-s.offset;
+ let pos=s.offset+Math.max(0,pt);
+ let audible=Number.isFinite(dur) && span>0.1;
+ if(audible && pos>=dur){
+  if(s.loop) pos=s.offset+(Math.max(0,pt)%span);
+  else audible=false;
+ }
+ if(!audible){
+  if(!el.paused) el.pause();
+  mixer.musicGain.gain.value=0;
+  return;
+ }
+ if(el.paused){
+  el.currentTime=pos;
+  el.play().catch(()=>{});
+ }else if(Math.abs(el.currentTime-pos)>0.3){
+  el.currentTime=pos; // keep music in sync with the video
+ }
+
+ let g=s.vol*k;
+ if(s.fadeIn>0 && pt<s.fadeIn) g*=Math.max(0,pt/s.fadeIn);
+ if(s.fadeOut>0 && len-pt<s.fadeOut) g*=Math.max(0,(len-pt)/s.fadeOut);
+
+ // Ducking: when the video is loud (speech), lower the music.
+ // Fast down (0.15 s), slow back up (0.6 s), held 0.4 s between words.
+ const now=performance.now()/1000;
+ const dt=Math.min(0.1,Math.max(0.001,now-(music.lastTick||now)));
+ music.lastTick=now;
+ let target=1;
+ if(s.duck){
+  if(speechLevel()>0.02) music.hold=0.4;
+  else music.hold=Math.max(0,music.hold-dt);
+  if(music.hold>0) target=s.duckLevel;
+ }
+ const tau=target<music.duck?0.15:0.6;
+ music.duck+=(target-music.duck)*(1-Math.exp(-dt/tau));
+ mixer.musicGain.gain.setTargetAtTime(g*music.duck,mixer.ctx.currentTime,0.02);
+}
+
+function musicStop(){
+ if(!music.el) return;
+ music.el.pause();
+ music.duck=1; music.hold=0; music.lastTick=0;
+ if(mixer) mixer.musicGain.gain.value=0;
+}
+
+function musicLabels(){
+ $("musicVolVal").textContent=$("musicVol").value;
+ $("videoVolVal").textContent=$("videoVol").value;
+ $("musicFadeInVal").textContent=$("musicFadeIn").value;
+ $("musicFadeOutVal").textContent=$("musicFadeOut").value;
+ $("musicDuckLevelVal").textContent=$("musicDuckLevel").value;
+}
+
+$("musicFile").addEventListener("change",async e=>{
+ const file=e.target.files[0];
+ if(!file) return;
+ if(busy){ alert("Wait until the current preview or export has finished."); e.target.value=""; return; }
+ const m=getMixer(); // created during this tap, so Android allows sound
+ if(!m){ alert("This browser cannot mix audio."); e.target.value=""; return; }
+ resumeMixer();
+ if(!music.el){
+  music.el=document.createElement("audio");
+  music.el.preload="auto";
+  m.ctx.createMediaElementSource(music.el).connect(m.musicGain);
+ }
+ musicStop();
+ if(music.url) URL.revokeObjectURL(music.url);
+ music.url=URL.createObjectURL(file);
+ music.loaded=false;
+ $("musicInfo").textContent="Loading music…";
+ try{
+  const ready=waitEvent(music.el,"loadedmetadata",15000);
+  music.el.src=music.url;
+  await ready;
+  if(!Number.isFinite(music.el.duration)) throw new Error("unknown length");
+  music.loaded=true;
+  $("musicInfo").textContent="♪ "+file.name+" ("+music.el.duration.toFixed(1)+" s). Press PLAY in section 02 to hear the mix.";
+  $("musicControls").hidden=false;
+ }catch(err){
+  music.el.removeAttribute("src"); music.el.load();
+  URL.revokeObjectURL(music.url); music.url=null;
+  $("musicInfo").textContent="Could not read this music file. Try an MP3 or M4A file.";
+  $("musicControls").hidden=true;
+ }finally{
+  e.target.value="";
+ }
+});
+
+$("musicRemove").addEventListener("click",()=>{
+ if(busy) return;
+ musicStop();
+ music.loaded=false;
+ if(music.el){ music.el.removeAttribute("src"); music.el.load(); }
+ if(music.url){ URL.revokeObjectURL(music.url); music.url=null; }
+ if(mixer){ mixer.videoGain.gain.value=1; mixer.tlIn.gain.value=1; }
+ $("musicControls").hidden=true;
+ $("musicInfo").textContent="No music added.";
+});
+
+["musicVol","videoVol","musicFadeIn","musicFadeOut","musicDuckLevel"].forEach(id=>
+ $(id).addEventListener("input",musicLabels));
+["musicVol","videoVol"].forEach(id=>$(id).addEventListener("input",()=>{
+ // Live volume change while the preview plays.
+ if(mixer && music.loaded) mixer.videoGain.gain.value=Number($("videoVol").value)/100;
+}));
+musicLabels();
 
 window.addEventListener("beforeunload",()=>{
  if(videoURL)URL.revokeObjectURL(videoURL);

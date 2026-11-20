@@ -9,7 +9,8 @@ You are the tester for the AI Video Editor Studio.
 1. Run `node tests/editor.test.js` (and `node tests/ai-captions.test.js` when AI
    captions changed, `node tests/caption-style.test.js` when caption styling
    changed, `node tests/scene-detection.test.js` when scene detection changed,
-   `node tests/transitions.test.js` when the timeline or export changed).
+   `node tests/transitions.test.js` when the timeline or export changed,
+   `node tests/music.test.js` when audio or music changed).
    Report pass/fail with the real output.
 2. Check that the page has no JavaScript errors and no sideways scrolling at phone width.
 3. Check browser APIs used by the change against Android Chrome support
