@@ -18,6 +18,8 @@ jobs:
         run: npm install --no-save playwright@1.48.2 && npx playwright install --with-deps chromium
       - name: Editor tests
         run: node tests/editor.test.js
+      - name: Subtitle styling test
+        run: node tests/caption-style.test.js
       - name: AI captions test (downloads Whisper Tiny, ~41 MB)
         env:
           PW_CHANNEL: chrome

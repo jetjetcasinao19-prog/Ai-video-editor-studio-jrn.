@@ -56,6 +56,9 @@ a{color:#9ab1ff;word-break:break-all}
 .cap .del{background:#5a2733}
 .cap .row>.btn{flex:0 0 52px}
 #capCount{margin-top:8px}
+summary{font-weight:bold;padding:10px 0;cursor:pointer}
+input[type=range]{padding:0;height:32px;accent-color:#526dff;background:transparent;border:0}
+input[type=color]{height:44px;padding:4px}
 .ai{
  border:1px solid #36435a;border-radius:10px;
  padding:4px 12px 10px;margin:14px 0;background:#101624
@@ -196,6 +199,74 @@ Only the Start–End range from section 03 is transcribed.
 <label for="showCaptions">Show captions</label>
 </div>
 
+<details id="styleBox" class="ai">
+<summary>Caption style</summary>
+<p class="note">Applies to all captions, in the preview and the export.
+Your style is remembered on this phone.</p>
+
+<label for="capPreset">Quick style</label>
+<select id="capPreset">
+<option value="classic">Classic — white, black outline</option>
+<option value="box">Box — white on dark box</option>
+<option value="yellow">Yellow — classic film style</option>
+<option value="bold">Bold — big ALL CAPS (Anton)</option>
+<option value="creator">Creator — heavy (Montserrat)</option>
+<option value="comic">Comic — fun yellow (Bangers)</option>
+<option value="minimal">Minimal — small, thin outline</option>
+<option value="custom">Custom</option>
+</select>
+
+<label for="capFont">Font</label>
+<select id="capFont">
+<option value="sans">Standard (Arial / Roboto)</option>
+<option value="serif">Serif</option>
+<option value="mono">Typewriter</option>
+<option value="anton">Anton — bold, tall</option>
+<option value="montserrat">Montserrat — heavy</option>
+<option value="bangers">Bangers — comic</option>
+</select>
+<p id="fontStatus" class="note"></p>
+
+<label for="capSize">Size: <span id="capSizeVal">100</span>%</label>
+<input id="capSize" type="range" min="50" max="200" step="5" value="100">
+
+<div class="row">
+<div><label for="capColor">Text colour</label>
+<input id="capColor" type="color" value="#ffffff"></div>
+<div><label for="capOutline">Outline colour</label>
+<input id="capOutline" type="color" value="#000000"></div>
+</div>
+
+<label for="capOutlineW">Outline thickness: <span id="capOutlineWVal">14</span></label>
+<input id="capOutlineW" type="range" min="0" max="30" step="1" value="14">
+
+<div class="check">
+<input id="capBox" type="checkbox">
+<label for="capBox">Background box</label>
+</div>
+<div class="row">
+<div><label for="capBoxColor">Box colour</label>
+<input id="capBoxColor" type="color" value="#000000"></div>
+<div><label for="capBoxOpacity">Box opacity: <span id="capBoxOpacityVal">60</span>%</label>
+<input id="capBoxOpacity" type="range" min="0" max="100" step="5" value="60"></div>
+</div>
+
+<label for="capPos">Position</label>
+<select id="capPos">
+<option value="bottom">Bottom</option>
+<option value="middle">Middle</option>
+<option value="top">Top</option>
+</select>
+
+<label for="capOffset">Move up / down: <span id="capOffsetVal">0</span></label>
+<input id="capOffset" type="range" min="-25" max="25" step="1" value="0">
+
+<div class="check">
+<input id="capUpper" type="checkbox">
+<label for="capUpper">ALL CAPS</label>
+</div>
+</details>
+
 <div class="row">
 <button id="addCap" class="secondary" disabled>+ ADD AT CURRENT TIME</button>
 </div>
@@ -330,35 +401,200 @@ function wrapLines(text,maxWidth,maxLines){
  return out.slice(0,maxLines);
 }
 
+/* ---------- CAPTION STYLE ---------- */
+
+const CAP_FONTS={
+ sans:{family:"Arial, Roboto, sans-serif",weight:"bold"},
+ serif:{family:"Georgia, 'Noto Serif', serif",weight:"bold"},
+ mono:{family:"'Courier New', 'Droid Sans Mono', monospace",weight:"bold"},
+ anton:{family:"Anton",weight:"normal",web:true},
+ montserrat:{family:"Montserrat",weight:"800",web:true},
+ bangers:{family:"Bangers",weight:"normal",web:true}
+};
+
+const CAP_PRESETS={
+ classic:{font:"sans",size:100,color:"#ffffff",outline:"#000000",outlineW:14,box:false,boxColor:"#000000",boxOpacity:60,pos:"bottom",offset:0,upper:false},
+ box:{font:"sans",size:95,color:"#ffffff",outline:"#000000",outlineW:0,box:true,boxColor:"#000000",boxOpacity:65,pos:"bottom",offset:0,upper:false},
+ yellow:{font:"sans",size:105,color:"#ffe600",outline:"#000000",outlineW:16,box:false,boxColor:"#000000",boxOpacity:60,pos:"bottom",offset:0,upper:false},
+ bold:{font:"anton",size:135,color:"#ffffff",outline:"#000000",outlineW:18,box:false,boxColor:"#000000",boxOpacity:60,pos:"middle",offset:-10,upper:true},
+ creator:{font:"montserrat",size:115,color:"#ffffff",outline:"#000000",outlineW:16,box:false,boxColor:"#000000",boxOpacity:60,pos:"bottom",offset:5,upper:false},
+ comic:{font:"bangers",size:130,color:"#ffe600",outline:"#000000",outlineW:18,box:false,boxColor:"#000000",boxOpacity:60,pos:"bottom",offset:3,upper:true},
+ minimal:{font:"sans",size:85,color:"#ffffff",outline:"#000000",outlineW:6,box:false,boxColor:"#000000",boxOpacity:60,pos:"bottom",offset:-2,upper:false}
+};
+
+// Control id for each style property.
+const CAP_FIELDS={font:"capFont",size:"capSize",color:"capColor",outline:"capOutline",
+ outlineW:"capOutlineW",box:"capBox",boxColor:"capBoxColor",boxOpacity:"capBoxOpacity",
+ pos:"capPos",offset:"capOffset",upper:"capUpper"};
+const STYLE_KEY="aves.captionStyle";
+
+let capStyle={...CAP_PRESETS.classic};
+let webFontsLinked=false;
+const loadedFonts=new Set();
+
+function styleFromControls(){
+ const s={};
+ for(const k in CAP_FIELDS){
+  const el=$(CAP_FIELDS[k]);
+  s[k]=el.type==="checkbox"?el.checked:el.type==="range"?Number(el.value):el.value;
+ }
+ return s;
+}
+
+function styleToControls(s){
+ for(const k in CAP_FIELDS){
+  const el=$(CAP_FIELDS[k]);
+  if(el.type==="checkbox") el.checked=!!s[k]; else el.value=s[k];
+ }
+ updateStyleLabels();
+}
+
+function updateStyleLabels(){
+ $("capSizeVal").textContent=$("capSize").value;
+ $("capOutlineWVal").textContent=$("capOutlineW").value;
+ $("capBoxOpacityVal").textContent=$("capBoxOpacity").value;
+ const o=Number($("capOffset").value);
+ $("capOffsetVal").textContent=o>0?"+"+o:String(o);
+}
+
+function saveStyle(){
+ try{ localStorage.setItem(STYLE_KEY,JSON.stringify({preset:$("capPreset").value,style:capStyle})); }catch(e){}
+}
+
+// Web fonts are downloaded from Google Fonts only when chosen.
+// If they cannot load (offline), the standard font is used instead.
+function ensureCaptionFont(){
+ const f=CAP_FONTS[capStyle.font]||CAP_FONTS.sans;
+ if(!f.web || loadedFonts.has(f.family) || !document.fonts) return Promise.resolve();
+ if(!webFontsLinked){
+  const link=document.createElement("link");
+  link.rel="stylesheet";
+  link.href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=Montserrat:wght@800&display=swap";
+  document.head.append(link);
+  webFontsLinked=true;
+ }
+ $("fontStatus").textContent="Loading font…";
+ const spec=f.weight+' 40px "'+f.family+'"';
+ // The stylesheet may still be loading: retry briefly until the face is known.
+ const attempt=n=>document.fonts.load(spec).then(list=>{
+  if(list.length) return true;
+  if(n<=0) return false;
+  return new Promise(r=>setTimeout(r,250)).then(()=>attempt(n-1));
+ });
+ return Promise.race([attempt(40),new Promise(r=>setTimeout(()=>r(false),10000))])
+  .then(ok=>{
+   if(ok){ loadedFonts.add(f.family); $("fontStatus").textContent=""; }
+   else $("fontStatus").textContent="Font could not load (no internet?). Using the standard font.";
+   redrawIfPaused();
+  })
+  .catch(()=>{ $("fontStatus").textContent="Font could not load. Using the standard font."; });
+}
+
+function captionFont(size){
+ const f=CAP_FONTS[capStyle.font]||CAP_FONTS.sans;
+ const family=f.web?'"'+f.family+'", Arial, sans-serif':f.family;
+ return f.weight+" "+size+"px "+family;
+}
+
+function hexToRgba(hex,alpha){
+ const n=parseInt(hex.slice(1),16);
+ return "rgba("+(n>>16&255)+","+(n>>8&255)+","+(n&255)+","+alpha+")";
+}
+
+function boxPath(x,y,bw,bh,r){
+ ctx.beginPath();
+ if(ctx.roundRect) ctx.roundRect(x,y,bw,bh,r); else ctx.rect(x,y,bw,bh);
+}
+
+function initCaptionStyle(){
+ let saved=null;
+ try{ saved=JSON.parse(localStorage.getItem(STYLE_KEY)||"null"); }catch(e){}
+ if(saved && saved.style){
+  capStyle={...CAP_PRESETS.classic,...saved.style};
+  if(!CAP_FONTS[capStyle.font]) capStyle.font="sans";
+  $("capPreset").value=CAP_PRESETS[saved.preset]||saved.preset==="custom"?saved.preset:"custom";
+ }
+ styleToControls(capStyle);
+ ensureCaptionFont();
+
+ $("capPreset").addEventListener("change",()=>{
+  const p=CAP_PRESETS[$("capPreset").value];
+  if(!p){ saveStyle(); return; } // "custom": keep current values
+  capStyle={...p};
+  styleToControls(capStyle);
+  saveStyle();
+  ensureCaptionFont();
+  redrawIfPaused();
+ });
+
+ Object.values(CAP_FIELDS).forEach(id=>{
+  $(id).addEventListener("input",()=>{
+   capStyle=styleFromControls();
+   $("capPreset").value="custom";
+   updateStyleLabels();
+   if(id==="capFont") ensureCaptionFont();
+   redrawIfPaused();
+  });
+  $(id).addEventListener("change",saveStyle);
+ });
+}
+
 function drawCaption(w,h,title){
  if(!$("showCaptions").checked) return;
  const c=currentCaption(video.currentTime);
  if(!c) return;
+ const s=capStyle;
 
- const fontSize=Math.max(20,Math.round(w*0.045));
+ const fontSize=Math.max(14,Math.round(w*0.045*s.size/100));
  const lineHeight=fontSize*1.25;
- ctx.font="bold "+fontSize+"px Arial";
+ ctx.font=captionFont(fontSize);
  ctx.textAlign="center";
  ctx.textBaseline="middle";
 
  const maxWidth=w*0.86;
- const lines=wrapLines(c.text,maxWidth,3);
+ const text=s.upper?c.text.toUpperCase():c.text;
+ const lines=wrapLines(text,maxWidth,3);
  if(!lines.length) return;
+ const blockH=(lines.length-1)*lineHeight;
+ const titlePos=title?$("position").value:"";
 
- // Keep clear of the title when it sits at the bottom.
- const bottom=(title && $("position").value==="bottom")?h*0.76:h*0.9;
- const firstY=bottom-(lines.length-1)*lineHeight;
+ // Centre of the first line, keeping clear of the title text.
+ let firstY;
+ if(s.pos==="top"){
+  firstY=titlePos==="top"?h*0.25:h*0.12;
+ }else if(s.pos==="middle"){
+  firstY=(titlePos==="center"?h*0.62:h*0.5)-blockH/2;
+ }else{
+  firstY=(titlePos==="bottom"?h*0.76:h*0.9)-blockH;
+ }
+ firstY-=s.offset/100*h;
+ // Never let the caption leave the frame.
+ const margin=lineHeight*0.7;
+ firstY=Math.min(Math.max(firstY,margin),h-margin-blockH);
 
- ctx.lineWidth=fontSize*0.14;
+ if(s.box && s.boxOpacity>0){
+  const padX=fontSize*0.35, padY=fontSize*0.12;
+  ctx.fillStyle=hexToRgba(s.boxColor,s.boxOpacity/100);
+  lines.forEach((line,i)=>{
+   const lw=Math.min(ctx.measureText(line).width,maxWidth);
+   const y=firstY+i*lineHeight;
+   boxPath(w/2-lw/2-padX,y-lineHeight/2-padY/2,lw+padX*2,lineHeight+padY,fontSize*0.2);
+   ctx.fill();
+  });
+ }
+
  ctx.lineJoin="round";
- ctx.strokeStyle="#000";
- ctx.fillStyle="#fff";
+ ctx.lineWidth=fontSize*s.outlineW/100;
+ ctx.strokeStyle=s.outline;
+ ctx.fillStyle=s.color;
  lines.forEach((line,i)=>{
   const y=firstY+i*lineHeight;
-  ctx.strokeText(line,w/2,y,maxWidth);
+  if(s.outlineW>0) ctx.strokeText(line,w/2,y,maxWidth);
   ctx.fillText(line,w/2,y,maxWidth);
  });
 }
+
+initCaptionStyle();
 
 function round1(n){return Math.round(n*10)/10}
 
@@ -971,6 +1207,7 @@ $("export").addEventListener("click",async()=>{
  try{
   video.pause();
   stopAnimation();
+  await ensureCaptionFont(); // web font ready before the first frame
   updatePreview();
 
   await seek(start);
