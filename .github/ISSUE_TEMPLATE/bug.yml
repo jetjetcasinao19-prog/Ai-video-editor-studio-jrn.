@@ -1,0 +1,20 @@
+name: Bug report
+description: Something in the app is broken
+labels: [bug]
+body:
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What happened vs. what you expected
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Phone model and Chrome version

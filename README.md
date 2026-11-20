@@ -11,6 +11,14 @@ Single-file, in-browser video editor built for Android Chrome. Open `index.html`
   burned into preview and export
 - Export to WebM with audio
 
+## Team and workflow
+See `docs/TEAM-GUIDE.md` (AI team agents, issue templates, posting schedule,
+model switching) and `CLAUDE.md` (project rules).
+
+## Tests
+`node tests/editor.test.js` (needs ffmpeg + Playwright). Runs automatically on
+GitHub Actions for every push.
+
 ## Roadmap (not implemented yet)
 AI automatic transcription, subtitle styling, scene detection, transitions,
 background music, templates, AI-assisted editing, MP4 export, project management.
