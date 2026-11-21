@@ -1,7 +1,7 @@
 # A Rocket Scientist Made This Toy (The Origin of the Super Soaker)
 
 - Format: 9:16
-- Target length: under 60 seconds (voice-over about 117 words ≈ 52 s in ElevenLabs)
+- Target length: under 60 seconds (voice-over 121 words ≈ 54 s in ElevenLabs)
 - Platform(s): YouTube Shorts, TikTok, Instagram Reels, Facebook Reels
 - Research file: content/research/2026-11-21-super-soaker-origin.md
 - Hook title (intro card): **A Rocket Scientist Made This Toy**
