@@ -161,6 +161,84 @@ function check(name, ok, detail) {
     check('scenes in order: red, blue, green', c1[0] > 150 && c1[2] < 90 && c2[2] > 150 && c2[0] < 90 && c3[1] > 90 && c3[0] < 90, [...c1, ...c2, ...c3].join(','));
   }
 
+  // 12. story style gallery
+  await page.setViewportSize({ width: 412, height: 900 });
+  const gal = await page.evaluate(() => ({ n: Story.STYLES.length, cards: document.querySelectorAll('#gallery .card').length, count: document.getElementById('galCount').textContent }));
+  check('gallery shows every style', gal.n >= 35 && gal.cards === gal.n && /styles · All/.test(gal.count), JSON.stringify(gal));
+  const ids = await page.evaluate(() => Story.STYLES.map(s => s.id));
+  for (const want of ['tagalog-drama', 'ai-drama', 'anime-drama', 'pinoy-folklore', 'stick', 'animated-short', 'food-body', 'herbal', 'ugc-ad', 'podcast-hugot',
+    'reverse-history', 'jeepney-diaries', 'blotter', 'sari-sari', 'halloween', 'unsolved', 'luxury-files', 'pera-matters', 'pov-history', 'kapre-vlog',
+    'creature-comedy', 'time-travel-pov', 'micro-drama', 'fruit-drama', 'cat-soap', 'creature-vlog', 'asmr', 'street-interview', 'animal-podcast', 'how-it-started'])
+    if (!ids.includes(want)) check('style ' + want + ' exists', false);
+  const covers = ids.filter(id => fs.existsSync(path.resolve(__dirname, '..', 'img', 'styles', id + '.webp')));
+  check('every style has a cover picture', covers.length === ids.length, covers.length + '/' + ids.length);
+  await page.click('#galCats button[data-c="horror"]');
+  const horror = await page.$$eval('#gallery .card b', els => els.map(e => e.textContent));
+  check('category filter', horror.includes('Pinoy Folklore Horror') && !horror.includes('UGC Product Ad'), horror.join(', '));
+  await page.click('#galCats button[data-c="all"]');
+  await page.fill('#galSearch', 'tagalog');
+  const tg = await page.$$eval('#gallery .card b', els => els.map(e => e.textContent));
+  check('search finds Tagalog styles', tg.length >= 5 && tg.includes('Sari-Sari Store Confessions'), tg.length);
+  await page.fill('#galSearch', '');
+  await page.check('#galTrend');
+  const tr = await page.evaluate(() => [...document.querySelectorAll('#gallery .card')].every(c => c.querySelector('.badge') && c.querySelector('.badge').textContent === 'TRENDING'));
+  check('trending only', tr);
+  await page.uncheck('#galTrend');
+
+  // 13. picking a style changes everything
+  await page.click('#gallery .card[data-id="tagalog-drama"]');
+  const applied = await page.evaluate(() => ({ niche: niche.value, n: sceneCount.value, sec: sceneSec.value, lang: lang.value, voice: voiceType.value,
+    ch: character.value, bgHidden: document.getElementById('bgBox').hidden, on: document.querySelector('.card.on').dataset.id, now: styleNow.textContent }));
+  check('style sets scenes, seconds, language, voice, cast', applied.niche === 'tagalog-drama' && applied.n === '8' && applied.sec === '8' && applied.lang === 'Tagalog' &&
+    applied.voice === 'dialogue' && /street-food vendor/.test(applied.ch) && applied.bgHidden && applied.on === 'tagalog-drama' && /Using Tagalog Drama/.test(applied.now), JSON.stringify(applied));
+  await page.fill('#topic', 'Ang anak na umalis');
+  await page.click('[data-write="chatgpt"]');
+  const wq = decodeURIComponent((await page.evaluate(() => window.__opened.slice(-1)[0])).split('?q=')[1]);
+  check('writer prompt follows the style', /Style: Tagalog Drama/.test(wq) && /8-scene, 64-second/.test(wq) && /Story beats, one per scene: 1\. emotional hook/.test(wq) &&
+    /every spoken word in Tagalog/.test(wq) && /Name: line/.test(wq) && /teleserye/.test(wq) && !/How it Started/.test(wq), wq.split('\n')[1]);
+  const vp = await page.inputValue('.scene[data-i="0"] [data-f="vidPrompt"]');
+  check('video prompt follows the style', /^TAGALOG DRAMA — 8-SECOND SCENE 1 OF 3/.test(vp) && /cinematic photoreal drama/.test(vp) && /lip-sync/.test(vp) &&
+    /DIALOGUE — In Tagalog/.test(vp) && !/solid .* background/.test(vp), vp.split('\n').slice(0, 2).join(' | '));
+  const ip = await page.inputValue('.scene[data-i="0"] [data-f="imgPrompt"]');
+  check('image prompt follows the style', /^Cinematic photoreal film still/.test(ip) && !/solid/.test(ip), ip.slice(0, 60));
+  await page.click('#gallery .card[data-id="asmr"]');
+  const asmr = await page.inputValue('.scene[data-i="0"] [data-f="vidPrompt"]');
+  check('ASMR style: no speech', /no speech, rich natural sound effects/.test(asmr) && !/says exactly/.test(asmr) && !(await page.isChecked('#narrator')));
+  await page.click('#gallery .card[data-id="creature-vlog"]');
+  check('vlog style: selfie camera talking', /handheld selfie camera/.test(await page.inputValue('.scene[data-i="0"] [data-f="vidPrompt"]')));
+  await page.reload();
+  check('chosen style is remembered', (await page.inputValue('#niche')) === 'creature-vlog' && !!(await page.$('#gallery .card.on[data-id="creature-vlog"]')));
+
+  // 14. free start images (picture service mocked)
+  let picMode = 'ok', picUrl = '';
+  await page.route('https://image.pollinations.ai/**', route => {
+    picUrl = route.request().url();
+    if (picMode === 'limit') return route.fulfill({ status: 429, body: 'slow down', headers: { 'access-control-allow-origin': '*' } });
+    return route.fulfill({ status: 200, contentType: 'image/png', headers: { 'access-control-allow-origin': '*' }, body: fs.readFileSync(IMG) });
+  });
+  await page.click('.scene[data-i="1"] [data-a="free-img"]');
+  await page.waitForSelector('.scene[data-i="1"] img.thumb', { timeout: 10000 });
+  check('free image becomes the scene start image', /width=720&height=1376/.test(picUrl) && /Bigfoot/.test(decodeURIComponent(picUrl)) &&
+    /Start image made/.test(await page.textContent('.scene[data-i="1"] .genbox')), decodeURIComponent(picUrl).slice(36, 90));
+  const cropped = await page.evaluate(() => new Promise(r => { const im = document.querySelector('.scene[data-i="1"] img.thumb'); const go = () => r([im.naturalWidth, im.naturalHeight]); im.complete ? go() : im.onload = go; }));
+  check('service mark strip is cut off (bottom 7%)', cropped[0] === 360 && cropped[1] === 595, cropped.join('x'));
+  picMode = 'limit';
+  await page.click('.scene[data-i="2"] [data-a="free-img"]');
+  await page.waitForFunction(() => /limit/.test(document.querySelector('.scene[data-i="2"] .genbox').textContent), null, { timeout: 10000 });
+  check('free picture limit message', true);
+  picMode = 'ok';
+  await page.click('#skipImg'); // images back on (was skipped earlier)
+  await page.click('#imgPlat button[data-p="free"]');
+  check('Next step offers the free picture maker', /start image on Free \(in app\)/.test(await page.textContent('#nextMsg')), await page.textContent('#nextMsg'));
+  const before = await page.evaluate(() => window.__opened.length);
+  await page.click('#nextBtn');
+  await page.waitForFunction(() => /Start image made/.test(document.querySelector('.scene[data-i="0"] .genbox').textContent), null, { timeout: 10000 });
+  check('Next step makes the image in the app (no site opened)', (await page.evaluate(() => window.__opened.length)) === before);
+  await page.unroute('https://image.pollinations.ai/**');
+  await page.setViewportSize({ width: 360, height: 740 });
+  check('no sideways scrolling at 360px with the gallery', (await page.evaluate(() => document.documentElement.scrollWidth)) <= 360);
+  await page.click('#gallery .card[data-id="stick"]');
+
   // 11. hand-off to the Stickman Director
   await page.click('#toStick');
   await page.waitForURL(/stickman\.html/);

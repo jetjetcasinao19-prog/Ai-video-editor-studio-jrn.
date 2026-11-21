@@ -60,6 +60,28 @@ input[type=color]{height:44px;padding:4px}
 canvas{width:100%;max-height:480px;object-fit:contain;background:#000;border-radius:10px;display:block;margin-top:10px}
 progress{width:100%;height:10px;margin-top:10px;accent-color:#e63946}
 details summary{cursor:pointer;font-weight:bold;padding:6px 0}
+.gal-tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}
+#galCats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
+#galCats button{margin:0;padding:9px 4px;font-size:12px;border-radius:7px;border:1px solid #36435a;background:#0d1320;font-weight:normal}
+#galCats button.on{border-color:#8f7cff;background:#2c2f5a;font-weight:bold}
+#galCats button[data-c="stories"]{background:#2a1d3d}#galCats button[data-c="ugc"]{background:#2f2a12}
+#galCats button[data-c="tips"]{background:#12302a}#galCats button[data-c="creative"]{background:#13283f}
+#galCats button[data-c="vlogs"]{background:#33200f}#galCats button[data-c="history"]{background:#2b2418}#galCats button[data-c="horror"]{background:#2e1418}
+#gallery{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;max-height:760px;overflow-y:auto;padding-right:2px}
+.card{background:#101624;border:1px solid #293449;border-radius:11px;padding:7px;cursor:pointer;text-align:left;min-width:0;position:relative}
+.card.on{border-color:#f5c400;box-shadow:0 0 0 2px #f5c40055}
+.card .cov{width:100%;aspect-ratio:4/3;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:40px;overflow:hidden;
+ background:linear-gradient(135deg,#2c2f5a,#12302a)}
+.card .cov img{width:100%;height:100%;object-fit:cover;display:block}
+.card .badge{position:absolute;top:12px;left:12px;font-size:9px;font-weight:bold;padding:2px 6px;border-radius:4px;background:#f5c400;color:#000}
+.card .badge.new{background:#8fe3d6}
+.card .tg{display:inline-block;font-size:10px;padding:1px 6px;border-radius:4px;background:#26304a;color:#c5ccda;margin-top:6px}
+.card b{display:block;font-size:13px;margin-top:4px;line-height:1.25}
+.card .meta{font-size:10px;color:#9ba8bb;margin-top:3px;line-height:1.4}
+.card .meta i{font-style:normal;color:#8fe3c0;border:1px solid #2f6b55;border-radius:4px;padding:0 4px;margin-right:4px}
+.card p{font-size:11px;color:#9ba8bb;margin:4px 0 0;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+#styleNow{border-left:4px solid #f5c400;padding:6px 10px;margin-top:10px;background:#1d1a10;border-radius:8px;font-size:13px}
+.genbox{font-size:12px;color:#91b7ff;margin-top:6px;min-height:1em}
 [hidden]{display:none!important}
 /* ---- red theme (shared look with stickman.html) ---- */
 :root{--accent:#e63946;--accent2:#ff6b6b;--glow:rgba(230,57,70,.35)}
@@ -96,6 +118,20 @@ section[id]{scroll-margin-top:64px}
 <h1>AI STORY STUDIO</h1>
 <div class="sub">TOPIC → SCENES → PROMPTS → CLIPS → ONE VIDEO •
  <a href="index.html">Video Studio</a> • <a href="stickman.html">Stickman Director</a></div>
+
+<section class="panel" id="stylesPanel">
+<h3>00 — Story styles</h3>
+<p class="note">Pick a style: it sets the scenes, seconds, language, look, cast and voice, and tells the AI how to
+write it. ⭐ TRENDING = popular on TikTok, Reels and Shorts in 2026.</p>
+<input id="galSearch" placeholder="Search styles… e.g. drama, horror, vlog, Tagalog" aria-label="Search styles">
+<div id="galCats"></div>
+<div class="gal-tools">
+ <div class="check" style="margin:0"><input id="galTrend" type="checkbox"><label for="galTrend">Trending only</label></div>
+ <span class="note" id="galCount"></span>
+</div>
+<div id="gallery"></div>
+<div id="styleNow"></div>
+</section>
 
 <section class="panel">
 <h3>01 — Story</h3>
@@ -136,18 +172,22 @@ request already typed; for Gemini it is copied, just paste it.</p>
 <section class="panel">
 <h3>02 — Look</h3>
 <div class="row">
- <div><label for="niche">Niche</label>
-  <select id="niche">
-   <option value="stick">Stick Figure Explainer · flat illustration</option>
-   <option value="doodle">Whiteboard doodle · hand-drawn</option>
-   <option value="paper">Paper cut-out · 2.5D</option>
-   <option value="cinematic">Cinematic 3D cartoon</option>
-  </select></div>
- <div><label for="bg">Background colour</label><input id="bg" type="color" value="#1f1b45"></div>
+ <div><label for="niche">Story style</label><select id="niche"></select></div>
+ <div id="bgBox"><label for="bg">Background colour</label><input id="bg" type="color" value="#1f1b45"></div>
 </div>
-<label for="character">Main character (kept the same in every scene)</label>
+<div class="row">
+ <div><label for="lang">Language</label>
+  <select id="lang"><option>English</option><option>Tagalog</option><option>Taglish</option><option>Cebuano</option><option>Spanish</option>
+   <option>Portuguese</option><option>French</option><option>Hindi</option><option>Indonesian</option><option>Vietnamese</option>
+   <option>Japanese</option><option>Korean</option></select></div>
+ <div><label for="voiceType">Voice</label>
+  <select id="voiceType"><option value="narrator">Off-screen narrator</option><option value="dialogue">Characters talk</option>
+   <option value="host">Host to camera</option><option value="vlog">Selfie vlog</option><option value="pov">POV voice-over</option>
+   <option value="none">No speech (sounds)</option></select></div>
+</div>
+<label for="character">Main character / cast (kept the same in every scene)</label>
 <input id="character" value="a clothed cartoon stick figure with a round white head, a mustard-yellow scarf and a navy hoodie">
-<div class="check"><input id="narrator" type="checkbox" checked><label for="narrator">Off-screen narrator voice in the video prompts</label></div>
+<div class="check"><input id="narrator" type="checkbox" checked><label for="narrator">Spoken words in the video prompts</label></div>
 <div class="check"><input id="noMusic" type="checkbox" checked><label for="noMusic">No music in the clips (add your own later)</label></div>
 </section>
 
@@ -203,6 +243,7 @@ show their start image (slow zoom) or a title card. Recording takes as long as t
 </main>
 <div id="toast"></div>
 
+<script src="story-styles.js"></script>
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
@@ -214,15 +255,14 @@ const PLATFORMS={
  chatgpt:{name:"ChatGPT",url:q=>"https://chatgpt.com/?q="+encodeURIComponent(q),prefill:true},
  gemini:{name:"Gemini",url:()=>"https://gemini.google.com/app",prefill:false},
  grok:{name:"Grok",url:q=>"https://grok.com/?q="+encodeURIComponent(q),prefill:true},
- flow:{name:"Flow",url:()=>"https://labs.google/fx/tools/flow",prefill:false}
+ flow:{name:"Flow",url:()=>"https://labs.google/fx/tools/flow",prefill:false},
+ free:{name:"Free (in app)",url:null,prefill:false}
 };
-const IMG_PLATS=["gemini","chatgpt","flow","grok"], VID_PLATS=["flow","gemini","grok"];
-const NICHES={
- stick:{label:"Stick Figure Explainer · Flat illustration",look:"flat 2D vector explainer animation",img:"Flat 2D vector illustration"},
- doodle:{label:"Whiteboard doodle · Hand-drawn",look:"hand-drawn whiteboard doodle animation with marker lines",img:"Hand-drawn whiteboard doodle, black marker lines"},
- paper:{label:"Paper cut-out · 2.5D",look:"paper cut-out 2.5D animation with soft shadows",img:"Paper cut-out 2.5D illustration with soft shadows"},
- cinematic:{label:"Cinematic 3D cartoon",look:"cinematic 3D cartoon animation, soft lighting",img:"Cinematic 3D cartoon render, soft lighting"}
-};
+const IMG_PLATS=["gemini","chatgpt","flow","grok","free"], VID_PLATS=["flow","gemini","grok"];
+const STYLES=(window.StoryStyles&&window.StoryStyles.STYLES)||[], CATS=(window.StoryStyles&&window.StoryStyles.CATS)||[["all","All"]];
+const NICHES={};
+STYLES.forEach(st=>{ NICHES[st.id]=Object.assign({label:st.name+" · "+st.tag},st); });
+const styleOf=id=>NICHES[id]||NICHES.stick||Object.values(NICHES)[0];
 const COLOR_NAMES=[["#1f1b45","midnight purple"],["#000000","black"],["#ffffff","white"],["#f7f4ec","off-white paper"],
  ["#0b1d3a","deep navy"],["#1f3b2d","chalkboard green"],["#8fd3ff","sky blue"],["#f5c400","golden yellow"]];
 function colorName(hex){
@@ -240,20 +280,39 @@ let imgPlat="gemini", vidPlat="flow", skipImages=false, reloaded=false;
 function settings(){
  return {topic:$("topic").value.trim(),notes:$("notes").value.trim(),count:+$("sceneCount").value,sec:+$("sceneSec").value,
   format:$("format").value,niche:$("niche").value,bg:$("bg").value,character:$("character").value.trim(),
-  narrator:$("narrator").checked,noMusic:$("noMusic").checked};
+  narrator:$("narrator").checked,noMusic:$("noMusic").checked,lang:$("lang").value,voice:$("voiceType").value};
 }
 
 /* ---------- writing the story ---------- */
 function wordsFor(sec){ return Math.max(6,Math.round(sec*2.4)); }
+// Spread a style's story beats over n scenes.
+function beatsFor(st,n){
+ const b=st.beats||[]; if(!b.length) return [];
+ return Array.from({length:n},(_,i)=>b[Math.min(b.length-1,Math.round(i*(b.length-1)/Math.max(1,n-1)))]);
+}
+const VOICE_WRITE={
+ narrator:"\"narration\" = what the off-screen narrator says.",
+ dialogue:"\"narration\" = the spoken lines, written as Name: line (1-2 short lines per scene).",
+ host:"\"narration\" = what the host says straight to the camera.",
+ vlog:"\"narration\" = what the character says to their selfie camera, vlog style.",
+ pov:"\"narration\" = a second-person voice-over (\"You...\"), present tense.",
+ none:"\"narration\" = a 3-6 word caption only (nobody speaks); put the sounds in \"visual\"."
+};
 function writerPrompt(o){
+ const st=styleOf(o.niche), lang=o.lang==="English"?"US English":o.lang, beats=beatsFor(st,o.count);
+ const brand=st.id==="how-it-started";
  return [
-  "You are the scriptwriter for \"How it Started\", a YouTube Shorts channel about the origin of things (people, brands, inventions, history, ideas).",
-  "Write a "+o.count+"-scene, "+(o.count*o.sec)+"-second "+NICHES[o.niche].label.split(" · ")[0].toLowerCase()+" video about: "+(o.topic||"(choose a surprising origin story)")+".",
+  brand?"You are the scriptwriter for \"How it Started\", a YouTube Shorts channel about the origin of things (people, brands, inventions, history, ideas).":
+   "You write viral short vertical videos for TikTok, Reels and YouTube Shorts.",
+  "Style: "+st.name+" — "+st.blurb,
+  "Write a "+o.count+"-scene, "+(o.count*o.sec)+"-second "+st.name.toLowerCase()+" video about: "+(o.topic||st.topic||"(choose a great topic for this style)")+".",
   o.notes?"Notes: "+o.notes:"",
-  "Tone: storyteller, dramatic but true, short sentences, US English, talk to the viewer as \"you\". Scene 1 is a strong hook; build from the humble start to the turning point; the last scene lands the payoff and ends with \"Every legend has a beginning.\"",
-  "Each scene is "+o.sec+" seconds, so its narration must be at most "+wordsFor(o.sec)+" words.",
-  "For each scene also describe what the main character ("+(o.character||"a cartoon stick figure")+") does on screen and 2-4 words of on-screen text.",
-  "Only use facts you are sure are true.",
+  beats.length?"Story beats, one per scene: "+beats.map((b,i)=>(i+1)+". "+b).join("; ")+".":"",
+  "Tone: "+(st.writer||"")+(brand?" Storyteller, dramatic but true, short sentences, talk to the viewer as \"you\". End with \"Every legend has a beginning.\"":" Scene 1 must hook in the first 2 seconds."),
+  "Language: write every spoken word in "+lang+".",
+  "Each scene is "+o.sec+" seconds, so its narration must be at most "+wordsFor(o.sec)+" words. "+(VOICE_WRITE[o.voice]||VOICE_WRITE.narrator),
+  "Main character / cast (same look in every scene): "+(o.character||st.character||"a cartoon stick figure")+". For each scene describe in \"visual\" what happens on screen, and give 2-4 words of on-screen text.",
+  "Only use facts you are sure are true. Do not copy the look or name of real people or other creators' characters.",
   "Reply with ONLY this JSON, no other text:",
   '{"title":"...","scenes":[{"narration":"...","visual":"...","onScreenText":"..."}]}'
  ].filter(Boolean).join("\n");
@@ -295,6 +354,11 @@ function splitNarration(text,n){
  return out;
 }
 function quickDraft(o){
+ const st=styleOf(o.niche);
+ if(!["stick","how-it-started","doodle","paper","cinematic","reverse-history"].includes(st.id)){
+  const beats=beatsFor(st,o.count);
+  return {title:o.topic||st.topic||st.name, scenes:beats.map(b=>({narration:"",visual:b,onScreenText:""}))};
+ }
  const t=(o.topic||"this idea").replace(/^how\s+/i,"").replace(/\s+(really\s+)?(started|began|begun|start|was (invented|created|made|born))[?.!]*$/i,"").trim()||"this idea";
  const arc=[
   ["You use it every day. But how did "+t+" really start?","stands puzzled next to a giant question mark","How did it start?"],
@@ -322,30 +386,44 @@ const VISUAL_RULES=[
  [/\b(money|dollars?|cost|price|cheap|rich|poor)\b/i,"holds up coins while a dollar sign grows beside the head"],
  [/\b(year|ago|century|history|ancient|old)\b/i,"stands beside a big calendar whose pages flip back in time"]
 ];
-function sceneVisual(s){
+function sceneVisual(s,st){
  if(s.visual) return s.visual.replace(/^the (main )?character\s*/i,"");
- for(const [re,v] of VISUAL_RULES) if(re.test(s.narration)) return v;
+ if(!st||st.cat==="tips") for(const [re,v] of VISUAL_RULES) if(re.test(s.narration)) return v;
+ if(st&&st.cat!=="tips"&&s.narration) return "acts out this moment: "+s.narration;
  return "explains with open hands while simple icons appear beside the head";
 }
+const fmtName=f=>f==="16:9"?"horizontal 16:9":f==="1:1"?"square 1:1":"vertical 9:16";
 function imagePrompt(s,i,o){
- const n=NICHES[o.niche], fmt=o.format==="16:9"?"horizontal 16:9":o.format==="1:1"?"square 1:1":"vertical 9:16";
- return [n.img+", "+fmt+", solid "+colorName(o.bg)+" background.",
-  "Scene "+(i+1)+": "+(o.character||"a cartoon stick figure")+" "+sceneVisual(s)+".",
-  "Clean thick outlines, minimal shapes, centered subject, empty space at the top for text.",
+ const st=styleOf(o.niche), solid=!!st.bg;
+ return [st.img+", "+fmtName(o.format)+(solid?", solid "+colorName(o.bg)+" background.":"."),
+  "Scene "+(i+1)+": "+(o.character||st.character||"a cartoon stick figure")+" "+sceneVisual(s,st)+".",
+  solid?"Clean thick outlines, minimal shapes, centered subject, empty space at the top for text.":"Consistent character design, strong composition, room at the top for text.",
   "No text, no letters, no watermark, no logo."].join(" ");
 }
+const VOICE_SHOT={
+ narrator:"off-screen narrator only",dialogue:"the characters speak their lines with natural lip-sync",
+ host:"the host talks straight to camera with lip-sync",vlog:"handheld selfie camera, the character talks to the camera with lip-sync",
+ pov:"first-person camera as the viewer's eyes, off-screen voice-over",none:"no speech, rich natural sound effects"
+};
 function videoPrompt(s,i,o){
- const n=NICHES[o.niche], fmt=o.format==="16:9"?"horizontal 16:9":o.format==="1:1"?"square 1:1":"vertical 9:16";
- const dur=s.dur||o.sec, kind=NICHES[o.niche].label.split(" · ")[0].toUpperCase();
+ const st=styleOf(o.niche), solid=!!st.bg, dur=s.dur||o.sec, kind=st.name.toUpperCase();
+ const voice=o.narrator?(o.voice||"narrator"):"none", lang=o.lang==="English"?"US English":o.lang, words=s.narration;
+ const say={
+  narrator:"NARRATOR — Warm, clear "+lang+" voice, off-screen, says exactly: \""+words+"\"",
+  dialogue:"DIALOGUE — In "+lang+", lip-synced, exactly: \""+words+"\"",
+  host:"HOST SAYS TO CAMERA — In "+lang+", natural and friendly, exactly: \""+words+"\"",
+  vlog:"VLOG LINE — Into the selfie camera, in "+lang+", exactly: \""+words+"\"",
+  pov:"VOICE-OVER — Off-screen, calm "+lang+" voice, says exactly: \""+words+"\"",
+  none:""}[voice];
  return [
   kind+" — "+dur+"-SECOND SCENE "+(i+1)+" OF "+story.scenes.length,
-  "OUTPUT — Exactly "+dur+" seconds, "+fmt+", "+n.look+" on a solid "+colorName(o.bg)+" background, lively clean motion graphics, "+
-   (o.narrator?"off-screen narrator only, ":"no speech, ")+"a new visible change every 2-3 seconds."+(o.noMusic?" No music.":""),
-  "START FRAME — The supplied image is the exact first frame. Keep the "+n.look.split(" animation")[0]+" look, "+(o.character||"the character")+", colours and layout; animate from it, do not redraw it.",
-  "ACTION — The character "+sceneVisual(s)+".",
+  "OUTPUT — Exactly "+dur+" seconds, "+fmtName(o.format)+", "+st.look+(solid?" on a solid "+colorName(o.bg)+" background, lively clean motion graphics":"")+", "+
+   (VOICE_SHOT[voice]||VOICE_SHOT.narrator)+", a new visible change every 2-3 seconds."+(o.noMusic?" No music.":""),
+  "START FRAME — The supplied image is the exact first frame. Keep the "+st.look.split(/ animation|,/)[0]+" look, "+(o.character||st.character||"the character")+", colours and layout; animate from it, do not redraw it.",
+  "ACTION — The character "+sceneVisual(s,st)+".",
   s.onScreenText?"TEXT ON SCREEN — \""+s.onScreenText+"\" pops in as bold clean words, spelled exactly like this.":"",
-  o.narrator&&s.narration?"NARRATOR — Warm, clear US English voice, off-screen, says exactly: \""+s.narration+"\"":"",
-  "AVOID — subtitles, captions, extra characters, realistic style, camera shake, watermarks, logos."
+  words&&say?say:"",
+  "AVOID — subtitles, captions, extra characters, "+(solid?"realistic style, ":"")+(voice==="vlog"||voice==="pov"?"":"camera shake, ")+"watermarks, logos, real people's likeness."
  ].filter(Boolean).join("\n");
 }
 function promptsFor(i){
@@ -383,7 +461,7 @@ function renderChips(){
 }
 function renderPackage(){
  const o=settings(), n=story.scenes.length;
- $("nichePill").textContent="NICHE · "+NICHES[o.niche].label;
+ $("nichePill").textContent="NICHE · "+styleOf(o.niche).label;
  $("pkgTitle").textContent=story.title||(n?"Untitled story":"No story yet");
  const secs=story.scenes.reduce((a,s)=>a+(s.dur||o.sec),0);
  const imgs=story.scenes.filter((s,i)=>s.imgDone||media[i]?.img).length, clips=story.scenes.filter((s,i)=>s.clipDone||media[i]?.clip).length;
@@ -408,7 +486,8 @@ function renderScenes(){
   '<label>Narration</label><textarea data-f="narration">'+esc(s.narration)+'</textarea>'+
   '<label>On-screen text</label><input data-f="onScreenText" value="'+esc(s.onScreenText||"")+'">'+
   '<label>Image prompt</label><textarea data-f="imgPrompt">'+esc(p.img)+'</textarea>'+
-  '<div class="btns"><button type="button" data-a="copy-img">Copy</button>'+IMG_PLATS.slice(0,3).map(pl=>'<button type="button" data-a="open-img" data-p="'+pl+'">'+PLATFORMS[pl].name+'</button>').join("")+'</div>'+
+  '<div class="btns"><button type="button" data-a="copy-img">Copy</button><button type="button" data-a="free-img" class="gold">🎨 Free</button>'+["gemini","chatgpt"].map(pl=>'<button type="button" data-a="open-img" data-p="'+pl+'">'+PLATFORMS[pl].name+'</button>').join("")+'</div>'+
+  '<div class="genbox">'+esc(genMsg[i]||"")+'</div>'+
   '<label>Video prompt</label><textarea class="big" data-f="vidPrompt">'+esc(p.vid)+'</textarea>'+
   '<div class="btns"><button type="button" data-a="copy-vid">Copy</button>'+VID_PLATS.map(pl=>'<button type="button" data-a="open-vid" data-p="'+pl+'">'+PLATFORMS[pl].name+'</button>').join("")+'</div>'+
   '<div class="media"><div><label>Start image</label><input type="file" accept="image/*" data-up="img">'+
@@ -425,7 +504,7 @@ function renderScenes(){
 /* ---------- saving ---------- */
 function save(){
  try{ localStorage.setItem(STORE,JSON.stringify({story,imgPlat,vidPlat,skipImages,
-  form:Object.fromEntries(["topic","notes","sceneCount","sceneSec","format","niche","bg","character","ownScript"].map(k=>[k,$(k).value])),
+  form:Object.fromEntries(["topic","notes","sceneCount","sceneSec","format","niche","bg","character","ownScript","lang","voiceType"].map(k=>[k,$(k).value])),
   checks:{narrator:$("narrator").checked,noMusic:$("noMusic").checked,burnCaps:$("burnCaps").checked}})); }catch(e){}
 }
 function load(){
@@ -529,6 +608,95 @@ async function joinVideo(){
  return {blob:new Blob(chunks,{type}),ext:type==="video/mp4"?"mp4":"webm"};
 }
 
+/* ---------- story style gallery ---------- */
+let galCat="all";
+$("niche").innerHTML=STYLES.map(st=>'<option value="'+st.id+'">'+esc(st.name)+'</option>').join("");
+$("niche").value="stick";
+$("galCats").innerHTML=CATS.map(([c,n])=>'<button type="button" data-c="'+c+'">'+esc(n)+'</button>').join("");
+function galleryList(){
+ const q=$("galSearch").value.trim().toLowerCase(), trend=$("galTrend").checked;
+ return STYLES.filter(st=>(galCat==="all"||st.cat===galCat)&&(!trend||st.trending)&&
+  (!q||[st.name,st.tag,st.blurb,st.lang,st.cat,st.topic].join(" ").toLowerCase().includes(q)));
+}
+function renderGallery(){
+ const list=galleryList(), cur=$("niche").value;
+ document.querySelectorAll("#galCats button").forEach(b=>b.classList.toggle("on",b.dataset.c===galCat));
+ $("galCount").textContent=list.length+" styles · "+(CATS.find(c=>c[0]===galCat)||["","All"])[1];
+ $("gallery").innerHTML=list.length?list.map(st=>
+  '<div class="card'+(st.id===cur?" on":"")+'" data-id="'+st.id+'" role="button" tabindex="0">'+
+  '<div class="cov">'+st.emoji+'<img src="img/styles/'+st.id+'.webp" alt="" loading="lazy" onerror="this.remove()"></div>'+
+  (st.trending?'<span class="badge">TRENDING</span>':st.isNew?'<span class="badge new">NEW</span>':'')+
+  '<span class="tg">'+esc(st.tag)+'</span><b>'+esc(st.name)+'</b>'+
+  '<div class="meta"><i>Image + Video</i>'+st.scenes+' scenes · '+esc(st.lang==="Any"?"Any language":st.lang)+'</div>'+
+  '<p>'+esc(st.blurb)+'</p></div>').join(""):'<p class="note">No style matches. Try another word.</p>';
+ const st=styleOf(cur);
+ $("styleNow").innerHTML='Using <b>'+esc(st.name)+'</b> · '+st.scenes+' scenes × '+st.sec+'s · '+esc(st.lang==="Any"?"any language":st.lang)+
+  ' · voice: '+esc($("voiceType").selectedOptions[0]?.textContent||"")+'<br><span class="note">Try: '+esc(st.topic||"")+'</span>';
+}
+// Use a style: sets scenes, seconds, language, voice, cast and look.
+function applyStyle(id,quiet){
+ const st=NICHES[id]; if(!st) return;
+ $("niche").value=id;
+ if([...$("sceneCount").options].some(o=>+o.value===st.scenes)) $("sceneCount").value=String(st.scenes);
+ if([...$("sceneSec").options].some(o=>+o.value===st.sec)) $("sceneSec").value=String(st.sec);
+ if(st.lang!=="Any") $("lang").value=st.lang;
+ $("voiceType").value=st.voice||"narrator";
+ $("narrator").checked=st.voice!=="none";
+ $("character").value=st.character||"";
+ if(st.bg) $("bg").value=st.bg;
+ $("bgBox").hidden=!st.bg;
+ $("topic").placeholder="e.g. "+(st.topic||"");
+ story.scenes.forEach(sc=>{ if(!sc.imgEdited) delete sc.imgPrompt; if(!sc.vidEdited) delete sc.vidPrompt; });
+ renderScenes(); renderGallery(); save();
+ if(!quiet){ toast("Style: "+st.name); $("topic").scrollIntoView({behavior:"smooth",block:"center"}); }
+}
+$("galCats").onclick=e=>{const b=e.target.closest("button"); if(!b)return; galCat=b.dataset.c; renderGallery();};
+$("galSearch").addEventListener("input",renderGallery);
+$("galTrend").addEventListener("change",renderGallery);
+$("gallery").addEventListener("click",e=>{const c=e.target.closest(".card"); if(c) applyStyle(c.dataset.id);});
+$("gallery").addEventListener("keydown",e=>{const c=e.target.closest(".card"); if(c&&(e.key==="Enter"||e.key===" ")){e.preventDefault();applyStyle(c.dataset.id);}});
+
+/* ---------- free start images (Pollinations, no account) ---------- */
+const PIC_API="https://image.pollinations.ai/prompt/";
+const genMsg={}; let picBusy=false;
+function setGen(i,msg){ genMsg[i]=msg; const el=document.querySelector('.scene[data-i="'+i+'"] .genbox'); if(el) el.textContent=msg; }
+function setMedia(i,kind,file){
+ const m=media[i]=media[i]||{};
+ if(kind==="img"){ if(m.imgUrl)URL.revokeObjectURL(m.imgUrl); m.img=file; m.imgUrl=URL.createObjectURL(file); }
+ else{ if(m.clipUrl)URL.revokeObjectURL(m.clipUrl); m.clip=file; m.clipUrl=URL.createObjectURL(file); }
+}
+async function makeFreeImage(i){
+ if(picBusy){ toast("A picture is already being made"); return false; }
+ if(!navigator.onLine){ setGen(i,"No internet connection. Free pictures need the internet."); return false; }
+ const o=settings(), [w,h]=o.format==="16:9"?[1280,720]:o.format==="1:1"?[1024,1024]:[720,1280];
+ const seed=Math.floor(Math.random()*1e9);
+ const url=PIC_API+encodeURIComponent(promptsFor(i).img.slice(0,700))+"?width="+w+"&height="+Math.round(h/0.93)+"&seed="+seed+"&nologo=true&safe=true";
+ picBusy=true; setGen(i,"🎨 Making the start image… (usually 5–30 seconds)");
+ const ctrl=new AbortController(), timer=setTimeout(()=>ctrl.abort(),120000);
+ try{
+  const res=await fetch(url,{signal:ctrl.signal});
+  if(res.status===402||res.status===429){ setGen(i,"The free picture limit was reached. Wait about a minute and try again."); return false; }
+  if(!res.ok){ setGen(i,"The picture service had a problem (error "+res.status+"). Try again in a minute."); return false; }
+  const blob=await res.blob();
+  if(!/^image\//.test(blob.type)){ setGen(i,"The picture service did not send a picture. Try again."); return false; }
+  // the free service stamps a small mark at the bottom: the picture was made 7% taller, cut that strip off
+  let file=new File([blob],"scene-"+(i+1)+(blob.type==="image/png"?".png":".jpg"),{type:blob.type});
+  try{
+   const bmp=await createImageBitmap(blob), ch=Math.round(bmp.height*0.93), c=document.createElement("canvas");
+   c.width=bmp.width; c.height=ch; c.getContext("2d").drawImage(bmp,0,0,bmp.width,ch,0,0,bmp.width,ch); bmp.close&&bmp.close();
+   const out=await new Promise(r=>c.toBlob(r,"image/jpeg",0.92));
+   if(out) file=new File([out],"scene-"+(i+1)+".jpg",{type:"image/jpeg"});
+  }catch(e){}
+  setMedia(i,"img",file);
+  genMsg[i]="Start image made ✓ (free AI picture). Long-press it to save.";
+  renderScenes(); save();
+  return true;
+ }catch(e){
+  setGen(i,e.name==="AbortError"?"The picture took too long. Try again.":"Could not reach the picture service. Check your internet.");
+  return false;
+ }finally{ clearTimeout(timer); picBusy=false; }
+}
+
 /* ---------- events ---------- */
 $("sceneCount").innerHTML=[3,4,5,6,7,8,9,10,12].map(n=>'<option'+(n===6?" selected":"")+'>'+n+'</option>').join("");
 document.querySelectorAll("[data-write]").forEach(b=>b.onclick=()=>{
@@ -545,15 +713,18 @@ $("useOwn").onclick=()=>{
  setStory({title:$("topic").value.trim(),scenes:parts.map(p=>({narration:p}))});
 };
 $("quickDraft").onclick=()=>setStory(quickDraft(settings()),"Draft ready. Edit the narration to fit your topic (check the facts!).");
-["topic","notes","sceneCount","sceneSec","format","niche","bg","character","ownScript","narrator","noMusic","burnCaps"].forEach(id=>
- $(id).addEventListener("change",()=>{ if(["format","niche","bg","character","narrator","noMusic"].includes(id)) renderScenes(); else renderPackage(); save(); }));
+["topic","notes","sceneCount","sceneSec","format","niche","bg","character","ownScript","narrator","noMusic","burnCaps","lang","voiceType"].forEach(id=>
+ $(id).addEventListener("change",()=>{
+  if(id==="niche"){ applyStyle($("niche").value,true); return; }
+  if(["format","bg","character","narrator","noMusic","lang","voiceType"].includes(id)) renderScenes(); else renderPackage(); save(); }));
 $("imgPlat").onclick=e=>{const b=e.target.closest("button"); if(!b)return; imgPlat=b.dataset.p; renderChips(); renderPackage(); save();};
 $("vidPlat").onclick=e=>{const b=e.target.closest("button"); if(!b)return; vidPlat=b.dataset.p; renderChips(); renderPackage(); save();};
 $("skipImg").onclick=()=>{ skipImages=!skipImages; renderPackage(); save(); };
 $("nextBtn").onclick=()=>{
  const nx=nextStep(); if(!nx)return;
  const p=promptsFor(nx.i);
- openOn(nx.kind==="img"?imgPlat:vidPlat, nx.kind==="img"?p.img:p.vid);
+ if(nx.kind==="img"&&imgPlat==="free") makeFreeImage(nx.i).then(()=>renderPackage());
+ else openOn(nx.kind==="img"?imgPlat:vidPlat, nx.kind==="img"?p.img:p.vid);
  document.querySelector('.scene[data-i="'+nx.i+'"]')?.scrollIntoView({behavior:"smooth",block:"start"});
 };
 $("scenes").addEventListener("input",e=>{
@@ -577,6 +748,7 @@ $("scenes").addEventListener("click",e=>{
  if(a==="copy-img") copyText(p.img).then(ok=>toast(ok?"Image prompt copied":"Copy failed — select the text"));
  if(a==="copy-vid") copyText(p.vid).then(ok=>toast(ok?"Video prompt copied":"Copy failed — select the text"));
  if(a==="open-img") openOn(b.dataset.p,p.img);
+ if(a==="free-img") makeFreeImage(i);
  if(a==="open-vid") openOn(b.dataset.p,p.vid);
  if(a==="reset"){ delete s.imgPrompt; delete s.vidPrompt; s.imgEdited=s.vidEdited=false; renderScenes(); save(); }
  if(a==="done"){ s.clipDone=!s.clipDone; renderScenes(); save(); }
@@ -584,9 +756,7 @@ $("scenes").addEventListener("click",e=>{
 $("scenes").addEventListener("change",e=>{
  const el=e.target; if(!el.dataset.up)return;
  const i=+el.closest(".scene").dataset.i, f=el.files&&el.files[0]; if(!f)return;
- const m=media[i]=media[i]||{};
- if(el.dataset.up==="img"){ if(m.imgUrl)URL.revokeObjectURL(m.imgUrl); m.img=f; m.imgUrl=URL.createObjectURL(f); }
- else{ if(m.clipUrl)URL.revokeObjectURL(m.clipUrl); m.clip=f; m.clipUrl=URL.createObjectURL(f); }
+ setMedia(i,el.dataset.up==="img"?"img":"clip",f);
  renderScenes(); save();
 });
 $("dlTxt").onclick=()=>story.scenes.length&&download(slug()+"-video-prompts.txt",promptsTxt("vid"));
@@ -617,8 +787,12 @@ $("joinShare").onclick=async()=>{
  try{ await navigator.share(data); }catch(e){}
 };
 
-load(); renderChips(); renderScenes();
-window.Story={parseAnswer,splitNarration,quickDraft,writerPrompt,imagePrompt,videoPrompt,promptsTxt,promptsCsv,stickmanScript,
+load();
+if(!NICHES[$("niche").value]) $("niche").value="stick";
+$("bgBox").hidden=!styleOf($("niche").value).bg;
+$("topic").placeholder="e.g. "+(styleOf($("niche").value).topic||"");
+renderChips(); renderScenes(); renderGallery();
+window.Story={applyStyle,makeFreeImage,STYLES,beatsFor,parseAnswer,splitNarration,quickDraft,writerPrompt,imagePrompt,videoPrompt,promptsTxt,promptsCsv,stickmanScript,
  nextStep,colorName,state:()=>({story,media,imgPlat,vidPlat,skipImages}),setStory,PLATFORMS};
 </script>
 </body>
