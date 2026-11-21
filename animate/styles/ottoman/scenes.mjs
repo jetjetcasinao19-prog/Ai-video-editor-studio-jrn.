@@ -116,3 +116,28 @@ export function bookCover(ctx, S, q) {
   for (let i = 0; i < 10; i++) { const y = H - ((q * 140 + i * 110) % (H + 100)); k.bubble(ctx, 80 + (i * 97) % 780, y, 9 + (i % 3) * 5, 0.85); }
 }
 
+// Title sign, round medallion (? / !) and a heart.
+export function heart(ctx, k, P, x, y, s, a = 1) {
+  if (s <= 0) return;
+  ctx.save(); ctx.globalAlpha *= clamp(a); ctx.translate(x, y); ctx.scale(s, s);
+  ctx.beginPath(); ctx.moveTo(0, 12); ctx.bezierCurveTo(-26, -6, -14, -28, 0, -14); ctx.bezierCurveTo(14, -28, 26, -6, 0, 12);
+  k.fillStroke(ctx, P.verm, P.ink, 1.5); ctx.restore();
+}
+export function bigSign(ctx, k, P, text, x, y, w, sc, size = 96) {
+  if (sc <= 0) return;
+  ctx.save(); ctx.translate(x, y); ctx.scale(sc, sc);
+  k.cartouche(ctx, 0, 0, w, size * 1.8, P.lapis, P.goldLight, 6);
+  ctx.font = `900 ${size}px Deco`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  while (ctx.measureText(text).width > w - 120) { size -= 4; ctx.font = `900 ${size}px Deco`; }
+  ctx.lineWidth = 10; ctx.strokeStyle = P.ink; ctx.strokeText(text, 0, 8);
+  const g = ctx.createLinearGradient(0, -50, 0, 60); g.addColorStop(0, P.goldLight); g.addColorStop(1, P.ochre);
+  ctx.fillStyle = g; ctx.fillText(text, 0, 8);
+  ctx.restore();
+}
+export function medallion(ctx, k, P, ch, x, y, sc, bg = P.lapis) {
+  if (sc <= 0) return;
+  ctx.save(); ctx.translate(x, y); ctx.scale(sc, sc);
+  k.circle(ctx, 0, 0, 56, bg, P.goldLight, 5);
+  ctx.fillStyle = P.goldLight; ctx.font = '900 74px Deco'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(ch, 0, 6);
+  ctx.restore();
+}

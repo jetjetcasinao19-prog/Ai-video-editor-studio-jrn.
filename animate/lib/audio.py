@@ -227,6 +227,16 @@ def sfx_signal(kind, pitch=1.0):
             s = s + g * np.sin(2 * np.pi * f * pitch * tt * (1 + 0.002 * np.sin(2 * np.pi * 3 * tt))) * np.exp(-tt * d)
         s = s * 0.45; d = drum_dum(0.5); s[:len(d)] += d * 0.5
         return s
+    if kind == 'spray':  # pressurised water jet
+        tt = t(1.1); n = bandnoise(len(tt), 1200, 11000)
+        return n * np.clip(tt / 0.03, 0, 1) * np.exp(-tt * 1.8) * (0.8 + 0.2 * np.sin(2 * np.pi * 23 * tt)) * 0.7
+    if kind == 'splash':
+        tt = t(0.8); body = bandnoise(len(tt), 300, 5000) * np.exp(-tt * 6)
+        drops = sum(np.sin(2 * np.pi * f * tt) * np.exp(-((tt - d) * 30) ** 2) for f, d in ((1400, 0.12), (1900, 0.22), (1100, 0.35), (2300, 0.45)))
+        return body * 0.7 + drops * 0.25
+    if kind == 'drip':
+        tt = t(0.25); f = 1200 * pitch + 900 * np.exp(-tt * 40)
+        return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-tt * 22) * 0.6
     if kind == 'clank':
         tt = t(0.3); s = sum(np.sin(2 * np.pi * f * tt) for f in (523, 1187, 1873)) * np.exp(-tt * 18)
         return s * 0.35

@@ -1,0 +1,616 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "A rocket scientist invented this toy by accident in his bathroom. In 1982, Lonnie Johnson, an engineer who worked on NASA missions, is building a cooling system that runs on water. He tests a homemade nozzle on his bathroom sink. Whoosh! A blast of water shoots across the room. This would make an amazing water gun. He builds a prototype, but it takes years to get a toy company on board. He keeps pushing. Finally, a company called Laramie says yes. In 1990, it hits stores as the Power Drencher. Then it gets a new name, the Super Soaker. In three years, Laramie sells about 27 million of them. A science experiment that soaked a whole generation. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "A",
+   "start": 0.02,
+   "end": 0.18
+  },
+  {
+   "w": "rocket",
+   "start": 0.18,
+   "end": 0.46
+  },
+  {
+   "w": "scientist",
+   "start": 0.46,
+   "end": 1.04
+  },
+  {
+   "w": "invented",
+   "start": 1.04,
+   "end": 1.6
+  },
+  {
+   "w": "this",
+   "start": 1.6,
+   "end": 1.9
+  },
+  {
+   "w": "toy",
+   "start": 1.9,
+   "end": 2.2
+  },
+  {
+   "w": "by",
+   "start": 2.2,
+   "end": 2.46
+  },
+  {
+   "w": "accident",
+   "start": 2.46,
+   "end": 2.96
+  },
+  {
+   "w": "in",
+   "start": 2.96,
+   "end": 3.34
+  },
+  {
+   "w": "his",
+   "start": 3.34,
+   "end": 3.46
+  },
+  {
+   "w": "bathroom.",
+   "start": 3.46,
+   "end": 4.4
+  },
+  {
+   "w": "In",
+   "start": 4.62,
+   "end": 4.72
+  },
+  {
+   "w": "1982,",
+   "start": 4.72,
+   "end": 6
+  },
+  {
+   "w": "Lonnie",
+   "start": 6,
+   "end": 6.2
+  },
+  {
+   "w": "Johnson,",
+   "start": 6.2,
+   "end": 7.02
+  },
+  {
+   "w": "an",
+   "start": 7.02,
+   "end": 7.1
+  },
+  {
+   "w": "engineer",
+   "start": 7.1,
+   "end": 7.6
+  },
+  {
+   "w": "who",
+   "start": 7.6,
+   "end": 7.82
+  },
+  {
+   "w": "worked",
+   "start": 7.82,
+   "end": 8.14
+  },
+  {
+   "w": "on",
+   "start": 8.14,
+   "end": 8.34
+  },
+  {
+   "w": "NASA",
+   "start": 8.34,
+   "end": 8.7
+  },
+  {
+   "w": "missions,",
+   "start": 8.7,
+   "end": 9.56
+  },
+  {
+   "w": "is",
+   "start": 9.56,
+   "end": 9.72
+  },
+  {
+   "w": "building",
+   "start": 9.72,
+   "end": 10.02
+  },
+  {
+   "w": "a",
+   "start": 10.02,
+   "end": 10.26
+  },
+  {
+   "w": "cooling",
+   "start": 10.26,
+   "end": 10.64
+  },
+  {
+   "w": "system",
+   "start": 10.64,
+   "end": 11.08
+  },
+  {
+   "w": "that",
+   "start": 11.08,
+   "end": 11.32
+  },
+  {
+   "w": "runs",
+   "start": 11.32,
+   "end": 11.62
+  },
+  {
+   "w": "on",
+   "start": 11.62,
+   "end": 11.84
+  },
+  {
+   "w": "water.",
+   "start": 11.84,
+   "end": 12.72
+  },
+  {
+   "w": "He",
+   "start": 13.02,
+   "end": 13.14
+  },
+  {
+   "w": "tests",
+   "start": 13.14,
+   "end": 13.42
+  },
+  {
+   "w": "a",
+   "start": 13.42,
+   "end": 13.6
+  },
+  {
+   "w": "homemade",
+   "start": 13.6,
+   "end": 14.06
+  },
+  {
+   "w": "nozzle",
+   "start": 14.06,
+   "end": 14.48
+  },
+  {
+   "w": "on",
+   "start": 14.48,
+   "end": 14.78
+  },
+  {
+   "w": "his",
+   "start": 14.78,
+   "end": 14.92
+  },
+  {
+   "w": "bathroom",
+   "start": 14.92,
+   "end": 15.34
+  },
+  {
+   "w": "sink.",
+   "start": 15.34,
+   "end": 16.14
+  },
+  {
+   "w": "Whoosh!",
+   "start": 16.38,
+   "end": 16.7
+  },
+  {
+   "w": "A",
+   "start": 16.7,
+   "end": 17.44
+  },
+  {
+   "w": "blast",
+   "start": 17.44,
+   "end": 17.92
+  },
+  {
+   "w": "of",
+   "start": 17.92,
+   "end": 18.06
+  },
+  {
+   "w": "water",
+   "start": 18.06,
+   "end": 18.42
+  },
+  {
+   "w": "shoots",
+   "start": 18.42,
+   "end": 18.8
+  },
+  {
+   "w": "across",
+   "start": 18.8,
+   "end": 19.18
+  },
+  {
+   "w": "the",
+   "start": 19.18,
+   "end": 19.38
+  },
+  {
+   "w": "room.",
+   "start": 19.38,
+   "end": 20.12
+  },
+  {
+   "w": "This",
+   "start": 20.28,
+   "end": 20.42
+  },
+  {
+   "w": "would",
+   "start": 20.42,
+   "end": 20.56
+  },
+  {
+   "w": "make",
+   "start": 20.56,
+   "end": 20.74
+  },
+  {
+   "w": "an",
+   "start": 20.74,
+   "end": 20.84
+  },
+  {
+   "w": "amazing",
+   "start": 20.84,
+   "end": 21.52
+  },
+  {
+   "w": "water",
+   "start": 21.52,
+   "end": 21.96
+  },
+  {
+   "w": "gun.",
+   "start": 21.96,
+   "end": 22.06
+  },
+  {
+   "w": "He",
+   "start": 22.94,
+   "end": 23.04
+  },
+  {
+   "w": "builds",
+   "start": 23.04,
+   "end": 23.34
+  },
+  {
+   "w": "a",
+   "start": 23.34,
+   "end": 23.48
+  },
+  {
+   "w": "prototype,",
+   "start": 23.48,
+   "end": 24.76
+  },
+  {
+   "w": "but",
+   "start": 24.76,
+   "end": 24.78
+  },
+  {
+   "w": "it",
+   "start": 24.78,
+   "end": 24.88
+  },
+  {
+   "w": "takes",
+   "start": 24.88,
+   "end": 25.16
+  },
+  {
+   "w": "years",
+   "start": 25.16,
+   "end": 25.64
+  },
+  {
+   "w": "to",
+   "start": 25.64,
+   "end": 25.88
+  },
+  {
+   "w": "get",
+   "start": 25.88,
+   "end": 25.98
+  },
+  {
+   "w": "a",
+   "start": 25.98,
+   "end": 26.16
+  },
+  {
+   "w": "toy",
+   "start": 26.16,
+   "end": 26.4
+  },
+  {
+   "w": "company",
+   "start": 26.4,
+   "end": 26.82
+  },
+  {
+   "w": "on",
+   "start": 26.82,
+   "end": 27.06
+  },
+  {
+   "w": "board.",
+   "start": 27.06,
+   "end": 27.82
+  },
+  {
+   "w": "He",
+   "start": 28.08,
+   "end": 28.1
+  },
+  {
+   "w": "keeps",
+   "start": 28.1,
+   "end": 28.5
+  },
+  {
+   "w": "pushing.",
+   "start": 28.5,
+   "end": 29.36
+  },
+  {
+   "w": "Finally,",
+   "start": 29.48,
+   "end": 30.2
+  },
+  {
+   "w": "a",
+   "start": 30.2,
+   "end": 30.24
+  },
+  {
+   "w": "company",
+   "start": 30.24,
+   "end": 30.56
+  },
+  {
+   "w": "called",
+   "start": 30.56,
+   "end": 30.94
+  },
+  {
+   "w": "Larami",
+   "start": 30.94,
+   "end": 31.46
+  },
+  {
+   "w": "says",
+   "start": 31.46,
+   "end": 31.96
+  },
+  {
+   "w": "yes.",
+   "start": 31.96,
+   "end": 32.86
+  },
+  {
+   "w": "In",
+   "start": 33.08,
+   "end": 33.18
+  },
+  {
+   "w": "1990,",
+   "start": 33.18,
+   "end": 34.28
+  },
+  {
+   "w": "it",
+   "start": 34.28,
+   "end": 34.36
+  },
+  {
+   "w": "hits",
+   "start": 34.36,
+   "end": 34.54
+  },
+  {
+   "w": "stores",
+   "start": 34.54,
+   "end": 34.96
+  },
+  {
+   "w": "as",
+   "start": 34.96,
+   "end": 35.36
+  },
+  {
+   "w": "the",
+   "start": 35.36,
+   "end": 35.54
+  },
+  {
+   "w": "Power",
+   "start": 35.54,
+   "end": 36
+  },
+  {
+   "w": "Drencher.",
+   "start": 36,
+   "end": 36.5
+  },
+  {
+   "w": "Then",
+   "start": 37.08,
+   "end": 37.28
+  },
+  {
+   "w": "it",
+   "start": 37.28,
+   "end": 37.46
+  },
+  {
+   "w": "gets",
+   "start": 37.46,
+   "end": 37.66
+  },
+  {
+   "w": "a",
+   "start": 37.66,
+   "end": 37.8
+  },
+  {
+   "w": "new",
+   "start": 37.8,
+   "end": 38.02
+  },
+  {
+   "w": "name,",
+   "start": 38.02,
+   "end": 38.82
+  },
+  {
+   "w": "the",
+   "start": 38.82,
+   "end": 38.92
+  },
+  {
+   "w": "Super",
+   "start": 38.92,
+   "end": 39.46
+  },
+  {
+   "w": "Soaker.",
+   "start": 39.46,
+   "end": 39.68
+  },
+  {
+   "w": "In",
+   "start": 40.4,
+   "end": 40.5
+  },
+  {
+   "w": "three",
+   "start": 40.5,
+   "end": 40.82
+  },
+  {
+   "w": "years,",
+   "start": 40.82,
+   "end": 41.66
+  },
+  {
+   "w": "Larami",
+   "start": 41.66,
+   "end": 42
+  },
+  {
+   "w": "sells",
+   "start": 42,
+   "end": 42.34
+  },
+  {
+   "w": "about",
+   "start": 42.34,
+   "end": 42.66
+  },
+  {
+   "w": "27",
+   "start": 42.66,
+   "end": 43.44
+  },
+  {
+   "w": "million",
+   "start": 43.44,
+   "end": 44.1
+  },
+  {
+   "w": "of",
+   "start": 44.1,
+   "end": 44.4
+  },
+  {
+   "w": "them.",
+   "start": 44.4,
+   "end": 44.56
+  },
+  {
+   "w": "A",
+   "start": 45.44,
+   "end": 45.52
+  },
+  {
+   "w": "science",
+   "start": 45.52,
+   "end": 45.96
+  },
+  {
+   "w": "experiment",
+   "start": 45.96,
+   "end": 46.42
+  },
+  {
+   "w": "that",
+   "start": 46.42,
+   "end": 47.2
+  },
+  {
+   "w": "soaked",
+   "start": 47.2,
+   "end": 47.6
+  },
+  {
+   "w": "a",
+   "start": 47.6,
+   "end": 47.94
+  },
+  {
+   "w": "whole",
+   "start": 47.94,
+   "end": 48.4
+  },
+  {
+   "w": "generation.",
+   "start": 48.4,
+   "end": 49.04
+  },
+  {
+   "w": "Every",
+   "start": 50.64,
+   "end": 50.9
+  },
+  {
+   "w": "legend",
+   "start": 50.9,
+   "end": 51.32
+  },
+  {
+   "w": "has",
+   "start": 51.32,
+   "end": 51.78
+  },
+  {
+   "w": "a",
+   "start": 51.78,
+   "end": 51.86
+  },
+  {
+   "w": "beginning.",
+   "start": 51.86,
+   "end": 52.12
+  }
+ ]
+}

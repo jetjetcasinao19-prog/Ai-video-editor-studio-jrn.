@@ -399,10 +399,12 @@ export function galley(ctx, x, y, s = 1, t = 0, cargo = null, rock = 0) {
 
 // ---------- people ----------
 // A miniature-style figure. Feet at (x, y); about 300·s tall.
-// o: { s, face: 1|-1, robe, robeP, inner, sash, hat:'turban'|'fez'|'cap'|'crown', hatColor,
+// o: { s, skin (colour), face: 1|-1, robe, robeP, inner, sash, hat:'turban'|'fez'|'cap'|'crown', hatColor,
 //      beard:'none'|'short'|'long', glasses, armB:[shoulder,elbow], armF:[shoulder,elbow],
 //      hold(ctx) drawn in the front hand, walk (phase) , bob, kneel, label, mood:'happy'|'sad'|'calm', look }
+let SKIN = P.skin; // skin colour of the figure being drawn (o.skin)
 export function figure(ctx, x, y, o = {}) {
+  SKIN = o.skin || P.skin;
   const s = o.s || 1, f = o.face || 1;
   const walk = o.walk ?? null, bob = (o.bob || 0) + (walk != null ? Math.abs(Math.sin(walk)) * -4 : 0);
   ctx.save(); ctx.translate(x, y + bob); ctx.scale(s * f, s);
@@ -446,7 +448,7 @@ function arm(ctx, sx, sy, [a1, a2], robe, robeP, s, hold, kneel) {
   ctx.lineCap = 'round'; ctx.lineJoin = 'round';
   ctx.strokeStyle = P.ink; ctx.lineWidth = 22; ctx.stroke();
   ctx.strokeStyle = shade(robe, 0.12); ctx.lineWidth = 17.5; ctx.stroke();
-  circle(ctx, hx, hy, 7, P.skin, P.ink, 1.5);
+  circle(ctx, hx, hy, 7, SKIN, P.ink, 1.5);
   if (hold) { ctx.save(); ctx.translate(hx, hy); hold(ctx, a1 + a2); ctx.restore(); }
 }
 function head(ctx, x, y, o) {
@@ -454,9 +456,9 @@ function head(ctx, x, y, o) {
   const look = o.look || 0; // -1..1 head tilt
   ctx.rotate(look * 0.12);
   // neck
-  rect(ctx, -6, 10, 12, 10, P.skin, P.ink, 1.2);
+  rect(ctx, -6, 10, 12, 10, SKIN, P.ink, 1.2);
   // face: three-quarter oval
-  ellipse(ctx, 2, 0, 15, 19, 0, P.skin, P.ink, 1.8);
+  ellipse(ctx, 2, 0, 15, 19, 0, SKIN, P.ink, 1.8);
   // beard
   if (o.beard && o.beard !== 'none') {
     const L = o.beard === 'long' ? 34 : 18;
@@ -728,6 +730,85 @@ export function rahle(ctx, x, y, w = 160, color = P.brownLight) {
   ctx.save(); ctx.translate(x, y);
   poly(ctx, [[-w / 2, -60], [w / 2, -80], [w / 2, -66], [-w / 2, -46]], color, P.ink, 2);
   for (const sx of [-w * 0.35, w * 0.35]) { ctx.beginPath(); ctx.moveTo(sx, -55); ctx.lineTo(sx - 18, 0); ctx.moveTo(sx, -55); ctx.lineTo(sx + 18, 0); stroke(ctx, P.brown, 5); }
+  ctx.restore();
+}
+
+// ---------- water, bath & toys ----------
+// Hammam (Turkish bath) interior: marble walls, a dome with star-shaped
+// skylights, and a marble basin (kurna) with a brass tap. Returns tap position.
+export function hammam(ctx, W, H, t = 0) {
+  ctx.fillStyle = '#e9e4da'; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = pattern(ctx, 'scales', '#e9e4da', '#d6cfc2', 46); ctx.fillRect(0, 0, W, H);
+  // the dome, seen from below: dark plaster pierced by glowing star skylights (fil gözü)
+  ctx.save(); ctx.beginPath(); ctx.moveTo(-10, 330); ctx.lineTo(-10, 300); ctx.quadraticCurveTo(W / 2, -160, W + 10, 300); ctx.lineTo(W + 10, 330); ctx.closePath();
+  const dg = ctx.createRadialGradient(W / 2, 120, 40, W / 2, 200, W * 0.7); dg.addColorStop(0, '#6f7f96'); dg.addColorStop(1, '#3b4a63');
+  ctx.fillStyle = dg; ctx.fill(); ctx.clip();
+  const R = rng(4);
+  for (let j = 0; j < 3; j++) for (let i = 0; i < 9 - j * 2; i++) {
+    const x = W / 2 + (i - (8 - j * 2) / 2) * (88 - j * 6), y = 270 - j * 75 - Math.cos((i - (8 - j * 2) / 2) / 5) * 40 + 40;
+    star(ctx, x, y, 15 - j * 2, 0.85 + 0.15 * Math.sin(t * 2 + i + j));
+  }
+  ctx.restore();
+  ctx.beginPath(); ctx.moveTo(-10, 300); ctx.quadraticCurveTo(W / 2, -160, W + 10, 300); stroke(ctx, P.goldLight, 6);
+  rect(ctx, -10, 318, W + 20, 16, P.goldDark, P.ink, 1.5);
+  // light beams falling from the skylights
+  ctx.save();
+  for (let i = 0; i < 6; i++) { const x = 170 + i * 130; ctx.globalAlpha = 0.1 + 0.05 * Math.sin(t * 1.5 + i); ctx.fillStyle = '#fff8dc'; ctx.beginPath(); ctx.moveTo(x - 10, 330); ctx.lineTo(x + 10, 330); ctx.lineTo(x + 70 + R() * 30, H); ctx.lineTo(x - 10 + R() * 30, H); ctx.closePath(); ctx.fill(); }
+  ctx.restore();
+  // arcade of niches + marble floor
+  for (let i = 0; i < 4; i++) arch(ctx, 120 + i * 235, 640, 150, 280, '#cfc6b6');
+  ctx.fillStyle = '#d4ccbc'; ctx.fillRect(0, 760, W, H - 760);
+  ctx.strokeStyle = 'rgba(120,110,95,0.5)'; ctx.lineWidth = 2;
+  for (let x = -200; x < W + 200; x += 90) { ctx.beginPath(); ctx.moveTo(x, 760); ctx.lineTo(x + 140, H); ctx.stroke(); ctx.beginPath(); ctx.moveTo(x + 140, 760); ctx.lineTo(x, H); ctx.stroke(); }
+}
+export function kurna(ctx, x, y, s = 1) { // marble basin with a brass tap; returns the tap's mouth
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  rect(ctx, -70, -200, 140, 90, '#ece7dd', P.ink, 2);
+  ctx.beginPath(); ctx.moveTo(-90, -110); ctx.lineTo(90, -110); ctx.quadraticCurveTo(85, 0, 0, 0); ctx.quadraticCurveTo(-85, 0, -90, -110); ctx.closePath(); fillStroke(ctx, '#f1ede4', P.ink, 2.5);
+  ctx.beginPath(); ctx.ellipse(0, -110, 90, 14, 0, 0, TAU); fillStroke(ctx, '#bcd6df', P.ink, 2);
+  rect(ctx, -8, -190, 16, 40, P.goldDark, P.ink, 1.5);
+  ctx.beginPath(); ctx.moveTo(0, -165); ctx.quadraticCurveTo(36, -170, 40, -140); stroke(ctx, P.ink, 12); stroke(ctx, P.gold, 8);
+  ctx.restore();
+  return [x + 40 * s, y - 138 * s];
+}
+// A stream of water from (x0,y0) curving through (cx,cy) to (x1,y1); k = how far it has travelled.
+export function waterStream(ctx, x0, y0, cx, cy, x1, y1, k, t = 0, w = 16) {
+  if (k <= 0) return;
+  const pts = [], n = 40;
+  for (let i = 0; i <= n * clamp(k); i++) { const q = i / n; pts.push([(1 - q) * (1 - q) * x0 + 2 * (1 - q) * q * cx + q * q * x1, (1 - q) * (1 - q) * y0 + 2 * (1 - q) * q * cy + q * q * y1]); }
+  if (pts.length < 2) return;
+  const path = () => { ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]); for (const p of pts) ctx.lineTo(p[0], p[1]); };
+  path(); stroke(ctx, P.ink, w + 4); path(); stroke(ctx, '#5fb6d8', w); path();
+  ctx.save(); ctx.setLineDash([22, 30]); ctx.lineDashOffset = -t * 700; stroke(ctx, 'rgba(255,255,255,0.85)', w * 0.35); ctx.restore();
+  const R = rng(13), [ex, ey] = pts[pts.length - 1];
+  for (let i = 0; i < 14; i++) { const a = R() * TAU, r = 10 + ((t * 120 + R() * 60) % 60); circle(ctx, ex + Math.cos(a) * r, ey + Math.sin(a) * r * 0.7, 3 + R() * 4, '#9fd3e8', P.ink, 1); }
+}
+// Pump-action water gun (the toy), facing right. colours: body, tank.
+export function waterGun(ctx, x, y, s = 1, rot = 0, body = P.turq, tank = P.ochre) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
+  // tank on top
+  ctx.beginPath(); ctx.ellipse(-20, -58, 70, 30, 0, 0, TAU); fillStroke(ctx, tank, P.ink, 2.5);
+  ctx.beginPath(); ctx.ellipse(-40, -66, 22, 8, -0.2, 0, TAU); ctx.fillStyle = 'rgba(255,255,255,0.5)'; ctx.fill();
+  rect(ctx, -30, -94, 20, 10, P.verm, P.ink, 1.5);
+  // body + barrel + nozzle
+  ctx.beginPath(); ctx.moveTo(-110, -30); ctx.lineTo(120, -30); ctx.lineTo(130, -14); ctx.lineTo(120, 4); ctx.lineTo(-90, 4); ctx.lineTo(-120, -10); ctx.closePath(); fillStroke(ctx, body, P.ink, 2.5);
+  rect(ctx, 128, -20, 22, 14, P.verm, P.ink, 2);
+  // pump handle under the barrel
+  rect(ctx, 30, 6, 80, 22, P.verm, P.ink, 2);
+  // grip + trigger
+  ctx.beginPath(); ctx.moveTo(-90, 4); ctx.lineTo(-60, 4); ctx.lineTo(-74, 70); ctx.lineTo(-108, 66); ctx.closePath(); fillStroke(ctx, body, P.ink, 2.5);
+  ctx.beginPath(); ctx.moveTo(-50, 4); ctx.quadraticCurveTo(-38, 26, -54, 34); stroke(ctx, P.ink, 4);
+  for (let i = 0; i < 4; i++) circle(ctx, -60 + i * 40, -14, 4, P.goldLight, P.ink, 1);
+  ctx.restore();
+}
+// A rocket of the kind Ottoman chronicles say Lagâri Hasan Çelebi rode in 1633.
+export function rocket(ctx, x, y, s = 1, rot = 0, t = 0, fire = 1) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
+  if (fire > 0) for (let i = 0; i < 3; i++) { const f = (1 + 0.25 * Math.sin(t * 30 + i * 2)) * fire; ctx.beginPath(); ctx.moveTo(-18 + i * 6, 70); ctx.quadraticCurveTo(-10 + i * 10, 70 + 90 * f, 0, 70 + 150 * f - i * 30); ctx.quadraticCurveTo(10 - i * 2, 80 + 60 * f, 18 - i * 6, 70); fillStroke(ctx, [P.verm, P.ochre, P.goldLight][i], P.ink, 1.2); }
+  rect(ctx, -24, -60, 48, 130, P.verm, P.ink, 2.5);
+  ctx.fillStyle = pattern(ctx, 'cintamani', P.verm, P.goldLight, 22); ctx.fillRect(-22, -58, 44, 126);
+  ctx.beginPath(); ctx.moveTo(-24, -60); ctx.quadraticCurveTo(-20, -110, 0, -140); ctx.quadraticCurveTo(20, -110, 24, -60); ctx.closePath(); fillStroke(ctx, P.goldLight, P.ink, 2.5);
+  for (const sx of [-1, 1]) { ctx.beginPath(); ctx.moveTo(sx * 24, 30); ctx.lineTo(sx * 52, 80); ctx.lineTo(sx * 24, 66); ctx.closePath(); fillStroke(ctx, P.lapis, P.ink, 2); }
   ctx.restore();
 }
 

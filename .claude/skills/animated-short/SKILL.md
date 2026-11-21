@@ -35,10 +35,11 @@ Everything lives in `animate/`:
 | `animate/render.mjs` | CLI: contact sheet, stills, full render |
 | `animate/lib/engine.mjs` | parallel frame workers → FFmpeg, then soundtrack + mux |
 | `animate/lib/audio.py` | synthesised score (maqam scales, oud/kanun strings, ney, def/darbuka) + 20 sound effects + voice ducking + −14 LUFS |
-| `animate/styles/ottoman/` | the Ottoman miniature style: `kit.mjs` (figures, turbans, cloud bands, spongy rocks, cypresses, tulips, waves, galley, tughra, seals, stamps…), `page.mjs` (ebru marbled margins, illuminated header, gold-ruled frame, captions, progress reed), `scenes.mjs` (ready backdrops: `land`, `interior`, `lamp`, `compassRose`, `bookCover` for the closing brand card), `index.mjs` (transitions) |
+| `animate/styles/ottoman/` | the Ottoman miniature style: `kit.mjs` (figures, turbans, cloud bands, spongy rocks, cypresses, tulips, waves, galley, tughra, seals, stamps, sticky notes, books, alembic, jar, hammam + basin, water streams, water gun, rocket…), `page.mjs` (ebru marbled margins, illuminated header, gold-ruled frame, captions, progress reed), `scenes.mjs` (ready backdrops: `land`, `interior`, `lamp`, `compassRose`, `bookCover` for the closing brand card, `bigSign` gold title, `medallion` ?/!, `heart`), `index.mjs` (transitions) |
 | `animate/projects/<name>/` | one video: `voice.mp3`, `words.json`, `story.mjs` → `out/<slug>.mp4` |
 | `animate/projects/bubble-wrap/` | the first finished short — **copy it as the template** |
 | `animate/projects/post-it-notes/` | second short (sticky notes, alembic, choir, hymn book, bazaar stall, map of America) |
+| `animate/projects/super-soaker/` | third short (hammam bathroom, water blasts, rocket, gates stamped NO with days flying by, counter over a treasure heap, festival) |
 
 Follow CLAUDE.md: never say it works until you rendered and looked at it.
 
@@ -81,12 +82,13 @@ Start from `projects/bubble-wrap/story.mjs`. It exports:
   circle), `wipe`, `unroll` (scroll), `flash` (gold), `cut`.
 - `sfx` — `{ t, type, gain, pitch }`; types: pop, whoosh, paper, chime, stamp,
   thud, pluck, slide, sizzle, wind, rain, waves, crickets, flop, riser, gong,
-  clank, alarm, thunder, crack, coins.
+  clank, alarm, thunder, crack, coins, spray, splash, drip.
 - `music` — `{ bpm, root, maqam: 'hicaz'|'rast'|'nihavend', gain, sections:[{from,to,mood}] }`,
   moods: intro, groove, sad, drive, triumph, end. Match moods to the story's
   turns (failure → sad, comeback → drive, payoff → triumph).
 
-Use helpers from the kit before drawing by hand. Animation tools are in
+Use helpers from the kit before drawing by hand. Figures take `skin:` (a colour) —
+match real people's skin tone (the kit default is light). Animation tools are in
 `lib/core.mjs`: `tween`, `ease.*`, `pop`, `shake`, `rng` (seeded — never
 `Math.random`, frames render in parallel and must be repeatable).
 
