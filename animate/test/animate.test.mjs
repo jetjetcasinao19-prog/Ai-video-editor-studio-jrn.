@@ -13,6 +13,8 @@ import { ebru, groupLines, LAYOUT } from '../styles/ottoman/page.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT = path.join(HERE, '..', 'projects', 'bubble-wrap');
+// every finished short is checked, so a change to the style can't break an older video
+const PROJECTS = fs.readdirSync(path.join(HERE, '..', 'projects')).filter(d => fs.existsSync(path.join(HERE, '..', 'projects', d, 'story.mjs'))).map(d => path.join(HERE, '..', 'projects', d));
 
 test('transcript: punctuation comes back and names can be fixed', () => {
   const words = [{ w: 'Mark', start: 0, end: 0.3 }, { w: 'Chavannes', start: 0.3, end: 0.8 }];
@@ -30,16 +32,16 @@ test('ebru marbling is deterministic', () => {
   assert.ok(new Set(Array.from(a.filter((_, i) => i % 4 === 0))).size > 2, 'uses several ink colours');
 });
 
-test('story: scenes are ordered, voice fits, every word is captioned', async () => {
-  const p = await loadProject(PROJECT);
+for (const PROJ of PROJECTS) test(`story ${path.basename(PROJ)}: scenes are ordered, voice fits, every word is captioned`, async () => {
+  const p = await loadProject(PROJ);
   assert.deepEqual(checkStory(p.meta, p.story.scenes, p.words), []);
   const lines = groupLines(p.words);
   assert.equal(lines.flat().length, p.words.length);
   for (const s of p.story.sfx) assert.ok(s.t >= 0 && s.t < p.meta.duration, 'sfx inside the video: ' + s.type);
 });
 
-test('every scene draws (start, middle, during its transition) and is not blank', async () => {
-  const p = await loadProject(PROJECT);
+for (const PROJ of PROJECTS) test(`${path.basename(PROJ)}: every scene draws (start, middle, during its transition) and is not blank`, async () => {
+  const p = await loadProject(PROJ);
   const fd = await makeFrameDrawer(p);
   const sc = p.story.scenes, PA = LAYOUT.paint;
   const sig = [];
@@ -72,8 +74,8 @@ print('ok', len(kinds))
   assert.equal(r.status, 0, r.stderr);
   assert.match(r.stdout, /^ok/);
 });
-function await_sfx() { // the sfx list without importing the story twice
-  const src = fs.readFileSync(path.join(PROJECT, 'story.mjs'), 'utf8');
+function await_sfx() { // the sfx lists without importing the stories twice
+  const src = PROJECTS.map(d => fs.readFileSync(path.join(d, 'story.mjs'), 'utf8')).join('\n');
   return [...src.matchAll(/type: '([a-z]+)'/g)].map(m => ({ type: m[1] }));
 }
 

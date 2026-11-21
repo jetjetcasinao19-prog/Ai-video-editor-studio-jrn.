@@ -1,0 +1,581 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "This glue was a failure. Now it's on desks everywhere. A 3M scientist, Spencer Silver, tries to make a super strong glue. He makes the opposite. A glue so weak it peels off and sticks again. Years later, his co-worker Art Fry is singing in his church choir. His bookmarks keep falling out of his hymn book. Then it clicks. What if the bookmark could stick? 3M tests the sticky pads as press and peel. It flops. But 3M doesn't quit. In 1978, they flood Boise, Idaho with free samples. People love them. Two years later, they hit stores across America as post-it notes. A failed glue turned desk icon. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "This",
+   "start": 0.02,
+   "end": 0.28
+  },
+  {
+   "w": "glue",
+   "start": 0.28,
+   "end": 0.58
+  },
+  {
+   "w": "was",
+   "start": 0.58,
+   "end": 1.02
+  },
+  {
+   "w": "a",
+   "start": 1.02,
+   "end": 1.16
+  },
+  {
+   "w": "failure.",
+   "start": 1.16,
+   "end": 2.28
+  },
+  {
+   "w": "Now",
+   "start": 2.28,
+   "end": 2.4
+  },
+  {
+   "w": "it's",
+   "start": 2.4,
+   "end": 2.6
+  },
+  {
+   "w": "on",
+   "start": 2.6,
+   "end": 2.78
+  },
+  {
+   "w": "desks",
+   "start": 2.78,
+   "end": 3.12
+  },
+  {
+   "w": "everywhere.",
+   "start": 3.12,
+   "end": 3.66
+  },
+  {
+   "w": "A",
+   "start": 4.68,
+   "end": 4.78
+  },
+  {
+   "w": "3M",
+   "start": 4.78,
+   "end": 5.14
+  },
+  {
+   "w": "scientist,",
+   "start": 5.14,
+   "end": 6.02
+  },
+  {
+   "w": "Spencer",
+   "start": 6.02,
+   "end": 6.42
+  },
+  {
+   "w": "Silver,",
+   "start": 6.42,
+   "end": 7.22
+  },
+  {
+   "w": "tries",
+   "start": 7.22,
+   "end": 7.42
+  },
+  {
+   "w": "to",
+   "start": 7.42,
+   "end": 7.62
+  },
+  {
+   "w": "make",
+   "start": 7.62,
+   "end": 7.82
+  },
+  {
+   "w": "a",
+   "start": 7.82,
+   "end": 8
+  },
+  {
+   "w": "super",
+   "start": 8,
+   "end": 8.54
+  },
+  {
+   "w": "strong",
+   "start": 8.54,
+   "end": 8.72
+  },
+  {
+   "w": "glue.",
+   "start": 8.72,
+   "end": 9.52
+  },
+  {
+   "w": "He",
+   "start": 9.72,
+   "end": 9.82
+  },
+  {
+   "w": "makes",
+   "start": 9.82,
+   "end": 10.04
+  },
+  {
+   "w": "the",
+   "start": 10.04,
+   "end": 10.18
+  },
+  {
+   "w": "opposite.",
+   "start": 10.18,
+   "end": 11.18
+  },
+  {
+   "w": "A",
+   "start": 11.18,
+   "end": 11.28
+  },
+  {
+   "w": "glue",
+   "start": 11.28,
+   "end": 11.52
+  },
+  {
+   "w": "so",
+   "start": 11.52,
+   "end": 11.8
+  },
+  {
+   "w": "weak",
+   "start": 11.8,
+   "end": 12.16
+  },
+  {
+   "w": "it",
+   "start": 12.16,
+   "end": 12.38
+  },
+  {
+   "w": "peels",
+   "start": 12.38,
+   "end": 12.8
+  },
+  {
+   "w": "off",
+   "start": 12.8,
+   "end": 13.12
+  },
+  {
+   "w": "and",
+   "start": 13.12,
+   "end": 13.32
+  },
+  {
+   "w": "sticks",
+   "start": 13.32,
+   "end": 13.68
+  },
+  {
+   "w": "again.",
+   "start": 13.68,
+   "end": 14.04
+  },
+  {
+   "w": "Years",
+   "start": 15.14,
+   "end": 15.38
+  },
+  {
+   "w": "later,",
+   "start": 15.38,
+   "end": 15.92
+  },
+  {
+   "w": "his",
+   "start": 15.92,
+   "end": 16.1
+  },
+  {
+   "w": "co-worker",
+   "start": 16.1,
+   "end": 16.64
+  },
+  {
+   "w": "Art",
+   "start": 16.64,
+   "end": 17.04
+  },
+  {
+   "w": "Fry",
+   "start": 17.04,
+   "end": 17.36
+  },
+  {
+   "w": "is",
+   "start": 17.36,
+   "end": 17.64
+  },
+  {
+   "w": "singing",
+   "start": 17.64,
+   "end": 17.96
+  },
+  {
+   "w": "in",
+   "start": 17.96,
+   "end": 18.18
+  },
+  {
+   "w": "his",
+   "start": 18.18,
+   "end": 18.32
+  },
+  {
+   "w": "church",
+   "start": 18.32,
+   "end": 18.64
+  },
+  {
+   "w": "choir.",
+   "start": 18.64,
+   "end": 19.42
+  },
+  {
+   "w": "His",
+   "start": 19.68,
+   "end": 19.82
+  },
+  {
+   "w": "bookmarks",
+   "start": 19.82,
+   "end": 20.3
+  },
+  {
+   "w": "keep",
+   "start": 20.3,
+   "end": 20.6
+  },
+  {
+   "w": "falling",
+   "start": 20.6,
+   "end": 20.98
+  },
+  {
+   "w": "out",
+   "start": 20.98,
+   "end": 21.2
+  },
+  {
+   "w": "of",
+   "start": 21.2,
+   "end": 21.32
+  },
+  {
+   "w": "his",
+   "start": 21.32,
+   "end": 21.44
+  },
+  {
+   "w": "hymn",
+   "start": 21.44,
+   "end": 21.62
+  },
+  {
+   "w": "book.",
+   "start": 21.62,
+   "end": 22.5
+  },
+  {
+   "w": "Then",
+   "start": 22.5,
+   "end": 22.68
+  },
+  {
+   "w": "it",
+   "start": 22.68,
+   "end": 23
+  },
+  {
+   "w": "clicks.",
+   "start": 23,
+   "end": 23.42
+  },
+  {
+   "w": "What",
+   "start": 24.24,
+   "end": 24.42
+  },
+  {
+   "w": "if",
+   "start": 24.42,
+   "end": 24.54
+  },
+  {
+   "w": "the",
+   "start": 24.54,
+   "end": 24.72
+  },
+  {
+   "w": "bookmark",
+   "start": 24.72,
+   "end": 25.4
+  },
+  {
+   "w": "could",
+   "start": 25.4,
+   "end": 26.12
+  },
+  {
+   "w": "stick?",
+   "start": 26.12,
+   "end": 27.2
+  },
+  {
+   "w": "3M",
+   "start": 27.86,
+   "end": 28.2
+  },
+  {
+   "w": "tests",
+   "start": 28.2,
+   "end": 28.64
+  },
+  {
+   "w": "the",
+   "start": 28.64,
+   "end": 28.92
+  },
+  {
+   "w": "sticky",
+   "start": 28.92,
+   "end": 29.24
+  },
+  {
+   "w": "pads",
+   "start": 29.24,
+   "end": 29.52
+  },
+  {
+   "w": "as",
+   "start": 29.52,
+   "end": 29.9
+  },
+  {
+   "w": "Press",
+   "start": 29.9,
+   "end": 30.34
+  },
+  {
+   "w": "'n",
+   "start": 30.34,
+   "end": 30.42
+  },
+  {
+   "w": "Peel.",
+   "start": 30.42,
+   "end": 31.46
+  },
+  {
+   "w": "It",
+   "start": 31.46,
+   "end": 31.56
+  },
+  {
+   "w": "flops.",
+   "start": 31.56,
+   "end": 32.84
+  },
+  {
+   "w": "But",
+   "start": 32.84,
+   "end": 32.94
+  },
+  {
+   "w": "3M",
+   "start": 32.94,
+   "end": 33.48
+  },
+  {
+   "w": "doesn't",
+   "start": 33.48,
+   "end": 33.92
+  },
+  {
+   "w": "quit.",
+   "start": 33.92,
+   "end": 35.08
+  },
+  {
+   "w": "In",
+   "start": 35.08,
+   "end": 35.14
+  },
+  {
+   "w": "1978,",
+   "start": 35.14,
+   "end": 36.38
+  },
+  {
+   "w": "they",
+   "start": 36.38,
+   "end": 36.4
+  },
+  {
+   "w": "flood",
+   "start": 36.4,
+   "end": 36.8
+  },
+  {
+   "w": "Boise,",
+   "start": 36.8,
+   "end": 37.36
+  },
+  {
+   "w": "Idaho",
+   "start": 37.36,
+   "end": 37.76
+  },
+  {
+   "w": "with",
+   "start": 37.76,
+   "end": 38.02
+  },
+  {
+   "w": "free",
+   "start": 38.02,
+   "end": 38.34
+  },
+  {
+   "w": "samples.",
+   "start": 38.34,
+   "end": 39.5
+  },
+  {
+   "w": "People",
+   "start": 39.5,
+   "end": 39.78
+  },
+  {
+   "w": "love",
+   "start": 39.78,
+   "end": 40.24
+  },
+  {
+   "w": "them.",
+   "start": 40.24,
+   "end": 41.18
+  },
+  {
+   "w": "Two",
+   "start": 41.18,
+   "end": 41.3
+  },
+  {
+   "w": "years",
+   "start": 41.3,
+   "end": 41.58
+  },
+  {
+   "w": "later,",
+   "start": 41.58,
+   "end": 42.24
+  },
+  {
+   "w": "they",
+   "start": 42.24,
+   "end": 42.36
+  },
+  {
+   "w": "hit",
+   "start": 42.36,
+   "end": 42.52
+  },
+  {
+   "w": "stores",
+   "start": 42.52,
+   "end": 42.88
+  },
+  {
+   "w": "across",
+   "start": 42.88,
+   "end": 43.3
+  },
+  {
+   "w": "America",
+   "start": 43.3,
+   "end": 43.76
+  },
+  {
+   "w": "as",
+   "start": 44.18,
+   "end": 44.44
+  },
+  {
+   "w": "Post-it",
+   "start": 44.44,
+   "end": 44.9
+  },
+  {
+   "w": "Notes.",
+   "start": 44.9,
+   "end": 45.26
+  },
+  {
+   "w": "A",
+   "start": 45.26,
+   "end": 46.32
+  },
+  {
+   "w": "failed",
+   "start": 46.32,
+   "end": 46.78
+  },
+  {
+   "w": "glue",
+   "start": 46.78,
+   "end": 47.22
+  },
+  {
+   "w": "turned",
+   "start": 47.22,
+   "end": 48.18
+  },
+  {
+   "w": "desk",
+   "start": 48.18,
+   "end": 48.66
+  },
+  {
+   "w": "icon.",
+   "start": 48.66,
+   "end": 49.88
+  },
+  {
+   "w": "Every",
+   "start": 49.88,
+   "end": 50.18
+  },
+  {
+   "w": "legend",
+   "start": 50.18,
+   "end": 50.54
+  },
+  {
+   "w": "has",
+   "start": 50.54,
+   "end": 51.06
+  },
+  {
+   "w": "a",
+   "start": 51.06,
+   "end": 51.14
+  },
+  {
+   "w": "beginning.",
+   "start": 51.14,
+   "end": 51.42
+  }
+ ]
+}

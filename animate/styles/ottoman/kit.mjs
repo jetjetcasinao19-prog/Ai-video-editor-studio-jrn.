@@ -659,6 +659,78 @@ export function stamp(ctx, text, x, y, size, k, rot = -0.18, color = P.verm) {
   ctx.restore();
 }
 
+// ---------- desk & study props ----------
+// A square sticky note. curl 0..1 lifts the bottom-right corner; text optional.
+export function stickyNote(ctx, x, y, size, rot = 0, curl = 0, color = '#f4d63e', text = null) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot);
+  const h = size / 2, c = size * 0.45 * clamp(curl);
+  ctx.beginPath(); ctx.moveTo(-h, -h); ctx.lineTo(h, -h); ctx.lineTo(h, h - c); ctx.lineTo(h - c, h); ctx.lineTo(-h, h); ctx.closePath();
+  fillStroke(ctx, color, P.ink, Math.max(1.2, size * 0.025));
+  ctx.fillStyle = 'rgba(160,120,0,0.25)'; ctx.fillRect(-h + 1, -h + 1, size - 2, size * 0.12); // the gummed strip
+  if (c > 1) { ctx.beginPath(); ctx.moveTo(h, h - c); ctx.quadraticCurveTo(h - c * 0.15, h - c * 0.15, h - c, h); ctx.lineTo(h - c * 0.75, h - c * 0.75); ctx.closePath(); fillStroke(ctx, shade(color, -0.15), P.ink, 1.2); }
+  if (text) {
+    ctx.fillStyle = P.ink; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    const lines = text.split('\n'); let fs = size * 0.2; ctx.font = `700 ${fs}px Garamond`;
+    lines.forEach((ln, i) => ctx.fillText(ln, 0, (i - (lines.length - 1) / 2) * fs * 1.1 + size * 0.04));
+  }
+  ctx.restore();
+}
+// A pad of notes (stack), e.g. for a market stall.
+export function notePad(ctx, x, y, size, n = 6, color = '#f4d63e') {
+  for (let i = n - 1; i >= 0; i--) rect(ctx, x - size / 2 + i * 1.5, y - size / 2 + i * 3, size, size, i ? shade(color, -0.12) : color, P.ink, 1.3);
+}
+// Open book seen from above (hymn book / ledger). page: lines drawn on pages.
+export function openBook(ctx, x, y, w, h, o = {}) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(o.rot || 0);
+  rect(ctx, -w / 2 - 8, -h / 2 - 6, w + 16, h + 14, o.cover || P.vermDark, P.ink, 2);
+  for (const sgn of [-1, 1]) {
+    ctx.beginPath(); ctx.moveTo(0, -h / 2); ctx.quadraticCurveTo(sgn * w * 0.25, -h / 2 - 10, sgn * w / 2, -h / 2 + 2); ctx.lineTo(sgn * w / 2, h / 2); ctx.quadraticCurveTo(sgn * w * 0.25, h / 2 - 10, 0, h / 2); ctx.closePath();
+    fillStroke(ctx, P.paperLight, P.ink, 1.6);
+    ctx.save(); ctx.globalAlpha = 0.45;
+    for (let k = 1; k < 7; k++) { ctx.beginPath(); ctx.moveTo(sgn * w * 0.08, -h / 2 + k * h / 7.5); ctx.lineTo(sgn * w * 0.44, -h / 2 + k * h / 7.5); stroke(ctx, P.ink, 1.2); }
+    ctx.restore();
+    if (o.notes) for (let k = 0; k < 2; k++) musicNote(ctx, sgn * w * 0.26, -h * 0.25 + k * h * 0.35, h * 0.12, P.ink);
+  }
+  ctx.beginPath(); ctx.moveTo(0, -h / 2); ctx.lineTo(0, h / 2); stroke(ctx, P.ink, 2);
+  ctx.restore();
+}
+export function musicNote(ctx, x, y, s, color = P.goldDark) {
+  ctx.save(); ctx.translate(x, y);
+  ctx.beginPath(); ctx.ellipse(0, 0, s * 0.42, s * 0.3, -0.4, 0, TAU); ctx.fillStyle = color; ctx.fill();
+  ctx.beginPath(); ctx.moveTo(s * 0.38, -s * 0.05); ctx.lineTo(s * 0.38, -s * 1.3); ctx.quadraticCurveTo(s * 0.9, -s, s * 0.8, -s * 0.5); stroke(ctx, color, Math.max(1.5, s * 0.12));
+  ctx.restore();
+}
+// Alchemist's alembic (imbik) on a brazier; bubbling 0..1, glow colour.
+export function alembic(ctx, x, y, s = 1, t = 0, bubbling = 1, liquid = P.goldLight) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  rect(ctx, -60, -30, 120, 30, P.brown, P.ink, 2);
+  for (let i = 0; i < 4; i++) { const f = 1 + 0.2 * Math.sin(t * 12 + i * 2); ctx.beginPath(); ctx.moveTo(-40 + i * 26, -30); ctx.quadraticCurveTo(-48 + i * 26, -46 * f, -40 + i * 26, -58 * f); ctx.quadraticCurveTo(-32 + i * 26, -46 * f, -28 + i * 26, -30); fillStroke(ctx, i % 2 ? P.verm : P.ochre, P.ink, 1); }
+  circle(ctx, 0, -110, 58, 'rgba(210,235,240,0.55)', P.ink, 2.5);
+  ctx.save(); ctx.beginPath(); ctx.arc(0, -110, 56, 0, TAU); ctx.clip(); ctx.fillStyle = liquid; ctx.fillRect(-60, -105, 120, 70);
+  for (let i = 0; i < 6; i++) { const k = (t * 1.5 * bubbling + i / 6) % 1; circle(ctx, -30 + i * 12, -60 - k * 50, 4 + (i % 3), 'rgba(255,255,255,0.7)', null); }
+  ctx.restore();
+  ctx.beginPath(); ctx.moveTo(-14, -164); ctx.lineTo(-14, -200); ctx.quadraticCurveTo(0, -230, 30, -210); ctx.lineTo(120, -150); ctx.lineTo(112, -140); ctx.lineTo(28, -196); ctx.quadraticCurveTo(14, -204, 14, -196); ctx.lineTo(14, -164); ctx.closePath();
+  fillStroke(ctx, 'rgba(210,235,240,0.7)', P.ink, 2);
+  ctx.restore();
+}
+// Glazed İznik jar labelled like a pharmacy pot.
+export function jar(ctx, x, y, s = 1, labelText = 'GLUE', rot = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
+  ctx.beginPath(); ctx.moveTo(-40, -150); ctx.lineTo(40, -150); ctx.quadraticCurveTo(40, -120, 70, -95); ctx.bezierCurveTo(100, -40, 80, 0, 50, 0); ctx.lineTo(-50, 0); ctx.bezierCurveTo(-80, 0, -100, -40, -70, -95); ctx.quadraticCurveTo(-40, -120, -40, -150); ctx.closePath();
+  fillStroke(ctx, P.white, P.ink, 2.5);
+  ctx.save(); ctx.clip(); ctx.fillStyle = pattern(ctx, 'tiles', P.white, P.lapisLight, 34); ctx.fillRect(-100, -150, 200, 60); ctx.fillRect(-100, -35, 200, 40); ctx.restore();
+  rect(ctx, -46, -162, 92, 14, P.lapis, P.ink, 2);
+  if (labelText) { cartouche(ctx, 0, -62, 120, 44, P.paperLight, P.goldDark, 2); ctx.fillStyle = P.verm; ctx.font = '900 22px Deco'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(labelText, 0, -60); }
+  ctx.restore();
+}
+// Low writing desk (rahle) for scribes.
+export function rahle(ctx, x, y, w = 160, color = P.brownLight) {
+  ctx.save(); ctx.translate(x, y);
+  poly(ctx, [[-w / 2, -60], [w / 2, -80], [w / 2, -66], [-w / 2, -46]], color, P.ink, 2);
+  for (const sx of [-w * 0.35, w * 0.35]) { ctx.beginPath(); ctx.moveTo(sx, -55); ctx.lineTo(sx - 18, 0); ctx.moveTo(sx, -55); ctx.lineTo(sx + 18, 0); stroke(ctx, P.brown, 5); }
+  ctx.restore();
+}
+
 // ---------- colour util ----------
 export function shade(hex, k) {
   if (!hex.startsWith('#')) return hex;
