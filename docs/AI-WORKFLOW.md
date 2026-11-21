@@ -4,7 +4,8 @@ Say **"edit this"** to Claude in this repository (Claude Code on claude.ai/code
 or the Claude app) and attach a video, give a link to your own video, or put
 it in `inbox/`. Claude then does the whole job:
 
-1. **Transcribes** the speech — Groq Whisper (`whisper-large-v3-turbo`), or
+1. **Transcribes** the speech — through your OmniRoute gateway if you set one
+   up (see below), otherwise Groq Whisper (`whisper-large-v3-turbo`), or
    local Whisper if the Groq key is missing or not working.
 2. **Cuts the pauses** (jump cuts) and, for Shorts/Reels, keeps it under 60 s.
 3. **Reframes** to 9:16 (or 16:9 / 1:1) with a blurred background.
@@ -57,6 +58,7 @@ the watermark and outro; until then they are left out.
 | HyperFrames (HeyGen, open source) | animated intro card rendered from HTML |
 | Groq API | fast, accurate Whisper transcription (needs your API key) |
 | transformers.js Whisper (local) | backup transcription when Groq is unavailable |
+| OmniRoute (optional, you run it) | AI gateway: one key for many providers, with fallback |
 | Claude team agents | hook title, post copy, schedule |
 
 The cloud environment **ai-video-editor-studio** prepares every new session with
@@ -72,6 +74,34 @@ node edit.mjs --help   # all options are listed at the top of edit.mjs
 node brand-preview.mjs # picture of your brand look → brand/preview.png
 npm test               # 38 automated checks
 ```
+
+## OmniRoute (optional AI gateway)
+[OmniRoute](https://github.com/cheaper-inference/OmniRoute) (MIT, free) is a
+gateway you run yourself. You connect your AI provider keys once in its
+dashboard (Groq, OpenAI, Deepgram and others), and the pipeline talks only to
+OmniRoute. If one provider is rate limited or down, OmniRoute tries the next.
+
+It is a big install (about 3 GB) that keeps running in the background, so run
+it on a computer or a small server, not inside a Claude cloud session (those
+are wiped). It can also run on Android in Termux, but phones have little space.
+
+1. Install and start it:
+   `npm install -g omniroute` then `omniroute` (needs Node.js 22 or newer).
+2. Open `http://localhost:20128`, go to **Providers** and add Groq (paste your
+   Groq key). Add others for fallback if you like.
+3. Copy your OmniRoute key from **Endpoints**.
+4. Tell the pipeline where it is:
+   ```bash
+   export OMNIROUTE_URL=http://localhost:20128/v1
+   export OMNIROUTE_API_KEY=<key from step 3>
+   # optional, default groq/whisper-large-v3-turbo:
+   export OMNIROUTE_TRANSCRIBE_MODEL=groq/whisper-large-v3-turbo
+   node pipeline/edit.mjs inbox/myvideo.mp4
+   ```
+With `OMNIROUTE_URL` set, the pipeline tries OmniRoute first, then Groq
+directly, then local Whisper. `--transcriber omniroute` uses only OmniRoute and
+stops with its error message if it fails. `report.md` says which one ran.
+Test: `cd pipeline && node test/omniroute.test.mjs`.
 
 ## Limits (honest)
 - Edits real footage; it does not film for you or generate a presenter.

@@ -31,6 +31,15 @@ Single-file, in-browser video editor built for Android Chrome. Open `index.html`
 - Export to MP4 (H.264 video, AAC or Opus sound, depending on the phone) or WebM;
   falls back to WebM with a message if the browser cannot make MP4
 
+## Stickman Director
+Open `stickman.html` (or tap "Stickman Director" at the top of the editor).
+Paste your story and tap **Direct my story**: each sentence gets a stickman
+action (walk, run, wave, talk, think, idea, point, jump, celebrate, dance,
+shrug, sit, fall, sad, title card). Edit the script (`3 wave: Hi!` = 3 seconds
+of waving with the caption "Hi!"), pick 9:16 / 16:9 / 1:1 and a background,
+preview, then export MP4 (WebM on phones without MP4) and share to CapCut or
+open it in the editor for music and voice-over. Runs offline on the phone.
+
 ## "Edit this" automatic workflow
 Say "edit this" to Claude with a video: it transcribes (Groq Whisper), cuts
 pauses, reframes, burns in captions, adds music and an animated HyperFrames
@@ -47,7 +56,7 @@ model switching) and `CLAUDE.md` (project rules).
 `node tests/caption-style.test.js`, `node tests/scene-detection.test.js`,
 `node tests/transitions.test.js`, `node tests/music.test.js`,
 `node tests/templates.test.js`, `node tests/assistant.test.js`,
-`node tests/mp4-export.test.js`, `node tests/projects.test.js` and
+`node tests/mp4-export.test.js`, `node tests/projects.test.js`, `node tests/stickman.test.js` and
 `node tests/capcut.test.js` (needs ffmpeg
 with flite, Playwright, internet). Runs automatically on
 GitHub Actions for every push.
