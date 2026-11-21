@@ -77,6 +77,20 @@ the owner or wire it into `index.html`; point to Prompt Studio → Google AI
 (API key) or the Flow hand-off instead. Never commit `google-flow-mcp/config/flow.config.json`.
 Read `google-flow-mcp/ABOUT-THIS-FOLDER.md` first.
 
+## OmniRoute and Remotion (linked repos)
+`omniroute/` and `remotion/` are git **submodules**: links to the owner's forks
+jetjetcasinao19-prog/OmniRoute and jetjetcasinao19-prog/remotion at a fixed
+commit (each is 0.6–1 GB, so they are not copied in). They are empty until
+fetched: `git submodule update --init --depth 1 omniroute` (or `remotion`), or
+clone with `git clone --recurse-submodules --shallow-submodules`. To move a
+link to a newer version: fetch it, check out the commit inside the folder,
+then commit the folder. The pipeline reaches OmniRoute through `OMNIROUTE_URL`
+(a running OmniRoute server), not through this folder.
+GitHub Pages is published by `.github/workflows/pages.yml`, which leaves the
+submodules, `pipeline/` and `google-flow-mcp/` out (Settings → Pages → Source:
+GitHub Actions). Never switch Pages back to "Deploy from a branch": the default
+builder downloads the submodules and fails.
+
 ## Brand kit
 `brand/brand.json` (name, @handle, colours, caption style, intro, outro,
 watermark, music volume, hashtags), `brand/voice.md` (how posts sound),

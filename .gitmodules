@@ -1,0 +1,8 @@
+[submodule "omniroute"]
+	path = omniroute
+	url = https://github.com/jetjetcasinao19-prog/OmniRoute
+	shallow = true
+[submodule "remotion"]
+	path = remotion
+	url = https://github.com/jetjetcasinao19-prog/remotion
+	shallow = true

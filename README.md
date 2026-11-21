@@ -108,3 +108,11 @@ GitHub Actions for every push.
 
 ## Roadmap
 All planned features are built. Next ideas come from testing on real phones.
+
+## Linked repos (submodules)
+- `omniroute/` → [jetjetcasinao19-prog/OmniRoute](https://github.com/jetjetcasinao19-prog/OmniRoute) (AI gateway used by the "edit this" pipeline via `OMNIROUTE_URL`)
+- `remotion/` → [jetjetcasinao19-prog/remotion](https://github.com/jetjetcasinao19-prog/remotion) (make videos with React)
+
+They are links, not copies (each is 0.6–1 GB). On a computer, get everything with
+`git clone --recurse-submodules --shallow-submodules https://github.com/jetjetcasinao19-prog/Ai-video-editor-studio-jrn.`
+On GitHub they show as folders you can tap to open the linked repo.
