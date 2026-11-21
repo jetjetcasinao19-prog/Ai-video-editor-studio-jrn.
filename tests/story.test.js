@@ -172,6 +172,9 @@ function check(name, ok, detail) {
     if (!ids.includes(want)) check('style ' + want + ' exists', false);
   const covers = ids.filter(id => fs.existsSync(path.resolve(__dirname, '..', 'img', 'styles', id + '.webp')));
   check('every style has a cover picture', covers.length === ids.length, covers.length + '/' + ids.length);
+  const fill = await page.evaluate(() => { const c = document.querySelector('#gallery .card .cov'), i = c.querySelector('img'); const a = c.getBoundingClientRect(), b = i.getBoundingClientRect();
+    return Math.abs(a.left - b.left) < 1 && Math.abs(a.width - b.width) < 1 && Math.abs(a.height - b.height) < 1; });
+  check('cover picture fills the whole card (no emoji strip)', fill);
   await page.click('#galCats button[data-c="horror"]');
   const horror = await page.$$eval('#gallery .card b', els => els.map(e => e.textContent));
   check('category filter', horror.includes('Pinoy Folklore Horror') && !horror.includes('UGC Product Ad'), horror.join(', '));
@@ -224,7 +227,7 @@ function check(name, ok, detail) {
   check('service mark strip is cut off (bottom 7%)', cropped[0] === 360 && cropped[1] === 595, cropped.join('x'));
   picMode = 'limit';
   await page.click('.scene[data-i="2"] [data-a="free-img"]');
-  await page.waitForFunction(() => /limit/.test(document.querySelector('.scene[data-i="2"] .genbox').textContent), null, { timeout: 10000 });
+  await page.waitForFunction(() => /every 45 seconds/.test(document.querySelector('.scene[data-i="2"] .genbox').textContent), null, { timeout: 10000 });
   check('free picture limit message', true);
   picMode = 'ok';
   await page.click('#skipImg'); // images back on (was skipped earlier)
