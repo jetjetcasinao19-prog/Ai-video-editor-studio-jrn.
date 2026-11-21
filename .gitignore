@@ -1,3 +1,7 @@
 output/
 inbox/*
 !inbox/README.md
+animate/node_modules/
+animate/projects/*/build/
+animate/projects/*/out/
+__pycache__/

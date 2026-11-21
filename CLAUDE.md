@@ -68,6 +68,16 @@ OmniRoute gateway if `OMNIROUTE_URL` is set, else Groq Whisper or local Whisper
 `cd pipeline && npm test` (OmniRoute: `node test/omniroute.test.mjs`). Never post to social media without the owner's
 explicit yes in the conversation. Guide: `docs/AI-WORKFLOW.md`.
 
+## Animated shorts from code (server side)
+When the owner says **"edit this in 2D(OTTOMAN)"** (or "edit this in 2D(<style>)"),
+or sends a voice-over and asks for an animated short / cartoon
+"written from code", use the `animated-short` skill
+(`.claude/skills/animated-short/SKILL.md`). It lives in `animate/`
+(Node canvas frames → FFmpeg, Python-generated score and sound effects;
+first style: Ottoman miniature painting). Setup: `bash animate/setup.sh`.
+Test: `cd animate && npm test`. Example: `animate/projects/bubble-wrap/`.
+Like `pipeline/`, it is not part of the phone app and is left out of Pages.
+
 ## Google Flow MCP (merged repo)
 `google-flow-mcp/` is the owner's fork of google-flow-browser-mcp, merged with
 its history. It is a separate Node.js MCP server that drives the Google Flow
