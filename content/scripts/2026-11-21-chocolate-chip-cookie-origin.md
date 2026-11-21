@@ -1,7 +1,7 @@
 # The Chocolate Chip Cookie Wasn't an Accident
 
 - Format: 9:16
-- Target length: under 60 seconds (voice-over 116 words ≈ 1 s in ElevenLabs)
+- Target length: under 60 seconds (voice-over 116 words ≈ 52 s in ElevenLabs)
 - Platform(s): YouTube Shorts, TikTok, Instagram Reels, Facebook Reels
 - Research file: content/research/2026-11-21-chocolate-chip-cookie-origin.md
 - Hook title (intro card): **This Cookie Wasn't an Accident**
