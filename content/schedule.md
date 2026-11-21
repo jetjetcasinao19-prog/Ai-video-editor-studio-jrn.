@@ -37,6 +37,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-12-02 Wed | 8:00 PM | Thu Dec 3, 9:00 AM | TikTok | Basketball started with two peach baskets. | content/posts/2026-11-21-basketball-ottoman.md | ready |
 | 2026-12-03 Thu | 7:00 PM | Fri Dec 4, 8:00 AM | Instagram Reels | Basketball started with two peach baskets. | content/posts/2026-11-21-basketball-ottoman.md | ready |
 | 2026-12-03 Thu | 8:00 PM | Fri Dec 4, 9:00 AM | Facebook Reels | Basketball started with two peach baskets. | content/posts/2026-11-21-basketball-ottoman.md | ready |
+| 2026-12-04 Fri | 7:00 PM | Sat Dec 5, 8:00 AM | YouTube Shorts | The Chocolate Chip Cookie Was NOT an Accident | content/posts/2026-11-21-chocolate-chip-cookie-ottoman.md | ready |
+| 2026-12-04 Fri | 8:00 PM | Sat Dec 5, 9:00 AM | TikTok | The chocolate chip cookie was NOT an accident. | content/posts/2026-11-21-chocolate-chip-cookie-ottoman.md | ready |
+| 2026-12-05 Sat | 7:00 PM | Sun Dec 6, 8:00 AM | Instagram Reels | You've heard the chocolate chip cookie was an accident. It wasn't. | content/posts/2026-11-21-chocolate-chip-cookie-ottoman.md | ready |
+| 2026-12-05 Sat | 8:00 PM | Sun Dec 6, 9:00 AM | Facebook Reels | The chocolate chip cookie was NOT an accident. | content/posts/2026-11-21-chocolate-chip-cookie-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
