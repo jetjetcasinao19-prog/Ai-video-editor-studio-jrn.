@@ -53,6 +53,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-12-10 Thu | 8:00 PM | Fri Dec 11, 9:00 AM | TikTok | At 65, he lost his business and was living on a $105 Social Security check. | content/posts/2026-11-21-kentucky-fried-chicken-ottoman.md | ready |
 | 2026-12-11 Fri | 7:00 PM | Sat Dec 12, 8:00 AM | Instagram Reels | At 65, he lost his business and was living on a $105 Social Security check. | content/posts/2026-11-21-kentucky-fried-chicken-ottoman.md | ready |
 | 2026-12-11 Fri | 8:00 PM | Sat Dec 12, 9:00 AM | Facebook Reels | At 65, he lost his business and was living on a $105 Social Security check. | content/posts/2026-11-21-kentucky-fried-chicken-ottoman.md | ready |
+| 2026-12-12 Sat | 7:00 PM | Sun Dec 13, 8:00 AM | YouTube Shorts | The Man Who Named the Big Bang Didn't Believe in It | content/posts/2026-11-21-big-bang-ottoman.md | ready |
+| 2026-12-12 Sat | 8:00 PM | Sun Dec 13, 9:00 AM | TikTok | The man who named the Big Bang didn't even believe in it. | content/posts/2026-11-21-big-bang-ottoman.md | ready |
+| 2026-12-13 Sun | 7:00 PM | Mon Dec 14, 8:00 AM | Instagram Reels | The man who named the Big Bang didn't even believe in it. | content/posts/2026-11-21-big-bang-ottoman.md | ready |
+| 2026-12-13 Sun | 8:00 PM | Mon Dec 14, 9:00 AM | Facebook Reels | The man who named the Big Bang didn't even believe in it. | content/posts/2026-11-21-big-bang-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
