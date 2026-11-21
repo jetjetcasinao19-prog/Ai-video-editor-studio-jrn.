@@ -1,7 +1,7 @@
 # The Hollywood Sign Was an Ad (The Origin of the Hollywood Sign)
 
 - Format: 9:16
-- Target length: under 60 seconds (voice-over 125 words ≈ 56 s in ElevenLabs)
+- Target length: under 60 seconds (voice-over 119 words ≈ 53 s in ElevenLabs)
 - Platform(s): YouTube Shorts, TikTok, Instagram Reels, Facebook Reels
 - Research file: content/research/2026-11-21-hollywood-sign-origin.md
 - Hook title (intro card): **This Sign Was Just an Ad**
@@ -18,13 +18,13 @@ Voice-over: "The Hollywood sign was supposed to come down after a year and a hal
 | 3 | 12–19 s | Workers and mules hauling giant letters up a hill; letters glowing at night | To get attention, they put up a giant ad on the hillside. Huge white letters, lit up at night. | A GIANT AD |
 | 4 | 19–21 s | Calendar pages flying past | But it never comes down. | IT NEVER CAME DOWN |
 | 5 | 21–29 s | Workers removing the letters L-A-N-D | Years later, it's falling apart. In 1949, the Hollywood Chamber of Commerce repairs it… and removes the word "land." | 1949 · BYE, "LAND" |
-| 6 | 29–34 s | 1970s photo style: cracked, leaning letters | By the 1970s, it's a wreck. Letters are cracked and falling over. | A WRECK ❌ |
+| 6 | 29–34 s | 1970s photo style: cracked, leaning letters | By the 1970s, it's a wreck. | A WRECK ❌ |
 | 7 | 34–42 s | Party invitation, checks being signed, one letter per name | So celebrities step in. Each donor pays for one letter. Rock star Alice Cooper pays for an O. | 1 DONOR = 1 LETTER |
 | 8 | 42–45 s | New shiny letters rise on the hill | In 1978, a brand-new sign goes up. | 1978 · REBORN ✅ |
 | 9 | 45–50 s | Sunset over the sign, film reel overlay | A real estate ad… that became the symbol of the movies. | THE SYMBOL OF THE MOVIES |
 | 10 | 50–53 s | Branded outro card (automatic from brand.json) | Every legend has a beginning. | Subscribe for more origin stories |
 
-Still too long? Cut "Letters are cracked and falling over." first.
+Still too long? Cut "Years later, it's falling apart." first.
 
 ## Voice-over script (read aloud)
 The Hollywood sign was supposed to come down after a year and a half.
@@ -42,7 +42,6 @@ In 1949, the Hollywood Chamber of Commerce repairs it…
 and removes the word "land."
 
 By the 1970s, it's a wreck.
-Letters are cracked and falling over.
 So celebrities step in.
 Each donor pays for one letter.
 Rock star Alice Cooper pays for an O.
