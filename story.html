@@ -717,7 +717,7 @@ async function makeFreeImage(i){
  const ctrl=new AbortController(), timer=setTimeout(()=>ctrl.abort(),120000);
  try{
   const res=await fetch(url,{signal:ctrl.signal});
-  if(res.status===402||res.status===429){ setGen(i,"The free picture service allows 1 picture every 45 seconds. Wait a moment and tap again."); return false; }
+  if(res.status===402||res.status===429){ setGen(i,"Free picture limit: the free service allows 1 picture every 45 seconds. Wait a moment and tap again."); return false; }
   if(!res.ok){ setGen(i,"The picture service had a problem (error "+res.status+"). Try again in a minute."); return false; }
   const blob=await res.blob();
   if(!/^image\//.test(blob.type)){ setGen(i,"The picture service did not send a picture. Try again."); return false; }
