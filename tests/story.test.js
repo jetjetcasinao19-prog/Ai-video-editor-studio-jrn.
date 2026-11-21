@@ -274,7 +274,7 @@ function check(name, ok, detail) {
   await page.fill('#flowAcct', ' Test.Creator@Gmail.com ');
   await page.click('#flowAcctSave');
   check('saves the Flow account on the phone', await page.evaluate(() => localStorage.getItem('aves.flowAccount')) === 'test.creator@gmail.com' &&
-    /Account: test\.creator@gmail\.com/.test(await page.textContent('#flowState')));
+    /✓ Flow buttons open Flow in test\.creator@gmail\.com/.test(await page.textContent('#flowState')));
   await page.click('.scene[data-i="0"] [data-a="open-vid"][data-p="flow"]');
   opened = await page.evaluate(() => window.__opened.slice(-1)[0]);
   check('Flow buttons open Flow in that account', opened === 'https://flow.google.com/?authuser=test.creator%40gmail.com', opened);

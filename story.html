@@ -228,7 +228,7 @@ then add it to its scene below. Check you have enough credits on that site first
  </ol>
  <div class="row"><button id="flowOpen" class="secondary">Open Flow &amp; sign in</button><button id="flowTest" class="secondary">Open my project</button></div>
  <label for="flowLink">My Flow project link</label>
- <input id="flowLink" inputmode="url" placeholder="https://labs.google/fx/tools/flow/project/…">
+ <input id="flowLink" inputmode="url" placeholder="https://flow.google.com/project/…">
  <div class="row"><button id="flowSave">Save</button><button id="flowClear" class="secondary">Forget</button></div>
  <p class="note">Your Google password and Flow credits stay with Google: this page never sees them. Google does not let
  other sites sign in to Flow or press its buttons, so you paste the prompt (it is copied for you) and pick
@@ -763,10 +763,11 @@ async function makeFreeImage(i){
 /* ---------- my Google Flow ---------- */
 function renderFlow(){
  const l=flowLink();
- $("flowState").className=l?"ok":"no";
  const a=flowAccount();
- $("flowState").textContent=(l?"✓ Connected to your Flow project: Flow buttons open it directly.":"Not set up yet: Flow buttons open the Flow home page.")+
-  (a?" Account: "+a+".":"");
+ $("flowState").className=l||a?"ok":"no";
+ $("flowState").textContent=l?"✓ Connected to your Flow project: Flow buttons open it directly"+(a?" in "+a:"")+".":
+  a?"✓ Flow buttons open Flow in "+a+". Optional: save a Flow project link below to open that project directly.":
+  "Not set up yet: Flow buttons open the Flow home page.";
  if(l&&!$("flowLink").value) $("flowLink").value=l;
  if(a&&!$("flowAcct").value) $("flowAcct").value=a;
 }
