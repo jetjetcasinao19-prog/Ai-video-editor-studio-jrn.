@@ -1,0 +1,581 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "Nintendo is 137 years old, and it started with playing cards. Kyoto, Japan. Fusajiro Yamauchi opens a small shop making Japanese playing cards. Decades later, a new boss, Hiroshi Yamauchi, wants more than cards. Nintendo tries a taxi company. Instant rice. None of it lasts. By the mid-1960s, Nintendo is close to going broke. Then the boss visits a card factory and spots a young engineer, Gunpei Yokoi, playing with an arm he built for fun. He tells him, turn it into a toy. The ultra-hand sells over a million. And that engineer? He later led the team behind the Game Boy, a card shop that became a gaming giant. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "Nintendo",
+   "start": 0,
+   "end": 0.56
+  },
+  {
+   "w": "is",
+   "start": 0.56,
+   "end": 0.84
+  },
+  {
+   "w": "137",
+   "start": 0.84,
+   "end": 2.44
+  },
+  {
+   "w": "years",
+   "start": 2.44,
+   "end": 2.88
+  },
+  {
+   "w": "old,",
+   "start": 2.88,
+   "end": 3.26
+  },
+  {
+   "w": "and",
+   "start": 3.26,
+   "end": 3.96
+  },
+  {
+   "w": "it",
+   "start": 3.96,
+   "end": 4.08
+  },
+  {
+   "w": "started",
+   "start": 4.08,
+   "end": 4.44
+  },
+  {
+   "w": "with",
+   "start": 4.44,
+   "end": 4.9
+  },
+  {
+   "w": "playing",
+   "start": 4.9,
+   "end": 5.78
+  },
+  {
+   "w": "cards.",
+   "start": 5.78,
+   "end": 6.8
+  },
+  {
+   "w": "Kyoto,",
+   "start": 7.32,
+   "end": 7.88
+  },
+  {
+   "w": "Japan.",
+   "start": 7.88,
+   "end": 8.78
+  },
+  {
+   "w": "Fusajiro",
+   "start": 8.94,
+   "end": 9.44
+  },
+  {
+   "w": "Yamauchi",
+   "start": 9.44,
+   "end": 9.98
+  },
+  {
+   "w": "opens",
+   "start": 9.98,
+   "end": 10.56
+  },
+  {
+   "w": "a",
+   "start": 10.56,
+   "end": 10.74
+  },
+  {
+   "w": "small",
+   "start": 10.74,
+   "end": 11.06
+  },
+  {
+   "w": "shop",
+   "start": 11.06,
+   "end": 11.44
+  },
+  {
+   "w": "making",
+   "start": 11.44,
+   "end": 11.78
+  },
+  {
+   "w": "Japanese",
+   "start": 11.78,
+   "end": 12.44
+  },
+  {
+   "w": "playing",
+   "start": 12.44,
+   "end": 12.84
+  },
+  {
+   "w": "cards.",
+   "start": 12.84,
+   "end": 13.24
+  },
+  {
+   "w": "Decades",
+   "start": 14.02,
+   "end": 14.24
+  },
+  {
+   "w": "later,",
+   "start": 14.24,
+   "end": 14.9
+  },
+  {
+   "w": "a",
+   "start": 14.9,
+   "end": 15.02
+  },
+  {
+   "w": "new",
+   "start": 15.02,
+   "end": 15.22
+  },
+  {
+   "w": "boss,",
+   "start": 15.22,
+   "end": 15.88
+  },
+  {
+   "w": "Hiroshi",
+   "start": 15.88,
+   "end": 16.22
+  },
+  {
+   "w": "Yamauchi,",
+   "start": 16.22,
+   "end": 17.2
+  },
+  {
+   "w": "wants",
+   "start": 17.2,
+   "end": 17.42
+  },
+  {
+   "w": "more",
+   "start": 17.42,
+   "end": 17.8
+  },
+  {
+   "w": "than",
+   "start": 17.8,
+   "end": 18.02
+  },
+  {
+   "w": "cards.",
+   "start": 18.02,
+   "end": 18.42
+  },
+  {
+   "w": "Nintendo",
+   "start": 19.24,
+   "end": 19.58
+  },
+  {
+   "w": "tries",
+   "start": 19.58,
+   "end": 20.02
+  },
+  {
+   "w": "a",
+   "start": 20.02,
+   "end": 20.26
+  },
+  {
+   "w": "taxi",
+   "start": 20.26,
+   "end": 20.62
+  },
+  {
+   "w": "company.",
+   "start": 20.62,
+   "end": 20.98
+  },
+  {
+   "w": "Instant",
+   "start": 21.7,
+   "end": 21.96
+  },
+  {
+   "w": "rice.",
+   "start": 21.96,
+   "end": 22.8
+  },
+  {
+   "w": "None",
+   "start": 22.96,
+   "end": 23.1
+  },
+  {
+   "w": "of",
+   "start": 23.1,
+   "end": 23.24
+  },
+  {
+   "w": "it",
+   "start": 23.24,
+   "end": 23.36
+  },
+  {
+   "w": "lasts.",
+   "start": 23.36,
+   "end": 24.24
+  },
+  {
+   "w": "By",
+   "start": 24.48,
+   "end": 24.56
+  },
+  {
+   "w": "the",
+   "start": 24.56,
+   "end": 24.72
+  },
+  {
+   "w": "mid-1960s,",
+   "start": 24.72,
+   "end": 25.82
+  },
+  {
+   "w": "Nintendo",
+   "start": 25.82,
+   "end": 26.48
+  },
+  {
+   "w": "is",
+   "start": 26.48,
+   "end": 26.7
+  },
+  {
+   "w": "close",
+   "start": 26.7,
+   "end": 27.06
+  },
+  {
+   "w": "to",
+   "start": 27.06,
+   "end": 27.28
+  },
+  {
+   "w": "going",
+   "start": 27.28,
+   "end": 27.54
+  },
+  {
+   "w": "broke.",
+   "start": 27.54,
+   "end": 28.34
+  },
+  {
+   "w": "Then",
+   "start": 28.78,
+   "end": 29.02
+  },
+  {
+   "w": "the",
+   "start": 29.02,
+   "end": 29.24
+  },
+  {
+   "w": "boss",
+   "start": 29.24,
+   "end": 29.46
+  },
+  {
+   "w": "visits",
+   "start": 29.46,
+   "end": 29.76
+  },
+  {
+   "w": "a",
+   "start": 29.76,
+   "end": 29.96
+  },
+  {
+   "w": "card",
+   "start": 29.96,
+   "end": 30.24
+  },
+  {
+   "w": "factory",
+   "start": 30.24,
+   "end": 30.62
+  },
+  {
+   "w": "and",
+   "start": 30.62,
+   "end": 31.14
+  },
+  {
+   "w": "spots",
+   "start": 31.14,
+   "end": 31.42
+  },
+  {
+   "w": "a",
+   "start": 31.42,
+   "end": 31.62
+  },
+  {
+   "w": "young",
+   "start": 31.62,
+   "end": 31.9
+  },
+  {
+   "w": "engineer,",
+   "start": 31.9,
+   "end": 32.9
+  },
+  {
+   "w": "Gunpei",
+   "start": 32.9,
+   "end": 33.28
+  },
+  {
+   "w": "Yokoi,",
+   "start": 33.28,
+   "end": 34.22
+  },
+  {
+   "w": "playing",
+   "start": 34.28,
+   "end": 34.54
+  },
+  {
+   "w": "with",
+   "start": 34.54,
+   "end": 34.72
+  },
+  {
+   "w": "an",
+   "start": 34.72,
+   "end": 34.9
+  },
+  {
+   "w": "arm",
+   "start": 34.9,
+   "end": 35.22
+  },
+  {
+   "w": "he",
+   "start": 35.22,
+   "end": 35.34
+  },
+  {
+   "w": "built",
+   "start": 35.34,
+   "end": 35.58
+  },
+  {
+   "w": "for",
+   "start": 35.58,
+   "end": 35.78
+  },
+  {
+   "w": "fun.",
+   "start": 35.78,
+   "end": 36.56
+  },
+  {
+   "w": "He",
+   "start": 36.45,
+   "end": 36.7
+  },
+  {
+   "w": "tells",
+   "start": 36.72,
+   "end": 37
+  },
+  {
+   "w": "him,",
+   "start": 37,
+   "end": 37.72
+  },
+  {
+   "w": "turn",
+   "start": 37.72,
+   "end": 37.84
+  },
+  {
+   "w": "it",
+   "start": 37.84,
+   "end": 37.98
+  },
+  {
+   "w": "into",
+   "start": 37.98,
+   "end": 38.18
+  },
+  {
+   "w": "a",
+   "start": 38.18,
+   "end": 38.3
+  },
+  {
+   "w": "toy.",
+   "start": 38.3,
+   "end": 39.14
+  },
+  {
+   "w": "The",
+   "start": 39.44,
+   "end": 39.6
+  },
+  {
+   "w": "Ultra Hand",
+   "start": 39.6,
+   "end": 40.24
+  },
+  {
+   "w": "sells",
+   "start": 40.24,
+   "end": 40.72
+  },
+  {
+   "w": "over",
+   "start": 40.72,
+   "end": 41.1
+  },
+  {
+   "w": "a",
+   "start": 41.1,
+   "end": 41.28
+  },
+  {
+   "w": "million.",
+   "start": 41.28,
+   "end": 41.66
+  },
+  {
+   "w": "And",
+   "start": 42.46,
+   "end": 42.6
+  },
+  {
+   "w": "that",
+   "start": 42.6,
+   "end": 42.76
+  },
+  {
+   "w": "engineer?",
+   "start": 42.76,
+   "end": 43.64
+  },
+  {
+   "w": "He",
+   "start": 43.86,
+   "end": 43.96
+  },
+  {
+   "w": "later",
+   "start": 43.96,
+   "end": 44.28
+  },
+  {
+   "w": "led",
+   "start": 44.28,
+   "end": 44.46
+  },
+  {
+   "w": "the",
+   "start": 44.46,
+   "end": 44.64
+  },
+  {
+   "w": "team",
+   "start": 44.64,
+   "end": 44.9
+  },
+  {
+   "w": "behind",
+   "start": 44.9,
+   "end": 45.4
+  },
+  {
+   "w": "the",
+   "start": 45.4,
+   "end": 45.7
+  },
+  {
+   "w": "Game",
+   "start": 45.7,
+   "end": 46.14
+  },
+  {
+   "w": "Boy,",
+   "start": 46.14,
+   "end": 47.04
+  },
+  {
+   "w": "a",
+   "start": 47.04,
+   "end": 47.14
+  },
+  {
+   "w": "card",
+   "start": 47.14,
+   "end": 47.64
+  },
+  {
+   "w": "shop",
+   "start": 47.64,
+   "end": 47.9
+  },
+  {
+   "w": "that",
+   "start": 47.9,
+   "end": 48.38
+  },
+  {
+   "w": "became",
+   "start": 48.38,
+   "end": 48.78
+  },
+  {
+   "w": "a",
+   "start": 48.78,
+   "end": 49.18
+  },
+  {
+   "w": "gaming",
+   "start": 49.18,
+   "end": 49.68
+  },
+  {
+   "w": "giant.",
+   "start": 49.68,
+   "end": 50.28
+  },
+  {
+   "w": "Every",
+   "start": 51.32,
+   "end": 51.54
+  },
+  {
+   "w": "legend",
+   "start": 51.54,
+   "end": 51.96
+  },
+  {
+   "w": "has",
+   "start": 51.96,
+   "end": 52.36
+  },
+  {
+   "w": "a",
+   "start": 52.36,
+   "end": 52.44
+  },
+  {
+   "w": "beginning.",
+   "start": 52.44,
+   "end": 52.72
+  }
+ ]
+}

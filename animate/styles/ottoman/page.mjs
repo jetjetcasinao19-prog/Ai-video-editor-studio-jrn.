@@ -190,7 +190,7 @@ export function captions(ctx, lines, t) {
   const rows = [[]]; let w = 0;
   for (const word of line) { const ww = ctx.measureText(word.w).width; if (w + ww > cp.w - 90 && rows[rows.length - 1].length) { rows.push([]); w = 0; } rows[rows.length - 1].push({ ...word, ww }); w += ww + space; }
   const lh = size * 1.12, y0 = cp.y + cp.h / 2 - (rows.length - 1) * lh / 2 + 4;
-  const fadeIn = clamp((t - (line[0].start - 0.15)) / 0.15);
+  const fadeIn = 0.35 + 0.65 * clamp((t - (line[0].start - 0.15)) / 0.15);
   // only the newest word that has started is highlighted
   const cur = line.findLast(w => t >= w.start);
   ctx.save(); ctx.textBaseline = 'middle'; ctx.globalAlpha = fadeIn;
@@ -229,7 +229,10 @@ export function groupLines(words, maxChars = 30, maxGap = 0.55, maxDur = 2.8) {
   const flush = () => { if (cur.length) lines.push(cur); cur = []; };
   for (const w of words) {
     const last = cur[cur.length - 1], text = cur.map(x => x.w).join(' ');
-    if (cur.length && ((text + ' ' + w.w).length > maxChars || w.start - last.end > maxGap || w.end - cur[0].start > maxDur)) flush();
+    const len = (text + ' ' + w.w).length;
+    // a sentence's last word may run a little long rather than sit alone on a line
+    const tooLong = len > maxChars && !(/[.!?]$/.test(w.w) && len <= maxChars + 10);
+    if (cur.length && (tooLong || w.start - last.end > maxGap || w.end - cur[0].start > maxDur + (/[.!?]$/.test(w.w) ? 0.8 : 0))) flush();
     cur.push(w);
     if (/[.!?]$/.test(w.w)) flush();
   }

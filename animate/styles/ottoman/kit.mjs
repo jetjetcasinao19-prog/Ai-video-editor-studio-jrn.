@@ -812,6 +812,118 @@ export function rocket(ctx, x, y, s = 1, rot = 0, t = 0, fire = 1) {
   ctx.restore();
 }
 
+// ---------- cards, toys & far-off places ----------
+// Five-storey pagoda (Kyoto), drawn with the miniaturist's flat elevations.
+export function pagoda(ctx, x, base, s = 1, t = 0) {
+  ctx.save(); ctx.translate(x, base); ctx.scale(s, s);
+  let y = 0;
+  for (let i = 0; i < 5; i++) {
+    const w = 150 - i * 20, h = 46 - i * 2;
+    rect(ctx, -w / 2 + 12, y - h, w - 24, h, i % 2 ? P.verm : P.vermDark, P.ink, 2);
+    for (let k = 0; k < 3; k++) rect(ctx, -w / 2 + 22 + k * (w - 44) / 3 + 4, y - h + 10, (w - 44) / 3 - 8, h - 18, P.ochreLight, P.ink, 1);
+    y -= h;
+    ctx.beginPath(); ctx.moveTo(-w / 2 - 22, y + 6); ctx.quadraticCurveTo(-w / 4, y - 4, 0, y - 22); ctx.quadraticCurveTo(w / 4, y - 4, w / 2 + 22, y + 6); ctx.quadraticCurveTo(0, y - 2, -w / 2 - 22, y + 6); fillStroke(ctx, P.ink, P.ink, 1);
+    ctx.beginPath(); ctx.moveTo(-w / 2 - 22, y + 6); ctx.quadraticCurveTo(0, y - 2, w / 2 + 22, y + 6); stroke(ctx, P.goldLight, 2.5);
+    y -= 10;
+  }
+  ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(0, y - 70); stroke(ctx, P.goldDark, 5);
+  for (let k = 0; k < 5; k++) circle(ctx, 0, y - 14 - k * 11, 6, P.goldLight, P.goldDeep, 1);
+  ctx.restore();
+}
+// An illuminated flower card (hanafuda). motif: 'tulip'|'blossom'|'moon'|'carnation'|'crane'.
+export function flowerCard(ctx, x, y, w, rot = 0, motif = 'blossom', back = false) {
+  const h = w * 1.6;
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot);
+  rect(ctx, -w / 2, -h / 2, w, h, back ? P.vermDark : P.paperLight, P.ink, Math.max(1.2, w * 0.03));
+  if (back) { ctx.fillStyle = pattern(ctx, 'cintamani', P.vermDark, P.goldLight, Math.max(8, w * 0.3)); ctx.fillRect(-w / 2 + 3, -h / 2 + 3, w - 6, h - 6); ctx.restore(); return; }
+  ctx.save(); ctx.beginPath(); ctx.rect(-w / 2 + w * 0.08, -h / 2 + w * 0.08, w * 0.84, h - w * 0.16); ctx.clip();
+  const g = ctx.createLinearGradient(0, -h / 2, 0, h / 2); g.addColorStop(0, motif === 'moon' ? P.lapisDeep : P.goldLight); g.addColorStop(1, motif === 'moon' ? P.lapis : P.ochre);
+  ctx.fillStyle = g; ctx.fillRect(-w / 2, -h / 2, w, h);
+  const s = w / 100;
+  if (motif === 'tulip') { tulip(ctx, 0, h * 0.42, 1.5 * s, P.verm); tulip(ctx, -26 * s, h * 0.45, 1.1 * s, P.verm); }
+  else if (motif === 'carnation') { carnation(ctx, 0, h * 0.4, 1.7 * s, P.verm); carnation(ctx, 28 * s, h * 0.44, 1.2 * s, P.lapisLight); }
+  else if (motif === 'moon') { circle(ctx, 0, -h * 0.12, 30 * s, P.white, P.ink, 1.5); spongy(ctx, 0, h / 2, w * 1.2, h * 0.45, P.verm, 2); }
+  else if (motif === 'crane') { ctx.beginPath(); ctx.moveTo(-30 * s, 20 * s); ctx.quadraticCurveTo(0, -40 * s, 34 * s, -10 * s); ctx.quadraticCurveTo(0, 0, -30 * s, 20 * s); fillStroke(ctx, P.white, P.ink, 1.5); circle(ctx, 34 * s, -14 * s, 6 * s, P.verm, P.ink, 1); circle(ctx, -10 * s, -h * 0.3, 26 * s, P.verm, null); }
+  else { for (let i = 0; i < 9; i++) flower(ctx, -30 * s + (i % 3) * 30 * s, -h * 0.3 + Math.floor(i / 3) * 40 * s, 9 * s, i % 2 ? P.pink : P.white); ctx.beginPath(); ctx.moveTo(-w / 2, h * 0.2); ctx.quadraticCurveTo(0, 0, w / 2, h * 0.1); stroke(ctx, P.brown, 6 * s); }
+  ctx.restore();
+  ctx.strokeStyle = P.goldDark; ctx.lineWidth = Math.max(1, w * 0.025); ctx.strokeRect(-w / 2 + w * 0.08, -h / 2 + w * 0.08, w * 0.84, h - w * 0.16);
+  ctx.restore();
+}
+// Little taxi car; wheel turns with t.
+export function car(ctx, x, y, s = 1, t = 0, color = P.ochre, text = 'TAXI', wheelOff = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  ctx.beginPath(); ctx.moveTo(-110, -20); ctx.lineTo(-100, -50); ctx.lineTo(-50, -54); ctx.lineTo(-30, -96); ctx.lineTo(50, -96); ctx.lineTo(74, -54); ctx.lineTo(110, -48); ctx.lineTo(118, -20); ctx.closePath(); fillStroke(ctx, color, P.ink, 2.5);
+  for (const [a, b] of [[-24, 4], [10, 44]]) poly(ctx, [[a, -88], [b, -88], [b + (b > 0 ? 16 : 0), -58], [a - 8, -58]], '#bcd6df', P.ink, 1.5);
+  if (text) { rect(ctx, -24, -116, 48, 20, P.white, P.ink, 1.5); ctx.fillStyle = P.verm; ctx.font = '900 13px Fell'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(text, 0, -105); }
+  for (const [wx, off] of [[-66, 0], [70, wheelOff]]) {
+    ctx.save(); ctx.translate(wx + off * 3, -16 + off * 0.5); ctx.rotate(t * 8 + off); circle(ctx, 0, 0, 22, P.ink, P.ink, 1); circle(ctx, 0, 0, 11, P.grey, P.ink, 1);
+    ctx.beginPath(); ctx.moveTo(-11, 0); ctx.lineTo(11, 0); ctx.moveTo(0, -11); ctx.lineTo(0, 11); stroke(ctx, P.ink, 1.5); ctx.restore();
+  }
+  ctx.restore();
+}
+// İznik bowl, filled (rice) with optional steam.
+export function bowl(ctx, x, y, s = 1, t = 0, fill = P.white, steam = true) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  ctx.beginPath(); ctx.ellipse(0, -60, 110, 26, 0, Math.PI, TAU); fillStroke(ctx, fill, P.ink, 2);
+  for (let i = 0; i < 18; i++) ellipse(ctx, -80 + (i % 9) * 20, -70 - Math.floor(i / 9) * 10 + (i % 2) * 4, 7, 4, (i % 3) * 0.5, fill, 'rgba(42,28,18,0.4)', 0.8);
+  ctx.beginPath(); ctx.moveTo(-110, -60); ctx.quadraticCurveTo(-100, 10, 0, 14); ctx.quadraticCurveTo(100, 10, 110, -60); ctx.closePath(); fillStroke(ctx, P.white, P.ink, 2.5);
+  ctx.save(); ctx.clip(); ctx.fillStyle = pattern(ctx, 'tiles', P.white, P.lapisLight, 34); ctx.fillRect(-120, -40, 240, 60); ctx.restore();
+  rect(ctx, -40, 12, 80, 12, P.lapis, P.ink, 1.5);
+  if (steam) for (let i = 0; i < 3; i++) { const q = (t * 0.6 + i / 3) % 1; ctx.save(); ctx.globalAlpha = 1 - q; ctx.beginPath(); ctx.moveTo(-40 + i * 40, -90 - q * 60); ctx.bezierCurveTo(-60 + i * 40, -120 - q * 60, -20 + i * 40, -140 - q * 60, -40 + i * 40, -170 - q * 60); stroke(ctx, P.white, 5); ctx.restore(); }
+  ctx.restore();
+}
+// Treasure chest; open 0..1, coins = how full.
+export function chest(ctx, x, y, s = 1, open = 1, coins = 1) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  rect(ctx, -110, -90, 220, 90, P.brownLight, P.ink, 2.5);
+  for (const bx of [-80, 0, 80]) rect(ctx, bx - 8, -90, 16, 90, P.goldDark, P.ink, 1.5);
+  if (coins > 0) for (let i = 0; i < Math.floor(24 * coins); i++) ellipse(ctx, -90 + (i * 37) % 180, -90 - (i % 4) * 8 - Math.floor(i / 8) * 6, 12, 6, 0, P.goldLight, P.goldDeep, 1);
+  ctx.save(); ctx.translate(0, -90); ctx.scale(1, Math.cos(open * 1.9));
+  ctx.beginPath(); ctx.moveTo(-110, 0); ctx.quadraticCurveTo(-110, -60, 0, -60); ctx.quadraticCurveTo(110, -60, 110, 0); ctx.closePath(); fillStroke(ctx, open > 0.5 ? shade(P.brownLight, -0.25) : P.brownLight, P.ink, 2.5);
+  ctx.restore();
+  rect(ctx, -14, -80, 28, 28, P.goldLight, P.ink, 1.5);
+  ctx.restore();
+}
+// The extending "lazy tongs" arm (Ultra Hand). ext 0..1 stretches it; grip 0..1 closes the claws.
+export function ultraHand(ctx, x, y, s = 1, rot = 0, ext = 0.5, grip = 0, color = P.ochre) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
+  const n = 5, L = 70, th = lerp(1.15, 0.25, clamp(ext)), dx = L * Math.cos(th), dy = L * Math.sin(th) / 2;
+  // handles (scissor grips)
+  ctx.beginPath(); ctx.moveTo(0, -dy); ctx.lineTo(-60, -dy - 30); ctx.moveTo(0, dy); ctx.lineTo(-60, dy + 30); stroke(ctx, P.ink, 14); stroke(ctx, P.verm, 10);
+  circle(ctx, -66, -dy - 34, 14, null, P.verm, 6); circle(ctx, -66, dy + 34, 14, null, P.verm, 6);
+  for (let i = 0; i < n; i++) {
+    ctx.beginPath(); ctx.moveTo(i * dx, -dy); ctx.lineTo((i + 1) * dx, dy); ctx.moveTo(i * dx, dy); ctx.lineTo((i + 1) * dx, -dy);
+    stroke(ctx, P.ink, 10); stroke(ctx, color, 6);
+    circle(ctx, i * dx + dx / 2, 0, 4, P.goldLight, P.ink, 1);
+  }
+  // the claws
+  const ex = n * dx, c = lerp(0.6, 0.15, clamp(grip));
+  for (const sg of [-1, 1]) { ctx.beginPath(); ctx.moveTo(ex, sg * dy); ctx.quadraticCurveTo(ex + 40, sg * (dy + 30 * c * 2), ex + 56, sg * 16 * c * 2); stroke(ctx, P.ink, 12); stroke(ctx, P.verm, 8); }
+  ctx.restore();
+  return [x + Math.cos(rot) * (n * dx + 50) * s, y + Math.sin(rot) * (n * dx + 50) * s];
+}
+// Handheld game console (grey brick with a green screen) — generic, no logos.
+export function handheld(ctx, x, y, s = 1, rot = 0, t = 0, on = 1) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
+  ctx.beginPath(); ctx.moveTo(-90, -150); ctx.lineTo(90, -150); ctx.lineTo(90, 110); ctx.quadraticCurveTo(90, 150, 40, 150); ctx.lineTo(-90, 150); ctx.closePath(); fillStroke(ctx, '#c9c6bf', P.ink, 3);
+  rect(ctx, -74, -132, 148, 120, '#5f6470', P.ink, 2);
+  rect(ctx, -54, -116, 108, 88, on > 0 ? '#9bb36a' : '#4b5440', P.ink, 1.5);
+  if (on > 0) { ctx.save(); ctx.globalAlpha = on; for (let i = 0; i < 4; i++) { const by = -60 - ((t * 40 + i * 22) % 60); rect(ctx, -44 + i * 24, by, 18, 18, '#3f5a2a', null); } rect(ctx, -50, -36, 100, 6, '#3f5a2a', null); ctx.restore(); }
+  circle(ctx, -50, -130 + 125, 0, null, null);
+  // d-pad + buttons
+  rect(ctx, -66, 34, 54, 16, P.ink, P.ink, 1); rect(ctx, -47, 15, 16, 54, P.ink, P.ink, 1);
+  circle(ctx, 40, 50, 14, P.vermDark, P.ink, 1.5); circle(ctx, 70, 30, 14, P.vermDark, P.ink, 1.5);
+  for (const bx of [-24, 6]) { ctx.save(); ctx.translate(bx, 100); ctx.rotate(-0.4); rect(ctx, -14, -4, 28, 8, '#8f8c86', P.ink, 1); ctx.restore(); }
+  ctx.restore();
+}
+// Toy box with a window and a label.
+export function toyBox(ctx, x, y, w, h, labelText = '', color = P.lapis) {
+  rect(ctx, x - w / 2, y - h, w, h, color, P.ink, 2.5);
+  ctx.fillStyle = pattern(ctx, 'dots', color, shade(color, 0.3), 18); ctx.fillRect(x - w / 2 + 3, y - h + 3, w - 6, h - 6);
+  rect(ctx, x - w / 2 + 18, y - h + 18, w - 36, h * 0.55, '#d7ecf2', P.ink, 1.5);
+  if (labelText) { cartouche(ctx, x, y - h * 0.2, w * 0.86, h * 0.2, P.paperLight, P.goldDark, 2); ctx.fillStyle = P.verm; ctx.font = `900 ${Math.round(h * 0.1)}px Deco`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(labelText, x, y - h * 0.2 + 2); }
+}
+
 // ---------- colour util ----------
 export function shade(hex, k) {
   if (!hex.startsWith('#')) return hex;
