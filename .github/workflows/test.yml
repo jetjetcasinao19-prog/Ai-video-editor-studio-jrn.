@@ -42,6 +42,14 @@ jobs:
         run: node tests/studio.test.js
       - name: Send to CapCut test
         run: node tests/capcut.test.js
+      - name: Stickman Director test
+        env:
+          PW_CHANNEL: chrome
+        run: node tests/stickman.test.js
+      - name: AI Story Studio test
+        env:
+          PW_CHANNEL: chrome
+        run: node tests/story.test.js
       - name: MP4 export test (Google Chrome, like Chrome on Android)
         env:
           PW_CHANNEL: chrome

@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Story Studio</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0c0809;color:#fff;font-family:Arial,sans-serif;padding:16px}
+main{max-width:850px;margin:auto}
+h1{font-size:25px;margin-bottom:4px}
+h3{margin:0 0 6px}
+.sub{color:#b3a3a7;font-size:12px}
+.panel{background:#170f12;border:1px solid #3b1d25;padding:15px;border-radius:13px;margin:15px 0}
+label{display:block;margin-top:12px;font-size:13px;color:#d8cccf}
+input,select,button,textarea{width:100%;padding:12px;margin-top:7px;border:1px solid #4a2630;border-radius:8px;
+ background:#100a0c;color:#fff;font-size:14px;font-family:inherit}
+textarea{min-height:90px;resize:vertical;line-height:1.45}
+button{background:#e63946;border:0;font-weight:bold;cursor:pointer}
+button:disabled{opacity:.45}
+.secondary{background:#2c1a20}
+.gold{background:#f5c400;color:#000}
+.grad{background:linear-gradient(90deg,#ff9aa0,#8fe3d6);color:#0c0809}
+.row{display:flex;gap:10px}
+.row>*{flex:1;min-width:0}
+.note{color:#a8989c;font-size:12px;line-height:1.6}
+.status{color:#ff8a8f;font-size:13px;margin-top:10px;min-height:1em}
+.warn{color:#ffb86b}
+a{color:#ff9aa0}
+input[type=color]{height:44px;padding:4px}
+.check{display:flex;align-items:center;gap:10px;margin-top:12px}
+.check input{width:auto;margin:0}
+.check label{margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.chips button{width:auto;margin:0;padding:10px 14px;background:#100a0c;border:1px solid #4a2630;font-weight:normal}
+.chips button.on{background:#3a1c24;border-color:#ff6b6b;font-weight:bold}
+.chipRow{display:grid;grid-template-columns:62px 1fr;gap:8px;align-items:center;margin-top:10px;font-size:13px;color:#d8cccf}
+.pill{display:inline-block;padding:3px 9px;border-radius:99px;font-size:11px;border:1px solid #4a2630;color:#d8cccf;margin:0 4px 4px 0}
+.pill.ok{border-color:#3fbf8f;color:#8fe3c0}
+.ready{border:1px solid #6b5a1e;background:#1d1a10;border-left:4px solid #f5c400;border-radius:12px;padding:12px;margin-top:12px}
+.ready b{display:block;margin-bottom:4px}
+.scene{border:1px solid #3b1d25;border-radius:12px;padding:12px;margin-top:12px;background:#130c0f}
+.scene.next{border-color:#ff6b6b}
+.scene .head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.scene .head b{font-size:15px}
+.scene .head select{width:auto;margin:0;padding:6px 8px;font-size:13px}
+.scene .head .sp{flex:1}
+.scene textarea{min-height:70px;font-size:13px}
+.scene textarea.big{min-height:120px}
+.btns{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:6px}
+.btns button{margin:0;padding:9px 4px;font-size:12px;background:#2c1a20}
+.media{display:flex;gap:10px;margin-top:10px;align-items:flex-start}
+.media>div{flex:1;min-width:0}
+.thumb{width:100%;aspect-ratio:9/16;max-height:150px;object-fit:cover;border-radius:8px;background:#000;display:block;margin-top:6px}
+.media input[type=file]{font-size:12px;padding:8px}
+.small{font-size:12px;padding:8px;margin-top:6px}
+#toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#f5c400;color:#000;font-weight:bold;
+ padding:10px 16px;border-radius:99px;font-size:13px;max-width:92vw;text-align:center;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9}
+#toast.show{opacity:1}
+canvas{width:100%;max-height:480px;object-fit:contain;background:#000;border-radius:10px;display:block;margin-top:10px}
+progress{width:100%;height:10px;margin-top:10px;accent-color:#e63946}
+details summary{cursor:pointer;font-weight:bold;padding:6px 0}
+[hidden]{display:none!important}
+/* ---- red theme (shared look with stickman.html) ---- */
+:root{--accent:#e63946;--accent2:#ff6b6b;--glow:rgba(230,57,70,.35)}
+body{background:radial-gradient(1200px 600px at 50% -200px,#2a0d13 0%,#0c0809 60%) fixed,#0c0809}
+.panel{position:relative;border-radius:4px;background:linear-gradient(180deg,#1b1115,#140d10);
+ clip-path:polygon(22px 0,100% 0,100% calc(100% - 22px),calc(100% - 22px) 100%,0 100%,0 22px);
+ box-shadow:inset 3px 0 0 var(--accent)}
+.panel h3{letter-spacing:.3px}
+button{border-radius:10px}
+button:not(.secondary):not(.del):not(.gold){background:linear-gradient(135deg,#e63946,#b51d2b)}
+button:not(:disabled):active{transform:scale(.98)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px var(--glow)}
+.appbar{display:flex;align-items:center;gap:12px;margin:0 0 10px}
+.appbar .logo{flex:0 0 46px;height:46px;border-radius:50%;display:grid;place-items:center;font-size:20px;
+ background:radial-gradient(circle at 30% 30%,#ff6b6b,#9d0f1c);box-shadow:0 0 18px var(--glow)}
+.appbar .brand{flex:1;min-width:0}
+.appbar h1{margin:0;font-size:22px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ver{font-size:12px;font-weight:bold;padding:3px 8px;border-radius:8px;border:1px solid #5c2430;background:#241217;color:#ffb3b8}
+.iconlink{flex:0 0 auto;font-size:22px;text-decoration:none;padding:6px}
+.banner{border:1px solid #3b1d25;border-radius:14px;padding:12px 14px;background:#140c0f;color:#f1dfe2;font-size:14px;line-height:1.5}
+.banner b{color:var(--accent2)}
+#topTabs{position:sticky;top:0;z-index:20;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;
+ margin:12px -16px 0;padding:8px 16px;background:rgba(12,8,9,.92);backdrop-filter:blur(6px);border-bottom:1px solid #3b1d25}
+#topTabs::-webkit-scrollbar{display:none}
+#topTabs button{flex:0 0 auto;width:auto;margin:0;padding:9px 14px;border-radius:10px;background:transparent!important;
+ border:1px solid transparent;font-weight:normal;color:#d8cccf;font-size:14px}
+#topTabs button.on{border-color:var(--accent);background:#2a1218!important;color:#fff;font-weight:bold}
+section[id]{scroll-margin-top:64px}
+.acts button,.chips button{background:#2c1a20!important;border:1px solid #4a2630}
+</style>
+</head>
+<body>
+<main>
+<h1>AI STORY STUDIO</h1>
+<div class="sub">TOPIC → SCENES → PROMPTS → CLIPS → ONE VIDEO •
+ <a href="index.html">Video Studio</a> • <a href="stickman.html">Stickman Director</a></div>
+
+<section class="panel">
+<h3>01 — Story</h3>
+<label for="topic">Topic</label>
+<input id="topic" placeholder="e.g. How the light bulb started">
+<label for="notes">Notes for the writer (optional)</label>
+<input id="notes" placeholder="e.g. focus on the failures, end with a lesson">
+<div class="row">
+ <div><label for="sceneCount">Scenes</label>
+  <select id="sceneCount"></select></div>
+ <div><label for="sceneSec">Seconds each</label>
+  <select id="sceneSec"><option>4</option><option>6</option><option>8</option><option selected>10</option></select></div>
+ <div><label for="format">Format</label>
+  <select id="format"><option value="9:16">9:16</option><option value="16:9">16:9</option><option value="1:1">1:1</option></select></div>
+</div>
+<p class="note">Let an AI write the scenes: tap one, paste its answer below. ChatGPT and Grok open with the
+request already typed; for Gemini it is copied, just paste it.</p>
+<div class="btns" style="grid-template-columns:repeat(3,1fr)">
+ <button type="button" data-write="chatgpt">✨ ChatGPT</button>
+ <button type="button" data-write="gemini">✨ Gemini</button>
+ <button type="button" data-write="grok">✨ Grok</button>
+</div>
+<label for="aiAnswer">Paste the AI's answer here</label>
+<textarea id="aiAnswer" placeholder='{"title": "...", "scenes": [{"narration": "...", "visual": "...", "onScreenText": "..."}]}'></textarea>
+<button id="useAnswer">Use this answer</button>
+<details>
+<summary>Other ways to start</summary>
+<label for="ownScript">My own narration (split into scenes automatically)</label>
+<textarea id="ownScript" placeholder="Paste your whole voice-over text here."></textarea>
+<div class="row">
+ <button id="useOwn" class="secondary">Split my narration</button>
+ <button id="quickDraft" class="secondary">Quick draft from topic</button>
+</div>
+</details>
+<div id="storyMsg" class="status"></div>
+</section>
+
+<section class="panel">
+<h3>02 — Look</h3>
+<div class="row">
+ <div><label for="niche">Niche</label>
+  <select id="niche">
+   <option value="stick">Stick Figure Explainer · flat illustration</option>
+   <option value="doodle">Whiteboard doodle · hand-drawn</option>
+   <option value="paper">Paper cut-out · 2.5D</option>
+   <option value="cinematic">Cinematic 3D cartoon</option>
+  </select></div>
+ <div><label for="bg">Background colour</label><input id="bg" type="color" value="#1f1b45"></div>
+</div>
+<label for="character">Main character (kept the same in every scene)</label>
+<input id="character" value="a clothed cartoon stick figure with a round white head, a mustard-yellow scarf and a navy hoodie">
+<div class="check"><input id="narrator" type="checkbox" checked><label for="narrator">Off-screen narrator voice in the video prompts</label></div>
+<div class="check"><input id="noMusic" type="checkbox" checked><label for="noMusic">No music in the clips (add your own later)</label></div>
+</section>
+
+<section class="panel" id="pkgPanel">
+<div class="chips"><span class="pill" id="nichePill"></span></div>
+<h2 id="pkgTitle" style="margin:6px 0 2px">No story yet</h2>
+<div class="note" id="pkgInfo"></div>
+<div class="ready" id="readyBox" hidden><b>Package ready</b><span class="note">Your prompts are prepared. Follow the next step below.</span></div>
+<h3 style="margin-top:14px">Next step</h3>
+<div class="chipRow"><span>Images</span><div class="chips" id="imgPlat"></div></div>
+<div class="chipRow"><span>Videos</span><div class="chips" id="vidPlat"></div></div>
+<div class="row" style="margin-top:6px">
+ <button id="nextBtn" class="grad">▶ Do next step</button>
+ <button id="skipImg" class="secondary">Skip images</button>
+</div>
+<div id="nextMsg" class="status"></div>
+<p class="note">Each tap copies the next prompt and opens the site you picked. Make the image or clip there, save it,
+then add it to its scene below. Check you have enough credits on that site first.</p>
+</section>
+
+<section class="panel">
+<h3>03 — Scenes</h3>
+<div id="scenes"><p class="note">Write a story above to see your scenes.</p></div>
+</section>
+
+<section class="panel">
+<h3>04 — Prompts out</h3>
+<div class="row">
+ <button id="dlTxt" class="secondary">⬇ Video prompts .txt</button>
+ <button id="dlCsv" class="secondary">⬇ All prompts .csv</button>
+</div>
+<div class="row">
+ <button id="dlImgTxt" class="secondary">⬇ Image prompts .txt</button>
+ <button id="toStick" class="secondary">🎬 Open in Stickman Director</button>
+</div>
+<p class="note">The .txt files have one prompt per block (blank line between), ready for batch tools.</p>
+</section>
+
+<section class="panel">
+<h3>05 — Join clips into one video</h3>
+<p class="note">Plays your clips in scene order and records one video with their sound. Scenes without a clip
+show their start image (slow zoom) or a title card. Recording takes as long as the video.</p>
+<div class="check"><input id="burnCaps" type="checkbox"><label for="burnCaps">Burn the narration in as captions</label></div>
+<button id="joinBtn">🎞 Join into one video</button>
+<progress id="joinProg" value="0" max="1" hidden></progress>
+<canvas id="cv" width="720" height="1280" hidden></canvas>
+<div id="joinMsg" class="status"></div>
+<div class="row" id="joinDone" hidden>
+ <a id="joinLink" download><button class="secondary" type="button">Save video</button></a>
+ <button id="joinShare" class="secondary">Share / CapCut</button>
+</div>
+</section>
+</main>
+<div id="toast"></div>
+
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
+const STORE="story.v1";
+
+/* ---------- platforms ---------- */
+// q: the site fills its prompt box from the link; otherwise the prompt is copied for pasting.
+const PLATFORMS={
+ chatgpt:{name:"ChatGPT",url:q=>"https://chatgpt.com/?q="+encodeURIComponent(q),prefill:true},
+ gemini:{name:"Gemini",url:()=>"https://gemini.google.com/app",prefill:false},
+ grok:{name:"Grok",url:q=>"https://grok.com/?q="+encodeURIComponent(q),prefill:true},
+ flow:{name:"Flow",url:()=>"https://labs.google/fx/tools/flow",prefill:false}
+};
+const IMG_PLATS=["gemini","chatgpt","flow","grok"], VID_PLATS=["flow","gemini","grok"];
+const NICHES={
+ stick:{label:"Stick Figure Explainer · Flat illustration",look:"flat 2D vector explainer animation",img:"Flat 2D vector illustration"},
+ doodle:{label:"Whiteboard doodle · Hand-drawn",look:"hand-drawn whiteboard doodle animation with marker lines",img:"Hand-drawn whiteboard doodle, black marker lines"},
+ paper:{label:"Paper cut-out · 2.5D",look:"paper cut-out 2.5D animation with soft shadows",img:"Paper cut-out 2.5D illustration with soft shadows"},
+ cinematic:{label:"Cinematic 3D cartoon",look:"cinematic 3D cartoon animation, soft lighting",img:"Cinematic 3D cartoon render, soft lighting"}
+};
+const COLOR_NAMES=[["#1f1b45","midnight purple"],["#000000","black"],["#ffffff","white"],["#f7f4ec","off-white paper"],
+ ["#0b1d3a","deep navy"],["#1f3b2d","chalkboard green"],["#8fd3ff","sky blue"],["#f5c400","golden yellow"]];
+function colorName(hex){
+ const h=(hex||"").toLowerCase(), rgb=x=>[1,3,5].map(i=>parseInt(x.slice(i,i+2),16));
+ let best=COLOR_NAMES[0],bd=1e9; const a=rgb(h);
+ COLOR_NAMES.forEach(c=>{const b=rgb(c[0]);const d=a.reduce((s,v,i)=>s+(v-b[i])**2,0);if(d<bd){bd=d;best=c;}});
+ return (bd<1200?best[1]:"solid colour")+" ("+h+")";
+}
+
+/* ---------- state ---------- */
+let story={title:"",scenes:[]};           // scenes: {narration, visual, onScreenText, dur, imgPrompt?, vidPrompt?, imgDone, clipDone}
+let media=[];                            // per scene: {img:File|null, imgUrl, clip:File|null, clipUrl}
+let imgPlat="gemini", vidPlat="flow", skipImages=false, reloaded=false;
+
+function settings(){
+ return {topic:$("topic").value.trim(),notes:$("notes").value.trim(),count:+$("sceneCount").value,sec:+$("sceneSec").value,
+  format:$("format").value,niche:$("niche").value,bg:$("bg").value,character:$("character").value.trim(),
+  narrator:$("narrator").checked,noMusic:$("noMusic").checked};
+}
+
+/* ---------- writing the story ---------- */
+function wordsFor(sec){ return Math.max(6,Math.round(sec*2.4)); }
+function writerPrompt(o){
+ return [
+  "You are the scriptwriter for \"How it Started\", a YouTube Shorts channel about the origin of things (people, brands, inventions, history, ideas).",
+  "Write a "+o.count+"-scene, "+(o.count*o.sec)+"-second "+NICHES[o.niche].label.split(" · ")[0].toLowerCase()+" video about: "+(o.topic||"(choose a surprising origin story)")+".",
+  o.notes?"Notes: "+o.notes:"",
+  "Tone: storyteller, dramatic but true, short sentences, US English, talk to the viewer as \"you\". Scene 1 is a strong hook; build from the humble start to the turning point; the last scene lands the payoff and ends with \"Every legend has a beginning.\"",
+  "Each scene is "+o.sec+" seconds, so its narration must be at most "+wordsFor(o.sec)+" words.",
+  "For each scene also describe what the main character ("+(o.character||"a cartoon stick figure")+") does on screen and 2-4 words of on-screen text.",
+  "Only use facts you are sure are true.",
+  "Reply with ONLY this JSON, no other text:",
+  '{"title":"...","scenes":[{"narration":"...","visual":"...","onScreenText":"..."}]}'
+ ].filter(Boolean).join("\n");
+}
+function parseAnswer(text){
+ let t=(text||"").trim().replace(/^```(?:json)?\s*/i,"").replace(/```\s*$/,"");
+ const ob=t.indexOf("{"), sq=t.indexOf("["), isList=sq>=0&&(ob<0||sq<ob);
+ const a=isList?sq:ob, b=t.lastIndexOf(isList?"]":"}");
+ if(a<0||b<a) throw new Error("No JSON found. Copy the whole answer, including the { and }.");
+ const raw=t.slice(a,b+1); let obj;
+ try{ obj=JSON.parse(raw); }
+ catch(e){
+  try{ obj=JSON.parse(raw.replace(/[“”]/g,'"').replace(/[‘’]/g,"'").replace(/,\s*([}\]])/g,"$1")); }
+  catch(e2){ throw new Error("The answer is not complete JSON. Ask the AI to \"reply with only the JSON\" and paste again."); }
+ }
+ const list=Array.isArray(obj)?obj:(obj.scenes||obj.Scenes);
+ if(!Array.isArray(list)||!list.length) throw new Error("The answer has no scenes.");
+ return {title:String(obj.title||obj.Title||"").trim(),
+  scenes:list.map(s=>typeof s==="string"?{narration:s}:s).map(s=>({
+   narration:String(s.narration||s.voiceover||s.text||"").trim(),
+   visual:String(s.visual||s.action||s.scene||"").trim(),
+   onScreenText:String(s.onScreenText||s.on_screen_text||s.text_on_screen||"").trim()}))};
+}
+function splitSentences(text){
+ return (text||"").replace(/\s+/g," ").trim().split(/(?<=[.!?…])\s+(?=[A-Z0-9“"'])/).map(s=>s.trim()).filter(Boolean);
+}
+// Split narration into n scenes of roughly equal length, never cutting a sentence.
+function splitNarration(text,n){
+ const sents=splitSentences(text);
+ if(!sents.length) return [];
+ n=Math.min(n,sents.length);
+ const total=sents.join(" ").length, out=[]; let cur=[],len=0,done=0;
+ sents.forEach((s,i)=>{
+  cur.push(s); len+=s.length+1;
+  const left=sents.length-i-1, need=n-out.length-1;
+  if(out.length<n-1 && (len>=(total-done)/(n-out.length) || left===need)){ out.push(cur.join(" ")); done+=len; cur=[]; len=0; }
+ });
+ if(cur.length) out.push(cur.join(" "));
+ return out;
+}
+function quickDraft(o){
+ const t=(o.topic||"this idea").replace(/^how\s+/i,"").replace(/\s+(really\s+)?(started|began|begun|start|was (invented|created|made|born))[?.!]*$/i,"").trim()||"this idea";
+ const arc=[
+  ["You use it every day. But how did "+t+" really start?","stands puzzled next to a giant question mark","How did it start?"],
+  ["It began with one person and a simple problem.","walks onto an empty stage and looks around, curious","One problem"],
+  ["At first, almost nobody believed in it.","is laughed at by a small crowd of stick figures and shrugs","Nobody believed"],
+  ["The early tries failed. Again and again.","trips over a pile of broken prototypes, then stands back up","Fail. Retry."],
+  ["Then came the turning point.","freezes as a glowing light bulb pops above the head","The turning point"],
+  ["One small change made everything work.","snaps fingers and the broken pieces fit together","It worked!"],
+  ["Word spread fast, and the world took notice.","stands on a growing map as dots light up across it","It spread"],
+  ["Today it is part of everyday life.","uses the finished thing in a busy modern street","Everyday life"],
+  ["Every legend has a beginning.","waves at the viewer as the screen fills with gold light","Every legend has a beginning"]
+ ];
+ const pick=[]; for(let i=0;i<o.count;i++) pick.push(arc[Math.round(i*(arc.length-1)/Math.max(1,o.count-1))]);
+ return {title:o.topic?"How "+t+" started":"Untitled story",
+  scenes:pick.map(([n,v,s])=>({narration:n,visual:v,onScreenText:s}))};
+}
+
+/* ---------- prompts ---------- */
+const VISUAL_RULES=[
+ [/\b(idea|invented|discovered|realized|figured|eureka|created|designed)\b/i,"looks up as a glowing light bulb pops above the head"],
+ [/\b(fail\w*|fell|crash\w*|broke|collaps\w*|disaster|mistake)\b/i,"stumbles over a pile of broken attempts, then gets back up"],
+ [/\b(won|success\w*|finally|worked|famous|celebrat\w*|millions?|billions?|record)\b/i,"jumps and celebrates as gold confetti falls"],
+ [/\b(think\w*|thought|wonder\w*|curious|imagine\w*|why|how)\b/i,"taps the chin while a thought bubble with a question mark appears"],
+ [/\b(walk\w*|went|travel\w*|journey|moved?|arrived?|left)\b/i,"walks across the frame as the scenery slides past"],
+ [/\b(money|dollars?|cost|price|cheap|rich|poor)\b/i,"holds up coins while a dollar sign grows beside the head"],
+ [/\b(year|ago|century|history|ancient|old)\b/i,"stands beside a big calendar whose pages flip back in time"]
+];
+function sceneVisual(s){
+ if(s.visual) return s.visual.replace(/^the (main )?character\s*/i,"");
+ for(const [re,v] of VISUAL_RULES) if(re.test(s.narration)) return v;
+ return "explains with open hands while simple icons appear beside the head";
+}
+function imagePrompt(s,i,o){
+ const n=NICHES[o.niche], fmt=o.format==="16:9"?"horizontal 16:9":o.format==="1:1"?"square 1:1":"vertical 9:16";
+ return [n.img+", "+fmt+", solid "+colorName(o.bg)+" background.",
+  "Scene "+(i+1)+": "+(o.character||"a cartoon stick figure")+" "+sceneVisual(s)+".",
+  "Clean thick outlines, minimal shapes, centered subject, empty space at the top for text.",
+  "No text, no letters, no watermark, no logo."].join(" ");
+}
+function videoPrompt(s,i,o){
+ const n=NICHES[o.niche], fmt=o.format==="16:9"?"horizontal 16:9":o.format==="1:1"?"square 1:1":"vertical 9:16";
+ const dur=s.dur||o.sec, kind=NICHES[o.niche].label.split(" · ")[0].toUpperCase();
+ return [
+  kind+" — "+dur+"-SECOND SCENE "+(i+1)+" OF "+story.scenes.length,
+  "OUTPUT — Exactly "+dur+" seconds, "+fmt+", "+n.look+" on a solid "+colorName(o.bg)+" background, lively clean motion graphics, "+
+   (o.narrator?"off-screen narrator only, ":"no speech, ")+"a new visible change every 2-3 seconds."+(o.noMusic?" No music.":""),
+  "START FRAME — The supplied image is the exact first frame. Keep the "+n.look.split(" animation")[0]+" look, "+(o.character||"the character")+", colours and layout; animate from it, do not redraw it.",
+  "ACTION — The character "+sceneVisual(s)+".",
+  s.onScreenText?"TEXT ON SCREEN — \""+s.onScreenText+"\" pops in as bold clean words, spelled exactly like this.":"",
+  o.narrator&&s.narration?"NARRATOR — Warm, clear US English voice, off-screen, says exactly: \""+s.narration+"\"":"",
+  "AVOID — subtitles, captions, extra characters, realistic style, camera shake, watermarks, logos."
+ ].filter(Boolean).join("\n");
+}
+function promptsFor(i){
+ const o=settings(), s=story.scenes[i];
+ return {img:s.imgPrompt||imagePrompt(s,i,o), vid:s.vidPrompt||videoPrompt(s,i,o)};
+}
+
+/* ---------- copy & open ---------- */
+function toast(msg){ const t=$("toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(toast.h); toast.h=setTimeout(()=>t.classList.remove("show"),2600); }
+async function copyText(text){
+ try{ await navigator.clipboard.writeText(text); return true; }catch(e){}
+ try{ const ta=document.createElement("textarea"); ta.value=text; ta.style.position="fixed"; ta.style.opacity="0";
+  document.body.appendChild(ta); ta.select(); const ok=document.execCommand("copy"); ta.remove(); return ok; }catch(e){ return false; }
+}
+async function openOn(plat,text){
+ const p=PLATFORMS[plat], copying=copyText(text); // start the copy while the tap still counts
+ window.open(p.url(text),"_blank","noopener");          // open right away so it is not blocked as a pop-up
+ const ok=await copying;
+ toast(p.prefill?p.name+" opened with your prompt"+(ok?" (also copied)":""):(ok?"Copied — paste it in "+p.name:"Opened "+p.name+" — copy the prompt from the scene"));
+}
+
+/* ---------- rendering the scene list ---------- */
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+function nextStep(){
+ for(let i=0;i<story.scenes.length;i++){
+  const s=story.scenes[i];
+  if(!skipImages&&!s.imgDone&&!media[i]?.img) return {i,kind:"img"};
+ }
+ for(let i=0;i<story.scenes.length;i++) if(!story.scenes[i].clipDone&&!media[i]?.clip) return {i,kind:"vid"};
+ return null;
+}
+function renderChips(){
+ $("imgPlat").innerHTML=IMG_PLATS.map(p=>'<button type="button" data-p="'+p+'" class="'+(p===imgPlat?"on":"")+'">'+PLATFORMS[p].name+'</button>').join("");
+ $("vidPlat").innerHTML=VID_PLATS.map(p=>'<button type="button" data-p="'+p+'" class="'+(p===vidPlat?"on":"")+'">'+PLATFORMS[p].name+'</button>').join("");
+}
+function renderPackage(){
+ const o=settings(), n=story.scenes.length;
+ $("nichePill").textContent="NICHE · "+NICHES[o.niche].label;
+ $("pkgTitle").textContent=story.title||(n?"Untitled story":"No story yet");
+ const secs=story.scenes.reduce((a,s)=>a+(s.dur||o.sec),0);
+ const imgs=story.scenes.filter((s,i)=>s.imgDone||media[i]?.img).length, clips=story.scenes.filter((s,i)=>s.clipDone||media[i]?.clip).length;
+ $("pkgInfo").textContent=n?n+" scenes · "+secs+"s · "+imgs+"/"+n+" images · "+clips+"/"+n+" clips":"Write a story in step 01.";
+ if(n&&!media.some(m=>m&&(m.img||m.clip))&&reloaded) $("pkgInfo").textContent+=" · images and clips are not kept after closing the page, add them again";
+ $("readyBox").hidden=!n;
+ const nx=nextStep();
+ $("nextBtn").disabled=!nx;
+ $("skipImg").textContent=skipImages?"Use images again":"Skip images";
+ $("nextMsg").textContent=!n?"":!nx?"All clips are in. Join them into one video in step 05.":
+  "Next: scene "+(nx.i+1)+" "+(nx.kind==="img"?"start image on "+PLATFORMS[imgPlat].name:"video clip on "+PLATFORMS[vidPlat].name)+".";
+ document.querySelectorAll(".scene").forEach(el=>el.classList.toggle("next",!!nx&&+el.dataset.i===nx.i));
+}
+function renderScenes(){
+ const o=settings();
+ if(!story.scenes.length){ $("scenes").innerHTML='<p class="note">Write a story above to see your scenes.</p>'; renderPackage(); return; }
+ $("scenes").innerHTML=story.scenes.map((s,i)=>{
+  const p=promptsFor(i), m=media[i]||{};
+  return '<div class="scene" data-i="'+i+'">'+
+  '<div class="head"><b>Scene '+(i+1)+'</b><select data-f="dur">'+[4,6,8,10].map(d=>'<option'+((s.dur||o.sec)===d?" selected":"")+'>'+d+'</option>').join("")+'</select><span class="note">sec</span><span class="sp"></span>'+
+   '<span class="pill'+(s.imgDone||m.img?" ok":"")+'">image</span><span class="pill'+(s.clipDone||m.clip?" ok":"")+'">clip</span></div>'+
+  '<label>Narration</label><textarea data-f="narration">'+esc(s.narration)+'</textarea>'+
+  '<label>On-screen text</label><input data-f="onScreenText" value="'+esc(s.onScreenText||"")+'">'+
+  '<label>Image prompt</label><textarea data-f="imgPrompt">'+esc(p.img)+'</textarea>'+
+  '<div class="btns"><button type="button" data-a="copy-img">Copy</button>'+IMG_PLATS.slice(0,3).map(pl=>'<button type="button" data-a="open-img" data-p="'+pl+'">'+PLATFORMS[pl].name+'</button>').join("")+'</div>'+
+  '<label>Video prompt</label><textarea class="big" data-f="vidPrompt">'+esc(p.vid)+'</textarea>'+
+  '<div class="btns"><button type="button" data-a="copy-vid">Copy</button>'+VID_PLATS.map(pl=>'<button type="button" data-a="open-vid" data-p="'+pl+'">'+PLATFORMS[pl].name+'</button>').join("")+'</div>'+
+  '<div class="media"><div><label>Start image</label><input type="file" accept="image/*" data-up="img">'+
+   (m.imgUrl?'<img class="thumb" src="'+m.imgUrl+'" alt="">':'')+'</div>'+
+   '<div><label>Video clip</label><input type="file" accept="video/*" data-up="clip">'+
+   (m.clipUrl?'<video class="thumb" src="'+m.clipUrl+'" muted playsinline preload="metadata"></video>':'')+'</div></div>'+
+  '<div class="row"><button type="button" class="secondary small" data-a="reset">↺ Rewrite prompts</button>'+
+   '<button type="button" class="secondary small" data-a="done">'+(s.clipDone?"Mark clip not done":"Mark clip done")+'</button></div>'+
+  '</div>';
+ }).join("");
+ renderPackage();
+}
+
+/* ---------- saving ---------- */
+function save(){
+ try{ localStorage.setItem(STORE,JSON.stringify({story,imgPlat,vidPlat,skipImages,
+  form:Object.fromEntries(["topic","notes","sceneCount","sceneSec","format","niche","bg","character","ownScript"].map(k=>[k,$(k).value])),
+  checks:{narrator:$("narrator").checked,noMusic:$("noMusic").checked,burnCaps:$("burnCaps").checked}})); }catch(e){}
+}
+function load(){
+ let d=null; try{ d=JSON.parse(localStorage.getItem(STORE)||"null"); }catch(e){}
+ if(!d) return;
+ if(d.form) Object.entries(d.form).forEach(([k,v])=>{ if($(k)&&v!=null) $(k).value=v; });
+ if(d.checks) Object.entries(d.checks).forEach(([k,v])=>{ if($(k)) $(k).checked=!!v; });
+ if(d.story&&Array.isArray(d.story.scenes)){ story=d.story; reloaded=story.scenes.length>0; story.scenes.forEach(s=>delete s.imgDone); }
+ imgPlat=d.imgPlat||imgPlat; vidPlat=d.vidPlat||vidPlat; skipImages=!!d.skipImages;
+}
+function setStory(st,msg){
+ const o=settings();
+ media.forEach(m=>{ if(m?.imgUrl)URL.revokeObjectURL(m.imgUrl); if(m?.clipUrl)URL.revokeObjectURL(m.clipUrl); });
+ media=[];
+ story={title:st.title||"",scenes:st.scenes.map(s=>({narration:s.narration||"",visual:s.visual||"",onScreenText:s.onScreenText||"",dur:o.sec}))};
+ renderScenes(); save();
+ $("storyMsg").textContent=msg||story.scenes.length+" scenes ready. Scroll down for the next step.";
+}
+
+/* ---------- downloads ---------- */
+function download(name,text,type){
+ const url=URL.createObjectURL(new Blob([text],{type:type||"text/plain"})), a=document.createElement("a");
+ a.href=url; a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),10000);
+}
+const slug=()=>(story.title||"story").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,40)||"story";
+function promptsTxt(kind){ return story.scenes.map((s,i)=>promptsFor(i)[kind].replace(/\n+/g," ")).join("\n\n")+"\n"; }
+function promptsCsv(){
+ const q=v=>'"'+String(v).replace(/"/g,'""')+'"';
+ return ["scene,seconds,narration,on_screen_text,image_prompt,video_prompt"].concat(
+  story.scenes.map((s,i)=>{const p=promptsFor(i);return [i+1,s.dur||settings().sec,q(s.narration),q(s.onScreenText||""),q(p.img),q(p.vid)].join(",");})).join("\n")+"\n";
+}
+function stickmanScript(){
+ const acts=["wave","walk","think","idea","fall","celebrate","point","talk"];
+ const pick=t=>/\b(idea|invented|discover\w*|realiz\w*|turning)\b/i.test(t)?"idea":/fail|fell|broke|mistake/i.test(t)?"fall":
+  /success|finally|worked|famous|legend/i.test(t)?"celebrate":/think|wonder|why|how/i.test(t)?"think":/walk|went|travel|began|start/i.test(t)?"walk":null;
+ const lines=story.title?["3 title: "+story.title]:[];
+ story.scenes.forEach((s,i)=>lines.push((pick(s.narration)||acts[i%acts.length])+": "+s.narration));
+ return lines.join("\n");
+}
+
+/* ---------- joining clips ---------- */
+const MIMES=["video/mp4;codecs=avc1.42E01E,mp4a.40.2","video/mp4;codecs=avc1,mp4a.40.2","video/mp4;codecs=avc1,opus","video/mp4","video/webm;codecs=vp9,opus","video/webm;codecs=vp8,opus","video/webm"];
+function pickMime(){ if(!window.MediaRecorder||!MediaRecorder.isTypeSupported)return null; return MIMES.find(m=>{try{return MediaRecorder.isTypeSupported(m);}catch(e){return false;}})||null; }
+function wrap(ctx,text,maxW){ const w=(text||"").split(/\s+/).filter(Boolean),out=[];let c="";
+ w.forEach(x=>{const t=c?c+" "+x:x; if(ctx.measureText(t).width>maxW&&c){out.push(c);c=x;}else c=t;}); if(c)out.push(c); return out; }
+function drawCover(ctx,src,sw,sh,zoom){
+ const W=ctx.canvas.width,H=ctx.canvas.height, k=Math.max(W/sw,H/sh)*(zoom||1), w=sw*k, h=sh*k;
+ ctx.drawImage(src,(W-w)/2,(H-h)/2,w,h);
+}
+function drawCaption(ctx,text){
+ if(!text)return; const W=ctx.canvas.width,H=ctx.canvas.height, fs=Math.round(Math.min(W,H)*0.055);
+ ctx.save(); ctx.font="bold "+fs+"px Arial"; ctx.textAlign="center"; ctx.textBaseline="middle";
+ const lines=wrap(ctx,text,W*0.86), lh=fs*1.25, y0=H*0.82-(lines.length-1)*lh/2;
+ lines.forEach((l,i)=>{ctx.lineWidth=fs*0.18;ctx.strokeStyle="#000";ctx.strokeText(l,W/2,y0+i*lh);ctx.fillStyle="#fff";ctx.fillText(l,W/2,y0+i*lh);});
+ ctx.restore();
+}
+let joining=false, lastJoinUrl=null, lastJoinFile=null;
+async function joinVideo(){
+ const o=settings(), mime=pickMime(), cv=$("cv"), ctx=cv.getContext("2d");
+ if(!mime||!cv.captureStream) throw new Error("This browser cannot record video. Use Chrome on Android.");
+ const [w,h]=o.format==="16:9"?[1280,720]:o.format==="1:1"?[960,960]:[720,1280]; cv.width=w; cv.height=h; cv.hidden=false;
+ const ac=new (window.AudioContext||window.webkitAudioContext)(); await ac.resume();
+ const dest=ac.createMediaStreamDestination();
+ const stream=cv.captureStream(30); stream.addTrack(dest.stream.getAudioTracks()[0]);
+ const rec=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:5000000}), chunks=[];
+ rec.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data);};
+ const stopped=new Promise(r=>rec.onstop=r);
+ const caps=$("burnCaps").checked, n=story.scenes.length;
+ ctx.fillStyle="#000"; ctx.fillRect(0,0,w,h);
+ rec.start(500);
+ const frameLoop=(drawFn,until)=>new Promise(res=>{ const tick=()=>{ if(until()){res();return;} drawFn(); setTimeout(tick,1000/30); }; tick(); });
+ for(let i=0;i<n;i++){
+  const s=story.scenes[i], m=media[i]||{};
+  $("joinMsg").textContent="Recording scene "+(i+1)+" of "+n+"…";
+  if(m.clip){
+   const v=document.createElement("video"); v.src=m.clipUrl; v.playsInline=true; v.preload="auto";
+   await new Promise((res,rej)=>{v.onloadeddata=res;v.onerror=()=>rej(new Error("Scene "+(i+1)+" clip cannot be played"));});
+   const node=ac.createMediaElementSource(v); node.connect(dest);
+   let ended=false; v.onended=()=>ended=true;
+   await v.play();
+   await frameLoop(()=>{ drawCover(ctx,v,v.videoWidth,v.videoHeight); if(caps)drawCaption(ctx,s.narration);
+    $("joinProg").value=(i+Math.min(1,v.currentTime/(v.duration||1)))/n; },()=>ended||v.error);
+   node.disconnect(); v.removeAttribute("src"); v.load();
+  }else{
+   const dur=(s.dur||o.sec), t0=performance.now();
+   let img=null;
+   if(m.img){ img=new Image(); img.src=m.imgUrl; await new Promise(r=>{img.onload=r;img.onerror=r;}); if(!img.naturalWidth)img=null; }
+   await frameLoop(()=>{
+    const k=(performance.now()-t0)/1000/dur;
+    if(img) drawCover(ctx,img,img.naturalWidth,img.naturalHeight,1+0.08*k);
+    else{ ctx.fillStyle=o.bg; ctx.fillRect(0,0,w,h); ctx.fillStyle="#f5c400"; const fs=Math.round(Math.min(w,h)*0.08);
+     ctx.font="900 "+fs+"px Arial Black, Arial"; ctx.textAlign="center"; ctx.textBaseline="middle";
+     const ls=wrap(ctx,(s.onScreenText||story.title||"").toUpperCase(),w*0.84); ls.forEach((l,j)=>ctx.fillText(l,w/2,h*0.4+(j-(ls.length-1)/2)*fs*1.15)); }
+    if(caps||!img) drawCaption(ctx,s.narration);
+    $("joinProg").value=(i+Math.min(1,k))/n; },()=>performance.now()-t0>=dur*1000);
+  }
+ }
+ rec.stop(); await stopped;
+ stream.getTracks().forEach(t=>t.stop()); ac.close();
+ const type=mime.split(";")[0];
+ return {blob:new Blob(chunks,{type}),ext:type==="video/mp4"?"mp4":"webm"};
+}
+
+/* ---------- events ---------- */
+$("sceneCount").innerHTML=[3,4,5,6,7,8,9,10,12].map(n=>'<option'+(n===6?" selected":"")+'>'+n+'</option>').join("");
+document.querySelectorAll("[data-write]").forEach(b=>b.onclick=()=>{
+ const o=settings(); if(!o.topic){ $("storyMsg").innerHTML='<span class="warn">Type a topic first.</span>'; $("topic").focus(); return; }
+ openOn(b.dataset.write,writerPrompt(o)); save();
+});
+$("useAnswer").onclick=()=>{
+ try{ const st=parseAnswer($("aiAnswer").value); setStory(st); }
+ catch(e){ $("storyMsg").innerHTML='<span class="warn">'+esc(e.message)+'</span>'; }
+};
+$("useOwn").onclick=()=>{
+ const parts=splitNarration($("ownScript").value,+$("sceneCount").value);
+ if(!parts.length){ $("storyMsg").innerHTML='<span class="warn">Paste your narration first.</span>'; return; }
+ setStory({title:$("topic").value.trim(),scenes:parts.map(p=>({narration:p}))});
+};
+$("quickDraft").onclick=()=>setStory(quickDraft(settings()),"Draft ready. Edit the narration to fit your topic (check the facts!).");
+["topic","notes","sceneCount","sceneSec","format","niche","bg","character","ownScript","narrator","noMusic","burnCaps"].forEach(id=>
+ $(id).addEventListener("change",()=>{ if(["format","niche","bg","character","narrator","noMusic"].includes(id)) renderScenes(); else renderPackage(); save(); }));
+$("imgPlat").onclick=e=>{const b=e.target.closest("button"); if(!b)return; imgPlat=b.dataset.p; renderChips(); renderPackage(); save();};
+$("vidPlat").onclick=e=>{const b=e.target.closest("button"); if(!b)return; vidPlat=b.dataset.p; renderChips(); renderPackage(); save();};
+$("skipImg").onclick=()=>{ skipImages=!skipImages; renderPackage(); save(); };
+$("nextBtn").onclick=()=>{
+ const nx=nextStep(); if(!nx)return;
+ const p=promptsFor(nx.i);
+ openOn(nx.kind==="img"?imgPlat:vidPlat, nx.kind==="img"?p.img:p.vid);
+ document.querySelector('.scene[data-i="'+nx.i+'"]')?.scrollIntoView({behavior:"smooth",block:"start"});
+};
+$("scenes").addEventListener("input",e=>{
+ const el=e.target, card=el.closest(".scene"); if(!card||!el.dataset.f)return;
+ const s=story.scenes[+card.dataset.i];
+ if(el.dataset.f==="dur") s.dur=+el.value; else s[el.dataset.f]=el.value;
+ if(el.dataset.f==="narration"||el.dataset.f==="onScreenText"||el.dataset.f==="dur"){
+  // keep prompts in sync unless the user has edited them by hand
+  const i=+card.dataset.i, o=settings();
+  if(!s.imgEdited){ delete s.imgPrompt; card.querySelector('[data-f="imgPrompt"]').value=imagePrompt(s,i,o); }
+  if(!s.vidEdited){ delete s.vidPrompt; card.querySelector('[data-f="vidPrompt"]').value=videoPrompt(s,i,o); }
+ }
+ if(el.dataset.f==="imgPrompt") s.imgEdited=true;
+ if(el.dataset.f==="vidPrompt") s.vidEdited=true;
+ renderPackage(); save();
+});
+$("scenes").addEventListener("click",e=>{
+ const b=e.target.closest("button[data-a]"); if(!b)return;
+ const i=+b.closest(".scene").dataset.i, s=story.scenes[i], p=promptsFor(i);
+ const a=b.dataset.a;
+ if(a==="copy-img") copyText(p.img).then(ok=>toast(ok?"Image prompt copied":"Copy failed — select the text"));
+ if(a==="copy-vid") copyText(p.vid).then(ok=>toast(ok?"Video prompt copied":"Copy failed — select the text"));
+ if(a==="open-img") openOn(b.dataset.p,p.img);
+ if(a==="open-vid") openOn(b.dataset.p,p.vid);
+ if(a==="reset"){ delete s.imgPrompt; delete s.vidPrompt; s.imgEdited=s.vidEdited=false; renderScenes(); save(); }
+ if(a==="done"){ s.clipDone=!s.clipDone; renderScenes(); save(); }
+});
+$("scenes").addEventListener("change",e=>{
+ const el=e.target; if(!el.dataset.up)return;
+ const i=+el.closest(".scene").dataset.i, f=el.files&&el.files[0]; if(!f)return;
+ const m=media[i]=media[i]||{};
+ if(el.dataset.up==="img"){ if(m.imgUrl)URL.revokeObjectURL(m.imgUrl); m.img=f; m.imgUrl=URL.createObjectURL(f); }
+ else{ if(m.clipUrl)URL.revokeObjectURL(m.clipUrl); m.clip=f; m.clipUrl=URL.createObjectURL(f); }
+ renderScenes(); save();
+});
+$("dlTxt").onclick=()=>story.scenes.length&&download(slug()+"-video-prompts.txt",promptsTxt("vid"));
+$("dlImgTxt").onclick=()=>story.scenes.length&&download(slug()+"-image-prompts.txt",promptsTxt("img"));
+$("dlCsv").onclick=()=>story.scenes.length&&download(slug()+"-prompts.csv",promptsCsv(),"text/csv");
+$("toStick").onclick=()=>{
+ if(!story.scenes.length)return;
+ try{ localStorage.setItem("stickman.import",stickmanScript()); }catch(e){}
+ location.href="stickman.html";
+};
+$("joinBtn").onclick=async()=>{
+ if(joining||!story.scenes.length)return;
+ joining=true; $("joinBtn").disabled=true; $("joinDone").hidden=true; $("joinProg").hidden=false; $("joinProg").value=0;
+ try{
+  const {blob,ext}=await joinVideo();
+  if(lastJoinUrl)URL.revokeObjectURL(lastJoinUrl);
+  lastJoinUrl=URL.createObjectURL(blob); const name=slug()+"."+ext;
+  lastJoinFile=new File([blob],name,{type:blob.type});
+  $("joinLink").href=lastJoinUrl; $("joinLink").download=name; $("joinDone").hidden=false;
+  $("joinMsg").textContent="Done: "+name+" ("+(blob.size/1048576).toFixed(1)+" MB)";
+  window.__lastJoin={size:blob.size,type:blob.type,ext};
+ }catch(e){ $("joinMsg").innerHTML='<span class="warn">Join failed: '+esc(e.message)+'</span>'; window.__lastJoin={error:e.message}; }
+ joining=false; $("joinBtn").disabled=false; $("joinProg").hidden=true;
+};
+$("joinShare").onclick=async()=>{
+ if(!lastJoinFile)return; const data={files:[lastJoinFile],title:story.title||"Story video"};
+ if(!navigator.share||!navigator.canShare||!navigator.canShare(data)){ toast("Sharing not available — tap Save video"); return; }
+ try{ await navigator.share(data); }catch(e){}
+};
+
+load(); renderChips(); renderScenes();
+window.Story={parseAnswer,splitNarration,quickDraft,writerPrompt,imagePrompt,videoPrompt,promptsTxt,promptsCsv,stickmanScript,
+ nextStep,colorName,state:()=>({story,media,imgPlat,vidPlat,skipImages}),setStory,PLATFORMS};
+</script>
+</body>
+</html>

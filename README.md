@@ -47,6 +47,24 @@ open it in the editor for music. Runs offline on the phone.
   narration is saved inside the exported video; "Save voice-over (.wav)" gives
   the voice on its own.
 
+## AI Story Studio
+Open `story.html` (or tap "AI Story Studio" at the top of the editor).
+1. Type a topic, pick scenes and seconds, tap **✨ ChatGPT / Gemini / Grok**: the
+   AI gets a ready-made writing request. Paste its answer and tap **Use this
+   answer** (or split your own narration, or make a quick draft).
+2. Pick the look (niche, background colour, main character).
+3. Every scene gets an **image prompt** (start frame) and a **video prompt**
+   (duration, format, start frame, action, on-screen text, narrator line).
+   **▶ Do next step** copies the next prompt and opens the site you picked
+   (ChatGPT and Grok open with it typed in; for Gemini and Flow, paste it).
+4. Add the images and clips you made to their scenes, then **Join into one
+   video** (keeps the clips' sound, optional burned-in captions).
+5. Download all prompts as .txt / .csv, or send the story to the Stickman
+   Director. The story is saved on the phone; images and clips are not.
+
+It cannot press buttons inside Flow, ChatGPT, Gemini or Grok for you: that
+needs a desktop Chrome extension, which Chrome on Android cannot run.
+
 ## "Edit this" automatic workflow
 Say "edit this" to Claude with a video: it transcribes (Groq Whisper), cuts
 pauses, reframes, burns in captions, adds music and an animated HyperFrames
@@ -63,7 +81,7 @@ model switching) and `CLAUDE.md` (project rules).
 `node tests/caption-style.test.js`, `node tests/scene-detection.test.js`,
 `node tests/transitions.test.js`, `node tests/music.test.js`,
 `node tests/templates.test.js`, `node tests/assistant.test.js`,
-`node tests/mp4-export.test.js`, `node tests/projects.test.js`, `node tests/stickman.test.js`, `node tests/stickman-voice.test.js` (needs internet) and
+`node tests/mp4-export.test.js`, `node tests/projects.test.js`, `node tests/stickman.test.js`, `node tests/stickman-voice.test.js` (needs internet), `node tests/story.test.js` and
 `node tests/capcut.test.js` (needs ffmpeg
 with flite, Playwright, internet). Runs automatically on
 GitHub Actions for every push.

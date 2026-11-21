@@ -72,7 +72,7 @@ section[id]{scroll-margin-top:64px}
 <body>
 <main>
 <h1>STICKMAN DIRECTOR</h1>
-<div class="sub">ANIMATED STICK FIGURE VIDEOS • <a href="index.html">← back to Video Studio</a></div>
+<div class="sub">ANIMATED STICK FIGURE VIDEOS • <a href="index.html">← back to Video Studio</a> • <a href="story.html">AI Story Studio</a></div>
 
 <section class="panel">
 <h3>01 — Story (AI Director)</h3>
@@ -828,6 +828,8 @@ function load(){
  let d=null; try{d=JSON.parse(localStorage.getItem(STORE)||"null");}catch(e){}
  $("script").value=d&&d.script!=null?d.script:DEFAULT_SCRIPT;
  if(d){["story","format","scene","stickColor","accent","handle","capSize","style","voiceMode","voice","speed"].forEach(k=>{if(d[k]!=null)$(k).value=d[k];});}
+ // a script sent from the AI Story Studio
+ try{ const imp=localStorage.getItem("stickman.import"); if(imp){ $("script").value=imp; localStorage.removeItem("stickman.import"); } }catch(e){}
 }
 
 function fmt(s){s=Math.max(0,s);return Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0");}
