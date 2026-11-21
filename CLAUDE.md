@@ -51,6 +51,7 @@ These rules apply to every Claude session and every team agent in `.claude/agent
 - [x] Stickman narration voice + Signature character (Kokoro TTS on-device, voice in export, .wav; tests/stickman-voice.test.js)
 - [x] AI Story Studio (`story.html`: topic → scenes → image/video prompts for Flow, ChatGPT, Gemini, Grok → join clips; tests/story.test.js)
 - [x] Story styles gallery (41 styles incl. 2026 trends, covers in img/styles, free in-app start images; story-styles.js; tests/story.test.js)
+- [x] My Google Flow link, ✨ Claude writer, Claude Cartoons styles (46 styles), word-pop captions, accurate covers (tests/story.test.js)
 - [x] AI Prompt panel (typed commands/scripts run the editor; prompt → picture via free Pollinations.ai, download or show on video; tests/prompt.test.js)
 - [x] Prompt Studio + red restyle (prompt queue → free pictures, Stickman, or guided copy/open/share hand-off to Flow, Gemini, ChatGPT, Grok — no automation of those sites; .txt/.csv; start frames; tab bar; tests/studio.test.js)
 - [x] ⚡ Edit this in the app (the edit-this skill on the phone: brand, Whisper captions with word highlight, cut pauses, max length, hook intro card, punch/slow zoom, Wikimedia B-roll, pop-ups, whoosh/pop, progress bar, logo, outro, export, thumbnail, post text, ET/PHT schedule; never posts; tests/edit-this.test.js)
