@@ -63,7 +63,7 @@ fs.writeFileSync(CSV, 'id,Prompt,notes\n1,"Ford Model T, 1910",a\n2,"A lighthous
     // Look: red theme + tab bar
     const accent = await page.evaluate(() => getComputedStyle(document.getElementById('stRun')).backgroundImage);
     check('red theme on main buttons', /230, 57, 70/.test(accent), accent.slice(0, 60));
-    check('tab bar has 8 sections', (await page.$$('#topTabs button')).length === 8);
+    check('tab bar has 9 sections', (await page.$$('#topTabs button')).length === 9);
     await page.click('#topTabs button[data-go="studioBox"]');
     await page.waitForFunction(() => Math.abs(document.getElementById('studioBox').getBoundingClientRect().top - 64) < 30, null, { timeout: 5000 }).catch(() => {});
     const top = await page.evaluate(() => document.getElementById('studioBox').getBoundingClientRect().top);

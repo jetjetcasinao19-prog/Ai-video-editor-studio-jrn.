@@ -40,6 +40,8 @@ jobs:
         run: node tests/prompt.test.js
       - name: Prompt Studio test
         run: node tests/studio.test.js
+      - name: Edit this (in the app) test
+        run: node tests/edit-this.test.js
       - name: Send to CapCut test
         run: node tests/capcut.test.js
       - name: Stickman Director test

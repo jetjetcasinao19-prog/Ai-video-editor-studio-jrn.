@@ -154,6 +154,18 @@ textarea{width:100%;padding:12px;margin-top:7px;border:1px solid #4a2630;border-
 .qbtns{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .qbtns button,.qbtns a{width:auto;flex:1 1 auto;margin:0;padding:9px 10px;font-size:12px}
 .qbtns a{display:block;text-align:center;border-radius:10px;background:#2c1a20;color:#fff;text-decoration:none;font-weight:bold;word-break:normal}
+#etLog{margin-top:10px;font-size:13px;line-height:1.5}
+#etLog div{border-left:3px solid #4a2630;padding:4px 8px;margin-bottom:4px;background:#100a0c;border-radius:4px;overflow-wrap:anywhere;white-space:pre-wrap}
+#etLog .ok{border-color:#3ec27a}
+#etLog .warn{border-color:#ffb86b}
+#etLog .err{border-color:#e05a6a}
+#etLog .info{border-color:var(--accent)}
+#etThumb{display:block;max-width:60%;max-height:360px;margin:10px auto 0;border-radius:10px}
+.sch{display:flex;gap:8px;align-items:center;border:1px solid #3b1d25;border-radius:10px;padding:8px;margin-top:8px;background:#100a0c;font-size:13px}
+.sch div{flex:1;min-width:0;overflow-wrap:anywhere}
+.sch select{width:auto;margin:0;padding:6px;font-size:12px}
+.sch button{width:auto;margin:0;padding:8px 10px}
+#etRun{font-size:17px;padding:16px;margin-top:14px}
 [hidden]{display:none!important}
 /* ---- red theme (shared look with stickman.html) ---- */
 :root{--accent:#e63946;--accent2:#ff6b6b;--glow:rgba(230,57,70,.35)}
@@ -204,6 +216,7 @@ section[id]{scroll-margin-top:64px}
 <nav id="topTabs" aria-label="Sections">
 <button data-go="projBox">Projects</button>
 <button data-go="importBox">Import</button>
+<button data-go="editThisBox">Edit this</button>
 <button data-go="promptBox">Prompt</button>
 <button data-go="studioBox">Studio</button>
 <button data-go="previewBox">Preview</button>
@@ -246,6 +259,113 @@ section[id]{scroll-margin-top:64px}
 Choose a video from your Android phone.
 Processing happens inside your browser.
 </p>
+</section>
+
+<section class="panel" id="editThisBox">
+<h3>⚡ Edit this — one tap</h3>
+<p class="note">Your “edit this” skill, on this phone: captions with the spoken word highlighted, pauses cut,
+vertical format, hook title card, punch zooms, B-roll photos from Wikimedia Commons, text pop-ups, sound effects,
+progress bar, your logo and outro — then the video, a thumbnail, the post text and a suggested posting time.
+It never posts anything for you.</p>
+
+<div class="row">
+<div><label for="etPlatform">Made for</label>
+<select id="etPlatform">
+<option value="shorts" selected>Shorts / Reels — 9:16, max 60 s</option>
+<option value="tiktok">TikTok — 9:16, max 90 s</option>
+<option value="youtube">YouTube — 16:9, no limit</option>
+<option value="feed">Feed post — 1:1, max 60 s</option>
+</select></div>
+<div><label for="etLang">Language</label>
+<select id="etLang">
+<option value="english" selected>English (US audience)</option>
+<option value="tagalog">Tagalog / Filipino</option>
+<option value="">Auto-detect</option>
+</select></div>
+</div>
+<label for="etTitle">Hook title for the intro card (empty = made from what you say)</label>
+<input id="etTitle" maxlength="60" placeholder="e.g. How the light bulb started">
+
+<details id="etMore">
+<summary>Options (captions, zoom, B-roll, sound…)</summary>
+<div class="row">
+<div><label for="etCaptions">Captions</label>
+<select id="etCaptions">
+<option value="creator" selected>Creator — word highlight</option>
+<option value="box">Box</option>
+<option value="classic">Classic</option>
+<option value="none">No captions</option>
+</select></div>
+<div><label for="etZoom">Zoom</label>
+<select id="etZoom">
+<option value="punch" selected>Punch — talking, live video</option>
+<option value="slow">Slow — animation, slides</option>
+<option value="none">None</option>
+</select></div>
+</div>
+<div class="check"><input id="etNewCaps" type="checkbox" checked><label for="etNewCaps">Make new AI captions (Whisper on this phone). Off: use the captions already in section 04.</label></div>
+<div class="check"><input id="etCut" type="checkbox" checked><label for="etCut">Cut out pauses</label></div>
+<div class="check"><input id="etIntro" type="checkbox" checked><label for="etIntro">Intro title card (skip it if your video starts with a strong spoken hook)</label></div>
+<div class="check"><input id="etBroll" type="checkbox" checked><label for="etBroll">B-roll photos from Wikimedia Commons (free licences only; needs internet)</label></div>
+<div class="check"><input id="etPopups" type="checkbox" checked><label for="etPopups">Text pop-ups for key words and numbers</label></div>
+<div class="check"><input id="etSfx" type="checkbox" checked><label for="etSfx">Sound effects (whoosh, pop)</label></div>
+<div class="check"><input id="etBar" type="checkbox" checked><label for="etBar">Progress bar</label></div>
+<div class="check"><input id="etWatermark" type="checkbox" checked><label for="etWatermark">Logo watermark</label></div>
+<div class="check"><input id="etOutro" type="checkbox" checked><label for="etOutro">Outro card with your @handle</label></div>
+<div class="check"><input id="etExport" type="checkbox" checked><label for="etExport">Export the video at the end</label></div>
+<label for="etFix">Fix words in the captions (one per line: wrong=right)</label>
+<textarea id="etFix" rows="2" placeholder="Zeigarnik effect=Zeigarnik effect&#10;edison=Edison"></textarea>
+<p class="note">Music: add a song in “Background music” (section 03) and it is mixed in automatically, with ducking under speech.</p>
+</details>
+
+<details id="etBrandBox">
+<summary>Brand kit</summary>
+<div class="row">
+<div><label for="etBrandName">Channel name</label><input id="etBrandName" maxlength="40"></div>
+<div><label for="etBrandHandle">@handle</label><input id="etBrandHandle" maxlength="40"></div>
+</div>
+<label for="etBrandTagline">Tagline (intro card second line)</label>
+<input id="etBrandTagline" maxlength="60">
+<label for="etBrandOutro">Outro text</label>
+<input id="etBrandOutro" maxlength="60">
+<div class="row">
+<div><label for="etBrandAccent">Accent colour</label><input id="etBrandAccent" type="color"></div>
+<div><label for="etBrandBg">Card background</label><input id="etBrandBg" type="color"></div>
+</div>
+<label for="etBrandTags">Hashtags (added to every post)</label>
+<input id="etBrandTags" maxlength="200">
+<label for="etBrandLogo">Logo (PNG with a see-through background is best)</label>
+<input id="etBrandLogo" type="file" accept="image/png,image/jpeg,image/webp">
+<p id="etBrandLogoNote" class="note"></p>
+<button id="etBrandReset" class="secondary" type="button">RESET TO HOW IT STARTED BRAND</button>
+</details>
+
+<button id="etRun">⚡ EDIT THIS</button>
+<div class="row">
+<button id="etPreview" class="secondary" disabled>▶ PREVIEW EDIT</button>
+<button id="etOff" class="secondary" disabled>EFFECTS OFF</button>
+</div>
+<progress id="etProgress" hidden></progress>
+<div id="etLog"></div>
+
+<div id="etResult" hidden>
+<div class="sthead"><b>Your post</b></div>
+<img id="etThumb" alt="Thumbnail" hidden>
+<div class="row">
+<a id="etThumbDl" class="btnlink" download="thumbnail.jpg" href="#">⬇ THUMBNAIL</a>
+<a id="etPostDl" class="btnlink" download="post.md" href="#">⬇ POST TEXT</a>
+</div>
+<textarea id="etPost" rows="12" readonly></textarea>
+<button id="etCopyPost" class="secondary" type="button">📋 COPY POST TEXT</button>
+<p class="note">Posting is your decision. Upload the video and paste the text in YouTube Studio, TikTok
+or Meta Business Suite — they can schedule it for the suggested time.</p>
+</div>
+
+<details id="etSchedBox">
+<summary>My posting schedule (<span id="etSchedCount">0</span>)</summary>
+<div id="etSched"></div>
+<a id="etSchedDl" class="btnlink" download="schedule.md" href="#">⬇ SCHEDULE (.md)</a>
+</details>
 </section>
 
 <section class="panel" id="promptBox">
@@ -808,6 +928,8 @@ let currentFile = null; // the imported File, kept for AI audio extraction
 let exportURL = null;
 let animationFrame = null;
 let busy = false;
+// "Edit this" effects, drawn only while the timeline plays or exports.
+let editFx=null, fxActive=false, fxNow=0, fxTotal=0, fxZoom=1;
 
 function dimensions(){
  const ratio = $("ratio").value;
@@ -842,7 +964,7 @@ function drawVideoLayer(el,alpha=1,dx=0,dy=0,zoom=1){
 
  const scale=(fit==="cover"
   ?Math.max(w/vw,h/vh)
-  :Math.min(w/vw,h/vh))*zoom;
+  :Math.min(w/vw,h/vh))*zoom*fxZoom;
 
  const dw=vw*scale;
  const dh=vh*scale;
@@ -868,6 +990,7 @@ function drawOverlays(t){
  const h=canvas.height;
  const title=$("overlay").value.trim();
  drawPicture(w,h);
+ if(fxActive) fxDrawUnder(w,h);
 
  if(title){
   const fontSize=Math.max(24,Math.round(w*0.055));
@@ -888,6 +1011,7 @@ function drawOverlays(t){
  }
 
  drawCaption(w,h,title,t);
+ if(fxActive) fxDrawOver(w,h);
 }
 
 /* ---------- CAPTIONS ---------- */
@@ -1107,6 +1231,11 @@ function drawCaption(w,h,title,t=video.currentTime){
  ctx.lineWidth=fontSize*s.outlineW/100;
  ctx.strokeStyle=s.outline;
  ctx.fillStyle=s.color;
+ // "Edit this" creator captions: the word being spoken is highlighted.
+ if(fxActive && editFx && editFx.highlight){
+  fxHighlightLines(lines,c,t,w,firstY,lineHeight,fontSize,s);
+  return;
+ }
  lines.forEach((line,i)=>{
   const y=firstY+i*lineHeight;
   if(s.outlineW>0) ctx.strokeText(line,w/2,y,maxWidth);
@@ -2418,6 +2547,7 @@ async function runTimeline(record,mimeType,onProgress){
  let acc=0;
  clips.forEach((c,i)=>{ startG.push(acc); acc+=clipLen(c)-T[i]; });
  const total=acc;
+ const fx=editFx; // "Edit this" effects (null = plain timeline)
 
  // Audio: both players go through their own gain (for crossfades) into
  // a master gain (for fade in/out). Created now, while the tap counts as
@@ -2474,7 +2604,11 @@ async function runTimeline(record,mimeType,onProgress){
    recorder.start(1000);
   }
 
-  await players[0].play();
+  // "Edit this": sound effects and the intro title card.
+  const sfx=fx&&actx&&master?fxSfxPlayer(actx,master):null;
+  if(fx&&fx.intro) await fxCard("intro",fx.intro.seconds,sfx);
+  if(tlStop){ /* stopped during the intro */ }
+  else await players[0].play();
   let nextStarted=false;
   let prep=Promise.resolve();
 
@@ -2487,6 +2621,7 @@ async function runTimeline(record,mimeType,onProgress){
     const t=cur.currentTime;
     const Ti=T[i];
     const g=startG[i]+(t-c.start);
+    if(fx){ fxActive=true; fxNow=Math.max(0,g); fxTotal=total; fxZoom=fxZoomAt(fxNow); if(sfx) sfx.tick(fxNow); }
 
     ctx.fillStyle="#000";
     ctx.fillRect(0,0,canvas.width,canvas.height);
@@ -2518,6 +2653,7 @@ async function runTimeline(record,mimeType,onProgress){
     if(t!==lastT){ lastT=t; lastMove=Date.now(); }
     else if(Date.now()-lastMove>15000){ reject(new Error("Video playback stalled.")); return; }
 
+    fxActive=false; fxZoom=1;
     if(t>=c.end-0.005 || cur.ended){
      if(i===n-1){ resolve(); return; }
      if(!nextStarted) nxt.play().catch(()=>{});   // plain cut
@@ -2532,6 +2668,10 @@ async function runTimeline(record,mimeType,onProgress){
    requestAnimationFrame(frame);
   });
 
+  if(fx&&fx.outro&&!tlStop){
+   players.forEach(v=>v.pause());
+   await fxCard("outro",fx.outro.seconds,sfx);
+  }
   if(tlStop && tlStopReason==="hidden") throw new Error("The screen was turned off or Chrome was left. Keep this tab open and try again.");
 
   if(recorder){
@@ -2546,6 +2686,7 @@ async function runTimeline(record,mimeType,onProgress){
   return null;
  }finally{
   document.removeEventListener("visibilitychange",onHidden);
+  fxActive=false; fxZoom=1;
   if(recorder && recorder.state!=="inactive"){ try{ recorder.stop(); }catch(e){} }
   if(cstream) cstream.getTracks().forEach(tr=>tr.stop());
   players.forEach(v=>{ try{ v.pause(); v.removeAttribute("src"); v.load(); }catch(e){} v.remove(); });
@@ -4429,6 +4570,781 @@ if("IntersectionObserver" in window){
 }
 
 /* ---------- END PROMPT STUDIO ---------- */
+
+/* ---------- EDIT THIS (the owner's skill, in the browser) ---------- */
+
+// Same steps as .claude/skills/edit-this and pipeline/edit.mjs, done on the
+// phone: brand → format → AI captions (Whisper) → fixes → cut pauses → max
+// length → hook title → effects plan (zoom, B-roll, pop-ups, sound effects,
+// progress bar, watermark, intro/outro cards) → export → thumbnail → post
+// text → suggested posting time. Effects are drawn by runTimeline while
+// editFx is set. Nothing is posted anywhere.
+
+const BRAND_KEY="aves.brand", SCHED_KEY="aves.schedule", ET_KEY="aves.editThis";
+// From brand/brand.json and brand/voice.md (How it Started).
+const BRAND_DEFAULT={name:"How it Started",handle:"@HOWITSTARTED-YT1",tagline:"Every Legend Has a Beginning",
+ outro:"Subscribe for more origin stories",accent:"#f5c400",bg:"#000000",text:"#ffffff",highlight:"#f5c400",
+ hashtags:"#HowItStarted #EveryLegendHasABeginning",logo:""};
+const ET_PLATFORMS={shorts:{ratio:"9:16",max:60,name:"Shorts / Reels"},tiktok:{ratio:"9:16",max:90,name:"TikTok"},
+ youtube:{ratio:"16:9",max:0,name:"YouTube"},feed:{ratio:"1:1",max:60,name:"Feed post"}};
+const WM_API="https://commons.wikimedia.org/w/api.php";
+let brand={...BRAND_DEFAULT};
+let brandLogoImg=null;      // Image or null
+let fxRunning=false;
+
+function etLog(text,cls){
+ const d=document.createElement("div");
+ d.className=cls||"info"; d.textContent=text;
+ $("etLog").append(d);
+ return d;
+}
+function etStep(text){ const d=etLog("… "+text,"info"); return { done:(msg,cls)=>{ d.className=cls||"ok"; d.textContent=(cls==="warn"?"⚠ ":cls==="err"?"✗ ":cls==="info"?"… ":"✓ ")+msg; } }; }
+
+// ---------- brand kit ----------
+function brandLoad(){
+ try{ const d=JSON.parse(localStorage.getItem(BRAND_KEY)||"null"); if(d&&typeof d==="object") brand={...BRAND_DEFAULT,...d}; }catch(e){}
+ brandToForm(); brandLogoLoad();
+}
+function brandToForm(){
+ $("etBrandName").value=brand.name; $("etBrandHandle").value=brand.handle; $("etBrandTagline").value=brand.tagline;
+ $("etBrandOutro").value=brand.outro; $("etBrandAccent").value=brand.accent; $("etBrandBg").value=brand.bg;
+ $("etBrandTags").value=brand.hashtags;
+}
+function brandSave(){
+ brand={...brand,name:$("etBrandName").value.trim(),handle:$("etBrandHandle").value.trim(),tagline:$("etBrandTagline").value.trim(),
+  outro:$("etBrandOutro").value.trim(),accent:$("etBrandAccent").value,highlight:$("etBrandAccent").value,bg:$("etBrandBg").value,
+  hashtags:$("etBrandTags").value.trim()};
+ try{ localStorage.setItem(BRAND_KEY,JSON.stringify(brand)); }catch(e){}
+}
+function brandInitials(){
+ const parts=(brand.name||"").replace(/[^\p{L}\p{N}\s]/gu," ").split(/\s+/).filter(Boolean);
+ return (parts.length>=2?parts[0][0]+parts[1][0]:(parts[0]||"").slice(0,2)).toUpperCase();
+}
+async function brandLogoLoad(){
+ brandLogoImg=null;
+ let src=brand.logo;
+ let note="";
+ if(!src && location.protocol!=="file:"){
+  // The repository's brand/logo.png (works when the page is on a website).
+  try{ const r=await fetch("brand/logo.png"); if(r.ok&&/^image\//.test(r.headers.get("content-type")||"")){ src=URL.createObjectURL(await r.blob()); note="Using brand/logo.png from your repository."; } }catch(e){}
+ }
+ if(src){
+  const img=new Image(); img.src=src;
+  try{ await img.decode(); brandLogoImg=img; }catch(e){ note="The logo could not be opened."; }
+ }
+ $("etBrandLogoNote").textContent=brandLogoImg?(note||"Your logo is saved on this phone."):
+  (note||"No logo yet: a round “"+brandInitials()+"” logo in your accent colour is used.");
+}
+["etBrandName","etBrandHandle","etBrandTagline","etBrandOutro","etBrandAccent","etBrandBg","etBrandTags"].forEach(id=>
+ $(id).addEventListener("change",()=>{ brandSave(); if(id==="etBrandName"&&!brandLogoImg) brandLogoLoad(); }));
+$("etBrandLogo").addEventListener("change",async e=>{
+ const f=e.target.files[0]; e.target.value=""; if(!f) return;
+ // Keep a small copy (256 px) so it fits in phone storage.
+ const url=URL.createObjectURL(f); const img=new Image(); img.src=url;
+ try{ await img.decode(); }catch(err){ URL.revokeObjectURL(url); $("etBrandLogoNote").textContent="That picture could not be opened."; return; }
+ const k=256/Math.max(img.naturalWidth,img.naturalHeight,1);
+ const c=document.createElement("canvas"); c.width=Math.max(1,Math.round(img.naturalWidth*Math.min(1,k))); c.height=Math.max(1,Math.round(img.naturalHeight*Math.min(1,k)));
+ c.getContext("2d").drawImage(img,0,0,c.width,c.height);
+ URL.revokeObjectURL(url);
+ brand.logo=c.toDataURL("image/png"); brandSave(); brandLogoLoad();
+});
+$("etBrandReset").addEventListener("click",()=>{
+ if(!confirm("Reset the brand kit to How it Started?")) return;
+ brand={...BRAND_DEFAULT}; try{ localStorage.setItem(BRAND_KEY,JSON.stringify(brand)); }catch(e){}
+ brandToForm(); brandLogoLoad();
+});
+
+// ---------- options ----------
+const ET_FIELDS=["etPlatform","etLang","etCaptions","etZoom","etNewCaps","etCut","etIntro","etBroll","etPopups","etSfx","etBar","etWatermark","etOutro","etExport"];
+function etSaveOpts(){
+ const o={}; ET_FIELDS.forEach(id=>{ const el=$(id); o[id]=el.type==="checkbox"?el.checked:el.value; });
+ try{ localStorage.setItem(ET_KEY,JSON.stringify(o)); }catch(e){}
+}
+(function etLoadOpts(){
+ let o=null; try{ o=JSON.parse(localStorage.getItem(ET_KEY)||"null"); }catch(e){}
+ if(o) ET_FIELDS.forEach(id=>{ if(!(id in o)) return; const el=$(id); if(el.type==="checkbox") el.checked=!!o[id]; else if([...el.options].some(x=>x.value===o[id])) el.value=o[id]; });
+ ET_FIELDS.forEach(id=>$(id).addEventListener("change",etSaveOpts));
+})();
+
+// ---------- timing helpers ----------
+// The output timeline: clips one after another (Edit this uses plain cuts).
+function fxTimeline(){
+ const startG=[]; let acc=0;
+ timeline.forEach((c,i)=>{ startG.push(acc); acc+=clipLen(c)-transLen(i); });
+ return {startG,total:acc};
+}
+// Source time → output time. A moment inside a cut moves to the next kept part.
+function fxMap(src,tl){
+ for(let i=0;i<timeline.length;i++){
+  const c=timeline[i];
+  if(src<c.start) return tl.startG[i];
+  if(src<=c.end) return tl.startG[i]+(src-c.start);
+ }
+ return tl.total;
+}
+// Words with times (spread over each caption by length; Whisper gives
+// sentence times, so word times are close, not exact).
+function fxWords(){
+ const out=[];
+ captions.forEach(c=>{
+  const ws=c.text.trim().split(/\s+/).filter(Boolean);
+  const total=ws.reduce((n,w)=>n+w.length+1,0)||1;
+  let t=c.start;
+  ws.forEach(w=>{ const d=(c.end-c.start)*(w.length+1)/total; out.push({w,start:t,end:t+d,cap:c}); t+=d; });
+ });
+ return out;
+}
+
+// Port of pipeline/effects.mjs zoomPlan(): punch = change zoom at cuts and
+// sentence ends (≥ 4 s apart); slow = slow push-in on every part.
+function fxZoomPlan(style,cuts,total,words,level=1.15,every=4,ease=0.25){
+ if(style==="none"||!style) return [];
+ const bounds=[0,...cuts.filter(c=>c>0.3&&c<total-0.3),total];
+ const keys=[];
+ if(style==="slow"){
+  for(let i=0;i<bounds.length-1;i++) keys.push({t:bounds[i],z:1,jump:true},{t:bounds[i+1]-0.001,z:1.08});
+  return keys;
+ }
+ const ends=words.filter(w=>/[.!?]$/.test(w.w)).map(w=>w.end).sort((a,b)=>a-b);
+ const points=[...cuts];
+ let last=0;
+ for(const e of ends){
+  if(e-last>=every&&points.every(p=>Math.abs(p-e)>1.5)&&e<total-1){ points.push(e); last=e; }
+  else if(points.some(p=>Math.abs(p-e)<=1.5)) last=e;
+ }
+ points.sort((a,b)=>a-b);
+ let z=1; keys.push({t:0,z:1});
+ for(const p of points){
+  if(p<=0.3||p>=total-0.3) continue;
+  const nz=z===1?level:1;
+  keys.push({t:p,z},{t:p+ease,z:nz}); z=nz;
+ }
+ return keys;
+}
+function fxZoomAt(g){
+ const keys=editFx&&editFx.zoom; if(!keys||!keys.length) return 1;
+ if(g<=keys[0].t) return keys[0].z;
+ for(let i=0;i<keys.length-1;i++){
+  const a=keys[i],b=keys[i+1];
+  if(g<b.t){
+   if(b.jump) return a.z;
+   const x=Math.min(1,Math.max(0,(g-a.t)/Math.max(0.001,b.t-a.t)));
+   return a.z+(b.z-a.z)*(3*x*x-2*x*x*x); // smoothstep
+  }
+ }
+ return keys[keys.length-1].z;
+}
+
+// ---------- picking pop-ups and B-roll from the words ----------
+const FX_COMMON=new Set(("I I'm I've I'll It It's The A An And But So Then Now This That These Those We You He She They My Our Your His Her Their "+
+ "What When Where Why How Who Which If Or Yes No Not Just Also Today Here There Every One Two Three First Last Next Because After Before "+
+ "Mr Mrs Ms Dr Okay OK Hey Hi Hello Well Let's Do Don't Is Are Was Were In On At Of To For With From By As").split(" "));
+function fxClean(w){ return w.replace(/^[^\p{L}\p{N}$]+|[^\p{L}\p{N}%]+$/gu,""); }
+// Key moments: numbers / years and names (capitalised words inside a sentence).
+function fxKeyMoments(words){
+ const out=[];
+ for(let i=0;i<words.length;i++){
+  const w=fxClean(words[i].w);
+  if(!w) continue;
+  const sentenceStart=i===0||/[.!?]$/.test(words[i-1].w);
+  if(/^\$?\d[\d,.]*(%|s)?$/.test(w)&&w.replace(/\D/g,"").length>=1){
+   let text=w;
+   const nxt=words[i+1]&&fxClean(words[i+1].w);
+   if(nxt&&/^(years?|minutes?|seconds?|days?|hours?|percent|million|billion|thousand|times|dollars|people|miles)$/i.test(nxt)) text+=" "+nxt;
+   const year=/^(1[5-9]\d\d|20\d\d)s?$/.test(w);
+   // money, percentages and numbers with a unit make the best pop-ups
+   const rank=year||/^\$|%$/.test(w)||text!==w?0:1;
+   out.push({at:words[i].start,text,kind:year?"year":"number",rank,word:words[i]});
+   continue;
+  }
+  if(/^\p{Lu}/u.test(w)&&!sentenceStart&&!FX_COMMON.has(w)&&w.length>=3){
+   let text=w, j=i+1;
+   while(j<words.length&&j<i+3&&/^\p{Lu}/u.test(fxClean(words[j].w))&&!FX_COMMON.has(fxClean(words[j].w))&&!/[.!?,]$/.test(words[j-1].w)){ text+=" "+fxClean(words[j].w); j++; }
+   out.push({at:words[i].start,text,kind:"name",rank:2,word:words[i]});
+   i=j-1;
+  }
+ }
+ return out;
+}
+function fxPick(list,n,gap,minAt,total,byRank){
+ const picked=[];
+ const order=byRank?list.slice().sort((a,b)=>(a.rank-b.rank)||(a.out-b.out)):list;
+ for(const m of order){
+  if(picked.length>=n) break;
+  if(m.out<minAt||m.out>total-1.5) continue;
+  if(picked.some(p=>Math.abs(p.out-m.out)<gap)) continue;
+  if(picked.some(p=>p.text.toLowerCase()===m.text.toLowerCase())) continue;
+  picked.push(m);
+ }
+ return picked.sort((a,b)=>a.out-b.out);
+}
+
+// ---------- Wikimedia Commons (port of pipeline/effects.mjs) ----------
+function wmLicenseOk(lic){
+ const l=String(lic||"").trim();
+ if(!l||/\bNC\b|non-?commercial|\bND\b|no-?deriv|fair use|non-?free|copyrighted/i.test(l)) return false;
+ return /^(public domain|pd\b|pd-|cc0|cc[ -]by\b|cc[ -]by-sa\b|cc[ -]by[ -]\d|cc[ -]by-sa[ -]\d)/i.test(l)||/^cc by(-sa)? \d/i.test(l);
+}
+let wmLast=0;
+async function wmFetch(url){
+ for(let tries=0;tries<3;tries++){
+  const wait=wmLast+1100-Date.now(); if(wait>0) await new Promise(r=>setTimeout(r,wait));
+  wmLast=Date.now();
+  let r=null;
+  // Wikimedia's "too many requests" answer has no CORS header, so the
+  // browser only reports a network error: treat it as "busy, wait".
+  try{ r=await fetch(url); }catch(e){ r=null; }
+  if(r&&r.status!==429&&r.status!==503) return r;
+  const sec=r?Math.min(10,Number(r.headers.get("retry-after"))||3):4+tries*3;
+  await new Promise(res=>setTimeout(res,sec*1000));
+ }
+ throw new Error("Wikimedia is busy or unreachable right now (try again in a minute)");
+}
+async function wikimediaPicture(query){
+ const url=WM_API+"?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=12&prop=imageinfo"+
+  "&iiprop=url|size|mime|extmetadata&iiurlwidth=1280&iiextmetadatafilter=LicenseShortName|Artist|NonFree"+
+  "&gsrsearch="+encodeURIComponent(query+" filetype:bitmap");
+ const r=await wmFetch(url);
+ if(!r.ok) throw new Error("Wikimedia "+r.status);
+ const pages=Object.values(((await r.json()).query||{}).pages||{}).sort((a,b)=>(a.index||0)-(b.index||0));
+ const strip=v=>String(v||"").replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();
+ for(const p of pages){
+  const ii=(p.imageinfo||[])[0];
+  if(!ii||!/^image\/(jpeg|png)$/.test(ii.mime)||ii.width<800||ii.height<500) continue;
+  const m=ii.extmetadata||{}, lic=strip(m.LicenseShortName&&m.LicenseShortName.value);
+  if(m.NonFree&&String(m.NonFree.value)==="true") continue;
+  if(!wmLicenseOk(lic)) continue;
+  const ir=await wmFetch(ii.thumburl||ii.url);
+  if(!ir.ok) continue;
+  const blob=await ir.blob();
+  const img=new Image(); const u=URL.createObjectURL(blob); img.src=u;
+  try{ await img.decode(); }catch(e){ URL.revokeObjectURL(u); continue; }
+  const author=strip(m.Artist&&m.Artist.value).slice(0,80)||"Unknown author";
+  return {img,url:u,credit:author+", "+lic+", via Wikimedia Commons",page:ii.descriptionurl||("https://commons.wikimedia.org/wiki/"+encodeURIComponent(p.title))};
+ }
+ throw new Error("no freely licensed picture for “"+query+"”");
+}
+
+// ---------- drawing ----------
+function fxAccent(){ return brand.accent||"#f5c400"; }
+function easeOut(x){ x=Math.min(1,Math.max(0,x)); return 1-Math.pow(1-x,3); }
+
+// Under the captions: B-roll, watermark, progress bar.
+function fxDrawUnder(w,h){
+ const fx=editFx; if(!fx) return;
+ const g=fxNow;
+ for(const b of fx.broll){
+  if(g<b.at||g>b.at+b.dur) continue;
+  const p=(g-b.at)/b.dur, a=Math.min(1,(g-b.at)/0.2,(b.at+b.dur-g)/0.2);
+  const iw=b.img.naturalWidth, ih=b.img.naturalHeight;
+  ctx.save(); ctx.globalAlpha=Math.max(0,a);
+  // Blurred, darker copy fills the frame; the whole photo sits on top.
+  const cs=Math.max(w/iw,h/ih);
+  try{ ctx.filter="blur(24px) brightness(0.8)"; }catch(e){}
+  ctx.drawImage(b.img,(w-iw*cs)/2,(h-ih*cs)/2,iw*cs,ih*cs);
+  ctx.filter="none";
+  const kb=1+0.06*p; // slow Ken Burns push-in
+  const s2=Math.min(w*0.94/iw,h*0.94/ih)*kb;
+  ctx.drawImage(b.img,(w-iw*s2)/2,(h-ih*s2)/2,iw*s2,ih*s2);
+  ctx.restore();
+  break;
+ }
+ if(fx.watermark){
+  const size=w*0.14, m=w*0.035;
+  ctx.save(); ctx.globalAlpha=0.9;
+  fxLogo(w-size-m,m+(fx.bar?h*0.012:0),size);
+  ctx.restore();
+ }
+ if(fx.bar&&fxTotal>0){
+  const bh=Math.max(4,Math.round(h*0.007));
+  ctx.fillStyle="rgba(0,0,0,0.35)"; ctx.fillRect(0,0,w,bh);
+  ctx.fillStyle=fxAccent(); ctx.fillRect(0,0,w*Math.min(1,g/fxTotal),bh);
+ }
+}
+// Logo (or a round initials logo) in a square box.
+function fxLogo(x,y,size){
+ if(brandLogoImg){
+  const iw=brandLogoImg.naturalWidth, ih=brandLogoImg.naturalHeight, k=Math.min(size/iw,size/ih);
+  ctx.drawImage(brandLogoImg,x+(size-iw*k)/2,y+(size-ih*k)/2,iw*k,ih*k);
+  return;
+ }
+ ctx.beginPath(); ctx.arc(x+size/2,y+size/2,size/2,0,Math.PI*2);
+ ctx.fillStyle=fxAccent(); ctx.fill();
+ ctx.fillStyle=brand.bg||"#000"; ctx.font="bold "+Math.round(size*0.4)+"px Arial, sans-serif";
+ ctx.textAlign="center"; ctx.textBaseline="middle";
+ ctx.fillText(brandInitials(),x+size/2,y+size/2+size*0.02);
+}
+// Over the captions: text pop-ups (top, accent colour, pop animation).
+function fxDrawOver(w,h){
+ const fx=editFx; if(!fx) return;
+ const g=fxNow;
+ for(const p of fx.popups){
+  if(g<p.at||g>p.at+1.4) continue;
+  const e=g-p.at;
+  const sc=e<0.12?0.6+0.55*(e/0.12):e<0.25?1.15-0.15*((e-0.12)/0.13):1;
+  const a=e>1.2?Math.max(0,1-(e-1.2)/0.2):1;
+  const size=Math.round(w*0.095);
+  ctx.save();
+  ctx.globalAlpha=a;
+  ctx.translate(w/2,h*0.17);
+  ctx.scale(sc,sc);
+  ctx.font=(loadedFonts.has("Anton")?'normal '+size+'px "Anton"':"900 "+size+"px Arial")+", Arial, sans-serif";
+  ctx.textAlign="center"; ctx.textBaseline="middle";
+  ctx.lineJoin="round"; ctx.lineWidth=size*0.16; ctx.strokeStyle="#000";
+  const text=p.text.toUpperCase();
+  ctx.strokeText(text,0,0,w*0.9); ctx.fillStyle=fxAccent(); ctx.fillText(text,0,0,w*0.9);
+  ctx.restore();
+ }
+}
+// Creator captions: draw word by word, the spoken word in the highlight colour.
+function fxHighlightLines(lines,c,t,w,firstY,lineHeight,fontSize,s){
+ const words=c.text.trim().split(/\s+/);
+ const total=words.reduce((n,x)=>n+x.length+1,0)||1;
+ let acc=0, cur=words.length-1;
+ const p=(t-c.start)/Math.max(0.01,c.end-c.start)*total;
+ for(let i=0;i<words.length;i++){ acc+=words[i].length+1; if(p<acc){ cur=i; break; } }
+ let k=0;
+ ctx.textAlign="left";
+ lines.forEach((line,li)=>{
+  const y=firstY+li*lineHeight;
+  const parts=line.split(" ");
+  const space=ctx.measureText(" ").width;
+  const widths=parts.map(x=>ctx.measureText(x).width);
+  const lw=widths.reduce((a,b)=>a+b,0)+space*(parts.length-1);
+  let x=w/2-lw/2;
+  parts.forEach((part,j)=>{
+   const on=k===cur;
+   if(s.outlineW>0) ctx.strokeText(part,x,y);
+   ctx.fillStyle=on?(editFx.highlightColor||fxAccent()):s.color;
+   ctx.fillText(part,x,y);
+   x+=widths[j]+space; k++;
+  });
+ });
+ ctx.textAlign="center";
+}
+// Intro (hook title) and outro (logo, text, @handle) cards.
+function fxDrawCard(kind,e,dur){
+ const w=canvas.width,h=canvas.height;
+ ctx.fillStyle=brand.bg||"#000"; ctx.fillRect(0,0,w,h);
+ const grad=ctx.createRadialGradient(w/2,h*0.4,0,w/2,h*0.4,Math.max(w,h)*0.7);
+ grad.addColorStop(0,"rgba(255,255,255,0.14)"); grad.addColorStop(1,"rgba(255,255,255,0)");
+ ctx.fillStyle=grad; ctx.fillRect(0,0,w,h);
+ const font=s=>(loadedFonts.has("Montserrat")?'800 '+s+'px "Montserrat"':"bold "+s+"px Arial")+", Arial, sans-serif";
+ ctx.textAlign="center"; ctx.textBaseline="middle";
+ if(kind==="intro"){
+  const title=editFx.intro.title, sub=editFx.intro.subtitle;
+  const ts=Math.round(w*(h>w?0.085:0.06));
+  ctx.font=font(ts);
+  const lines=wrapLines(title,w*0.84,4);
+  const blockH=lines.length*ts*1.1;
+  const top=h/2-blockH/2-(sub?ts*0.4:0);
+  // accent bar
+  const bp=easeOut((e-0.05)/0.45);
+  ctx.fillStyle=fxAccent();
+  const bw=w*0.18*bp, bh=Math.max(4,w*0.012);
+  ctx.fillRect(w/2-bw/2,top-w*0.06,bw,bh);
+  const tp=easeOut((e-0.15)/0.6);
+  ctx.globalAlpha=tp; ctx.fillStyle=brand.text||"#fff";
+  lines.forEach((l,i)=>ctx.fillText(l,w/2,top+ts*0.55+i*ts*1.1+(1-tp)*h*0.04));
+  if(sub){
+   const sp=easeOut((e-0.45)/0.5);
+   ctx.globalAlpha=sp*0.8; ctx.font=font(Math.round(ts*0.47));
+   ctx.fillText(sub,w/2,top+blockH+ts*0.6+(1-sp)*h*0.02,w*0.84);
+  }
+  ctx.globalAlpha=1;
+ }else{
+  const p=easeOut(e/0.5);
+  const size=Math.min(w,h)*0.3;
+  ctx.globalAlpha=p;
+  fxLogo(w/2-size/2,h*0.5-size*1.15,size);
+  ctx.fillStyle=brand.text||"#fff"; ctx.font=font(Math.round(w*(h>w?0.06:0.045)));
+  wrapLines(brand.outro||"",w*0.84,2).forEach((l,i)=>ctx.fillText(l,w/2,h*0.56+i*w*0.07+(1-p)*h*0.03));
+  ctx.fillStyle=fxAccent(); ctx.font=font(Math.round(w*(h>w?0.05:0.038)));
+  ctx.fillText(brand.handle||"",w/2,h*0.56+w*0.17,w*0.9);
+  ctx.globalAlpha=1;
+ }
+ // fade to black at the end of the intro
+ if(kind==="intro"&&e>dur-0.35){ ctx.fillStyle="rgba(0,0,0,"+Math.min(1,(e-(dur-0.35))/0.35)+")"; ctx.fillRect(0,0,w,h); }
+}
+function fxCard(kind,dur,sfx){
+ if(sfx) sfx.play("whoosh");
+ return new Promise(resolve=>{
+  const t0=performance.now();
+  function frame(){
+   const e=(performance.now()-t0)/1000;
+   if(tlStop||e>=dur){ resolve(); return; }
+   fxDrawCard(kind,e,dur);
+   requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+ });
+}
+
+// ---------- sound effects (made here, like the pipeline: no licence needed) ----------
+function fxSfxPlayer(actx,master){
+ const rate=actx.sampleRate;
+ const whoosh=actx.createBuffer(1,Math.round(rate*0.5),rate);
+ { const d=whoosh.getChannelData(0); let lp=0,hp=0,prev=0;
+   for(let i=0;i<d.length;i++){
+    const t=i/rate, white=Math.random()*2-1;
+    lp+=0.25*(white-lp);           // soften (low-pass)
+    hp=0.9*(hp+lp-prev); prev=lp;  // remove rumble (high-pass)
+    const env=t<0.22?Math.pow(t/0.22,2):Math.max(0,1-(t-0.22)/0.28);
+    d[i]=hp*env*2.2;
+   } }
+ const pop=actx.createBuffer(1,Math.round(rate*0.2),rate);
+ { const d=pop.getChannelData(0);
+   for(let i=0;i<d.length;i++){ const t=i/rate; d[i]=0.7*Math.sin(2*Math.PI*(700+500*Math.exp(-40*t))*t)*Math.exp(-18*t); } }
+ const out=actx.createGain(); out.gain.value=0.6; out.connect(master);
+ const events=(editFx&&editFx.sfx||[]).slice().sort((a,b)=>a.t-b.t);
+ let next=0;
+ const play=type=>{ try{ const s=actx.createBufferSource(); s.buffer=type==="pop"?pop:whoosh; s.connect(out); s.start(); }catch(e){} };
+ return {
+  play,
+  tick(g){ while(next<events.length&&events[next].t<=g){ if(g-events[next].t<0.3) play(events[next].type); next++; } }
+ };
+}
+
+// ---------- the plan ----------
+async function fxBuildPlan(o,title,log){
+ const tl=fxTimeline(), total=tl.total;
+ const words=fxWords().map(x=>({...x,start:fxMap(x.start,tl),end:fxMap(x.end,tl)}));
+ const cuts=tl.startG.slice(1);
+ const zoom=fxZoomPlan(o.zoom,cuts,total,words);
+ const moments=fxKeyMoments(words).map(m=>({...m,out:Math.max(0,m.at)}));
+ const nPop=Math.max(2,Math.min(6,Math.round(total/12)));
+ const popups=o.popups?fxPick(moments,nPop,Math.min(5,total/(nPop+2)),1,total,true)
+  .map(m=>({at:Math.max(0,m.out-0.2),text:m.text.slice(0,20)})):[];
+ const broll=[], credits=[], notes=[];
+ if(o.broll){
+  const cand=moments.filter(m=>m.kind!=="number").map(m=>{
+   // Period-aware search: a name plus a year said nearby.
+   const near=moments.find(x=>x.kind==="year"&&Math.abs(x.out-m.out)<8);
+   return {...m,query:m.kind==="year"?(m.text+" "+(title||"")).trim():m.text+(near?" "+near.text.replace(/s$/,""):"")};
+  });
+  const want=Math.max(1,Math.min(4,Math.round(total/15)));
+  const gap=Math.min(6,total/(want+1));
+  // Names find the best photos, then years. Search them in that order and
+  // keep the ones that are found, spaced out over the video.
+  const seen=new Set();
+  const order=cand.map(m=>({...m,rank:m.kind==="name"?0:1})).sort((a,b)=>(a.rank-b.rank)||(a.out-b.out))
+   .filter(m=>{ const k=m.query.toLowerCase(); if(seen.has(k)) return false; seen.add(k); return true; });
+  let tries=0;
+  for(const m of order){
+   if(broll.length>=want||tries>=want+3) break;
+   const at=Math.max(2,m.out-0.3), dur=Math.min(3,total-0.5-at);
+   if(dur<1.5||broll.some(x=>Math.abs(x.at-at)<gap)) continue;
+   tries++;
+   try{
+    log("Finding a B-roll photo: “"+m.query+"”…");
+    const pic=await wikimediaPicture(m.query);
+    broll.push({at,dur,img:pic.img,url:pic.url,query:m.query,credit:pic.credit,page:pic.page});
+    credits.push(pic.credit);
+   }catch(e){ notes.push("B-roll skipped for “"+m.query+"”: "+e.message); }
+  }
+  broll.sort((a,b)=>a.at-b.at);
+ }
+ const sfx=[];
+ if(o.sfx){
+  for(let i=1;i<zoom.length;i++) if(!zoom[i].jump&&zoom[i].z!==zoom[i-1].z&&zoom[i].t-zoom[i-1].t<0.5) sfx.push({t:zoom[i-1].t,type:"whoosh"});
+  broll.forEach(b=>sfx.push({t:b.at,type:"whoosh"}));
+  popups.forEach(p=>sfx.push({t:p.at,type:"pop"}));
+ }
+ return {zoom,popups,broll,sfx:sfx.slice(0,60),credits,notes,total,
+  bar:o.bar,watermark:o.watermark,highlight:o.captions==="creator",highlightColor:brand.highlight||brand.accent,
+  intro:o.intro?{seconds:2.5,title,subtitle:brand.tagline||""}:null,
+  outro:o.outro?{seconds:2.5}:null};
+}
+function fxClear(){
+ if(editFx) editFx.broll.forEach(b=>URL.revokeObjectURL(b.url));
+ editFx=null;
+ $("etPreview").disabled=true; $("etOff").disabled=true;
+}
+
+// ---------- post text and posting time ----------
+function tzParts(date,tz){
+ const p=Object.fromEntries(new Intl.DateTimeFormat("en-US",{timeZone:tz,hourCycle:"h23",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"})
+  .formatToParts(date).filter(x=>x.type!=="literal").map(x=>[x.type,Number(x.value)]));
+ return p;
+}
+// Next evening slot for US viewers: 7:00 PM Eastern Time, tomorrow or later.
+function suggestSlot(now=new Date()){
+ const et=tzParts(now,"America/New_York");
+ for(let add=1;add<4;add++){
+  // a UTC guess, then correct by the real New York offset of that day
+  let guess=Date.UTC(et.year,et.month-1,et.day+add,19+5,0);
+  for(let k=0;k<2;k++){ const q=tzParts(new Date(guess),"America/New_York"); guess-=((q.hour-19)*60+q.minute)*60000; }
+  const d=new Date(guess);
+  if(d-now>3*3600000) return d;
+ }
+ return new Date(now.getTime()+86400000);
+}
+function fmtTz(d,tz,label){
+ return new Intl.DateTimeFormat("en-US",{timeZone:tz,weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}).format(d)+" "+label;
+}
+function fxSummary(){
+ const text=captions.map(c=>c.text).join(" ").replace(/\s+/g," ").trim();
+ const sentences=text.split(/(?<=[.!?])\s+/).filter(x=>x.split(/\s+/).length>=4);
+ return sentences.slice(0,2).join(" ")||text.slice(0,200);
+}
+function fxHashtags(){
+ const own=(brand.hashtags||"").split(/\s+/).filter(x=>/^#\w/.test(x));
+ const extra=(editFx?editFx.popups:[]).map(p=>p.text).filter(t=>/^\p{L}/u.test(t))
+  .map(t=>"#"+t.replace(/[^\p{L}\p{N}]+/gu," ").trim().split(" ").map(x=>x.charAt(0).toUpperCase()+x.slice(1)).join("")).filter(t=>t.length>3&&t.length<30);
+ return [...new Set([...own,...extra])].slice(0,8);
+}
+function fxPostText(title,slot,platform){
+ const tags=fxHashtags().join(" ");
+ const summary=fxSummary();
+ const credits=editFx&&editFx.credits.length?editFx.credits.map(c=>"B-roll: "+c).join("\n"):"";
+ const when=fmtTz(slot,"America/New_York","ET")+" ("+fmtTz(slot,"Asia/Manila","PHT")+")";
+ const cta=brand.outro?brand.outro+".":"";
+ const lines=[
+  "# "+title,"",
+  "Video: edited-video (exported "+new Date().toISOString().slice(0,10)+") · made for "+ET_PLATFORMS[platform].name,"",
+  "## What it says","",summary,"",
+  "## YouTube Shorts","",
+  "Title: "+title.slice(0,90)+" #Shorts","",
+  "Description:",summary,cta,credits,tags,"",
+  "## TikTok","",
+  "Caption: "+title+" "+tags+(credits?"\n"+credits:""),"",
+  "## Instagram / Facebook Reels","",
+  "Caption: "+title+"\n"+summary+"\n"+cta+"\n"+tags+(credits?"\n"+credits:""),"",
+  "## Suggested posting time","",
+  when+" — general guidance for US viewers (evenings ET are busiest), not from your channel's analytics.","",
+  "Check the captions and facts before posting. Posting is your decision."
+ ];
+ return lines.filter((l,i,a)=>!(l===""&&a[i-1]==="")).join("\n").replace(/\n{3,}/g,"\n\n");
+}
+
+// Local posting schedule (like content/schedule.md, kept on this phone).
+function schedLoad(){ try{ const l=JSON.parse(localStorage.getItem(SCHED_KEY)||"[]"); return Array.isArray(l)?l:[]; }catch(e){ return []; } }
+function schedSave(l){ try{ localStorage.setItem(SCHED_KEY,JSON.stringify(l.slice(-100))); }catch(e){} }
+let schedURL=null;
+function schedRender(){
+ const l=schedLoad();
+ $("etSchedCount").textContent=l.length;
+ const frag=document.createDocumentFragment();
+ l.forEach((r,i)=>{
+  const d=document.createElement("div"); d.className="sch";
+  const info=document.createElement("div"); info.textContent=r.et+" · "+r.platform+" · "+r.title;
+  const sel=document.createElement("select");
+  ["planned","ready","posted"].forEach(v=>{ const o=document.createElement("option"); o.value=v; o.textContent=v; sel.append(o); });
+  sel.value=r.status;
+  sel.addEventListener("change",()=>{ const x=schedLoad(); if(x[i]){ x[i].status=sel.value; schedSave(x); schedRender(); } });
+  const del=document.createElement("button"); del.className="del"; del.textContent="✕"; del.title="Remove";
+  del.addEventListener("click",()=>{ const x=schedLoad(); x.splice(i,1); schedSave(x); schedRender(); });
+  d.append(info,sel,del); frag.append(d);
+ });
+ $("etSched").replaceChildren(frag);
+ const md="| Date (ET) | PHT | Platform | Title | Status |\n|---|---|---|---|---|\n"+
+  l.map(r=>"| "+r.et+" | "+r.pht+" | "+r.platform+" | "+r.title.replace(/\|/g,"/")+" | "+r.status+" |").join("\n")+"\n";
+ if(schedURL) URL.revokeObjectURL(schedURL);
+ schedURL=URL.createObjectURL(new Blob([md],{type:"text/markdown"}));
+ $("etSchedDl").href=schedURL;
+}
+
+// Thumbnail: a frame from the video with the hook title.
+async function fxThumbnail(title){
+ const c=document.createElement("canvas"); c.width=canvas.width; c.height=canvas.height;
+ const x=c.getContext("2d");
+ x.fillStyle="#000"; x.fillRect(0,0,c.width,c.height);
+ const clip=timeline[0]||{start:0,end:video.duration};
+ const at=Math.min(clip.end-0.05,clip.start+Math.min(1.5,(clip.end-clip.start)/2));
+ try{
+  video.pause();
+  await new Promise((res)=>{ const t=setTimeout(res,3000); video.addEventListener("seeked",()=>{ clearTimeout(t); res(); },{once:true}); video.currentTime=at; });
+  const vw=video.videoWidth,vh=video.videoHeight,k=Math.max(c.width/vw,c.height/vh)*1.08;
+  x.drawImage(video,(c.width-vw*k)/2,(c.height-vh*k)/2,vw*k,vh*k);
+ }catch(e){}
+ const g=x.createLinearGradient(0,c.height*0.45,0,c.height);
+ g.addColorStop(0,"rgba(0,0,0,0)"); g.addColorStop(1,"rgba(0,0,0,0.85)");
+ x.fillStyle=g; x.fillRect(0,0,c.width,c.height);
+ const size=Math.round(c.width*(c.height>c.width?0.1:0.075));
+ x.font=(loadedFonts.has("Montserrat")?'800 '+size+'px "Montserrat"':"bold "+size+"px Arial")+", Arial, sans-serif";
+ x.textAlign="center"; x.textBaseline="middle"; x.lineJoin="round"; x.lineWidth=size*0.14; x.strokeStyle="#000";
+ const prev=ctx; // wrapLines measures with the main canvas context font
+ ctx.save(); ctx.font=x.font;
+ const lines=wrapLines(title.toUpperCase(),c.width*0.88,3);
+ ctx.restore();
+ lines.forEach((l,i)=>{
+  const y=c.height*0.78-(lines.length-1-i)*size*1.12;
+  x.strokeText(l,c.width/2,y,c.width*0.92);
+  x.fillStyle=i===lines.length-1?(brand.accent||"#f5c400"):"#fff";
+  x.fillText(l,c.width/2,y,c.width*0.92);
+ });
+ return await new Promise(r=>c.toBlob(r,"image/jpeg",0.9));
+}
+
+// ---------- run ----------
+const etSleep=ms=>new Promise(r=>setTimeout(r,ms));
+async function etWaitIdle(){ while(busy||aiBusy||sceneBusy) await etSleep(250); }
+let etThumbURL=null, etPostURL=null;
+
+$("etRun").addEventListener("click",async()=>{
+ if(fxRunning) return;
+ if(!currentFile||!Number.isFinite(video.duration)){ $("etLog").replaceChildren(); etLog("Import a video first (section 01).","err"); return; }
+ if(busy||aiBusy||sceneBusy){ etLog("Wait until the current task has finished.","warn"); return; }
+ resumeMixer(); // during the tap, so Android allows sound in the export
+ brandSave();
+ const o={platform:$("etPlatform").value,lang:$("etLang").value,captions:$("etCaptions").value,zoom:$("etZoom").value,
+  newCaps:$("etNewCaps").checked,cut:$("etCut").checked,intro:$("etIntro").checked,broll:$("etBroll").checked,
+  popups:$("etPopups").checked,sfx:$("etSfx").checked,bar:$("etBar").checked,watermark:$("etWatermark").checked,
+  outro:$("etOutro").checked,exportIt:$("etExport").checked};
+ const P=ET_PLATFORMS[o.platform];
+ fxRunning=true; $("etRun").disabled=true; $("etProgress").hidden=false;
+ $("etLog").replaceChildren(); $("etResult").hidden=true;
+ fxClear();
+ const report={};
+ try{
+  // 1. Brand + format
+  let st=etStep("Brand and format");
+  pmSet("ratio",P.ratio); pmSet("fit","cover"); pmSet("overlay","");
+  if(o.captions!=="none"){
+   pmSet("capPreset",o.captions); pmSet("showCaptions",true);
+   // Big captions at about 70 % of the height, like the pipeline's creator style.
+   pmSet("capPos","bottom"); pmSet("capSize",o.captions==="creator"?150:130); pmSet("capOffset",P.ratio==="9:16"?18:4);
+  }else pmSet("showCaptions",false);
+  updatePreview();
+  st.done("Brand: "+(brand.name||"no name")+" "+(brand.handle||"")+" · "+P.name+" ("+P.ratio+")");
+  const dur=video.duration;
+  pmSet("start",0); pmSet("end",round1(dur));
+
+  // 2. Captions
+  if(o.captions!=="none"||o.popups||o.broll){
+   if(o.newCaps||!captions.length){
+    st=etStep("AI captions with Whisper on this phone (the first time downloads the model)…");
+    captions=[]; renderCaptionList();
+    pmSet("aiLang",o.lang);
+    $("aiRun").click();
+    await etSleep(100); await etWaitIdle();
+    if(captions.length){ st.done("Captions: "+captions.length+" lines ("+$("aiModel").selectedOptions[0].textContent.split("·")[0].trim()+" Whisper, on this phone). Check names and terms."); report.transcriber="Whisper "+$("aiModel").value.split("-").pop()+" on this phone"; }
+    else st.done("No speech found ("+$("aiStatus").textContent+"). Continuing without captions.","warn");
+   }else etLog("✓ Using the "+captions.length+" captions already in section 04.","ok");
+  }
+  // 3. Fixes
+  const fixes=$("etFix").value.split("\n").map(l=>l.split("=")).filter(p=>p.length===2&&p[0].trim()&&p[1].trim());
+  if(fixes.length&&captions.length){
+   let n=0;
+   captions.forEach(c=>fixes.forEach(([a,b])=>{
+    const re=new RegExp("\\b"+a.trim().replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\b","gi");
+    const t=c.text.replace(re,b.trim()); if(t!==c.text){ c.text=t; n++; }
+   }));
+   renderCaptionList();
+   etLog("✓ Fixed words in "+n+" caption"+(n===1?"":"s")+".","ok");
+  }
+
+  // 4. Cut pauses
+  timeline=[]; renderTimeline();
+  pmSet("tlType","cut"); pmSet("tlFadeIn",false); pmSet("tlFadeOut",false);
+  if(o.cut){
+   st=etStep("Cutting out pauses…");
+   $("assistSilence").click();
+   await etSleep(100); await etWaitIdle();
+   if(timeline.length){ const kept=timeline.reduce((n,c)=>n+clipLen(c),0); report.cut=dur-kept; st.done("Pauses cut: "+(dur-kept).toFixed(1)+" s removed, "+timeline.length+" parts kept."); }
+   else st.done("No pauses to cut ("+$("assistStatus").textContent+")","warn");
+  }
+  if(!timeline.length) timeline=[{start:0,end:round1(dur)>dur?dur:round1(dur),thumb:null,trans:"cut"}];
+  timeline.forEach(c=>{ c.trans="cut"; });
+  // 5. Max length
+  if(P.max){
+   let acc=0; const keep=[];
+   for(const c of timeline){ if(acc>=P.max) break; const len=Math.min(clipLen(c),P.max-acc); if(len>=0.3) keep.push({...c,end:c.start+len}); acc+=len; }
+   if(keep.length<timeline.length||acc<timeline.reduce((n,c)=>n+clipLen(c),0)-0.05) etLog("⚠ Longer than "+P.max+" s for "+P.name+": the end was cut. Pick YouTube for no limit.","warn");
+   timeline=keep;
+  }
+  renderTimeline();
+
+  // 6. Hook title
+  let title=$("etTitle").value.trim();
+  if(!title){
+   title=fxHook(captions.map(c=>c.text).join(" "));
+   etLog("✓ Hook title (from what you say): “"+title+"”. Type your own above for a stronger hook.","ok");
+  }else etLog("✓ Hook title: “"+title+"”","ok");
+  report.title=title;
+
+  // 7. Effects plan
+  st=etStep("Planning effects…");
+  if(o.popups) ensureCaptionFontFamily("Anton");
+  const plan=await fxBuildPlan(o,title,msg=>{ st.done(msg,"info"); });
+  editFx=plan;
+  $("etPreview").disabled=false; $("etOff").disabled=false;
+  const zoomN=Math.max(0,plan.zoom.length-1);
+  st.done("Effects: zoom "+o.zoom+(o.zoom==="punch"?" ("+Math.floor(zoomN/2)+" moves)":"")+
+   " · "+plan.broll.length+" B-roll photo"+(plan.broll.length===1?"":"s")+
+   " · "+plan.popups.length+" pop-up"+(plan.popups.length===1?"":"s")+(plan.popups.length?" ("+plan.popups.map(p=>p.text).join(", ")+")":"")+
+   " · "+plan.sfx.length+" sound effects"+(o.bar?" · progress bar":"")+(o.watermark?" · logo":"")+
+   (plan.intro?" · intro card":"")+(plan.outro?" · outro card":""));
+  plan.notes.forEach(n=>etLog("⚠ "+n,"warn"));
+  if(plan.broll.length) etLog("B-roll credits (put them in your description):\n"+plan.credits.join("\n"),"info");
+
+  // 8. Export
+  const length=plan.total+(plan.intro?plan.intro.seconds:0)+(plan.outro?plan.outro.seconds:0);
+  if(o.exportIt){
+   st=etStep("Exporting the video ("+length.toFixed(0)+" s; keep this tab open and the screen on)…");
+   await exportTimeline();
+   const s2=$("status").textContent;
+   if(/error|stopped/i.test(s2)) st.done("Export: "+s2,"err");
+   else st.done(s2+" Save it with the link in section 05.");
+  }else etLog("Tap ▶ PREVIEW EDIT to watch it, then EXPORT VIDEO in section 05.","info");
+
+  // 9. Thumbnail + post + schedule
+  st=etStep("Thumbnail and post text…");
+  const thumb=await fxThumbnail(title);
+  if(etThumbURL) URL.revokeObjectURL(etThumbURL);
+  if(thumb){ etThumbURL=URL.createObjectURL(thumb); $("etThumb").src=etThumbURL; $("etThumb").hidden=false; $("etThumbDl").href=etThumbURL; }
+  const slot=suggestSlot();
+  const post=fxPostText(title,slot,o.platform);
+  $("etPost").value=post;
+  if(etPostURL) URL.revokeObjectURL(etPostURL);
+  etPostURL=URL.createObjectURL(new Blob([post],{type:"text/markdown"}));
+  const slug=title.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,40)||"post";
+  $("etPostDl").href=etPostURL; $("etPostDl").download=new Date().toISOString().slice(0,10)+"-"+slug+".md";
+  const sched=schedLoad();
+  sched.push({et:fmtTz(slot,"America/New_York","ET"),pht:fmtTz(slot,"Asia/Manila","PHT"),platform:P.name,title,status:"planned"});
+  schedSave(sched); schedRender();
+  $("etResult").hidden=false;
+  st.done("Post text ready. Suggested time: "+fmtTz(slot,"America/New_York","ET")+" ("+fmtTz(slot,"Asia/Manila","PHT")+") — added to My posting schedule as planned.");
+  etLog("Done. Cut: "+(report.cut?report.cut.toFixed(1)+" s":"nothing")+" · captions: "+(report.transcriber||(captions.length?"existing":"none"))+
+   " · hook: “"+title+"”. Not done here: sound level evening (loudness) and posting — those stay with you.","ok");
+ }catch(err){
+  etLog("Stopped: "+err.message,"err");
+ }finally{
+  fxRunning=false; $("etRun").disabled=false; $("etProgress").hidden=true;
+ }
+});
+// A short hook title (≤ 40 characters, whole words, no dangling "the").
+function fxHook(text){
+ const ideas=titleIdeas(text);
+ // The first idea comes from the opening sentence: the spoken hook.
+ let t=ideas[0]||brand.name||"New video";
+ if(t.length>40){
+  t=t.slice(0,41).replace(/\s+\S*$/,"");
+ }
+ t=t.replace(/[\s,;:.!?-]+$/,"").replace(/\s+(the|a|an|of|to|and|or|in|on|at|for|with|by|from|but|that|this)$/i,"").replace(/[\s,;:-]+$/,"");
+ return t||brand.name||"New video";
+}
+// Load a web font for pop-ups / cards (the caption font loader handles one at a time).
+function ensureCaptionFontFamily(fam){
+ if(loadedFonts.has(fam)||!document.fonts) return;
+ if(!webFontsLinked){
+  const link=document.createElement("link"); link.rel="stylesheet";
+  link.href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=Montserrat:wght@800&display=swap";
+  document.head.append(link); webFontsLinked=true;
+ }
+ const spec=(fam==="Montserrat"?"800":"normal")+' 40px "'+fam+'"';
+ const tryLoad=n=>document.fonts.load(spec).then(l=>{ if(l.length) loadedFonts.add(fam); else if(n>0) setTimeout(()=>tryLoad(n-1),300); }).catch(()=>{});
+ tryLoad(20);
+}
+$("etPreview").addEventListener("click",()=>{ if(editFx&&timeline.length) $("tlPlay").click(); });
+$("etOff").addEventListener("click",()=>{ fxClear(); etLog("Effects off: the timeline plays and exports plain again. Tap ⚡ EDIT THIS to add them back.","info"); });
+$("etCopyPost").addEventListener("click",async()=>{ const ok=await stCopy($("etPost").value); $("etCopyPost").textContent=ok?"✓ COPIED":"Could not copy — select the text"; setTimeout(()=>$("etCopyPost").textContent="📋 COPY POST TEXT",2000); });
+
+brandLoad();
+schedRender();
+ensureCaptionFontFamily("Montserrat");
+
+/* ---------- END EDIT THIS ---------- */
 </script>
 </body>
 </html>
