@@ -27,6 +27,35 @@ Voice-over: "This was supposed to go on your walls."
 Voice-over word count: about 140 words, a calm but excited storyteller pace
 (about 2.5 words per second). If it runs long, cut "Very fragile." first.
 
+## Voice-over script (read aloud)
+This was supposed to go on your walls.
+
+1957. Hawthorne, New Jersey.
+Two engineers, Alfred Fielding and Marc Chavannes,
+heat-seal two plastic shower curtains together.
+Air gets trapped inside. Tiny bubbles.
+
+Their big idea? Textured wallpaper.
+Nobody bought it.
+
+So they tried again. Greenhouse insulation.
+That flopped too.
+
+Most people would quit here. They didn't.
+They started a company: Sealed Air.
+
+Then a marketer on their team spotted a problem.
+IBM was about to ship its new 1401 computer.
+And computers were fragile. Very fragile.
+
+The bubbles were perfect.
+IBM became their first big customer.
+
+Today you know it as Bubble Wrap.
+A failed wallpaper… that now protects packages all over the world.
+
+Every legend has a beginning.
+
 ## Call to action
 Spoken: "Every legend has a beginning."
 Outro card: "Subscribe for more origin stories".
