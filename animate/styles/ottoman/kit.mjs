@@ -1495,6 +1495,57 @@ export function frame(ctx, x, y, w, h, paint = null, rot = 0) {
   ctx.restore();
 }
 
+// ---------- toys, fire & windmills ----------
+// A toy building brick seen from the side: n studs on top; tubes draws the cut-away underside.
+export function brick(ctx, x, y, w, color = P.verm, n = 4, tubes = false) {
+  const h = w * 0.36, sw = w / n;
+  ctx.save(); ctx.translate(x, y);
+  for (let i = 0; i < n; i++) { rect(ctx, -w / 2 + i * sw + sw * 0.2, -h / 2 - sw * 0.22, sw * 0.6, sw * 0.24, shade(color, 0.1), P.ink, 1.5); }
+  rect(ctx, -w / 2, -h / 2, w, h, color, P.ink, 2);
+  ctx.fillStyle = 'rgba(255,255,255,0.25)'; ctx.fillRect(-w / 2 + 3, -h / 2 + 3, w - 6, h * 0.18);
+  if (tubes) { rect(ctx, -w / 2 + 6, -h / 2 + h * 0.3, w - 12, h * 0.62, shade(color, -0.35), P.ink, 1); for (let i = 1; i < n; i++) circle(ctx, -w / 2 + i * sw, h * 0.12, sw * 0.28, color, P.ink, 1.5); }
+  ctx.restore();
+}
+export function woodenDuck(ctx, x, y, s = 1, t = 0, roll = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  for (const wx of [-26, 26]) { ctx.save(); ctx.translate(wx, 8); ctx.rotate(roll); circle(ctx, 0, 0, 14, P.brown, P.ink, 2); ctx.beginPath(); ctx.moveTo(-12, 0); ctx.lineTo(12, 0); ctx.moveTo(0, -12); ctx.lineTo(0, 12); stroke(ctx, P.ink, 1.5); ctx.restore(); }
+  rect(ctx, -44, -8, 88, 12, P.brownLight, P.ink, 1.5);
+  ctx.beginPath(); ctx.moveTo(-40, -8); ctx.quadraticCurveTo(-50, -50, -10, -48); ctx.quadraticCurveTo(10, -46, 20, -30); ctx.quadraticCurveTo(40, -30, 36, -8); ctx.closePath(); fillStroke(ctx, P.ochreLight, P.ink, 2);
+  ctx.beginPath(); ctx.moveTo(-10, -40); ctx.quadraticCurveTo(10, -36, 18, -24); stroke(ctx, '#c9a36a', 3);
+  circle(ctx, 22, -54, 18, P.ochreLight, P.ink, 2); circle(ctx, 28, -58, 3, P.ink, null);
+  poly(ctx, [[38, -54], [56, -50], [38, -46]], P.ochre, P.ink, 1.5);
+  ctx.beginPath(); ctx.moveTo(44, -4); ctx.quadraticCurveTo(90, -10 + Math.sin(t * 4) * 6, 130, -30); stroke(ctx, P.verm, 2);
+  ctx.restore();
+}
+export function yoyo(ctx, x, y, r, t = 0, drop = 0) {
+  ctx.save(); ctx.translate(x, y);
+  ctx.beginPath(); ctx.moveTo(0, -drop - 40); ctx.lineTo(0, 0); stroke(ctx, P.ink, 1.5);
+  ctx.rotate(t * 8);
+  circle(ctx, 0, 0, r, P.verm, P.ink, 2); circle(ctx, 0, 0, r * 0.65, P.ochreLight, P.ink, 1.2);
+  for (let i = 0; i < 4; i++) { const a = i * Math.PI / 2; ctx.beginPath(); ctx.moveTo(Math.cos(a) * r * 0.3, Math.sin(a) * r * 0.3); ctx.lineTo(Math.cos(a) * r * 0.62, Math.sin(a) * r * 0.62); stroke(ctx, P.brown, 2); }
+  circle(ctx, 0, 0, r * 0.18, P.brown, P.ink, 1);
+  ctx.restore();
+}
+// A row of flames across a width; k 0..1 height.
+export function flames(ctx, x, base, w, k = 1, t = 0) {
+  if (k <= 0) return;
+  const n = Math.max(3, Math.round(w / 40));
+  for (let i = 0; i < n; i++) {
+    const fx = x - w / 2 + (i + 0.5) * w / n, f = k * (1 + 0.25 * Math.sin(t * 13 + i * 2.1)), hh = (90 + (i % 3) * 40) * f;
+    for (const [c, sc] of [[P.verm, 1], [P.ochre, 0.7], [P.goldLight, 0.4]]) { ctx.beginPath(); ctx.moveTo(fx - 24 * sc, base); ctx.quadraticCurveTo(fx - 30 * sc, base - hh * 0.5 * sc, fx + Math.sin(t * 9 + i) * 8, base - hh * sc); ctx.quadraticCurveTo(fx + 30 * sc, base - hh * 0.5 * sc, fx + 24 * sc, base); ctx.closePath(); fillStroke(ctx, c, sc === 1 ? P.ink : null, 1); }
+  }
+}
+export function windmill(ctx, x, base, s = 1, t = 0) {
+  ctx.save(); ctx.translate(x, base); ctx.scale(s, s);
+  poly(ctx, [[-50, 0], [-34, -200], [34, -200], [50, 0]], P.white, P.ink, 2);
+  ctx.beginPath(); ctx.moveTo(-40, -200); ctx.quadraticCurveTo(0, -260, 40, -200); ctx.closePath(); fillStroke(ctx, P.vermDark, P.ink, 2);
+  arch(ctx, 0, 0, 30, 60, P.brown);
+  ctx.translate(0, -210); ctx.rotate(t * 0.8);
+  for (let i = 0; i < 4; i++) { ctx.save(); ctx.rotate(i * Math.PI / 2); rect(ctx, -4, -150, 8, 150, P.brown, P.ink, 1.5); rect(ctx, 4, -140, 30, 110, P.paperLight, P.ink, 1.5); ctx.restore(); }
+  circle(ctx, 0, 0, 10, P.goldDark, P.ink, 1.5);
+  ctx.restore();
+}
+
 // ---------- colour util ----------
 export function shade(hex, k) {
   if (!hex.startsWith('#')) return hex;
