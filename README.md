@@ -49,6 +49,14 @@ open it in the editor for music. Runs offline on the phone.
 
 ## AI Story Studio
 Open `story.html` (or tap "AI Story Studio" at the top of the editor).
+0. **Story styles:** pick one of 41 styles in the picture gallery (search,
+   categories, ⭐ trending): Tagalog Drama, Micro-Drama Series, Fruit Drama,
+   Pinoy Folklore Horror, POV History, Bigfoot Vlog, Satisfying ASMR, Stick
+   Figure Explainer, How It Started and more. A style sets the scenes, seconds,
+   language, cast, look and voice (narrator, dialogue, host, selfie vlog, POV or
+   no speech) and tells the AI how to write it. Research and sources:
+   `content/research/2026-11-trending-ai-story-styles.md`. Add a style in
+   `story-styles.js`, then run `node tools/make-style-covers.mjs` for its cover.
 1. Type a topic, pick scenes and seconds, tap **✨ ChatGPT / Gemini / Grok**: the
    AI gets a ready-made writing request. Paste its answer and tap **Use this
    answer** (or split your own narration, or make a quick draft).
@@ -57,6 +65,8 @@ Open `story.html` (or tap "AI Story Studio" at the top of the editor).
    (duration, format, start frame, action, on-screen text, narrator line).
    **▶ Do next step** copies the next prompt and opens the site you picked
    (ChatGPT and Grok open with it typed in; for Gemini and Flow, paste it).
+   **🎨 Free** (or the "Free (in app)" choice in Next step) makes the start
+   image right in the app with the free Pollinations service, no account.
 4. Add the images and clips you made to their scenes, then **Join into one
    video** (keeps the clips' sound, optional burned-in captions).
 5. Download all prompts as .txt / .csv, or send the story to the Stickman
