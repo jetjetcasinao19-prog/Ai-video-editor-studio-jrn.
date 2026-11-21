@@ -33,12 +33,17 @@ function probe(file) {
   // Decode every video and audio frame with ffprobe: report decoder errors,
   // and check each video frame has its own, increasing timestamp.
   // (Recordings have a variable frame rate, so no fixed-rate output is used.)
-  const vf = spawnSync('ffprobe', ['-v', 'error', '-select_streams', 'v', '-show_entries', 'frame=pts', '-of', 'csv=p=0', file]);
+  const vf = spawnSync('ffprobe', ['-v', 'error', '-select_streams', 'v', '-show_entries', 'frame=pts,pts_time', '-of', 'csv=p=0', file]);
   const af = spawnSync('ffprobe', ['-v', 'error', '-select_streams', 'a', '-show_entries', 'frame=pts', '-of', 'csv=p=0', file]);
-  const pts = vf.stdout.toString().trim().split('\n').map(Number);
+  const rows = vf.stdout.toString().trim().split('\n').map(l => l.split(',').map(Number));
+  const pts = rows.map(r => r[0]);
+  // Real length from the timestamps (first to last frame + one frame), not from
+  // the frame count: a busy computer records fewer frames of a correct-length video.
+  const times = rows.map(r => r[1]);
+  const seconds = times[times.length - 1] - times[0] + 1 / 30;
   const ordered = pts.every((x, i) => i === 0 || x > pts[i - 1]);
   const decodeErrors = (vf.stderr.toString() + af.stderr.toString()).trim() + (ordered ? '' : ' video timestamps not increasing');
-  return { format: j.format.format_name, video: v && v.codec_name, audio: a && a.codec_name, w: v && v.width, h: v && v.height, frames, decodeErrors };
+  return { format: j.format.format_name, video: v && v.codec_name, audio: a && a.codec_name, w: v && v.width, h: v && v.height, frames, seconds, decodeErrors };
 }
 function colourAt(file, t) {
   const raw = ff(['-ss', String(t), '-i', file, '-frames:v', '1', '-vf', 'scale=8:8', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-']);
@@ -101,7 +106,7 @@ function toneLevel(file, f, t0, t1) {
     check('MP4 has sound (AAC or Opus)', pa.audio === 'aac' || pa.audio === 'opus', pa.audio);
     check('status says exactly what was made', A.status.includes('MP4 (H.264 video, ' + (pa.audio === 'aac' ? 'AAC' : 'Opus') + ' sound)'), A.status);
     check('9:16 size 720x1280', pa.w === 720 && pa.h === 1280, pa.w + 'x' + pa.h);
-    check('length ≈ 3.0 s', Math.abs(pa.frames / 30 - 3) < 0.4, (pa.frames / 30).toFixed(2) + ' s');
+    check('length ≈ 3.0 s', Math.abs(pa.seconds - 3) < 0.4, pa.seconds.toFixed(2) + ' s (' + pa.frames + ' frames)');
     check('whole file decodes without errors', pa.decodeErrors === '', pa.decodeErrors.slice(0, 120));
     const c1 = colourAt(A.out, 0.5), c2 = colourAt(A.out, 2.5);
     check('picture correct (red, then blue)', c1[0] > 150 && c1[2] < 80 && c2[2] > 150 && c2[0] < 80, JSON.stringify([c1, c2]));
@@ -129,7 +134,7 @@ function toneLevel(file, f, t0, t1) {
     const T = await doExport(page, 't.mp4');
     const pt = probe(T.out);
     check('timeline exports as MP4', /mp4/.test(pt.format) && pt.video === 'h264' && T.filename === 'edited-video.mp4', pt.format + ' ' + T.filename);
-    check('timeline MP4 length ≈ 2.5 s (two 1.5 s clips, 0.5 s crossfade)', Math.abs(pt.frames / 30 - 2.5) < 0.4, (pt.frames / 30).toFixed(2) + ' s');
+    check('timeline MP4 length ≈ 2.5 s (two 1.5 s clips, 0.5 s crossfade)', Math.abs(pt.seconds - 2.5) < 0.4, pt.seconds.toFixed(2) + ' s (' + pt.frames + ' frames)');
     check('timeline MP4 has the music (song 0.125 × 50% ≈ 0.0625)', toneLevel(T.out, 1000, 0.3, 2.2) > 0.045, toneLevel(T.out, 1000, 0.3, 2.2).toFixed(3));
     check('timeline MP4 decodes without errors', pt.decodeErrors === '', pt.decodeErrors.slice(0, 120));
     await page.evaluate(() => { timeline = []; renderTimeline(); });
