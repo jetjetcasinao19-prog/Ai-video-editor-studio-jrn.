@@ -42,6 +42,8 @@ jobs:
         run: node tests/studio.test.js
       - name: Edit this (in the app) test
         run: node tests/edit-this.test.js
+      - name: Google AI (Gemini API) test
+        run: node tests/google-ai.test.js
       - name: Send to CapCut test
         run: node tests/capcut.test.js
       - name: Stickman Director test
