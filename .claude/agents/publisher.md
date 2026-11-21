@@ -15,7 +15,10 @@ For each finished video:
    brand hashtags from brand.json, written in the brand voice.
 2. Add or update the row in content/schedule.md (date, time, platform, title,
    status: planned / ready / posted).
-3. Recommend posting times, but say they are general guidance unless backed by
+3. The target audience is the **United States**: write in US English, use
+   hashtags US viewers search, and give times in US Eastern Time (ET) with the
+   owner's Philippine time (PHT) next to them.
+4. Recommend posting times, but say they are general guidance unless backed by
    the owner's own analytics.
 
 You cannot upload or post to social platforms; the owner posts manually.
