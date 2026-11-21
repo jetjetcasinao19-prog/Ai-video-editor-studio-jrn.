@@ -503,6 +503,11 @@ function head(ctx, x, y, o) {
     poly(ctx, [[-12, -20], [-8, -56], [12, -56], [16, -20]], o.hatColor || P.verm, P.ink, 1.5);
     ctx.beginPath(); ctx.moveTo(-8, -46); ctx.lineTo(12, -46); stroke(ctx, P.goldLight, 3);
     circle(ctx, 2, -60, 5, P.goldLight, P.ink, 1);
+  } else if (hat === 'santa' || hat === 'furcap') { // Santa's stocking cap / Nast's early fur cap
+    const red = hat === 'santa', cc = o.hatColor || (red ? P.verm : '#8a5a3a');
+    ctx.beginPath(); ctx.moveTo(-20, -16); ctx.quadraticCurveTo(-6, red ? -70 : -44, red ? 26 : 16, red ? -52 : -34); ctx.quadraticCurveTo(14, -30, 22, -16); ctx.closePath(); fillStroke(ctx, cc, P.ink, 1.6);
+    if (red) circle(ctx, 28, -50, 7, P.white, P.ink, 1.2);
+    ctx.beginPath(); ctx.ellipse(1, -16, 23, 7, 0, 0, TAU); fillStroke(ctx, red ? P.white : '#c9b89a', P.ink, 1.4);
   } else if (hat === 'wildhair') { // no hat: a big untamed halo of hair
     const hc = o.hair || '#ececec', puffs = [[-18, -14, 11], [-10, -24, 12], [2, -28, 12], [14, -24, 12], [22, -12, 10], [-22, 2, 9], [24, 2, 9], [-20, 14, 7], [24, 14, 7]];
     ctx.lineWidth = 3.2; ctx.strokeStyle = P.ink; for (const [a, b, r] of puffs) { ctx.beginPath(); ctx.arc(a, b, r, 0, TAU); ctx.stroke(); }
@@ -1437,6 +1442,56 @@ export function drum(ctx, x, y, s = 1, t = 0) {
   ctx.beginPath(); ctx.moveTo(-40, -30); ctx.lineTo(-40, 20); ctx.ellipse(0, 20, 40, 12, 0, Math.PI, 0, true); ctx.lineTo(40, -30); fillStroke(ctx, P.verm, P.ink, 2);
   for (let i = 0; i < 5; i++) { ctx.beginPath(); ctx.moveTo(-40 + i * 20, -26); ctx.lineTo(-30 + i * 20, 24); stroke(ctx, P.goldLight, 1.5); }
   for (const sd of [-1, 1]) { ctx.save(); ctx.translate(sd * 20, -40); ctx.rotate(sd * (0.4 + 0.3 * Math.sin(t * 12 + sd))); rect(ctx, -2, -40, 4, 40, P.brown, P.ink, 1); ctx.restore(); }
+  ctx.restore();
+}
+
+// ---------- Christmas & the studio ----------
+export function reindeer(ctx, x, y, s = 1, t = 0, phase = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  const gal = Math.sin(t * 10 + phase);
+  for (const [lx, d] of [[-24, gal], [-12, -gal], [18, gal], [30, -gal]]) { ctx.beginPath(); ctx.moveTo(lx, -10); ctx.lineTo(lx + d * 12, 22); stroke(ctx, '#5a3a22', 5); }
+  ctx.beginPath(); ctx.ellipse(0, -16, 40, 18, 0, 0, TAU); fillStroke(ctx, '#a0703f', P.ink, 2);
+  ctx.beginPath(); ctx.moveTo(30, -24); ctx.lineTo(46, -48); ctx.lineTo(56, -44); ctx.lineTo(42, -18); ctx.closePath(); fillStroke(ctx, '#a0703f', P.ink, 1.6);
+  ellipse(ctx, 56, -50, 12, 8, 0.3, '#a0703f', P.ink, 1.6); circle(ctx, 66, -48, 3.5, P.ink, null);
+  for (const dx of [-4, 6]) { ctx.beginPath(); ctx.moveTo(52 + dx, -56); ctx.lineTo(46 + dx, -74); ctx.moveTo(48 + dx, -66); ctx.lineTo(40 + dx, -70); ctx.moveTo(48 + dx, -66); ctx.lineTo(54 + dx, -76); stroke(ctx, '#5a3a22', 2.5); }
+  ellipse(ctx, -40, -22, 6, 4, -0.5, P.white, P.ink, 1);
+  ctx.restore();
+}
+export function sleigh(ctx, x, y, s = 1, color = P.verm) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  ctx.beginPath(); ctx.moveTo(-90, 30); ctx.quadraticCurveTo(-120, 30, -110, 10); ctx.moveTo(-110, 30); ctx.lineTo(90, 30); ctx.quadraticCurveTo(120, 30, 120, 0); stroke(ctx, P.goldDark, 6);
+  for (const lx of [-60, 50]) { ctx.beginPath(); ctx.moveTo(lx, 30); ctx.lineTo(lx, 10); stroke(ctx, P.goldDark, 5); }
+  ctx.beginPath(); ctx.moveTo(-100, 10); ctx.quadraticCurveTo(-110, -50, -70, -60); ctx.lineTo(-60, -20); ctx.lineTo(70, -20); ctx.quadraticCurveTo(100, -20, 100, 10); ctx.closePath(); fillStroke(ctx, color, P.ink, 2.5);
+  ctx.beginPath(); ctx.moveTo(-96, 0); ctx.lineTo(96, 0); stroke(ctx, P.goldLight, 4);
+  ctx.restore();
+}
+// A plain glass soda bottle with a red label (generic, no brand shape).
+export function sodaBottle(ctx, x, y, s = 1, rot = 0, labelText = '') {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
+  ctx.beginPath(); ctx.moveTo(-10, -120); ctx.lineTo(10, -120); ctx.lineTo(10, -90); ctx.quadraticCurveTo(28, -70, 28, -40); ctx.lineTo(28, 40); ctx.quadraticCurveTo(28, 50, 18, 50); ctx.lineTo(-18, 50); ctx.quadraticCurveTo(-28, 50, -28, 40); ctx.lineTo(-28, -40); ctx.quadraticCurveTo(-28, -70, -10, -90); ctx.closePath();
+  fillStroke(ctx, '#4a2a1a', P.ink, 2);
+  rect(ctx, -12, -128, 24, 10, P.goldDark, P.ink, 1.2);
+  rect(ctx, -28, -20, 56, 40, P.verm, P.ink, 1.5);
+  if (labelText) { ctx.fillStyle = P.white; ctx.font = '900 10px Deco'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(labelText, 0, 0); }
+  ctx.beginPath(); ctx.moveTo(-18, -60); ctx.lineTo(-18, 30); stroke(ctx, 'rgba(255,255,255,0.35)', 4);
+  ctx.restore();
+}
+export function easel(ctx, x, base, w, h, paint = null) {
+  ctx.save(); ctx.translate(x, base);
+  for (const sx of [-1, 1]) { ctx.beginPath(); ctx.moveTo(sx * w * 0.45, 0); ctx.lineTo(sx * w * 0.2, -h - 60); stroke(ctx, P.brown, 8); }
+  ctx.beginPath(); ctx.moveTo(0, -h - 60); ctx.lineTo(0, 20); stroke(ctx, P.brown, 6);
+  rect(ctx, -w / 2, -h - 40, w, h, P.paperLight, P.ink, 2.5);
+  rect(ctx, -w / 2 - 8, -40, w + 16, 14, P.brownLight, P.ink, 1.5);
+  if (paint) { ctx.save(); ctx.beginPath(); ctx.rect(-w / 2 + 6, -h - 34, w - 12, h - 12); ctx.clip(); ctx.translate(0, -h / 2 - 40); paint(ctx); ctx.restore(); }
+  ctx.restore();
+}
+// Gilded picture frame with something painted inside.
+export function frame(ctx, x, y, w, h, paint = null, rot = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot);
+  rect(ctx, -w / 2 - 12, -h / 2 - 12, w + 24, h + 24, P.gold, P.goldDeep, 2);
+  ctx.fillStyle = pattern(ctx, 'dots', P.gold, P.goldLight, 12); ctx.fillRect(-w / 2 - 10, -h / 2 - 10, w + 20, h + 20);
+  rect(ctx, -w / 2, -h / 2, w, h, P.paperLight, P.goldDeep, 2);
+  if (paint) { ctx.save(); ctx.beginPath(); ctx.rect(-w / 2, -h / 2, w, h); ctx.clip(); paint(ctx); ctx.restore(); }
   ctx.restore();
 }
 
