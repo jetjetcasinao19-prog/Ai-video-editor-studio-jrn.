@@ -38,6 +38,8 @@ jobs:
         run: node tests/projects.test.js
       - name: AI prompt test
         run: node tests/prompt.test.js
+      - name: Prompt Studio test
+        run: node tests/studio.test.js
       - name: Send to CapCut test
         run: node tests/capcut.test.js
       - name: MP4 export test (Google Chrome, like Chrome on Android)

@@ -8,28 +8,28 @@
 <style>
 *{box-sizing:border-box}
 body{
- margin:0;background:#0b0e14;color:#fff;
+ margin:0;background:#0c0809;color:#fff;
  font-family:Arial,sans-serif;padding:16px
 }
 main{max-width:850px;margin:auto}
 h1{font-size:25px;margin-bottom:4px}
-.sub{color:#929bad;font-size:12px}
+.sub{color:#b3a3a7;font-size:12px}
 .panel{
- background:#151b27;border:1px solid #293449;
+ background:#170f12;border:1px solid #3b1d25;
  padding:15px;border-radius:13px;margin:15px 0
 }
-label{display:block;margin-top:12px;font-size:13px;color:#c5ccda}
+label{display:block;margin-top:12px;font-size:13px;color:#d8cccf}
 input,select,button{
  width:100%;padding:12px;margin-top:7px;
- border:1px solid #36435a;border-radius:8px;
- background:#0d1320;color:white;font-size:14px
+ border:1px solid #4a2630;border-radius:8px;
+ background:#100a0c;color:white;font-size:14px
 }
 button{
- background:#526dff;border:0;
+ background:#e63946;border:0;
  font-weight:bold;cursor:pointer
 }
 button:disabled{opacity:.45}
-.secondary{background:#303b51}
+.secondary{background:#2c1a20}
 canvas{
  width:100%;max-height:540px;
  object-fit:contain;background:#000;
@@ -38,39 +38,39 @@ canvas{
 video{display:none}
 .row{display:flex;gap:10px}
 .row>*{flex:1;min-width:0}
-.note{color:#9ba8bb;font-size:12px;line-height:1.6}
-#status{color:#91b7ff;font-size:13px;margin-top:12px}
-a{color:#9ab1ff;word-break:break-all}
+.note{color:#a8989c;font-size:12px;line-height:1.6}
+#status{color:#ff8a8f;font-size:13px;margin-top:12px}
+a{color:#ff9aa0;word-break:break-all}
 .check{display:flex;align-items:center;gap:10px;margin-top:12px}
 .check input{width:auto;margin:0}
 .check label{margin:0}
 #capList{margin-top:12px;max-height:420px;overflow-y:auto}
 .cap{
- border:1px solid #293449;border-radius:10px;
- padding:8px 10px 10px;margin-bottom:10px;background:#101624
+ border:1px solid #3b1d25;border-radius:10px;
+ padding:8px 10px 10px;margin-bottom:10px;background:#130c0f
 }
 .cap .row{align-items:flex-end}
 .cap label{margin-top:0;font-size:11px}
 .cap input{margin-top:4px;padding:10px}
 .cap button{margin-top:4px;padding:10px 0}
-.cap .del{background:#5a2733}
+.cap .del{background:#5c2430}
 .cap .row>.btn{flex:0 0 52px}
 #capCount{margin-top:8px}
 summary{font-weight:bold;padding:10px 0;cursor:pointer}
-input[type=range]{padding:0;height:32px;accent-color:#526dff;background:transparent;border:0}
+input[type=range]{padding:0;height:32px;accent-color:#e63946;background:transparent;border:0}
 input[type=color]{height:44px;padding:4px}
 .ai{
- border:1px solid #36435a;border-radius:10px;
- padding:4px 12px 10px;margin:14px 0;background:#101624
+ border:1px solid #4a2630;border-radius:10px;
+ padding:4px 12px 10px;margin:14px 0;background:#130c0f
 }
 .ai h4{margin:10px 0 4px}
 #sceneList{margin-top:10px;max-height:460px;overflow-y:auto}
 .scene{
  display:flex;gap:10px;align-items:center;
- border:1px solid #293449;border-radius:10px;
- padding:8px;margin-bottom:8px;background:#0d1320
+ border:1px solid #3b1d25;border-radius:10px;
+ padding:8px;margin-bottom:8px;background:#100a0c
 }
-.scene.active{border-color:#526dff}
+.scene.active{border-color:#e63946}
 .scene img{width:64px;height:64px;object-fit:cover;border-radius:6px;flex:0 0 64px;background:#000}
 .scene .info{flex:1;min-width:0;font-size:13px;line-height:1.4}
 .scene .info b{display:block}
@@ -79,50 +79,137 @@ input[type=color]{height:44px;padding:4px}
 .scene .btns button:last-child{grid-column:1 / span 2}
 .clip{
  display:flex;gap:8px;align-items:center;
- border:1px solid #293449;border-radius:10px;
- padding:8px;background:#0d1320
+ border:1px solid #3b1d25;border-radius:10px;
+ padding:8px;background:#100a0c
 }
 .clip img{width:48px;height:48px;object-fit:cover;border-radius:6px;flex:0 0 48px;background:#000}
 .clip .info{flex:1;min-width:0;font-size:13px;line-height:1.4}
 .clip button{width:auto;margin:0;padding:10px 11px}
-.trans{display:flex;align-items:center;gap:8px;margin:6px 0 6px 14px;font-size:12px;color:#9ba8bb}
+.trans{display:flex;align-items:center;gap:8px;margin:6px 0 6px 14px;font-size:12px;color:#a8989c}
 .trans select{margin:0;padding:8px;font-size:13px;flex:1}
 #tlList{margin-top:10px}
 #tplGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
 .tpl{margin:0;text-align:left;padding:10px;display:flex;flex-direction:column;gap:4px;min-height:84px}
 .tpl b{font-size:13px}
-.tpl span{font-size:11px;font-weight:normal;color:#b9c3d6;line-height:1.35}
-.tpl.active{outline:2px solid #526dff;background:#253055}
+.tpl span{font-size:11px;font-weight:normal;color:#cdbfc3;line-height:1.35}
+.tpl.active{outline:2px solid #e63946;background:#3a1c24}
 #myTplList .clip{margin-bottom:8px}
 #projList .clip{margin-bottom:8px}
-#projList .clip.active{border-color:#526dff}
+#projList .clip.active{border-color:#e63946}
 .check label{line-height:1.4}
 .sub2{display:block;margin-top:16px;font-size:14px}
 .idea{text-align:left;font-weight:normal}
-.del{background:#5a2733}
-progress{width:100%;height:10px;margin-top:10px;accent-color:#526dff}
-textarea{width:100%;padding:12px;margin-top:7px;border:1px solid #36435a;border-radius:8px;background:#0d1320;color:#fff;font-size:14px;font-family:inherit;resize:vertical;line-height:1.5}
+.del{background:#5c2430}
+progress{width:100%;height:10px;margin-top:10px;accent-color:#e63946}
+textarea{width:100%;padding:12px;margin-top:7px;border:1px solid #4a2630;border-radius:8px;background:#100a0c;color:#fff;font-size:14px;font-family:inherit;resize:vertical;line-height:1.5}
 .tabs{margin-top:6px}
-.tabs button.on{background:#526dff}
+.tabs button.on{background:#e63946}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.chips button{width:auto;margin:0;padding:8px 10px;font-size:12px;font-weight:normal;background:#253055}
+.chips button{width:auto;margin:0;padding:8px 10px;font-size:12px;font-weight:normal;background:#3a1c24}
 #pmLog{margin-top:10px;font-size:13px;line-height:1.5;max-height:320px;overflow-y:auto}
-#pmLog div{border-left:3px solid #36435a;padding:4px 8px;margin-bottom:4px;background:#0d1320;border-radius:4px;overflow-wrap:anywhere;white-space:pre-wrap}
+#pmLog div{border-left:3px solid #4a2630;padding:4px 8px;margin-bottom:4px;background:#100a0c;border-radius:4px;overflow-wrap:anywhere;white-space:pre-wrap}
 #pmLog .ok{border-color:#3ec27a}
 #pmLog .err{border-color:#e05a6a}
-#pmLog .info{border-color:#526dff}
-.btnlink{display:block;text-align:center;padding:12px;margin-top:7px;border-radius:8px;background:#303b51;color:#fff;font-weight:bold;font-size:14px;text-decoration:none;word-break:normal}
+#pmLog .info{border-color:#e63946}
+.btnlink{display:block;text-align:center;padding:12px;margin-top:7px;border-radius:8px;background:#2c1a20;color:#fff;font-weight:bold;font-size:14px;text-decoration:none;word-break:normal}
 #pmPicImg{display:block;max-width:100%;max-height:420px;margin:12px auto 0;border-radius:10px;background:#000}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:8px;padding:8px;border-radius:14px;background:#0f090b}
+.cards button{margin:0;padding:12px 6px;background:transparent!important;border:1px solid transparent;font-size:14px;display:flex;flex-direction:column;align-items:center;gap:3px;line-height:1.2}
+.cards button small{font-size:10px;font-weight:normal;color:#a8989c}
+.cards button.on{border-color:var(--accent);background:#2a1218!important}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.modes button{margin:0;padding:14px 6px;background:#140c0f!important;border:1px solid #3b1d25;font-weight:normal}
+.modes button.on{border-color:var(--accent);background:#2a1218!important;font-weight:bold}
+.modes button:disabled{opacity:.3}
+.sthead{display:flex;align-items:center;gap:10px;margin-top:16px}
+.sthead b{font-size:16px}
+.sthead span{margin-left:auto;color:#a8989c;font-size:13px}
+.drop{display:block;text-align:center;border:2px dashed #4a2630;border-radius:12px;padding:16px;margin-top:8px;color:#cdbfc3;font-size:13px;line-height:1.5;cursor:pointer}
+.drop input{display:none}
+#stImgList{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.stimg{position:relative;width:76px}
+.stimg img{width:76px;height:76px;object-fit:cover;border-radius:8px;display:block;background:#000}
+.stimg b{position:absolute;top:3px;left:3px;background:rgba(0,0,0,.7);border-radius:6px;padding:1px 6px;font-size:11px}
+.stimg div{display:flex;gap:2px;margin-top:3px}
+.stimg button{margin:0;padding:5px 0;font-size:12px}
+.filebtn{display:block;text-align:center;padding:12px;margin-top:7px;border-radius:10px;background:#2c1a20;font-weight:bold;font-size:14px;cursor:pointer}
+.filebtn input{display:none}
+.switch{display:flex;align-items:center;gap:10px;margin-top:12px;border:1px solid #3b1d25;border-radius:12px;padding:10px 12px;background:#130c0f}
+.switch label{flex:1;margin:0}
+.switch input{width:auto;margin:0;transform:scale(1.4);accent-color:var(--accent)}
+.est{margin-top:8px}
+#stQueue{margin-top:8px}
+.qi{border:1px solid #3b1d25;border-radius:12px;padding:10px;margin-bottom:8px;background:#100a0c}
+.qi.cur{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.qhead{display:flex;gap:8px;align-items:flex-start}
+.qhead .n{flex:0 0 auto;font-weight:bold;color:var(--accent2)}
+.qhead .t{flex:1;min-width:0;font-size:13px;line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow-wrap:anywhere}
+.chip{flex:0 0 auto;font-size:11px;padding:2px 8px;border-radius:9px;border:1px solid #4a2630;color:#d8cccf}
+.chip.done,.chip.sent{border-color:#3ec27a;color:#7be0a6}
+.chip.failed{border-color:#e05a6a;color:#ff9aa0}
+.chip.making{border-color:var(--accent);color:#fff}
+.qmsg{font-size:12px;color:#a8989c;margin-top:4px;overflow-wrap:anywhere}
+.qouts{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.qouts img{width:64px;height:64px;object-fit:cover;border-radius:8px;background:#000}
+.qbtns{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.qbtns button,.qbtns a{width:auto;flex:1 1 auto;margin:0;padding:9px 10px;font-size:12px}
+.qbtns a{display:block;text-align:center;border-radius:10px;background:#2c1a20;color:#fff;text-decoration:none;font-weight:bold;word-break:normal}
 [hidden]{display:none!important}
+/* ---- red theme (shared look with stickman.html) ---- */
+:root{--accent:#e63946;--accent2:#ff6b6b;--glow:rgba(230,57,70,.35)}
+body{background:radial-gradient(1200px 600px at 50% -200px,#2a0d13 0%,#0c0809 60%) fixed,#0c0809}
+.panel{position:relative;border-radius:4px;background:linear-gradient(180deg,#1b1115,#140d10);
+ clip-path:polygon(22px 0,100% 0,100% calc(100% - 22px),calc(100% - 22px) 100%,0 100%,0 22px);
+ box-shadow:inset 3px 0 0 var(--accent)}
+.panel h3{letter-spacing:.3px}
+button{border-radius:10px}
+button:not(.secondary):not(.del):not(.gold){background:linear-gradient(135deg,#e63946,#b51d2b)}
+button:not(:disabled):active{transform:scale(.98)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px var(--glow)}
+.appbar{display:flex;align-items:center;gap:12px;margin:0 0 10px}
+.appbar .logo{flex:0 0 46px;height:46px;border-radius:50%;display:grid;place-items:center;font-size:20px;
+ background:radial-gradient(circle at 30% 30%,#ff6b6b,#9d0f1c);box-shadow:0 0 18px var(--glow)}
+.appbar .brand{flex:1;min-width:0}
+.appbar h1{margin:0;font-size:22px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ver{font-size:12px;font-weight:bold;padding:3px 8px;border-radius:8px;border:1px solid #5c2430;background:#241217;color:#ffb3b8}
+.iconlink{flex:0 0 auto;font-size:22px;text-decoration:none;padding:6px}
+.banner{border:1px solid #3b1d25;border-radius:14px;padding:12px 14px;background:#140c0f;color:#f1dfe2;font-size:14px;line-height:1.5}
+.banner b{color:var(--accent2)}
+#topTabs{position:sticky;top:0;z-index:20;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;
+ margin:12px -16px 0;padding:8px 16px;background:rgba(12,8,9,.92);backdrop-filter:blur(6px);border-bottom:1px solid #3b1d25}
+#topTabs::-webkit-scrollbar{display:none}
+#topTabs button{flex:0 0 auto;width:auto;margin:0;padding:9px 14px;border-radius:10px;background:transparent!important;
+ border:1px solid transparent;font-weight:normal;color:#d8cccf;font-size:14px}
+#topTabs button.on{border-color:var(--accent);background:#2a1218!important;color:#fff;font-weight:bold}
+section[id]{scroll-margin-top:64px}
+.acts button,.chips button{background:#2c1a20!important;border:1px solid #4a2630}
 </style>
 </head>
 
 <body>
 <main>
 
-<h1>VIDEO STUDIO</h1>
+<header class="appbar">
+<div class="logo" aria-hidden="true">▶</div>
+<div class="brand">
+<h1>VIDEO STUDIO <span class="ver">v2.0</span></h1>
 <div class="sub">AI MEDIA PRODUCTION • EDITING DEPARTMENT</div>
+</div>
+<a class="iconlink" href="stickman.html" title="Stickman Director" aria-label="Stickman Director">🎬</a>
+</header>
+<div class="banner">✦ Edit videos, make pictures, and send prompts to <b>Flow, Gemini, ChatGPT &amp; Grok</b> — or let the Stickman Director make the video.</div>
 <p class="note"><a href="stickman.html">🎬 Stickman Director</a> — turn a story into an animated stickman video.</p>
+
+<nav id="topTabs" aria-label="Sections">
+<button data-go="projBox">Projects</button>
+<button data-go="importBox">Import</button>
+<button data-go="promptBox">Prompt</button>
+<button data-go="studioBox">Studio</button>
+<button data-go="previewBox">Preview</button>
+<button data-go="editBox">Edit</button>
+<button data-go="captionBox">Captions</button>
+<button data-go="exportBox">Export</button>
+</nav>
 
 <section class="panel" id="projBox">
 <h3>Projects</h3>
@@ -151,7 +238,7 @@ textarea{width:100%;padding:12px;margin-top:7px;border:1px solid #36435a;border-
 </details>
 </section>
 
-<section class="panel">
+<section class="panel" id="importBox">
 <h3>01 — Import Video</h3>
 <input id="file" type="file" accept="video/*">
 <p class="note">
@@ -233,7 +320,91 @@ so don't present them as real historical photos.
 </div>
 </section>
 
-<section class="panel">
+<section class="panel" id="studioBox">
+<h3>🎛 Prompt Studio</h3>
+<p class="note">Turn a list of prompts into pictures and videos. Free pictures are made right here.
+For <b>Flow, Gemini, ChatGPT and Grok</b> the studio copies each prompt (and shares its start picture)
+and opens the site or app for you, prompt after prompt — you paste and press generate there, with your own account.</p>
+
+<div class="sthead"><b>PLATFORM</b></div>
+<div class="cards" id="stPlatforms">
+<button data-p="free">🎨 Free AI<small>pictures · in this app</small></button>
+<button data-p="stickman">🕺 Stickman<small>videos · in this app</small></button>
+<button data-p="flow">🎬 Flow<small>video &amp; pictures</small></button>
+<button data-p="gemini">✦ Gemini<small>pictures &amp; video</small></button>
+<button data-p="chatgpt">◎ ChatGPT<small>pictures</small></button>
+<button data-p="grok">⊘ Grok<small>pictures &amp; video</small></button>
+</div>
+<p id="stPlatNote" class="note"></p>
+
+<div class="modes" id="stModes">
+<button data-m="t2i">Text to Image</button>
+<button data-m="i2i">Image to Image</button>
+<button data-m="t2v">Text to Video</button>
+<button data-m="f2v">Frame to Video</button>
+</div>
+
+<div class="sthead"><b>Settings</b></div>
+<div class="row">
+<div><label for="stOutputs">Outputs per prompt</label>
+<select id="stOutputs"><option>1</option><option>2</option><option>3</option><option>4</option></select></div>
+<div><label for="stPrefix">File name start (optional)</label>
+<input id="stPrefix" maxlength="30" placeholder="e.g. how-it-started"></div>
+</div>
+<div class="switch">
+<label for="stAutoName">Auto file names<br><span class="note">On: 001_prompt_words.jpg · Off: ai-picture.jpg</span></label>
+<input id="stAutoName" type="checkbox" checked>
+</div>
+
+<div id="stImgBox">
+<div class="sthead"><b>Images</b><span id="stImgCount">0 uploaded</span></div>
+<p class="note">Start frames for Image to Image and Frame to Video. Prompt 1 uses image 1, prompt 2 uses
+image 2, and so on, wrapping back around. Use the arrows to change the order.</p>
+<label class="drop">Tap to choose pictures<br><span class="note">PNG / JPG / WEBP</span>
+<input id="stImgFile" type="file" accept="image/png,image/jpeg,image/webp" multiple></label>
+<div id="stImgList"></div>
+<button id="stImgClear" class="secondary" hidden>CLEAR ALL PICTURES</button>
+</div>
+
+<div class="sthead"><b>Prompts</b><span id="stCount">0 loaded</span></div>
+<div class="row">
+<label class="filebtn">Upload .txt<input id="stTxt" type="file" accept=".txt,text/plain"></label>
+<label class="filebtn">Upload .csv<input id="stCsv" type="file" accept=".csv,text/csv"></label>
+</div>
+<label for="stSplit">How prompts are separated</label>
+<select id="stSplit">
+<option value="line">One prompt per line</option>
+<option value="blank">Empty line between prompts (long prompts)</option>
+</select>
+<textarea id="stPrompts" rows="7" placeholder="The first gas station in 1905, vintage photo&#10;Henry Ford beside a Model T, 1910&#10;A modern electric car charging at night"></textarea>
+<label for="stAdd">Add to every prompt (style, niche — optional)</label>
+<textarea id="stAdd" rows="2" maxlength="600" placeholder="e.g. flat 2D stick figure explainer, midnight background, vertical 9:16"></textarea>
+<p class="note">Excel files: save them as CSV first (File → Download → CSV). The CSV column named “prompt”
+is used, or the first column.</p>
+
+<div class="sthead"><b>Run</b></div>
+<p id="stEstimate" class="note est"></p>
+<div class="row">
+<button id="stRun">▶ RUN ALL</button>
+<button id="stStop" class="del" hidden>■ STOP</button>
+</div>
+<p id="stStatus" class="note"></p>
+
+<div class="sthead"><b>Queue</b><span id="stDoneCount"></span></div>
+<div class="row">
+<select id="stFilter">
+<option value="all">All prompts</option>
+<option value="todo">Not done yet</option>
+<option value="done">Done</option>
+<option value="failed">Failed</option>
+</select>
+<button id="stDownloadAll" class="secondary" disabled>⬇ DOWNLOAD ALL</button>
+</div>
+<div id="stQueue"><p class="note">Your queue appears here. Type prompts above, then RUN ALL.</p></div>
+<button id="stClearQueue" class="secondary" hidden>CLEAR QUEUE</button>
+</section>
+
+<section class="panel" id="previewBox">
 <h3>02 — Video Preview</h3>
 <video id="video" playsinline preload="metadata"></video>
 <canvas id="canvas" width="720" height="1280"></canvas>
@@ -268,7 +439,7 @@ Slow fades and dissolves may not be detected.
 </div>
 </section>
 
-<section class="panel">
+<section class="panel" id="editBox">
 <h3>03 — Editing Controls</h3>
 
 <div id="tplBox" class="ai">
@@ -464,7 +635,7 @@ Only use music you have the right to use.
 </div>
 </section>
 
-<section class="panel">
+<section class="panel" id="captionBox">
 <h3>04 — Captions</h3>
 <p class="note">
 Captions are burned into the preview and the exported video.
@@ -604,7 +775,7 @@ Your style is remembered on this phone.</p>
 <div id="capList"></div>
 </section>
 
-<section class="panel">
+<section class="panel" id="exportBox">
 <h3>05 — Export Video</h3>
 <p class="note">
 Export your edited clip as a video file.
@@ -3418,7 +3589,49 @@ function picSize(){
  return r==="9:16"?[720,1280]:r==="16:9"?[1280,720]:[1024,1024];
 }
 
-// Make a picture. Returns {ok,msg}. Only one picture is kept in memory.
+// One picture from the free Pollinations.ai service.
+// Returns {ok:true,blob} or {ok:false,wait (seconds, free limit),msg}.
+let lastPicAt=0;              // when the last picture was asked for (free limit)
+let PIC_GAP_MS=46000;         // free limit: 1 picture every 45 s
+async function pollinationsPicture(prompt,w,h,seed){
+ const url=PIC_API+encodeURIComponent(prompt)+"?width="+w+"&height="+h+"&seed="+seed+"&nologo=true&safe=true";
+ const ctrl=new AbortController();
+ const timer=setTimeout(()=>ctrl.abort(),120000);
+ lastPicAt=Date.now();
+ try{
+  const res=await fetch(url,{signal:ctrl.signal});
+  if(res.status===402||res.status===429){
+   let wait=Number(res.headers.get("Retry-After"))||0;
+   try{ const j=await res.json(); const m=/retry after (\d+)/i.exec(j&&j.error&&j.error.message||""); if(m) wait=Number(m[1]); }catch(e){}
+   return {ok:false,wait:wait||45,msg:"The free picture limit was reached. Wait "+(wait?wait+" seconds":"about a minute")+" and try again."};
+  }
+  if(!res.ok) return {ok:false,msg:"The picture service had a problem (error "+res.status+"). Try again in a minute."};
+  const blob=await res.blob();
+  if(!/^image\//.test(blob.type)) return {ok:false,msg:"The picture service did not send a picture. Try again."};
+  return {ok:true,blob};
+ }catch(err){
+  return {ok:false,msg:err.name==="AbortError"?"The picture took too long. Try again.":"Could not reach the picture service. Check your internet and try again."};
+ }finally{ clearTimeout(timer); }
+}
+
+// Put a picture (Blob) on the video: the PICTURE tab and drawPicture use it.
+// Only one video picture is kept in memory.
+async function setVideoPicture(blob,name){
+ const newURL=URL.createObjectURL(blob);
+ const img=new Image();
+ img.src=newURL;
+ try{ await img.decode(); }catch(e){ URL.revokeObjectURL(newURL); return false; }
+ if(picURL) URL.revokeObjectURL(picURL); // free the old picture
+ picURL=newURL; picImg=img;
+ $("pmPicImg").src=newURL; $("pmPicImg").hidden=false;
+ $("pmPicDownload").href=newURL;
+ $("pmPicDownload").download=name;
+ $("pmPicActions").hidden=false;
+ redrawIfPaused();
+ return true;
+}
+
+// Make a picture. Returns {ok,msg}.
 async function generatePicture(prompt){
  const text=String(prompt||"").trim().slice(0,400);
  if(!text) return {ok:false,msg:"Describe the picture first."};
@@ -3428,38 +3641,16 @@ async function generatePicture(prompt){
  const full=style?text+", "+style:text;
  const [w,h]=picSize();
  const seed=Math.floor(Math.random()*1e9);
- const url=PIC_API+encodeURIComponent(full)+"?width="+w+"&height="+h+"&seed="+seed+"&nologo=true&safe=true";
  picBusy=true;
  $("pmPicGen").disabled=true; $("pmPicProgress").hidden=false;
  picStatus("Making your picture… (usually 5–30 seconds)");
- const ctrl=new AbortController();
- const timer=setTimeout(()=>ctrl.abort(),120000);
  try{
-  const res=await fetch(url,{signal:ctrl.signal});
-  if(res.status===402||res.status===429){
-   let wait=Number(res.headers.get("Retry-After"))||0;
-   try{ const j=await res.json(); const m=/retry after (\d+)/i.exec(j&&j.error&&j.error.message||""); if(m) wait=Number(m[1]); }catch(e){}
-   return {ok:false,msg:"The free picture limit was reached. Wait "+(wait?wait+" seconds":"about a minute")+" and try again."};
-  }
-  if(!res.ok) return {ok:false,msg:"The picture service had a problem (error "+res.status+"). Try again in a minute."};
-  const blob=await res.blob();
-  if(!/^image\//.test(blob.type)) return {ok:false,msg:"The picture service did not send a picture. Try again."};
-  const newURL=URL.createObjectURL(blob);
-  const img=new Image();
-  img.src=newURL;
-  try{ await img.decode(); }catch(e){ URL.revokeObjectURL(newURL); return {ok:false,msg:"The picture could not be opened. Try again."}; }
-  if(picURL) URL.revokeObjectURL(picURL); // free the old picture
-  picURL=newURL; picImg=img;
-  $("pmPicImg").src=newURL; $("pmPicImg").hidden=false;
-  $("pmPicDownload").href=newURL;
-  $("pmPicDownload").download="ai-picture-"+seed+(blob.type==="image/png"?".png":".jpg");
-  $("pmPicActions").hidden=false;
-  redrawIfPaused();
-  return {ok:true,msg:"Picture ready ("+img.naturalWidth+"×"+img.naturalHeight+"). DOWNLOAD it or tap SHOW ON VIDEO."};
- }catch(err){
-  return {ok:false,msg:err.name==="AbortError"?"The picture took too long. Try again.":"Could not reach the picture service. Check your internet and try again."};
+  const r=await pollinationsPicture(full,w,h,seed);
+  if(!r.ok) return {ok:false,msg:r.msg};
+  if(!await setVideoPicture(r.blob,"ai-picture-"+seed+(r.blob.type==="image/png"?".png":".jpg")))
+   return {ok:false,msg:"The picture could not be opened. Try again."};
+  return {ok:true,msg:"Picture ready ("+picImg.naturalWidth+"×"+picImg.naturalHeight+"). DOWNLOAD it or tap SHOW ON VIDEO."};
  }finally{
-  clearTimeout(timer);
   picBusy=false;
   $("pmPicGen").disabled=false; $("pmPicProgress").hidden=true;
  }
@@ -3763,6 +3954,480 @@ $("pmCmd").addEventListener("keydown",e=>{ if(e.key==="Enter"&&(e.ctrlKey||e.met
 try{ const last=localStorage.getItem("aves.prompt"); if(last) $("pmCmd").value=last; }catch(e){}
 
 /* ---------- END AI PROMPT ---------- */
+
+/* ---------- PROMPT STUDIO ---------- */
+
+// A list of prompts → pictures (free, made here), a Stickman video, or a
+// guided hand-off to Flow / Gemini / ChatGPT / Grok: the studio copies each
+// prompt (and shares its start picture) and opens the site or app; the owner
+// pastes and generates there with their own account. Nothing is automated on
+// those sites.
+const ST_KEY="aves.studio";
+const ST_PLATFORMS={
+ free:{name:"Free AI pictures",kind:"free",modes:["t2i"],
+  note:"Made in this app by the free Pollinations.ai service (no account, no cost). Free limit: about 1 picture every 45 seconds, so keep this tab open while the queue runs. Pictures have a small “pollinations.ai” mark."},
+ stickman:{name:"Stickman Director",kind:"stickman",modes:["t2v"],
+  note:"Your prompts become the story in the Stickman Director (opens in a new tab). It animates and exports the video on this phone, free."},
+ flow:{name:"Flow",kind:"handoff",url:"https://labs.google/fx/tools/flow",modes:["t2i","i2i","t2v","f2v"],
+  note:"Google Flow — sign in first. Each prompt is copied and Flow opens: paste it, pick the same mode in Flow, and generate. Uses your Flow credits."},
+ gemini:{name:"Gemini",kind:"handoff",url:"https://gemini.google.com/app",modes:["t2i","i2i","t2v","f2v"],
+  note:"Gemini — sign in first. Each prompt is copied and Gemini opens: paste and send. With a start picture, SHARE sends picture + prompt to the Gemini app."},
+ chatgpt:{name:"ChatGPT",kind:"handoff",url:"https://chatgpt.com/",modes:["t2i","i2i"],
+  note:"ChatGPT — sign in first. Each prompt is copied and ChatGPT opens: paste and send. With a start picture, SHARE sends picture + prompt to the ChatGPT app."},
+ grok:{name:"Grok",kind:"handoff",url:"https://grok.com/",modes:["t2i","i2i","t2v","f2v"],
+  note:"Grok — sign in first. Each prompt is copied and Grok opens: paste and send. With a start picture, SHARE sends picture + prompt to the Grok app."}
+};
+const ST_MODE_NAMES={t2i:"Text to Image",i2i:"Image to Image",t2v:"Text to Video",f2v:"Frame to Video"};
+// Chat apps need to be told what to make; Flow has its own mode buttons.
+const ST_CHAT_PREFIX={t2i:"Create an image: ",i2i:"Edit the attached image: ",t2v:"Create a video: ",f2v:"Create a video that starts from the attached image: "};
+const ST_MAX_PICTURES=100; // memory limit for phones
+
+let stPlatform="free", stMode="t2i";
+let stImages=[];   // {file,url}
+let stQueue=[];    // {n,title,prompt,img,status,outs:[{url,name}],msg,platform,mode}
+let stRunning=false, stStopFlag=false, stCur=-1;
+
+function stStatus(t){ $("stStatus").textContent=t; }
+function stNeedsImage(){ return stMode==="i2i"||stMode==="f2v"; }
+
+function stSave(){
+ try{ localStorage.setItem(ST_KEY,JSON.stringify({platform:stPlatform,mode:stMode,prompts:$("stPrompts").value,
+  add:$("stAdd").value,split:$("stSplit").value,outputs:$("stOutputs").value,prefix:$("stPrefix").value,autoName:$("stAutoName").checked})); }catch(e){}
+}
+function stLoad(){
+ let d=null; try{ d=JSON.parse(localStorage.getItem(ST_KEY)||"null"); }catch(e){}
+ if(!d) return;
+ if(ST_PLATFORMS[d.platform]) stPlatform=d.platform;
+ if(ST_MODE_NAMES[d.mode]) stMode=d.mode;
+ ["prompts","add"].forEach(k=>{ if(typeof d[k]==="string") $(k==="prompts"?"stPrompts":"stAdd").value=d[k]; });
+ if(d.split==="blank"||d.split==="line") $("stSplit").value=d.split;
+ if(/^[1-4]$/.test(d.outputs)) $("stOutputs").value=d.outputs;
+ if(typeof d.prefix==="string") $("stPrefix").value=d.prefix;
+ if(typeof d.autoName==="boolean") $("stAutoName").checked=d.autoName;
+}
+
+// Prompts from the text box. Returns [{title, prompt}] (title = without the
+// "add to every prompt" text, used for file names).
+function stParse(){
+ const raw=$("stPrompts").value.replace(/\r/g,"");
+ const parts=$("stSplit").value==="blank"?raw.split(/\n\s*\n/):raw.split("\n");
+ const add=$("stAdd").value.trim();
+ return parts.map(p=>p.trim()).filter(Boolean).slice(0,200).map(p=>({title:p,
+  prompt:add?(/[.!?]$/.test(p)?p+" "+add:p+", "+add):p}));
+}
+
+function stSize(){
+ const r=$("ratio").value;
+ return r==="9:16"?[720,1280]:r==="16:9"?[1280,720]:[1024,1024];
+}
+function stSlug(t){
+ return t.toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9]+/g," ").trim()
+  .split(" ").filter(Boolean).slice(0,5).join("_").slice(0,40)||"prompt";
+}
+function stFileName(item,k,ext,seed){
+ if(!$("stAutoName").checked) return "ai-picture-"+seed+ext;
+ const pre=$("stPrefix").value.trim().toLowerCase().replace(/[^a-z0-9_-]+/g,"-").replace(/^-+|-+$/g,"");
+ const outs=Number($("stOutputs").value);
+ return (pre?pre+"_":"")+String(item.n).padStart(3,"0")+"_"+stSlug(item.title)+(outs>1?"_"+(k+1):"")+ext;
+}
+
+// Small CSV reader (quotes, commas and new lines inside quotes).
+function stCsvRows(text){
+ const rows=[]; let row=[], cell="", q=false;
+ text=text.replace(/^﻿/,"");
+ for(let i=0;i<text.length;i++){
+  const c=text[i];
+  if(q){
+   if(c==='"'){ if(text[i+1]==='"'){ cell+='"'; i++; } else q=false; }
+   else cell+=c;
+  }else if(c==='"') q=true;
+  else if(c===","||c===";"&&!text.includes(",")){ row.push(cell); cell=""; }
+  else if(c==="\n"||c==="\r"){ if(c==="\r"&&text[i+1]==="\n") i++; row.push(cell); rows.push(row); row=[]; cell=""; }
+  else cell+=c;
+ }
+ if(cell!==""||row.length){ row.push(cell); rows.push(row); }
+ return rows.filter(r=>r.some(x=>x.trim()));
+}
+function stSetPrompts(list){
+ list=list.map(p=>p.trim()).filter(Boolean);
+ const multi=list.some(p=>p.includes("\n"));
+ $("stSplit").value=multi?"blank":"line";
+ $("stPrompts").value=list.join(multi?"\n\n":"\n");
+ stUpdate();
+}
+
+function stRenderPlatform(){
+ document.querySelectorAll("#stPlatforms button").forEach(b=>b.classList.toggle("on",b.dataset.p===stPlatform));
+ const P=ST_PLATFORMS[stPlatform];
+ if(!P.modes.includes(stMode)) stMode=P.modes[0];
+ document.querySelectorAll("#stModes button").forEach(b=>{
+  b.disabled=!P.modes.includes(b.dataset.m);
+  b.classList.toggle("on",b.dataset.m===stMode);
+ });
+ $("stPlatNote").textContent=P.note;
+ $("stOutputs").disabled=P.kind!=="free";
+ $("stImgBox").hidden=!stNeedsImage();
+ stUpdate();
+}
+
+function stRenderImages(){
+ const list=$("stImgList");
+ const frag=document.createDocumentFragment();
+ stImages.forEach((im,i)=>{
+  const d=document.createElement("div"); d.className="stimg";
+  const img=document.createElement("img"); img.src=im.url; img.alt="Start picture "+(i+1);
+  const n=document.createElement("b"); n.textContent=i+1;
+  const btns=document.createElement("div");
+  [["←",-1,"Move earlier"],["→",1,"Move later"],["✕",0,"Remove"]].forEach(([t,dir,title])=>{
+   const b=document.createElement("button"); b.type="button"; b.textContent=t; b.title=title;
+   b.className=dir?"secondary":"del";
+   b.addEventListener("click",()=>{
+    if(!dir){ URL.revokeObjectURL(im.url); stImages.splice(i,1); }
+    else{ const j=i+dir; if(j<0||j>=stImages.length) return; [stImages[i],stImages[j]]=[stImages[j],stImages[i]]; }
+    stRenderImages(); stUpdate();
+   });
+   btns.append(b);
+  });
+  d.append(img,n,btns); frag.append(d);
+ });
+ list.replaceChildren(frag);
+ $("stImgCount").textContent=stImages.length+" uploaded";
+ $("stImgClear").hidden=!stImages.length;
+}
+
+// Count, estimate and button text.
+function stUpdate(){
+ const items=stParse();
+ const P=ST_PLATFORMS[stPlatform];
+ $("stCount").textContent=items.length+" loaded";
+ let est="";
+ if(!items.length) est="Type or upload prompts to start.";
+ else if(P.kind==="free"){
+  const pics=items.length*Number($("stOutputs").value);
+  const min=Math.ceil(pics*PIC_GAP_MS/60000);
+  est="This run makes "+pics+" picture"+(pics===1?"":"s")+" for free"+(pics>1?" — about "+min+" minute"+(min===1?"":"s")+" because of the free limit":"")+"."+
+   (pics>ST_MAX_PICTURES?" Only the first "+ST_MAX_PICTURES+" pictures are made (phone memory).":"");
+ }else if(P.kind==="stickman") est="Opens the Stickman Director with your "+items.length+" prompt"+(items.length===1?"":"s")+" as the story.";
+ else{
+  est=items.length+" prompt"+(items.length===1?"":"s")+" for "+P.name+" ("+ST_MODE_NAMES[stMode]+"). For each one: the prompt is copied and "+P.name+
+   " opens — paste, generate, come back and tap NEXT. Uses your "+P.name+" account and credits.";
+  if(stNeedsImage()&&!stImages.length) est+=" Add start pictures above first.";
+ }
+ $("stEstimate").textContent=est;
+ stRunLabel();
+}
+
+function stRunLabel(){
+ const b=$("stRun");
+ const live=stQueue.length&&stQueue[0].platform===stPlatform&&stQueue[0].mode===stMode&&ST_PLATFORMS[stPlatform].kind==="handoff"&&stCur>=0&&stCur<stQueue.length;
+ b.textContent=stRunning?"⏳ RUNNING…":live?"▶ NEXT: PROMPT "+(stCur+1)+" OF "+stQueue.length:"▶ RUN ALL";
+ b.disabled=stRunning;
+}
+
+function stItemImage(item){ return item.img!=null?stImages[item.img]:null; }
+
+function stRenderQueue(){
+ const box=$("stQueue");
+ const filter=$("stFilter").value;
+ const frag=document.createDocumentFragment();
+ const shown=stQueue.filter(it=>filter==="all"||(filter==="done"?(it.status==="done"||it.status==="sent"):filter==="failed"?it.status==="failed":(it.status!=="done"&&it.status!=="sent")));
+ shown.forEach(it=>{
+  const P=ST_PLATFORMS[it.platform];
+  const d=document.createElement("div"); d.className="qi"+(stQueue.indexOf(it)===stCur?" cur":"");
+  const head=document.createElement("div"); head.className="qhead";
+  const n=document.createElement("span"); n.className="n"; n.textContent=String(it.n).padStart(3,"0");
+  const t=document.createElement("span"); t.className="t"; t.textContent=it.prompt;
+  const chip=document.createElement("span"); chip.className="chip "+it.status;
+  chip.textContent={waiting:"waiting",making:"making…",done:"done",failed:"failed",sent:"sent",ready:"ready"}[it.status]||it.status;
+  head.append(n,t,chip); d.append(head);
+  if(it.msg){ const m=document.createElement("div"); m.className="qmsg"; m.textContent=it.msg; d.append(m); }
+  const im=stItemImage(it);
+  if(it.outs.length||im){
+   const outs=document.createElement("div"); outs.className="qouts";
+   if(im){ const i=document.createElement("img"); i.src=im.url; i.alt="Start picture"; i.title="Start picture "+(it.img+1); outs.append(i); }
+   it.outs.forEach(o=>{ const i=document.createElement("img"); i.src=o.url; i.alt=o.name; outs.append(i); });
+   d.append(outs);
+  }
+  const btns=document.createElement("div"); btns.className="qbtns";
+  const btn=(label,fn,cls)=>{ const b=document.createElement("button"); b.type="button"; b.textContent=label; if(cls) b.className=cls; b.addEventListener("click",fn); btns.append(b); return b; };
+  if(P.kind==="free"){
+   it.outs.forEach((o,k)=>{
+    const a=document.createElement("a"); a.href=o.url; a.download=o.name; a.textContent="⬇ "+(it.outs.length>1?k+1:"SAVE"); btns.append(a);
+   });
+   if(it.outs.length) btn("SHOW ON VIDEO",async()=>{
+    const blob=await fetch(it.outs[0].url).then(r=>r.blob());
+    if(await setVideoPicture(blob,it.outs[0].name)){
+     if($("pmPicPlace").value==="off") $("pmPicPlace").value="full";
+     updatePreview(); stStatus("Picture "+it.n+" is on the video. Change its place in the AI Prompt → PICTURE tab.");
+    }
+   },"secondary");
+   if(it.status==="failed"&&!stRunning) btn("↻ TRY AGAIN",()=>{ it.status="waiting"; it.msg=""; stRunFree(); },"secondary");
+  }else if(P.kind==="handoff"){
+   btn("📋 COPY & OPEN",()=>stHandoff(stQueue.indexOf(it),false),"");
+   if(im&&stCanShareFiles()) btn("📤 SHARE WITH PICTURE",()=>stHandoff(stQueue.indexOf(it),true),"secondary");
+   btn(it.status==="sent"?"↺ NOT DONE":"✓ DONE",()=>{ it.status=it.status==="sent"?"ready":"sent"; stRenderQueue(); },"secondary");
+  }
+  d.append(btns);
+  frag.append(d);
+ });
+ if(!stQueue.length){ const p=document.createElement("p"); p.className="note"; p.textContent="Your queue appears here. Type prompts above, then RUN ALL."; frag.append(p); }
+ else if(!shown.length){ const p=document.createElement("p"); p.className="note"; p.textContent="Nothing in this filter."; frag.append(p); }
+ box.replaceChildren(frag);
+ const pics=stQueue.reduce((n,it)=>n+it.outs.length,0);
+ const done=stQueue.filter(it=>it.status==="done"||it.status==="sent").length;
+ $("stDoneCount").textContent=stQueue.length?done+"/"+stQueue.length+" done":"";
+ $("stDownloadAll").disabled=!pics;
+ $("stDownloadAll").textContent="⬇ DOWNLOAD ALL"+(pics?" ("+pics+")":"");
+ $("stClearQueue").hidden=!stQueue.length||stRunning;
+ stRunLabel();
+}
+
+function stFreeQueue(){
+ stQueue.forEach(it=>it.outs.forEach(o=>URL.revokeObjectURL(o.url)));
+ stQueue=[]; stCur=-1;
+}
+
+function stBuildQueue(items){
+ stFreeQueue();
+ const useImg=stNeedsImage()&&stImages.length;
+ stQueue=items.map((x,i)=>({n:i+1,title:x.title,prompt:x.prompt,img:useImg?i%stImages.length:null,
+  status:ST_PLATFORMS[stPlatform].kind==="free"?"waiting":"ready",outs:[],msg:"",platform:stPlatform,mode:stMode}));
+}
+
+const stSleep=ms=>new Promise(r=>setTimeout(r,ms));
+// Wait (with a countdown) unless STOP is pressed. Returns false when stopped.
+async function stWait(ms,label){
+ const end=Date.now()+ms;
+ while(Date.now()<end){
+  if(stStopFlag) return false;
+  stStatus(label+" "+Math.ceil((end-Date.now())/1000)+" s…");
+  await stSleep(Math.min(250,Math.max(10,end-Date.now())));
+ }
+ return !stStopFlag;
+}
+
+async function stRunFree(){
+ if(stRunning) return;
+ stRunning=true; stStopFlag=false;
+ $("stStop").hidden=false; stRenderQueue();
+ const outs=Number($("stOutputs").value);
+ const [w,h]=stSize();
+ let made=0;
+ try{
+  for(let i=0;i<stQueue.length&&!stStopFlag;i++){
+   const it=stQueue[i];
+   if(it.status==="done"||it.status==="failed") continue;
+   stCur=i; it.status="making"; it.msg=""; stRenderQueue();
+   while(it.outs.length<outs&&!stStopFlag){
+    if(stQueue.reduce((n,x)=>n+x.outs.length,0)>=ST_MAX_PICTURES){ it.status="failed"; it.msg="Picture limit reached ("+ST_MAX_PICTURES+"). Download and clear the queue first."; break; }
+    const gap=lastPicAt+PIC_GAP_MS-Date.now();
+    if(gap>0&&!await stWait(gap,"Free limit: next picture in")) break;
+    let r=null;
+    for(let tries=0;tries<4&&!stStopFlag;tries++){
+     stStatus("Making picture "+(it.outs.length+1)+" of prompt "+it.n+"…");
+     const seed=Math.floor(Math.random()*1e9);
+     r=await pollinationsPicture(it.prompt,w,h,seed);
+     if(r.ok){
+      const ext=r.blob.type==="image/png"?".png":".jpg";
+      it.outs.push({url:URL.createObjectURL(r.blob),name:stFileName(it,it.outs.length,ext,seed)});
+      made++; break;
+     }
+     if(!r.wait) break;
+     if(!await stWait(r.wait*1000+1000,"Free limit: trying again in")) break;
+    }
+    stRenderQueue();
+    if(stStopFlag) break;
+    if(!r||!r.ok){ it.status="failed"; it.msg=r?r.msg:"Not made."; break; }
+   }
+   if(it.status==="making") it.status=it.outs.length>=outs?"done":"waiting";
+   stRenderQueue();
+  }
+  const done=stQueue.filter(it=>it.status==="done").length, failed=stQueue.filter(it=>it.status==="failed").length;
+  stStatus(stStopFlag?"Stopped. "+made+" picture"+(made===1?"":"s")+" made. RUN ALL continues where it stopped.":
+   "Finished: "+done+" of "+stQueue.length+" prompts done"+(failed?", "+failed+" failed (TRY AGAIN)":"")+". Tap ⬇ DOWNLOAD ALL to save them.");
+ }finally{
+  stRunning=false; stCur=-1;
+  $("stStop").hidden=true;
+  stQueue.forEach(it=>{ if(it.status==="making") it.status="waiting"; });
+  stRenderQueue();
+ }
+}
+
+function stCanShareFiles(){
+ try{ return !!(navigator.canShare&&navigator.share&&navigator.canShare({files:[new File([""],"x.png",{type:"image/png"})]})); }catch(e){ return false; }
+}
+async function stCopy(text){
+ try{ await navigator.clipboard.writeText(text); return true; }
+ catch(e){
+  const ta=document.createElement("textarea"); ta.value=text; ta.setAttribute("readonly","");
+  ta.style.position="fixed"; ta.style.opacity="0"; document.body.append(ta); ta.select();
+  let ok=false; try{ ok=document.execCommand("copy"); }catch(e2){}
+  ta.remove(); return ok;
+ }
+}
+function stHandoffText(it){
+ const P=ST_PLATFORMS[it.platform];
+ return (it.platform==="flow"?"":ST_CHAT_PREFIX[it.mode])+it.prompt;
+}
+
+// Copy one prompt and open the platform (or share picture + prompt).
+// Must run from a tap (browsers only open tabs / share sheets after a tap).
+async function stHandoff(i,share){
+ const it=stQueue[i]; if(!it) return;
+ const P=ST_PLATFORMS[it.platform];
+ const text=stHandoffText(it);
+ stCur=i;
+ const im=stItemImage(it);
+ if(share&&im){
+  try{
+   await navigator.share({files:[im.file],text});
+   it.status="sent"; it.msg="Shared picture "+(it.img+1)+" + prompt. Choose "+P.name+" in the share list if you haven't.";
+  }catch(e){
+   if(e.name!=="AbortError"){ it.msg="Sharing failed here. Use COPY & OPEN and attach picture "+(it.img+1)+" in "+P.name+"."; }
+   stRenderQueue(); return;
+  }
+ }else{
+  // Open first (still inside the tap), then copy.
+  const win=window.open(P.url,"aves_"+it.platform);
+  const copied=await stCopy(text);
+  it.status="sent";
+  it.msg=(copied?"Copied":"Could not copy — select the prompt text and copy it")+(win?". "+P.name+" opened: paste and generate.":". Open "+P.name+" and paste.")+
+   (im?" Attach start picture "+(it.img+1)+" there.":"");
+ }
+ // Next prompt
+ stCur=stQueue.findIndex((x,k)=>k>i&&x.status!=="sent");
+ if(stCur<0) stCur=stQueue.findIndex(x=>x.status!=="sent");
+ stStatus(stCur<0?"All "+stQueue.length+" prompts sent to "+P.name+". ✓":
+  "Prompt "+it.n+" sent. When "+P.name+" is done, come back and tap NEXT for prompt "+(stCur+1)+".");
+ stRenderQueue();
+}
+
+$("stRun").addEventListener("click",()=>{
+ if(stRunning) return;
+ const P=ST_PLATFORMS[stPlatform];
+ // Continue a hand-off queue with the next prompt.
+ if(P.kind==="handoff"&&stQueue.length&&stQueue[0].platform===stPlatform&&stQueue[0].mode===stMode&&stCur>=0){
+  const it=stQueue[stCur];
+  stHandoff(stCur,!!(stItemImage(it)&&stCanShareFiles()));
+  return;
+ }
+ const items=stParse();
+ if(!items.length){ stStatus("Type or upload some prompts first."); $("stPrompts").focus(); return; }
+ if(P.kind==="stickman"){
+  const story=items.map(x=>/[.!?]$/.test(x.prompt)?x.prompt:x.prompt+".").join(" ");
+  window.open("stickman.html#story="+encodeURIComponent(story.slice(0,6000)),"aves_stickman");
+  stStatus("Stickman Director opened with your story. Tap “Direct my story” there.");
+  return;
+ }
+ if(P.kind==="handoff"&&stNeedsImage()&&!stImages.length){ stStatus("Add start pictures (Images) first, or choose Text to "+(stMode==="i2i"?"Image":"Video")+"."); return; }
+ // Free pictures: continue an unfinished queue with the same prompts.
+ const same=stQueue.length===items.length&&stQueue.every((it,i)=>it.prompt===items[i].prompt&&it.platform===stPlatform&&it.mode===stMode);
+ if(!same){
+  if(stQueue.some(it=>it.outs.length)&&!confirm("Start a new queue? Pictures in the current queue that you haven't downloaded will be removed.")) return;
+  stBuildQueue(items);
+ }else if(P.kind==="free") stQueue.forEach(it=>{ if(it.status==="failed"){ it.status="waiting"; it.msg=""; } });
+ else if(stQueue.every(it=>it.status==="sent")) stQueue.forEach(it=>{ it.status="ready"; it.msg=""; }); // start the list again
+ stRenderQueue();
+ if(P.kind==="free"){ stRunFree(); return; }
+ stCur=0;
+ const it=stQueue[0];
+ stHandoff(0,!!(stItemImage(it)&&stCanShareFiles()));
+});
+$("stStop").addEventListener("click",()=>{ stStopFlag=true; stStatus("Stopping…"); });
+
+$("stDownloadAll").addEventListener("click",async()=>{
+ const all=stQueue.flatMap(it=>it.outs);
+ $("stDownloadAll").disabled=true;
+ for(let i=0;i<all.length;i++){
+  const a=document.createElement("a"); a.href=all[i].url; a.download=all[i].name;
+  document.body.append(a); a.click(); a.remove();
+  stStatus("Saving "+(i+1)+" of "+all.length+"… (allow “download multiple files” if Chrome asks)");
+  await stSleep(400);
+ }
+ stStatus(all.length+" picture"+(all.length===1?"":"s")+" sent to your Downloads.");
+ $("stDownloadAll").disabled=false;
+});
+$("stClearQueue").addEventListener("click",()=>{
+ if(stQueue.some(it=>it.outs.length)&&!confirm("Clear the queue? Pictures you haven't downloaded will be removed.")) return;
+ stFreeQueue(); stRenderQueue(); stStatus("");
+});
+$("stFilter").addEventListener("change",stRenderQueue);
+
+document.querySelectorAll("#stPlatforms button").forEach(b=>b.addEventListener("click",()=>{
+ if(stRunning) return;
+ stPlatform=b.dataset.p; stRenderPlatform(); stSave(); stRenderQueue();
+}));
+document.querySelectorAll("#stModes button").forEach(b=>b.addEventListener("click",()=>{
+ if(b.disabled||stRunning) return;
+ stMode=b.dataset.m; stRenderPlatform(); stSave();
+}));
+["stPrompts","stAdd","stSplit","stOutputs","stPrefix","stAutoName"].forEach(id=>{
+ $(id).addEventListener("input",()=>{ stUpdate(); stSave(); });
+ $(id).addEventListener("change",()=>{ stUpdate(); stSave(); });
+});
+$("ratio").addEventListener("change",stUpdate);
+
+$("stImgFile").addEventListener("change",e=>{
+ const files=[...e.target.files].filter(f=>/^image\/(png|jpeg|webp)$/.test(f.type));
+ const room=30-stImages.length;
+ files.slice(0,Math.max(0,room)).forEach(f=>stImages.push({file:f,url:URL.createObjectURL(f)}));
+ if(files.length>room) stStatus("Up to 30 start pictures. Some were not added.");
+ e.target.value="";
+ stRenderImages(); stUpdate();
+});
+$("stImgClear").addEventListener("click",()=>{
+ stImages.forEach(im=>URL.revokeObjectURL(im.url)); stImages=[];
+ stQueue.forEach(it=>{ it.img=null; });
+ stRenderImages(); stRenderQueue(); stUpdate();
+});
+$("stTxt").addEventListener("change",async e=>{
+ const f=e.target.files[0]; e.target.value=""; if(!f) return;
+ if(f.size>2*1024*1024){ stStatus("That file is too big (max 2 MB)."); return; }
+ const text=(await f.text()).replace(/\r/g,"");
+ const blank=/\n\s*\n/.test(text.trim());
+ $("stSplit").value=blank?"blank":"line";
+ $("stPrompts").value=text.trim();
+ stUpdate(); stSave();
+ stStatus("Loaded "+stParse().length+" prompts from “"+f.name+"”.");
+});
+$("stCsv").addEventListener("change",async e=>{
+ const f=e.target.files[0]; e.target.value=""; if(!f) return;
+ if(f.size>2*1024*1024){ stStatus("That file is too big (max 2 MB)."); return; }
+ const rows=stCsvRows(await f.text());
+ if(!rows.length){ stStatus("No prompts found in “"+f.name+"”."); return; }
+ let col=rows[0].findIndex(c=>/^\s*prompts?\s*$/i.test(c));
+ if(col<0) col=rows[0].findIndex(c=>/^\s*(text|ideas?|titles?|descriptions?|scenes?)\s*$/i.test(c));
+ const header=col>=0;
+ if(col<0) col=0;
+ stSetPrompts(rows.slice(header?1:0).map(r=>r[col]||""));
+ stSave();
+ stStatus("Loaded "+stParse().length+" prompts from “"+f.name+"” (column "+(header?"“"+rows[0][col].trim()+"”":col+1)+").");
+});
+
+stLoad();
+stRenderPlatform();
+stRenderImages();
+stRenderQueue();
+
+// Tab bar: jump to a section, and show which section is on screen.
+document.querySelectorAll("#topTabs button").forEach(b=>b.addEventListener("click",()=>{
+ const sec=$(b.dataset.go); if(sec) sec.scrollIntoView({behavior:"smooth",block:"start"});
+}));
+if("IntersectionObserver" in window){
+ const seen=new Map();
+ const io=new IntersectionObserver(entries=>{
+  entries.forEach(en=>seen.set(en.target.id,en.isIntersecting?en.intersectionRect.height:0));
+  let best=null,bh=0; seen.forEach((h,id)=>{ if(h>bh){ bh=h; best=id; } });
+  document.querySelectorAll("#topTabs button").forEach(b=>{
+   const on=b.dataset.go===best;
+   if(on&&!b.classList.contains("on")) b.scrollIntoView({block:"nearest",inline:"nearest"});
+   b.classList.toggle("on",on);
+  });
+ },{threshold:[0,0.25,0.5,0.75,1]});
+ document.querySelectorAll("#topTabs button").forEach(b=>{ const s=$(b.dataset.go); if(s) io.observe(s); });
+}
+
+/* ---------- END PROMPT STUDIO ---------- */
 </script>
 </body>
 </html>
