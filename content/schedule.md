@@ -65,6 +65,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-12-16 Wed | 8:00 PM | Thu Dec 17, 9:00 AM | TikTok | Coca-Cola made Santa red? That's a myth. | content/posts/2026-11-21-santa-ottoman.md | ready |
 | 2026-12-17 Thu | 7:00 PM | Fri Dec 18, 8:00 AM | Instagram Reels | Coca-Cola made Santa red? That's a myth. | content/posts/2026-11-21-santa-ottoman.md | ready |
 | 2026-12-17 Thu | 8:00 PM | Fri Dec 18, 9:00 AM | Facebook Reels | Coca-Cola made Santa red? That's a myth. | content/posts/2026-11-21-santa-ottoman.md | ready |
+| 2026-12-18 Fri | 7:00 PM | Sat Dec 19, 8:00 AM | YouTube Shorts | LEGO Started With a Carpenter Running Out of Work | content/posts/2026-11-21-lego-ottoman.md | ready |
+| 2026-12-18 Fri | 8:00 PM | Sat Dec 19, 9:00 AM | TikTok | LEGO started with a carpenter who was running out of work. | content/posts/2026-11-21-lego-ottoman.md | ready |
+| 2026-12-19 Sat | 7:00 PM | Sun Dec 20, 8:00 AM | Instagram Reels | LEGO started with a carpenter who was running out of work. | content/posts/2026-11-21-lego-ottoman.md | ready |
+| 2026-12-19 Sat | 8:00 PM | Sun Dec 20, 9:00 AM | Facebook Reels | LEGO started with a carpenter who was running out of work. | content/posts/2026-11-21-lego-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
