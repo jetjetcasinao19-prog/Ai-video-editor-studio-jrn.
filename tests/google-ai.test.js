@@ -25,7 +25,9 @@ ff(['-f', 'lavfi', '-i', 'color=c=green:size=360x640:rate=24:duration=2', '-f', 
   '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-shortest', CLIP]);
 
 (async () => {
-  const browser = await chromium.launch();
+  // The test clip is H.264 MP4: on CI this runs in Google Chrome (PW_CHANNEL=chrome),
+  // because Playwright's own Chromium on Linux cannot play H.264.
+  const browser = await chromium.launch({ channel: process.env.PW_CHANNEL || undefined });
   const context = await browser.newContext({ ...devices['Pixel 7'], acceptDownloads: true });
   const page = await context.newPage();
   const errors = [];
