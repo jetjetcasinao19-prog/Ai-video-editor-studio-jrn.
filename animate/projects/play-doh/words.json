@@ -1,0 +1,581 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "Play-Doh was invented to clean your walls. 1930s, Cincinnati, Ohio. Homes burn coal for heat, and the soot turns wallpaper black. A soap company called Kutol sells a soft, doughy putty that rolls the dirt right off. Then, after World War II, homes switch from coal to gas and oil. Washable wallpaper arrives. Nobody needs the putty anymore. Then Kay Zufall, a nursery school teacher in the family, reads that kids are modeling with wallpaper cleaner. She tries it with her class. The kids love it. Her idea? Sell it as a toy. In 1956, it's reborn with a new name. Play-Doh. A wall cleaner that became a childhood classic. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "Play-Doh",
+   "start": 0.02,
+   "end": 0.46
+  },
+  {
+   "w": "was",
+   "start": 0.46,
+   "end": 0.68
+  },
+  {
+   "w": "invented",
+   "start": 0.68,
+   "end": 1.14
+  },
+  {
+   "w": "to",
+   "start": 1.14,
+   "end": 1.84
+  },
+  {
+   "w": "clean",
+   "start": 1.84,
+   "end": 2.12
+  },
+  {
+   "w": "your",
+   "start": 2.12,
+   "end": 2.4
+  },
+  {
+   "w": "walls.",
+   "start": 2.4,
+   "end": 3.42
+  },
+  {
+   "w": "1930s,",
+   "start": 3.98,
+   "end": 5.1
+  },
+  {
+   "w": "Cincinnati,",
+   "start": 5.1,
+   "end": 6.24
+  },
+  {
+   "w": "Ohio.",
+   "start": 6.24,
+   "end": 6.52
+  },
+  {
+   "w": "Homes",
+   "start": 7.58,
+   "end": 7.9
+  },
+  {
+   "w": "burn",
+   "start": 7.9,
+   "end": 8.3
+  },
+  {
+   "w": "coal",
+   "start": 8.3,
+   "end": 8.72
+  },
+  {
+   "w": "for",
+   "start": 8.72,
+   "end": 8.96
+  },
+  {
+   "w": "heat,",
+   "start": 8.96,
+   "end": 9.7
+  },
+  {
+   "w": "and",
+   "start": 9.7,
+   "end": 9.72
+  },
+  {
+   "w": "the",
+   "start": 9.72,
+   "end": 9.9
+  },
+  {
+   "w": "soot",
+   "start": 9.9,
+   "end": 10.14
+  },
+  {
+   "w": "turns",
+   "start": 10.14,
+   "end": 10.58
+  },
+  {
+   "w": "wallpaper",
+   "start": 10.58,
+   "end": 11.12
+  },
+  {
+   "w": "black.",
+   "start": 11.12,
+   "end": 12.1
+  },
+  {
+   "w": "A",
+   "start": 12.38,
+   "end": 12.4
+  },
+  {
+   "w": "soap",
+   "start": 12.4,
+   "end": 12.62
+  },
+  {
+   "w": "company",
+   "start": 12.62,
+   "end": 12.96
+  },
+  {
+   "w": "called",
+   "start": 12.96,
+   "end": 13.32
+  },
+  {
+   "w": "Kutol",
+   "start": 13.32,
+   "end": 13.86
+  },
+  {
+   "w": "sells",
+   "start": 13.86,
+   "end": 14.46
+  },
+  {
+   "w": "a",
+   "start": 14.46,
+   "end": 14.68
+  },
+  {
+   "w": "soft,",
+   "start": 14.68,
+   "end": 15.56
+  },
+  {
+   "w": "doughy",
+   "start": 15.56,
+   "end": 15.66
+  },
+  {
+   "w": "putty",
+   "start": 15.66,
+   "end": 16.02
+  },
+  {
+   "w": "that",
+   "start": 16.02,
+   "end": 16.52
+  },
+  {
+   "w": "rolls",
+   "start": 16.52,
+   "end": 16.86
+  },
+  {
+   "w": "the",
+   "start": 16.86,
+   "end": 17.1
+  },
+  {
+   "w": "dirt",
+   "start": 17.1,
+   "end": 17.44
+  },
+  {
+   "w": "right",
+   "start": 17.44,
+   "end": 17.82
+  },
+  {
+   "w": "off.",
+   "start": 17.82,
+   "end": 18.12
+  },
+  {
+   "w": "Then,",
+   "start": 19.06,
+   "end": 19.48
+  },
+  {
+   "w": "after",
+   "start": 19.48,
+   "end": 19.84
+  },
+  {
+   "w": "World",
+   "start": 19.84,
+   "end": 20.14
+  },
+  {
+   "w": "War",
+   "start": 20.14,
+   "end": 20.34
+  },
+  {
+   "w": "II,",
+   "start": 20.34,
+   "end": 21.02
+  },
+  {
+   "w": "homes",
+   "start": 21.02,
+   "end": 21.26
+  },
+  {
+   "w": "switch",
+   "start": 21.26,
+   "end": 21.56
+  },
+  {
+   "w": "from",
+   "start": 21.56,
+   "end": 21.78
+  },
+  {
+   "w": "coal",
+   "start": 21.78,
+   "end": 22.2
+  },
+  {
+   "w": "to",
+   "start": 22.2,
+   "end": 22.42
+  },
+  {
+   "w": "gas",
+   "start": 22.42,
+   "end": 22.84
+  },
+  {
+   "w": "and",
+   "start": 22.84,
+   "end": 23.08
+  },
+  {
+   "w": "oil.",
+   "start": 23.08,
+   "end": 23.9
+  },
+  {
+   "w": "Washable",
+   "start": 24.26,
+   "end": 24.62
+  },
+  {
+   "w": "wallpaper",
+   "start": 24.62,
+   "end": 25.22
+  },
+  {
+   "w": "arrives.",
+   "start": 25.22,
+   "end": 26.26
+  },
+  {
+   "w": "Nobody",
+   "start": 26.48,
+   "end": 26.72
+  },
+  {
+   "w": "needs",
+   "start": 26.72,
+   "end": 27.08
+  },
+  {
+   "w": "the",
+   "start": 27.08,
+   "end": 27.26
+  },
+  {
+   "w": "putty",
+   "start": 27.26,
+   "end": 27.48
+  },
+  {
+   "w": "anymore.",
+   "start": 27.48,
+   "end": 28.32
+  },
+  {
+   "w": "Then",
+   "start": 27.84,
+   "end": 29.14
+  },
+  {
+   "w": "Kay",
+   "start": 29.14,
+   "end": 29.68
+  },
+  {
+   "w": "Zufall,",
+   "start": 29.68,
+   "end": 30.34
+  },
+  {
+   "w": "a",
+   "start": 30.34,
+   "end": 30.6
+  },
+  {
+   "w": "nursery",
+   "start": 30.6,
+   "end": 30.92
+  },
+  {
+   "w": "school",
+   "start": 30.92,
+   "end": 31.2
+  },
+  {
+   "w": "teacher",
+   "start": 31.2,
+   "end": 31.54
+  },
+  {
+   "w": "in",
+   "start": 31.54,
+   "end": 31.72
+  },
+  {
+   "w": "the",
+   "start": 31.72,
+   "end": 31.8
+  },
+  {
+   "w": "family,",
+   "start": 31.8,
+   "end": 32.66
+  },
+  {
+   "w": "reads",
+   "start": 32.66,
+   "end": 32.8
+  },
+  {
+   "w": "that",
+   "start": 32.8,
+   "end": 33.06
+  },
+  {
+   "w": "kids",
+   "start": 33.06,
+   "end": 33.38
+  },
+  {
+   "w": "are",
+   "start": 33.38,
+   "end": 33.6
+  },
+  {
+   "w": "modeling",
+   "start": 33.6,
+   "end": 34.02
+  },
+  {
+   "w": "with",
+   "start": 34.02,
+   "end": 34.36
+  },
+  {
+   "w": "wallpaper",
+   "start": 34.36,
+   "end": 34.74
+  },
+  {
+   "w": "cleaner.",
+   "start": 34.74,
+   "end": 35.64
+  },
+  {
+   "w": "She",
+   "start": 35.98,
+   "end": 36.08
+  },
+  {
+   "w": "tries",
+   "start": 36.08,
+   "end": 36.38
+  },
+  {
+   "w": "it",
+   "start": 36.38,
+   "end": 36.52
+  },
+  {
+   "w": "with",
+   "start": 36.52,
+   "end": 36.66
+  },
+  {
+   "w": "her",
+   "start": 36.66,
+   "end": 36.76
+  },
+  {
+   "w": "class.",
+   "start": 36.76,
+   "end": 37.8
+  },
+  {
+   "w": "The",
+   "start": 37.8,
+   "end": 37.86
+  },
+  {
+   "w": "kids",
+   "start": 37.86,
+   "end": 38.3
+  },
+  {
+   "w": "love",
+   "start": 38.3,
+   "end": 38.86
+  },
+  {
+   "w": "it.",
+   "start": 38.86,
+   "end": 39.04
+  },
+  {
+   "w": "Her",
+   "start": 39.76,
+   "end": 39.88
+  },
+  {
+   "w": "idea?",
+   "start": 39.88,
+   "end": 40.92
+  },
+  {
+   "w": "Sell",
+   "start": 40.92,
+   "end": 41.18
+  },
+  {
+   "w": "it",
+   "start": 41.18,
+   "end": 41.32
+  },
+  {
+   "w": "as",
+   "start": 41.32,
+   "end": 41.44
+  },
+  {
+   "w": "a",
+   "start": 41.44,
+   "end": 41.58
+  },
+  {
+   "w": "toy.",
+   "start": 41.58,
+   "end": 42.3
+  },
+  {
+   "w": "In",
+   "start": 42.66,
+   "end": 42.78
+  },
+  {
+   "w": "1956,",
+   "start": 42.78,
+   "end": 44.16
+  },
+  {
+   "w": "it's",
+   "start": 44.16,
+   "end": 44.38
+  },
+  {
+   "w": "reborn",
+   "start": 44.38,
+   "end": 44.78
+  },
+  {
+   "w": "with",
+   "start": 44.78,
+   "end": 45.18
+  },
+  {
+   "w": "a",
+   "start": 45.18,
+   "end": 45.34
+  },
+  {
+   "w": "new",
+   "start": 45.34,
+   "end": 45.54
+  },
+  {
+   "w": "name.",
+   "start": 45.54,
+   "end": 46.44
+  },
+  {
+   "w": "Play-Doh.",
+   "start": 46.66,
+   "end": 47.14
+  },
+  {
+   "w": "A",
+   "start": 47.14,
+   "end": 48.02
+  },
+  {
+   "w": "wall",
+   "start": 48.02,
+   "end": 48.44
+  },
+  {
+   "w": "cleaner",
+   "start": 48.44,
+   "end": 48.7
+  },
+  {
+   "w": "that",
+   "start": 48.7,
+   "end": 49.36
+  },
+  {
+   "w": "became",
+   "start": 49.36,
+   "end": 49.78
+  },
+  {
+   "w": "a",
+   "start": 49.78,
+   "end": 50.04
+  },
+  {
+   "w": "childhood",
+   "start": 50.04,
+   "end": 50.7
+  },
+  {
+   "w": "classic.",
+   "start": 50.7,
+   "end": 51.24
+  },
+  {
+   "w": "Every",
+   "start": 52.52,
+   "end": 52.8
+  },
+  {
+   "w": "legend",
+   "start": 52.8,
+   "end": 53.24
+  },
+  {
+   "w": "has",
+   "start": 53.24,
+   "end": 53.7
+  },
+  {
+   "w": "a",
+   "start": 53.7,
+   "end": 53.78
+  },
+  {
+   "w": "beginning.",
+   "start": 53.78,
+   "end": 54.06
+  }
+ ]
+}

@@ -1149,6 +1149,63 @@ export function chipBag(ctx, x, y, s = 1, rot = 0, labelText = 'CHOCOLATE CHIPS'
   ctx.restore();
 }
 
+// ---------- dough, soot & stoves ----------
+// A soft dough blob; squash 0..1 flattens it.
+export function dough(ctx, x, y, r, color = P.ochreLight, squash = 0, seed = 1) {
+  const R = rng(seed), pts = [];
+  for (let i = 0; i < 12; i++) { const a = i / 12 * TAU, rr = r * (0.9 + R() * 0.2); pts.push([x + Math.cos(a) * rr * (1 + squash * 0.4), y + Math.sin(a) * rr * (1 - squash * 0.45)]); }
+  ctx.beginPath(); smoothPath(ctx, pts); fillStroke(ctx, color, P.ink, Math.max(1.2, r * 0.05));
+  ctx.beginPath(); ctx.ellipse(x - r * 0.3, y - r * 0.35 * (1 - squash * 0.4), r * 0.3, r * 0.15, -0.4, 0, TAU); ctx.fillStyle = 'rgba(255,255,255,0.45)'; ctx.fill();
+}
+// Dark soot smudges over a wall area; k 0..1 how dirty.
+export function soot(ctx, x, y, w, h, k, seed = 3) {
+  if (k <= 0) return;
+  const R = rng(seed); ctx.save(); ctx.beginPath(); ctx.rect(x, y, w, h); ctx.clip();
+  ctx.fillStyle = `rgba(40,32,28,${0.45 * k})`; ctx.fillRect(x, y, w, h);
+  for (let i = 0; i < 26; i++) { const cx = x + R() * w, cy = y + R() * h, r = 30 + R() * 90, g = ctx.createRadialGradient(cx, cy, 2, cx, cy, r); g.addColorStop(0, `rgba(30,24,20,${0.5 * k})`); g.addColorStop(1, 'rgba(30,24,20,0)'); ctx.fillStyle = g; ctx.fillRect(cx - r, cy - r, 2 * r, 2 * r); }
+  ctx.restore();
+}
+// Cylindrical can of putty/dough with a paper label.
+export function doughCan(ctx, x, y, s = 1, labelText = '', color = P.ochre, lid = P.verm, open = 0, doughColor = null) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  ctx.beginPath(); ctx.moveTo(-50, -120); ctx.lineTo(-50, 0); ctx.ellipse(0, 0, 50, 14, 0, Math.PI, 0, true); ctx.lineTo(50, -120); ctx.closePath(); fillStroke(ctx, color, P.ink, 2.5);
+  rect(ctx, -50, -96, 100, 60, P.paperLight, P.ink, 1.5);
+  if (labelText) { ctx.fillStyle = P.verm; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; const words = labelText.split(' '); let fs = 18; ctx.font = `900 ${fs}px Deco`; while (words.some(w => ctx.measureText(w).width > 92) && fs > 9) { fs -= 1; ctx.font = `900 ${fs}px Deco`; } words.forEach((w, i) => ctx.fillText(w, 0, -66 + (i - (words.length - 1) / 2) * (fs + 2))); }
+  if (open > 0) { if (doughColor) dough(ctx, 0, -128, 40, doughColor, 0.4, 3); ctx.save(); ctx.translate(lerp(0, 70, open), lerp(-120, -170, open)); ctx.rotate(open * 0.6); ctx.beginPath(); ctx.ellipse(0, 0, 54, 14, 0, 0, TAU); fillStroke(ctx, lid, P.ink, 2); ctx.restore(); }
+  else { ctx.beginPath(); ctx.ellipse(0, -120, 54, 14, 0, 0, TAU); fillStroke(ctx, lid, P.ink, 2); }
+  ctx.restore();
+}
+// Cast-iron potbelly stove burning coal, with a pipe and sooty smoke.
+export function coalStove(ctx, x, base, s = 1, t = 0, fire = 1, smoke = 1) {
+  ctx.save(); ctx.translate(x, base); ctx.scale(s, s);
+  rect(ctx, -16, -560, 32, 360, '#3a3a3a', P.ink, 2);
+  ctx.beginPath(); ctx.moveTo(-60, -200); ctx.lineTo(60, -200); ctx.quadraticCurveTo(110, -110, 70, -30); ctx.lineTo(-70, -30); ctx.quadraticCurveTo(-110, -110, -60, -200); ctx.closePath(); fillStroke(ctx, '#2f2f33', P.ink, 2.5);
+  for (const lx of [-50, 50]) { ctx.beginPath(); ctx.moveTo(lx, -30); ctx.lineTo(lx * 1.2, 0); stroke(ctx, P.ink, 8); }
+  rect(ctx, -34, -140, 68, 60, '#1a1a1a', P.ink, 2);
+  if (fire > 0) for (let i = 0; i < 3; i++) { const f = (1 + 0.25 * Math.sin(t * 14 + i * 2)) * fire; ctx.beginPath(); ctx.moveTo(-24 + i * 20, -82); ctx.quadraticCurveTo(-30 + i * 20, -100 * f, -16 + i * 20, -130 * f + 50 * (1 - f)); ctx.quadraticCurveTo(-8 + i * 20, -100 * f, -4 + i * 20, -82); fillStroke(ctx, [P.verm, P.ochre, P.goldLight][i], P.ink, 1); }
+  if (smoke > 0) for (let i = 0; i < 4; i++) { const k = (t * 0.4 + i / 4) % 1; ctx.save(); ctx.globalAlpha = (1 - k) * smoke; cloud(ctx, 10 + k * 40, -580 - k * 160, 0.5 + k * 0.5, i + 50, '#55504c', P.ink); ctx.restore(); }
+  ctx.restore();
+}
+// Folded newspaper with a headline.
+export function newspaper(ctx, x, y, w, rot = 0, headline = 'NEWS', title = 'THE DAILY NEWS') {
+  const h = w * 1.25;
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot);
+  rect(ctx, -w / 2, -h / 2, w, h, '#f1ead8', P.ink, 2);
+  ctx.fillStyle = P.ink; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.font = `900 ${Math.round(w * 0.075)}px Fell`; ctx.fillText(title, 0, -h / 2 + w * 0.08);
+  ctx.beginPath(); ctx.moveTo(-w * 0.45, -h / 2 + w * 0.14); ctx.lineTo(w * 0.45, -h / 2 + w * 0.14); stroke(ctx, P.ink, 2);
+  const words = headline.split('\n'); ctx.font = `900 ${Math.round(w * 0.075)}px Deco`; ctx.fillStyle = P.verm;
+  words.forEach((ln, i) => ctx.fillText(ln, 0, -h / 2 + w * 0.24 + i * w * 0.09));
+  for (let c = 0; c < 2; c++) for (let i = 0; i < 9; i++) { ctx.beginPath(); ctx.moveTo(-w * 0.44 + c * w * 0.46, -h / 2 + w * (0.26 + words.length * 0.09) + i * w * 0.06); ctx.lineTo(-w * 0.02 + c * w * 0.46, -h / 2 + w * (0.26 + words.length * 0.09) + i * w * 0.06); stroke(ctx, P.grey, 1.5); }
+  ctx.restore();
+}
+export function cobweb(ctx, x, y, r, corner = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(corner * Math.PI / 2); ctx.strokeStyle = 'rgba(240,240,240,0.85)'; ctx.lineWidth = 1.5;
+  for (let i = 0; i <= 5; i++) { const a = i / 5 * Math.PI / 2; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(Math.cos(a) * r, Math.sin(a) * r); ctx.stroke(); }
+  for (let j = 1; j <= 4; j++) { ctx.beginPath(); for (let i = 0; i <= 5; i++) { const a = i / 5 * Math.PI / 2, rr = r * j / 4.3; i ? ctx.quadraticCurveTo(Math.cos(a - 0.15) * rr * 0.85, Math.sin(a - 0.15) * rr * 0.85, Math.cos(a) * rr, Math.sin(a) * rr) : ctx.moveTo(Math.cos(a) * rr, Math.sin(a) * rr); } ctx.stroke(); }
+  ctx.restore();
+}
+
 // ---------- colour util ----------
 export function shade(hex, k) {
   if (!hex.startsWith('#')) return hex;
