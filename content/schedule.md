@@ -25,6 +25,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-11-28 Sat | 8:00 PM | Sun Nov 29, 9:00 AM | TikTok | A rocket scientist invented this toy by accident in his bathroom. | content/posts/2026-11-21-super-soaker-ottoman.md | ready |
 | 2026-11-29 Sun | 7:00 PM | Mon Nov 30, 8:00 AM | Instagram Reels | He worked on NASA missions. Then a bathroom sink test changed everything. | content/posts/2026-11-21-super-soaker-ottoman.md | ready |
 | 2026-11-29 Sun | 8:00 PM | Mon Nov 30, 9:00 AM | Facebook Reels | A rocket scientist invented this toy by accident in his bathroom. | content/posts/2026-11-21-super-soaker-ottoman.md | ready |
+| 2026-11-30 Mon | 7:00 PM | Tue Dec 1, 8:00 AM | YouTube Shorts | A 137-Year-Old Company Started With Playing Cards | content/posts/2026-11-21-nintendo-ottoman.md | ready |
+| 2026-11-30 Mon | 8:00 PM | Tue Dec 1, 9:00 AM | TikTok | Nintendo is 137 years old, and it started with playing cards. | content/posts/2026-11-21-nintendo-ottoman.md | ready |
+| 2026-12-01 Tue | 7:00 PM | Wed Dec 2, 8:00 AM | Instagram Reels | A card shop, a taxi company, and instant rice came first | content/posts/2026-11-21-nintendo-ottoman.md | ready |
+| 2026-12-01 Tue | 8:00 PM | Wed Dec 2, 9:00 AM | Facebook Reels | Nintendo is 137 years old, and it started with playing cards. | content/posts/2026-11-21-nintendo-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
