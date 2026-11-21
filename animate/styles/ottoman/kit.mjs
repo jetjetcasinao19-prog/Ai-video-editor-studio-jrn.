@@ -501,6 +501,12 @@ function head(ctx, x, y, o) {
     poly(ctx, [[-12, -20], [-8, -56], [12, -56], [16, -20]], o.hatColor || P.verm, P.ink, 1.5);
     ctx.beginPath(); ctx.moveTo(-8, -46); ctx.lineTo(12, -46); stroke(ctx, P.goldLight, 3);
     circle(ctx, 2, -60, 5, P.goldLight, P.ink, 1);
+  } else if (hat === 'longhair') { // no hat: long hair down to the shoulders
+    const hc = o.hair || '#1a1a1a';
+    ctx.beginPath(); ctx.moveTo(-16, -6); ctx.quadraticCurveTo(-26, 30, -20, 58); ctx.lineTo(-6, 52); ctx.quadraticCurveTo(-12, 20, -8, -4); ctx.closePath(); fillStroke(ctx, hc, P.ink, 1.2);
+    ctx.beginPath(); ctx.moveTo(18, -4); ctx.quadraticCurveTo(26, 30, 22, 56); ctx.lineTo(12, 50); ctx.quadraticCurveTo(16, 20, 14, -2); ctx.closePath(); fillStroke(ctx, hc, P.ink, 1.2);
+    ctx.beginPath(); ctx.ellipse(2, -10, 20, 14, 0, Math.PI, TAU); fillStroke(ctx, hc, P.ink, 1.2);
+    if (o.eyePaint) for (const ex of [-3, 9]) { ctx.beginPath(); ctx.moveTo(ex, -12); ctx.lineTo(ex, 4); stroke(ctx, P.ink, 1.6); }
   } else if (hat === 'stovepipe') { // tall black top hat
     rect(ctx, -14, -62, 32, 46, P.ink, P.ink, 1.5); rect(ctx, -22, -18, 48, 6, P.ink, P.ink, 1.5);
     ctx.beginPath(); ctx.moveTo(-14, -26); ctx.lineTo(18, -26); stroke(ctx, '#5a4a3a', 3);
@@ -1203,6 +1209,76 @@ export function cobweb(ctx, x, y, r, corner = 0) {
   ctx.save(); ctx.translate(x, y); ctx.rotate(corner * Math.PI / 2); ctx.strokeStyle = 'rgba(240,240,240,0.85)'; ctx.lineWidth = 1.5;
   for (let i = 0; i <= 5; i++) { const a = i / 5 * Math.PI / 2; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(Math.cos(a) * r, Math.sin(a) * r); ctx.stroke(); }
   for (let j = 1; j <= 4; j++) { ctx.beginPath(); for (let i = 0; i <= 5; i++) { const a = i / 5 * Math.PI / 2, rr = r * j / 4.3; i ? ctx.quadraticCurveTo(Math.cos(a - 0.15) * rr * 0.85, Math.sin(a - 0.15) * rr * 0.85, Math.cos(a) * rr, Math.sin(a) * rr) : ctx.moveTo(Math.cos(a) * rr, Math.sin(a) * rr); } ctx.stroke(); }
+  ctx.restore();
+}
+
+// ---------- hills, signs & the movies ----------
+// Big block letters standing on a hillside on poles. f(i) → { show 0..1, tilt, drop, dx, lit, color }.
+export function hillLetters(ctx, x, y, size, text, f = () => ({}), t = 0) {
+  ctx.save(); ctx.font = `900 ${size}px Deco`; ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'center';
+  const gap = size * 0.08, widths = [...text].map(ch => ctx.measureText(ch).width), total = widths.reduce((a, b) => a + b, 0) + gap * (text.length - 1);
+  let cx = x - total / 2;
+  [...text].forEach((ch, i) => {
+    const o = { show: 1, tilt: 0, drop: 0, dx: 0, lit: 0, color: P.white, ...f(i) }, w = widths[i];
+    const lx = cx + w / 2 + o.dx, ly = y + o.drop; cx += w + gap;
+    if (o.show <= 0) return;
+    // poles behind each letter
+    ctx.save(); ctx.globalAlpha *= clamp(o.show);
+    for (const px of [-w * 0.3, w * 0.3]) { ctx.beginPath(); ctx.moveTo(lx + px, ly - size * 0.3); ctx.lineTo(lx + px, ly + size * 0.25); stroke(ctx, P.brown, Math.max(2, size * 0.04)); }
+    if (o.lit > 0) { const g = ctx.createRadialGradient(lx, ly - size * 0.35, 2, lx, ly - size * 0.35, size * 0.9); g.addColorStop(0, `rgba(255,240,170,${0.55 * o.lit})`); g.addColorStop(1, 'rgba(255,240,170,0)'); ctx.fillStyle = g; ctx.fillRect(lx - size, ly - size * 1.3, size * 2, size * 2); }
+    ctx.translate(lx, ly); ctx.rotate(o.tilt); ctx.scale(1, clamp(o.show));
+    ctx.lineWidth = Math.max(3, size * 0.08); ctx.strokeStyle = P.ink; ctx.lineJoin = 'round'; ctx.strokeText(ch, 0, 0);
+    ctx.fillStyle = o.lit > 0.5 ? '#fff8dc' : o.color; ctx.fillText(ch, 0, 0);
+    if (o.lit > 0) { ctx.globalAlpha *= o.lit; const R = rng(i + 3); for (let k = 0; k < 7; k++) { const bx = (R() - 0.5) * w * 0.8, by = -R() * size * 0.7; circle(ctx, bx, by, Math.max(3, size * 0.06), 0.5 + 0.5 * Math.sin(t * 9 + k + i) > 0.3 ? '#fff3a8' : P.ochre, P.goldDeep, 1); } }
+    ctx.restore();
+  });
+  ctx.restore();
+}
+export function palm(ctx, x, base, h, t = 0, seed = 1) {
+  ctx.save(); ctx.translate(x, base);
+  const lean = Math.sin(seed) * 0.12, sway = Math.sin(t * 1.2 + seed) * 0.04;
+  ctx.beginPath(); ctx.moveTo(-8, 0); ctx.quadraticCurveTo(h * lean, -h * 0.5, h * (lean + sway) - 4, -h); ctx.lineTo(h * (lean + sway) + 4, -h); ctx.quadraticCurveTo(h * lean + 10, -h * 0.5, 8, 0); ctx.closePath(); fillStroke(ctx, P.brownLight, P.ink, 1.8);
+  for (let i = 1; i < 10; i++) { const yy = -h * i / 10, xx = h * lean * Math.sin(i / 10 * Math.PI / 2); ctx.beginPath(); ctx.moveTo(xx - 7, yy); ctx.lineTo(xx + 7, yy + 4); stroke(ctx, P.brown, 1.3); }
+  const tx = h * (lean + sway), ty = -h;
+  for (let i = 0; i < 7; i++) { const a = -Math.PI / 2 + (i - 3) * 0.55 + sway * 3, L = h * 0.32; ctx.beginPath(); ctx.moveTo(tx, ty); ctx.quadraticCurveTo(tx + Math.cos(a) * L * 0.6, ty + Math.sin(a) * L * 0.6 - 16, tx + Math.cos(a) * L, ty + Math.sin(a) * L + L * 0.35); ctx.quadraticCurveTo(tx + Math.cos(a) * L * 0.5, ty + Math.sin(a) * L * 0.4, tx, ty); fillStroke(ctx, i % 2 ? P.green : P.greenDark, P.ink, 1.4); }
+  ctx.restore();
+}
+export function hourglass(ctx, x, y, s = 1, k = 0.5, rot = 0) { // k = share of sand already fallen
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
+  rect(ctx, -60, -110, 120, 14, P.brownLight, P.ink, 2); rect(ctx, -60, 96, 120, 14, P.brownLight, P.ink, 2);
+  ctx.beginPath(); ctx.moveTo(-46, -96); ctx.quadraticCurveTo(-46, -20, -6, 0); ctx.quadraticCurveTo(-46, 20, -46, 96); ctx.lineTo(46, 96); ctx.quadraticCurveTo(46, 20, 6, 0); ctx.quadraticCurveTo(46, -20, 46, -96); ctx.closePath();
+  ctx.save(); ctx.clip(); ctx.fillStyle = 'rgba(210,235,240,0.6)'; ctx.fillRect(-50, -100, 100, 200);
+  ctx.fillStyle = P.ochre; ctx.fillRect(-50, -96 + 90 * clamp(k), 100, 92 * (1 - clamp(k))); ctx.fillRect(-50, 96 - 92 * clamp(k), 100, 92 * clamp(k));
+  if (k > 0 && k < 1) ctx.fillRect(-2, 0, 4, 96);
+  ctx.restore(); stroke(ctx, P.ink, 2.5);
+  for (const sx of [-54, 54]) { ctx.beginPath(); ctx.moveTo(sx, -96); ctx.lineTo(sx, 96); stroke(ctx, P.brown, 6); }
+  ctx.restore();
+}
+export function searchlights(ctx, x, y, W, H, t = 0, n = 4, a = 1) {
+  ctx.save(); ctx.globalAlpha *= a;
+  for (let i = 0; i < n; i++) { const ang = -Math.PI / 2 + Math.sin(t * 0.8 + i * 1.7) * 0.6, L = H * 1.3; ctx.beginPath(); ctx.moveTo(x + (i - (n - 1) / 2) * 60, y); ctx.lineTo(x + Math.cos(ang - 0.06) * L, y + Math.sin(ang - 0.06) * L); ctx.lineTo(x + Math.cos(ang + 0.06) * L, y + Math.sin(ang + 0.06) * L); ctx.closePath(); const g = ctx.createLinearGradient(x, y, x + Math.cos(ang) * L, y + Math.sin(ang) * L); g.addColorStop(0, 'rgba(255,248,200,0.55)'); g.addColorStop(1, 'rgba(255,248,200,0)'); ctx.fillStyle = g; ctx.fill(); }
+  ctx.restore();
+}
+export function filmReel(ctx, x, y, r, rot = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot);
+  circle(ctx, 0, 0, r, P.steel, P.ink, 2.5); circle(ctx, 0, 0, r * 0.2, P.goldLight, P.ink, 1.5);
+  for (let i = 0; i < 5; i++) { const a = i / 5 * TAU; circle(ctx, Math.cos(a) * r * 0.55, Math.sin(a) * r * 0.55, r * 0.2, '#2a2f45', P.ink, 1.5); }
+  ctx.restore();
+}
+export function clapper(ctx, x, y, s = 1, open = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  rect(ctx, -90, -40, 180, 120, '#1a1a1a', P.ink, 2);
+  ctx.fillStyle = P.white; ctx.font = '700 18px Fell'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle'; ctx.fillText('SCENE  1', -76, -10); ctx.fillText('TAKE   1', -76, 20); ctx.fillText('ROLL   1', -76, 50);
+  ctx.save(); ctx.translate(-90, -40); ctx.rotate(-open * 0.5);
+  rect(ctx, 0, -28, 180, 28, '#1a1a1a', P.ink, 2); for (let i = 0; i < 6; i++) poly(ctx, [[i * 30 + 4, -28], [i * 30 + 18, -28], [i * 30 + 8, 0], [i * 30 - 6, 0]], P.white, null);
+  ctx.restore();
+  ctx.restore();
+}
+export function guitar(ctx, x, y, s = 1, rot = 0, color = P.verm) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
+  ctx.beginPath(); ctx.moveTo(-40, -30); ctx.bezierCurveTo(-70, -40, -80, 30, -40, 34); ctx.bezierCurveTo(-20, 40, -10, 20, 10, 24); ctx.bezierCurveTo(40, 30, 40, -20, 10, -18); ctx.bezierCurveTo(-10, -16, -20, -26, -40, -30); ctx.closePath(); fillStroke(ctx, color, P.ink, 2);
+  rect(ctx, 10, -6, 130, 12, P.brown, P.ink, 1.5); rect(ctx, 136, -12, 24, 24, P.ink, P.ink, 1);
+  for (let i = 0; i < 4; i++) { ctx.beginPath(); ctx.moveTo(-30, -6 + i * 4); ctx.lineTo(140, -6 + i * 4); stroke(ctx, P.goldLight, 0.8); }
   ctx.restore();
 }
 
