@@ -69,6 +69,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-12-18 Fri | 8:00 PM | Sat Dec 19, 9:00 AM | TikTok | LEGO started with a carpenter who was running out of work. | content/posts/2026-11-21-lego-ottoman.md | ready |
 | 2026-12-19 Sat | 7:00 PM | Sun Dec 20, 8:00 AM | Instagram Reels | LEGO started with a carpenter who was running out of work. | content/posts/2026-11-21-lego-ottoman.md | ready |
 | 2026-12-19 Sat | 8:00 PM | Sun Dec 20, 9:00 AM | Facebook Reels | LEGO started with a carpenter who was running out of work. | content/posts/2026-11-21-lego-ottoman.md | ready |
+| 2026-12-20 Sun | 7:00 PM | Mon Dec 21, 8:00 AM | YouTube Shorts | The Nike Swoosh Cost $35 | content/posts/2026-11-21-nike-swoosh-ottoman.md | ready |
+| 2026-12-20 Sun | 8:00 PM | Mon Dec 21, 9:00 AM | TikTok | The Nike swoosh cost $35. | content/posts/2026-11-21-nike-swoosh-ottoman.md | ready |
+| 2026-12-21 Mon | 7:00 PM | Tue Dec 22, 8:00 AM | Instagram Reels | The Nike swoosh cost $35. | content/posts/2026-11-21-nike-swoosh-ottoman.md | ready |
+| 2026-12-21 Mon | 8:00 PM | Tue Dec 22, 9:00 AM | Facebook Reels | The Nike swoosh cost $35. | content/posts/2026-11-21-nike-swoosh-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
