@@ -56,7 +56,9 @@ const red = c => c[0] > 150 && c[1] < 90 && c[2] < 90;
 const dark = c => c[0] < 60 && c[1] < 60 && c[2] < 60;
 
 (async () => {
-  const browser = await chromium.launch({ args: ['--autoplay-policy=no-user-gesture-required'] });
+  // The test video is H.264/AAC MP4 (like phone videos). Playwright's own Chromium on
+  // Linux cannot play H.264, so CI runs this in Google Chrome (PW_CHANNEL=chrome).
+  const browser = await chromium.launch({ channel: process.env.PW_CHANNEL || undefined, args: ['--autoplay-policy=no-user-gesture-required'] });
   const context = await browser.newContext({ ...devices['Pixel 7'], acceptDownloads: true });
   const page = await context.newPage();
   const errors = [];
