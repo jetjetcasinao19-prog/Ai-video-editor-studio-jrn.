@@ -40,7 +40,9 @@ jobs:
         run: node tests/prompt.test.js
       - name: Prompt Studio test
         run: node tests/studio.test.js
-      - name: Edit this (in the app) test
+      - name: Edit this (in the app) test (Google Chrome: the test video is H.264 MP4)
+        env:
+          PW_CHANNEL: chrome
         run: node tests/edit-this.test.js
       - name: Google AI (Gemini API) test
         run: node tests/google-ai.test.js
