@@ -1,0 +1,571 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "OK is one of the most used words on earth, and it started as a joke. 1830s, Boston. Newspapers have a trend. Joke abbreviations of misspelled words. On March 23rd, 1839, the Boston Morning Post prints OK, short for All Correct, spelled wrong on purpose. Most of these jokes died fast. OK didn't. In 1840, President Martin Van Buren runs for re-election. His nickname? Old Kinderhook, after his hometown in New York. His fans form OK Clubs. Van Buren loses, but the word wins. In the 1960s, a language researcher traced it back to that one newspaper joke. A silly spelling joke that the whole world now says. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "OK",
+   "start": 0.06,
+   "end": 0.34
+  },
+  {
+   "w": "is",
+   "start": 0.34,
+   "end": 0.76
+  },
+  {
+   "w": "one",
+   "start": 0.76,
+   "end": 0.94
+  },
+  {
+   "w": "of",
+   "start": 0.94,
+   "end": 1.08
+  },
+  {
+   "w": "the",
+   "start": 1.08,
+   "end": 1.18
+  },
+  {
+   "w": "most",
+   "start": 1.18,
+   "end": 1.52
+  },
+  {
+   "w": "used",
+   "start": 1.52,
+   "end": 1.96
+  },
+  {
+   "w": "words",
+   "start": 1.96,
+   "end": 2.4
+  },
+  {
+   "w": "on",
+   "start": 2.4,
+   "end": 2.76
+  },
+  {
+   "w": "earth,",
+   "start": 2.76,
+   "end": 3.84
+  },
+  {
+   "w": "and",
+   "start": 3.84,
+   "end": 3.94
+  },
+  {
+   "w": "it",
+   "start": 3.94,
+   "end": 4.06
+  },
+  {
+   "w": "started",
+   "start": 4.06,
+   "end": 4.5
+  },
+  {
+   "w": "as",
+   "start": 4.5,
+   "end": 5.24
+  },
+  {
+   "w": "a",
+   "start": 5.24,
+   "end": 5.4
+  },
+  {
+   "w": "joke.",
+   "start": 5.4,
+   "end": 5.8
+  },
+  {
+   "w": "1830s,",
+   "start": 6.9,
+   "end": 7.92
+  },
+  {
+   "w": "Boston.",
+   "start": 7.92,
+   "end": 9
+  },
+  {
+   "w": "Newspapers",
+   "start": 9.52,
+   "end": 10.04
+  },
+  {
+   "w": "have",
+   "start": 10.04,
+   "end": 10.28
+  },
+  {
+   "w": "a",
+   "start": 10.28,
+   "end": 10.48
+  },
+  {
+   "w": "trend.",
+   "start": 10.48,
+   "end": 11.28
+  },
+  {
+   "w": "Joke",
+   "start": 11.42,
+   "end": 11.68
+  },
+  {
+   "w": "abbreviations",
+   "start": 11.68,
+   "end": 12.5
+  },
+  {
+   "w": "of",
+   "start": 12.5,
+   "end": 12.82
+  },
+  {
+   "w": "misspelled",
+   "start": 12.82,
+   "end": 13.36
+  },
+  {
+   "w": "words.",
+   "start": 13.36,
+   "end": 14.4
+  },
+  {
+   "w": "On",
+   "start": 14.62,
+   "end": 14.76
+  },
+  {
+   "w": "March",
+   "start": 14.76,
+   "end": 15.08
+  },
+  {
+   "w": "23rd,",
+   "start": 15.08,
+   "end": 15.86
+  },
+  {
+   "w": "1839,",
+   "start": 15.86,
+   "end": 17.3
+  },
+  {
+   "w": "the",
+   "start": 17.3,
+   "end": 17.4
+  },
+  {
+   "w": "Boston",
+   "start": 17.4,
+   "end": 17.8
+  },
+  {
+   "w": "Morning",
+   "start": 17.8,
+   "end": 18.08
+  },
+  {
+   "w": "Post",
+   "start": 18.08,
+   "end": 18.46
+  },
+  {
+   "w": "prints",
+   "start": 18.46,
+   "end": 18.92
+  },
+  {
+   "w": "OK,",
+   "start": 18.92,
+   "end": 20.42
+  },
+  {
+   "w": "short",
+   "start": 20.42,
+   "end": 20.62
+  },
+  {
+   "w": "for",
+   "start": 20.62,
+   "end": 20.94
+  },
+  {
+   "w": "All",
+   "start": 20.94,
+   "end": 21.6
+  },
+  {
+   "w": "Correct,",
+   "start": 21.6,
+   "end": 23
+  },
+  {
+   "w": "spelled",
+   "start": 23,
+   "end": 23.16
+  },
+  {
+   "w": "wrong",
+   "start": 23,
+   "end": 23.58
+  },
+  {
+   "w": "on",
+   "start": 23.58,
+   "end": 23.94
+  },
+  {
+   "w": "purpose.",
+   "start": 23.94,
+   "end": 24.34
+  },
+  {
+   "w": "Most",
+   "start": 25.52,
+   "end": 25.76
+  },
+  {
+   "w": "of",
+   "start": 25.76,
+   "end": 25.88
+  },
+  {
+   "w": "these",
+   "start": 25.88,
+   "end": 26.08
+  },
+  {
+   "w": "jokes",
+   "start": 26.08,
+   "end": 26.42
+  },
+  {
+   "w": "died",
+   "start": 26.42,
+   "end": 26.8
+  },
+  {
+   "w": "fast.",
+   "start": 26.8,
+   "end": 27.78
+  },
+  {
+   "w": "OK",
+   "start": 28.02,
+   "end": 28.42
+  },
+  {
+   "w": "didn't.",
+   "start": 28.42,
+   "end": 29.22
+  },
+  {
+   "w": "In",
+   "start": 30,
+   "end": 30.12
+  },
+  {
+   "w": "1840,",
+   "start": 30.12,
+   "end": 31.34
+  },
+  {
+   "w": "President",
+   "start": 31.34,
+   "end": 31.48
+  },
+  {
+   "w": "Martin",
+   "start": 31.48,
+   "end": 32.02
+  },
+  {
+   "w": "Van",
+   "start": 32.02,
+   "end": 32.32
+  },
+  {
+   "w": "Buren",
+   "start": 32.32,
+   "end": 32.4
+  },
+  {
+   "w": "runs",
+   "start": 32.4,
+   "end": 32.86
+  },
+  {
+   "w": "for",
+   "start": 32.86,
+   "end": 33.12
+  },
+  {
+   "w": "re-election.",
+   "start": 33.12,
+   "end": 33.58
+  },
+  {
+   "w": "His",
+   "start": 34.22,
+   "end": 34.36
+  },
+  {
+   "w": "nickname?",
+   "start": 34.36,
+   "end": 35.28
+  },
+  {
+   "w": "Old",
+   "start": 35.28,
+   "end": 35.7
+  },
+  {
+   "w": "Kinderhook,",
+   "start": 35.7,
+   "end": 36.72
+  },
+  {
+   "w": "after",
+   "start": 36.72,
+   "end": 36.92
+  },
+  {
+   "w": "his",
+   "start": 36.92,
+   "end": 37.12
+  },
+  {
+   "w": "hometown",
+   "start": 37.12,
+   "end": 37.56
+  },
+  {
+   "w": "in",
+   "start": 37.56,
+   "end": 37.94
+  },
+  {
+   "w": "New",
+   "start": 37.94,
+   "end": 38.14
+  },
+  {
+   "w": "York.",
+   "start": 38.14,
+   "end": 38.92
+  },
+  {
+   "w": "His",
+   "start": 39.14,
+   "end": 39.28
+  },
+  {
+   "w": "fans",
+   "start": 39.28,
+   "end": 39.7
+  },
+  {
+   "w": "form",
+   "start": 39.7,
+   "end": 40.12
+  },
+  {
+   "w": "OK",
+   "start": 40.12,
+   "end": 40.86
+  },
+  {
+   "w": "Clubs.",
+   "start": 40.86,
+   "end": 41.92
+  },
+  {
+   "w": "Van",
+   "start": 42.3,
+   "end": 42.48
+  },
+  {
+   "w": "Buren",
+   "start": 42.48,
+   "end": 42.78
+  },
+  {
+   "w": "loses,",
+   "start": 42.78,
+   "end": 43.9
+  },
+  {
+   "w": "but",
+   "start": 43.9,
+   "end": 44
+  },
+  {
+   "w": "the",
+   "start": 44,
+   "end": 44.24
+  },
+  {
+   "w": "word",
+   "start": 44.24,
+   "end": 44.72
+  },
+  {
+   "w": "wins.",
+   "start": 44.72,
+   "end": 45.22
+  },
+  {
+   "w": "In",
+   "start": 46.24,
+   "end": 46.34
+  },
+  {
+   "w": "the",
+   "start": 46.34,
+   "end": 46.46
+  },
+  {
+   "w": "1960s,",
+   "start": 46.46,
+   "end": 47.34
+  },
+  {
+   "w": "a",
+   "start": 47.34,
+   "end": 47.68
+  },
+  {
+   "w": "language",
+   "start": 47.68,
+   "end": 48.08
+  },
+  {
+   "w": "researcher",
+   "start": 48.08,
+   "end": 48.54
+  },
+  {
+   "w": "traced",
+   "start": 48.54,
+   "end": 48.94
+  },
+  {
+   "w": "it",
+   "start": 48.94,
+   "end": 49.12
+  },
+  {
+   "w": "back",
+   "start": 49.12,
+   "end": 49.32
+  },
+  {
+   "w": "to",
+   "start": 49.32,
+   "end": 49.54
+  },
+  {
+   "w": "that",
+   "start": 49.54,
+   "end": 49.7
+  },
+  {
+   "w": "one",
+   "start": 49.7,
+   "end": 50.08
+  },
+  {
+   "w": "newspaper",
+   "start": 50.08,
+   "end": 50.66
+  },
+  {
+   "w": "joke.",
+   "start": 50.66,
+   "end": 51.52
+  },
+  {
+   "w": "A",
+   "start": 51.66,
+   "end": 51.76
+  },
+  {
+   "w": "silly",
+   "start": 51.76,
+   "end": 52.18
+  },
+  {
+   "w": "spelling",
+   "start": 52.18,
+   "end": 52.64
+  },
+  {
+   "w": "joke",
+   "start": 52.64,
+   "end": 53.04
+  },
+  {
+   "w": "that",
+   "start": 53.04,
+   "end": 53.76
+  },
+  {
+   "w": "the",
+   "start": 53.76,
+   "end": 53.9
+  },
+  {
+   "w": "whole",
+   "start": 53.9,
+   "end": 54.22
+  },
+  {
+   "w": "world",
+   "start": 54.22,
+   "end": 54.76
+  },
+  {
+   "w": "now",
+   "start": 54.76,
+   "end": 55.22
+  },
+  {
+   "w": "says.",
+   "start": 55.22,
+   "end": 55.68
+  },
+  {
+   "w": "Every",
+   "start": 56.76,
+   "end": 57.02
+  },
+  {
+   "w": "legend",
+   "start": 57.02,
+   "end": 57.5
+  },
+  {
+   "w": "has",
+   "start": 57.5,
+   "end": 58
+  },
+  {
+   "w": "a",
+   "start": 58,
+   "end": 58.08
+  },
+  {
+   "w": "beginning.",
+   "start": 58.08,
+   "end": 58.88
+  }
+ ]
+}

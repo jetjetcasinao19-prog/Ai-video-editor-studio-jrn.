@@ -1415,6 +1415,31 @@ export function gableHouse(ctx, x, base, w, h, wall = P.ochreLight) {
   ctx.restore();
 }
 
+// ---------- words & parades ----------
+export function speechBubble(ctx, x, y, text, size = 34, tail = 1, fill = P.paperLight) {
+  ctx.save(); ctx.font = `900 ${size}px Deco`;
+  const w = ctx.measureText(text).width + size * 1.2, h = size * 1.6;
+  ctx.beginPath(); ctx.moveTo(x - w / 2 + h / 2, y - h / 2); ctx.lineTo(x + w / 2 - h / 2, y - h / 2); ctx.arc(x + w / 2 - h / 2, y, h / 2, -Math.PI / 2, Math.PI / 2); ctx.lineTo(x + tail * w * 0.15 + 10, y + h / 2); ctx.lineTo(x + tail * w * 0.05, y + h / 2 + size * 0.6); ctx.lineTo(x + tail * w * 0.1 - 10, y + h / 2); ctx.lineTo(x - w / 2 + h / 2, y + h / 2); ctx.arc(x - w / 2 + h / 2, y, h / 2, Math.PI / 2, Math.PI * 1.5); ctx.closePath();
+  fillStroke(ctx, fill, P.ink, 2.5);
+  ctx.fillStyle = P.verm; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(text, x, y + size * 0.05);
+  ctx.restore();
+}
+export function magnifier(ctx, x, y, r, rot = 0.7) {
+  ctx.save(); ctx.translate(x, y);
+  ctx.save(); ctx.rotate(rot); rect(ctx, r * 0.95, -r * 0.12, r * 1.2, r * 0.24, P.brown, P.ink, 2); ctx.restore();
+  circle(ctx, 0, 0, r, 'rgba(210,235,240,0.25)', P.goldDark, Math.max(4, r * 0.12));
+  ctx.beginPath(); ctx.arc(0, 0, r * 0.75, Math.PI * 1.1, Math.PI * 1.45); stroke(ctx, 'rgba(255,255,255,0.8)', Math.max(2, r * 0.06));
+  ctx.restore();
+}
+export function drum(ctx, x, y, s = 1, t = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  ctx.beginPath(); ctx.ellipse(0, -30, 40, 12, 0, 0, TAU); fillStroke(ctx, P.paperLight, P.ink, 2);
+  ctx.beginPath(); ctx.moveTo(-40, -30); ctx.lineTo(-40, 20); ctx.ellipse(0, 20, 40, 12, 0, Math.PI, 0, true); ctx.lineTo(40, -30); fillStroke(ctx, P.verm, P.ink, 2);
+  for (let i = 0; i < 5; i++) { ctx.beginPath(); ctx.moveTo(-40 + i * 20, -26); ctx.lineTo(-30 + i * 20, 24); stroke(ctx, P.goldLight, 1.5); }
+  for (const sd of [-1, 1]) { ctx.save(); ctx.translate(sd * 20, -40); ctx.rotate(sd * (0.4 + 0.3 * Math.sin(t * 12 + sd))); rect(ctx, -2, -40, 4, 40, P.brown, P.ink, 1); ctx.restore(); }
+  ctx.restore();
+}
+
 // ---------- colour util ----------
 export function shade(hex, k) {
   if (!hex.startsWith('#')) return hex;
