@@ -469,6 +469,7 @@ function head(ctx, x, y, o) {
     ctx.beginPath(); ctx.moveTo(-12, 2); ctx.quadraticCurveTo(-8, L, 6, L + 4); ctx.quadraticCurveTo(18, L - 4, 17, 2); ctx.quadraticCurveTo(6, 12, -12, 2);
     fillStroke(ctx, o.beardColor || '#3a2a20', P.ink, 1.3);
   }
+  if (o.stringTie) { ctx.beginPath(); ctx.moveTo(-6, 24); ctx.lineTo(0, 21); ctx.lineTo(6, 24); ctx.lineTo(6, 18); ctx.lineTo(0, 21); ctx.lineTo(-6, 18); ctx.closePath(); fillStroke(ctx, P.ink, P.ink, 1); ctx.beginPath(); ctx.moveTo(-2, 22); ctx.lineTo(-4, 34); ctx.moveTo(2, 22); ctx.lineTo(4, 34); stroke(ctx, P.ink, 1.5); }
   // almond eyes + arched brows
   for (const ex of [-3, 9]) {
     ctx.beginPath(); ctx.moveTo(ex - 4, -3); ctx.quadraticCurveTo(ex, -6, ex + 4, -3); ctx.quadraticCurveTo(ex, -1, ex - 4, -3); fillStroke(ctx, P.ink, P.ink, 0.8);
@@ -480,7 +481,7 @@ function head(ctx, x, y, o) {
   ctx.beginPath();
   if (mood === 'happy') ctx.arc(4, 9, 4, 0.1 * Math.PI, 0.9 * Math.PI); else if (mood === 'sad') ctx.arc(4, 15, 4, 1.15 * Math.PI, 1.85 * Math.PI); else { ctx.moveTo(1, 12); ctx.lineTo(7, 12); }
   stroke(ctx, P.vermDark, 1.6);
-  if (o.mustache) { ctx.beginPath(); ctx.moveTo(-3, 9); ctx.quadraticCurveTo(4, 6, 11, 9); stroke(ctx, '#3a2a20', 2.5); }
+  if (o.mustache) { ctx.beginPath(); ctx.moveTo(-3, 9); ctx.quadraticCurveTo(4, 6, 11, 9); stroke(ctx, o.mustacheColor || '#3a2a20', 2.5); }
   if (o.glasses) { circle(ctx, -3, -3, 5, 'rgba(220,240,255,0.35)', P.ink, 1.3); circle(ctx, 9, -3, 5, 'rgba(220,240,255,0.35)', P.ink, 1.3); ctx.beginPath(); ctx.moveTo(2, -3); ctx.lineTo(4, -3); stroke(ctx, P.ink, 1.2); }
   // headwear
   const hat = o.hat || 'turban';
@@ -501,6 +502,8 @@ function head(ctx, x, y, o) {
     poly(ctx, [[-12, -20], [-8, -56], [12, -56], [16, -20]], o.hatColor || P.verm, P.ink, 1.5);
     ctx.beginPath(); ctx.moveTo(-8, -46); ctx.lineTo(12, -46); stroke(ctx, P.goldLight, 3);
     circle(ctx, 2, -60, 5, P.goldLight, P.ink, 1);
+  } else if (hat === 'shorthair') { // no hat: short swept hair
+    ctx.beginPath(); ctx.moveTo(-15, -2); ctx.quadraticCurveTo(-20, -24, 0, -22); ctx.quadraticCurveTo(22, -24, 18, -2); ctx.quadraticCurveTo(10, -14, -4, -12); ctx.quadraticCurveTo(-10, -10, -15, -2); ctx.closePath(); fillStroke(ctx, o.hair || '#3a2a20', P.ink, 1.2);
   } else if (hat === 'longhair') { // no hat: long hair down to the shoulders
     const hc = o.hair || '#1a1a1a';
     ctx.beginPath(); ctx.moveTo(-16, -6); ctx.quadraticCurveTo(-26, 30, -20, 58); ctx.lineTo(-6, 52); ctx.quadraticCurveTo(-12, 20, -8, -4); ctx.closePath(); fillStroke(ctx, hc, P.ink, 1.2);
@@ -1279,6 +1282,62 @@ export function guitar(ctx, x, y, s = 1, rot = 0, color = P.verm) {
   ctx.beginPath(); ctx.moveTo(-40, -30); ctx.bezierCurveTo(-70, -40, -80, 30, -40, 34); ctx.bezierCurveTo(-20, 40, -10, 20, 10, 24); ctx.bezierCurveTo(40, 30, 40, -20, 10, -18); ctx.bezierCurveTo(-10, -16, -20, -26, -40, -30); ctx.closePath(); fillStroke(ctx, color, P.ink, 2);
   rect(ctx, 10, -6, 130, 12, P.brown, P.ink, 1.5); rect(ctx, 136, -12, 24, 24, P.ink, P.ink, 1);
   for (let i = 0; i < 4; i++) { ctx.beginPath(); ctx.moveTo(-30, -6 + i * 4); ctx.lineTo(140, -6 + i * 4); stroke(ctx, P.goldLight, 0.8); }
+  ctx.restore();
+}
+
+// ---------- roadside & kitchen (fried chicken) ----------
+export function gasPump(ctx, x, base, s = 1, color = P.verm, glow = 0) {
+  ctx.save(); ctx.translate(x, base); ctx.scale(s, s);
+  rect(ctx, -34, -180, 68, 180, color, P.ink, 2.5);
+  rect(ctx, -24, -160, 48, 40, P.paperLight, P.ink, 1.5);
+  ctx.fillStyle = P.ink; ctx.font = '700 12px Fell'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('GAS', 0, -140);
+  rect(ctx, -10, -210, 20, 30, P.steel, P.ink, 1.5);
+  if (glow > 0) { const g = ctx.createRadialGradient(0, -236, 4, 0, -236, 60); g.addColorStop(0, `rgba(255,240,170,${0.7 * glow})`); g.addColorStop(1, 'rgba(255,240,170,0)'); ctx.fillStyle = g; ctx.fillRect(-60, -296, 120, 120); }
+  circle(ctx, 0, -236, 26, P.white, P.ink, 2); circle(ctx, 0, -236, 16, color, null);
+  ctx.beginPath(); ctx.moveTo(34, -100); ctx.quadraticCurveTo(70, -80, 56, -30); stroke(ctx, P.ink, 5);
+  ctx.restore();
+}
+export function drumstick(ctx, x, y, s = 1, rot = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
+  ctx.beginPath(); ctx.moveTo(-6, 10); ctx.lineTo(-4, 34); ctx.lineTo(4, 34); ctx.lineTo(6, 10); stroke(ctx, P.ink, 9); stroke(ctx, P.white, 6);
+  circle(ctx, -5, 36, 5, P.white, P.ink, 1.2); circle(ctx, 5, 36, 5, P.white, P.ink, 1.2);
+  const R = rng(3); ctx.beginPath();
+  for (let i = 0; i <= 14; i++) { const a = Math.PI * 0.75 + i / 14 * TAU * 0.75, rr = 22 * (0.9 + R() * 0.2); i ? ctx.lineTo(Math.cos(a) * rr * 0.8, -6 + Math.sin(a) * rr) : ctx.moveTo(Math.cos(a) * rr * 0.8, -6 + Math.sin(a) * rr); }
+  ctx.lineTo(8, 12); ctx.lineTo(-8, 12); ctx.closePath(); fillStroke(ctx, '#c47a32', P.ink, 1.8);
+  for (let i = 0; i < 6; i++) circle(ctx, -10 + (i % 3) * 9, -16 + Math.floor(i / 3) * 14, 2.5, '#9a5a20', null);
+  ctx.restore();
+}
+// Striped paper bucket heaped with chicken (no logo).
+export function bucket(ctx, x, y, s = 1, full = 1) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  if (full > 0) for (let i = 0; i < Math.ceil(5 * full); i++) drumstick(ctx, -44 + i * 22, -150 - (i % 2) * 14, 1.1, -0.6 + i * 0.3);
+  ctx.beginPath(); ctx.moveTo(-80, -140); ctx.lineTo(80, -140); ctx.lineTo(60, 0); ctx.lineTo(-60, 0); ctx.closePath();
+  ctx.save(); ctx.clip(); ctx.fillStyle = P.white; ctx.fillRect(-90, -150, 180, 160); ctx.fillStyle = P.verm; for (let i = -4; i < 5; i += 2) { ctx.beginPath(); ctx.moveTo(i * 18 - 9, -140); ctx.lineTo(i * 18 + 9, -140); ctx.lineTo(i * 14 + 7, 0); ctx.lineTo(i * 14 - 7, 0); ctx.closePath(); ctx.fill(); } ctx.restore();
+  ctx.beginPath(); ctx.moveTo(-80, -140); ctx.lineTo(80, -140); ctx.lineTo(60, 0); ctx.lineTo(-60, 0); ctx.closePath(); stroke(ctx, P.ink, 2.5);
+  rect(ctx, -82, -146, 164, 12, P.white, P.ink, 2);
+  ctx.restore();
+}
+// A bank check with an amount.
+export function bankCheck(ctx, x, y, w, rot = 0, amount = '$105.00', payee = '') {
+  const h = w * 0.42;
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot);
+  rect(ctx, -w / 2, -h / 2, w, h, '#dfeee0', P.ink, 2);
+  ctx.fillStyle = pattern(ctx, 'scales', '#dfeee0', '#c9e0cb', 16); ctx.fillRect(-w / 2 + 2, -h / 2 + 2, w - 4, h - 4);
+  ctx.fillStyle = P.ink; ctx.textAlign = 'left'; ctx.textBaseline = 'middle'; ctx.font = `700 ${Math.round(h * 0.12)}px Fell`;
+  ctx.fillText('PAY TO THE ORDER OF', -w * 0.45, -h * 0.18);
+  if (payee) { ctx.font = `700 ${Math.round(h * 0.14)}px GaramondItalic`; ctx.fillText(payee, -w * 0.1, -h * 0.18); }
+  rect(ctx, w * 0.12, -h * 0.4, w * 0.33, h * 0.24, P.white, P.ink, 1.5);
+  ctx.textAlign = 'center'; ctx.fillStyle = P.verm; ctx.font = `900 ${Math.round(h * 0.17)}px Deco`; ctx.fillText(amount, w * 0.285, -h * 0.28);
+  for (let i = 0; i < 2; i++) { ctx.beginPath(); ctx.moveTo(-w * 0.45, h * 0.08 + i * h * 0.18); ctx.lineTo(w * 0.42, h * 0.08 + i * h * 0.18); stroke(ctx, P.grey, 1.3); }
+  ctx.restore();
+}
+export function pressureCooker(ctx, x, base, s = 1, t = 0, steam = 1) {
+  ctx.save(); ctx.translate(x, base); ctx.scale(s, s);
+  ctx.beginPath(); ctx.moveTo(-70, -100); ctx.lineTo(70, -100); ctx.quadraticCurveTo(76, -10, 60, 0); ctx.lineTo(-60, 0); ctx.quadraticCurveTo(-76, -10, -70, -100); ctx.closePath(); fillStroke(ctx, P.steel, P.ink, 2.5);
+  ctx.beginPath(); ctx.ellipse(0, -100, 74, 18, 0, Math.PI, TAU); fillStroke(ctx, '#9aa7b6', P.ink, 2);
+  rect(ctx, -8, -136, 16, 20, P.ink, P.ink, 1); circle(ctx, 0, -140, 8, P.verm, P.ink, 1.5);
+  for (const sx of [-1, 1]) rect(ctx, sx * 70 - (sx < 0 ? 40 : 0), -84, 40, 14, P.ink, P.ink, 1);
+  if (steam > 0) for (let i = 0; i < 3; i++) { const q = (t * 0.8 + i / 3) % 1; ctx.save(); ctx.globalAlpha = (1 - q) * steam; cloud(ctx, 10 + q * 30, -170 - q * 100, 0.35 + q * 0.3, i + 60, P.white, P.grey); ctx.restore(); }
   ctx.restore();
 }
 

@@ -1,0 +1,591 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "At 65, he lost his business and was living on a $105 Social Security check. 1930s, Corbin, Kentucky. Harland Sanders serves fried chicken to travelers at his roadside service station. Then, in 1956, plans are announced for a new highway that will skip his town. Customers disappear. He sells the café. Most people would retire. Instead, he takes his recipe on the road. He drives from restaurant to restaurant, cooking for the owners. They pay him a few cents for every chicken they sell. It works. Restaurant after restaurant signs up. In 1964, he sells the company for $2 million. A man who started over at 65 became the face of Kentucky Fried Chicken. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "At",
+   "start": 0,
+   "end": 0.24
+  },
+  {
+   "w": "65,",
+   "start": 0.24,
+   "end": 1.42
+  },
+  {
+   "w": "he",
+   "start": 1.42,
+   "end": 1.48
+  },
+  {
+   "w": "lost",
+   "start": 1.48,
+   "end": 1.78
+  },
+  {
+   "w": "his",
+   "start": 1.78,
+   "end": 1.96
+  },
+  {
+   "w": "business",
+   "start": 1.96,
+   "end": 2.36
+  },
+  {
+   "w": "and",
+   "start": 2.36,
+   "end": 3.14
+  },
+  {
+   "w": "was",
+   "start": 3.14,
+   "end": 3.32
+  },
+  {
+   "w": "living",
+   "start": 3.32,
+   "end": 3.52
+  },
+  {
+   "w": "on",
+   "start": 3.52,
+   "end": 3.76
+  },
+  {
+   "w": "a $105",
+   "start": 3.76,
+   "end": 4.96
+  },
+  {
+   "w": "Social",
+   "start": 4.96,
+   "end": 5.78
+  },
+  {
+   "w": "Security",
+   "start": 5.78,
+   "end": 6.34
+  },
+  {
+   "w": "check.",
+   "start": 6.34,
+   "end": 7.22
+  },
+  {
+   "w": "1930s,",
+   "start": 7.8,
+   "end": 9.3
+  },
+  {
+   "w": "Corbin,",
+   "start": 9.3,
+   "end": 9.66
+  },
+  {
+   "w": "Kentucky.",
+   "start": 9.66,
+   "end": 10.52
+  },
+  {
+   "w": "Harland",
+   "start": 10.9,
+   "end": 11.24
+  },
+  {
+   "w": "Sanders",
+   "start": 11.24,
+   "end": 11.86
+  },
+  {
+   "w": "serves",
+   "start": 11.86,
+   "end": 12.38
+  },
+  {
+   "w": "fried",
+   "start": 12.38,
+   "end": 12.8
+  },
+  {
+   "w": "chicken",
+   "start": 12.8,
+   "end": 13.14
+  },
+  {
+   "w": "to",
+   "start": 13.14,
+   "end": 13.36
+  },
+  {
+   "w": "travelers",
+   "start": 13.36,
+   "end": 13.72
+  },
+  {
+   "w": "at",
+   "start": 13.72,
+   "end": 14.1
+  },
+  {
+   "w": "his",
+   "start": 14.1,
+   "end": 14.26
+  },
+  {
+   "w": "roadside",
+   "start": 14.26,
+   "end": 14.8
+  },
+  {
+   "w": "service",
+   "start": 14.8,
+   "end": 15.16
+  },
+  {
+   "w": "station.",
+   "start": 15.16,
+   "end": 15.54
+  },
+  {
+   "w": "Then,",
+   "start": 16.34,
+   "end": 16.86
+  },
+  {
+   "w": "in",
+   "start": 16.86,
+   "end": 16.98
+  },
+  {
+   "w": "1956,",
+   "start": 16.98,
+   "end": 18.7
+  },
+  {
+   "w": "plans",
+   "start": 18.7,
+   "end": 19
+  },
+  {
+   "w": "are",
+   "start": 19,
+   "end": 19.14
+  },
+  {
+   "w": "announced",
+   "start": 19.14,
+   "end": 19.46
+  },
+  {
+   "w": "for",
+   "start": 19.46,
+   "end": 19.68
+  },
+  {
+   "w": "a",
+   "start": 19.68,
+   "end": 19.82
+  },
+  {
+   "w": "new",
+   "start": 19.82,
+   "end": 20.02
+  },
+  {
+   "w": "highway",
+   "start": 20.02,
+   "end": 20.46
+  },
+  {
+   "w": "that",
+   "start": 20.46,
+   "end": 20.8
+  },
+  {
+   "w": "will",
+   "start": 20.8,
+   "end": 20.94
+  },
+  {
+   "w": "skip",
+   "start": 20.94,
+   "end": 21.3
+  },
+  {
+   "w": "his",
+   "start": 21.3,
+   "end": 21.5
+  },
+  {
+   "w": "town.",
+   "start": 21.5,
+   "end": 22.32
+  },
+  {
+   "w": "Customers",
+   "start": 22.76,
+   "end": 23.1
+  },
+  {
+   "w": "disappear.",
+   "start": 23.1,
+   "end": 24.1
+  },
+  {
+   "w": "He",
+   "start": 24.38,
+   "end": 24.48
+  },
+  {
+   "w": "sells",
+   "start": 24.48,
+   "end": 24.8
+  },
+  {
+   "w": "the",
+   "start": 24.8,
+   "end": 24.96
+  },
+  {
+   "w": "café.",
+   "start": 24.96,
+   "end": 25.74
+  },
+  {
+   "w": "Most",
+   "start": 26.2,
+   "end": 26.4
+  },
+  {
+   "w": "people",
+   "start": 26.4,
+   "end": 26.7
+  },
+  {
+   "w": "would",
+   "start": 26.7,
+   "end": 26.88
+  },
+  {
+   "w": "retire.",
+   "start": 26.88,
+   "end": 27.8
+  },
+  {
+   "w": "Instead,",
+   "start": 27.86,
+   "end": 28.68
+  },
+  {
+   "w": "he",
+   "start": 28.68,
+   "end": 28.72
+  },
+  {
+   "w": "takes",
+   "start": 28.72,
+   "end": 29.02
+  },
+  {
+   "w": "his",
+   "start": 29.02,
+   "end": 29.2
+  },
+  {
+   "w": "recipe",
+   "start": 29.2,
+   "end": 29.6
+  },
+  {
+   "w": "on",
+   "start": 29.6,
+   "end": 30.02
+  },
+  {
+   "w": "the",
+   "start": 30.02,
+   "end": 30.22
+  },
+  {
+   "w": "road.",
+   "start": 30.22,
+   "end": 31.08
+  },
+  {
+   "w": "He",
+   "start": 31.36,
+   "end": 31.42
+  },
+  {
+   "w": "drives",
+   "start": 31.42,
+   "end": 31.86
+  },
+  {
+   "w": "from",
+   "start": 31.86,
+   "end": 32.08
+  },
+  {
+   "w": "restaurant",
+   "start": 32.08,
+   "end": 32.56
+  },
+  {
+   "w": "to",
+   "start": 32.56,
+   "end": 32.88
+  },
+  {
+   "w": "restaurant,",
+   "start": 32.88,
+   "end": 33.82
+  },
+  {
+   "w": "cooking",
+   "start": 33.82,
+   "end": 33.96
+  },
+  {
+   "w": "for",
+   "start": 33.96,
+   "end": 34.2
+  },
+  {
+   "w": "the",
+   "start": 34.2,
+   "end": 34.36
+  },
+  {
+   "w": "owners.",
+   "start": 34.36,
+   "end": 35.16
+  },
+  {
+   "w": "They",
+   "start": 35.48,
+   "end": 35.6
+  },
+  {
+   "w": "pay",
+   "start": 35.6,
+   "end": 35.82
+  },
+  {
+   "w": "him",
+   "start": 35.82,
+   "end": 35.98
+  },
+  {
+   "w": "a",
+   "start": 35.98,
+   "end": 36.12
+  },
+  {
+   "w": "few",
+   "start": 36.12,
+   "end": 36.34
+  },
+  {
+   "w": "cents",
+   "start": 36.34,
+   "end": 36.78
+  },
+  {
+   "w": "for",
+   "start": 36.78,
+   "end": 36.96
+  },
+  {
+   "w": "every",
+   "start": 36.96,
+   "end": 37.26
+  },
+  {
+   "w": "chicken",
+   "start": 37.26,
+   "end": 37.54
+  },
+  {
+   "w": "they",
+   "start": 37.54,
+   "end": 37.76
+  },
+  {
+   "w": "sell.",
+   "start": 37.76,
+   "end": 38.56
+  },
+  {
+   "w": "It",
+   "start": 38.8,
+   "end": 38.92
+  },
+  {
+   "w": "works.",
+   "start": 38.92,
+   "end": 39.8
+  },
+  {
+   "w": "Restaurant",
+   "start": 40.2,
+   "end": 40.4
+  },
+  {
+   "w": "after",
+   "start": 40.4,
+   "end": 40.78
+  },
+  {
+   "w": "restaurant",
+   "start": 40.78,
+   "end": 41.3
+  },
+  {
+   "w": "signs",
+   "start": 41.3,
+   "end": 41.68
+  },
+  {
+   "w": "up.",
+   "start": 41.68,
+   "end": 42.44
+  },
+  {
+   "w": "In",
+   "start": 42.58,
+   "end": 42.7
+  },
+  {
+   "w": "1964,",
+   "start": 42.7,
+   "end": 44.04
+  },
+  {
+   "w": "he",
+   "start": 44.04,
+   "end": 44.14
+  },
+  {
+   "w": "sells",
+   "start": 44.14,
+   "end": 44.52
+  },
+  {
+   "w": "the",
+   "start": 44.52,
+   "end": 44.66
+  },
+  {
+   "w": "company",
+   "start": 44.66,
+   "end": 45.02
+  },
+  {
+   "w": "for $2",
+   "start": 45.02,
+   "end": 45.86
+  },
+  {
+   "w": "million.",
+   "start": 45.86,
+   "end": 46.92
+  },
+  {
+   "w": "A",
+   "start": 47.6,
+   "end": 47.84
+  },
+  {
+   "w": "man",
+   "start": 47.86,
+   "end": 48.16
+  },
+  {
+   "w": "who",
+   "start": 48.16,
+   "end": 48.34
+  },
+  {
+   "w": "started",
+   "start": 48.34,
+   "end": 48.74
+  },
+  {
+   "w": "over",
+   "start": 48.74,
+   "end": 49.08
+  },
+  {
+   "w": "at",
+   "start": 49.08,
+   "end": 49.38
+  },
+  {
+   "w": "65",
+   "start": 49.38,
+   "end": 49.96
+  },
+  {
+   "w": "became",
+   "start": 49.96,
+   "end": 51.06
+  },
+  {
+   "w": "the",
+   "start": 51.06,
+   "end": 51.32
+  },
+  {
+   "w": "face",
+   "start": 51.32,
+   "end": 51.8
+  },
+  {
+   "w": "of",
+   "start": 51.8,
+   "end": 52.16
+  },
+  {
+   "w": "Kentucky",
+   "start": 52.16,
+   "end": 52.66
+  },
+  {
+   "w": "Fried",
+   "start": 52.66,
+   "end": 53.08
+  },
+  {
+   "w": "Chicken.",
+   "start": 53.08,
+   "end": 53.5
+  },
+  {
+   "w": "Every",
+   "start": 54.84,
+   "end": 55.1
+  },
+  {
+   "w": "legend",
+   "start": 55.1,
+   "end": 55.56
+  },
+  {
+   "w": "has",
+   "start": 55.56,
+   "end": 56.04
+  },
+  {
+   "w": "a",
+   "start": 56.04,
+   "end": 56.12
+  },
+  {
+   "w": "beginning.",
+   "start": 56.12,
+   "end": 56.98
+  }
+ ]
+}
