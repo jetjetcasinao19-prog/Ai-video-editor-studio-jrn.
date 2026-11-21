@@ -24,7 +24,8 @@ These rules apply to every Claude session and every team agent in `.claude/agent
    `node tests/projects.test.js` for projects,
    `node tests/capcut.test.js` for Send to CapCut,
    `node tests/stickman.test.js` for the Stickman Director,
-   `node tests/stickman-voice.test.js` for its AI narration voice; needs internet).
+   `node tests/stickman-voice.test.js` for its AI narration voice; needs internet,
+   `node tests/story.test.js` for the AI Story Studio).
 8. Phones have little RAM: avoid loading whole videos into memory, free object
    URLs, stop media tracks, avoid heavy libraries unless the owner agrees.
 9. Never claim a feature works unless it has been implemented and tested.
@@ -44,6 +45,7 @@ These rules apply to every Claude session and every team agent in `.claude/agent
 - [x] Send to CapCut (share sheet hand-off after export + Open CapCut link; tests/capcut.test.js)
 - [x] Stickman Director (`stickman.html`: story → stickman script → animated video export; tests/stickman.test.js)
 - [x] Stickman narration voice + Signature character (Kokoro TTS on-device, voice in export, .wav; tests/stickman-voice.test.js)
+- [x] AI Story Studio (`story.html`: topic → scenes → image/video prompts for Flow, ChatGPT, Gemini, Grok → join clips; tests/story.test.js)
 
 ## "Edit this" workflow (server side)
 When the owner says "edit this", use the `edit-this` skill
