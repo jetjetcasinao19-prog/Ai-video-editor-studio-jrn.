@@ -168,7 +168,7 @@ function check(name, ok, detail) {
   const ids = await page.evaluate(() => Story.STYLES.map(s => s.id));
   for (const want of ['tagalog-drama', 'ai-drama', 'anime-drama', 'pinoy-folklore', 'stick', 'animated-short', 'food-body', 'herbal', 'ugc-ad', 'podcast-hugot',
     'reverse-history', 'jeepney-diaries', 'blotter', 'sari-sari', 'halloween', 'unsolved', 'luxury-files', 'pera-matters', 'pov-history', 'kapre-vlog',
-    'creature-comedy', 'time-travel-pov', 'micro-drama', 'fruit-drama', 'cat-soap', 'creature-vlog', 'asmr', 'street-interview', 'animal-podcast', 'how-it-started'])
+    'creature-comedy', 'time-travel-pov', 'micro-drama', 'claude-cartoon', 'stickman-horror', 'silhouette-explainer', 'caricature-doc', 'family-cartoon', 'fruit-drama', 'cat-soap', 'creature-vlog', 'asmr', 'street-interview', 'animal-podcast', 'how-it-started'])
     if (!ids.includes(want)) check('style ' + want + ' exists', false);
   const covers = ids.filter(id => fs.existsSync(path.resolve(__dirname, '..', 'img', 'styles', id + '.webp')));
   check('every style has a cover picture', covers.length === ids.length, covers.length + '/' + ids.length);
@@ -237,6 +237,47 @@ function check(name, ok, detail) {
   await page.unroute('https://image.pollinations.ai/**');
   await page.setViewportSize({ width: 360, height: 740 });
   check('no sideways scrolling at 360px with the gallery', (await page.evaluate(() => document.documentElement.scrollWidth)) <= 360);
+  await page.click('#gallery .card[data-id="stick"]');
+
+  // 15. my Google Flow
+  await page.setViewportSize({ width: 412, height: 900 });
+  check('Flow not set up yet', /Not set up yet/.test(await page.textContent('#flowState')));
+  await page.fill('#flowLink', 'https://evil.example.com/tools/flow');
+  await page.click('#flowSave');
+  check('rejects a non-Flow link', /not a Flow link/.test(await page.textContent('#flowState')));
+  const myFlow = 'https://labs.google/fx/tools/flow/project/abc-123_XYZ';
+  await page.fill('#flowLink', myFlow);
+  await page.click('#flowSave');
+  check('saves my Flow project', /Connected to your Flow project/.test(await page.textContent('#flowState')));
+  await page.click('.scene[data-i="0"] [data-a="open-vid"][data-p="flow"]');
+  check('Flow buttons open my project', (await page.evaluate(() => window.__opened.slice(-1)[0])) === myFlow);
+  await page.click('#flowTest');
+  check('Open my project button', (await page.evaluate(() => window.__opened.slice(-1)[0])) === myFlow);
+  check('accepts a localized Flow link', await page.evaluate(() => { localStorage.setItem('story.flow', 'https://labs.google/fx/es/tools/flow/project/9'); return Story.flowLink() === 'https://labs.google/fx/es/tools/flow/project/9'; }));
+  await page.reload();
+  check('Flow project remembered after reload', /Connected/.test(await page.textContent('#flowState')) && (await page.inputValue('#flowLink')).includes('/fx/es/tools/flow/project/9'));
+  await page.click('#flowClear');
+  check('Forget clears it', /Not set up yet/.test(await page.textContent('#flowState')));
+
+  // 16. Claude writer + Claude cartoon styles + word-pop captions
+  await page.click('[data-write="claude"]');
+  const cl = await page.evaluate(() => window.__opened.slice(-1)[0]);
+  check('Claude opens with the writer prompt', cl.startsWith('https://claude.ai/new?q=') && /Reply with ONLY this JSON/.test(decodeURIComponent(cl)));
+  await page.click('#galCats button[data-c="claude"]');
+  const cc = await page.$$eval('#gallery .card b', els => els.map(e => e.textContent));
+  check('Claude Cartoons category', cc.includes('Claude Cartoon Shorts') && cc.includes('Stickman Horror') && cc.includes('Silhouette History Explainer') && cc.length === 5, cc.join(', '));
+  await page.click('#gallery .card[data-id="claude-cartoon"]');
+  check('Claude Cartoon style turns on word-pop captions', (await page.inputValue('#capStyle')) === 'wordpop' && (await page.isChecked('#burnCaps')));
+  check('Claude Cartoon image prompt describes the egg-head look', /egg-shaped head/.test(await page.inputValue('.scene[data-i="0"] [data-f="imgPrompt"]')));
+  const wp = await page.evaluate(() => {
+    const c = document.createElement('canvas'); c.width = 360; c.height = 640; const x = c.getContext('2d');
+    const lit = () => { const d = x.getImageData(0, 0, 360, 640).data; let n = 0, top = 640, bot = 0; for (let i = 0; i < d.length; i += 4) if (d[i] > 240 && d[i + 1] > 240) { n++; const y = Math.floor(i / 4 / 360); top = Math.min(top, y); bot = Math.max(bot, y); } return { n, top, bot }; };
+    x.fillStyle = '#336'; x.fillRect(0, 0, 360, 640); Story.drawWordPop(x, 'He sold ice to the tropics', 0.05); const a = lit();
+    x.fillStyle = '#336'; x.fillRect(0, 0, 360, 640); Story.drawWordPop(x, 'He sold ice to the tropics', 0.9); const b = lit();
+    return { a, b };
+  });
+  check('word-pop shows a few words in the middle and changes over time', wp.a.n > 200 && wp.a.top > 300 && wp.a.bot < 480 && Math.abs(wp.a.n - wp.b.n) > 20, JSON.stringify(wp));
+  await page.click('#galCats button[data-c="all"]');
   await page.click('#gallery .card[data-id="stick"]');
 
   // 11. hand-off to the Stickman Director
