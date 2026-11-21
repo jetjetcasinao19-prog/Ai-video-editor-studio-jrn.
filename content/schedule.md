@@ -33,6 +33,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-11-30 Mon | 8:00 PM | Tue Dec 1, 9:00 AM | TikTok | Nintendo is 137 years old, and it started with playing cards. | content/posts/2026-11-21-nintendo-ottoman.md | ready |
 | 2026-12-01 Tue | 7:00 PM | Wed Dec 2, 8:00 AM | Instagram Reels | A card shop, a taxi company, and instant rice came first | content/posts/2026-11-21-nintendo-ottoman.md | ready |
 | 2026-12-01 Tue | 8:00 PM | Wed Dec 2, 9:00 AM | Facebook Reels | Nintendo is 137 years old, and it started with playing cards. | content/posts/2026-11-21-nintendo-ottoman.md | ready |
+| 2026-12-02 Wed | 7:00 PM | Thu Dec 3, 8:00 AM | YouTube Shorts | Basketball Started With Two Peach Baskets | content/posts/2026-11-21-basketball-ottoman.md | ready |
+| 2026-12-02 Wed | 8:00 PM | Thu Dec 3, 9:00 AM | TikTok | Basketball started with two peach baskets. | content/posts/2026-11-21-basketball-ottoman.md | ready |
+| 2026-12-03 Thu | 7:00 PM | Fri Dec 4, 8:00 AM | Instagram Reels | Basketball started with two peach baskets. | content/posts/2026-11-21-basketball-ottoman.md | ready |
+| 2026-12-03 Thu | 8:00 PM | Fri Dec 4, 9:00 AM | Facebook Reels | Basketball started with two peach baskets. | content/posts/2026-11-21-basketball-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
