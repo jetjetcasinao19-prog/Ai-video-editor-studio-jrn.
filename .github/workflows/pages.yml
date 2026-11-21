@@ -1,6 +1,7 @@
 # Publishes the editor (index.html, stickman.html, story.html and their files)
 # to GitHub Pages WITHOUT the big submodules (omniroute/, remotion/), which
 # GitHub's default Pages builder would download (1.5 GB) and fail on.
+# animate/ (code-animated shorts, server side) is left out like pipeline/.
 # One-time setup: repository Settings → Pages → Build and deployment →
 # Source: "GitHub Actions".
 name: Deploy editor to GitHub Pages
@@ -30,7 +31,7 @@ jobs:
           mkdir _site
           tar -cf - --exclude=./.git --exclude=./.github --exclude=./_site \
             --exclude=./omniroute --exclude=./remotion --exclude=./google-flow-mcp \
-            --exclude=./pipeline --exclude=node_modules --exclude=./output --exclude=./inbox . | tar -xf - -C _site
+            --exclude=./pipeline --exclude=./animate --exclude=node_modules --exclude=./output --exclude=./inbox . | tar -xf - -C _site
           touch _site/.nojekyll
           du -sh _site
       - uses: actions/configure-pages@v5
