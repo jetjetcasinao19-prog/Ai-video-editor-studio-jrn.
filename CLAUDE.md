@@ -67,6 +67,16 @@ OmniRoute gateway if `OMNIROUTE_URL` is set, else Groq Whisper or local Whisper
 `cd pipeline && npm test` (OmniRoute: `node test/omniroute.test.mjs`). Never post to social media without the owner's
 explicit yes in the conversation. Guide: `docs/AI-WORKFLOW.md`.
 
+## Google Flow MCP (merged repo)
+`google-flow-mcp/` is the owner's fork of google-flow-browser-mcp, merged with
+its history. It is a separate Node.js MCP server that drives the Google Flow
+website with Playwright in the owner's own Chrome on a computer. It is not part
+of the phone app and does not run in cloud sessions. Google's terms don't allow
+automating its apps and the tool hides from bot detection, so don't run it for
+the owner or wire it into `index.html`; point to Prompt Studio → Google AI
+(API key) or the Flow hand-off instead. Never commit `google-flow-mcp/config/flow.config.json`.
+Read `google-flow-mcp/ABOUT-THIS-FOLDER.md` first.
+
 ## Brand kit
 `brand/brand.json` (name, @handle, colours, caption style, intro, outro,
 watermark, music volume, hashtags), `brand/voice.md` (how posts sound),
