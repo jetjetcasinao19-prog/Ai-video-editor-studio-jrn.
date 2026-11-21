@@ -41,6 +41,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-12-04 Fri | 8:00 PM | Sat Dec 5, 9:00 AM | TikTok | The chocolate chip cookie was NOT an accident. | content/posts/2026-11-21-chocolate-chip-cookie-ottoman.md | ready |
 | 2026-12-05 Sat | 7:00 PM | Sun Dec 6, 8:00 AM | Instagram Reels | You've heard the chocolate chip cookie was an accident. It wasn't. | content/posts/2026-11-21-chocolate-chip-cookie-ottoman.md | ready |
 | 2026-12-05 Sat | 8:00 PM | Sun Dec 6, 9:00 AM | Facebook Reels | The chocolate chip cookie was NOT an accident. | content/posts/2026-11-21-chocolate-chip-cookie-ottoman.md | ready |
+| 2026-12-06 Sun | 7:00 PM | Mon Dec 7, 8:00 AM | YouTube Shorts | Play-Doh Was Invented to Clean Your Walls | content/posts/2026-11-21-play-doh-ottoman.md | ready |
+| 2026-12-06 Sun | 8:00 PM | Mon Dec 7, 9:00 AM | TikTok | Play-Doh was invented to clean your walls. | content/posts/2026-11-21-play-doh-ottoman.md | ready |
+| 2026-12-07 Mon | 7:00 PM | Tue Dec 8, 8:00 AM | Instagram Reels | Play-Doh was invented to clean your walls. | content/posts/2026-11-21-play-doh-ottoman.md | ready |
+| 2026-12-07 Mon | 8:00 PM | Tue Dec 8, 9:00 AM | Facebook Reels | Play-Doh was invented to clean your walls. | content/posts/2026-11-21-play-doh-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
