@@ -461,6 +461,21 @@ and opens the site or app for you, prompt after prompt — you paste and press g
 </div>
 <p id="stPlatNote" class="note"></p>
 
+<div id="stFlowBox" class="ai" hidden>
+<h4>🎬 My Google Flow account</h4>
+<label for="stFlowAcct">The Gmail you use for Flow</label>
+<input id="stFlowAcct" type="email" inputmode="email" autocomplete="email" spellcheck="false" placeholder="you@gmail.com">
+<div class="row">
+<button id="stFlowSave" type="button">SAVE ACCOUNT</button>
+<button id="stFlowSignIn" type="button" class="secondary">SIGN IN TO FLOW</button>
+<button id="stFlowForget" type="button" class="del">FORGET</button>
+</div>
+<p id="stFlowStatus" class="note"></p>
+<p class="note">Saved only on this phone (not in your public code). Flow then opens in this Google account, even when
+Chrome is signed in to several accounts; your password and credits stay with Google. If you saved a Flow project
+link in the AI Story Studio, Flow opens that project.</p>
+</div>
+
 <div id="stGoogleBox" class="ai" hidden>
 <h4>Google AI (Gemini API)</h4>
 <p class="note">The same Google models Flow uses, made right here with your own API key: videos with
@@ -4161,7 +4176,7 @@ const ST_PLATFORMS={
   note:"Made in this app by the free Pollinations.ai service (no account, no cost). Free limit: about 1 picture every 45 seconds, so keep this tab open while the queue runs. Pictures have a small “pollinations.ai” mark."},
  stickman:{name:"Stickman Director",kind:"stickman",modes:["t2v"],
   note:"Your prompts become the story in the Stickman Director (opens in a new tab). It animates and exports the video on this phone, free."},
- flow:{name:"Flow",kind:"handoff",url:"https://labs.google/fx/tools/flow",modes:["t2i","i2i","t2v","f2v"],
+ flow:{name:"Flow",kind:"handoff",url:()=>withFlowAccount(flowProjectLink()||FLOW_HOME),modes:["t2i","i2i","t2v","f2v"],
   note:"Google Flow — sign in first. Each prompt is copied and Flow opens: paste it, pick the same mode in Flow, and generate. Uses your Flow credits."},
  gemini:{name:"Gemini",kind:"handoff",url:"https://gemini.google.com/app",modes:["t2i","i2i","t2v","f2v"],
   note:"Gemini — sign in first. Each prompt is copied and Gemini opens: paste and send. With a start picture, SHARE sends picture + prompt to the Gemini app."},
@@ -4264,6 +4279,7 @@ function stRenderPlatform(){
  $("stPlatNote").textContent=P.note;
  $("stOutputs").disabled=P.kind!=="free"&&P.kind!=="google";
  $("stGoogleBox").hidden=P.kind!=="google";
+ $("stFlowBox").hidden=stPlatform!=="flow";
  $("stImgBox").hidden=!stNeedsImage();
  stUpdate();
 }
@@ -4505,7 +4521,7 @@ async function stHandoff(i,share){
   }
  }else{
   // Open first (still inside the tap), then copy.
-  const win=window.open(P.url,"aves_"+it.platform);
+  const win=window.open(typeof P.url==="function"?P.url():P.url,"aves_"+it.platform);
   const copied=await stCopy(text);
   it.status="sent";
   it.msg=(copied?"Copied":"Could not copy — select the prompt text and copy it")+(win?". "+P.name+" opened: paste and generate.":". Open "+P.name+" and paste.")+
@@ -4632,6 +4648,34 @@ $("stCsv").addEventListener("change",async e=>{
  stSave();
  stStatus("Loaded "+stParse().length+" prompts from “"+f.name+"” (column "+(header?"“"+rows[0][col].trim()+"”":col+1)+").");
 });
+
+// ---------- My Google Flow account (shared with story.html) ----------
+// Flow has no API; this only makes the Flow buttons open Flow in the owner's
+// Google account ("authuser") and offers Google's sign-in with the email filled in.
+// Flow moved to flow.google.com (labs.google/fx/tools/flow redirects there).
+const FLOW_HOME="https://flow.google.com/", FLOW_ACCT_KEY="aves.flowAccount", FLOW_PROJECT_KEY="story.flow";
+const FLOW_RE=/^https:\/\/(?:labs\.google\/fx\/(?:[a-z]{2}(?:-[a-z]{2})?\/)?tools\/flow|flow\.google\.com)(?:\/[A-Za-z0-9_\-\/]*)?(?:[?#].*)?$/i;
+const EMAIL_RE=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+function flowAccount(){ try{ const v=localStorage.getItem(FLOW_ACCT_KEY)||""; return EMAIL_RE.test(v)?v:""; }catch(e){ return ""; } }
+function flowProjectLink(){ try{ const v=localStorage.getItem(FLOW_PROJECT_KEY)||""; return FLOW_RE.test(v)?v:""; }catch(e){ return ""; } }
+function withFlowAccount(url){ const a=flowAccount(); if(!a) return url; try{ const u=new URL(url); u.searchParams.set("authuser",a); return u.toString(); }catch(e){ return url; } }
+function flowSignInUrl(){ const a=flowAccount(); return "https://accounts.google.com/ServiceLogin?"+(a?"Email="+encodeURIComponent(a)+"&":"")+"continue="+encodeURIComponent(withFlowAccount(flowProjectLink()||FLOW_HOME)); }
+function stFlowRender(){
+ const a=flowAccount(), p=flowProjectLink();
+ if(a&&!$("stFlowAcct").value) $("stFlowAcct").value=a;
+ $("stFlowForget").disabled=!a;
+ $("stFlowStatus").textContent=(a?"✓ Flow opens in "+a+".":"Not set: Flow opens in whichever Google account Chrome uses.")+
+  (p?" Your Flow project from the Story Studio is used.":"");
+}
+$("stFlowSave").addEventListener("click",()=>{
+ const v=$("stFlowAcct").value.trim().toLowerCase();
+ if(!EMAIL_RE.test(v)){ $("stFlowStatus").textContent="That is not an email address. Type the Gmail you use for Flow."; return; }
+ try{ localStorage.setItem(FLOW_ACCT_KEY,v); }catch(e){ $("stFlowStatus").textContent="Could not save on this phone (storage blocked)."; return; }
+ $("stFlowAcct").value=v; stFlowRender();
+});
+$("stFlowForget").addEventListener("click",()=>{ try{ localStorage.removeItem(FLOW_ACCT_KEY); }catch(e){} $("stFlowAcct").value=""; stFlowRender(); });
+$("stFlowSignIn").addEventListener("click",()=>{ window.open(flowSignInUrl(),"aves_flow"); });
+stFlowRender();
 
 // ---------- Google AI (Gemini API, the owner's own key) ----------
 // Videos: Gemini Omni Flash. Pictures: Nano Banana. REST "interactions"

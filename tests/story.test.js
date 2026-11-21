@@ -115,7 +115,7 @@ function check(name, ok, detail) {
   check('Grok opens with the video prompt pre-filled', opened.startsWith('https://grok.com/?q=') && /SCENE 1 OF 3/.test(decodeURIComponent(opened)));
   await page.click('.scene[data-i="2"] [data-a="open-vid"][data-p="flow"]');
   opened = await page.evaluate(() => window.__opened.slice(-1)[0]);
-  check('Flow button opens Flow', opened === 'https://labs.google/fx/tools/flow');
+  check('Flow button opens Flow (flow.google.com)', opened === 'https://flow.google.com/', opened);
   await page.setInputFiles('.scene[data-i="0"] [data-up="clip"]', CLIP1);
   await page.setInputFiles('.scene[data-i="1"] [data-up="clip"]', CLIP2);
   check('next step moves to scene 3', /scene 3 video clip/.test(await page.textContent('#nextMsg')));
@@ -267,6 +267,30 @@ function check(name, ok, detail) {
   check('Flow project remembered after reload', /Connected/.test(await page.textContent('#flowState')) && (await page.inputValue('#flowLink')).includes('/fx/es/tools/flow/project/9'));
   await page.click('#flowClear');
   check('Forget clears it', /Not set up yet/.test(await page.textContent('#flowState')));
+  // My Google Flow account (made-up address)
+  await page.fill('#flowAcct', 'not an email');
+  await page.click('#flowAcctSave');
+  check('rejects a wrong email', /not an email address/.test(await page.textContent('#flowState')));
+  await page.fill('#flowAcct', ' Test.Creator@Gmail.com ');
+  await page.click('#flowAcctSave');
+  check('saves the Flow account on the phone', await page.evaluate(() => localStorage.getItem('aves.flowAccount')) === 'test.creator@gmail.com' &&
+    /Account: test\.creator@gmail\.com/.test(await page.textContent('#flowState')));
+  await page.click('.scene[data-i="0"] [data-a="open-vid"][data-p="flow"]');
+  opened = await page.evaluate(() => window.__opened.slice(-1)[0]);
+  check('Flow buttons open Flow in that account', opened === 'https://flow.google.com/?authuser=test.creator%40gmail.com', opened);
+  await page.fill('#flowLink', 'https://flow.google.com/project/new-1');
+  await page.click('#flowSave');
+  check('accepts a new flow.google.com project link', /Connected to your Flow project/.test(await page.textContent('#flowState')));
+  await page.click('#flowTest');
+  opened = await page.evaluate(() => window.__opened.slice(-1)[0]);
+  check('my project opens in my account', opened === 'https://flow.google.com/project/new-1?authuser=test.creator%40gmail.com', opened);
+  await page.click('#flowOpen');
+  opened = await page.evaluate(() => window.__opened.slice(-1)[0]);
+  check('Open Flow & sign in: Google sign-in with the email filled in, then Flow', opened.startsWith('https://accounts.google.com/ServiceLogin?Email=test.creator%40gmail.com&continue=') &&
+    decodeURIComponent(opened.split('continue=')[1]) === 'https://flow.google.com/?authuser=test.creator%40gmail.com', opened);
+  await page.click('#flowAcctClear');
+  await page.click('#flowClear');
+  check('Forget account clears it', await page.evaluate(() => localStorage.getItem('aves.flowAccount')) === null);
 
   // 16. Claude writer + Claude cartoon styles + word-pop captions
   await page.click('[data-write="claude"]');
