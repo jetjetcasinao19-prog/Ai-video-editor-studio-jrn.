@@ -35,7 +35,7 @@ Everything lives in `animate/`:
 | `animate/render.mjs` | CLI: contact sheet, stills, full render |
 | `animate/lib/engine.mjs` | parallel frame workers → FFmpeg, then soundtrack + mux |
 | `animate/lib/audio.py` | synthesised score (maqam scales, oud/kanun strings, ney, def/darbuka) + 20 sound effects + voice ducking + −14 LUFS |
-| `animate/styles/ottoman/` | the Ottoman miniature style: `kit.mjs` (figures, turbans, cloud bands, spongy rocks, cypresses, tulips, waves, galley, tughra, seals, stamps, sticky notes, books, alembic, jar, hammam + basin, water streams, water gun, rocket, pagoda, flower cards, taxi car, rice bowl, treasure chest, Ultra Hand lattice, handheld console, toy box, lamb, roast turkey, pie, pumpkin, calendar page, quill, envelope, printing press, magazine, peach basket, 1891 leather ball, ladder, maple leaf, snow, gym railing…), `page.mjs` (ebru marbled margins, illuminated header, gold-ruled frame, captions, progress reed), `scenes.mjs` (ready backdrops: `land`, `interior`, `lamp`, `compassRose`, `bookCover` for the closing brand card, `bigSign` gold title, `medallion` ?/!, `heart`), `index.mjs` (transitions) |
+| `animate/styles/ottoman/` | the Ottoman miniature style: `kit.mjs` (figures, turbans, cloud bands, spongy rocks, cypresses, tulips, waves, galley, tughra, seals, stamps, sticky notes, books, alembic, jar, hammam + basin, water streams, water gun, rocket, pagoda, flower cards, taxi car, rice bowl, treasure chest, Ultra Hand lattice, handheld console, toy box, lamb, roast turkey, pie, pumpkin, calendar page, quill, envelope, printing press, magazine, peach basket, 1891 leather ball, ladder, maple leaf, snow, gym railing, cookie, chocolate bar + chunks, knife, brick oven, balance scale, coin, chip bag…), `page.mjs` (ebru marbled margins, illuminated header, gold-ruled frame, captions, progress reed), `scenes.mjs` (ready backdrops: `land`, `interior`, `lamp`, `compassRose`, `bookCover` for the closing brand card, `bigSign` gold title, `medallion` ?/!, `heart`, `usMap`), `index.mjs` (transitions) |
 | `animate/projects/<name>/` | one video: `voice.mp3`, `words.json`, `story.mjs` → `out/<slug>.mp4` |
 | `animate/projects/bubble-wrap/` | the first finished short — **copy it as the template** |
 | `animate/projects/post-it-notes/` | second short (sticky notes, alembic, choir, hymn book, bazaar stall, map of America) |
@@ -43,6 +43,7 @@ Everything lives in `animate/`:
 | `animate/projects/nintendo/` | fourth short (Kyoto pagoda, flower cards, counters, a palace that grows behind a little shop) |
 | `animate/projects/thanksgiving/` | fifth short (a woman with a hotoz cap and veil, Lincoln in a stovepipe hat, calendars, letters, a torn map, a feast) |
 | `animate/projects/basketball/` | sixth short (snowy town, a palace-hall gym with baskets on the balcony, teams of nine, a chalk scoreboard, a janitor on a ladder) |
+| `animate/projects/chocolate-chip-cookie/` | seventh short (a kitchen, chopping chocolate, a brick oven, a cookbook, a deal under a canopy, a rolling coin) |
 
 Follow CLAUDE.md: never say it works until you rendered and looked at it.
 

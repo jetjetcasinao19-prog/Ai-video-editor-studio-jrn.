@@ -1078,6 +1078,77 @@ export function railing(ctx, x0, x1, y, h = 60, color = P.brownLight) {
   for (let x = x0 + 14; x < x1; x += 28) { ctx.beginPath(); ctx.moveTo(x, y + 6); ctx.lineTo(x, y + h); stroke(ctx, P.ink, 6); stroke(ctx, color, 3.5); }
 }
 
+// ---------- kitchen ----------
+export function cookie(ctx, x, y, r, rot = 0, bite = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot);
+  const R = rng(Math.round(r * 7) + 3);
+  ctx.beginPath();
+  for (let i = 0; i <= 24; i++) { const a = i / 24 * TAU, rr = r * (0.94 + R() * 0.08); i ? ctx.lineTo(Math.cos(a) * rr, Math.sin(a) * rr) : ctx.moveTo(Math.cos(a) * rr, Math.sin(a) * rr); }
+  ctx.closePath();
+  if (bite > 0) { ctx.save(); ctx.clip(); }
+  fillStroke(ctx, '#d9a45c', P.ink, Math.max(1.2, r * 0.04));
+  const g = ctx.createRadialGradient(-r * 0.3, -r * 0.3, r * 0.1, 0, 0, r); g.addColorStop(0, 'rgba(255,230,170,0.5)'); g.addColorStop(1, 'rgba(160,100,40,0.25)'); ctx.fillStyle = g; ctx.fill();
+  for (let i = 0; i < 9; i++) { const a = R() * TAU, rr = R() * r * 0.75; poly(ctx, [[Math.cos(a) * rr - r * 0.08, Math.sin(a) * rr], [Math.cos(a) * rr, Math.sin(a) * rr - r * 0.1], [Math.cos(a) * rr + r * 0.09, Math.sin(a) * rr + r * 0.02], [Math.cos(a) * rr, Math.sin(a) * rr + r * 0.08]], '#4a2a18', P.ink, 0.8); }
+  if (bite > 0) { ctx.restore(); ctx.globalCompositeOperation = 'destination-out'; for (const [bx, by] of [[r * 0.9, -r * 0.3], [r * 0.95, r * 0.15]]) { ctx.beginPath(); ctx.arc(bx, by, r * 0.25 * bite, 0, TAU); ctx.fill(); } ctx.globalCompositeOperation = 'source-over'; }
+  ctx.restore();
+}
+// Chocolate bar with a paper label; cut 0..1 removes pieces from the right.
+export function chocBar(ctx, x, y, w, rot = 0, labelText = '', cut = 0) {
+  const h = w * 0.42, n = 6, keep = Math.ceil(n * (1 - clamp(cut)));
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot);
+  for (let i = 0; i < keep; i++) { rect(ctx, -w / 2 + i * w / n, -h / 2, w / n, h, '#5a321c', P.ink, 1.6); rect(ctx, -w / 2 + i * w / n + 5, -h / 2 + 5, w / n - 10, h - 10, '#6e3e22', null); }
+  if (labelText) { const lw = Math.min(w * 0.36, keep * w / n); if (lw > 20) { rect(ctx, -w / 2, -h / 2 - 2, lw, h + 4, P.paperLight, P.ink, 1.6); ctx.fillStyle = P.verm; ctx.font = `900 ${Math.round(h * 0.3)}px Deco`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(labelText, -w / 2 + lw / 2, 2); } }
+  ctx.restore();
+}
+export function chocChunk(ctx, x, y, s = 1, rot = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
+  poly(ctx, [[-10, -8], [8, -10], [12, 6], [-6, 10]], '#5a321c', P.ink, 1.2); ctx.restore();
+}
+export function knife(ctx, x, y, s = 1, rot = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
+  ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(150, 0); ctx.quadraticCurveTo(170, 0, 160, 30); ctx.lineTo(0, 30); ctx.closePath(); fillStroke(ctx, '#d9dee4', P.ink, 2);
+  rect(ctx, -90, 4, 92, 24, P.brown, P.ink, 2); for (const rx of [-70, -40, -12]) circle(ctx, rx, 16, 3, P.goldLight, P.ink, 0.8);
+  ctx.restore();
+}
+// Brick oven with a fire; open 0..1 (door), tray: draw a tray of cookies coming out.
+export function oven(ctx, x, base, s = 1, t = 0, tray = 0) {
+  ctx.save(); ctx.translate(x, base); ctx.scale(s, s);
+  ctx.beginPath(); ctx.moveTo(-150, 0); ctx.lineTo(-150, -150); ctx.quadraticCurveTo(0, -300, 150, -150); ctx.lineTo(150, 0); ctx.closePath(); fillStroke(ctx, '#b5553a', P.ink, 2.5);
+  ctx.save(); ctx.clip(); ctx.strokeStyle = 'rgba(80,30,20,0.4)'; ctx.lineWidth = 2; for (let y = -280; y < 0; y += 22) { ctx.beginPath(); ctx.moveTo(-160, y); ctx.lineTo(160, y); ctx.stroke(); for (let xx = -160 + ((y / 22) % 2) * 20; xx < 160; xx += 40) { ctx.beginPath(); ctx.moveTo(xx, y); ctx.lineTo(xx, y + 22); ctx.stroke(); } } ctx.restore();
+  ctx.beginPath(); ctx.moveTo(-70, 0); ctx.lineTo(-70, -80); ctx.quadraticCurveTo(0, -150, 70, -80); ctx.lineTo(70, 0); ctx.closePath(); fillStroke(ctx, '#2a1c12', P.ink, 2);
+  for (let i = 0; i < 3; i++) { const f = 1 + 0.25 * Math.sin(t * 14 + i * 2); ctx.beginPath(); ctx.moveTo(-40 + i * 30, -10); ctx.quadraticCurveTo(-48 + i * 30, -40 * f, -30 + i * 30, -70 * f); ctx.quadraticCurveTo(-24 + i * 30, -40 * f, -14 + i * 30, -10); fillStroke(ctx, [P.verm, P.ochre, P.goldLight][i], P.ink, 1); }
+  if (tray > 0) { ctx.save(); ctx.translate(lerp(0, 150, tray), -20); rect(ctx, -90, -6, 180, 12, P.steel, P.ink, 1.5); for (let i = 0; i < 4; i++) cookie(ctx, -66 + i * 44, -18, 18, i); ctx.restore(); }
+  ctx.restore();
+}
+// Balance scale; tilt -1..1 (0 = perfectly level).
+export function balance(ctx, x, base, s = 1, tilt = 0) {
+  ctx.save(); ctx.translate(x, base); ctx.scale(s, s);
+  rect(ctx, -60, -12, 120, 14, P.goldDark, P.ink, 2); rect(ctx, -6, -200, 12, 190, P.gold, P.ink, 2);
+  ctx.save(); ctx.translate(0, -200); ctx.rotate(tilt * 0.3);
+  rect(ctx, -130, -6, 260, 12, P.gold, P.ink, 2);
+  for (const sx of [-1, 1]) { ctx.save(); ctx.translate(sx * 120, 0); ctx.rotate(-tilt * 0.3); ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(-40, 90); ctx.moveTo(0, 0); ctx.lineTo(40, 90); stroke(ctx, P.goldDark, 2); ctx.beginPath(); ctx.ellipse(0, 92, 50, 12, 0, 0, Math.PI); fillStroke(ctx, P.goldLight, P.ink, 2); ctx.restore(); }
+  ctx.restore();
+  circle(ctx, 0, -200, 10, P.goldLight, P.ink, 1.5);
+  ctx.restore();
+}
+export function coin(ctx, x, y, r, spin = 0, text = '$1') {
+  ctx.save(); ctx.translate(x, y); ctx.scale(Math.max(0.08, Math.abs(Math.cos(spin))), 1);
+  circle(ctx, 0, 0, r, P.goldLight, P.goldDeep, Math.max(1.5, r * 0.06)); circle(ctx, 0, 0, r * 0.8, null, P.goldDark, Math.max(1, r * 0.03));
+  if (text && Math.abs(Math.cos(spin)) > 0.35) { ctx.fillStyle = P.goldDeep; ctx.font = `900 ${Math.round(r * 0.7)}px Deco`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(text, 0, r * 0.05); }
+  ctx.restore();
+}
+// Paper bag of chocolate chips.
+export function chipBag(ctx, x, y, s = 1, rot = 0, labelText = 'CHOCOLATE CHIPS') {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
+  ctx.beginPath(); ctx.moveTo(-60, -110); ctx.lineTo(60, -110); ctx.lineTo(70, 0); ctx.lineTo(-70, 0); ctx.closePath(); fillStroke(ctx, P.verm, P.ink, 2.5);
+  for (let i = 0; i < 6; i++) { ctx.beginPath(); ctx.moveTo(-60 + i * 24, -110); ctx.lineTo(-54 + i * 24, -124); ctx.lineTo(-48 + i * 24, -110); fillStroke(ctx, P.verm, P.ink, 1.5); }
+  rect(ctx, -52, -80, 104, 54, P.paperLight, P.ink, 1.5);
+  ctx.fillStyle = '#4a2a18'; ctx.font = '900 13px Deco'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  const words = labelText.split(' '); words.forEach((w, i) => ctx.fillText(w, 0, -64 + i * 18 - (words.length - 2) * 9));
+  for (let i = 0; i < 5; i++) chocChunk(ctx, -40 + i * 20, -14, 0.6, i);
+  ctx.restore();
+}
+
 // ---------- colour util ----------
 export function shade(hex, k) {
   if (!hex.startsWith('#')) return hex;

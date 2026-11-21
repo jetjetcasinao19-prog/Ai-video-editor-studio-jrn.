@@ -141,3 +141,11 @@ export function medallion(ctx, k, P, ch, x, y, sc, bg = P.lapis) {
   ctx.fillStyle = P.goldLight; ctx.font = '900 74px Deco'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(ch, 0, 6);
   ctx.restore();
 }
+
+// A stylised map of the United States on parchment-coloured land.
+export const US_SHAPE = [[110, 260], [300, 190], [500, 210], [650, 170], [830, 230], [860, 330], [800, 420], [780, 520], [700, 600], [720, 700], [660, 700], [600, 640], [480, 660], [400, 720], [330, 650], [240, 620], [150, 540], [100, 420]];
+export function usMap(ctx, S, color = '#cdb57a') {
+  const { k, P, W, H } = S;
+  ctx.beginPath(); k.smoothPath(ctx, US_SHAPE); k.fillStroke(ctx, color, P.ink, 2.5);
+  ctx.save(); ctx.clip(); ctx.fillStyle = k.pattern(ctx, 'dots', color, '#b39a5e', 26); ctx.fillRect(0, 0, W, H); ctx.restore();
+}
