@@ -4,3 +4,4 @@ inbox/*
 animate/node_modules/
 animate/projects/*/build/
 animate/projects/*/out/
+__pycache__/
