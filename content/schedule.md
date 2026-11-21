@@ -49,6 +49,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-12-08 Tue | 8:00 PM | Wed Dec 9, 9:00 AM | TikTok | The Hollywood sign was supposed to come down after a year and a half. | content/posts/2026-11-21-hollywood-sign-ottoman.md | ready |
 | 2026-12-09 Wed | 7:00 PM | Thu Dec 10, 8:00 AM | Instagram Reels | The Hollywood sign was supposed to come down after a year and a half. | content/posts/2026-11-21-hollywood-sign-ottoman.md | ready |
 | 2026-12-09 Wed | 8:00 PM | Thu Dec 10, 9:00 AM | Facebook Reels | The Hollywood sign was supposed to come down after a year and a half. | content/posts/2026-11-21-hollywood-sign-ottoman.md | ready |
+| 2026-12-10 Thu | 7:00 PM | Fri Dec 11, 8:00 AM | YouTube Shorts | At 65, He Lost His Business and Started Over | content/posts/2026-11-21-kentucky-fried-chicken-ottoman.md | ready |
+| 2026-12-10 Thu | 8:00 PM | Fri Dec 11, 9:00 AM | TikTok | At 65, he lost his business and was living on a $105 Social Security check. | content/posts/2026-11-21-kentucky-fried-chicken-ottoman.md | ready |
+| 2026-12-11 Fri | 7:00 PM | Sat Dec 12, 8:00 AM | Instagram Reels | At 65, he lost his business and was living on a $105 Social Security check. | content/posts/2026-11-21-kentucky-fried-chicken-ottoman.md | ready |
+| 2026-12-11 Fri | 8:00 PM | Sat Dec 12, 9:00 AM | Facebook Reels | At 65, he lost his business and was living on a $105 Social Security check. | content/posts/2026-11-21-kentucky-fried-chicken-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
