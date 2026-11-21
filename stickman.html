@@ -77,6 +77,8 @@ Tap an action to add a line:</p>
  <div><label for="stickColor">Stickman colour</label><input id="stickColor" type="color" value="#ffffff"></div>
  <div><label for="accent">Accent colour</label><input id="accent" type="color" value="#f5c400"></div>
 </div>
+<label for="style">Character</label>
+<select id="style"><option value="signature">Signature (gold scarf, minimalist)</option><option value="classic">Classic stick figure</option></select>
 <label for="handle">Watermark (empty = none)</label>
 <input id="handle" value="@HOWITSTARTED-YT1">
 <label for="capSize">Caption size <span id="capSizeVal"></span></label>
@@ -84,7 +86,38 @@ Tap an action to add a line:</p>
 </section>
 
 <section class="panel">
-<h3>04 — Preview</h3>
+<h3>04 — Narration voice</h3>
+<p class="note">An AI voice reads every line of your script, right on your phone. The first time it downloads
+the voice model (about 92 MB, use Wi-Fi); after that it works offline. Shots get longer automatically
+so the voice always fits, and the voice is saved inside the exported video.</p>
+<label for="voiceMode">Narration</label>
+<select id="voiceMode"><option value="off">Off (silent video)</option><option value="ai">AI voice</option></select>
+<div id="voiceOpts">
+<div>
+ <div><label for="voice">Voice</label>
+  <select id="voice">
+   <option value="af_heart">Heart — US female, warm</option>
+   <option value="af_bella">Bella — US female, bright</option>
+   <option value="af_nicole">Nicole — US female, soft</option>
+   <option value="am_michael">Michael — US male, calm</option>
+   <option value="am_fenrir">Fenrir — US male, deep</option>
+   <option value="am_puck">Puck — US male, lively</option>
+   <option value="bf_emma">Emma — UK female</option>
+   <option value="bm_george">George — UK male, storyteller</option>
+   <option value="bm_fable">Fable — UK male</option>
+  </select></div>
+ <div><label for="speed">Speed <span id="speedVal"></span></label>
+  <input id="speed" type="range" min="0.75" max="1.25" step="0.05" value="1"></div>
+</div>
+<button id="voiceBtn" class="gold">🎙 Make narration</button>
+<progress id="voiceProg" value="0" max="1" hidden></progress>
+<div id="voiceMsg" class="status"></div>
+<button id="wavBtn" class="secondary" hidden>⬇ Save voice-over (.wav)</button>
+</div>
+</section>
+
+<section class="panel">
+<h3>05 — Preview</h3>
 <canvas id="cv" width="720" height="1280"></canvas>
 <input id="seek" type="range" min="0" max="1" step="0.01" value="0" aria-label="Position">
 <div class="row">
@@ -95,7 +128,7 @@ Tap an action to add a line:</p>
 </section>
 
 <section class="panel">
-<h3>05 — Export</h3>
+<h3>06 — Export</h3>
 <p class="note">Records the animation in real time (a 30 s video takes 30 s). Keep this screen open.
 Then open the video in Video Studio to add music, voice-over or more captions.</p>
 <button id="exportBtn">⬇ Export video</button>
@@ -363,6 +396,100 @@ function drawStickman(ctx,cx,groundY,size,pose,dir,color,accent,showChair){
  return {headX:cx+dir*0, headY:hipY-u*4.2-hr*0.95, headR:hr, u};
 }
 
+function luminance(hex){
+ const m=/^#?([0-9a-f]{6})$/i.exec(hex||""); if(!m)return 1;
+ const n=parseInt(m[1],16); return ((n>>16&255)*0.299+(n>>8&255)*0.587+(n&255)*0.114)/255;
+}
+// Signature character: solid round head with cut-out eyes, smooth bending
+// limbs, a gold scarf that flutters with movement, and a soft shadow.
+function drawSignature(ctx,cx,groundY,size,pose,dir,color,accent,showChair,bg){
+ const u=size/10, lw=Math.max(3,u*0.52), tw=Math.max(3.5,u*0.66);
+ const time=pose.time||0, cut=luminance(color)>0.5?bg:"#ffffff";
+ ctx.save();
+ ctx.lineCap="round"; ctx.lineJoin="round";
+ const hipY=groundY-u*4.25-pose.lift*size;
+ // shadow
+ if(!pose.rot){
+  const k=Math.max(0.35,1-pose.lift*5);
+  ctx.save(); ctx.globalAlpha=0.16*k; ctx.fillStyle=color;
+  ctx.beginPath(); ctx.ellipse(cx,groundY+u*0.12,u*2.1*k,u*0.32*k,0,0,Math.PI*2); ctx.fill(); ctx.restore();
+ }
+ if(showChair){
+  ctx.save(); ctx.strokeStyle=accent; ctx.lineWidth=lw*0.8;
+  const sx=cx-dir*u*1.1, sy=groundY-u*2.0;
+  ctx.beginPath();
+  ctx.moveTo(sx-u*1.5,sy); ctx.lineTo(sx+u*1.5,sy);
+  ctx.moveTo(sx-u*1.3*dir,sy); ctx.lineTo(sx-u*1.3*dir,groundY);
+  ctx.moveTo(sx+u*1.3*dir,sy); ctx.lineTo(sx+u*1.3*dir,groundY);
+  ctx.moveTo(sx-u*1.4*dir,sy); ctx.lineTo(sx-u*1.5*dir,sy-u*3);
+  ctx.stroke(); ctx.restore();
+ }
+ ctx.translate(cx,hipY);
+ if(pose.rot){ const fy=u*4.1; ctx.translate(0,fy-(pose.rot/-88)*u*2.5); ctx.rotate(-pose.rot*D*dir); ctx.translate(0,-fy); }
+ ctx.scale(dir,1);
+ const seg=(x,y,ang,len)=>[x+Math.sin(ang*D)*len,y+Math.cos(ang*D)*len];
+ // smooth limb: a curve that passes through the joint
+ const limb=(x0,y0,j,e,w,cap)=>{
+  ctx.lineWidth=w; ctx.beginPath(); ctx.moveTo(x0,y0);
+  ctx.quadraticCurveTo(2*j[0]-(x0+e[0])/2,2*j[1]-(y0+e[1])/2,e[0],e[1]); ctx.stroke();
+  if(cap==="hand"){ctx.beginPath();ctx.arc(e[0],e[1],w*0.78,0,Math.PI*2);ctx.fill();}
+  if(cap==="foot"){ctx.beginPath();ctx.moveTo(e[0]-w*0.2,e[1]);ctx.lineTo(e[0]+u*0.55,e[1]+u*0.02);ctx.stroke();}
+ };
+ ctx.strokeStyle=color; ctx.fillStyle=color;
+ const legs=[[pose.ll,pose.lk],[pose.rl,pose.rk]].map(([th,sh])=>{const k=seg(0,0,th,u*2.15);return [k,seg(k[0],k[1],sh,u*2.1)];});
+ const neckY=-u*3.5, shY=neckY+u*0.45;
+ const armPts=lean=>[[pose.la,pose.lf],[pose.ra,pose.rf]].map(([ua,fa])=>{const e=seg(0,shY,ua,u*1.75);return [e,seg(e[0],e[1],fa,u*1.65)];});
+ const arms=armPts();
+ // back limbs (dimmed for depth)
+ ctx.save(); ctx.globalAlpha=0.55;
+ limb(0,0,legs[0][0],legs[0][1],lw,"foot");
+ ctx.rotate(pose.lean*D); limb(0,shY,arms[0][0],arms[0][1],lw,"hand");
+ ctx.restore();
+ limb(0,0,legs[1][0],legs[1][1],lw,"foot");
+ ctx.rotate(pose.lean*D);
+ // torso, slightly curved
+ ctx.lineWidth=tw; ctx.beginPath(); ctx.moveTo(0,0); ctx.quadraticCurveTo(u*0.18,neckY*0.5,0,neckY); ctx.stroke();
+ // scarf tail flutters behind (more when moving)
+ const sp=pose.speed||0.15, ny=neckY+u*0.25;
+ ctx.strokeStyle=accent; ctx.fillStyle=accent;
+ const tail=[[-u*0.35,ny]];
+ for(let i=1;i<=3;i++){
+  const wave=Math.sin(time*(6+sp*8)-i*1.1)*u*0.16*i*(0.4+sp);
+  tail.push([-u*0.35-i*u*(0.45+sp*0.35),ny+i*u*(0.42-sp*0.3)+wave]);
+ }
+ for(let i=0;i<3;i++){ctx.lineWidth=lw*(1.15-i*0.25);ctx.beginPath();ctx.moveTo(tail[i][0],tail[i][1]);ctx.lineTo(tail[i+1][0],tail[i+1][1]);ctx.stroke();}
+ ctx.lineWidth=lw*1.25; ctx.beginPath(); ctx.moveTo(-u*0.5,ny); ctx.lineTo(u*0.5,ny+u*0.06); ctx.stroke();
+ // front arm (over the scarf)
+ ctx.strokeStyle=color; ctx.fillStyle=color;
+ limb(0,shY,arms[1][0],arms[1][1],lw,"hand");
+ // head
+ const hr=u*1.45;
+ ctx.translate(0,neckY-hr*0.92); ctx.rotate(pose.head*D);
+ ctx.beginPath(); ctx.arc(0,0,hr,0,Math.PI*2); ctx.fill();
+ ctx.fillStyle=cut; ctx.strokeStyle=cut;
+ const blink=(time%3.3)<0.12;
+ const eyes=[hr*0.12,hr*0.58], ey=-hr*0.08, ew=hr*0.17, eh=hr*0.42;
+ if(pose.eyes==="x"){
+  ctx.lineWidth=hr*0.13;
+  eyes.forEach(x=>{const r=hr*0.15;ctx.beginPath();ctx.moveTo(x-r,ey-r);ctx.lineTo(x+r,ey+r);ctx.moveTo(x+r,ey-r);ctx.lineTo(x-r,ey+r);ctx.stroke();});
+ }else{
+  eyes.forEach(x=>{
+   const h=blink?ew*0.5:(pose.eyes==="sad"?eh*0.6:eh);
+   const y=pose.eyes==="sad"?ey+eh*0.2:ey;
+   ctx.beginPath(); ctx.ellipse(x,y,ew/2,h/2,0,0,Math.PI*2); ctx.fill();
+  });
+  if(pose.eyes==="sad"){ctx.lineWidth=hr*0.09;ctx.beginPath();ctx.moveTo(eyes[0]-ew,ey-eh*0.55);ctx.lineTo(eyes[0]+ew,ey-eh*0.8);
+   ctx.moveTo(eyes[1]-ew,ey-eh*0.8);ctx.lineTo(eyes[1]+ew,ey-eh*0.55);ctx.stroke();}
+ }
+ const mx=hr*0.4, my=hr*0.5;
+ ctx.lineWidth=hr*0.1;
+ if(pose.eyes==="sad"){ctx.beginPath();ctx.arc(mx,my+hr*0.18,hr*0.2,1.2*Math.PI,1.8*Math.PI);ctx.stroke();}
+ else if(pose.talking&&pose.mouth>0.12){ctx.beginPath();ctx.ellipse(mx,my,hr*0.16,hr*0.04+hr*0.15*pose.mouth,0,0,Math.PI*2);ctx.fill();}
+ else if(pose.mouth>0.3){ctx.beginPath();ctx.arc(mx,my-hr*0.12,hr*0.2,0.15*Math.PI,0.85*Math.PI);ctx.stroke();}
+ ctx.restore();
+ return {headY:hipY+neckY-hr*0.92, headR:hr, u};
+}
+
 function drawBubble(ctx,x,y,text,maxW,font,thought,colors){
  ctx.save();
  ctx.font=font;
@@ -439,7 +566,7 @@ function renderFrame(ctx,plan,t,opts){
  const s=shots[idx], lt=t-s.start;
  const size=Math.min(W,H)*(H>W?0.52:0.4);
  if(s.action==="title"){
-  const k=ease(lt/0.5);
+  const k=0.2+0.8*ease(lt/0.5);
   ctx.save();
   ctx.globalAlpha=k;
   const fs=Math.round(Math.min(W,H)*0.09*opts.capSize);
@@ -455,7 +582,10 @@ function renderFrame(ctx,plan,t,opts){
   const moving=s.action==="walk"||s.action==="run";
   const xk=moving?Math.min(1,lt/s.dur):1;
   const cx=W*lerp(s.x0,s.x1,xk);
-  const head=drawStickman(ctx,cx,groundY,size,pose,s.dir,color,accent,s.action==="sit");
+  pose.time=t; pose.talking=s.action==="talk";
+  pose.speed=s.action==="run"?1:s.action==="walk"?0.55:s.action==="dance"||s.action==="jump"?0.5:0.12;
+  const head=opts.style==="classic"?drawStickman(ctx,cx,groundY,size,pose,s.dir,color,accent,s.action==="sit"):
+   drawSignature(ctx,cx,groundY,size,pose,s.dir,color,accent,s.action==="sit",scene.bg);
   const bubbleFont="bold "+Math.round(Math.min(W,H)*0.048*opts.capSize)+"px Arial, sans-serif";
   const hx=cx+s.dir*head.u*0.4;
   if(s.action==="idea"){
@@ -487,6 +617,155 @@ function renderFrame(ctx,plan,t,opts){
  return idx;
 }
 
+/* ---------- narration voice (Kokoro TTS, runs on the phone in a worker) ---------- */
+const VOICE_LEAD=0.2, VOICE_TAIL=0.45;
+const KOKORO_URL="https://cdn.jsdelivr.net/npm/kokoro-js@1.2.1/dist/kokoro.web.js";
+const KOKORO_MODEL="onnx-community/Kokoro-82M-v1.0-ONNX";
+const voiceCache=new Map(); // key -> {audio:Float32Array, rate, dur, buf?}
+let ttsWorker=null, ttsJobs=new Map(), ttsSeq=0, voicing=false, actx=null, liveSources=[];
+const voiceOn=()=>$("voiceMode").value==="ai";
+const spokenText=s=>(s.text||"").replace(/[*_#~`]/g,"").trim();
+const voiceKey=text=>$("voice").value+"|"+$("speed").value+"|"+text;
+
+function applyVoice(p){
+ if(!voiceOn())return p;
+ let t=0;
+ p.shots.forEach(s=>{
+  const text=spokenText(s), c=text?voiceCache.get(voiceKey(text)):null;
+  s.voice=c||null;
+  if(c) s.dur=Math.max(s.dur,VOICE_LEAD+c.dur+VOICE_TAIL);
+  s.start=t; t+=s.dur;
+ });
+ p.total=t;
+ return p;
+}
+function missingVoice(){ return voiceOn()?plan.shots.filter(s=>spokenText(s)&&!s.voice):[]; }
+function updateVoiceMsg(){
+ $("voiceOpts").hidden=!voiceOn();
+ $("speedVal").textContent=parseFloat($("speed").value).toFixed(2)+"×";
+ if(!voiceOn()||voicing)return;
+ const all=plan.shots.filter(s=>spokenText(s)).length, miss=missingVoice().length;
+ $("voiceMsg").textContent=!all?"No words to read yet.":miss?(all-miss)+" of "+all+" lines voiced. Tap Make narration.":"All "+all+" lines voiced ✓";
+ $("wavBtn").hidden=!(all&&!miss);
+}
+
+function getWorker(){
+ if(ttsWorker)return ttsWorker;
+ const src=`let tts=null;
+self.onmessage=async e=>{const m=e.data;
+ try{
+  if(!tts){const {KokoroTTS}=await import("${KOKORO_URL}");
+   tts=await KokoroTTS.from_pretrained("${KOKORO_MODEL}",{dtype:"q8",device:"wasm",
+    progress_callback:p=>{if(p.status==="progress"&&/onnx/.test(p.file||""))self.postMessage({type:"progress",k:(p.progress||0)/100});}});
+   self.postMessage({type:"ready"});}
+  const out=await tts.generate(m.text,{voice:m.voice,speed:m.speed});
+  const a=out.audio;
+  self.postMessage({type:"audio",id:m.id,audio:a,rate:out.sampling_rate},[a.buffer]);
+ }catch(err){self.postMessage({type:"error",id:m.id,message:String(err&&err.message||err)});}
+};`;
+ const url=URL.createObjectURL(new Blob([src],{type:"text/javascript"}));
+ ttsWorker=new Worker(url,{type:"module"});
+ URL.revokeObjectURL(url);
+ ttsWorker.onmessage=e=>{
+  const m=e.data;
+  if(m.type==="progress"){ $("voiceProg").value=m.k; $("voiceMsg").textContent="Downloading the voice (first time only)… "+Math.round(m.k*100)+"%"; return; }
+  if(m.type==="ready"){ workerReady=true; $("voiceMsg").textContent="Voice ready."; return; }
+  const job=ttsJobs.get(m.id); if(!job)return; ttsJobs.delete(m.id);
+  if(m.type==="error"&&!workerReady){ try{ttsWorker.terminate();}catch(_){} ttsWorker=null; useMainThread=true;
+   speakMain(job.text,job.voice,job.speed).then(job.resolve,job.reject); return; }
+  m.type==="audio"?job.resolve(m):job.reject(new Error(m.message));
+ };
+ ttsWorker.onerror=e=>{
+  // Some pages cannot start a background worker: fall back to the page itself.
+  e.preventDefault&&e.preventDefault();
+  try{ttsWorker.terminate();}catch(_){}
+  ttsWorker=null; useMainThread=true;
+  const jobs=[...ttsJobs.values()]; ttsJobs.clear();
+  jobs.forEach(j=>speakMain(j.text,j.voice,j.speed).then(j.resolve,j.reject));
+ };
+ return ttsWorker;
+}
+let useMainThread=false, mainTts=null, workerReady=false;
+async function speakMain(text,voice,speed){
+ if(!mainTts){
+  const {KokoroTTS}=await import(KOKORO_URL);
+  mainTts=await KokoroTTS.from_pretrained(KOKORO_MODEL,{dtype:"q8",device:"wasm",
+   progress_callback:p=>{if(p.status==="progress"&&/onnx/.test(p.file||"")){$("voiceProg").value=(p.progress||0)/100;
+    $("voiceMsg").textContent="Downloading the voice (first time only)… "+Math.round(p.progress||0)+"%";}}});
+ }
+ await new Promise(r=>setTimeout(r,30)); // let the screen update between lines
+ const out=await mainTts.generate(text,{voice,speed});
+ return {audio:out.audio,rate:out.sampling_rate};
+}
+function speak(text,voice,speed){
+ if(useMainThread)return speakMain(text,voice,speed);
+ return new Promise((resolve,reject)=>{const id=++ttsSeq; ttsJobs.set(id,{resolve,reject,text,voice,speed}); getWorker().postMessage({id,text,voice,speed});});
+}
+function addVoiceClip(text,audio,rate){
+ // trim silence at both ends so lines follow each other naturally
+ let a=0,b=audio.length-1; const th=0.01;
+ while(a<b&&Math.abs(audio[a])<th)a++; while(b>a&&Math.abs(audio[b])<th)b--;
+ a=Math.max(0,a-Math.round(rate*0.03)); b=Math.min(audio.length,b+Math.round(rate*0.08));
+ const clip=audio.slice(a,b);
+ voiceCache.set(voiceKey(text),{audio:clip,rate,dur:clip.length/rate});
+}
+async function makeNarration(){
+ if(voicing)return;
+ const todo=[...new Set(missingVoice().map(spokenText))];
+ if(!todo.length){updateVoiceMsg();return;}
+ voicing=true; $("voiceBtn").disabled=true; $("voiceProg").hidden=false; $("voiceProg").value=0;
+ $("voiceMsg").textContent="Starting the voice engine…";
+ const voice=$("voice").value, speed=parseFloat($("speed").value);
+ try{
+  for(let i=0;i<todo.length;i++){
+   const m=await speak(todo[i],voice,speed);
+   addVoiceClip(todo[i],m.audio,m.rate);
+   $("voiceProg").value=(i+1)/todo.length;
+   $("voiceMsg").textContent="Voicing line "+(i+1)+" of "+todo.length+"…";
+  }
+  voicing=false; rebuild();
+ }catch(e){
+  voicing=false; $("voiceMsg").innerHTML='<span class="warn">Voice failed: '+esc(e.message)+'. Check your internet for the first download, then try again.</span>';
+ }
+ voicing=false; $("voiceBtn").disabled=false; $("voiceProg").hidden=true;
+}
+
+function audioCtx(){ if(!actx) actx=new (window.AudioContext||window.webkitAudioContext)(); return actx; }
+function clipBuffer(c){
+ const ac=audioCtx();
+ if(!c.buf){ c.buf=ac.createBuffer(1,c.audio.length,c.rate); c.buf.copyToChannel(c.audio,0); }
+ return c.buf;
+}
+// Play every voiced line from timeline position `from` into `dest`.
+function startVoices(from,dest){
+ stopVoices();
+ if(!voiceOn())return;
+ const ac=audioCtx(); if(ac.state==="suspended")ac.resume();
+ const now=ac.currentTime+0.03;
+ plan.shots.forEach(s=>{
+  if(!s.voice)return;
+  const at=s.start+VOICE_LEAD, off=from-at;
+  if(off>=s.voice.dur)return;
+  const src=ac.createBufferSource(); src.buffer=clipBuffer(s.voice);
+  src.connect(dest||ac.destination);
+  if(off>0)src.start(now,off); else src.start(now-off);
+  liveSources.push(src);
+ });
+}
+function stopVoices(){ liveSources.forEach(s=>{try{s.stop();}catch(e){}}); liveSources=[]; }
+
+function narrationWav(){
+ const rate=24000, n=Math.ceil(plan.total*rate), mix=new Float32Array(n);
+ plan.shots.forEach(s=>{ if(!s.voice)return; const o=Math.round((s.start+VOICE_LEAD)*rate), a=s.voice.audio;
+  const step=s.voice.rate/rate; for(let i=0;o+i<n&&i*step<a.length;i++) mix[o+i]+=a[Math.floor(i*step)]; });
+ const buf=new ArrayBuffer(44+n*2), v=new DataView(buf);
+ const w=(o,str)=>{for(let i=0;i<str.length;i++)v.setUint8(o+i,str.charCodeAt(i));};
+ w(0,"RIFF"); v.setUint32(4,36+n*2,true); w(8,"WAVEfmt "); v.setUint32(16,16,true); v.setUint16(20,1,true); v.setUint16(22,1,true);
+ v.setUint32(24,rate,true); v.setUint32(28,rate*2,true); v.setUint16(32,2,true); v.setUint16(34,16,true); w(36,"data"); v.setUint32(40,n*2,true);
+ for(let i=0;i<n;i++){const x=Math.max(-1,Math.min(1,mix[i])); v.setInt16(44+i*2,x<0?x*32768:x*32767,true);}
+ return new Blob([buf],{type:"audio/wav"});
+}
+
 /* ---------- UI ---------- */
 const STORE="stickman.v1";
 const DEFAULT_SCRIPT=[
@@ -503,7 +782,7 @@ const cv=$("cv"), ctx=cv.getContext("2d");
 let plan=parseScript(""), playing=false, t0=0, tNow=0, raf=0, exporting=false;
 
 function opts(){return {scene:$("scene").value,stickColor:$("stickColor").value,accent:$("accent").value,
- handle:$("handle").value.trim(),capSize:parseFloat($("capSize").value)||1};}
+ handle:$("handle").value.trim(),capSize:parseFloat($("capSize").value)||1,style:$("style").value};}
 
 function setSize(){
  const f=$("format").value;
@@ -514,18 +793,19 @@ function setSize(){
 function save(){
  try{localStorage.setItem(STORE,JSON.stringify({script:$("script").value,story:$("story").value,
   format:$("format").value,scene:$("scene").value,stickColor:$("stickColor").value,accent:$("accent").value,
-  handle:$("handle").value,capSize:$("capSize").value}));}catch(e){}
+  handle:$("handle").value,capSize:$("capSize").value,style:$("style").value,
+  voiceMode:$("voiceMode").value,voice:$("voice").value,speed:$("speed").value}));}catch(e){}
 }
 function load(){
  let d=null; try{d=JSON.parse(localStorage.getItem(STORE)||"null");}catch(e){}
  $("script").value=d&&d.script!=null?d.script:DEFAULT_SCRIPT;
- if(d){["story","format","scene","stickColor","accent","handle","capSize"].forEach(k=>{if(d[k]!=null)$(k).value=d[k];});}
+ if(d){["story","format","scene","stickColor","accent","handle","capSize","style","voiceMode","voice","speed"].forEach(k=>{if(d[k]!=null)$(k).value=d[k];});}
 }
 
 function fmt(s){s=Math.max(0,s);return Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0");}
 
 function rebuild(){
- plan=parseScript($("script").value); planPositions(plan.shots);
+ plan=parseScript($("script").value); applyVoice(plan); planPositions(plan.shots); updateVoiceMsg();
  $("scriptMsg").innerHTML=plan.warnings.length?'<span class="warn">'+plan.warnings.map(esc).join("<br>")+"</span>":
   plan.shots.length+" shots • "+fmt(plan.total)+" long";
  $("shotList").innerHTML=plan.shots.map((s,i)=>'<div class="shot" data-i="'+i+'"><b>'+s.dur.toFixed(1)+'s '+s.action+'</b><span>'+esc(s.text)+'</span></div>').join("");
@@ -550,18 +830,25 @@ function tick(){
  draw();
  if(playing)raf=requestAnimationFrame(tick);
 }
-function play(){ if(!plan.shots.length)return; if(tNow>=plan.total-0.01)tNow=0; playing=true; t0=performance.now()-tNow*1000; $("playBtn").textContent="⏸ Pause"; raf=requestAnimationFrame(tick);}
-function stop(){ playing=false; cancelAnimationFrame(raf); $("playBtn").textContent="▶ Play"; }
+function play(){ if(!plan.shots.length)return; if(tNow>=plan.total-0.01)tNow=0; playing=true; startVoices(tNow); t0=performance.now()-tNow*1000; $("playBtn").textContent="⏸ Pause"; raf=requestAnimationFrame(tick);}
+function stop(){ playing=false; cancelAnimationFrame(raf); stopVoices(); $("playBtn").textContent="▶ Play"; }
 
 $("playBtn").onclick=()=>playing?stop():play();
 $("restartBtn").onclick=()=>{stop();tNow=0;draw();};
 $("seek").oninput=()=>{stop();tNow=parseFloat($("seek").value)||0;draw();};
 $("script").addEventListener("input",()=>{rebuild();save();});
-["format","scene","stickColor","accent","handle","capSize"].forEach(id=>$(id).addEventListener("input",()=>{
+["format","scene","stickColor","accent","handle","capSize","style"].forEach(id=>$(id).addEventListener("input",()=>{
  if(id==="scene"){$("stickColor").value=SCENES[$("scene").value].stick;}
  $("capSizeVal").textContent=Math.round($("capSize").value*100)+"%";
  save();draw();}));
 $("story").addEventListener("input",save);
+["voiceMode","voice","speed"].forEach(id=>$(id).addEventListener("input",()=>{stop();rebuild();save();}));
+$("voiceBtn").onclick=makeNarration;
+$("wavBtn").onclick=()=>{
+ const url=URL.createObjectURL(narrationWav()), a=document.createElement("a");
+ a.href=url; a.download="narration-"+new Date().toISOString().slice(0,10)+".wav"; document.body.appendChild(a); a.click(); a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),10000);
+};
 $("directBtn").onclick=()=>{
  const out=directStory($("story").value);
  if(!out){$("scriptMsg").textContent="Write a story first.";return;}
@@ -576,24 +863,28 @@ $("acts").onclick=e=>{const b=e.target.closest("button"); if(!b)return;
 
 /* ---------- export ---------- */
 const MIME_LIST=["video/mp4;codecs=avc1.42E01E","video/mp4;codecs=avc1","video/mp4","video/webm;codecs=vp9","video/webm;codecs=vp8","video/webm"];
-function pickMime(){
+const MIME_LIST_AUDIO=["video/mp4;codecs=avc1.42E01E,mp4a.40.2","video/mp4;codecs=avc1,mp4a.40.2","video/mp4;codecs=avc1,opus","video/webm;codecs=vp9,opus","video/webm;codecs=vp8,opus","video/webm"];
+function pickMime(withAudio){
  if(!window.MediaRecorder||!MediaRecorder.isTypeSupported)return null;
- return MIME_LIST.find(m=>{try{return MediaRecorder.isTypeSupported(m);}catch(e){return false;}})||null;
+ return (withAudio?MIME_LIST_AUDIO:MIME_LIST).find(m=>{try{return MediaRecorder.isTypeSupported(m);}catch(e){return false;}})||null;
 }
 let lastFile=null, lastUrl=null;
 function exportVideo(){
  return new Promise((resolve,reject)=>{
   if(!plan.shots.length)return reject(new Error("Write a script first."));
-  const mime=pickMime();
+  const withAudio=voiceOn()&&plan.shots.some(s=>s.voice);
+  const mime=pickMime(withAudio);
   if(!mime||!cv.captureStream)return reject(new Error("This browser cannot record video. Use Chrome on Android."));
   stop(); setSize();
   const stream=cv.captureStream(30);
+  let dest=null;
+  if(withAudio){ dest=audioCtx().createMediaStreamDestination(); stream.addTrack(dest.stream.getAudioTracks()[0]); }
   const rec=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:4000000});
   const chunks=[];
   rec.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data);};
   rec.onerror=e=>reject(e.error||new Error("Recording failed"));
   rec.onstop=()=>{
-   stream.getTracks().forEach(tr=>tr.stop());
+   stopVoices(); stream.getTracks().forEach(tr=>tr.stop());
    const type=mime.split(";")[0], ext=type==="video/mp4"?"mp4":"webm";
    resolve({blob:new Blob(chunks,{type}),ext});
   };
@@ -607,7 +898,7 @@ function exportVideo(){
    setTimeout(step,1000/30);
   };
   renderFrame(ctx,plan,0,o);
-  rec.start(500); start=performance.now(); step();
+  rec.start(500); if(dest)startVoices(0,dest); start=performance.now(); step();
  });
 }
 $("exportBtn").onclick=async()=>{
@@ -615,6 +906,8 @@ $("exportBtn").onclick=async()=>{
  $("exportBtn").disabled=true; $("doneRow").hidden=true; $("exportProg").hidden=false; $("exportProg").value=0;
  $("exportMsg").textContent="Recording… keep this screen open ("+fmt(plan.total)+").";
  try{
+  if(missingVoice().length){ await makeNarration(); if(missingVoice().length)throw new Error("the narration could not be made"); }
+  $("exportMsg").textContent="Recording… keep this screen open ("+fmt(plan.total)+").";
   const {blob,ext}=await exportVideo();
   if(lastUrl)URL.revokeObjectURL(lastUrl);
   lastUrl=URL.createObjectURL(blob);
@@ -637,7 +930,8 @@ $("shareBtn").onclick=async()=>{
 load();
 $("capSizeVal").textContent=Math.round($("capSize").value*100)+"%";
 rebuild();
-window.Stickman={parseScript,directStory,planPositions,renderFrame,poseFor,ACTIONS};
+window.Stickman={parseScript,directStory,planPositions,renderFrame,poseFor,ACTIONS,addVoiceClip,makeNarration,narrationWav,
+ plan:()=>plan,rebuild};
 </script>
 </body>
 </html>
