@@ -57,6 +57,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-12-12 Sat | 8:00 PM | Sun Dec 13, 9:00 AM | TikTok | The man who named the Big Bang didn't even believe in it. | content/posts/2026-11-21-big-bang-ottoman.md | ready |
 | 2026-12-13 Sun | 7:00 PM | Mon Dec 14, 8:00 AM | Instagram Reels | The man who named the Big Bang didn't even believe in it. | content/posts/2026-11-21-big-bang-ottoman.md | ready |
 | 2026-12-13 Sun | 8:00 PM | Mon Dec 14, 9:00 AM | Facebook Reels | The man who named the Big Bang didn't even believe in it. | content/posts/2026-11-21-big-bang-ottoman.md | ready |
+| 2026-12-14 Mon | 7:00 PM | Tue Dec 15, 8:00 AM | YouTube Shorts | OK Started as a Joke | content/posts/2026-11-21-ok-ottoman.md | ready |
+| 2026-12-14 Mon | 8:00 PM | Tue Dec 15, 9:00 AM | TikTok | OK started as a joke. | content/posts/2026-11-21-ok-ottoman.md | ready |
+| 2026-12-15 Tue | 7:00 PM | Wed Dec 16, 8:00 AM | Instagram Reels | OK started as a joke. | content/posts/2026-11-21-ok-ottoman.md | ready |
+| 2026-12-15 Tue | 8:00 PM | Wed Dec 16, 9:00 AM | Facebook Reels | OK started as a joke. | content/posts/2026-11-21-ok-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
