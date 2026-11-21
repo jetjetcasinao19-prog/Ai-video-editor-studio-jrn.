@@ -90,9 +90,14 @@ fs.writeFileSync(CSV, 'id,Prompt,notes\n1,"Ford Model T, 1910",a\n2,"A lighthous
     check('one prompt per line, empty lines ignored', (await page.textContent('#stCount')) === '3 loaded');
     const parsed = await page.evaluate(() => stParse().map(x => x.prompt));
     check('style added to every prompt', parsed[0] === 'Ford Model T in 1910, vintage photo' && parsed[1] === 'A lighthouse at night. vintage photo', JSON.stringify(parsed));
+    // Files are read in the background: wait for the "Loaded …" message.
+    const loaded = name => page.waitForFunction(n => document.getElementById('stStatus').textContent.includes('“' + n + '”'), name, { timeout: 10000 });
     await page.setInputFiles('#stTxt', TXT);
-    check('.txt with empty lines → long prompts', (await page.inputValue('#stSplit')) === 'blank' && (await page.textContent('#stCount')) === '2 loaded');
+    await loaded('prompts.txt');
+    check('.txt with empty lines → long prompts', (await page.inputValue('#stSplit')) === 'blank' && (await page.textContent('#stCount')) === '2 loaded',
+      (await page.inputValue('#stSplit')) + ' / ' + (await page.textContent('#stCount')));
     await page.setInputFiles('#stCsv', CSV);
+    await loaded('prompts.csv');
     const csv = await page.evaluate(() => stParse().map(x => x.title));
     check('.csv uses the "Prompt" column (quotes, commas, new lines)', csv.length === 3 && csv[0] === 'Ford Model T, 1910' && csv[1] === 'A lighthouse "at night"' && csv[2] === 'Two lines\nin one cell', JSON.stringify(csv));
     check('csv status says which column', /column “Prompt”/.test(await status()), await status());
