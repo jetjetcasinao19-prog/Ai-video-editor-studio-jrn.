@@ -97,7 +97,59 @@ export async function pexelsClip(query, orientation, dir) {
   return { file, credit: (v.user && v.user.name ? v.user.name + ' on Pexels' : 'Pexels'), url: v.url };
 }
 
-// Resolve plan entries to files. Entries: {at, duration, file} or {at, duration, query}.
+// Wikimedia Commons: free historical photos, paintings, maps and documents.
+// No key needed. Only licences that allow reuse with changes, also
+// commercially (public domain, CC0, CC BY, CC BY-SA) are used; the credit
+// (author, licence, link) is kept for the post description.
+const WM_UA = 'AIVideoEditorStudio/1.0 (personal video pipeline)';
+let wmLast = 0;
+export function wikimediaLicenseOk(lic) {
+  const l = String(lic || '').trim();
+  if (!l || /\bNC\b|non-?commercial|\bND\b|no-?deriv|fair use|non-?free|copyrighted/i.test(l)) return false;
+  return /^(public domain|pd\b|pd-|cc0|cc[ -]by\b|cc[ -]by-sa\b|cc[ -]by[ -]\d|cc[ -]by-sa[ -]\d)/i.test(l) || /^cc by(-sa)? \d/i.test(l);
+}
+async function wmFetch(url, tries = 5) {
+  for (let i = 0; i < tries; i++) {
+    const wait = 1100 - (Date.now() - wmLast);              // at most ~1 request per second
+    if (wait > 0) await new Promise(r => setTimeout(r, wait));
+    wmLast = Date.now();
+    const r = await fetch(url, { headers: { 'User-Agent': WM_UA } });
+    if (r.status !== 429 && r.status !== 503) return r;
+    const after = Math.min(30, Number(r.headers.get('retry-after')) || 5);  // Wikimedia asks us to wait
+    await new Promise(res => setTimeout(res, (after + 1) * 1000));
+  }
+  throw new Error('Wikimedia is busy (too many requests); try again in a minute');
+}
+export async function wikimediaImage(query, dir) {
+  const base = process.env.WIKIMEDIA_API_BASE || 'https://commons.wikimedia.org';
+  const url = base + '/w/api.php?action=query&format=json&generator=search&gsrnamespace=6&gsrlimit=12&prop=imageinfo' +
+    '&iiprop=url|size|mime|extmetadata&iiurlwidth=1600&iiextmetadatafilter=LicenseShortName|Artist|NonFree' +
+    '&gsrsearch=' + encodeURIComponent(query + ' filetype:bitmap');
+  const r = await wmFetch(url);
+  if (!r.ok) throw new Error('Wikimedia ' + r.status);
+  const pages = Object.values((await r.json()).query?.pages || {}).sort((a, b) => (a.index || 0) - (b.index || 0));
+  const strip = v => String(v || '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+  for (const p of pages) {
+    const ii = (p.imageinfo || [])[0];
+    if (!ii || !/^image\/(jpeg|png)$/.test(ii.mime) || ii.width < 800 || ii.height < 500) continue;
+    const m = ii.extmetadata || {}, lic = strip(m.LicenseShortName && m.LicenseShortName.value);
+    if (m.NonFree && String(m.NonFree.value) === 'true') continue;
+    if (!wikimediaLicenseOk(lic)) continue;
+    fs.mkdirSync(dir, { recursive: true });
+    const file = path.join(dir, 'wm-' + p.pageid + (ii.mime === 'image/png' ? '.png' : '.jpg'));
+    if (!fs.existsSync(file)) {
+      const img = await wmFetch(ii.thumburl || ii.url);
+      if (!img.ok) continue;
+      fs.writeFileSync(file, Buffer.from(await img.arrayBuffer()));
+    }
+    const author = strip(m.Artist && m.Artist.value).slice(0, 80) || 'Unknown author';
+    return { file, credit: `${author}, ${lic}, via Wikimedia Commons`, url: ii.descriptionurl || ('https://commons.wikimedia.org/wiki/' + encodeURIComponent(p.title)), title: p.title };
+  }
+  throw new Error('no freely licensed image on Wikimedia Commons for "' + query + '"');
+}
+
+// Resolve plan entries to files. Entries: {at, duration, file} or
+// {at, duration, query, source: "wikimedia" (default) | "pexels"}.
 export async function resolveBroll(entries, { total, orientation, cacheDir, baseDir, log }) {
   const out = [];
   for (const e of entries || []) {
@@ -109,9 +161,12 @@ export async function resolveBroll(entries, { total, orientation, cacheDir, base
         const f = path.resolve(baseDir, e.file);
         if (!fs.existsSync(f) || !(VIDEO.test(f) || IMAGE.test(f))) throw new Error('file not found or not a video/image: ' + e.file);
         out.push({ at, duration: d, file: f, image: IMAGE.test(f), source: path.basename(f) });
-      } else if (e.query) {
+      } else if (e.query && e.source === 'pexels') {
         const c = await pexelsClip(String(e.query), orientation, cacheDir);
         out.push({ at, duration: d, file: c.file, image: false, source: 'Pexels: ' + e.query, credit: c.credit, url: c.url });
+      } else if (e.query) {
+        const c = await wikimediaImage(String(e.query), cacheDir);
+        out.push({ at, duration: d, file: c.file, image: true, source: 'Wikimedia: ' + e.query, credit: c.credit, url: c.url });
       }
     } catch (err) {
       log && log('broll-skip', { at, reason: err.message });

@@ -47,8 +47,8 @@ These rules apply to every Claude session and every team agent in `.claude/agent
 When the owner says "edit this", use the `edit-this` skill
 (`.claude/skills/edit-this/SKILL.md`). It runs `pipeline/edit.mjs` (FFmpeg +
 OmniRoute gateway if `OMNIROUTE_URL` is set, else Groq Whisper or local Whisper
-+ HyperFrames intro; effects: zoom, B-roll from files or Pexels, text pop-ups,
-sound effects, progress bar), writes post copy to
++ HyperFrames intro; effects: zoom, B-roll from files, Wikimedia Commons images
+(no key) or Pexels, text pop-ups, sound effects, progress bar), writes post copy to
 `content/posts/` and adds a row to `content/schedule.md`. Test it with
 `cd pipeline && npm test` (OmniRoute: `node test/omniroute.test.mjs`). Never post to social media without the owner's
 explicit yes in the conversation. Guide: `docs/AI-WORKFLOW.md`.

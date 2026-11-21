@@ -77,28 +77,40 @@ on punch zooms, sound effects and the progress bar by default. Use
 after cuts — the same timeline the plan uses) and write
 `output/<slug>/plan.json`:
 ```json
-{ "broll":  [ {"at": 8.2, "duration": 2.5, "query": "ancient roman coins"},
+{ "broll":  [ {"at": 8.2, "duration": 3, "query": "Ford Model T 1910s photograph"},
               {"at": 21.0, "duration": 3, "file": "inbox/broll/factory.mp4"} ],
   "popups": [ {"at": 10.8, "text": "2-minute rule"}, {"at": 40.1, "text": "Dopamine"} ] }
 ```
 - **Zoom** (`--zoom`): `punch` for talking heads and live footage (zooms at
   cuts and sentence ends); `slow` for animation, slides or screen recordings
   (punch zooms crop drawings at the edges); `none` if the owner asks.
-- **B-roll**: 3–6 moments for a 60 s video, 2–3.5 s each, at least ~6 s apart,
+- **B-roll**: 3–6 moments for a 60 s video, 2.5–3.5 s each, at least ~6 s apart,
   never in the first 2 s (the hook) or over an on-screen reveal. Each one must
-  match what is said at that moment. Prefer the owner's own clips (`file`, e.g.
-  from `inbox/broll/`); otherwise a short, concrete Pexels search (`query`, for
-  example "1950s diner", not "history"). Stock B-roll needs the Pexels key;
-  without it the pipeline skips those entries and says so. Skip B-roll for
-  animated videos (stock footage clashes with the art style).
+  match what is said at that moment. Sources, in this order:
+  1. The owner's own clips (`file`, e.g. from `inbox/broll/`).
+  2. **Wikimedia Commons images** (default for `query`, no key needed): real
+     historical photos, paintings, maps, old ads and documents — ideal for this
+     origin-story channel. Write specific, period-aware searches: "Ford Model T
+     1910s photograph", "first McDonald's San Bernardino 1948", "Wright brothers
+     first flight 1903" — not "car" or "history". Only free licences (public
+     domain, CC0, CC BY, CC BY-SA) are used. Wikimedia limits how fast requests
+     come from shared cloud addresses, so a run with B-roll can take a minute
+     longer; keep it to ≤ 6 queries.
+  3. Pexels stock video (`"source": "pexels"`), only if `PEXELS_API_KEY` is set.
+  Missing files or searches without a free image are skipped with a note.
+  Skip B-roll for animated videos (real photos clash with the art style).
+- **Check B-roll**: look at the downloaded image in the contact sheet; if it
+  does not match the moment, change the query and render again.
 - **Text pop-ups**: 3–6 key words or numbers (max ~20 characters) placed
   0.1–0.3 s before the word is spoken. They appear at the top, in the brand
   accent colour, with a pop sound.
 - **Sound effects** (`--sfx` / `--no-sfx`): whoosh on zoom moves and B-roll,
   pop on pop-ups. Made by the pipeline itself (no licence needed).
 - **Progress bar** (`--progress-bar` / `--no-progress-bar`): thin accent bar at the top.
-- Stock clips: Pexels licence allows free use; the report lists each clip's
-  creator under `credits` — add "B-roll: Pexels" credits to the description.
+- **Credits are required** for CC BY / CC BY-SA images: copy every entry of
+  `credits` in `output/<slug>/report.json` into the post file and into the
+  YouTube description (e.g. "B-roll: Iwao, CC BY-SA 2.0, via Wikimedia
+  Commons"). Pexels credits are optional but nice.
 
 ## 8. Final pass with the HyperFrames intro card (and brand outro)
 ```bash

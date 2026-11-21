@@ -26,7 +26,8 @@
 //   --zoom punch|slow|none   punch-in zooms at cuts and sentences, or a slow
 //                        push-in (default: brand effects.zoom, else none)
 //   --plan FILE.json     B-roll and text pop-ups on the output timeline:
-//                        {"broll":[{"at":3,"duration":2.5,"query":"brain"} or
+//                        {"broll":[{"at":3,"duration":2.5,"query":"Model T 1914"} (Wikimedia
+//                         Commons image; add "source":"pexels" for Pexels video) or
 //                         {"at":9,"duration":3,"file":"inbox/broll/x.mp4"}],
 //                         "popups":[{"at":12,"text":"2 MINUTES"}]}
 //   --sfx / --no-sfx     whoosh on zooms and B-roll, pop on pop-ups
@@ -505,9 +506,17 @@ export async function editVideo(opts) {
     if (b.image) args.push('-loop', '1', '-t', String(b.duration), '-i', b.file);
     else args.push('-stream_loop', '-1', '-t', String(b.duration), '-i', b.file);
     const fo = Math.max(0, b.duration - 0.2).toFixed(2);
-    const kb = b.image ? `,scale=w='trunc(${W}*(1+0.08*t/${b.duration.toFixed(2)})/2)*2':h='trunc(${H}*(1+0.08*t/${b.duration.toFixed(2)})/2)*2':eval=frame,crop=${W}:${H}` : '';
+    const kb = `,scale=w='trunc(${W}*(1+0.08*t/${b.duration.toFixed(2)})/2)*2':h='trunc(${H}*(1+0.08*t/${b.duration.toFixed(2)})/2)*2':eval=frame,crop=${W}:${H}`;
     const o = label();
-    vf.push(`[${nextInput}:v]scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},fps=30,setsar=1${kb},format=yuva420p,` +
+    // Images (photos, paintings, maps) are shown whole on a blurred copy of
+    // themselves, with a slow zoom; video clips fill the frame.
+    const head = b.image
+      ? `[${nextInput}:v]fps=30,setsar=1,split[ia${nextInput}][ib${nextInput}];` +
+        `[ia${nextInput}]scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},boxblur=30:3,eq=brightness=-0.15[ig${nextInput}];` +
+        `[ib${nextInput}]scale=${Math.round(W * 0.94)}:${Math.round(H * 0.94)}:force_original_aspect_ratio=decrease[if${nextInput}];` +
+        `[ig${nextInput}][if${nextInput}]overlay=(W-w)/2:(H-h)/2${kb}`
+      : `[${nextInput}:v]scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},fps=30,setsar=1`;
+    vf.push(head + `,format=yuva420p,` +
       `fade=t=in:st=0:d=0.2:alpha=1,fade=t=out:st=${fo}:d=0.2:alpha=1,setpts=PTS-STARTPTS+${b.at.toFixed(3)}/TB[br${nextInput}]`,
       `[${cur}][br${nextInput}]overlay=0:0:eof_action=pass:enable='between(t,${b.at.toFixed(3)},${(b.at + b.duration).toFixed(3)})'[${o}]`);
     cur = o; nextInput++;
