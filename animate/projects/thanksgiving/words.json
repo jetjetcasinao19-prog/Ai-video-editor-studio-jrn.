@@ -1,0 +1,596 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "The woman who wrote Mary Had a Little Lamb is the reason you get Thanksgiving. Her name? Sarah Josepha Hale. In the 1800s, Thanksgiving was a mess. Every state picked its own day. Many didn't celebrate it at all. Sarah ran one of America's most popular magazines. She used it to push for one national day of thanks. She wrote to presidents, Taylor, Fillmore, Pierce, Buchanan. None of them acted. She didn't quit. The country is torn apart by the Civil War. She writes one more letter to Abraham Lincoln. Days later, Lincoln declares a national Thanksgiving, the last Thursday in November. One woman, one pen, and a holiday the whole country shares. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "The",
+   "start": 0,
+   "end": 0.18
+  },
+  {
+   "w": "woman",
+   "start": 0.18,
+   "end": 0.4
+  },
+  {
+   "w": "who",
+   "start": 0.4,
+   "end": 0.62
+  },
+  {
+   "w": "wrote",
+   "start": 0.62,
+   "end": 0.94
+  },
+  {
+   "w": "Mary",
+   "start": 0.94,
+   "end": 1.42
+  },
+  {
+   "w": "Had",
+   "start": 1.42,
+   "end": 1.7
+  },
+  {
+   "w": "a",
+   "start": 1.7,
+   "end": 1.84
+  },
+  {
+   "w": "Little",
+   "start": 1.84,
+   "end": 2.04
+  },
+  {
+   "w": "Lamb",
+   "start": 2.04,
+   "end": 2.44
+  },
+  {
+   "w": "is",
+   "start": 2.44,
+   "end": 3.06
+  },
+  {
+   "w": "the",
+   "start": 3.06,
+   "end": 3.2
+  },
+  {
+   "w": "reason",
+   "start": 3.2,
+   "end": 3.54
+  },
+  {
+   "w": "you",
+   "start": 3.54,
+   "end": 3.82
+  },
+  {
+   "w": "get",
+   "start": 3.82,
+   "end": 4.1
+  },
+  {
+   "w": "Thanksgiving.",
+   "start": 4.1,
+   "end": 5.12
+  },
+  {
+   "w": "Her",
+   "start": 5.54,
+   "end": 5.66
+  },
+  {
+   "w": "name?",
+   "start": 5.66,
+   "end": 6.56
+  },
+  {
+   "w": "Sarah",
+   "start": 6.56,
+   "end": 6.88
+  },
+  {
+   "w": "Josepha",
+   "start": 6.88,
+   "end": 7.46
+  },
+  {
+   "w": "Hale.",
+   "start": 7.46,
+   "end": 8.34
+  },
+  {
+   "w": "In",
+   "start": 8.98,
+   "end": 9.08
+  },
+  {
+   "w": "the",
+   "start": 9.08,
+   "end": 9.2
+  },
+  {
+   "w": "1800s,",
+   "start": 9.2,
+   "end": 10.4
+  },
+  {
+   "w": "Thanksgiving",
+   "start": 10.4,
+   "end": 10.74
+  },
+  {
+   "w": "was",
+   "start": 10.74,
+   "end": 11.06
+  },
+  {
+   "w": "a",
+   "start": 11.06,
+   "end": 11.22
+  },
+  {
+   "w": "mess.",
+   "start": 11.22,
+   "end": 12.1
+  },
+  {
+   "w": "Every",
+   "start": 12.32,
+   "end": 12.5
+  },
+  {
+   "w": "state",
+   "start": 12.5,
+   "end": 12.88
+  },
+  {
+   "w": "picked",
+   "start": 12.88,
+   "end": 13.18
+  },
+  {
+   "w": "its",
+   "start": 13.18,
+   "end": 13.36
+  },
+  {
+   "w": "own",
+   "start": 13.36,
+   "end": 13.58
+  },
+  {
+   "w": "day.",
+   "start": 13.58,
+   "end": 14.42
+  },
+  {
+   "w": "Many",
+   "start": 14.46,
+   "end": 14.66
+  },
+  {
+   "w": "didn't",
+   "start": 14.66,
+   "end": 14.94
+  },
+  {
+   "w": "celebrate",
+   "start": 14.94,
+   "end": 15.4
+  },
+  {
+   "w": "it",
+   "start": 15.4,
+   "end": 15.54
+  },
+  {
+   "w": "at",
+   "start": 15.54,
+   "end": 15.7
+  },
+  {
+   "w": "all.",
+   "start": 15.7,
+   "end": 15.94
+  },
+  {
+   "w": "Sarah",
+   "start": 17.1,
+   "end": 17.34
+  },
+  {
+   "w": "ran",
+   "start": 17.34,
+   "end": 17.68
+  },
+  {
+   "w": "one",
+   "start": 17.68,
+   "end": 17.86
+  },
+  {
+   "w": "of",
+   "start": 17.86,
+   "end": 18
+  },
+  {
+   "w": "America's",
+   "start": 18,
+   "end": 18.5
+  },
+  {
+   "w": "most",
+   "start": 18.5,
+   "end": 18.74
+  },
+  {
+   "w": "popular",
+   "start": 18.74,
+   "end": 19.34
+  },
+  {
+   "w": "magazines.",
+   "start": 19.34,
+   "end": 19.8
+  },
+  {
+   "w": "She",
+   "start": 20.74,
+   "end": 20.86
+  },
+  {
+   "w": "used",
+   "start": 20.86,
+   "end": 21.2
+  },
+  {
+   "w": "it",
+   "start": 21.2,
+   "end": 21.34
+  },
+  {
+   "w": "to",
+   "start": 21.34,
+   "end": 21.58
+  },
+  {
+   "w": "push",
+   "start": 21.58,
+   "end": 21.84
+  },
+  {
+   "w": "for",
+   "start": 21.84,
+   "end": 22.02
+  },
+  {
+   "w": "one",
+   "start": 22.02,
+   "end": 22.44
+  },
+  {
+   "w": "national",
+   "start": 22.44,
+   "end": 23.16
+  },
+  {
+   "w": "day",
+   "start": 23.16,
+   "end": 23.48
+  },
+  {
+   "w": "of",
+   "start": 23.48,
+   "end": 23.76
+  },
+  {
+   "w": "thanks.",
+   "start": 23.76,
+   "end": 24.64
+  },
+  {
+   "w": "She",
+   "start": 24.98,
+   "end": 25.08
+  },
+  {
+   "w": "wrote",
+   "start": 25.08,
+   "end": 25.26
+  },
+  {
+   "w": "to",
+   "start": 25.26,
+   "end": 25.42
+  },
+  {
+   "w": "presidents,",
+   "start": 25.42,
+   "end": 26.38
+  },
+  {
+   "w": "Taylor,",
+   "start": 26.38,
+   "end": 27.18
+  },
+  {
+   "w": "Fillmore,",
+   "start": 27.18,
+   "end": 27.98
+  },
+  {
+   "w": "Pierce,",
+   "start": 27.98,
+   "end": 28.78
+  },
+  {
+   "w": "Buchanan.",
+   "start": 28.78,
+   "end": 29.16
+  },
+  {
+   "w": "None",
+   "start": 30.2,
+   "end": 30.32
+  },
+  {
+   "w": "of",
+   "start": 30.32,
+   "end": 30.5
+  },
+  {
+   "w": "them",
+   "start": 30.5,
+   "end": 30.62
+  },
+  {
+   "w": "acted.",
+   "start": 30.62,
+   "end": 31.82
+  },
+  {
+   "w": "She",
+   "start": 31.82,
+   "end": 32.02
+  },
+  {
+   "w": "didn't",
+   "start": 32.02,
+   "end": 32.3
+  },
+  {
+   "w": "quit.",
+   "start": 32.3,
+   "end": 33.08
+  },
+  {
+   "w": "The",
+   "start": 32.74,
+   "end": 33.5
+  },
+  {
+   "w": "country",
+   "start": 33.5,
+   "end": 33.82
+  },
+  {
+   "w": "is",
+   "start": 33.82,
+   "end": 34.02
+  },
+  {
+   "w": "torn",
+   "start": 34.02,
+   "end": 34.32
+  },
+  {
+   "w": "apart",
+   "start": 34.32,
+   "end": 34.76
+  },
+  {
+   "w": "by",
+   "start": 34.76,
+   "end": 35
+  },
+  {
+   "w": "the",
+   "start": 35,
+   "end": 35.16
+  },
+  {
+   "w": "Civil",
+   "start": 35.16,
+   "end": 35.4
+  },
+  {
+   "w": "War.",
+   "start": 35.4,
+   "end": 36.68
+  },
+  {
+   "w": "She",
+   "start": 35.7,
+   "end": 36.5
+  },
+  {
+   "w": "writes",
+   "start": 36.5,
+   "end": 36.82
+  },
+  {
+   "w": "one",
+   "start": 36.82,
+   "end": 37.14
+  },
+  {
+   "w": "more",
+   "start": 37.14,
+   "end": 37.42
+  },
+  {
+   "w": "letter",
+   "start": 37.42,
+   "end": 37.86
+  },
+  {
+   "w": "to",
+   "start": 37.86,
+   "end": 38.36
+  },
+  {
+   "w": "Abraham",
+   "start": 38.36,
+   "end": 38.86
+  },
+  {
+   "w": "Lincoln.",
+   "start": 38.86,
+   "end": 40.48
+  },
+  {
+   "w": "Days",
+   "start": 39.5,
+   "end": 40.48
+  },
+  {
+   "w": "later,",
+   "start": 40.48,
+   "end": 41.3
+  },
+  {
+   "w": "Lincoln",
+   "start": 41.3,
+   "end": 41.58
+  },
+  {
+   "w": "declares",
+   "start": 41.58,
+   "end": 42.14
+  },
+  {
+   "w": "a",
+   "start": 42.14,
+   "end": 42.44
+  },
+  {
+   "w": "national",
+   "start": 42.44,
+   "end": 42.94
+  },
+  {
+   "w": "Thanksgiving,",
+   "start": 42.94,
+   "end": 44.22
+  },
+  {
+   "w": "the",
+   "start": 43.62,
+   "end": 44.42
+  },
+  {
+   "w": "last",
+   "start": 44.42,
+   "end": 44.8
+  },
+  {
+   "w": "Thursday",
+   "start": 44.8,
+   "end": 45.32
+  },
+  {
+   "w": "in",
+   "start": 45.32,
+   "end": 45.68
+  },
+  {
+   "w": "November.",
+   "start": 45.68,
+   "end": 46.24
+  },
+  {
+   "w": "One",
+   "start": 46.42,
+   "end": 47.34
+  },
+  {
+   "w": "woman,",
+   "start": 47.34,
+   "end": 48.18
+  },
+  {
+   "w": "one",
+   "start": 48.18,
+   "end": 48.38
+  },
+  {
+   "w": "pen,",
+   "start": 48.38,
+   "end": 49.24
+  },
+  {
+   "w": "and",
+   "start": 49.24,
+   "end": 49.36
+  },
+  {
+   "w": "a",
+   "start": 49.36,
+   "end": 49.48
+  },
+  {
+   "w": "holiday",
+   "start": 49.48,
+   "end": 49.9
+  },
+  {
+   "w": "the",
+   "start": 49.9,
+   "end": 50.12
+  },
+  {
+   "w": "whole",
+   "start": 50.12,
+   "end": 50.42
+  },
+  {
+   "w": "country",
+   "start": 50.42,
+   "end": 50.9
+  },
+  {
+   "w": "shares.",
+   "start": 50.9,
+   "end": 52.8
+  },
+  {
+   "w": "Every",
+   "start": 51.82,
+   "end": 52.8
+  },
+  {
+   "w": "legend",
+   "start": 52.8,
+   "end": 53.32
+  },
+  {
+   "w": "has",
+   "start": 53.32,
+   "end": 53.8
+  },
+  {
+   "w": "a",
+   "start": 53.8,
+   "end": 53.92
+  },
+  {
+   "w": "beginning.",
+   "start": 53.92,
+   "end": 54.88
+  }
+ ]
+}

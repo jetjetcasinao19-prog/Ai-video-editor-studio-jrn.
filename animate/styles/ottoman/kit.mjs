@@ -460,7 +460,11 @@ function head(ctx, x, y, o) {
   // face: three-quarter oval
   ellipse(ctx, 2, 0, 15, 19, 0, SKIN, P.ink, 1.8);
   // beard
-  if (o.beard && o.beard !== 'none') {
+  if (o.beard === 'chin') { // chin-curtain: a band along the jaw, mouth left clear
+    ctx.beginPath(); ctx.moveTo(-14, 7); ctx.quadraticCurveTo(-12, 28, 4, 30); ctx.quadraticCurveTo(19, 28, 17, 7);
+    ctx.quadraticCurveTo(14, 19, 4, 20); ctx.quadraticCurveTo(-8, 19, -11, 7); ctx.closePath();
+    fillStroke(ctx, o.beardColor || '#3a2a20', P.ink, 1.2);
+  } else if (o.beard && o.beard !== 'none') {
     const L = o.beard === 'long' ? 34 : 18;
     ctx.beginPath(); ctx.moveTo(-12, 2); ctx.quadraticCurveTo(-8, L, 6, L + 4); ctx.quadraticCurveTo(18, L - 4, 17, 2); ctx.quadraticCurveTo(6, 12, -12, 2);
     fillStroke(ctx, o.beardColor || '#3a2a20', P.ink, 1.3);
@@ -490,6 +494,17 @@ function head(ctx, x, y, o) {
     ctx.beginPath(); ctx.moveTo(0, -40); ctx.quadraticCurveTo(-10, -36, -16, -22); stroke(ctx, P.ink, 2);
   } else if (hat === 'cap') {
     ctx.beginPath(); ctx.ellipse(2, -12, 18, 14, 0, Math.PI, TAU); fillStroke(ctx, o.hatColor || P.ochre, P.ink, 1.6);
+  } else if (hat === 'hotoz') { // a lady's tall cap with a flowing veil
+    ctx.beginPath(); ctx.moveTo(-14, -16); ctx.quadraticCurveTo(-40, 20, -30, 70); ctx.lineTo(-10, 60); ctx.quadraticCurveTo(-16, 20, -4, -6); ctx.closePath(); fillStroke(ctx, o.veil || P.white, P.ink, 1.3);
+    ctx.beginPath(); ctx.ellipse(2, -14, 19, 11, 0, Math.PI, TAU); fillStroke(ctx, o.hair || '#3a2a20', P.ink, 1.2);
+    for (const sx of [-15, 17]) { ctx.beginPath(); ctx.moveTo(sx, -8); ctx.quadraticCurveTo(sx + (sx < 0 ? -6 : 6), 4, sx, 14); stroke(ctx, o.hair || '#3a2a20', 4); }
+    poly(ctx, [[-12, -20], [-8, -56], [12, -56], [16, -20]], o.hatColor || P.verm, P.ink, 1.5);
+    ctx.beginPath(); ctx.moveTo(-8, -46); ctx.lineTo(12, -46); stroke(ctx, P.goldLight, 3);
+    circle(ctx, 2, -60, 5, P.goldLight, P.ink, 1);
+  } else if (hat === 'stovepipe') { // tall black top hat
+    rect(ctx, -14, -62, 32, 46, P.ink, P.ink, 1.5); rect(ctx, -22, -18, 48, 6, P.ink, P.ink, 1.5);
+    ctx.beginPath(); ctx.moveTo(-14, -26); ctx.lineTo(18, -26); stroke(ctx, '#5a4a3a', 3);
+    ctx.beginPath(); ctx.ellipse(2, -10, 17, 8, 0, Math.PI, TAU); fillStroke(ctx, o.hair || '#2a1c12', P.ink, 1);
   } else if (hat === 'crown') {
     ctx.beginPath(); ctx.ellipse(1, -22, 25, 17, 0, Math.PI * 0.95, Math.PI * 2.05); ctx.quadraticCurveTo(1, -6, -24, -18); fillStroke(ctx, P.white, P.ink, 1.8);
     poly(ctx, [[-12, -34], [-8, -54], [0, -40], [6, -58], [12, -40], [18, -52], [16, -32]], P.goldLight, P.ink, 1.5);
@@ -922,6 +937,96 @@ export function toyBox(ctx, x, y, w, h, labelText = '', color = P.lapis) {
   ctx.fillStyle = pattern(ctx, 'dots', color, shade(color, 0.3), 18); ctx.fillRect(x - w / 2 + 3, y - h + 3, w - 6, h - 6);
   rect(ctx, x - w / 2 + 18, y - h + 18, w - 36, h * 0.55, '#d7ecf2', P.ink, 1.5);
   if (labelText) { cartouche(ctx, x, y - h * 0.2, w * 0.86, h * 0.2, P.paperLight, P.goldDark, 2); ctx.fillStyle = P.verm; ctx.font = `900 ${Math.round(h * 0.1)}px Deco`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(labelText, x, y - h * 0.2 + 2); }
+}
+
+// ---------- feasts, letters & the press ----------
+export function lamb(ctx, x, y, s = 1, t = 0, walk = null) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  const st = walk != null ? Math.sin(walk) * 6 : 0;
+  for (const [lx, d] of [[-30, st], [-14, -st], [18, st], [32, -st]]) { ctx.beginPath(); ctx.moveTo(lx, -26); ctx.lineTo(lx + d, 0); stroke(ctx, P.ink, 6); }
+  const lobes = [[-36, -50, 20], [-14, -60, 22], [10, -58, 22], [30, -48, 18], [-24, -34, 18], [4, -34, 20], [26, -32, 16]];
+  ctx.lineWidth = 4.4; ctx.strokeStyle = P.ink; for (const [a, b, r] of lobes) { ctx.beginPath(); ctx.arc(a, b, r, 0, TAU); ctx.stroke(); }
+  ctx.fillStyle = P.white; for (const [a, b, r] of lobes) { ctx.beginPath(); ctx.arc(a, b, r, 0, TAU); ctx.fill(); }
+  ctx.lineWidth = 1.3; for (const [a, b, r] of lobes) { ctx.beginPath(); ctx.arc(a, b, r * 0.45, Math.PI * 0.9, Math.PI * 2.2); stroke(ctx, P.grey, 1.3); }
+  ellipse(ctx, 50, -60 + Math.sin(t * 3) * 2, 15, 19, -0.4, P.ink, P.ink, 1);
+  ellipse(ctx, 40, -72, 9, 4, -0.8, P.ink, P.ink, 1);
+  circle(ctx, 55, -64, 2.5, P.white, null);
+  circle(ctx, 42, -82, 10, P.white, P.ink, 1.5);
+  ctx.restore();
+}
+export function turkey(ctx, x, y, s = 1, t = 0) { // roast on a platter
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  ctx.beginPath(); ctx.ellipse(0, 0, 120, 26, 0, 0, TAU); fillStroke(ctx, P.goldLight, P.goldDeep, 2.5);
+  ctx.beginPath(); ctx.ellipse(0, -34, 76, 46, 0, Math.PI * 0.95, Math.PI * 2.05); ctx.quadraticCurveTo(0, -4, -74, -26); fillStroke(ctx, '#b8662e', P.ink, 2.5);
+  ctx.beginPath(); ctx.ellipse(-20, -52, 30, 14, -0.3, 0, TAU); ctx.fillStyle = 'rgba(255,220,160,0.5)'; ctx.fill();
+  for (const sx of [-1, 1]) { ctx.save(); ctx.translate(sx * 64, -36); ctx.rotate(sx * 0.7); ellipse(ctx, 0, -10, 12, 22, 0, '#a85a26', P.ink, 2); circle(ctx, 0, -34, 7, P.white, P.ink, 1.5); ctx.restore(); }
+  for (let i = 0; i < 5; i++) flower(ctx, -100 + i * 50, 4, 5, [P.verm, P.ochre, P.green][i % 3]);
+  for (let i = 0; i < 3; i++) { const q = (t * 0.5 + i / 3) % 1; ctx.save(); ctx.globalAlpha = 1 - q; ctx.beginPath(); ctx.moveTo(-30 + i * 30, -84 - q * 50); ctx.bezierCurveTo(-46 + i * 30, -110 - q * 50, -14 + i * 30, -126 - q * 50, -30 + i * 30, -150 - q * 50); stroke(ctx, P.white, 5); ctx.restore(); }
+  ctx.restore();
+}
+export function pie(ctx, x, y, s = 1, color = P.ochre) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  ctx.beginPath(); ctx.ellipse(0, 0, 44, 14, 0, 0, TAU); fillStroke(ctx, P.white, P.ink, 2);
+  ctx.beginPath(); ctx.ellipse(0, -6, 38, 11, 0, 0, TAU); fillStroke(ctx, color, P.ink, 2);
+  for (let i = 0; i < 6; i++) { ctx.beginPath(); ctx.moveTo(-30 + i * 12, -12); ctx.lineTo(-24 + i * 12, -2); stroke(ctx, P.ochreLight, 2); }
+  ctx.restore();
+}
+export function pumpkin(ctx, x, y, s = 1) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  for (const [dx, w] of [[-20, 26], [20, 26], [0, 30]]) ellipse(ctx, dx, -26, w, 26, 0, '#e07a22', P.ink, 2);
+  ctx.beginPath(); ctx.moveTo(0, -50); ctx.quadraticCurveTo(4, -64, 12, -66); stroke(ctx, P.greenDark, 5);
+  ctx.restore();
+}
+// A calendar page: month on top, a big day number; circled draws a red ring.
+export function calendarPage(ctx, x, y, w, month, day, rot = 0, circled = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot);
+  const h = w * 1.15;
+  rect(ctx, -w / 2, -h / 2, w, h, P.paperLight, P.ink, 2);
+  rect(ctx, -w / 2, -h / 2, w, h * 0.26, P.verm, P.ink, 2);
+  for (const sx of [-0.25, 0.25]) circle(ctx, sx * w, -h / 2, w * 0.05, P.goldLight, P.ink, 1);
+  ctx.fillStyle = P.paperLight; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.font = `900 ${Math.round(w * 0.16)}px Deco`; ctx.fillText(month, 0, -h / 2 + h * 0.13);
+  ctx.fillStyle = P.ink; ctx.font = `900 ${Math.round(w * 0.42)}px Deco`; ctx.fillText(String(day), 0, h * 0.12);
+  if (circled > 0) { ctx.beginPath(); ctx.ellipse(0, h * 0.12, w * 0.36, w * 0.3, -0.1, 0, TAU * clamp(circled)); stroke(ctx, P.verm, w * 0.05); }
+  ctx.restore();
+}
+export function quill(ctx, x, y, s = 1, rot = 0, glow = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
+  if (glow > 0) { const g = ctx.createRadialGradient(0, -60, 5, 0, -60, 120); g.addColorStop(0, `rgba(255,240,170,${0.8 * glow})`); g.addColorStop(1, 'rgba(255,240,170,0)'); ctx.fillStyle = g; ctx.fillRect(-130, -190, 260, 260); }
+  ctx.beginPath(); ctx.moveTo(0, 0); ctx.quadraticCurveTo(-30, -60, -6, -140); ctx.quadraticCurveTo(14, -80, 0, 0); fillStroke(ctx, glow > 0.5 ? P.goldLight : P.white, P.ink, 2);
+  ctx.beginPath(); ctx.moveTo(0, 0); ctx.quadraticCurveTo(-8, -70, -6, -140); stroke(ctx, P.ink, 1.5);
+  for (let i = 1; i < 7; i++) { ctx.beginPath(); ctx.moveTo(-4 - i * 0.2, -i * 18); ctx.lineTo(-18, -i * 18 - 10); stroke(ctx, P.grey, 1); }
+  ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(-2, 14); stroke(ctx, P.ink, 3);
+  ctx.restore();
+}
+export function envelope(ctx, x, y, s = 1, rot = 0, sealColor = P.verm) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
+  rect(ctx, -60, -38, 120, 76, P.paperLight, P.ink, 2);
+  ctx.beginPath(); ctx.moveTo(-60, -38); ctx.lineTo(0, 6); ctx.lineTo(60, -38); stroke(ctx, P.ink, 1.5);
+  circle(ctx, 0, 6, 11, sealColor, shade(sealColor, -0.3), 1.5);
+  ctx.restore();
+}
+// Wooden screw press printing a page; k 0..1 is the press stroke.
+export function printingPress(ctx, x, y, s = 1, k = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  for (const sx of [-110, 90]) rect(ctx, sx, -320, 20, 320, P.brown, P.ink, 2);
+  rect(ctx, -120, -340, 240, 30, P.brownLight, P.ink, 2);
+  rect(ctx, -130, -110, 260, 26, P.brownLight, P.ink, 2);
+  const py = lerp(-260, -150, clamp(k));
+  rect(ctx, -6, -310, 12, py + 310, P.steel, P.ink, 1.5);
+  rect(ctx, -80, py, 160, 30, P.steel, P.ink, 2);
+  ctx.save(); ctx.translate(0, -290); ctx.rotate(k * 2); ctx.beginPath(); ctx.moveTo(-70, 0); ctx.lineTo(70, 0); stroke(ctx, P.ink, 8); stroke(ctx, P.goldDark, 5); ctx.restore();
+  rect(ctx, -70, -122, 140, 12, P.white, P.ink, 1.5);
+  ctx.restore();
+}
+export function magazine(ctx, x, y, w, rot = 0, title = 'LADY’S BOOK', color = P.lapis) {
+  const h = w * 1.35;
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot);
+  rect(ctx, -w / 2, -h / 2, w, h, P.paperLight, P.ink, 2);
+  rect(ctx, -w / 2 + 6, -h / 2 + 6, w - 12, h * 0.22, color, P.ink, 1.2);
+  ctx.fillStyle = P.goldLight; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.font = `900 ${Math.round(w * 0.11)}px Deco`; ctx.fillText(title, 0, -h / 2 + 6 + h * 0.11);
+  ellipse(ctx, 0, h * 0.08, w * 0.24, h * 0.24, 0, P.pink, P.ink, 1.2);
+  for (let i = 0; i < 3; i++) { ctx.beginPath(); ctx.moveTo(-w * 0.35, h * 0.36 + i * h * 0.04); ctx.lineTo(w * 0.35, h * 0.36 + i * h * 0.04); stroke(ctx, P.grey, 1.2); }
+  ctx.restore();
 }
 
 // ---------- colour util ----------
