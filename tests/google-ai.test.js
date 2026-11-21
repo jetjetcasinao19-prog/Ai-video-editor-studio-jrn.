@@ -22,7 +22,8 @@ const ff = args => execFileSync('ffmpeg', ['-loglevel', 'error', '-y', ...args])
 ff(['-f', 'lavfi', '-i', 'color=c=red:size=360x640', '-frames:v', '1', RED]);
 ff(['-f', 'lavfi', '-i', 'color=c=blue:size=2000x1200', '-frames:v', '1', START]);
 ff(['-f', 'lavfi', '-i', 'color=c=green:size=360x640:rate=24:duration=2', '-f', 'lavfi', '-i', 'sine=frequency=440:duration=2',
-  '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-shortest', CLIP]);
+  // MP4 like Google sends, but VP9/Opus inside: GitHub's open-source Chromium has no H.264.
+  '-c:v', 'libvpx-vp9', '-deadline', 'realtime', '-cpu-used', '8', '-b:v', '200k', '-c:a', 'libopus', '-shortest', CLIP]);
 
 (async () => {
   const browser = await chromium.launch();

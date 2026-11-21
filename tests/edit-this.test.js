@@ -13,7 +13,7 @@ const path = require('path');
 
 const PAGE = 'file://' + path.resolve(__dirname, '..', 'index.html');
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'edit-this-test-'));
-const VIDEO = path.join(tmp, 'talk.mp4');
+const VIDEO = path.join(tmp, 'talk.webm'); // VP8/Opus: GitHub's open-source Chromium has no H.264
 const RED = path.join(tmp, 'red.png');
 
 let failures = 0;
@@ -31,7 +31,7 @@ ff(['-i', path.join(tmp, 's1.wav'), '-i', path.join(tmp, 's2.wav'), '-filter_com
   '-map', '[a]', path.join(tmp, 'talk.wav')]);
 const T = Number(execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', path.join(tmp, 'talk.wav')]).toString());
 ff(['-f', 'lavfi', '-i', 'color=c=gray:size=640x360:rate=30', '-i', path.join(tmp, 'talk.wav'), '-t', String(T),
-  '-c:v', 'libx264', '-preset', 'ultrafast', '-pix_fmt', 'yuv420p', '-c:a', 'aac', VIDEO]);
+  '-c:v', 'libvpx', '-deadline', 'realtime', '-cpu-used', '8', '-b:v', '300k', '-c:a', 'libopus', VIDEO]);
 ff(['-f', 'lavfi', '-i', 'color=c=red:size=1200x800', '-frames:v', '1', RED]);
 
 // Captions like Whisper makes them, at the speech times.
