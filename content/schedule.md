@@ -61,6 +61,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-12-14 Mon | 8:00 PM | Tue Dec 15, 9:00 AM | TikTok | OK started as a joke. | content/posts/2026-11-21-ok-ottoman.md | ready |
 | 2026-12-15 Tue | 7:00 PM | Wed Dec 16, 8:00 AM | Instagram Reels | OK started as a joke. | content/posts/2026-11-21-ok-ottoman.md | ready |
 | 2026-12-15 Tue | 8:00 PM | Wed Dec 16, 9:00 AM | Facebook Reels | OK started as a joke. | content/posts/2026-11-21-ok-ottoman.md | ready |
+| 2026-12-16 Wed | 7:00 PM | Thu Dec 17, 8:00 AM | YouTube Shorts | Coca-Cola Made Santa Red? That's a Myth | content/posts/2026-11-21-santa-ottoman.md | ready |
+| 2026-12-16 Wed | 8:00 PM | Thu Dec 17, 9:00 AM | TikTok | Coca-Cola made Santa red? That's a myth. | content/posts/2026-11-21-santa-ottoman.md | ready |
+| 2026-12-17 Thu | 7:00 PM | Fri Dec 18, 8:00 AM | Instagram Reels | Coca-Cola made Santa red? That's a myth. | content/posts/2026-11-21-santa-ottoman.md | ready |
+| 2026-12-17 Thu | 8:00 PM | Fri Dec 18, 9:00 AM | Facebook Reels | Coca-Cola made Santa red? That's a myth. | content/posts/2026-11-21-santa-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
