@@ -35,7 +35,7 @@ Everything lives in `animate/`:
 | `animate/render.mjs` | CLI: contact sheet, stills, full render |
 | `animate/lib/engine.mjs` | parallel frame workers → FFmpeg, then soundtrack + mux |
 | `animate/lib/audio.py` | synthesised score (maqam scales, oud/kanun strings, ney, def/darbuka) + 20 sound effects + voice ducking + −14 LUFS |
-| `animate/styles/ottoman/` | the Ottoman miniature style: `kit.mjs` (figures, turbans, cloud bands, spongy rocks, cypresses, tulips, waves, galley, tughra, seals, stamps, sticky notes, books, alembic, jar, hammam + basin, water streams, water gun, rocket, pagoda, flower cards, taxi car, rice bowl, treasure chest, Ultra Hand lattice, handheld console, toy box, lamb, roast turkey, pie, pumpkin, calendar page, quill, envelope, printing press, magazine, peach basket, 1891 leather ball, ladder, maple leaf, snow, gym railing, cookie, chocolate bar + chunks, knife, brick oven, balance scale, coin, chip bag, dough blob, soot, dough can, coal stove, newspaper, cobweb, hillside sign letters (rise/tilt/fall/light up), palm, hourglass, searchlights, film reel, clapperboard, guitar, gas pump, drumstick, striped bucket, bank check, pressure cooker…), `page.mjs` (ebru marbled margins, illuminated header, gold-ruled frame, captions, progress reed), `scenes.mjs` (ready backdrops: `land`, `interior`, `lamp`, `compassRose`, `bookCover` for the closing brand card, `bigSign` gold title, `medallion` ?/!, `heart`, `usMap`), `index.mjs` (transitions) |
+| `animate/styles/ottoman/` | the Ottoman miniature style: `kit.mjs` (figures, turbans, cloud bands, spongy rocks, cypresses, tulips, waves, galley, tughra, seals, stamps, sticky notes, books, alembic, jar, hammam + basin, water streams, water gun, rocket, pagoda, flower cards, taxi car, rice bowl, treasure chest, Ultra Hand lattice, handheld console, toy box, lamb, roast turkey, pie, pumpkin, calendar page, quill, envelope, printing press, magazine, peach basket, 1891 leather ball, ladder, maple leaf, snow, gym railing, cookie, chocolate bar + chunks, knife, brick oven, balance scale, coin, chip bag, dough blob, soot, dough can, coal stove, newspaper, cobweb, hillside sign letters (rise/tilt/fall/light up), palm, hourglass, searchlights, film reel, clapperboard, guitar, gas pump, drumstick, striped bucket, bank check, pressure cooker, celestial spheres, galaxy, BBC microphone with radio waves, horn antenna, chalkboard, stepped-gable house…), `page.mjs` (ebru marbled margins, illuminated header, gold-ruled frame, captions, progress reed), `scenes.mjs` (ready backdrops: `land`, `interior`, `lamp`, `compassRose`, `bookCover` for the closing brand card, `bigSign` gold title, `medallion` ?/!, `heart`, `usMap`), `index.mjs` (transitions) |
 | `animate/projects/<name>/` | one video: `voice.mp3`, `words.json`, `story.mjs` → `out/<slug>.mp4` |
 | `animate/projects/bubble-wrap/` | the first finished short — **copy it as the template** |
 | `animate/projects/post-it-notes/` | second short (sticky notes, alembic, choir, hymn book, bazaar stall, map of America) |
@@ -47,6 +47,7 @@ Everything lives in `animate/`:
 | `animate/projects/play-doh/` | eighth short (a sooty wall wiped clean in stripes, a coal stove, a gas heater, a classroom of dough, a can that becomes a toy) |
 | `animate/projects/hollywood-sign/` | ninth short (a hillside sign whose letters rise, light up, fall and fly away; a rock star; searchlights and film reels). Keep videos under 60 s: set `duration` ≤ 59.8 |
 | `animate/projects/kentucky-fried-chicken/` | tenth short (a real person's signature look — white suit, goatee, string tie — without any logo; a bypass highway on a chart; coins per chicken into a jar) |
+| `animate/projects/big-bang/` | eleventh short (celestial spheres from Ottoman astronomy manuscripts expanding and collapsing to one point, a BBC microphone, a horn antenna, Einstein's wild hair) |
 
 Follow CLAUDE.md: never say it works until you rendered and looked at it.
 
@@ -94,7 +95,7 @@ Start from `projects/bubble-wrap/story.mjs`. It exports:
   moods: intro, groove, sad, drive, triumph, end. Match moods to the story's
   turns (failure → sad, comeback → drive, payoff → triumph).
 
-Use helpers from the kit before drawing by hand. Figures take `skin:` (a colour), `hat:` (`turban`, `fez`, `cap`, `crown`, `hotoz` for women with `veil`/`hair`, `stovepipe`, `longhair` with `hair`/`eyePaint`, `shorthair` with `hair`), `stringTie`, `mustacheColor` and `beard:` (`none`, `short`, `long`, `chin`) —
+Use helpers from the kit before drawing by hand. Figures take `skin:` (a colour), `hat:` (`turban`, `fez`, `cap`, `crown`, `hotoz` for women with `veil`/`hair`, `stovepipe`, `longhair` with `hair`/`eyePaint`, `shorthair` with `hair`, `wildhair` with `hair`), `stringTie`, `collar`, `mustacheColor` and `beard:` (`none`, `short`, `long`, `chin`) —
 match real people's skin tone (the kit default is light). Painting a
 real place, use its own landmarks (a Kyoto pagoda, not a mosque) inside the
 miniature style; don't turn a company building into a religious one. For holiday stories,

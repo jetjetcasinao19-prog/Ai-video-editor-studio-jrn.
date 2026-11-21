@@ -1,0 +1,546 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "The man who named the Big Bang didn't even believe in it. 1927, Belgium. Georges Lemaitre, a Catholic priest and physicist, has a wild idea. The universe is expanding, and it all began from one tiny point. Einstein reportedly told him, Your math is correct, but your physics is abominable. In 1949, astronomer Fred Hoyle, who thinks the universe has no beginning, calls it on BBC Radio, this Big Bang idea. The name sticks. In 1965, two American scientists detect faint leftover heat from the early universe. Le Maître hears the news shortly before he dies. A priest's idea, named by its biggest doubter. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "The",
+   "start": 0,
+   "end": 0.2
+  },
+  {
+   "w": "man",
+   "start": 0.2,
+   "end": 0.44
+  },
+  {
+   "w": "who",
+   "start": 0.44,
+   "end": 0.62
+  },
+  {
+   "w": "named",
+   "start": 0.62,
+   "end": 1.18
+  },
+  {
+   "w": "the",
+   "start": 1.18,
+   "end": 1.42
+  },
+  {
+   "w": "Big",
+   "start": 1.42,
+   "end": 1.74
+  },
+  {
+   "w": "Bang",
+   "start": 1.74,
+   "end": 2
+  },
+  {
+   "w": "didn't",
+   "start": 2,
+   "end": 3.04
+  },
+  {
+   "w": "even",
+   "start": 3.04,
+   "end": 3.36
+  },
+  {
+   "w": "believe",
+   "start": 3.36,
+   "end": 3.78
+  },
+  {
+   "w": "in",
+   "start": 3.78,
+   "end": 4.02
+  },
+  {
+   "w": "it.",
+   "start": 4.02,
+   "end": 4.28
+  },
+  {
+   "w": "1927,",
+   "start": 5.24,
+   "end": 6.58
+  },
+  {
+   "w": "Belgium.",
+   "start": 6.58,
+   "end": 7.68
+  },
+  {
+   "w": "Georges",
+   "start": 8.18,
+   "end": 8.52
+  },
+  {
+   "w": "Lemaître,",
+   "start": 8.52,
+   "end": 9.38
+  },
+  {
+   "w": "a",
+   "start": 9.38,
+   "end": 9.48
+  },
+  {
+   "w": "Catholic",
+   "start": 9.48,
+   "end": 9.88
+  },
+  {
+   "w": "priest",
+   "start": 9.88,
+   "end": 10.28
+  },
+  {
+   "w": "and",
+   "start": 10.28,
+   "end": 10.56
+  },
+  {
+   "w": "physicist,",
+   "start": 10.56,
+   "end": 11.56
+  },
+  {
+   "w": "has",
+   "start": 11.56,
+   "end": 11.58
+  },
+  {
+   "w": "a",
+   "start": 11.58,
+   "end": 11.7
+  },
+  {
+   "w": "wild",
+   "start": 11.7,
+   "end": 12.14
+  },
+  {
+   "w": "idea.",
+   "start": 12.14,
+   "end": 13.14
+  },
+  {
+   "w": "The",
+   "start": 13.36,
+   "end": 13.48
+  },
+  {
+   "w": "universe",
+   "start": 13.48,
+   "end": 14.02
+  },
+  {
+   "w": "is",
+   "start": 14.02,
+   "end": 14.42
+  },
+  {
+   "w": "expanding,",
+   "start": 14.42,
+   "end": 15.9
+  },
+  {
+   "w": "and",
+   "start": 15.9,
+   "end": 15.98
+  },
+  {
+   "w": "it",
+   "start": 15.98,
+   "end": 16.12
+  },
+  {
+   "w": "all",
+   "start": 16.12,
+   "end": 16.34
+  },
+  {
+   "w": "began",
+   "start": 16.34,
+   "end": 16.7
+  },
+  {
+   "w": "from",
+   "start": 16.7,
+   "end": 17.06
+  },
+  {
+   "w": "one",
+   "start": 17.06,
+   "end": 17.44
+  },
+  {
+   "w": "tiny",
+   "start": 17.44,
+   "end": 18.06
+  },
+  {
+   "w": "point.",
+   "start": 18.06,
+   "end": 18.5
+  },
+  {
+   "w": "Einstein",
+   "start": 19.56,
+   "end": 19.98
+  },
+  {
+   "w": "reportedly",
+   "start": 19.98,
+   "end": 20.52
+  },
+  {
+   "w": "told",
+   "start": 20.52,
+   "end": 20.84
+  },
+  {
+   "w": "him,",
+   "start": 20.84,
+   "end": 21.52
+  },
+  {
+   "w": "Your",
+   "start": 21.64,
+   "end": 21.68
+  },
+  {
+   "w": "math",
+   "start": 21.68,
+   "end": 22.04
+  },
+  {
+   "w": "is",
+   "start": 22.04,
+   "end": 22.2
+  },
+  {
+   "w": "correct,",
+   "start": 22.2,
+   "end": 23.28
+  },
+  {
+   "w": "but",
+   "start": 23.28,
+   "end": 23.4
+  },
+  {
+   "w": "your",
+   "start": 23.4,
+   "end": 23.56
+  },
+  {
+   "w": "physics",
+   "start": 23.56,
+   "end": 24.02
+  },
+  {
+   "w": "is",
+   "start": 24.02,
+   "end": 24.42
+  },
+  {
+   "w": "abominable.",
+   "start": 24.42,
+   "end": 24.98
+  },
+  {
+   "w": "In",
+   "start": 26.02,
+   "end": 26.1
+  },
+  {
+   "w": "1949,",
+   "start": 26.1,
+   "end": 27.46
+  },
+  {
+   "w": "astronomer",
+   "start": 27.46,
+   "end": 27.86
+  },
+  {
+   "w": "Fred",
+   "start": 27.86,
+   "end": 28.34
+  },
+  {
+   "w": "Hoyle,",
+   "start": 28.34,
+   "end": 28.74
+  },
+  {
+   "w": "who",
+   "start": 28.74,
+   "end": 29.02
+  },
+  {
+   "w": "thinks",
+   "start": 29.02,
+   "end": 29.3
+  },
+  {
+   "w": "the",
+   "start": 29.3,
+   "end": 29.44
+  },
+  {
+   "w": "universe",
+   "start": 29.44,
+   "end": 29.74
+  },
+  {
+   "w": "has",
+   "start": 29.74,
+   "end": 30.1
+  },
+  {
+   "w": "no",
+   "start": 30.1,
+   "end": 30.42
+  },
+  {
+   "w": "beginning,",
+   "start": 30.42,
+   "end": 31.38
+  },
+  {
+   "w": "calls",
+   "start": 31.38,
+   "end": 31.56
+  },
+  {
+   "w": "it",
+   "start": 31.56,
+   "end": 31.8
+  },
+  {
+   "w": "on",
+   "start": 31.8,
+   "end": 31.96
+  },
+  {
+   "w": "BBC",
+   "start": 31.96,
+   "end": 32.38
+  },
+  {
+   "w": "Radio,",
+   "start": 32.38,
+   "end": 33.34
+  },
+  {
+   "w": "this",
+   "start": 33.5,
+   "end": 33.72
+  },
+  {
+   "w": "Big",
+   "start": 33.72,
+   "end": 34.3
+  },
+  {
+   "w": "Bang",
+   "start": 34.3,
+   "end": 34.64
+  },
+  {
+   "w": "idea.",
+   "start": 34.64,
+   "end": 36.04
+  },
+  {
+   "w": "The",
+   "start": 36.04,
+   "end": 36.12
+  },
+  {
+   "w": "name",
+   "start": 36.12,
+   "end": 36.42
+  },
+  {
+   "w": "sticks.",
+   "start": 36.42,
+   "end": 37.88
+  },
+  {
+   "w": "In",
+   "start": 37.88,
+   "end": 37.96
+  },
+  {
+   "w": "1965,",
+   "start": 37.96,
+   "end": 39.34
+  },
+  {
+   "w": "two",
+   "start": 39.34,
+   "end": 39.46
+  },
+  {
+   "w": "American",
+   "start": 39.46,
+   "end": 39.98
+  },
+  {
+   "w": "scientists",
+   "start": 39.98,
+   "end": 40.64
+  },
+  {
+   "w": "detect",
+   "start": 40.64,
+   "end": 41.2
+  },
+  {
+   "w": "faint",
+   "start": 41.2,
+   "end": 41.66
+  },
+  {
+   "w": "leftover",
+   "start": 41.66,
+   "end": 42.26
+  },
+  {
+   "w": "heat",
+   "start": 42.26,
+   "end": 42.64
+  },
+  {
+   "w": "from",
+   "start": 42.66,
+   "end": 43
+  },
+  {
+   "w": "the",
+   "start": 43,
+   "end": 43.14
+  },
+  {
+   "w": "early",
+   "start": 43.14,
+   "end": 43.42
+  },
+  {
+   "w": "universe.",
+   "start": 43.42,
+   "end": 44.68
+  },
+  {
+   "w": "Lemaître",
+   "start": 44.68,
+   "end": 45
+  },
+  {
+   "w": "hears",
+   "start": 45,
+   "end": 45.34
+  },
+  {
+   "w": "the",
+   "start": 45.34,
+   "end": 45.54
+  },
+  {
+   "w": "news",
+   "start": 45.54,
+   "end": 45.94
+  },
+  {
+   "w": "shortly",
+   "start": 45.94,
+   "end": 46.44
+  },
+  {
+   "w": "before",
+   "start": 46.44,
+   "end": 46.76
+  },
+  {
+   "w": "he",
+   "start": 46.76,
+   "end": 46.96
+  },
+  {
+   "w": "dies.",
+   "start": 46.96,
+   "end": 48.3
+  },
+  {
+   "w": "A",
+   "start": 48.3,
+   "end": 48.42
+  },
+  {
+   "w": "priest's",
+   "start": 48.42,
+   "end": 48.98
+  },
+  {
+   "w": "idea,",
+   "start": 48.98,
+   "end": 49.98
+  },
+  {
+   "w": "named",
+   "start": 50.18,
+   "end": 50.32
+  },
+  {
+   "w": "by",
+   "start": 50.32,
+   "end": 50.94
+  },
+  {
+   "w": "its",
+   "start": 50.94,
+   "end": 51.16
+  },
+  {
+   "w": "biggest",
+   "start": 51.16,
+   "end": 51.6
+  },
+  {
+   "w": "doubter.",
+   "start": 51.6,
+   "end": 53.08
+  },
+  {
+   "w": "Every",
+   "start": 53.08,
+   "end": 53.28
+  },
+  {
+   "w": "legend",
+   "start": 53.28,
+   "end": 53.64
+  },
+  {
+   "w": "has",
+   "start": 53.64,
+   "end": 54.26
+  },
+  {
+   "w": "a",
+   "start": 54.26,
+   "end": 54.4
+  },
+  {
+   "w": "beginning.",
+   "start": 54.4,
+   "end": 54.66
+  }
+ ]
+}

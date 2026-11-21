@@ -469,6 +469,7 @@ function head(ctx, x, y, o) {
     ctx.beginPath(); ctx.moveTo(-12, 2); ctx.quadraticCurveTo(-8, L, 6, L + 4); ctx.quadraticCurveTo(18, L - 4, 17, 2); ctx.quadraticCurveTo(6, 12, -12, 2);
     fillStroke(ctx, o.beardColor || '#3a2a20', P.ink, 1.3);
   }
+  if (o.collar) { rect(ctx, -5, 18, 10, 5, P.white, P.ink, 1); }
   if (o.stringTie) { ctx.beginPath(); ctx.moveTo(-6, 24); ctx.lineTo(0, 21); ctx.lineTo(6, 24); ctx.lineTo(6, 18); ctx.lineTo(0, 21); ctx.lineTo(-6, 18); ctx.closePath(); fillStroke(ctx, P.ink, P.ink, 1); ctx.beginPath(); ctx.moveTo(-2, 22); ctx.lineTo(-4, 34); ctx.moveTo(2, 22); ctx.lineTo(4, 34); stroke(ctx, P.ink, 1.5); }
   // almond eyes + arched brows
   for (const ex of [-3, 9]) {
@@ -502,6 +503,14 @@ function head(ctx, x, y, o) {
     poly(ctx, [[-12, -20], [-8, -56], [12, -56], [16, -20]], o.hatColor || P.verm, P.ink, 1.5);
     ctx.beginPath(); ctx.moveTo(-8, -46); ctx.lineTo(12, -46); stroke(ctx, P.goldLight, 3);
     circle(ctx, 2, -60, 5, P.goldLight, P.ink, 1);
+  } else if (hat === 'wildhair') { // no hat: a big untamed halo of hair
+    const hc = o.hair || '#ececec', puffs = [[-18, -14, 11], [-10, -24, 12], [2, -28, 12], [14, -24, 12], [22, -12, 10], [-22, 2, 9], [24, 2, 9], [-20, 14, 7], [24, 14, 7]];
+    ctx.lineWidth = 3.2; ctx.strokeStyle = P.ink; for (const [a, b, r] of puffs) { ctx.beginPath(); ctx.arc(a, b, r, 0, TAU); ctx.stroke(); }
+    ctx.fillStyle = hc; for (const [a, b, r] of puffs) { ctx.beginPath(); ctx.arc(a, b, r, 0, TAU); ctx.fill(); }
+    ellipse(ctx, 2, 0, 15, 19, 0, SKIN, P.ink, 1.8);
+    for (const ex of [-3, 9]) { ctx.beginPath(); ctx.moveTo(ex - 4, -3); ctx.quadraticCurveTo(ex, -6, ex + 4, -3); ctx.quadraticCurveTo(ex, -1, ex - 4, -3); fillStroke(ctx, P.ink, P.ink, 0.8); ctx.beginPath(); ctx.moveTo(ex - 5, -8); ctx.quadraticCurveTo(ex, -11, ex + 5, -8); stroke(ctx, hc === '#ececec' ? '#9a9a9a' : P.ink, 1.8); }
+    ctx.beginPath(); ctx.moveTo(4, -2); ctx.quadraticCurveTo(10, 6, 5, 7); stroke(ctx, P.ink, 1.1);
+    if (o.mustache) { ctx.beginPath(); ctx.moveTo(-4, 9); ctx.quadraticCurveTo(4, 5, 12, 9); stroke(ctx, o.mustacheColor || hc, 4); }
   } else if (hat === 'shorthair') { // no hat: short swept hair
     ctx.beginPath(); ctx.moveTo(-15, -2); ctx.quadraticCurveTo(-20, -24, 0, -22); ctx.quadraticCurveTo(22, -24, 18, -2); ctx.quadraticCurveTo(10, -14, -4, -12); ctx.quadraticCurveTo(-10, -10, -15, -2); ctx.closePath(); fillStroke(ctx, o.hair || '#3a2a20', P.ink, 1.2);
   } else if (hat === 'longhair') { // no hat: long hair down to the shoulders
@@ -1338,6 +1347,71 @@ export function pressureCooker(ctx, x, base, s = 1, t = 0, steam = 1) {
   rect(ctx, -8, -136, 16, 20, P.ink, P.ink, 1); circle(ctx, 0, -140, 8, P.verm, P.ink, 1.5);
   for (const sx of [-1, 1]) rect(ctx, sx * 70 - (sx < 0 ? 40 : 0), -84, 40, 14, P.ink, P.ink, 1);
   if (steam > 0) for (let i = 0; i < 3; i++) { const q = (t * 0.8 + i / 3) % 1; ctx.save(); ctx.globalAlpha = (1 - q) * steam; cloud(ctx, 10 + q * 30, -170 - q * 100, 0.35 + q * 0.3, i + 60, P.white, P.grey); ctx.restore(); }
+  ctx.restore();
+}
+
+// ---------- the cosmos ----------
+// Celestial spheres in the manner of Ottoman astronomical manuscripts. k = expansion 0..1+.
+export function celestialSpheres(ctx, x, y, r, k = 1, t = 0) {
+  ctx.save(); ctx.translate(x, y);
+  const n = 6;
+  for (let i = n; i >= 1; i--) {
+    const rr = r * (i / n) * k;
+    if (rr < 1) continue;
+    ctx.beginPath(); ctx.arc(0, 0, rr, 0, TAU); ctx.fillStyle = i % 2 ? P.lapisDeep : P.lapis; ctx.fill(); stroke(ctx, P.goldLight, 3);
+    // zodiac-like ticks
+    ctx.save(); ctx.rotate(t * 0.05 * (i % 2 ? 1 : -1));
+    for (let j = 0; j < 24; j++) { const a = j / 24 * TAU; ctx.beginPath(); ctx.moveTo(Math.cos(a) * rr, Math.sin(a) * rr); ctx.lineTo(Math.cos(a) * (rr - 8), Math.sin(a) * (rr - 8)); stroke(ctx, P.goldLight, 1.2); }
+    const R = rng(i); for (let j = 0; j < 4 + i * 2; j++) { const a = R() * TAU, d = rr - r / n * (0.3 + R() * 0.4); if (d > 4) star(ctx, Math.cos(a) * d, Math.sin(a) * d, 4 + R() * 4, 1); }
+    ctx.restore();
+  }
+  ctx.restore();
+}
+export function galaxy(ctx, x, y, r, rot = 0, color = '#f6e7b4') {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot);
+  const g = ctx.createRadialGradient(0, 0, 1, 0, 0, r); g.addColorStop(0, 'rgba(255,248,220,0.95)'); g.addColorStop(0.35, 'rgba(240,210,150,0.5)'); g.addColorStop(1, 'rgba(240,210,150,0)');
+  ctx.fillStyle = g; ctx.beginPath(); ctx.ellipse(0, 0, r, r * 0.55, 0, 0, TAU); ctx.fill();
+  for (let arm = 0; arm < 2; arm++) { ctx.beginPath(); for (let i = 0; i < 40; i++) { const a = i / 40 * Math.PI * 2.2 + arm * Math.PI, d = r * i / 40; const px = Math.cos(a) * d, py = Math.sin(a) * d * 0.55; i ? ctx.lineTo(px, py) : ctx.moveTo(px, py); } stroke(ctx, color, Math.max(1.5, r * 0.08)); }
+  ctx.restore();
+}
+// A vintage broadcast microphone on a stand; waves 0..1 draws radio waves.
+export function microphone(ctx, x, base, s = 1, waves = 0, t = 0) {
+  ctx.save(); ctx.translate(x, base); ctx.scale(s, s);
+  rect(ctx, -40, -10, 80, 10, P.ink, P.ink, 1); rect(ctx, -4, -260, 8, 250, P.steel, P.ink, 1.5);
+  ctx.beginPath(); ctx.ellipse(0, -300, 34, 46, 0, 0, TAU); fillStroke(ctx, '#3a3f4a', P.ink, 2.5);
+  for (let i = -3; i <= 3; i++) { ctx.beginPath(); ctx.moveTo(-28, -300 + i * 10); ctx.lineTo(28, -300 + i * 10); stroke(ctx, '#6a7080', 1.5); }
+  rect(ctx, -40, -310, 80, 20, P.verm, P.ink, 1.5); ctx.fillStyle = P.white; ctx.font = '900 14px Deco'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('BBC', 0, -299);
+  if (waves > 0) for (let i = 0; i < 4; i++) { const q = (t * 0.8 + i / 4) % 1; ctx.save(); ctx.globalAlpha = (1 - q) * waves; ctx.beginPath(); ctx.arc(0, -300, 60 + q * 260, -0.7, 0.7); stroke(ctx, P.goldLight, 4); ctx.beginPath(); ctx.arc(0, -300, 60 + q * 260, Math.PI - 0.7, Math.PI + 0.7); stroke(ctx, P.goldLight, 4); ctx.restore(); }
+  ctx.restore();
+}
+// The horn antenna on its turntable.
+export function hornAntenna(ctx, x, base, s = 1) {
+  ctx.save(); ctx.translate(x, base); ctx.scale(s, s);
+  rect(ctx, -160, -20, 320, 20, P.steel, P.ink, 2);
+  for (const sx of [-120, 120]) { ctx.beginPath(); ctx.moveTo(sx, -20); ctx.lineTo(sx * 0.6, -120); stroke(ctx, P.ink, 6); }
+  ctx.beginPath(); ctx.moveTo(-170, -260); ctx.lineTo(120, -200); ctx.lineTo(120, -110); ctx.lineTo(-170, -60); ctx.closePath(); fillStroke(ctx, '#c9c6bf', P.ink, 2.5);
+  ctx.beginPath(); ctx.moveTo(-170, -260); ctx.lineTo(-240, -300); ctx.lineTo(-240, -10); ctx.lineTo(-170, -60); ctx.closePath(); fillStroke(ctx, '#e2dfd8', P.ink, 2.5);
+  for (let i = 1; i < 6; i++) { ctx.beginPath(); ctx.moveTo(-170 + i * 50, -260 + i * 10); ctx.lineTo(-170 + i * 50, -60 - i * 9); stroke(ctx, '#9a978f', 1.5); }
+  rect(ctx, 120, -175, 60, 40, P.steel, P.ink, 2);
+  ctx.restore();
+}
+export function chalkboard(ctx, x, y, w, h, k = 1) {
+  rect(ctx, x, y, w, h, '#2f3b33', P.brown, 8);
+  ctx.save(); ctx.beginPath(); ctx.rect(x + 10, y + 10, (w - 20) * clamp(k), h - 20); ctx.clip();
+  ctx.fillStyle = 'rgba(255,255,255,0.88)'; ctx.font = `700 ${Math.round(h * 0.11)}px GaramondItalic`; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+  ['v = H₀ · d', 'R(t) → 0', 'ä/a = −4πG(ρ+3p)/3', 'λ ∝ a(t)'].forEach((ln, i) => ctx.fillText(ln, x + 24, y + h * (0.2 + i * 0.2)));
+  ctx.restore();
+}
+// Belgian stepped-gable house front.
+export function gableHouse(ctx, x, base, w, h, wall = P.ochreLight) {
+  ctx.save(); ctx.translate(x, base);
+  const steps = 4, sw = w / 2 / steps, sh = h * 0.12;
+  ctx.beginPath(); ctx.moveTo(-w / 2, 0); ctx.lineTo(-w / 2, -h);
+  for (let i = 0; i < steps; i++) { ctx.lineTo(-w / 2 + i * sw, -h - (i + 1) * sh); ctx.lineTo(-w / 2 + (i + 1) * sw, -h - (i + 1) * sh); }
+  for (let i = steps - 1; i >= 0; i--) { ctx.lineTo(w / 2 - i * sw, -h - (i + 1) * sh); ctx.lineTo(w / 2 - i * sw, -h - i * sh); }
+  ctx.lineTo(w / 2, 0); ctx.closePath(); fillStroke(ctx, wall, P.ink, 2);
+  for (let r = 0; r < 2; r++) for (let c = 0; c < 2; c++) rect(ctx, -w * 0.3 + c * w * 0.38, -h * 0.85 + r * h * 0.38, w * 0.2, h * 0.24, P.lapis, P.ink, 1.3);
+  arch(ctx, 0, 0, w * 0.22, h * 0.32, P.brown);
   ctx.restore();
 }
 
