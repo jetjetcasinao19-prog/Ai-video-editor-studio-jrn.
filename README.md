@@ -38,7 +38,14 @@ action (walk, run, wave, talk, think, idea, point, jump, celebrate, dance,
 shrug, sit, fall, sad, title card). Edit the script (`3 wave: Hi!` = 3 seconds
 of waving with the caption "Hi!"), pick 9:16 / 16:9 / 1:1 and a background,
 preview, then export MP4 (WebM on phones without MP4) and share to CapCut or
-open it in the editor for music and voice-over. Runs offline on the phone.
+open it in the editor for music. Runs offline on the phone.
+- **Character:** "Signature" (solid round head, blinking eyes, smooth limbs, a
+  gold scarf that flutters as he moves) or "Classic" stick figure.
+- **Narration voice:** pick an AI voice (9 US/UK voices, speed control) and tap
+  **Make narration**. The voice runs on the phone (Kokoro; first use downloads
+  about 92 MB, then works offline). Shots stretch to fit the voice and the
+  narration is saved inside the exported video; "Save voice-over (.wav)" gives
+  the voice on its own.
 
 ## "Edit this" automatic workflow
 Say "edit this" to Claude with a video: it transcribes (Groq Whisper), cuts
@@ -56,7 +63,7 @@ model switching) and `CLAUDE.md` (project rules).
 `node tests/caption-style.test.js`, `node tests/scene-detection.test.js`,
 `node tests/transitions.test.js`, `node tests/music.test.js`,
 `node tests/templates.test.js`, `node tests/assistant.test.js`,
-`node tests/mp4-export.test.js`, `node tests/projects.test.js`, `node tests/stickman.test.js` and
+`node tests/mp4-export.test.js`, `node tests/projects.test.js`, `node tests/stickman.test.js`, `node tests/stickman-voice.test.js` (needs internet) and
 `node tests/capcut.test.js` (needs ffmpeg
 with flite, Playwright, internet). Runs automatically on
 GitHub Actions for every push.

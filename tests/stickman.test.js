@@ -2,7 +2,7 @@
 // offline "Direct my story" rules, animation frames and video export.
 // Run: node tests/stickman.test.js   (needs playwright; ffprobe optional)
 const { chromium, devices } = require('playwright');
-const { execFileSync } = require('child_process');
+const { execFileSync, spawnSync } = require('child_process');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
@@ -105,6 +105,57 @@ function check(name, ok, detail) {
       const [w, h, n] = info.split(',').map(Number);
       check('exported video is 720x1280 with frames', w === 720 && h === 1280 && n > 20, info);
     } catch (e) { console.log('SKIP ffprobe check (' + e.message.split('\n')[0] + ')'); }
+  }
+
+  // 9. both characters draw
+  const styles = await page.evaluate(() => {
+    const c = document.createElement('canvas'); c.width = 360; c.height = 640; const x = c.getContext('2d');
+    const plan = Stickman.parseScript('3 wave: Hi'); Stickman.planPositions(plan.shots);
+    const res = {};
+    for (const style of ['signature', 'classic']) {
+      Stickman.renderFrame(x, plan, 1, { scene: 'brand', stickColor: '#ffffff', accent: '#f5c400', handle: '', capSize: 1, style });
+      const d = x.getImageData(0, 0, 360, 520).data; let gold = 0, white = 0;
+      for (let i = 0; i < d.length; i += 4) { if (d[i] > 200 && d[i + 1] > 150 && d[i + 2] < 60) gold++; if (d[i] > 220 && d[i + 1] > 220 && d[i + 2] > 220) white++; }
+      res[style] = { gold, white };
+    }
+    return res;
+  });
+  check('signature character has a gold scarf', styles.signature.gold > 150, styles.signature.gold);
+  check('classic character still available', styles.classic.white > 300 && styles.classic.gold < 20, JSON.stringify(styles.classic));
+
+  // 10. narration timing, WAV and audio in the export (fake voice clip, no download)
+  await page.selectOption('#voiceMode', 'ai');
+  await page.fill('#script', '1 wave: Hello world\n1 jump');
+  const missing = await page.textContent('#voiceMsg');
+  check('voice: says lines are missing', /0 of 1 lines voiced/.test(missing), missing);
+  const timing = await page.evaluate(() => {
+    const rate = 24000, n = rate * 2, a = new Float32Array(n + rate / 2);
+    for (let i = 0; i < n; i++) a[i + rate / 4] = 0.4 * Math.sin(2 * Math.PI * 220 * i / rate);
+    Stickman.addVoiceClip('Hello world', a, rate); Stickman.rebuild();
+    const p = Stickman.plan(); return { d0: p.shots[0].dur, s1: p.shots[1].start, voiced: !!p.shots[0].voice, msg: document.getElementById('voiceMsg').textContent };
+  });
+  check('voice: silence trimmed, shot stretched to fit', timing.voiced && timing.d0 > 2.5 && timing.d0 < 2.9, JSON.stringify(timing));
+  check('voice: next shot starts after the voice', Math.abs(timing.s1 - timing.d0) < 1e-9);
+  check('voice: all lines voiced message', /All 1 lines voiced/.test(timing.msg), timing.msg);
+  const wav = await page.evaluate(async () => { const b = Stickman.narrationWav(); const v = new DataView(await b.arrayBuffer()); return { size: b.size, rate: v.getUint32(24, true) }; });
+  check('voice: WAV voice-over', wav.rate === 24000 && wav.size > 24000 * 2 * 3, JSON.stringify(wav));
+  await page.evaluate(() => { window.__lastExport = null; });
+  await page.click('#exportBtn');
+  await page.waitForFunction(() => window.__lastExport, null, { timeout: 30000 });
+  const ex2 = await page.evaluate(() => window.__lastExport);
+  check('voice: export with narration', !ex2.error && ex2.size > 5000, JSON.stringify(ex2));
+  if (!ex2.error) {
+    const dl = page.waitForEvent('download');
+    await page.click('#dlLink button');
+    const file = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'stickv-')), 'out.' + ex2.ext);
+    await (await dl).saveAs(file);
+    try {
+      const streams = execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'stream=codec_type', '-of', 'csv=p=0', file]).toString();
+      check('voice: exported video has a sound track', /audio/.test(streams), streams.replace(/\n/g, ' '));
+      const vol = spawnSync('ffmpeg', ['-hide_banner', '-i', file, '-vn', '-af', 'volumedetect', '-f', 'null', '-']).stderr.toString();
+      const m = /max_volume: (-?[\d.]+) dB/.exec(vol);
+      check('voice: sound track is not silent', m && parseFloat(m[1]) > -30, m ? m[1] + ' dB' : 'no volume');
+    } catch (e) { console.log('SKIP ffprobe/ffmpeg check (' + String(e.message).split('\n')[0] + ')'); }
   }
 
   check('no page errors', errors.length === 0, errors.join(' | '));
