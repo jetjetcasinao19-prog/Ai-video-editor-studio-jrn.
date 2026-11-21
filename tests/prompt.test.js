@@ -34,9 +34,10 @@ ff(['-f', 'lavfi', '-i', 'color=c=red:size=360x640', '-frames:v', '1', RED]);
   page.on('dialog', d => d.accept());
 
   // Stand-in for Pollinations: a red picture, or the free-limit answer.
-  let mode = 'ok', lastUrl = '';
+  let mode = 'ok', lastUrl = '', hits = 0;
   await page.route('https://image.pollinations.ai/**', route => {
-    lastUrl = route.request().url();
+    lastUrl = route.request().url(); hits++;
+    if (mode === 'busyonce') { mode = 'ok'; return route.fulfill({ status: 503, body: 'busy', headers: { 'access-control-allow-origin': '*' } }); }
     if (mode === 'limit') return route.fulfill({ status: 402, contentType: 'application/json',
       headers: { 'access-control-allow-origin': '*' },
       body: JSON.stringify({ status: 402, error: { code: 'FREE_LIMIT', message: 'Free limit reached: 1 image every 45 seconds per IP. Retry after 36s' } }) });
@@ -155,9 +156,13 @@ ff(['-f', 'lavfi', '-i', 'color=c=red:size=360x640', '-frames:v', '1', RED]);
     mode = 'limit';
     log = await run('picture a castle');
     check('free limit: says how long to wait', log[0].cls === 'err' && /Wait 36 seconds/.test(log[0].text), log[0].text);
-    mode = 'down';
+    await page.evaluate(() => { PIC_RETRY_MS = 50; });
+    mode = 'busyonce'; hits = 0;
     log = await run('picture a castle');
-    check('service error explained', log[0].cls === 'err' && /error 500/.test(log[0].text), log[0].text);
+    check('busy service (503): tries again by itself and succeeds', log[0].cls === 'ok' && hits === 2, hits + ' requests: ' + log[0].text);
+    mode = 'down'; hits = 0;
+    log = await run('picture a castle');
+    check('service error explained after 3 tries', log[0].cls === 'err' && /error 500/.test(log[0].text) && hits === 3, hits + ' requests: ' + log[0].text);
     check('generate button usable again', !(await page.isDisabled('#pmPicGen')));
     mode = 'ok';
     await page.click('#pmTabPic');

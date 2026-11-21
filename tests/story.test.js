@@ -217,6 +217,7 @@ function check(name, ok, detail) {
   await page.route('https://image.pollinations.ai/**', route => {
     picUrl = route.request().url();
     if (picMode === 'limit') return route.fulfill({ status: 429, body: 'slow down', headers: { 'access-control-allow-origin': '*' } });
+    if (picMode === 'busyonce') { picMode = 'ok'; return route.fulfill({ status: 503, body: 'busy', headers: { 'access-control-allow-origin': '*' } }); }
     return route.fulfill({ status: 200, contentType: 'image/png', headers: { 'access-control-allow-origin': '*' }, body: fs.readFileSync(IMG) });
   });
   await page.click('.scene[data-i="1"] [data-a="free-img"]');
@@ -229,6 +230,11 @@ function check(name, ok, detail) {
   await page.click('.scene[data-i="2"] [data-a="free-img"]');
   await page.waitForFunction(() => /every 45 seconds/.test(document.querySelector('.scene[data-i="2"] .genbox').textContent), null, { timeout: 10000 });
   check('free picture limit message', true);
+  picMode = 'busyonce';
+  await page.evaluate(() => { window.PIC_RETRY_MS = 50; document.querySelector('.scene[data-i="1"] img.thumb').remove(); });
+  await page.click('.scene[data-i="1"] [data-a="free-img"]');
+  await page.waitForSelector('.scene[data-i="1"] img.thumb', { timeout: 15000 });
+  check('busy picture service (503): tries again by itself', picMode === 'ok' && /Start image made/.test(await page.textContent('.scene[data-i="1"] .genbox')));
   picMode = 'ok';
   await page.click('#skipImg'); // images back on (was skipped earlier)
   await page.click('#imgPlat button[data-p="free"]');

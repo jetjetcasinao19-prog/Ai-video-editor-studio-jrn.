@@ -716,7 +716,17 @@ async function makeFreeImage(i){
  picBusy=true; setGen(i,"🎨 Making the start image… (usually 5–30 seconds)");
  const ctrl=new AbortController(), timer=setTimeout(()=>ctrl.abort(),120000);
  try{
-  const res=await fetch(url,{signal:ctrl.signal});
+  let res=null;
+  // The free service is sometimes busy (error 503) or the connection drops: try again twice by itself.
+  for(let attempt=0;attempt<3;attempt++){
+   try{ res=await fetch(url,{signal:ctrl.signal}); }catch(e){ if(e.name==="AbortError"||attempt===2) throw e; res=null; }
+   if(res&&res.status<500) break;
+   if(attempt===2) break;
+   const wait=(window.PIC_RETRY_MS||8000)*(attempt+1);
+   setGen(i,"The picture service is busy — trying again in "+Math.round(wait/1000)+" s…");
+   await new Promise(r=>setTimeout(r,wait));
+   setGen(i,"🎨 Making the start image… (try "+(attempt+2)+" of 3)");
+  }
   if(res.status===402||res.status===429){ setGen(i,"Free picture limit: the free service allows 1 picture every 45 seconds. Wait a moment and tap again."); return false; }
   if(!res.ok){ setGen(i,"The picture service had a problem (error "+res.status+"). Try again in a minute."); return false; }
   const blob=await res.blob();

@@ -3776,6 +3776,7 @@ function picSize(){
 // Returns {ok:true,blob} or {ok:false,wait (seconds, free limit),msg}.
 let lastPicAt=0;              // when the last picture was asked for (free limit)
 let PIC_GAP_MS=46000;         // free limit: 1 picture every 45 s
+let PIC_RETRY_MS=8000;        // wait before trying again when the service is busy (5xx)
 async function pollinationsPicture(prompt,w,h,seed){
  const url=PIC_API+encodeURIComponent(prompt)+"?width="+w+"&height="+h+"&seed="+seed+"&nologo=true&safe=true";
  const ctrl=new AbortController();
@@ -3788,12 +3789,12 @@ async function pollinationsPicture(prompt,w,h,seed){
    try{ const j=await res.json(); const m=/retry after (\d+)/i.exec(j&&j.error&&j.error.message||""); if(m) wait=Number(m[1]); }catch(e){}
    return {ok:false,wait:wait||45,msg:"The free picture limit was reached. Wait "+(wait?wait+" seconds":"about a minute")+" and try again."};
   }
-  if(!res.ok) return {ok:false,msg:"The picture service had a problem (error "+res.status+"). Try again in a minute."};
+  if(!res.ok) return {ok:false,retry:res.status>=500,msg:"The picture service had a problem (error "+res.status+"). Try again in a minute."};
   const blob=await res.blob();
-  if(!/^image\//.test(blob.type)) return {ok:false,msg:"The picture service did not send a picture. Try again."};
+  if(!/^image\//.test(blob.type)) return {ok:false,retry:true,msg:"The picture service did not send a picture. Try again."};
   return {ok:true,blob};
  }catch(err){
-  return {ok:false,msg:err.name==="AbortError"?"The picture took too long. Try again.":"Could not reach the picture service. Check your internet and try again."};
+  return {ok:false,retry:true,msg:err.name==="AbortError"?"The picture took too long. Try again.":"Could not reach the picture service. Check your internet and try again."};
  }finally{ clearTimeout(timer); }
 }
 
@@ -3828,7 +3829,16 @@ async function generatePicture(prompt){
  $("pmPicGen").disabled=true; $("pmPicProgress").hidden=false;
  picStatus("Making your picture… (usually 5–30 seconds)");
  try{
-  const r=await pollinationsPicture(full,w,h,seed);
+  let r=null;
+  // The free service is sometimes busy (error 503): try again twice by itself.
+  for(let attempt=0;attempt<3;attempt++){
+   r=await pollinationsPicture(full,w,h,seed);
+   if(r.ok||!r.retry||attempt===2) break;
+   const wait=PIC_RETRY_MS*(attempt+1);
+   picStatus("The picture service is busy — trying again in "+Math.round(wait/1000)+" s…");
+   await new Promise(res=>setTimeout(res,wait));
+   picStatus("Making your picture… (try "+(attempt+2)+" of 3)");
+  }
   if(!r.ok) return {ok:false,msg:r.msg};
   if(!await setVideoPicture(r.blob,"ai-picture-"+seed+(r.blob.type==="image/png"?".png":".jpg")))
    return {ok:false,msg:"The picture could not be opened. Try again."};
@@ -4438,6 +4448,7 @@ async function stRunFree(){
       it.outs.push({url:URL.createObjectURL(r.blob),name:stFileName(it,it.outs.length,ext,seed)});
       made++; break;
      }
+     if(r.retry&&tries<2){ if(!await stWait(PIC_RETRY_MS*(tries+1),"The picture service is busy — trying again in")) break; continue; }
      if(!r.wait) break;
      if(!await stWait(r.wait*1000+1000,"Free limit: trying again in")) break;
     }

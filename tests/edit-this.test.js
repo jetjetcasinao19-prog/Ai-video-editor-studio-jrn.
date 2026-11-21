@@ -13,7 +13,7 @@ const path = require('path');
 
 const PAGE = 'file://' + path.resolve(__dirname, '..', 'index.html');
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'edit-this-test-'));
-const VIDEO = path.join(tmp, 'talk.mp4');
+const VIDEO = path.join(tmp, 'talk.webm'); // VP8/Opus: GitHub's open-source Chromium has no H.264
 const RED = path.join(tmp, 'red.png');
 
 let failures = 0;
@@ -31,7 +31,7 @@ ff(['-i', path.join(tmp, 's1.wav'), '-i', path.join(tmp, 's2.wav'), '-filter_com
   '-map', '[a]', path.join(tmp, 'talk.wav')]);
 const T = Number(execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', path.join(tmp, 'talk.wav')]).toString());
 ff(['-f', 'lavfi', '-i', 'color=c=gray:size=640x360:rate=30', '-i', path.join(tmp, 'talk.wav'), '-t', String(T),
-  '-c:v', 'libx264', '-preset', 'ultrafast', '-pix_fmt', 'yuv420p', '-c:a', 'aac', VIDEO]);
+  '-c:v', 'libvpx', '-deadline', 'realtime', '-cpu-used', '8', '-b:v', '300k', '-c:a', 'libopus', VIDEO]);
 ff(['-f', 'lavfi', '-i', 'color=c=red:size=1200x800', '-frames:v', '1', RED]);
 
 // Captions like Whisper makes them, at the speech times.
@@ -56,8 +56,8 @@ const red = c => c[0] > 150 && c[1] < 90 && c[2] < 90;
 const dark = c => c[0] < 60 && c[1] < 60 && c[2] < 60;
 
 (async () => {
-  // The test video is H.264/AAC MP4 (like phone videos). Playwright's own Chromium on
-  // Linux cannot play H.264, so CI runs this in Google Chrome (PW_CHANNEL=chrome).
+  // The test video is VP8 WebM, so it plays in any Chromium. CI also runs this in
+  // Google Chrome (PW_CHANNEL=chrome), the browser closest to Chrome on Android.
   const browser = await chromium.launch({ channel: process.env.PW_CHANNEL || undefined, args: ['--autoplay-policy=no-user-gesture-required'] });
   const context = await browser.newContext({ ...devices['Pixel 7'], acceptDownloads: true });
   const page = await context.newPage();
