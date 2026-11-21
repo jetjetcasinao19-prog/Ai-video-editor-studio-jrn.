@@ -12,7 +12,9 @@
 //   --format 9:16|16:9|1:1        (default 9:16)
 //   --captions creator|box|classic|none   (default creator)
 //   --language en|tl|…   spoken language (default: auto-detect)
-//   --transcriber auto|groq|local|none     (default auto: Groq, else local)
+//   --transcriber auto|omniroute|groq|local|none
+//                        (default auto: OmniRoute if OMNIROUTE_URL is set,
+//                        then Groq, else local Whisper)
 //   --cut-pauses / --no-cut-pauses          (default on)
 //   --min-pause 0.6      shortest pause to cut, seconds
 //   --max-length 60      cut the result to at most N seconds
@@ -88,7 +90,7 @@ function parseArgs(argv) {
   if (!SIZES[o.format]) throw new Error('--format must be 9:16, 16:9 or 1:1');
   if (o.captions !== undefined && !['creator', 'box', 'classic', 'none'].includes(o.captions)) throw new Error('--captions must be creator, box, classic or none');
   if (o.zoom !== undefined && !['punch', 'slow', 'none'].includes(o.zoom)) throw new Error('--zoom must be punch, slow or none');
-  if (!['auto', 'groq', 'local', 'none'].includes(o.transcriber)) throw new Error('--transcriber must be auto, groq, local or none');
+  if (!['auto', 'omniroute', 'groq', 'local', 'none'].includes(o.transcriber)) throw new Error('--transcriber must be auto, omniroute, groq, local or none');
   return o;
 }
 
@@ -118,24 +120,50 @@ export function probe(file) {
 }
 
 // ---------- 2. transcribe ----------
-async function transcribeGroq(audioMp3, language) {
+// OmniRoute (github.com/cheaper-inference/OmniRoute) is a self-hosted,
+// OpenAI-compatible AI gateway: one endpoint in front of many providers, with
+// automatic fallback. Turned on by setting OMNIROUTE_URL, for example
+// http://localhost:20128/v1. OMNIROUTE_API_KEY is the key from its dashboard
+// (Endpoints page); OMNIROUTE_TRANSCRIBE_MODEL picks the Whisper model
+// (default groq/whisper-large-v3-turbo; the provider must be connected in OmniRoute).
+export function omnirouteConfig(env = process.env) {
+  let url = String(env.OMNIROUTE_URL || '').trim().replace(/\/+$/, '');
+  if (!url) return null;
+  if (!/\/v1$/.test(url)) url += '/v1';
+  return {
+    endpoint: url + '/audio/transcriptions',
+    key: env.OMNIROUTE_API_KEY || '',
+    model: env.OMNIROUTE_TRANSCRIBE_MODEL || 'groq/whisper-large-v3-turbo',
+    label: 'OmniRoute'
+  };
+}
+
+// Any OpenAI-style /audio/transcriptions endpoint (Groq directly, or OmniRoute).
+async function transcribeOpenAICompatible({ endpoint, key, model, label }, audioMp3, language) {
   const size = fs.statSync(audioMp3).size;
-  if (size > 24 * 1024 * 1024) throw new Error('Audio is too long for one Groq request (' + (size / 1048576).toFixed(1) + ' MB).');
+  if (size > 24 * 1024 * 1024) throw new Error('Audio is too long for one ' + label + ' request (' + (size / 1048576).toFixed(1) + ' MB).');
   const form = new FormData();
   form.append('file', new Blob([fs.readFileSync(audioMp3)], { type: 'audio/mpeg' }), 'audio.mp3');
-  form.append('model', 'whisper-large-v3-turbo');
+  form.append('model', model);
   form.append('response_format', 'verbose_json');
+  // "word" first: some gateways (OmniRoute) forward only the first value.
   form.append('timestamp_granularities[]', 'word');
   form.append('timestamp_granularities[]', 'segment');
   if (language) form.append('language', language);
-  // The key is added by the session's network proxy (or GROQ_API_KEY locally).
-  const res = await fetch('https://api.groq.com/openai/v1/audio/transcriptions', {
-    method: 'POST', body: form, headers: { Authorization: 'Bearer ' + (process.env.GROQ_API_KEY || 'proxy-injected') }
-  });
+  const res = await fetch(endpoint, { method: 'POST', body: form, headers: key ? { Authorization: 'Bearer ' + key } : {} });
   const body = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error('Groq ' + res.status + ': ' + (body.error?.message || res.statusText));
+  if (!res.ok) throw new Error(label + ' ' + res.status + ': ' + (body.error?.message || res.statusText));
   const words = (body.words || []).map(w => ({ w: String(w.word).trim(), start: w.start, end: w.end })).filter(w => w.w);
-  return { engine: 'groq whisper-large-v3-turbo', language: body.language, text: body.text || '', words };
+  if (!words.length && String(body.text || '').trim()) throw new Error(label + ' returned text without word timings (model ' + model + ').');
+  return { engine: label.toLowerCase() + ' ' + model, language: body.language, text: body.text || '', words };
+}
+
+function transcribeGroq(audioMp3, language) {
+  // The key is added by the session's network proxy (or GROQ_API_KEY locally).
+  return transcribeOpenAICompatible({
+    endpoint: 'https://api.groq.com/openai/v1/audio/transcriptions',
+    key: process.env.GROQ_API_KEY || 'proxy-injected', model: 'whisper-large-v3-turbo', label: 'Groq'
+  }, audioMp3, language);
 }
 
 async function transcribeLocal(audioWav, language) {
@@ -389,9 +417,22 @@ export async function editVideo(opts) {
     await run('ffmpeg', ['-y', '-i', input, '-vn', '-ac', '1', '-ar', '16000', '-c:a', 'pcm_s16le', wav]);
     // 3. transcribe
     const want = opts.captions === 'none' && opts.transcriber === 'auto' ? 'none' : opts.transcriber;
-    if (want === 'groq' || want === 'auto') {
+    const omni = omnirouteConfig();
+    if (want === 'omniroute' && !omni) throw new Error('--transcriber omniroute needs OMNIROUTE_URL (for example http://localhost:20128/v1)');
+    const madeMp3 = () => fs.existsSync(mp3) ? null : run('ffmpeg', ['-y', '-i', wav, '-c:a', 'libmp3lame', '-b:a', '32k', mp3]);
+    // auto: OmniRoute (when OMNIROUTE_URL is set) → Groq → local Whisper
+    if (omni && (want === 'omniroute' || want === 'auto')) {
       try {
-        await run('ffmpeg', ['-y', '-i', wav, '-c:a', 'libmp3lame', '-b:a', '32k', mp3]);
+        await madeMp3();
+        transcript = await transcribeOpenAICompatible(omni, mp3, opts.language);
+      } catch (e) {
+        if (want === 'omniroute') throw e;
+        step('omniroute-unavailable', { reason: e.message });
+      }
+    }
+    if (transcript.engine === 'none' && (want === 'groq' || want === 'auto')) {
+      try {
+        await madeMp3();
         transcript = await transcribeGroq(mp3, opts.language);
       } catch (e) {
         if (want === 'groq') throw e;

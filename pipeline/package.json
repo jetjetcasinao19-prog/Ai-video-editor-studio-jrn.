@@ -8,7 +8,7 @@
   },
   "scripts": {
     "edit": "node edit.mjs",
-    "test": "node test/pipeline.test.mjs"
+    "test": "node test/pipeline.test.mjs && node test/omniroute.test.mjs"
   },
   "dependencies": {
     "hyperframes": "0.9.17",
