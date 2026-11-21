@@ -55,6 +55,7 @@ These rules apply to every Claude session and every team agent in `.claude/agent
 - [x] AI Prompt panel (typed commands/scripts run the editor; prompt → picture via free Pollinations.ai, download or show on video; tests/prompt.test.js)
 - [x] Prompt Studio + red restyle (prompt queue → free pictures, Stickman, or guided copy/open/share hand-off to Flow, Gemini, ChatGPT, Grok — no automation of those sites; .txt/.csv; start frames; tab bar; tests/studio.test.js)
 - [x] ⚡ Edit this in the app (the edit-this skill on the phone: brand, Whisper captions with word highlight, cut pauses, max length, hook intro card, punch/slow zoom, Wikimedia B-roll, pop-ups, whoosh/pop, progress bar, logo, outro, export, thumbnail, post text, ET/PHT schedule; never posts; tests/edit-this.test.js)
+- [x] My Google Flow account (owner's Gmail saved only on the phone, never in code: Flow buttons open flow.google.com in that account via authuser; Google sign-in with the email filled in; shared by index.html and story.html; accepts flow.google.com project links; tests/studio.test.js, tests/story.test.js)
 - [x] Google AI in the Prompt Studio (owner's own Gemini API key, saved only on the phone: Gemini Omni Flash videos (Veo was shut down in the Gemini API on Oct 22, 2026) and Nano Banana pictures via the REST interactions endpoint; cost shown and confirmed before spending; USE IN EDITOR; Flow itself has no API, so it stays a hand-off; tests/google-ai.test.js)
 
 ## "Edit this" workflow (server side)

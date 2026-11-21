@@ -191,8 +191,25 @@ fs.writeFileSync(CSV, 'id,Prompt,notes\n1,"Ford Model T, 1910",a\n2,"A lighthous
     await page.click('#stRun');
     await page.waitForFunction(() => window.__copied.length === 2);
     check('Flow gets the prompt as written and opens Flow', (await page.evaluate(() => window.__copied[1])) === 'a red car drives' &&
-      (await page.evaluate(() => window.__opened.slice(-1)[0][0])) === 'https://labs.google/fx/tools/flow');
+      (await page.evaluate(() => window.__opened.slice(-1)[0][0])) === 'https://flow.google.com/');
     check('Flow NEXT button waits for prompt 2', /NEXT: PROMPT 2 OF 2/.test(await page.textContent('#stRun')));
+    check('Flow account box shown for Flow', await page.isVisible('#stFlowBox'));
+    await page.fill('#stFlowAcct', 'Test.Creator@gmail.com');
+    await page.click('#stFlowSave');
+    check('Flow account saved on the phone', await page.evaluate(() => localStorage.getItem('aves.flowAccount')) === 'test.creator@gmail.com' &&
+      /Flow opens in test\.creator@gmail\.com/.test(await page.textContent('#stFlowStatus')));
+    await page.click('#stQueue .qi:nth-child(2) button:has-text("COPY & OPEN")');
+    await page.waitForFunction(() => window.__copied.length === 3);
+    check('Flow opens in that account', (await page.evaluate(() => window.__opened.slice(-1)[0][0])) === 'https://flow.google.com/?authuser=test.creator%40gmail.com',
+      await page.evaluate(() => window.__opened.slice(-1)[0][0]));
+    await page.evaluate(() => localStorage.setItem('story.flow', 'https://flow.google.com/project/p9'));
+    await page.click('#stFlowSignIn');
+    const signIn = await page.evaluate(() => window.__opened.slice(-1)[0][0]);
+    check('SIGN IN TO FLOW: email filled in, then my Story Studio project', signIn.startsWith('https://accounts.google.com/ServiceLogin?Email=test.creator%40gmail.com&continue=') &&
+      decodeURIComponent(signIn.split('continue=')[1]) === 'https://flow.google.com/project/p9?authuser=test.creator%40gmail.com', signIn);
+    await page.click('#stFlowForget');
+    await page.evaluate(() => localStorage.removeItem('story.flow'));
+    check('FORGET removes the account', await page.evaluate(() => localStorage.getItem('aves.flowAccount')) === null);
     check('Frame to Video without pictures is refused (new mode = new queue)', await (async () => {
       await page.click('#stModes button[data-m="f2v"]');
       await page.click('#stImgClear');
