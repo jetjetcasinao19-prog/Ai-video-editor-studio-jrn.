@@ -1,6 +1,6 @@
 ---
 name: edit-this
-description: The owner's one-command video workflow. Use when the owner says "edit this", "edit this video", "make this a reel/short", or sends a video and asks for it to be edited, captioned, made into content or scheduled. Runs the FFmpeg + Groq + HyperFrames pipeline, writes the post copy and adds it to the posting schedule.
+description: The owner's one-command video workflow. Use when the owner says "edit this", "edit this video", "make this a reel/short", or sends a video and asks for it to be edited, captioned, made into content or scheduled. Runs the FFmpeg + Groq + HyperFrames pipeline, writes the post copy and adds it to the posting schedule. NOT for "edit this in 2D(…)" (for example "edit this in 2D(OTTOMAN)") — that phrase means the animated-short skill.
 ---
 
 # "Edit this" — from raw video to a scheduled post

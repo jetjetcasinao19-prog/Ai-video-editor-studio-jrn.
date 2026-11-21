@@ -1,7 +1,22 @@
 ---
 name: animated-short
-description: Turn a voice-over into a 2D animated short drawn entirely in code (no stock footage, no AI images) — every frame painted on a canvas, synced word-by-word to the voice, with a generated soundtrack and sound effects. Use when the owner sends a voice-over (mp3/wav) and asks for an animated video, a cartoon, a "2D animated short", or a video "written from code", or names a visual style (first style: Ottoman miniature painting).
+description: Turn a voice-over into a 2D animated short drawn entirely in code (no stock footage, no AI images) — every frame painted on a canvas, synced word-by-word to the voice, with a generated soundtrack, sound effects, post copy and a schedule row. ALWAYS use when the owner says "edit this in 2D(OTTOMAN)" or "edit this in 2D (<style>)" (any spacing or capitals, e.g. "edit this in 2d ottoman"), and when the owner sends a voice-over (mp3/wav) and asks for an animated video, a cartoon, a "2D animated short", or a video "written from code". Styles: OTTOMAN (Ottoman miniature painting).
 ---
+
+## Trigger: "edit this in 2D(STYLE)"
+This is the owner's one-command phrase for this skill (the plain "edit this"
+skill is for real footage; anything with "in 2D" comes here). Do every step
+below without asking questions you can answer yourself:
+- **Style** = the word in brackets, lower-cased → `animate/styles/<style>/`
+  (`OTTOMAN` → `styles/ottoman`). No brackets → Ottoman. A style that does
+  not exist yet: say so in one line and offer to build it as a new style
+  (see the end of this file) or to use Ottoman now.
+- **Voice-over** = the audio file attached in this conversation; else the
+  newest `.mp3`/`.wav`/`.m4a` in `inbox/`. None → ask for it in one line.
+- **Script** = the text the owner pasted, if any (use it to fix the spelling
+  of names); otherwise the transcript.
+- **Finish the whole job**: render → check → send the MP4 → publisher agent
+  writes post copy + schedule rows (step 7) → commit and push.
 
 # Animated short from a voice-over — all code
 
@@ -93,12 +108,24 @@ grab frames at transitions with `ffmpeg -ss <t> -i out.mp4 -frames:v 1`, and
 measure loudness (`ffmpeg -i build/mix.wav -af ebur128 -f null -` → about −14 LUFS).
 You cannot hear the audio — say so, and ask the owner to listen.
 
-## 7. Hand-off
-Send the MP4 to the owner (SendUserFile). Do not commit the MP4 or
-`build/` (gitignored, too large); commit the project's `story.mjs`,
-`words.json` and `voice.mp3`. Offer the publisher agent for titles,
-hashtags and a schedule row (`content/schedule.md`), and **never post
-anything without the owner's explicit yes**.
+## 7. Hand-off: post copy + schedule
+1. Send the MP4 to the owner (SendUserFile).
+2. Use the **publisher** agent (`.claude/agents/publisher.md`) to write
+   `content/posts/<YYYY-MM-DD>-<slug>.md` (same format as the other files
+   there: hook, summary, fact-check notes, and title/description/hashtags for
+   YouTube Shorts, TikTok, Instagram Reels, Facebook Reels, always with the
+   brand hashtags) and to add one row per platform to `content/schedule.md`.
+   Give it the exact voice-over text, the dates/facts shown on screen, and
+   tell it: **US audience**, times in US Eastern Time with the owner's
+   Philippine time next to them (PHT = ET + 13 h Nov–Mar, + 12 h in US
+   daylight saving), status `ready`, and no clashes with existing rows.
+3. Check its file and rows yourself (dates, weekday, PHT day roll-over,
+   no claims the video does not make).
+4. Commit `story.mjs`, `words.json`, `voice.mp3`, the post file and the
+   schedule. Do not commit the MP4 or `build/` (gitignored, too large).
+
+**Never post anything without the owner's explicit yes**, and never mark a
+row `posted` unless the owner says they posted it.
 
 ## Adding another style
 Make `animate/styles/<style>/index.mjs` exporting `createRenderer(project)`

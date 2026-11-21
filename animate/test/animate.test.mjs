@@ -84,3 +84,14 @@ test('renders a 1-second MP4 with picture and sound', { skip: process.env.NODE_T
   assert.match(probe, /video,1080,1920/);
   assert.match(probe, /audio/);
 });
+
+test('skill trigger "edit this in 2D(OTTOMAN)" points at an existing style', () => {
+  const root = path.join(HERE, '..', '..');
+  const skill = fs.readFileSync(path.join(root, '.claude', 'skills', 'animated-short', 'SKILL.md'), 'utf8');
+  const desc = skill.split('\n').find(l => l.startsWith('description:'));
+  assert.ok(desc.includes('edit this in 2D(OTTOMAN)'), 'phrase is in the skill description');
+  const style = /edit this in 2D\((\w+)\)/.exec(desc)[1].toLowerCase();
+  assert.ok(fs.existsSync(path.join(HERE, '..', 'styles', style, 'index.mjs')), 'styles/' + style + ' exists');
+  const editThis = fs.readFileSync(path.join(root, '.claude', 'skills', 'edit-this', 'SKILL.md'), 'utf8');
+  assert.match(editThis.split('\n').find(l => l.startsWith('description:')), /NOT for "edit this in 2D/);
+});

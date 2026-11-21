@@ -69,7 +69,8 @@ OmniRoute gateway if `OMNIROUTE_URL` is set, else Groq Whisper or local Whisper
 explicit yes in the conversation. Guide: `docs/AI-WORKFLOW.md`.
 
 ## Animated shorts from code (server side)
-When the owner sends a voice-over and asks for an animated short / cartoon
+When the owner says **"edit this in 2D(OTTOMAN)"** (or "edit this in 2D(<style>)"),
+or sends a voice-over and asks for an animated short / cartoon
 "written from code", use the `animated-short` skill
 (`.claude/skills/animated-short/SKILL.md`). It lives in `animate/`
 (Node canvas frames → FFmpeg, Python-generated score and sound effects;
