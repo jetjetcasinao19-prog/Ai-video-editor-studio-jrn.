@@ -1,0 +1,586 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "The Times Square ball drop exists because fireworks got banned. 1904, New York. The New York Times moves into a brand new tower. The area gets renamed Times Square. To celebrate New Year's Eve, the newspaper's owner, Adolf Ochs, sets off fireworks from the roof. Huge crowds show up. Then the city bans the fireworks. So Ochs needs a new idea. He borrows one from sailors. For decades, ships set their clocks by watching time balls drop from towers at an exact time. On December 31st, 1907, a 700-pound ball of iron and wood, covered in 100 light bulbs, drops at midnight. A party trick now watched by millions every year. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "The",
+   "start": 0.02,
+   "end": 0.2
+  },
+  {
+   "w": "Times",
+   "start": 0.2,
+   "end": 0.64
+  },
+  {
+   "w": "Square",
+   "start": 0.64,
+   "end": 0.9
+  },
+  {
+   "w": "ball",
+   "start": 0.9,
+   "end": 1.26
+  },
+  {
+   "w": "drop",
+   "start": 1.26,
+   "end": 1.58
+  },
+  {
+   "w": "exists",
+   "start": 1.58,
+   "end": 2.36
+  },
+  {
+   "w": "because",
+   "start": 2.36,
+   "end": 3.16
+  },
+  {
+   "w": "fireworks",
+   "start": 3.16,
+   "end": 3.86
+  },
+  {
+   "w": "got",
+   "start": 3.86,
+   "end": 4.18
+  },
+  {
+   "w": "banned.",
+   "start": 4.18,
+   "end": 5.2
+  },
+  {
+   "w": "1904,",
+   "start": 5.9,
+   "end": 7.06
+  },
+  {
+   "w": "New",
+   "start": 7.06,
+   "end": 7.22
+  },
+  {
+   "w": "York.",
+   "start": 7.22,
+   "end": 7.98
+  },
+  {
+   "w": "The",
+   "start": 8.26,
+   "end": 8.38
+  },
+  {
+   "w": "New",
+   "start": 8.38,
+   "end": 8.56
+  },
+  {
+   "w": "York",
+   "start": 8.56,
+   "end": 8.78
+  },
+  {
+   "w": "Times",
+   "start": 8.78,
+   "end": 9.2
+  },
+  {
+   "w": "moves",
+   "start": 9.2,
+   "end": 9.56
+  },
+  {
+   "w": "into",
+   "start": 9.56,
+   "end": 9.78
+  },
+  {
+   "w": "a",
+   "start": 9.78,
+   "end": 9.96
+  },
+  {
+   "w": "brand",
+   "start": 9.96,
+   "end": 10.42
+  },
+  {
+   "w": "new",
+   "start": 10.42,
+   "end": 10.74
+  },
+  {
+   "w": "tower.",
+   "start": 10.74,
+   "end": 11.66
+  },
+  {
+   "w": "The",
+   "start": 11.84,
+   "end": 11.96
+  },
+  {
+   "w": "area",
+   "start": 11.96,
+   "end": 12.32
+  },
+  {
+   "w": "gets",
+   "start": 12.32,
+   "end": 12.62
+  },
+  {
+   "w": "renamed",
+   "start": 12.62,
+   "end": 13.24
+  },
+  {
+   "w": "Times",
+   "start": 13.24,
+   "end": 13.84
+  },
+  {
+   "w": "Square.",
+   "start": 13.84,
+   "end": 14.76
+  },
+  {
+   "w": "To",
+   "start": 15.16,
+   "end": 15.26
+  },
+  {
+   "w": "celebrate",
+   "start": 15.26,
+   "end": 15.72
+  },
+  {
+   "w": "New",
+   "start": 15.72,
+   "end": 15.96
+  },
+  {
+   "w": "Year's",
+   "start": 15.96,
+   "end": 16.28
+  },
+  {
+   "w": "Eve,",
+   "start": 16.28,
+   "end": 16.8
+  },
+  {
+   "w": "the",
+   "start": 16.8,
+   "end": 16.88
+  },
+  {
+   "w": "newspaper's",
+   "start": 16.88,
+   "end": 17.46
+  },
+  {
+   "w": "owner,",
+   "start": 17.46,
+   "end": 18.12
+  },
+  {
+   "w": "Adolph",
+   "start": 18.12,
+   "end": 18.54
+  },
+  {
+   "w": "Ochs,",
+   "start": 18.54,
+   "end": 19.32
+  },
+  {
+   "w": "sets",
+   "start": 19.32,
+   "end": 19.56
+  },
+  {
+   "w": "off",
+   "start": 19.56,
+   "end": 19.82
+  },
+  {
+   "w": "fireworks",
+   "start": 19.82,
+   "end": 20.46
+  },
+  {
+   "w": "from",
+   "start": 20.46,
+   "end": 20.7
+  },
+  {
+   "w": "the",
+   "start": 20.7,
+   "end": 20.86
+  },
+  {
+   "w": "roof.",
+   "start": 20.86,
+   "end": 21.62
+  },
+  {
+   "w": "Huge",
+   "start": 21.88,
+   "end": 22.28
+  },
+  {
+   "w": "crowds",
+   "start": 22.28,
+   "end": 22.84
+  },
+  {
+   "w": "show",
+   "start": 22.84,
+   "end": 23.16
+  },
+  {
+   "w": "up.",
+   "start": 23.16,
+   "end": 23.36
+  },
+  {
+   "w": "Then",
+   "start": 24.22,
+   "end": 24.5
+  },
+  {
+   "w": "the",
+   "start": 24.5,
+   "end": 24.8
+  },
+  {
+   "w": "city",
+   "start": 24.8,
+   "end": 25.08
+  },
+  {
+   "w": "bans",
+   "start": 25.08,
+   "end": 25.62
+  },
+  {
+   "w": "the",
+   "start": 25.62,
+   "end": 25.82
+  },
+  {
+   "w": "fireworks.",
+   "start": 25.82,
+   "end": 26.94
+  },
+  {
+   "w": "So",
+   "start": 27.2,
+   "end": 27.48
+  },
+  {
+   "w": "Ochs",
+   "start": 27.48,
+   "end": 27.86
+  },
+  {
+   "w": "needs",
+   "start": 27.86,
+   "end": 28.16
+  },
+  {
+   "w": "a",
+   "start": 28.16,
+   "end": 28.32
+  },
+  {
+   "w": "new",
+   "start": 28.32,
+   "end": 28.52
+  },
+  {
+   "w": "idea.",
+   "start": 28.52,
+   "end": 29.42
+  },
+  {
+   "w": "He",
+   "start": 29.66,
+   "end": 29.76
+  },
+  {
+   "w": "borrows",
+   "start": 29.76,
+   "end": 30.08
+  },
+  {
+   "w": "one",
+   "start": 30.08,
+   "end": 30.38
+  },
+  {
+   "w": "from",
+   "start": 30.38,
+   "end": 30.62
+  },
+  {
+   "w": "sailors.",
+   "start": 30.62,
+   "end": 31.14
+  },
+  {
+   "w": "For",
+   "start": 32,
+   "end": 32.06
+  },
+  {
+   "w": "decades,",
+   "start": 32.06,
+   "end": 32.94
+  },
+  {
+   "w": "ships",
+   "start": 32.94,
+   "end": 33.08
+  },
+  {
+   "w": "set",
+   "start": 33.08,
+   "end": 33.42
+  },
+  {
+   "w": "their",
+   "start": 33.42,
+   "end": 33.6
+  },
+  {
+   "w": "clocks",
+   "start": 33.6,
+   "end": 33.96
+  },
+  {
+   "w": "by",
+   "start": 33.96,
+   "end": 34.2
+  },
+  {
+   "w": "watching",
+   "start": 34.2,
+   "end": 34.6
+  },
+  {
+   "w": "time",
+   "start": 34.6,
+   "end": 35.26
+  },
+  {
+   "w": "balls",
+   "start": 35.26,
+   "end": 35.52
+  },
+  {
+   "w": "drop",
+   "start": 35.52,
+   "end": 36.12
+  },
+  {
+   "w": "from",
+   "start": 36.12,
+   "end": 36.4
+  },
+  {
+   "w": "towers",
+   "start": 36.4,
+   "end": 36.84
+  },
+  {
+   "w": "at",
+   "start": 36.84,
+   "end": 37.16
+  },
+  {
+   "w": "an",
+   "start": 37.16,
+   "end": 37.28
+  },
+  {
+   "w": "exact",
+   "start": 37.28,
+   "end": 37.74
+  },
+  {
+   "w": "time.",
+   "start": 37.74,
+   "end": 38.72
+  },
+  {
+   "w": "On",
+   "start": 39.14,
+   "end": 39.26
+  },
+  {
+   "w": "December",
+   "start": 39.26,
+   "end": 39.62
+  },
+  {
+   "w": "31st,",
+   "start": 39.62,
+   "end": 40.5
+  },
+  {
+   "w": "1907,",
+   "start": 40.5,
+   "end": 41.8
+  },
+  {
+   "w": "a",
+   "start": 41.8,
+   "end": 41.88
+  },
+  {
+   "w": "700-pound",
+   "start": 41.88,
+   "end": 43
+  },
+  {
+   "w": "ball",
+   "start": 43,
+   "end": 43.4
+  },
+  {
+   "w": "of",
+   "start": 43.4,
+   "end": 43.62
+  },
+  {
+   "w": "iron",
+   "start": 43.62,
+   "end": 43.98
+  },
+  {
+   "w": "and",
+   "start": 43.98,
+   "end": 44.2
+  },
+  {
+   "w": "wood,",
+   "start": 44.2,
+   "end": 44.96
+  },
+  {
+   "w": "covered",
+   "start": 45.02,
+   "end": 45.2
+  },
+  {
+   "w": "in",
+   "start": 45.2,
+   "end": 45.42
+  },
+  {
+   "w": "100",
+   "start": 45.42,
+   "end": 46.1
+  },
+  {
+   "w": "light",
+   "start": 46.1,
+   "end": 46.44
+  },
+  {
+   "w": "bulbs,",
+   "start": 46.44,
+   "end": 47.28
+  },
+  {
+   "w": "drops",
+   "start": 47.28,
+   "end": 47.56
+  },
+  {
+   "w": "at",
+   "start": 47.56,
+   "end": 47.94
+  },
+  {
+   "w": "midnight.",
+   "start": 47.94,
+   "end": 48.3
+  },
+  {
+   "w": "A",
+   "start": 49.2,
+   "end": 49.3
+  },
+  {
+   "w": "party",
+   "start": 49.3,
+   "end": 49.6
+  },
+  {
+   "w": "trick",
+   "start": 49.6,
+   "end": 49.94
+  },
+  {
+   "w": "now",
+   "start": 49.94,
+   "end": 50.62
+  },
+  {
+   "w": "watched",
+   "start": 50.62,
+   "end": 51.04
+  },
+  {
+   "w": "by",
+   "start": 51.04,
+   "end": 51.28
+  },
+  {
+   "w": "millions",
+   "start": 51.28,
+   "end": 51.96
+  },
+  {
+   "w": "every",
+   "start": 51.96,
+   "end": 52.58
+  },
+  {
+   "w": "year.",
+   "start": 52.58,
+   "end": 52.94
+  },
+  {
+   "w": "Every",
+   "start": 54.42,
+   "end": 54.74
+  },
+  {
+   "w": "legend",
+   "start": 54.74,
+   "end": 55.2
+  },
+  {
+   "w": "has",
+   "start": 55.2,
+   "end": 55.74
+  },
+  {
+   "w": "a",
+   "start": 55.74,
+   "end": 55.82
+  },
+  {
+   "w": "beginning.",
+   "start": 55.82,
+   "end": 56.66
+  }
+ ]
+}
