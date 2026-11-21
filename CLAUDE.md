@@ -22,7 +22,8 @@ These rules apply to every Claude session and every team agent in `.claude/agent
    `node tests/assistant.test.js` for the AI assistant,
    `node tests/mp4-export.test.js` for MP4 export,
    `node tests/projects.test.js` for projects,
-   `node tests/capcut.test.js` for Send to CapCut).
+   `node tests/capcut.test.js` for Send to CapCut,
+   `node tests/stickman.test.js` for the Stickman Director).
 8. Phones have little RAM: avoid loading whole videos into memory, free object
    URLs, stop media tracks, avoid heavy libraries unless the owner agrees.
 9. Never claim a feature works unless it has been implemented and tested.
@@ -40,6 +41,7 @@ These rules apply to every Claude session and every team agent in `.claude/agent
 - [x] MP4 export (H.264 + AAC/Opus via MediaRecorder, WebM fallback; tests/mp4-export.test.js)
 - [x] Project management (save/open in IndexedDB, optional kept media, autosave, backup file; tests/projects.test.js)
 - [x] Send to CapCut (share sheet hand-off after export + Open CapCut link; tests/capcut.test.js)
+- [x] Stickman Director (`stickman.html`: story → stickman script → animated video export; tests/stickman.test.js)
 
 ## "Edit this" workflow (server side)
 When the owner says "edit this", use the `edit-this` skill

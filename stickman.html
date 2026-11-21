@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stickman Director</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0b0e14;color:#fff;font-family:Arial,sans-serif;padding:16px}
+main{max-width:850px;margin:auto}
+h1{font-size:25px;margin-bottom:4px}
+.sub{color:#929bad;font-size:12px}
+.panel{background:#151b27;border:1px solid #293449;padding:15px;border-radius:13px;margin:15px 0}
+h3{margin:0 0 6px}
+label{display:block;margin-top:12px;font-size:13px;color:#c5ccda}
+input,select,button,textarea{width:100%;padding:12px;margin-top:7px;border:1px solid #36435a;border-radius:8px;
+ background:#0d1320;color:#fff;font-size:14px;font-family:inherit}
+textarea{min-height:170px;resize:vertical;line-height:1.5}
+button{background:#526dff;border:0;font-weight:bold;cursor:pointer}
+button:disabled{opacity:.45}
+.secondary{background:#303b51}
+.gold{background:#f5c400;color:#000}
+canvas{width:100%;max-height:540px;object-fit:contain;background:#000;border-radius:10px;display:block}
+.row{display:flex;gap:10px}
+.row>*{flex:1;min-width:0}
+.note{color:#9ba8bb;font-size:12px;line-height:1.6}
+.status{color:#91b7ff;font-size:13px;margin-top:12px;min-height:1em}
+.warn{color:#ffb86b}
+a{color:#9ab1ff;word-break:break-all}
+input[type=range]{padding:0;height:32px;accent-color:#526dff;background:transparent;border:0}
+input[type=color]{height:44px;padding:4px}
+code{background:#0d1320;padding:1px 5px;border-radius:4px;color:#f5c400}
+.acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.acts button{width:auto;margin:0;padding:8px 10px;font-size:12px;background:#303b51}
+#shotList{margin-top:10px;font-size:13px;max-height:240px;overflow-y:auto}
+.shot{display:flex;gap:8px;padding:6px 8px;border:1px solid #293449;border-radius:8px;margin-bottom:6px;background:#0d1320}
+.shot.on{border-color:#f5c400}
+.shot b{flex:0 0 auto;color:#f5c400}
+.shot span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+progress{width:100%;height:10px;margin-top:10px;accent-color:#526dff}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+<h1>STICKMAN DIRECTOR</h1>
+<div class="sub">ANIMATED STICK FIGURE VIDEOS • <a href="index.html">← back to Video Studio</a></div>
+
+<section class="panel">
+<h3>01 — Story (AI Director)</h3>
+<p class="note">Paste your narration, one or more sentences. The director picks a stickman
+action for every sentence (walking, ideas, talking, celebrating…). Works offline on the phone.</p>
+<textarea id="story" placeholder="Long ago, a young inventor walked into his workshop. He wondered how to make light without fire. Then he had an idea! His first ten tries failed. But in 1879 the light bulb finally worked."></textarea>
+<button id="directBtn" class="gold">🎬 Direct my story</button>
+</section>
+
+<section class="panel">
+<h3>02 — Script</h3>
+<p class="note">One shot per line: <code>seconds action: words</code>, for example
+<code>3 wave: Hi, I'm Sticky!</code>. Seconds are optional. Lines starting with <code>//</code> are notes.
+Tap an action to add a line:</p>
+<div class="acts" id="acts"></div>
+<textarea id="script"></textarea>
+<div id="scriptMsg" class="status"></div>
+<div id="shotList"></div>
+</section>
+
+<section class="panel">
+<h3>03 — Look</h3>
+<div class="row">
+ <div><label for="format">Format</label>
+  <select id="format"><option value="9:16">9:16 Reels/Shorts</option><option value="16:9">16:9 YouTube</option><option value="1:1">1:1 Square</option></select></div>
+ <div><label for="scene">Background</label>
+  <select id="scene"><option value="brand">How it Started (black/gold)</option><option value="paper">White paper</option><option value="sky">Sky &amp; grass</option><option value="chalk">Chalkboard</option></select></div>
+</div>
+<div class="row">
+ <div><label for="stickColor">Stickman colour</label><input id="stickColor" type="color" value="#ffffff"></div>
+ <div><label for="accent">Accent colour</label><input id="accent" type="color" value="#f5c400"></div>
+</div>
+<label for="handle">Watermark (empty = none)</label>
+<input id="handle" value="@HOWITSTARTED-YT1">
+<label for="capSize">Caption size <span id="capSizeVal"></span></label>
+<input id="capSize" type="range" min="0.6" max="1.6" step="0.05" value="1">
+</section>
+
+<section class="panel">
+<h3>04 — Preview</h3>
+<canvas id="cv" width="720" height="1280"></canvas>
+<input id="seek" type="range" min="0" max="1" step="0.01" value="0" aria-label="Position">
+<div class="row">
+ <button id="playBtn">▶ Play</button>
+ <button id="restartBtn" class="secondary">⟲ Start</button>
+</div>
+<div id="timeLbl" class="note"></div>
+</section>
+
+<section class="panel">
+<h3>05 — Export</h3>
+<p class="note">Records the animation in real time (a 30 s video takes 30 s). Keep this screen open.
+Then open the video in Video Studio to add music, voice-over or more captions.</p>
+<button id="exportBtn">⬇ Export video</button>
+<progress id="exportProg" value="0" max="1" hidden></progress>
+<div id="exportMsg" class="status"></div>
+<div class="row" id="doneRow" hidden>
+ <a id="dlLink" download><button class="secondary" type="button">Save video</button></a>
+ <button id="shareBtn" class="secondary">Share / CapCut</button>
+</div>
+</section>
+</main>
+
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
+
+/* ---------- actions ---------- */
+const ACTIONS={
+ stand:"Stand", walk:"Walk", run:"Run", wave:"Wave", talk:"Talk (speech bubble)",
+ think:"Think (thought bubble)", idea:"Idea (light bulb)", point:"Point", jump:"Jump",
+ celebrate:"Celebrate", dance:"Dance", shrug:"Shrug", sit:"Sit", fall:"Fall down",
+ sad:"Sad", title:"Title card"
+};
+const ALIASES={walking:"walk",running:"run",hello:"wave",hi:"wave",say:"talk",says:"talk",speak:"talk",
+ thinking:"think",wonder:"think",bulb:"idea",win:"celebrate",cheer:"celebrate",party:"dance",
+ chair:"sit",trip:"fall",cry:"sad",text:"title",card:"title",idle:"stand"};
+
+/* ---------- script parsing ---------- */
+function autoSeconds(text){
+ const words=(text||"").trim().split(/\s+/).filter(Boolean).length;
+ return Math.min(8,Math.max(2,Math.round((0.8+words*0.38)*10)/10));
+}
+function parseScript(src){
+ const shots=[],warnings=[];
+ (src||"").split(/\r?\n/).forEach((raw,i)=>{
+  const line=raw.trim();
+  if(!line||line.startsWith("//"))return;
+  // "3 wave: Hi" / "3s wave - Hi" / "wave: Hi" / "wave"
+  const m=line.match(/^(?:(\d+(?:\.\d+)?)\s*s?\s+)?([a-zA-Z]+)\s*(?:[:|\-–]\s*(.*))?$/);
+  let sec=null,act="talk",text=line;
+  if(m){ sec=m[1]?parseFloat(m[1]):null; act=m[2].toLowerCase(); text=(m[3]||"").trim(); }
+  else{
+   const n=line.match(/^(\d+(?:\.\d+)?)\s*s?\s+(.*)$/);
+   if(n){ sec=parseFloat(n[1]); text=n[2]; }
+   const a=text.match(/^([a-zA-Z]+)\s*[:|]\s*(.*)$/);
+   if(a){ act=a[1].toLowerCase(); text=a[2]; }
+  }
+  act=ALIASES[act]||act;
+  if(!ACTIONS[act]){ warnings.push("Line "+(i+1)+": unknown action \""+act+"\", using talk"); text=line.replace(/^\d+(\.\d+)?\s*s?\s+/,""); act="talk"; }
+  const dur=Math.min(30,Math.max(0.5,sec||autoSeconds(text)));
+  shots.push({action:act,text,dur});
+ });
+ let t=0;
+ shots.forEach(s=>{s.start=t;t+=s.dur;});
+ return {shots,warnings,total:t};
+}
+
+/* ---------- AI director: narration -> script (offline keyword rules) ---------- */
+const DIRECTOR_RULES=[
+ [/\b(idea|invented|invents|inventing|discovered|discovers|realis\w*|realiz\w*|figured|eureka|created?|design\w*)\b/i,"idea"],
+ [/\b(fail\w*|fell|falls?|crash\w*|broke|collaps\w*|disaster|tripped|lost everything)\b/i,"fall"],
+ [/\b(won|wins?|success\w*|finally|worked|famous|celebrat\w*|millions?|billions?|record|victory|hooray)\b/i,"celebrate"],
+ [/\b(nobody knows|unknown|unclear|maybe|who knows|mystery)\b/i,"shrug"],
+ [/\b(think\w*|thought|wonder\w*|ask(ed)? (himself|herself|themselves)|curious|imagine\w*|why|how could)\b/i,"think"],
+ [/\b(walk\w*|went|travel\w*|journey|moved?|arrived?|left|walked into|stepped)\b/i,"walk"],
+ [/\b(ran|run\w*|rush\w*|race\w*|hurr\w*|chase\w*|escap\w*)\b/i,"run"],
+ [/\b(sad|cried|cry|lonely|poor|rejected|nobody|ignored|depress\w*|mourn\w*)\b/i,"sad"],
+ [/\b(jump\w*|leap\w*|launch\w*|soar\w*|flew|took off)\b/i,"jump"],
+ [/\b(danc\w*|party|music|song|sang|sing\w*)\b/i,"dance"],
+ [/\b(sat|sits?|sitting|desk|studied|study|wrote|read|worked on|years of work)\b/i,"sit"],
+ [/\b(look|see|here|there|this|that is|map|chart|shows?)\b/i,"point"],
+ [/\b(said|says|asked|told|tell|called|shouted|replied|"|“)/i,"talk"]
+];
+function splitSentences(text){
+ return (text||"").replace(/\s+/g," ").trim()
+  .split(/(?<=[.!?…])\s+(?=[A-Z0-9“"'])/).map(s=>s.trim()).filter(Boolean);
+}
+function directStory(text){
+ const sents=splitSentences(text);
+ const lines=[];
+ let last="";
+ sents.forEach((s,i)=>{
+  let act=null;
+  for(const [re,a] of DIRECTOR_RULES){ if(re.test(s)){act=a;break;} }
+  if(!act) act=i===0?"wave":(["talk","point","stand"][i%3]);
+  if(act===last && act!=="talk") act=act==="point"?"talk":"point";
+  last=act;
+  lines.push(act+": "+s);
+ });
+ if(lines.length && /\b(subscribe|follow)\b/i.test(sents[sents.length-1]||"")===false && sents.length>2){
+  lines.push("wave: Subscribe for more origin stories");
+ }
+ return lines.join("\n");
+}
+
+/* ---------- drawing ---------- */
+const SCENES={
+ brand:{bg:"#000000",ground:"#2a2a2a",text:"#ffffff",stick:"#ffffff"},
+ paper:{bg:"#f7f4ec",ground:"#c9c2b0",text:"#111111",stick:"#111111"},
+ sky:{bg:"#8fd3ff",ground:"#4caf50",text:"#ffffff",stick:"#111111"},
+ chalk:{bg:"#1f3b2d",ground:"#3d5c4a",text:"#f3f3e8",stick:"#f3f3e8"}
+};
+const lerp=(a,b,k)=>a+(b-a)*k;
+const ease=k=>k<0?0:k>1?1:k*k*(3-2*k);
+const D=Math.PI/180;
+
+// Pose: angles in degrees, 0 = straight down, +90 = towards facing direction, 180 = up.
+// Upper and lower limb angles are absolute.
+function basePose(){return {la:-12,lf:-8,ra:12,rf:8,ll:-8,lk:-8,rl:8,rk:8,lean:0,lift:0,rot:0,head:0,mouth:0,eyes:"open"};}
+
+function poseFor(action,t,dur){
+ const p=basePose(), w=2*Math.PI;
+ const breathe=Math.sin(t*w*0.5);
+ switch(action){
+  case "stand": case "title":
+   p.la=-10+breathe*2; p.ra=10-breathe*2; p.lf=p.la+3; p.rf=p.ra-3; break;
+  case "walk": case "run": {
+   const run=action==="run", f=run?2.6:1.6, a=run?40:26, s=Math.sin(t*w*f);
+   p.ll=a*s; p.rl=-a*s;
+   p.lk=p.ll-Math.max(0,-Math.cos(t*w*f))*(run?55:30);
+   p.rk=p.rl-Math.max(0,Math.cos(t*w*f))*(run?55:30);
+   p.la=-a*0.9*s; p.ra=a*0.9*s; p.lf=p.la+(run?70:25); p.rf=p.ra+(run?70:25);
+   p.lift=Math.abs(Math.sin(t*w*f))*(run?0.05:0.025); p.lean=run?12:4; break;}
+  case "wave": {
+   const s=Math.sin(t*w*2.2);
+   p.ra=140; p.rf=165+28*s; p.la=-10; p.lf=-6; p.mouth=0.4; break;}
+  case "talk": {
+   const s=Math.sin(t*w*1.3), q=Math.sin(t*w*0.7);
+   p.ra=40+18*s; p.rf=95+25*s; p.la=-20+10*q; p.lf=-10+30*Math.max(0,q);
+   p.mouth=Math.abs(Math.sin(t*w*3.5)); p.head=4*q; break;}
+  case "think":
+   p.ra=25; p.rf=165; p.la=-25; p.lf=40; p.head=-8; break;
+  case "idea": {
+   const k=ease(t/0.5);
+   p.ra=lerp(25,165,k); p.rf=lerp(165,180,k); p.la=-15; p.lf=-10; p.head=lerp(-8,6,k); p.mouth=0.6*k;
+   p.lift=k>0.99?Math.abs(Math.sin((t-0.5)*w*1.2))*0.03:0; break;}
+  case "point": {
+   const k=ease(t/0.4);
+   p.ra=lerp(10,92,k); p.rf=lerp(8,92,k); p.la=-15; p.lf=-8; p.head=6*k; p.lean=-3; break;}
+  case "jump": {
+   const ph=(t%0.9)/0.9, air=Math.sin(Math.PI*ph);
+   p.lift=air*0.14; p.la=-150*air-10; p.ra=150*air+10; p.lf=p.la; p.rf=p.ra;
+   p.ll=-15-25*air; p.lk=-15+45*air; p.rl=15-5*air; p.rk=15+30*air; p.mouth=air*0.5; break;}
+  case "celebrate": {
+   const ph=(t%0.6)/0.6, air=Math.sin(Math.PI*ph);
+   p.lift=air*0.06; p.la=-140; p.ra=140; p.lf=-170+15*Math.sin(t*w*3); p.rf=170-15*Math.sin(t*w*3);
+   p.ll=-12; p.lk=-12+20*air; p.rl=12; p.rk=12+20*air; p.mouth=0.8; break;}
+  case "dance": {
+   const s=Math.sin(t*w*1.8), c=Math.cos(t*w*1.8);
+   p.la=-90-60*s; p.lf=-150-30*s; p.ra=90-60*s; p.rf=60-40*c;
+   p.ll=-15+15*s; p.lk=-15+15*s; p.rl=15+15*s; p.rk=15+30*Math.max(0,s);
+   p.lean=10*s; p.lift=Math.abs(c)*0.02; p.mouth=0.5; break;}
+  case "shrug": {
+   const k=ease(Math.min(t,dur-t)/0.35);
+   p.la=lerp(-10,-35,k); p.lf=lerp(-6,-120,k); p.ra=lerp(10,35,k); p.rf=lerp(6,120,k);
+   p.head=-10*k; p.lift=0.01*k; break;}
+  case "sit":
+   p.ll=80; p.lk=0; p.rl=85; p.rk=5; p.lift=-0.09; p.la=40; p.lf=80; p.ra=35; p.rf=75; break;
+  case "fall": {
+   const k=ease(t/0.7);
+   p.rot=-88*k; p.la=lerp(-10,-150,k); p.ra=lerp(10,120,k); p.lf=p.la; p.rf=p.ra+20*k;
+   p.ll=lerp(-8,-25,k); p.rl=lerp(8,30,k); p.lk=p.ll; p.rk=p.rl; p.eyes=k>0.8?"x":"open"; break;}
+  case "sad":
+   p.la=-5; p.lf=-2; p.ra=5; p.rf=2; p.head=-14; p.lean=8; p.eyes="sad"; break;
+ }
+ return p;
+}
+
+function blendPose(a,b,k){
+ const o={};
+ for(const key in b) o[key]=typeof b[key]==="number"?lerp(a[key],b[key],k):(k<0.5?a[key]:b[key]);
+ return o;
+}
+
+// Where the stickman stands at each shot (walk/run move him across the screen).
+function planPositions(shots){
+ let x=0.5, dir=1;
+ shots.forEach(s=>{
+  s.x0=x; s.dir=dir;
+  if(s.action==="walk"||s.action==="run"){
+   const dist=Math.min(0.55,(s.action==="run"?0.16:0.08)*s.dur);
+   if(x+dir*dist>0.82||x+dir*dist<0.18) dir=-dir;
+   s.dir=dir;
+   x=Math.min(0.82,Math.max(0.18,x+dir*dist));
+  }else if(s.action==="title"){
+   // stays where he is
+  }
+  s.x1=x;
+ });
+ // after a walk, point/talk etc face the centre
+ shots.forEach(s=>{ if(s.action!=="walk"&&s.action!=="run") s.dir=s.x0>0.55?-1:1; });
+ return shots;
+}
+
+function wrapText(ctx,text,maxW){
+ const words=(text||"").split(/\s+/).filter(Boolean), lines=[];
+ let cur="";
+ words.forEach(wd=>{
+  const test=cur?cur+" "+wd:wd;
+  if(ctx.measureText(test).width>maxW && cur){lines.push(cur);cur=wd;}else cur=test;
+ });
+ if(cur)lines.push(cur);
+ return lines;
+}
+
+function roundRect(ctx,x,y,w,h,r){
+ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r);
+ ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();
+}
+
+function drawStickman(ctx,cx,groundY,size,pose,dir,color,accent,showChair){
+ const u=size/10; // body unit
+ const lw=Math.max(3,u*0.62);
+ ctx.save();
+ ctx.strokeStyle=color; ctx.fillStyle=color; ctx.lineWidth=lw; ctx.lineCap="round"; ctx.lineJoin="round";
+ const hipY=groundY-u*4.6-pose.lift*size*1.0;
+ if(showChair){
+  ctx.save(); ctx.strokeStyle=accent; ctx.lineWidth=lw*0.8;
+  const sx=cx-dir*u*1.2, sy=groundY-u*2.2;
+  ctx.beginPath();
+  ctx.moveTo(sx-u*1.6,sy); ctx.lineTo(sx+u*1.6,sy);
+  ctx.moveTo(sx-u*1.4*dir,sy); ctx.lineTo(sx-u*1.4*dir,groundY);
+  ctx.moveTo(sx+u*1.4*dir,sy); ctx.lineTo(sx+u*1.4*dir,groundY);
+  ctx.moveTo(sx-u*1.5*dir,sy); ctx.lineTo(sx-u*1.6*dir,sy-u*3.2);
+  ctx.stroke(); ctx.restore();
+ }
+ ctx.translate(cx,hipY);
+ if(pose.rot){ const fy=u*4.4; ctx.translate(0,fy); ctx.rotate(-pose.rot*D*dir); ctx.translate(0,-fy); }
+ ctx.scale(dir,1);
+ const seg=(x,y,ang,len)=>[x+Math.sin(ang*D)*len,y+Math.cos(ang*D)*len];
+ // legs
+ [[pose.ll,pose.lk],[pose.rl,pose.rk]].forEach(([th,sh])=>{
+  const k=seg(0,0,th,u*2.4), f=seg(k[0],k[1],sh,u*2.3);
+  ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(k[0],k[1]); ctx.lineTo(f[0],f[1]); ctx.stroke();
+ });
+ // body
+ ctx.rotate(pose.lean*D);
+ const neckY=-u*4.2;
+ ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(0,neckY); ctx.stroke();
+ // arms
+ const shY=neckY+u*0.5;
+ [[pose.la,pose.lf],[pose.ra,pose.rf]].forEach(([ua,fa])=>{
+  const e=seg(0,shY,ua,u*1.9), h=seg(e[0],e[1],fa,u*1.8);
+  ctx.beginPath(); ctx.moveTo(0,shY); ctx.lineTo(e[0],e[1]); ctx.lineTo(h[0],h[1]); ctx.stroke();
+ });
+ // head
+ const hr=u*1.25;
+ ctx.translate(0,neckY-hr*0.95); ctx.rotate(pose.head*D);
+ ctx.lineWidth=lw*0.8; ctx.beginPath(); ctx.arc(0,0,hr,0,Math.PI*2); ctx.stroke();
+ // face (looks towards facing direction)
+ const ex=hr*0.38, ey=-hr*0.12, er=Math.max(1.5,hr*0.11);
+ if(pose.eyes==="x"){
+  ctx.lineWidth=lw*0.5;
+  [ex*0.2,ex*1.3].forEach(x=>{ctx.beginPath();ctx.moveTo(x-er,ey-er);ctx.lineTo(x+er,ey+er);ctx.moveTo(x+er,ey-er);ctx.lineTo(x-er,ey+er);ctx.stroke();});
+ }else{
+  [ex*0.2,ex*1.3].forEach(x=>{ctx.beginPath();ctx.arc(x,ey,er,0,Math.PI*2);ctx.fill();});
+ }
+ ctx.lineWidth=lw*0.5;
+ const mx=hr*0.6, my=hr*0.42;
+ ctx.beginPath();
+ if(pose.eyes==="sad"){ ctx.arc(mx,my+hr*0.2,hr*0.28,1.15*Math.PI,1.85*Math.PI); ctx.stroke(); }
+ else if(pose.mouth>0.15){ ctx.ellipse(mx,my,hr*0.22,hr*0.06+hr*0.2*pose.mouth,0,0,Math.PI*2); ctx.fill(); }
+ else { ctx.arc(mx,my-hr*0.1,hr*0.25,0.15*Math.PI,0.85*Math.PI); ctx.stroke(); }
+ ctx.restore();
+ return {headX:cx+dir*0, headY:hipY-u*4.2-hr*0.95, headR:hr, u};
+}
+
+function drawBubble(ctx,x,y,text,maxW,font,thought,colors){
+ ctx.save();
+ ctx.font=font;
+ const lines=wrapText(ctx,text,maxW);
+ const lh=parseFloat(font.replace(/^\D+/,""))*1.2, pad=lh*0.55;
+ const w=Math.min(maxW,Math.max(...lines.map(l=>ctx.measureText(l).width)))+pad*2;
+ const h=lines.length*lh+pad*1.6;
+ const W=ctx.canvas.width;
+ let bx=Math.min(W-w-W*0.04,Math.max(W*0.04,x-w/2)), by=Math.max(ctx.canvas.height*0.06,y-h);
+ ctx.fillStyle="#ffffff"; ctx.strokeStyle="#111"; ctx.lineWidth=Math.max(2,lh*0.08);
+ roundRect(ctx,bx,by,w,h,Math.min(h/2,lh*0.8)); ctx.fill(); ctx.stroke();
+ if(thought){
+  [[0.35,0.18],[0.65,0.12]].forEach(([k,r])=>{ctx.beginPath();ctx.arc(lerp(bx+w/2,x,k*1.4),lerp(by+h,y+lh*1.6,k),lh*r*2,0,Math.PI*2);ctx.fill();ctx.stroke();});
+ }else{
+  const tx=Math.min(bx+w-lh,Math.max(bx+lh,x));
+  ctx.beginPath(); ctx.moveTo(tx-lh*0.4,by+h-1); ctx.lineTo(x,by+h+lh*0.9); ctx.lineTo(tx+lh*0.4,by+h-1); ctx.closePath();
+  ctx.fill(); ctx.beginPath(); ctx.moveTo(tx-lh*0.4,by+h); ctx.lineTo(x,by+h+lh*0.9); ctx.lineTo(tx+lh*0.4,by+h); ctx.stroke();
+ }
+ ctx.fillStyle="#111"; ctx.textAlign="center"; ctx.textBaseline="top";
+ lines.forEach((l,i)=>ctx.fillText(l,bx+w/2,by+pad*0.8+i*lh));
+ ctx.restore();
+}
+
+function drawBulb(ctx,x,y,r,accent,glow){
+ ctx.save();
+ ctx.globalAlpha=glow;
+ ctx.fillStyle=accent; ctx.strokeStyle=accent; ctx.lineWidth=Math.max(2,r*0.12);
+ for(let i=0;i<8;i++){const a=i*Math.PI/4;ctx.beginPath();ctx.moveTo(x+Math.cos(a)*r*1.4,y+Math.sin(a)*r*1.4);ctx.lineTo(x+Math.cos(a)*r*1.9,y+Math.sin(a)*r*1.9);ctx.stroke();}
+ ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill();
+ ctx.fillStyle="#888"; ctx.fillRect(x-r*0.45,y+r*0.85,r*0.9,r*0.55);
+ ctx.restore();
+}
+
+function drawBackground(ctx,W,H,groundY,scene){
+ ctx.fillStyle=scene.bg; ctx.fillRect(0,0,W,H);
+ if(scene===SCENES.sky){
+  ctx.fillStyle="#ffffff";
+  [[0.2,0.15],[0.7,0.1]].forEach(([x,y])=>{ctx.beginPath();ctx.arc(W*x,H*y,W*0.06,0,7);ctx.arc(W*x+W*0.06,H*y,W*0.05,0,7);ctx.arc(W*x-W*0.06,H*y,W*0.045,0,7);ctx.fill();});
+  ctx.fillStyle=scene.ground; ctx.fillRect(0,groundY,W,H-groundY);
+ }else{
+  ctx.strokeStyle=scene.ground; ctx.lineWidth=Math.max(2,W*0.004);
+  ctx.beginPath(); ctx.moveTo(0,groundY); ctx.lineTo(W,groundY); ctx.stroke();
+ }
+}
+
+function drawCaption(ctx,W,H,text,k,opts,scene){
+ if(!text)return;
+ const fs=Math.round(Math.min(W,H)*0.058*opts.capSize);
+ ctx.save();
+ ctx.font="bold "+fs+"px Arial, sans-serif"; ctx.textAlign="center"; ctx.textBaseline="middle";
+ const shown=text.split(/\s+/).slice(0,Math.max(1,Math.ceil(text.split(/\s+/).length*Math.min(1,k)))).join(" ");
+ const lines=wrapText(ctx,shown,W*0.86);
+ const lh=fs*1.25, y0=H*0.86-(lines.length-1)*lh/2;
+ lines.forEach((l,i)=>{
+  ctx.lineWidth=fs*0.18; ctx.strokeStyle=scene===SCENES.paper?"#ffffff":"#000000"; ctx.strokeText(l,W/2,y0+i*lh);
+  ctx.fillStyle=scene===SCENES.paper?"#111111":"#ffffff"; ctx.fillText(l,W/2,y0+i*lh);
+ });
+ ctx.restore();
+}
+
+function renderFrame(ctx,plan,t,opts){
+ const W=ctx.canvas.width,H=ctx.canvas.height;
+ const scene=SCENES[opts.scene]||SCENES.brand;
+ const color=opts.stickColor||scene.stick, accent=opts.accent||"#f5c400";
+ const groundY=H*(H>W?0.7:0.78);
+ drawBackground(ctx,W,H,groundY,scene);
+ const shots=plan.shots;
+ if(!shots.length){
+  ctx.fillStyle=scene.text; ctx.font="bold "+Math.round(W*0.05)+"px Arial"; ctx.textAlign="center";
+  ctx.fillText("Write a script to start",W/2,H/2); return -1;
+ }
+ t=Math.max(0,Math.min(t,plan.total-0.001));
+ let idx=shots.findIndex(s=>t>=s.start&&t<s.start+s.dur); if(idx<0)idx=shots.length-1;
+ const s=shots[idx], lt=t-s.start;
+ const size=Math.min(W,H)*(H>W?0.52:0.4);
+ if(s.action==="title"){
+  const k=ease(lt/0.5);
+  ctx.save();
+  ctx.globalAlpha=k;
+  const fs=Math.round(Math.min(W,H)*0.09*opts.capSize);
+  ctx.font="900 "+fs+"px Arial Black, Arial, sans-serif"; ctx.textAlign="center"; ctx.textBaseline="middle";
+  const lines=wrapText(ctx,(s.text||"").toUpperCase(),W*0.84);
+  const lh=fs*1.15, y0=H*0.42-(lines.length-1)*lh/2+(1-k)*fs*0.6;
+  lines.forEach((l,i)=>{ctx.fillStyle=accent;ctx.fillText(l,W/2,y0+i*lh);});
+  ctx.fillStyle=accent; ctx.fillRect(W/2-W*0.15*k,y0+lines.length*lh-lh*0.2,W*0.3*k,Math.max(3,fs*0.08));
+  ctx.restore();
+ }else{
+  let pose=poseFor(s.action,lt,s.dur);
+  if(idx>0&&lt<0.25){const pv=shots[idx-1]; if(pv.action!=="title") pose=blendPose(poseFor(pv.action,pv.dur,pv.dur),pose,ease(lt/0.25));}
+  const moving=s.action==="walk"||s.action==="run";
+  const xk=moving?Math.min(1,lt/s.dur):1;
+  const cx=W*lerp(s.x0,s.x1,xk);
+  const head=drawStickman(ctx,cx,groundY,size,pose,s.dir,color,accent,s.action==="sit");
+  const bubbleFont="bold "+Math.round(Math.min(W,H)*0.048*opts.capSize)+"px Arial, sans-serif";
+  const hx=cx+s.dir*head.u*0.4;
+  if(s.action==="idea"){
+   const g=ease((lt-0.35)/0.3);
+   if(g>0) drawBulb(ctx,hx,head.headY-head.headR*3.1,head.headR*0.9,accent,g*(0.85+0.15*Math.sin(lt*12)));
+  }
+  if(s.action==="talk"&&s.text){
+   drawBubble(ctx,hx,head.headY-head.headR*2.1,s.text,W*0.78,bubbleFont,false,scene);
+  }else if(s.action==="think"&&s.text){
+   drawBubble(ctx,hx,head.headY-head.headR*2.6,s.text,W*0.74,bubbleFont,true,scene);
+  }else if(s.text){
+   drawCaption(ctx,W,H,s.text,lt/Math.min(0.9,s.dur*0.4),opts,scene);
+  }
+  if(s.action==="point"){
+   const k=ease((lt-0.3)/0.3);
+   if(k>0){ctx.save();ctx.globalAlpha=k;ctx.strokeStyle=accent;ctx.lineWidth=Math.max(3,W*0.006);
+    const ax=cx+s.dir*size*0.55, ay=head.headY+head.headR*2.6;
+    ctx.beginPath();ctx.arc(ax+s.dir*size*0.12,ay,size*0.09,0,Math.PI*2);ctx.stroke();ctx.restore();}
+  }
+ }
+ // watermark
+ if(opts.handle){
+  ctx.save(); ctx.globalAlpha=0.9; ctx.fillStyle=accent;
+  ctx.font="bold "+Math.round(Math.min(W,H)*0.03)+"px Arial"; ctx.textAlign="right"; ctx.textBaseline="top";
+  ctx.fillText(opts.handle,W*0.96,H*0.03); ctx.restore();
+ }
+ // progress bar
+ ctx.fillStyle=accent; ctx.fillRect(0,H-Math.max(4,H*0.006),W*(t/plan.total),Math.max(4,H*0.006));
+ return idx;
+}
+
+/* ---------- UI ---------- */
+const STORE="stickman.v1";
+const DEFAULT_SCRIPT=[
+ "3 title: How the Light Bulb Started",
+ "wave: Long ago, nights were dark.",
+ "4 walk: People walked home by candle light.",
+ "think: How can we make light without fire?",
+ "idea: Then came a bright idea!",
+ "fall: The first thousand tries failed.",
+ "3 celebrate: In 1879 the bulb finally glowed!",
+ "point: And that's how it started."
+].join("\n");
+const cv=$("cv"), ctx=cv.getContext("2d");
+let plan=parseScript(""), playing=false, t0=0, tNow=0, raf=0, exporting=false;
+
+function opts(){return {scene:$("scene").value,stickColor:$("stickColor").value,accent:$("accent").value,
+ handle:$("handle").value.trim(),capSize:parseFloat($("capSize").value)||1};}
+
+function setSize(){
+ const f=$("format").value;
+ const [w,h]=f==="16:9"?[1280,720]:f==="1:1"?[960,960]:[720,1280];
+ if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h;}
+}
+
+function save(){
+ try{localStorage.setItem(STORE,JSON.stringify({script:$("script").value,story:$("story").value,
+  format:$("format").value,scene:$("scene").value,stickColor:$("stickColor").value,accent:$("accent").value,
+  handle:$("handle").value,capSize:$("capSize").value}));}catch(e){}
+}
+function load(){
+ let d=null; try{d=JSON.parse(localStorage.getItem(STORE)||"null");}catch(e){}
+ $("script").value=d&&d.script!=null?d.script:DEFAULT_SCRIPT;
+ if(d){["story","format","scene","stickColor","accent","handle","capSize"].forEach(k=>{if(d[k]!=null)$(k).value=d[k];});}
+}
+
+function fmt(s){s=Math.max(0,s);return Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0");}
+
+function rebuild(){
+ plan=parseScript($("script").value); planPositions(plan.shots);
+ $("scriptMsg").innerHTML=plan.warnings.length?'<span class="warn">'+plan.warnings.map(esc).join("<br>")+"</span>":
+  plan.shots.length+" shots • "+fmt(plan.total)+" long";
+ $("shotList").innerHTML=plan.shots.map((s,i)=>'<div class="shot" data-i="'+i+'"><b>'+s.dur.toFixed(1)+'s '+s.action+'</b><span>'+esc(s.text)+'</span></div>').join("");
+ $("seek").max=Math.max(0.01,plan.total);
+ tNow=Math.min(tNow,plan.total);
+ draw();
+}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+
+function draw(){
+ setSize();
+ const idx=renderFrame(ctx,plan,tNow,opts());
+ $("seek").value=tNow;
+ $("timeLbl").textContent=fmt(tNow)+" / "+fmt(plan.total);
+ document.querySelectorAll(".shot").forEach(el=>el.classList.toggle("on",+el.dataset.i===idx));
+}
+
+function tick(){
+ if(!playing)return;
+ tNow=(performance.now()-t0)/1000;
+ if(tNow>=plan.total){tNow=plan.total;stop();}
+ draw();
+ if(playing)raf=requestAnimationFrame(tick);
+}
+function play(){ if(!plan.shots.length)return; if(tNow>=plan.total-0.01)tNow=0; playing=true; t0=performance.now()-tNow*1000; $("playBtn").textContent="⏸ Pause"; raf=requestAnimationFrame(tick);}
+function stop(){ playing=false; cancelAnimationFrame(raf); $("playBtn").textContent="▶ Play"; }
+
+$("playBtn").onclick=()=>playing?stop():play();
+$("restartBtn").onclick=()=>{stop();tNow=0;draw();};
+$("seek").oninput=()=>{stop();tNow=parseFloat($("seek").value)||0;draw();};
+$("script").addEventListener("input",()=>{rebuild();save();});
+["format","scene","stickColor","accent","handle","capSize"].forEach(id=>$(id).addEventListener("input",()=>{
+ if(id==="scene"){$("stickColor").value=SCENES[$("scene").value].stick;}
+ $("capSizeVal").textContent=Math.round($("capSize").value*100)+"%";
+ save();draw();}));
+$("story").addEventListener("input",save);
+$("directBtn").onclick=()=>{
+ const out=directStory($("story").value);
+ if(!out){$("scriptMsg").textContent="Write a story first.";return;}
+ $("script").value=out; stop(); tNow=0; rebuild(); save();
+ $("script").scrollIntoView({behavior:"smooth",block:"center"});
+};
+$("shotList").onclick=e=>{const el=e.target.closest(".shot"); if(!el)return; stop(); tNow=plan.shots[+el.dataset.i].start+0.01; draw();};
+$("acts").innerHTML=Object.keys(ACTIONS).map(a=>'<button type="button" data-a="'+a+'">'+a+'</button>').join("");
+$("acts").onclick=e=>{const b=e.target.closest("button"); if(!b)return;
+ const ta=$("script"); ta.value=(ta.value.replace(/\s*$/,"")+(ta.value.trim()?"\n":"")+b.dataset.a+": ");
+ ta.focus(); ta.setSelectionRange(ta.value.length,ta.value.length); rebuild(); save();};
+
+/* ---------- export ---------- */
+const MIME_LIST=["video/mp4;codecs=avc1.42E01E","video/mp4;codecs=avc1","video/mp4","video/webm;codecs=vp9","video/webm;codecs=vp8","video/webm"];
+function pickMime(){
+ if(!window.MediaRecorder||!MediaRecorder.isTypeSupported)return null;
+ return MIME_LIST.find(m=>{try{return MediaRecorder.isTypeSupported(m);}catch(e){return false;}})||null;
+}
+let lastFile=null, lastUrl=null;
+function exportVideo(){
+ return new Promise((resolve,reject)=>{
+  if(!plan.shots.length)return reject(new Error("Write a script first."));
+  const mime=pickMime();
+  if(!mime||!cv.captureStream)return reject(new Error("This browser cannot record video. Use Chrome on Android."));
+  stop(); setSize();
+  const stream=cv.captureStream(30);
+  const rec=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:4000000});
+  const chunks=[];
+  rec.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data);};
+  rec.onerror=e=>reject(e.error||new Error("Recording failed"));
+  rec.onstop=()=>{
+   stream.getTracks().forEach(tr=>tr.stop());
+   const type=mime.split(";")[0], ext=type==="video/mp4"?"mp4":"webm";
+   resolve({blob:new Blob(chunks,{type}),ext});
+  };
+  exporting=true;
+  const o=opts(); let start=0;
+  const step=()=>{
+   const t=(performance.now()-start)/1000;
+   renderFrame(ctx,plan,Math.min(t,plan.total),o);
+   $("exportProg").value=Math.min(1,t/plan.total);
+   if(t>=plan.total+0.2){exporting=false;rec.stop();return;}
+   setTimeout(step,1000/30);
+  };
+  renderFrame(ctx,plan,0,o);
+  rec.start(500); start=performance.now(); step();
+ });
+}
+$("exportBtn").onclick=async()=>{
+ if(exporting)return;
+ $("exportBtn").disabled=true; $("doneRow").hidden=true; $("exportProg").hidden=false; $("exportProg").value=0;
+ $("exportMsg").textContent="Recording… keep this screen open ("+fmt(plan.total)+").";
+ try{
+  const {blob,ext}=await exportVideo();
+  if(lastUrl)URL.revokeObjectURL(lastUrl);
+  lastUrl=URL.createObjectURL(blob);
+  const name="stickman-"+new Date().toISOString().slice(0,10)+"."+ext;
+  lastFile=new File([blob],name,{type:blob.type});
+  $("dlLink").href=lastUrl; $("dlLink").download=name;
+  $("doneRow").hidden=false;
+  $("exportMsg").textContent="Done: "+name+" ("+(blob.size/1048576).toFixed(1)+" MB)"+(ext==="webm"?" — this phone made WebM instead of MP4.":"");
+  window.__lastExport={size:blob.size,type:blob.type,ext};
+ }catch(e){ $("exportMsg").textContent="Export failed: "+e.message; window.__lastExport={error:e.message}; }
+ $("exportBtn").disabled=false; $("exportProg").hidden=true; tNow=0; draw();
+};
+$("shareBtn").onclick=async()=>{
+ if(!lastFile)return;
+ const data={files:[lastFile],title:"Stickman video"};
+ if(!navigator.share||!navigator.canShare||!navigator.canShare(data)){$("exportMsg").textContent="Sharing is not available here. Tap Save video, then open it in CapCut.";return;}
+ try{await navigator.share(data);}catch(e){if(e.name!=="AbortError")$("exportMsg").textContent="Share failed: "+e.message;}
+};
+
+load();
+$("capSizeVal").textContent=Math.round($("capSize").value*100)+"%";
+rebuild();
+window.Stickman={parseScript,directStory,planPositions,renderFrame,poseFor,ACTIONS};
+</script>
+</body>
+</html>
