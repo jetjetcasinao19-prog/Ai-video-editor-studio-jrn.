@@ -35,13 +35,14 @@ Everything lives in `animate/`:
 | `animate/render.mjs` | CLI: contact sheet, stills, full render |
 | `animate/lib/engine.mjs` | parallel frame workers → FFmpeg, then soundtrack + mux |
 | `animate/lib/audio.py` | synthesised score (maqam scales, oud/kanun strings, ney, def/darbuka) + 20 sound effects + voice ducking + −14 LUFS |
-| `animate/styles/ottoman/` | the Ottoman miniature style: `kit.mjs` (figures, turbans, cloud bands, spongy rocks, cypresses, tulips, waves, galley, tughra, seals, stamps, sticky notes, books, alembic, jar, hammam + basin, water streams, water gun, rocket, pagoda, flower cards, taxi car, rice bowl, treasure chest, Ultra Hand lattice, handheld console, toy box, lamb, roast turkey, pie, pumpkin, calendar page, quill, envelope, printing press, magazine…), `page.mjs` (ebru marbled margins, illuminated header, gold-ruled frame, captions, progress reed), `scenes.mjs` (ready backdrops: `land`, `interior`, `lamp`, `compassRose`, `bookCover` for the closing brand card, `bigSign` gold title, `medallion` ?/!, `heart`), `index.mjs` (transitions) |
+| `animate/styles/ottoman/` | the Ottoman miniature style: `kit.mjs` (figures, turbans, cloud bands, spongy rocks, cypresses, tulips, waves, galley, tughra, seals, stamps, sticky notes, books, alembic, jar, hammam + basin, water streams, water gun, rocket, pagoda, flower cards, taxi car, rice bowl, treasure chest, Ultra Hand lattice, handheld console, toy box, lamb, roast turkey, pie, pumpkin, calendar page, quill, envelope, printing press, magazine, peach basket, 1891 leather ball, ladder, maple leaf, snow, gym railing…), `page.mjs` (ebru marbled margins, illuminated header, gold-ruled frame, captions, progress reed), `scenes.mjs` (ready backdrops: `land`, `interior`, `lamp`, `compassRose`, `bookCover` for the closing brand card, `bigSign` gold title, `medallion` ?/!, `heart`), `index.mjs` (transitions) |
 | `animate/projects/<name>/` | one video: `voice.mp3`, `words.json`, `story.mjs` → `out/<slug>.mp4` |
 | `animate/projects/bubble-wrap/` | the first finished short — **copy it as the template** |
 | `animate/projects/post-it-notes/` | second short (sticky notes, alembic, choir, hymn book, bazaar stall, map of America) |
 | `animate/projects/super-soaker/` | third short (hammam bathroom, water blasts, rocket, gates stamped NO with days flying by, counter over a treasure heap, festival) |
 | `animate/projects/nintendo/` | fourth short (Kyoto pagoda, flower cards, counters, a palace that grows behind a little shop) |
 | `animate/projects/thanksgiving/` | fifth short (a woman with a hotoz cap and veil, Lincoln in a stovepipe hat, calendars, letters, a torn map, a feast) |
+| `animate/projects/basketball/` | sixth short (snowy town, a palace-hall gym with baskets on the balcony, teams of nine, a chalk scoreboard, a janitor on a ladder) |
 
 Follow CLAUDE.md: never say it works until you rendered and looked at it.
 
@@ -93,7 +94,9 @@ Use helpers from the kit before drawing by hand. Figures take `skin:` (a colour)
 match real people's skin tone (the kit default is light). Painting a
 real place, use its own landmarks (a Kyoto pagoda, not a mosque) inside the
 miniature style; don't turn a company building into a religious one. For holiday stories,
-ask the publisher to schedule before the holiday, not after it. Animation tools are in
+ask the publisher to schedule before the holiday, not after it.
+Draw period-correct objects (the 1891 ball was brown laced leather, not a
+modern black-and-white one). Animation tools are in
 `lib/core.mjs`: `tween`, `ease.*`, `pop`, `shake`, `rng` (seeded — never
 `Math.random`, frames render in parallel and must be repeatable).
 

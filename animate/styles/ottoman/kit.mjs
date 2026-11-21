@@ -1029,6 +1029,55 @@ export function magazine(ctx, x, y, w, rot = 0, title = 'LADY’S BOOK', color =
   ctx.restore();
 }
 
+// ---------- sport & winter ----------
+// Woven peach basket (open top). fill 0..1 shows peaches inside; ball draws a ball in it.
+export function peachBasket(ctx, x, y, s = 1, peaches = 0, ball = false) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  ctx.beginPath(); ctx.ellipse(0, -60, 48, 12, 0, 0, TAU); fillStroke(ctx, '#5a3a20', P.ink, 2);
+  if (peaches > 0) for (let i = 0; i < Math.ceil(6 * peaches); i++) circle(ctx, -30 + (i % 3) * 30, -66 - Math.floor(i / 3) * 14, 13, i % 2 ? '#f0a060' : '#e8844a', P.ink, 1.2);
+  if (ball) leatherBall(ctx, 0, -72, 0.9);
+  ctx.beginPath(); ctx.moveTo(-48, -60); ctx.lineTo(-38, 0); ctx.quadraticCurveTo(0, 10, 38, 0); ctx.lineTo(48, -60); ctx.quadraticCurveTo(0, -46, -48, -60); ctx.closePath();
+  fillStroke(ctx, '#c9a36a', P.ink, 2.2);
+  ctx.save(); ctx.clip();
+  for (let j = 0; j < 6; j++) { ctx.beginPath(); ctx.moveTo(-60, -52 + j * 10); ctx.quadraticCurveTo(0, -40 + j * 10, 60, -52 + j * 10); stroke(ctx, '#9a7440', 2); }
+  for (let i = -5; i <= 5; i++) { ctx.beginPath(); ctx.moveTo(i * 9, -60); ctx.lineTo(i * 7.5, 6); stroke(ctx, '#8a6430', 1.4); }
+  ctx.restore();
+  ctx.beginPath(); ctx.ellipse(0, -60, 48, 12, 0, Math.PI * 0.05, Math.PI * 0.95); stroke(ctx, '#8a6430', 4);
+  ctx.restore();
+}
+// The 1891 ball: brown leather panels with a laced seam.
+export function leatherBall(ctx, x, y, s = 1, rot = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
+  circle(ctx, 0, 0, 22, '#a0622e', P.ink, 2);
+  ctx.beginPath(); ctx.moveTo(-21, -4); ctx.quadraticCurveTo(0, -12, 21, -4); ctx.moveTo(-18, 10); ctx.quadraticCurveTo(0, 2, 18, 10); ctx.moveTo(-4, -21); ctx.quadraticCurveTo(-10, 0, -4, 21); stroke(ctx, '#6a3a18', 1.5);
+  for (let i = 0; i < 4; i++) { ctx.beginPath(); ctx.moveTo(4, -10 + i * 6); ctx.lineTo(12, -8 + i * 6); stroke(ctx, P.paperLight, 1.6); }
+  ctx.beginPath(); ctx.arc(-6, -8, 7, Math.PI * 1.1, Math.PI * 1.6); stroke(ctx, 'rgba(255,230,190,0.7)', 2.5);
+  ctx.restore();
+}
+export function ladder(ctx, x, yTop, yBot, w = 70) {
+  for (const sx of [-w / 2, w / 2]) { ctx.beginPath(); ctx.moveTo(x + sx, yBot); ctx.lineTo(x + sx * 0.8, yTop); stroke(ctx, P.ink, 9); stroke(ctx, P.brownLight, 6); }
+  for (let yy = yBot - 30; yy > yTop + 10; yy -= 44) { const k = (yBot - yy) / (yBot - yTop), hw = w / 2 * (1 - k * 0.2); ctx.beginPath(); ctx.moveTo(x - hw, yy); ctx.lineTo(x + hw, yy); stroke(ctx, P.ink, 7); stroke(ctx, P.brownLight, 4); }
+}
+export function mapleLeaf(ctx, x, y, s = 1, color = P.verm, rot = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
+  const pts = [[0, -60], [10, -38], [24, -44], [20, -16], [46, -30], [40, -14], [56, -4], [28, 10], [32, 24], [6, 18], [4, 40], [-4, 40], [-6, 18], [-32, 24], [-28, 10], [-56, -4], [-40, -14], [-46, -30], [-20, -16], [-24, -44], [-10, -38]];
+  poly(ctx, pts, color, P.ink, 2);
+  ctx.beginPath(); ctx.moveTo(0, 40); ctx.lineTo(0, 60); stroke(ctx, P.ink, 4);
+  ctx.restore();
+}
+// Falling snow over an area.
+export function snow(ctx, x, y, w, h, t, n = 80, seed = 5) {
+  const R = rng(seed); ctx.save(); ctx.fillStyle = 'rgba(255,255,255,0.95)';
+  for (let i = 0; i < n; i++) { const sp = 40 + R() * 60, x0 = R() * w, q = (R() * h + t * sp) % h; ctx.beginPath(); ctx.arc(x + x0 + Math.sin(t * 1.5 + i) * 12, y + q, 2 + R() * 3.5, 0, TAU); ctx.fill(); }
+  ctx.restore();
+}
+// Gallery railing across a hall (gym balcony) at height y.
+export function railing(ctx, x0, x1, y, h = 60, color = P.brownLight) {
+  rect(ctx, x0, y - 8, x1 - x0, 14, color, P.ink, 2);
+  rect(ctx, x0, y + h, x1 - x0, 12, color, P.ink, 2);
+  for (let x = x0 + 14; x < x1; x += 28) { ctx.beginPath(); ctx.moveTo(x, y + 6); ctx.lineTo(x, y + h); stroke(ctx, P.ink, 6); stroke(ctx, color, 3.5); }
+}
+
 // ---------- colour util ----------
 export function shade(hex, k) {
   if (!hex.startsWith('#')) return hex;
