@@ -1,58 +1,55 @@
 # This Glue Was a Failure (The Origin of Post-it Notes)
 
 - Format: 9:16
-- Target length: 60 seconds (about 57 s of story + 2.5 s branded outro)
+- Target length: under 60 seconds (voice-over about 51 s in ElevenLabs; v1 was 1:05)
 - Platform(s): YouTube Shorts, TikTok, Instagram Reels, Facebook Reels
 - Research file: content/research/2026-11-21-post-it-origin.md
 - Hook title (intro card): **This Glue Was a Failure**
 
-## Hook (0–3 s)
+## Hook (0–4 s)
 A yellow sticky note is slapped onto a screen, peeled off, and stuck back (pop sound).
 Voice-over: "This glue was a failure. Now it's on desks everywhere."
 
 ## Scenes
+Times are measured for ElevenLabs pace (about 2.25 words per second).
+
 | # | Time | Visual | Voice-over | On-screen text |
 |---|---|---|---|---|
-| 1 | 0–3 s | Yellow note slapped on, peeled off, stuck back. Punch zoom. | This glue was a failure. Now it's on desks everywhere. | A FAILED GLUE? |
-| 2 | 3–9 s | 1960s lab in Minnesota, scientist with beakers | 1968. Minnesota. A 3M scientist named Spencer Silver is trying to make a super-strong glue. | 1968 · MINNESOTA |
-| 3 | 9–15 s | Paper lifts off easily; scientist frowns | He makes the opposite. A glue so weak, you can peel it off and stick it again. | TOO WEAK ❌ |
-| 4 | 15–19 s | Glue jar on a dusty shelf | Nobody at 3M knows what to do with it. | NO USE FOR IT |
-| 5 | 19–27 s | Church choir; paper bookmarks fall out of a hymn book | Years later, his co-worker Art Fry is singing in his church choir. His paper bookmarks keep falling out of his hymn book. | BOOKMARKS KEEP FALLING |
-| 6 | 27–31 s | Light-bulb moment: bookmark sticks to the page | Then it clicks. What if the bookmark… could stick? | 💡 WHAT IF IT STUCK? |
-| 7 | 31–38 s | Store shelf of pads labeled "Press 'n Peel"; nobody buys | 3M tests the little sticky pads in four cities. The name? Press 'n Peel. It flops. | PRESS 'N PEEL ❌ |
-| 8 | 38–46 s | Map pin on Boise, Idaho; hands passing out free samples | Most companies would give up. 3M didn't. In 1978, they flooded Boise, Idaho, with free samples. | 1978 · BOISE, IDAHO |
-| 9 | 46–51 s | Office workers covering desks and monitors with notes | People tried them. People loved them. | ✅ PEOPLE LOVED THEM |
-| 10 | 51–57 s | Wall covered in colorful sticky notes, slow zoom out | Two years later, they hit stores across America with a new name: Post-it Notes. A failed glue… that became a desk icon. | POST-IT NOTES |
-| 11 | 57–60 s | Branded outro card (automatic from brand.json) | Every legend has a beginning. | Subscribe for more origin stories |
+| 1 | 0–4.5 s | Yellow note slapped on, peeled off, stuck back. Punch zoom. | This glue was a failure. Now it's on desks everywhere. | A FAILED GLUE? |
+| 2 | 4.5–9.5 s | 1960s lab, scientist with beakers | 1968. A 3M scientist, Spencer Silver, tries to make a super-strong glue. | 1968 |
+| 3 | 9.5–15.5 s | Paper lifts off easily; scientist frowns | He makes the opposite. A glue so weak, it peels off and sticks again. | TOO WEAK ❌ |
+| 4 | 15.5–24.5 s | Church choir; paper bookmarks fall out of a hymn book | Years later, his co-worker Art Fry is singing in his church choir. His bookmarks keep falling out of his hymn book. | BOOKMARKS KEEP FALLING |
+| 5 | 24.5–28.5 s | Light-bulb moment: bookmark sticks to the page | Then it clicks. What if the bookmark… could stick? | 💡 WHAT IF IT STUCK? |
+| 6 | 28.5–33 s | Store shelf of pads labeled "Press 'n Peel"; nobody buys | 3M tests the sticky pads as Press 'n Peel. It flops. | PRESS 'N PEEL ❌ |
+| 7 | 33–40 s | Map pin on Boise, Idaho; free samples; happy office workers | But 3M doesn't quit. In 1978, they flood Boise, Idaho, with free samples. People love them. | 1978 · BOISE, IDAHO ✅ |
+| 8 | 40–45 s | Wall covered in colorful sticky notes, slow zoom out | Two years later, they hit stores across America as Post-it Notes. | POST-IT NOTES |
+| 9 | 45–48 s | One note slapped on the camera lens | A failed glue… turned desk icon. | DESK ICON |
+| 10 | 48–51 s | Branded outro card (automatic from brand.json) | Every legend has a beginning. | Subscribe for more origin stories |
 
-Voice-over word count: about 145 words (about 2.5 words per second).
-If it runs long, cut "Nobody at 3M knows what to do with it." first.
+Voice-over word count: about 115 words (v1 was 147 words = 1:05 in ElevenLabs).
+Expected length: about 51 s. Still too long? Cut "But 3M doesn't quit." first.
 
 ## Voice-over script (read aloud)
 This glue was a failure. Now it's on desks everywhere.
 
-1968. Minnesota.
-A 3M scientist named Spencer Silver is trying to make a super-strong glue.
+1968. A 3M scientist, Spencer Silver, tries to make a super-strong glue.
 He makes the opposite.
-A glue so weak, you can peel it off and stick it again.
-Nobody at 3M knows what to do with it.
+A glue so weak, it peels off and sticks again.
 
 Years later, his co-worker Art Fry is singing in his church choir.
-His paper bookmarks keep falling out of his hymn book.
+His bookmarks keep falling out of his hymn book.
 Then it clicks.
 What if the bookmark… could stick?
 
-3M tests the little sticky pads in four cities.
-The name? Press 'n Peel.
+3M tests the sticky pads as Press 'n Peel.
 It flops.
 
-Most companies would give up. 3M didn't.
-In 1978, they flooded Boise, Idaho, with free samples.
-People tried them. People loved them.
+But 3M doesn't quit.
+In 1978, they flood Boise, Idaho, with free samples.
+People love them.
 
-Two years later, they hit stores across America with a new name:
-Post-it Notes.
-A failed glue… that became a desk icon.
+Two years later, they hit stores across America as Post-it Notes.
+A failed glue… turned desk icon.
 
 Every legend has a beginning.
 
@@ -62,73 +59,63 @@ Outro card: "Subscribe for more origin stories".
 Pinned comment: "What everyday object should we tell next? 👇"
 
 ## Captions (SRT — import in the app: 04 — Captions → Import subtitles)
+Tip: after you add the ElevenLabs audio, AI captions (Whisper) will match the
+voice exactly; use this SRT if you want these exact words.
 ```
 1
-00:00:00,000 --> 00:00:03,000
+00:00:00,000 --> 00:00:02,000
 This glue was a failure.
 
 2
-00:00:03,000 --> 00:00:05,500
-1968. Minnesota.
+00:00:02,000 --> 00:00:04,500
+Now it's on desks everywhere.
 
 3
-00:00:05,500 --> 00:00:09,000
-Spencer Silver wants a strong glue.
+00:00:04,500 --> 00:00:09,500
+1968. Spencer Silver wants strong glue.
 
 4
-00:00:09,000 --> 00:00:11,500
+00:00:09,500 --> 00:00:12,000
 He makes the opposite.
 
 5
-00:00:11,500 --> 00:00:15,000
-Peel it off. Stick it again.
+00:00:12,000 --> 00:00:15,500
+It peels off and sticks again.
 
 6
-00:00:15,000 --> 00:00:19,000
-Nobody knows what to do with it.
-
-7
-00:00:19,000 --> 00:00:23,000
+00:00:15,500 --> 00:00:20,000
 Years later, Art Fry sings in a choir.
 
-8
-00:00:23,000 --> 00:00:27,000
+7
+00:00:20,000 --> 00:00:24,500
 His bookmarks keep falling out.
 
-9
-00:00:27,000 --> 00:00:31,000
+8
+00:00:24,500 --> 00:00:28,500
 What if the bookmark could stick?
 
+9
+00:00:28,500 --> 00:00:33,000
+Press 'n Peel. It flops.
+
 10
-00:00:31,000 --> 00:00:34,500
-3M tests it in four cities.
+00:00:33,000 --> 00:00:35,500
+But 3M doesn't quit.
 
 11
-00:00:34,500 --> 00:00:38,000
-Name: Press 'n Peel. It flops.
+00:00:35,500 --> 00:00:40,000
+Free samples in Boise. People love them.
 
 12
-00:00:38,000 --> 00:00:41,500
-Most would give up. 3M didn't.
+00:00:40,000 --> 00:00:45,000
+Then: Post-it Notes, across America.
 
 13
-00:00:41,500 --> 00:00:46,000
-1978: free samples in Boise, Idaho.
-
-14
-00:00:46,000 --> 00:00:51,000
-People tried them. People loved them.
-
-15
-00:00:51,000 --> 00:00:54,000
-A new name: Post-it Notes.
-
-16
-00:00:54,000 --> 00:00:57,000
+00:00:45,000 --> 00:00:48,000
 A failed glue turned desk icon.
 
-17
-00:00:57,000 --> 00:01:00,000
+14
+00:00:48,000 --> 00:00:51,000
 Every legend has a beginning.
 ```
 
