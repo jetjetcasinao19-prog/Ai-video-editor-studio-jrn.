@@ -27,7 +27,8 @@ These rules apply to every Claude session and every team agent in `.claude/agent
    `node tests/stickman-voice.test.js` for its AI narration voice; needs internet,
    `node tests/story.test.js` for the AI Story Studio,
    `node tests/prompt.test.js` for the AI Prompt panel,
-   `node tests/studio.test.js` for the Prompt Studio and the red look).
+   `node tests/studio.test.js` for the Prompt Studio and the red look,
+   `node tests/edit-this.test.js` for ⚡ Edit this in the app).
 8. Phones have little RAM: avoid loading whole videos into memory, free object
    URLs, stop media tracks, avoid heavy libraries unless the owner agrees.
 9. Never claim a feature works unless it has been implemented and tested.
@@ -50,6 +51,7 @@ These rules apply to every Claude session and every team agent in `.claude/agent
 - [x] AI Story Studio (`story.html`: topic → scenes → image/video prompts for Flow, ChatGPT, Gemini, Grok → join clips; tests/story.test.js)
 - [x] AI Prompt panel (typed commands/scripts run the editor; prompt → picture via free Pollinations.ai, download or show on video; tests/prompt.test.js)
 - [x] Prompt Studio + red restyle (prompt queue → free pictures, Stickman, or guided copy/open/share hand-off to Flow, Gemini, ChatGPT, Grok — no automation of those sites; .txt/.csv; start frames; tab bar; tests/studio.test.js)
+- [x] ⚡ Edit this in the app (the edit-this skill on the phone: brand, Whisper captions with word highlight, cut pauses, max length, hook intro card, punch/slow zoom, Wikimedia B-roll, pop-ups, whoosh/pop, progress bar, logo, outro, export, thumbnail, post text, ET/PHT schedule; never posts; tests/edit-this.test.js)
 
 ## "Edit this" workflow (server side)
 When the owner says "edit this", use the `edit-this` skill

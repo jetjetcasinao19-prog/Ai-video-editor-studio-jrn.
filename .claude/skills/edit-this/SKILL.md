@@ -5,6 +5,13 @@ description: The owner's one-command video workflow. Use when the owner says "ed
 
 # "Edit this" — from raw video to a scheduled post
 
+The same workflow also runs on the owner's phone with no server: the
+**⚡ Edit this** panel in `index.html` (Whisper on the phone, Wikimedia B-roll,
+canvas effects, post text and schedule). When the owner edits on the phone
+and only needs help, point them there; when they send a video here, run the
+steps below. Keep both in step: a new effect here should get a matching one
+in the app (tests/edit-this.test.js).
+
 You are the owner's whole production team. When they say **"edit this"**, do
 every step below without asking questions you can answer yourself. Ask only
 for things that are truly theirs to decide (see step 7). Follow CLAUDE.md
