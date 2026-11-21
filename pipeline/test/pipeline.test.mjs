@@ -7,7 +7,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { keepSegments, mapTime, limitLength, groupLines, buildSrt, probe, applyFixes } from '../edit.mjs';
-import { zoomPlan, zoomExpr, zoomMoments, pexelsClip } from '../effects.mjs';
+import { zoomPlan, zoomExpr, zoomMoments, pexelsClip, wikimediaImage, wikimediaLicenseOk } from '../effects.mjs';
 import http from 'node:http';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -191,7 +191,10 @@ try {
   const red = p => p[0] > 200 && p[1] < 60 && p[2] < 60, green = p => p[1] > 140 && p[0] < 60 && p[2] < 110;
   check('video B-roll covers the frame at its time', px(fin, 3, 'iw:ih*0.4:0:0').filter(red).length > 2000 && px(fin, 1, 'iw:ih*0.4:0:0').filter(red).length < 300,
     px(fin, 3, 'iw:ih*0.4:0:0').filter(red).length + ' vs ' + px(fin, 1, 'iw:ih*0.4:0:0').filter(red).length);
-  check('image B-roll covers the frame at its time', px(fin, 7, 'iw:ih*0.4:0:0').filter(green).length > 1500, px(fin, 7, 'iw:ih*0.4:0:0').filter(green).length);
+  // Images are shown whole in the middle, on a darker blurred copy of themselves.
+  const mid = px(fin, 7, 'iw:ih*0.2:0:ih*0.4').filter(green).length;
+  const top = px(fin, 7, 'iw:ih*0.15:0:0').filter(p => p[1] > 60 && p[1] < 150 && p[0] < 60).length;
+  check('image B-roll: whole picture in the middle on a blurred background', mid > 3000 && top > 2000, mid + ' sharp / ' + top + ' blurred');
   const gold = p => p[0] > 200 && p[1] > 170 && p[2] < 80;
   const diff = (a, b) => a.reduce((n, p, i) => n + Math.abs(p[0] - b[i][0]) + Math.abs(p[1] - b[i][1]) + Math.abs(p[2] - b[i][2]), 0) / a.length;
   // Compared with the same video rendered without effects (only the pop-up differs there at 4.8 s).
@@ -241,6 +244,37 @@ try {
   server.close();
   delete process.env.PEXELS_API_BASE; delete process.env.PEXELS_API_KEY;
 } catch (e) { check('Pexels stand-in', false, e.message); }
+
+// Wikimedia Commons image B-roll, tested against a local stand-in.
+check('Wikimedia licence filter: free licences in, NC / ND / unknown out',
+  ['Public domain', 'CC0', 'CC BY 2.0', 'CC BY-SA 4.0', 'PD-US'].every(wikimediaLicenseOk) &&
+  !['CC BY-NC 2.0', 'CC BY-ND 4.0', 'CC BY-NC-SA 3.0', 'Fair use', '', 'GFDL'].some(wikimediaLicenseOk));
+try {
+  const photo = path.join(tmp, 'photo.jpg');
+  ff(['-f', 'lavfi', '-i', 'color=c=0x886644:s=1600x1000', '-frames:v', '1', photo]);
+  let calls = 0, sawUA = '';
+  const info = (id, lic, artist) => ({ pageid: id, index: id, title: 'File:Test_' + id + '.jpg', imageinfo: [{ mime: 'image/jpeg', width: 1600, height: 1000,
+    thumburl: `http://127.0.0.1:${server.address().port}/thumb/${id}.jpg`, url: '', descriptionurl: 'https://commons.wikimedia.org/wiki/File:Test_' + id + '.jpg',
+    extmetadata: { LicenseShortName: { value: lic }, Artist: { value: '<a href="x">' + artist + '</a>' } } }] });
+  const server = http.createServer((req, res) => {
+    sawUA = req.headers['user-agent'] || '';
+    if (req.url.startsWith('/w/api.php')) {
+      if (++calls === 1) { res.writeHead(429, { 'Retry-After': '1' }); return res.end('slow down'); }
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ query: { pages: { 1: info(1, 'CC BY-NC 2.0', 'Not Allowed'), 2: info(2, 'CC BY-SA 4.0', 'Jane Photographer') } } }));
+    }
+    if (req.url.startsWith('/thumb/')) { res.writeHead(200); return res.end(fs.readFileSync(photo)); }
+    res.writeHead(404); res.end();
+  });
+  await new Promise(r => server.listen(0, '127.0.0.1', r));
+  process.env.WIKIMEDIA_API_BASE = `http://127.0.0.1:${server.address().port}`;
+  const got = await wikimediaImage('Ford Model T', path.join(tmp, 'wm'));
+  check('Wikimedia: waits and retries when asked, skips the non-commercial image, keeps the credit',
+    calls === 2 && /wm-2\.jpg$/.test(got.file) && fs.statSync(got.file).size > 1000 &&
+    got.credit === 'Jane Photographer, CC BY-SA 4.0, via Wikimedia Commons' && /AIVideoEditorStudio/.test(sawUA), JSON.stringify({ calls, credit: got.credit }));
+  server.close();
+  delete process.env.WIKIMEDIA_API_BASE;
+} catch (e) { check('Wikimedia stand-in', false, e.message); }
 
 // ---------- other options ----------
 try {

@@ -26,9 +26,12 @@ example OpusClip with your social accounts); otherwise you upload by hand.
 Claude plans these from the transcript for every video:
 - **Zoom**: punch-in zooms at cuts and sentences (talking/live footage) or a
   slow push-in (animation, slides).
-- **B-roll**: short clips over the video where they match what is said — your
-  own clips (put them in `inbox/broll/`) or free Pexels stock video (needs a
-  free Pexels API key).
+- **B-roll**: pictures or clips over the video where they match what is said —
+  your own clips (put them in `inbox/broll/`), **historical photos, paintings
+  and maps from Wikimedia Commons** (no key needed; only free licences; the
+  credits go into your post description), or Pexels stock video (optional,
+  needs a free Pexels API key). Photos are shown whole on a blurred background
+  with a slow documentary zoom.
 - **Text pop-ups**: key words and numbers pop in at the top in your gold.
 - **Sound effects**: whoosh and pop, made by the pipeline (no licence needed).
 - **Progress bar**: thin gold bar at the top.
