@@ -1546,6 +1546,44 @@ export function windmill(ctx, x, base, s = 1, t = 0) {
   ctx.restore();
 }
 
+// ---------- marks, shoes & gifts ----------
+// A curved "motion" stroke, filled as a tapered brush mark; k 0..1 draws it in.
+export function curvedStroke(ctx, x, y, s = 1, color = P.ink, k = 1, rot = 0) {
+  if (k <= 0) return;
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
+  ctx.beginPath(); ctx.rect(-120, -80, 250 * clamp(k), 160); ctx.clip();
+  ctx.beginPath(); ctx.moveTo(-110, -10); ctx.quadraticCurveTo(-90, 40, -40, 34); ctx.quadraticCurveTo(40, 26, 120, -50); ctx.quadraticCurveTo(30, 0, -40, 14); ctx.quadraticCurveTo(-88, 18, -110, -10); ctx.closePath();
+  ctx.fillStyle = color; ctx.fill();
+  ctx.restore();
+}
+// Plain running shoe, side view; mark(ctx) draws on its side panel.
+export function sneaker(ctx, x, y, s = 1, color = P.white, mark = null) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  ctx.beginPath(); ctx.moveTo(-120, 20); ctx.lineTo(130, 20); ctx.quadraticCurveTo(150, 20, 140, 0); ctx.lineTo(-120, 0); ctx.closePath(); fillStroke(ctx, P.white, P.ink, 2);
+  ctx.beginPath(); ctx.moveTo(-120, 0); ctx.quadraticCurveTo(-126, -60, -90, -80); ctx.lineTo(-30, -84); ctx.quadraticCurveTo(10, -40, 70, -30); ctx.quadraticCurveTo(140, -24, 140, 0); ctx.closePath(); fillStroke(ctx, color, P.ink, 2.5);
+  for (let i = 0; i < 4; i++) { ctx.beginPath(); ctx.moveTo(-40 + i * 16, -78 + i * 10); ctx.lineTo(-24 + i * 16, -70 + i * 10); stroke(ctx, P.ink, 2); }
+  rect(ctx, -126, 20, 270, 8, P.ink, P.ink, 1);
+  if (mark) { ctx.save(); ctx.translate(10, -28); mark(ctx); ctx.restore(); }
+  ctx.restore();
+}
+export function ring(ctx, x, y, r, t = 0, sparkle = 1) {
+  ctx.save(); ctx.translate(x, y);
+  ctx.beginPath(); ctx.ellipse(0, 0, r, r * 0.45, 0, 0, TAU); ctx.lineWidth = r * 0.18; ctx.strokeStyle = P.ink; ctx.stroke(); ctx.lineWidth = r * 0.12; ctx.strokeStyle = P.goldLight; ctx.stroke();
+  poly(ctx, [[0, -r * 0.75], [r * 0.25, -r * 0.45], [0, -r * 0.2], [-r * 0.25, -r * 0.45]], '#dff4ff', P.ink, 1.5);
+  if (sparkle > 0) for (let i = 0; i < 4; i++) { const a = t * 2 + i * Math.PI / 2; star(ctx, Math.cos(a) * r * 0.6, -r * 0.5 + Math.sin(a) * r * 0.4, r * 0.12, sparkle * (0.5 + 0.5 * Math.sin(t * 6 + i))); }
+  ctx.restore();
+}
+export function certificate(ctx, x, y, w, rot = 0, title = 'SHARES', line = '') {
+  const h = w * 0.7;
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot);
+  rect(ctx, -w / 2, -h / 2, w, h, '#f3ecd6', P.ink, 2);
+  ctx.strokeStyle = P.green; ctx.lineWidth = 6; ctx.strokeRect(-w / 2 + 10, -h / 2 + 10, w - 20, h - 20);
+  ctx.fillStyle = P.green; ctx.font = `900 ${Math.round(w * 0.09)}px Deco`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(title, 0, -h * 0.25);
+  if (line) { ctx.fillStyle = P.ink; ctx.font = `700 ${Math.round(w * 0.05)}px Fell`; ctx.fillText(line, 0, -h * 0.05); }
+  for (let i = 0; i < 2; i++) { ctx.beginPath(); ctx.moveTo(-w * 0.35, h * 0.12 + i * h * 0.12); ctx.lineTo(w * 0.35, h * 0.12 + i * h * 0.12); stroke(ctx, P.grey, 1.5); }
+  ctx.restore();
+}
+
 // ---------- colour util ----------
 export function shade(hex, k) {
   if (!hex.startsWith('#')) return hex;

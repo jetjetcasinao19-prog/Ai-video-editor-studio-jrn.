@@ -1,0 +1,576 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "The Nike swoosh cost $35. 1971, Portland, Oregon. Phil Knight is teaching accounting at Portland State University. His shoe company needs a logo, fast. He hires a graphic design student, Carolyn Davidson. She sketches idea after idea. One looks like motion, a simple curved stroke. Knight's reaction? I don't love it, but maybe it will grow on me. She sends him a bill for $35. The swoosh goes on the shoes. The company becomes Nike, one of the biggest sports brands on Earth. In 1983, Knight surprises her with a gold swoosh ring with a diamond and shares of Nike stock. A $35 sketch, now one of the most famous logos ever. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "The",
+   "start": 0.04,
+   "end": 0.22
+  },
+  {
+   "w": "Nike",
+   "start": 0.22,
+   "end": 0.5
+  },
+  {
+   "w": "swoosh",
+   "start": 0.5,
+   "end": 0.9
+  },
+  {
+   "w": "cost $35.",
+   "start": 0.9,
+   "end": 3.04
+  },
+  {
+   "w": "1971,",
+   "start": 4.12,
+   "end": 5.68
+  },
+  {
+   "w": "Portland,",
+   "start": 5.68,
+   "end": 6.36
+  },
+  {
+   "w": "Oregon.",
+   "start": 6.36,
+   "end": 7.12
+  },
+  {
+   "w": "Phil",
+   "start": 7.6,
+   "end": 7.8
+  },
+  {
+   "w": "Knight",
+   "start": 7.8,
+   "end": 8.02
+  },
+  {
+   "w": "is",
+   "start": 8.02,
+   "end": 8.26
+  },
+  {
+   "w": "teaching",
+   "start": 8.26,
+   "end": 8.58
+  },
+  {
+   "w": "accounting",
+   "start": 8.58,
+   "end": 8.94
+  },
+  {
+   "w": "at",
+   "start": 8.94,
+   "end": 9.22
+  },
+  {
+   "w": "Portland",
+   "start": 9.22,
+   "end": 9.62
+  },
+  {
+   "w": "State",
+   "start": 9.62,
+   "end": 9.92
+  },
+  {
+   "w": "University.",
+   "start": 9.92,
+   "end": 11
+  },
+  {
+   "w": "His",
+   "start": 11.24,
+   "end": 11.38
+  },
+  {
+   "w": "shoe",
+   "start": 11.38,
+   "end": 11.56
+  },
+  {
+   "w": "company",
+   "start": 11.56,
+   "end": 11.96
+  },
+  {
+   "w": "needs",
+   "start": 11.96,
+   "end": 12.36
+  },
+  {
+   "w": "a",
+   "start": 12.36,
+   "end": 12.46
+  },
+  {
+   "w": "logo,",
+   "start": 12.46,
+   "end": 13.38
+  },
+  {
+   "w": "fast.",
+   "start": 13.38,
+   "end": 14.24
+  },
+  {
+   "w": "He",
+   "start": 14.5,
+   "end": 14.62
+  },
+  {
+   "w": "hires",
+   "start": 14.62,
+   "end": 14.94
+  },
+  {
+   "w": "a",
+   "start": 14.94,
+   "end": 15.14
+  },
+  {
+   "w": "graphic",
+   "start": 15.14,
+   "end": 15.46
+  },
+  {
+   "w": "design",
+   "start": 15.46,
+   "end": 15.84
+  },
+  {
+   "w": "student,",
+   "start": 15.84,
+   "end": 16.62
+  },
+  {
+   "w": "Carolyn",
+   "start": 16.62,
+   "end": 16.96
+  },
+  {
+   "w": "Davidson.",
+   "start": 16.96,
+   "end": 17.36
+  },
+  {
+   "w": "She",
+   "start": 18.28,
+   "end": 18.38
+  },
+  {
+   "w": "sketches",
+   "start": 18.38,
+   "end": 18.78
+  },
+  {
+   "w": "idea",
+   "start": 18.78,
+   "end": 19.4
+  },
+  {
+   "w": "after",
+   "start": 19.4,
+   "end": 19.82
+  },
+  {
+   "w": "idea.",
+   "start": 19.82,
+   "end": 20.26
+  },
+  {
+   "w": "One",
+   "start": 21.04,
+   "end": 21.22
+  },
+  {
+   "w": "looks",
+   "start": 21.22,
+   "end": 21.48
+  },
+  {
+   "w": "like",
+   "start": 21.48,
+   "end": 21.7
+  },
+  {
+   "w": "motion,",
+   "start": 21.7,
+   "end": 22.6
+  },
+  {
+   "w": "a",
+   "start": 22.6,
+   "end": 22.68
+  },
+  {
+   "w": "simple",
+   "start": 22.68,
+   "end": 23.08
+  },
+  {
+   "w": "curved",
+   "start": 23.08,
+   "end": 23.64
+  },
+  {
+   "w": "stroke.",
+   "start": 23.64,
+   "end": 24.56
+  },
+  {
+   "w": "Knight's",
+   "start": 24.84,
+   "end": 25.08
+  },
+  {
+   "w": "reaction?",
+   "start": 25.08,
+   "end": 25.96
+  },
+  {
+   "w": "I",
+   "start": 26.36,
+   "end": 26.42
+  },
+  {
+   "w": "don't",
+   "start": 26.42,
+   "end": 26.76
+  },
+  {
+   "w": "love",
+   "start": 26.76,
+   "end": 27.12
+  },
+  {
+   "w": "it,",
+   "start": 27.12,
+   "end": 27.8
+  },
+  {
+   "w": "but",
+   "start": 27.8,
+   "end": 27.94
+  },
+  {
+   "w": "maybe",
+   "start": 27.94,
+   "end": 28.46
+  },
+  {
+   "w": "it",
+   "start": 28.46,
+   "end": 28.62
+  },
+  {
+   "w": "will",
+   "start": 28.62,
+   "end": 28.72
+  },
+  {
+   "w": "grow",
+   "start": 28.72,
+   "end": 28.92
+  },
+  {
+   "w": "on",
+   "start": 28.92,
+   "end": 29.14
+  },
+  {
+   "w": "me.",
+   "start": 29.14,
+   "end": 29.3
+  },
+  {
+   "w": "She",
+   "start": 30.24,
+   "end": 30.36
+  },
+  {
+   "w": "sends",
+   "start": 30.36,
+   "end": 30.66
+  },
+  {
+   "w": "him",
+   "start": 30.66,
+   "end": 30.78
+  },
+  {
+   "w": "a",
+   "start": 30.78,
+   "end": 30.9
+  },
+  {
+   "w": "bill",
+   "start": 30.9,
+   "end": 31.12
+  },
+  {
+   "w": "for $35.",
+   "start": 31.12,
+   "end": 32.98
+  },
+  {
+   "w": "The",
+   "start": 33,
+   "end": 33.26
+  },
+  {
+   "w": "swoosh",
+   "start": 33.26,
+   "end": 33.62
+  },
+  {
+   "w": "goes",
+   "start": 33.62,
+   "end": 34.06
+  },
+  {
+   "w": "on",
+   "start": 34.06,
+   "end": 34.26
+  },
+  {
+   "w": "the",
+   "start": 34.26,
+   "end": 34.36
+  },
+  {
+   "w": "shoes.",
+   "start": 34.36,
+   "end": 35.08
+  },
+  {
+   "w": "The",
+   "start": 34.58,
+   "end": 35.42
+  },
+  {
+   "w": "company",
+   "start": 35.42,
+   "end": 35.76
+  },
+  {
+   "w": "becomes",
+   "start": 35.76,
+   "end": 36.4
+  },
+  {
+   "w": "Nike,",
+   "start": 36.4,
+   "end": 37.08
+  },
+  {
+   "w": "one",
+   "start": 37.08,
+   "end": 37.68
+  },
+  {
+   "w": "of",
+   "start": 37.68,
+   "end": 37.8
+  },
+  {
+   "w": "the",
+   "start": 37.8,
+   "end": 37.9
+  },
+  {
+   "w": "biggest",
+   "start": 37.9,
+   "end": 38.36
+  },
+  {
+   "w": "sports",
+   "start": 38.36,
+   "end": 38.84
+  },
+  {
+   "w": "brands",
+   "start": 38.84,
+   "end": 39.3
+  },
+  {
+   "w": "on",
+   "start": 39.3,
+   "end": 39.64
+  },
+  {
+   "w": "Earth.",
+   "start": 39.64,
+   "end": 40.52
+  },
+  {
+   "w": "In",
+   "start": 40.8,
+   "end": 40.96
+  },
+  {
+   "w": "1983,",
+   "start": 40.96,
+   "end": 42.22
+  },
+  {
+   "w": "Knight",
+   "start": 42.22,
+   "end": 42.3
+  },
+  {
+   "w": "surprises",
+   "start": 42.3,
+   "end": 42.82
+  },
+  {
+   "w": "her",
+   "start": 42.82,
+   "end": 43.04
+  },
+  {
+   "w": "with",
+   "start": 43.04,
+   "end": 43.24
+  },
+  {
+   "w": "a",
+   "start": 43.24,
+   "end": 43.36
+  },
+  {
+   "w": "gold",
+   "start": 43.36,
+   "end": 43.74
+  },
+  {
+   "w": "swoosh",
+   "start": 43.74,
+   "end": 44.12
+  },
+  {
+   "w": "ring",
+   "start": 44.12,
+   "end": 44.48
+  },
+  {
+   "w": "with",
+   "start": 44.48,
+   "end": 44.78
+  },
+  {
+   "w": "a",
+   "start": 44.78,
+   "end": 44.9
+  },
+  {
+   "w": "diamond",
+   "start": 44.9,
+   "end": 45.38
+  },
+  {
+   "w": "and",
+   "start": 45.38,
+   "end": 46.16
+  },
+  {
+   "w": "shares",
+   "start": 46.16,
+   "end": 46.68
+  },
+  {
+   "w": "of",
+   "start": 46.68,
+   "end": 46.88
+  },
+  {
+   "w": "Nike",
+   "start": 46.88,
+   "end": 47.16
+  },
+  {
+   "w": "stock.",
+   "start": 47.16,
+   "end": 47.7
+  },
+  {
+   "w": "A $35",
+   "start": 47.62,
+   "end": 49.3
+  },
+  {
+   "w": "sketch,",
+   "start": 49.3,
+   "end": 50.24
+  },
+  {
+   "w": "now",
+   "start": 50.24,
+   "end": 50.9
+  },
+  {
+   "w": "one",
+   "start": 50.9,
+   "end": 51.1
+  },
+  {
+   "w": "of",
+   "start": 51.1,
+   "end": 51.26
+  },
+  {
+   "w": "the",
+   "start": 51.26,
+   "end": 51.36
+  },
+  {
+   "w": "most",
+   "start": 51.36,
+   "end": 51.56
+  },
+  {
+   "w": "famous",
+   "start": 51.56,
+   "end": 52.12
+  },
+  {
+   "w": "logos",
+   "start": 52.12,
+   "end": 52.72
+  },
+  {
+   "w": "ever.",
+   "start": 52.72,
+   "end": 53.72
+  },
+  {
+   "w": "Every",
+   "start": 54.12,
+   "end": 54.46
+  },
+  {
+   "w": "legend",
+   "start": 54.46,
+   "end": 54.94
+  },
+  {
+   "w": "has",
+   "start": 54.94,
+   "end": 55.4
+  },
+  {
+   "w": "a",
+   "start": 55.4,
+   "end": 55.52
+  },
+  {
+   "w": "beginning.",
+   "start": 55.52,
+   "end": 56.32
+  }
+ ]
+}
