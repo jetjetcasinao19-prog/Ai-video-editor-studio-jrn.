@@ -82,6 +82,12 @@ details summary{cursor:pointer;font-weight:bold;padding:6px 0}
 .card p{font-size:11px;color:#9ba8bb;margin:4px 0 0;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 #styleNow{border-left:4px solid #f5c400;padding:6px 10px;margin-top:10px;background:#1d1a10;border-radius:8px;font-size:13px}
 .genbox{font-size:12px;color:#91b7ff;margin-top:6px;min-height:1em}
+#flowBox{border:1px solid #2f6b55;background:#0f1f1a;border-radius:12px;padding:12px;margin-top:14px}
+#flowBox h3{margin:0}
+#flowState{font-size:13px;margin-top:6px}
+#flowState.ok{color:#8fe3c0}
+#flowState.no{color:#ffb86b}
+.steps{margin:8px 0 0;padding-left:20px;font-size:13px;line-height:1.5;color:#c5ccda}
 [hidden]{display:none!important}
 /* ---- red theme (shared look with stickman.html) ---- */
 :root{--accent:#e63946;--accent2:#ff6b6b;--glow:rgba(230,57,70,.35)}
@@ -147,9 +153,10 @@ write it. ⭐ TRENDING = popular on TikTok, Reels and Shorts in 2026.</p>
  <div><label for="format">Format</label>
   <select id="format"><option value="9:16">9:16</option><option value="16:9">16:9</option><option value="1:1">1:1</option></select></div>
 </div>
-<p class="note">Let an AI write the scenes: tap one, paste its answer below. ChatGPT and Grok open with the
+<p class="note">Let an AI write the scenes: tap one, paste its answer below. Claude, ChatGPT and Grok open with the
 request already typed; for Gemini it is copied, just paste it.</p>
-<div class="btns" style="grid-template-columns:repeat(3,1fr)">
+<div class="btns" style="grid-template-columns:repeat(2,1fr)">
+ <button type="button" data-write="claude">✨ Claude</button>
  <button type="button" data-write="chatgpt">✨ ChatGPT</button>
  <button type="button" data-write="gemini">✨ Gemini</button>
  <button type="button" data-write="grok">✨ Grok</button>
@@ -206,6 +213,22 @@ request already typed; for Gemini it is copied, just paste it.</p>
 <div id="nextMsg" class="status"></div>
 <p class="note">Each tap copies the next prompt and opens the site you picked. Make the image or clip there, save it,
 then add it to its scene below. Check you have enough credits on that site first.</p>
+<div id="flowBox">
+ <h3>🎬 My Google Flow</h3>
+ <div id="flowState" class="no"></div>
+ <ol class="steps">
+  <li>Tap <b>Open Flow &amp; sign in</b> and sign in with your Google account (once; Chrome remembers it).</li>
+  <li>In Flow, open or create the project for this video and copy its link from the address bar.</li>
+  <li>Paste it below and tap <b>Save</b>. From then on, every Flow button opens <b>your project</b> with the prompt copied.</li>
+ </ol>
+ <div class="row"><button id="flowOpen" class="secondary">Open Flow &amp; sign in</button><button id="flowTest" class="secondary">Open my project</button></div>
+ <label for="flowLink">My Flow project link</label>
+ <input id="flowLink" inputmode="url" placeholder="https://labs.google/fx/tools/flow/project/…">
+ <div class="row"><button id="flowSave">Save</button><button id="flowClear" class="secondary">Forget</button></div>
+ <p class="note">Your Google password and Flow credits stay with Google: this page never sees them. Google does not let
+ other sites sign in to Flow or press its buttons, so you paste the prompt (it is copied for you) and pick
+ <b>Frames to Video</b> when the scene has a start image.</p>
+</div>
 </section>
 
 <section class="panel">
@@ -231,6 +254,8 @@ then add it to its scene below. Check you have enough credits on that site first
 <p class="note">Plays your clips in scene order and records one video with their sound. Scenes without a clip
 show their start image (slow zoom) or a title card. Recording takes as long as the video.</p>
 <div class="check"><input id="burnCaps" type="checkbox"><label for="burnCaps">Burn the narration in as captions</label></div>
+<label for="capStyle">Caption look</label>
+<select id="capStyle"><option value="lines">Lines at the bottom</option><option value="wordpop">Word pop, center (viral cartoon style)</option></select>
 <button id="joinBtn">🎞 Join into one video</button>
 <progress id="joinProg" value="0" max="1" hidden></progress>
 <canvas id="cv" width="720" height="1280" hidden></canvas>
@@ -252,12 +277,16 @@ const STORE="story.v1";
 /* ---------- platforms ---------- */
 // q: the site fills its prompt box from the link; otherwise the prompt is copied for pasting.
 const PLATFORMS={
+ claude:{name:"Claude",url:q=>"https://claude.ai/new?q="+encodeURIComponent(q),prefill:true},
  chatgpt:{name:"ChatGPT",url:q=>"https://chatgpt.com/?q="+encodeURIComponent(q),prefill:true},
  gemini:{name:"Gemini",url:()=>"https://gemini.google.com/app",prefill:false},
  grok:{name:"Grok",url:q=>"https://grok.com/?q="+encodeURIComponent(q),prefill:true},
- flow:{name:"Flow",url:()=>"https://labs.google/fx/tools/flow",prefill:false},
+ flow:{name:"Flow",url:()=>flowLink()||FLOW_HOME,prefill:false},
  free:{name:"Free (in app)",url:null,prefill:false}
 };
+const FLOW_HOME="https://labs.google/fx/tools/flow", FLOW_KEY="story.flow";
+const FLOW_RE=/^https:\/\/labs\.google\/fx\/(?:[a-z]{2}(?:-[a-z]{2})?\/)?tools\/flow(?:\/[A-Za-z0-9_\-\/]*)?(?:[?#].*)?$/i;
+function flowLink(){ try{ const v=localStorage.getItem(FLOW_KEY)||""; return FLOW_RE.test(v)?v:""; }catch(e){ return ""; } }
 const IMG_PLATS=["gemini","chatgpt","flow","grok","free"], VID_PLATS=["flow","gemini","grok"];
 const STYLES=(window.StoryStyles&&window.StoryStyles.STYLES)||[], CATS=(window.StoryStyles&&window.StoryStyles.CATS)||[["all","All"]];
 const NICHES={};
@@ -442,7 +471,7 @@ async function openOn(plat,text){
  const p=PLATFORMS[plat], copying=copyText(text); // start the copy while the tap still counts
  window.open(p.url(text),"_blank","noopener");          // open right away so it is not blocked as a pop-up
  const ok=await copying;
- toast(p.prefill?p.name+" opened with your prompt"+(ok?" (also copied)":""):(ok?"Copied — paste it in "+p.name:"Opened "+p.name+" — copy the prompt from the scene"));
+ toast(p.prefill?p.name+" opened with your prompt"+(ok?" (also copied)":""):(ok?"Copied — paste it in "+(plat==="flow"&&flowLink()?"your Flow project":p.name):"Opened "+p.name+" — copy the prompt from the scene"));
 }
 
 /* ---------- rendering the scene list ---------- */
@@ -504,7 +533,7 @@ function renderScenes(){
 /* ---------- saving ---------- */
 function save(){
  try{ localStorage.setItem(STORE,JSON.stringify({story,imgPlat,vidPlat,skipImages,
-  form:Object.fromEntries(["topic","notes","sceneCount","sceneSec","format","niche","bg","character","ownScript","lang","voiceType"].map(k=>[k,$(k).value])),
+  form:Object.fromEntries(["topic","notes","sceneCount","sceneSec","format","niche","bg","character","ownScript","lang","voiceType","capStyle"].map(k=>[k,$(k).value])),
   checks:{narrator:$("narrator").checked,noMusic:$("noMusic").checked,burnCaps:$("burnCaps").checked}})); }catch(e){}
 }
 function load(){
@@ -561,6 +590,17 @@ function drawCaption(ctx,text){
  lines.forEach((l,i)=>{ctx.lineWidth=fs*0.18;ctx.strokeStyle="#000";ctx.strokeText(l,W/2,y0+i*lh);ctx.fillStyle="#fff";ctx.fillText(l,W/2,y0+i*lh);});
  ctx.restore();
 }
+// Viral cartoon captions: 1-3 words at a time, big, centered, popping in. k = 0..1 through the line.
+function drawWordPop(ctx,text,k){
+ const words=(text||"").split(/\s+/).filter(Boolean); if(!words.length)return;
+ const chunks=[]; for(let i=0;i<words.length;){ const n=words[i].length>7?1:2; chunks.push(words.slice(i,i+n).join(" ")); i+=n; }
+ const pos=Math.min(chunks.length-1,Math.floor(Math.max(0,k)*chunks.length)), local=(Math.max(0,k)*chunks.length)%1;
+ const W=ctx.canvas.width,H=ctx.canvas.height, base=Math.min(W,H)*0.085, pop=local<0.12?0.85+1.25*local:1;
+ ctx.save(); ctx.font="900 "+Math.round(base*pop)+"px Arial Black, Arial"; ctx.textAlign="center"; ctx.textBaseline="middle";
+ const t=chunks[pos], lines=wrap(ctx,t,W*0.9), lh=base*1.1, y0=H*0.62-(lines.length-1)*lh/2;
+ lines.forEach((l,i)=>{ ctx.lineJoin="round"; ctx.lineWidth=base*0.22; ctx.strokeStyle="#000"; ctx.strokeText(l,W/2,y0+i*lh); ctx.fillStyle="#fff"; ctx.fillText(l,W/2,y0+i*lh); });
+ ctx.restore();
+}
 let joining=false, lastJoinUrl=null, lastJoinFile=null;
 async function joinVideo(){
  const o=settings(), mime=pickMime(), cv=$("cv"), ctx=cv.getContext("2d");
@@ -572,7 +612,7 @@ async function joinVideo(){
  const rec=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:5000000}), chunks=[];
  rec.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data);};
  const stopped=new Promise(r=>rec.onstop=r);
- const caps=$("burnCaps").checked, n=story.scenes.length;
+ const caps=$("burnCaps").checked, n=story.scenes.length, pop=$("capStyle").value==="wordpop";
  ctx.fillStyle="#000"; ctx.fillRect(0,0,w,h);
  rec.start(500);
  const frameLoop=(drawFn,until)=>new Promise(res=>{ const tick=()=>{ if(until()){res();return;} drawFn(); setTimeout(tick,1000/30); }; tick(); });
@@ -585,7 +625,7 @@ async function joinVideo(){
    const node=ac.createMediaElementSource(v); node.connect(dest);
    let ended=false; v.onended=()=>ended=true;
    await v.play();
-   await frameLoop(()=>{ drawCover(ctx,v,v.videoWidth,v.videoHeight); if(caps)drawCaption(ctx,s.narration);
+   await frameLoop(()=>{ drawCover(ctx,v,v.videoWidth,v.videoHeight); if(caps){ if(pop) drawWordPop(ctx,s.narration,v.currentTime/(v.duration||1)); else drawCaption(ctx,s.narration); }
     $("joinProg").value=(i+Math.min(1,v.currentTime/(v.duration||1)))/n; },()=>ended||v.error);
    node.disconnect(); v.removeAttribute("src"); v.load();
   }else{
@@ -598,7 +638,7 @@ async function joinVideo(){
     else{ ctx.fillStyle=o.bg; ctx.fillRect(0,0,w,h); ctx.fillStyle="#f5c400"; const fs=Math.round(Math.min(w,h)*0.08);
      ctx.font="900 "+fs+"px Arial Black, Arial"; ctx.textAlign="center"; ctx.textBaseline="middle";
      const ls=wrap(ctx,(s.onScreenText||story.title||"").toUpperCase(),w*0.84); ls.forEach((l,j)=>ctx.fillText(l,w/2,h*0.4+(j-(ls.length-1)/2)*fs*1.15)); }
-    if(caps||!img) drawCaption(ctx,s.narration);
+    if(caps&&pop) drawWordPop(ctx,s.narration,k); else if(caps||!img) drawCaption(ctx,s.narration);
     $("joinProg").value=(i+Math.min(1,k))/n; },()=>performance.now()-t0>=dur*1000);
   }
  }
@@ -644,6 +684,8 @@ function applyStyle(id,quiet){
  $("narrator").checked=st.voice!=="none";
  $("character").value=st.character||"";
  if(st.bg) $("bg").value=st.bg;
+ $("capStyle").value=st.captions==="wordpop"?"wordpop":"lines";
+ if(st.captions==="wordpop") $("burnCaps").checked=true;
  $("bgBox").hidden=!st.bg;
  $("topic").placeholder="e.g. "+(st.topic||"");
  story.scenes.forEach(sc=>{ if(!sc.imgEdited) delete sc.imgPrompt; if(!sc.vidEdited) delete sc.vidPrompt; });
@@ -675,7 +717,7 @@ async function makeFreeImage(i){
  const ctrl=new AbortController(), timer=setTimeout(()=>ctrl.abort(),120000);
  try{
   const res=await fetch(url,{signal:ctrl.signal});
-  if(res.status===402||res.status===429){ setGen(i,"The free picture limit was reached. Wait about a minute and try again."); return false; }
+  if(res.status===402||res.status===429){ setGen(i,"The free picture service allows 1 picture every 45 seconds. Wait a moment and tap again."); return false; }
   if(!res.ok){ setGen(i,"The picture service had a problem (error "+res.status+"). Try again in a minute."); return false; }
   const blob=await res.blob();
   if(!/^image\//.test(blob.type)){ setGen(i,"The picture service did not send a picture. Try again."); return false; }
@@ -697,6 +739,23 @@ async function makeFreeImage(i){
  }finally{ clearTimeout(timer); picBusy=false; }
 }
 
+/* ---------- my Google Flow ---------- */
+function renderFlow(){
+ const l=flowLink();
+ $("flowState").className=l?"ok":"no";
+ $("flowState").textContent=l?"✓ Connected to your Flow project: Flow buttons open it directly.":"Not set up yet: Flow buttons open the Flow home page.";
+ if(l&&!$("flowLink").value) $("flowLink").value=l;
+}
+$("flowOpen").onclick=()=>window.open(FLOW_HOME,"_blank","noopener");
+$("flowTest").onclick=()=>{ const l=flowLink(); if(!l){ toast("Save your Flow project link first"); return; } window.open(l,"_blank","noopener"); };
+$("flowSave").onclick=()=>{
+ const v=$("flowLink").value.trim();
+ if(!FLOW_RE.test(v)){ $("flowState").className="no"; $("flowState").textContent="That is not a Flow link. It should start with https://labs.google/fx/ and contain /tools/flow"; return; }
+ try{ localStorage.setItem(FLOW_KEY,v); }catch(e){}
+ renderFlow(); toast("Flow project saved");
+};
+$("flowClear").onclick=()=>{ try{ localStorage.removeItem(FLOW_KEY); }catch(e){} $("flowLink").value=""; renderFlow(); };
+
 /* ---------- events ---------- */
 $("sceneCount").innerHTML=[3,4,5,6,7,8,9,10,12].map(n=>'<option'+(n===6?" selected":"")+'>'+n+'</option>').join("");
 document.querySelectorAll("[data-write]").forEach(b=>b.onclick=()=>{
@@ -713,7 +772,7 @@ $("useOwn").onclick=()=>{
  setStory({title:$("topic").value.trim(),scenes:parts.map(p=>({narration:p}))});
 };
 $("quickDraft").onclick=()=>setStory(quickDraft(settings()),"Draft ready. Edit the narration to fit your topic (check the facts!).");
-["topic","notes","sceneCount","sceneSec","format","niche","bg","character","ownScript","narrator","noMusic","burnCaps","lang","voiceType"].forEach(id=>
+["topic","notes","sceneCount","sceneSec","format","niche","bg","character","ownScript","narrator","noMusic","burnCaps","lang","voiceType","capStyle"].forEach(id=>
  $(id).addEventListener("change",()=>{
   if(id==="niche"){ applyStyle($("niche").value,true); return; }
   if(["format","bg","character","narrator","noMusic","lang","voiceType"].includes(id)) renderScenes(); else renderPackage(); save(); }));
@@ -791,8 +850,8 @@ load();
 if(!NICHES[$("niche").value]) $("niche").value="stick";
 $("bgBox").hidden=!styleOf($("niche").value).bg;
 $("topic").placeholder="e.g. "+(styleOf($("niche").value).topic||"");
-renderChips(); renderScenes(); renderGallery();
-window.Story={applyStyle,makeFreeImage,STYLES,beatsFor,parseAnswer,splitNarration,quickDraft,writerPrompt,imagePrompt,videoPrompt,promptsTxt,promptsCsv,stickmanScript,
+renderChips(); renderScenes(); renderGallery(); renderFlow();
+window.Story={drawWordPop,flowLink,applyStyle,makeFreeImage,STYLES,beatsFor,parseAnswer,splitNarration,quickDraft,writerPrompt,imagePrompt,videoPrompt,promptsTxt,promptsCsv,stickmanScript,
  nextStep,colorName,state:()=>({story,media,imgPlat,vidPlat,skipImages}),setStory,PLATFORMS};
 </script>
 </body>

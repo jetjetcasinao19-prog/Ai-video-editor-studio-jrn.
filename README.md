@@ -66,7 +66,17 @@ Open `story.html` (or tap "AI Story Studio" at the top of the editor).
    **▶ Do next step** copies the next prompt and opens the site you picked
    (ChatGPT and Grok open with it typed in; for Gemini and Flow, paste it).
    **🎨 Free** (or the "Free (in app)" choice in Next step) makes the start
-   image right in the app with the free Pollinations service, no account.
+   image right in the app with the free Pollinations service, no account. The free
+   service allows 1 picture every 45 seconds.
+   **🎬 My Google Flow:** sign in to Flow once in Chrome, paste your Flow project
+   link and Save: every Flow button then opens your project with the prompt
+   copied. (Google doesn't let other sites sign in to Flow or press its
+   buttons, so you paste and generate there.)
+   **Claude Cartoons** styles (Claude Cartoon Shorts, Stickman Horror,
+   Silhouette History Explainer, 2D Caricature Documentary, 2D Family Cartoon
+   Comedy) follow the viral 2D shorts made with Claude; they switch on the
+   big word-by-word "Word pop" captions when you join the clips. ✨ Claude
+   writes the story (opens claude.ai with the request typed).
 4. Add the images and clips you made to their scenes, then **Join into one
    video** (keeps the clips' sound, optional burned-in captions).
 5. Download all prompts as .txt / .csv, or send the story to the Stickman
