@@ -26,8 +26,8 @@ ff(['-f', 'lavfi', '-i', 'color=c=green:size=360x640:rate=24:duration=2', '-f', 
   '-c:v', 'libvpx-vp9', '-deadline', 'realtime', '-cpu-used', '8', '-b:v', '200k', '-c:a', 'libopus', '-shortest', CLIP]);
 
 (async () => {
-  // The test clip is H.264 MP4: on CI this runs in Google Chrome (PW_CHANNEL=chrome),
-  // because Playwright's own Chromium on Linux cannot play H.264.
+  // The test clip is VP9 inside MP4, so it plays in any Chromium. CI also runs this in
+  // Google Chrome (PW_CHANNEL=chrome), the browser closest to Chrome on Android.
   const browser = await chromium.launch({ channel: process.env.PW_CHANNEL || undefined });
   const context = await browser.newContext({ ...devices['Pixel 7'], acceptDownloads: true });
   const page = await context.newPage();
