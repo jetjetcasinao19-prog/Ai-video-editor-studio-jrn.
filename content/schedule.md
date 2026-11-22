@@ -23,6 +23,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-11-25 Wed | 8:00 PM | Thu Nov 26, 9:00 AM | TikTok | This glue was a failure. Now it's on desks everywhere. | content/posts/2026-11-21-post-it-notes-ottoman.md | ready |
 | 2026-11-26 Thu | 9:00 AM | Thu Nov 26, 10:00 PM | Instagram Reels | Happy Thanksgiving: the woman behind the holiday | content/posts/2026-11-21-thanksgiving-ottoman.md | ready |
 | 2026-11-26 Thu | 10:00 AM | Thu Nov 26, 11:00 PM | Facebook Reels | The woman who wrote Mary Had a Little Lamb gave us Thanksgiving. | content/posts/2026-11-21-thanksgiving-ottoman.md | ready |
+| 2026-11-26 Thu | 7:00 PM | Fri Nov 27, 8:00 AM | YouTube Shorts | Black Friday Started as a Police Complaint | content/posts/2026-11-21-black-friday-ottoman.md | ready |
+| 2026-11-26 Thu | 8:00 PM | Fri Nov 27, 9:00 AM | TikTok | Heading into Black Friday tomorrow? The name has nothing to do with store profits. | content/posts/2026-11-21-black-friday-ottoman.md | ready |
+| 2026-11-27 Fri | 9:00 AM | Fri Nov 27, 10:00 PM | Instagram Reels | Quick quiz: why is it called Black Friday? | content/posts/2026-11-21-black-friday-ottoman.md | ready |
+| 2026-11-27 Fri | 10:00 AM | Fri Nov 27, 11:00 PM | Facebook Reels | A cop's complaint became one of America's biggest shopping days. | content/posts/2026-11-21-black-friday-ottoman.md | ready |
 | 2026-11-27 Fri | 7:00 PM | Sat Nov 28, 8:00 AM | Instagram Reels | A glue so weak it peeled right off | content/posts/2026-11-21-post-it-notes-ottoman.md | ready |
 | 2026-11-27 Fri | 8:00 PM | Sat Nov 28, 9:00 AM | Facebook Reels | This glue was a failure. Now it's on desks everywhere. | content/posts/2026-11-21-post-it-notes-ottoman.md | ready |
 | 2026-11-28 Sat | 7:00 PM | Sun Nov 29, 8:00 AM | YouTube Shorts | A Rocket Scientist Invented This Toy by Accident | content/posts/2026-11-21-super-soaker-ottoman.md | ready |
