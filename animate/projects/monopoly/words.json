@@ -1,0 +1,601 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "Monopoly was invented to show how unfair monopolies are. 1904. Lizzie Magie patents a board game called The Landlord's Game. Players buy property, charge rent, and watch others go broke. She wanted people to see how unfair that is. For years, people make their own homemade copies. Players in Atlantic City add their own street names. Then, in the 1930s, a man named Charles Darrow sells a version to Parker Brothers. He's credited as the inventor. Royalties make him a millionaire. Lizzie? Parker Brothers buys her patent for $500. The truth only comes out in the 1970s during a court fight over another board game. A game about unfairness with an unfair origin story. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "Monopoly",
+   "start": 0.02,
+   "end": 0.52
+  },
+  {
+   "w": "was",
+   "start": 0.52,
+   "end": 0.76
+  },
+  {
+   "w": "invented",
+   "start": 0.76,
+   "end": 1.24
+  },
+  {
+   "w": "to",
+   "start": 1.24,
+   "end": 1.84
+  },
+  {
+   "w": "show",
+   "start": 1.84,
+   "end": 2.12
+  },
+  {
+   "w": "how",
+   "start": 2.12,
+   "end": 2.48
+  },
+  {
+   "w": "unfair",
+   "start": 2.48,
+   "end": 3.26
+  },
+  {
+   "w": "monopolies",
+   "start": 3.26,
+   "end": 3.9
+  },
+  {
+   "w": "are.",
+   "start": 3.9,
+   "end": 4.24
+  },
+  {
+   "w": "1904.",
+   "start": 5.5,
+   "end": 6.6
+  },
+  {
+   "w": "Lizzie",
+   "start": 6.6,
+   "end": 6.8
+  },
+  {
+   "w": "Magie",
+   "start": 6.8,
+   "end": 7.1
+  },
+  {
+   "w": "patents",
+   "start": 7.1,
+   "end": 7.56
+  },
+  {
+   "w": "a",
+   "start": 7.56,
+   "end": 7.76
+  },
+  {
+   "w": "board",
+   "start": 7.76,
+   "end": 8.06
+  },
+  {
+   "w": "game",
+   "start": 8.06,
+   "end": 8.3
+  },
+  {
+   "w": "called",
+   "start": 8.3,
+   "end": 8.74
+  },
+  {
+   "w": "The",
+   "start": 8.74,
+   "end": 9.06
+  },
+  {
+   "w": "Landlord's",
+   "start": 9.06,
+   "end": 9.9
+  },
+  {
+   "w": "Game.",
+   "start": 9.9,
+   "end": 10.58
+  },
+  {
+   "w": "Players",
+   "start": 10.86,
+   "end": 11.14
+  },
+  {
+   "w": "buy",
+   "start": 11.14,
+   "end": 11.42
+  },
+  {
+   "w": "property,",
+   "start": 11.42,
+   "end": 12.24
+  },
+  {
+   "w": "charge",
+   "start": 12.24,
+   "end": 12.54
+  },
+  {
+   "w": "rent,",
+   "start": 12.54,
+   "end": 12.86
+  },
+  {
+   "w": "and",
+   "start": 12.86,
+   "end": 13.24
+  },
+  {
+   "w": "watch",
+   "start": 13.24,
+   "end": 13.46
+  },
+  {
+   "w": "others",
+   "start": 13.46,
+   "end": 13.82
+  },
+  {
+   "w": "go",
+   "start": 13.82,
+   "end": 14.04
+  },
+  {
+   "w": "broke.",
+   "start": 14.04,
+   "end": 14.92
+  },
+  {
+   "w": "She",
+   "start": 15.2,
+   "end": 15.32
+  },
+  {
+   "w": "wanted",
+   "start": 15.32,
+   "end": 15.6
+  },
+  {
+   "w": "people",
+   "start": 15.6,
+   "end": 15.86
+  },
+  {
+   "w": "to",
+   "start": 15.86,
+   "end": 16.02
+  },
+  {
+   "w": "see",
+   "start": 16.02,
+   "end": 16.22
+  },
+  {
+   "w": "how",
+   "start": 16.22,
+   "end": 16.46
+  },
+  {
+   "w": "unfair",
+   "start": 16.46,
+   "end": 16.98
+  },
+  {
+   "w": "that",
+   "start": 16.98,
+   "end": 17.2
+  },
+  {
+   "w": "is.",
+   "start": 17.2,
+   "end": 17.98
+  },
+  {
+   "w": "For",
+   "start": 18.28,
+   "end": 18.38
+  },
+  {
+   "w": "years,",
+   "start": 18.38,
+   "end": 19.02
+  },
+  {
+   "w": "people",
+   "start": 19.02,
+   "end": 19.14
+  },
+  {
+   "w": "make",
+   "start": 19.14,
+   "end": 19.4
+  },
+  {
+   "w": "their",
+   "start": 19.4,
+   "end": 19.58
+  },
+  {
+   "w": "own",
+   "start": 19.58,
+   "end": 19.86
+  },
+  {
+   "w": "homemade",
+   "start": 19.86,
+   "end": 20.36
+  },
+  {
+   "w": "copies.",
+   "start": 20.36,
+   "end": 21.28
+  },
+  {
+   "w": "Players",
+   "start": 21.54,
+   "end": 21.76
+  },
+  {
+   "w": "in",
+   "start": 21.76,
+   "end": 21.94
+  },
+  {
+   "w": "Atlantic",
+   "start": 21.94,
+   "end": 22.42
+  },
+  {
+   "w": "City",
+   "start": 22.42,
+   "end": 22.72
+  },
+  {
+   "w": "add",
+   "start": 22.72,
+   "end": 23.04
+  },
+  {
+   "w": "their",
+   "start": 23.04,
+   "end": 23.2
+  },
+  {
+   "w": "own",
+   "start": 23.2,
+   "end": 23.42
+  },
+  {
+   "w": "street",
+   "start": 23.42,
+   "end": 23.76
+  },
+  {
+   "w": "names.",
+   "start": 23.76,
+   "end": 23.98
+  },
+  {
+   "w": "Then,",
+   "start": 24.86,
+   "end": 25.12
+  },
+  {
+   "w": "in",
+   "start": 25.12,
+   "end": 25.32
+  },
+  {
+   "w": "the",
+   "start": 25.32,
+   "end": 25.42
+  },
+  {
+   "w": "1930s,",
+   "start": 25.42,
+   "end": 26.24
+  },
+  {
+   "w": "a",
+   "start": 26.24,
+   "end": 26.56
+  },
+  {
+   "w": "man",
+   "start": 26.56,
+   "end": 26.78
+  },
+  {
+   "w": "named",
+   "start": 26.78,
+   "end": 27.1
+  },
+  {
+   "w": "Charles",
+   "start": 27.1,
+   "end": 27.66
+  },
+  {
+   "w": "Darrow",
+   "start": 27.66,
+   "end": 28.06
+  },
+  {
+   "w": "sells",
+   "start": 28.06,
+   "end": 28.5
+  },
+  {
+   "w": "a",
+   "start": 28.5,
+   "end": 28.7
+  },
+  {
+   "w": "version",
+   "start": 28.7,
+   "end": 28.94
+  },
+  {
+   "w": "to",
+   "start": 28.94,
+   "end": 29.14
+  },
+  {
+   "w": "Parker",
+   "start": 29.14,
+   "end": 29.48
+  },
+  {
+   "w": "Brothers.",
+   "start": 29.48,
+   "end": 29.98
+  },
+  {
+   "w": "He's",
+   "start": 30.42,
+   "end": 30.66
+  },
+  {
+   "w": "credited",
+   "start": 30.66,
+   "end": 30.98
+  },
+  {
+   "w": "as",
+   "start": 30.98,
+   "end": 31.42
+  },
+  {
+   "w": "the",
+   "start": 31.42,
+   "end": 31.52
+  },
+  {
+   "w": "inventor.",
+   "start": 31.52,
+   "end": 32.38
+  },
+  {
+   "w": "Royalties",
+   "start": 32.88,
+   "end": 33.12
+  },
+  {
+   "w": "make",
+   "start": 33.12,
+   "end": 33.58
+  },
+  {
+   "w": "him",
+   "start": 33.58,
+   "end": 33.76
+  },
+  {
+   "w": "a",
+   "start": 33.76,
+   "end": 34
+  },
+  {
+   "w": "millionaire.",
+   "start": 34,
+   "end": 34.42
+  },
+  {
+   "w": "Lizzie?",
+   "start": 35.42,
+   "end": 35.68
+  },
+  {
+   "w": "Parker",
+   "start": 36.46,
+   "end": 36.72
+  },
+  {
+   "w": "Brothers",
+   "start": 36.72,
+   "end": 36.98
+  },
+  {
+   "w": "buys",
+   "start": 36.98,
+   "end": 37.34
+  },
+  {
+   "w": "her",
+   "start": 37.34,
+   "end": 37.56
+  },
+  {
+   "w": "patent",
+   "start": 37.56,
+   "end": 37.92
+  },
+  {
+   "w": "for",
+   "start": 37.92,
+   "end": 38.33
+  },
+  {
+   "w": "$500.",
+   "start": 38.33,
+   "end": 39.3
+  },
+  {
+   "w": "The",
+   "start": 40.12,
+   "end": 40.3
+  },
+  {
+   "w": "truth",
+   "start": 40.3,
+   "end": 40.56
+  },
+  {
+   "w": "only",
+   "start": 40.56,
+   "end": 40.9
+  },
+  {
+   "w": "comes",
+   "start": 40.9,
+   "end": 41.16
+  },
+  {
+   "w": "out",
+   "start": 41.16,
+   "end": 41.38
+  },
+  {
+   "w": "in",
+   "start": 41.38,
+   "end": 41.5
+  },
+  {
+   "w": "the",
+   "start": 41.5,
+   "end": 41.58
+  },
+  {
+   "w": "1970s",
+   "start": 41.58,
+   "end": 42.58
+  },
+  {
+   "w": "during",
+   "start": 42.58,
+   "end": 43
+  },
+  {
+   "w": "a",
+   "start": 43,
+   "end": 43.18
+  },
+  {
+   "w": "court",
+   "start": 43.18,
+   "end": 43.48
+  },
+  {
+   "w": "fight",
+   "start": 43.48,
+   "end": 43.74
+  },
+  {
+   "w": "over",
+   "start": 43.74,
+   "end": 44.04
+  },
+  {
+   "w": "another",
+   "start": 44.04,
+   "end": 44.4
+  },
+  {
+   "w": "board",
+   "start": 44.4,
+   "end": 44.74
+  },
+  {
+   "w": "game.",
+   "start": 44.74,
+   "end": 44.98
+  },
+  {
+   "w": "A",
+   "start": 45.7,
+   "end": 45.84
+  },
+  {
+   "w": "game",
+   "start": 45.84,
+   "end": 46.12
+  },
+  {
+   "w": "about",
+   "start": 46.12,
+   "end": 46.52
+  },
+  {
+   "w": "unfairness",
+   "start": 46.52,
+   "end": 47.36
+  },
+  {
+   "w": "with",
+   "start": 47.36,
+   "end": 48.12
+  },
+  {
+   "w": "an",
+   "start": 48.12,
+   "end": 48.3
+  },
+  {
+   "w": "unfair",
+   "start": 48.3,
+   "end": 49
+  },
+  {
+   "w": "origin",
+   "start": 49,
+   "end": 49.6
+  },
+  {
+   "w": "story.",
+   "start": 49.6,
+   "end": 50
+  },
+  {
+   "w": "Every",
+   "start": 50.98,
+   "end": 51.22
+  },
+  {
+   "w": "legend",
+   "start": 51.22,
+   "end": 51.6
+  },
+  {
+   "w": "has",
+   "start": 51.6,
+   "end": 52.14
+  },
+  {
+   "w": "a",
+   "start": 52.14,
+   "end": 52.24
+  },
+  {
+   "w": "beginning.",
+   "start": 52.24,
+   "end": 52.54
+  }
+ ]
+}

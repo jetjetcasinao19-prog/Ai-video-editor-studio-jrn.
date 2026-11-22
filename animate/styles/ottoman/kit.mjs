@@ -1911,6 +1911,89 @@ export function paintBucket(ctx, x, y, s = 1, color = COPPER.new, rot = 0) {
   ctx.restore();
 }
 
+// ---------- Karagöz shadow puppets (the "karagoz" storytelling device) ----------
+// A flat, jointed leather puppet in profile, pierced with light holes and held on a rod
+// from below, the way Karagöz figures are. o: face (1 right, -1 left), robe, trim, skin,
+// hat ('bun' | 'fedora' | 'bowler' | 'cap' | 'bald'), beard, t (time), walk (leg swing),
+// arm (0 down … 1 raised), talk (0..1 jaw), tilt (whole-body sway), rod (false hides it).
+export function puppet(ctx, x, y, s = 1, o = {}) {
+  const f = o.face || 1, t = o.t || 0, robe = o.robe || P.verm, trim = o.trim || P.goldLight, skin = o.skin || '#e8c49a';
+  const walk = o.walk ?? 0, sway = Math.sin(t * 2.2) * 0.03 + (o.tilt || 0), talk = clamp(o.talk || 0) * (0.5 + 0.5 * Math.sin(t * 18));
+  ctx.save(); ctx.translate(x, y); ctx.rotate(sway); ctx.scale(s * f, s);
+  const holes = (cx, cy, w, h, n = 6) => { for (let i = 0; i < n; i++) circle(ctx, cx + ((i * 37) % w) - w / 2, cy + ((i * 53) % h) - h / 2, 3.2, 'rgba(255,248,220,0.85)', null); };
+  // the rod (held from below, behind the screen)
+  if (o.rod !== false) { ctx.beginPath(); ctx.moveTo(-8, -120); ctx.lineTo(-60, 220); stroke(ctx, 'rgba(40,24,12,0.75)', 6); }
+  // legs: two hinged pieces
+  for (const [k, c] of [[-1, shade(robe, -0.25)], [1, robe]]) {
+    ctx.save(); ctx.translate(k * 8, -62); ctx.rotate(Math.sin(t * 6 + (k > 0 ? 0 : Math.PI)) * 0.28 * walk);
+    poly(ctx, [[-14, 0], [14, 0], [12, 58], [24, 62], [-12, 62]], c, P.ink, 2.2); holes(0, 26, 18, 30, 3);
+    ctx.restore();
+  }
+  // body
+  ctx.beginPath(); ctx.moveTo(-26, -150); ctx.quadraticCurveTo(-36, -100, -30, -58); ctx.lineTo(34, -58); ctx.quadraticCurveTo(38, -110, 24, -150); ctx.closePath(); fillStroke(ctx, robe, P.ink, 2.5);
+  ctx.beginPath(); ctx.moveTo(-30, -66); ctx.lineTo(34, -66); stroke(ctx, trim, 6); holes(0, -110, 40, 60, 7);
+  if (o.tie) { poly(ctx, [[14, -148], [22, -148], [24, -104], [18, -98], [12, -104]], o.tie, P.ink, 1.5); }
+  // head on its neck pivot
+  ctx.save(); ctx.translate(2, -150); ctx.rotate(Math.sin(t * 3) * 0.05 + talk * -0.08);
+  rect(ctx, -6, -14, 14, 16, skin, P.ink, 1.8);
+  ctx.beginPath(); ctx.moveTo(-22, -20); ctx.quadraticCurveTo(-26, -62, 4, -66); ctx.quadraticCurveTo(28, -64, 30, -40); ctx.lineTo(40, -32); ctx.lineTo(30, -26); ctx.lineTo(32, -18 + talk * 6); ctx.quadraticCurveTo(10, -6, -22, -20); ctx.closePath(); fillStroke(ctx, skin, P.ink, 2.2);
+  circle(ctx, 16, -44, 3.6, P.ink, null); circle(ctx, 17, -45, 1.2, 'rgba(255,248,220,0.9)', null);
+  if (o.beard) { ctx.beginPath(); ctx.moveTo(-4, -14); ctx.quadraticCurveTo(20, 10, 30, -18); ctx.quadraticCurveTo(14, -4, -4, -14); fillStroke(ctx, o.beard, P.ink, 1.5); }
+  const hat = o.hat || 'cap', hc = o.hatColor || P.lapis;
+  if (hat === 'bun') { circle(ctx, -18, -54, 16, o.hair || '#5a3a2a', P.ink, 2); ctx.beginPath(); ctx.moveTo(-24, -40); ctx.quadraticCurveTo(-6, -78, 26, -56); ctx.lineTo(20, -48); ctx.quadraticCurveTo(0, -60, -24, -40); fillStroke(ctx, o.hair || '#5a3a2a', P.ink, 1.8); ctx.beginPath(); ctx.ellipse(0, -70, 30, 9, -0.1, 0, TAU); fillStroke(ctx, hc, P.ink, 2); flower(ctx, -14, -76, 7, P.pink); }
+  else if (hat === 'fedora') { ctx.beginPath(); ctx.ellipse(4, -62, 38, 8, 0, 0, TAU); fillStroke(ctx, hc, P.ink, 2); ctx.beginPath(); ctx.moveTo(-18, -62); ctx.quadraticCurveTo(-16, -94, 6, -92); ctx.quadraticCurveTo(26, -94, 24, -62); ctx.closePath(); fillStroke(ctx, hc, P.ink, 2); rect(ctx, -18, -70, 42, 6, P.ink, null); }
+  else if (hat === 'bowler') { ctx.beginPath(); ctx.ellipse(4, -62, 34, 7, 0, 0, TAU); fillStroke(ctx, hc, P.ink, 2); ctx.beginPath(); ctx.arc(4, -64, 22, Math.PI, 0); fillStroke(ctx, hc, P.ink, 2); }
+  else if (hat === 'cap') { ctx.beginPath(); ctx.arc(2, -60, 26, Math.PI * 1.05, Math.PI * 1.95); ctx.lineTo(36, -58); ctx.closePath(); fillStroke(ctx, hc, P.ink, 2); }
+  else if (hat === 'bald') { ctx.beginPath(); ctx.arc(-8, -52, 14, Math.PI, Math.PI * 1.8); stroke(ctx, o.hair || '#cfcfcf', 6); }
+  ctx.restore();
+  // the arm, hinged at the shoulder; o.hold(ctx) draws something in the hand
+  ctx.save(); ctx.translate(12, -140); ctx.rotate(lerp(0.15, -2.3, clamp(o.arm || 0)) + Math.sin(t * 4) * 0.05);
+  rect(ctx, -7, 0, 14, 66, robe, P.ink, 2); circle(ctx, 0, 72, 9, skin, P.ink, 1.8);
+  if (o.hold) { ctx.save(); ctx.translate(0, 78); o.hold(ctx); ctx.restore(); }
+  ctx.restore();
+  ctx.restore();
+}
+// A square race-around-the-board game seen from above (generic, after the 1904 patent's idea):
+// o.title, o.houses (0..1 how many houses are up), o.tokens [{ pos 0..36, color }], o.names (street labels)
+export function gameBoard(ctx, x, y, size, o = {}) {
+  const n = 9, c = size / (n + 1.5), cs = c * 1.25, colors = [P.verm, P.lapis, P.green, P.ochre, P.lav, P.turq, P.pink, P.brownLight];
+  ctx.save(); ctx.translate(x - size / 2, y - size / 2);
+  rect(ctx, 0, 0, size, size, '#efe6cf', P.ink, 3);
+  const cell = i => { // 36 squares around the edge
+    const side = Math.floor(i / 9), k = i % 9;
+    if (side === 0) return [size - cs - k * c - (k ? 0 : 0), size - cs, k ? c : cs, cs, 0];
+    if (side === 1) return [0, size - cs - k * c, cs, k ? c : cs, 1];
+    if (side === 2) return [cs + (k - 1) * c, 0, k ? c : cs, cs, 2];
+    return [size - cs, cs + (k - 1) * c, cs, k ? c : cs, 3];
+  };
+  for (let i = 0; i < 36; i++) {
+    let [cx, cy, w, h, side] = cell(i);
+    if (i % 9 === 0) { [cx, cy] = [[size - cs, size - cs], [0, size - cs], [0, 0], [size - cs, 0]][side]; w = h = cs; rect(ctx, cx, cy, w, h, P.paperLight, P.ink, 1.5); star(ctx, cx + w / 2, cy + h / 2, cs * 0.22, 1); continue; }
+    if (side === 0) cx = size - cs - (i % 9) * c; if (side === 1) cy = size - cs - (i % 9) * c; if (side === 2) cx = cs + (i % 9 - 1) * c; if (side === 3) cy = cs + (i % 9 - 1) * c;
+    rect(ctx, cx, cy, side % 2 ? cs : c, side % 2 ? c : cs, P.paperLight, P.ink, 1.2);
+    const band = colors[Math.floor(i / 2) % colors.length], bw = cs * 0.26;
+    if (side === 0) rect(ctx, cx, cy, c, bw, band, P.ink, 1); else if (side === 1) rect(ctx, cx + cs - bw, cy, bw, c, band, P.ink, 1); else if (side === 2) rect(ctx, cx, cy + cs - bw, c, bw, band, P.ink, 1); else rect(ctx, cx, cy, bw, c, band, P.ink, 1);
+    if (o.houses && (i * 7) % 10 < 10 * o.houses && i % 3) { const hx = side % 2 ? cx + cs / 2 : cx + c / 2, hy = side % 2 ? cy + c / 2 : cy + cs / 2; poly(ctx, [[hx - 7, hy + 6], [hx + 7, hy + 6], [hx + 7, hy - 2], [hx, hy - 9], [hx - 7, hy - 2]], i % 2 ? P.green : P.verm, P.ink, 1); }
+  }
+  rect(ctx, cs, cs, size - 2 * cs, size - 2 * cs, '#f6efdc', P.ink, 2);
+  if (o.title) { ctx.save(); ctx.translate(size / 2, size / 2); ctx.rotate(-0.6); let fs = size * 0.075; ctx.font = `900 ${fs}px Deco`; while (ctx.measureText(o.title).width > size * 0.8 && fs > 10) { fs -= 1; ctx.font = `900 ${fs}px Deco`; } ctx.fillStyle = P.vermDark; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(o.title, 0, 0); ctx.restore(); }
+  for (const tk of o.tokens || []) { const p = ((tk.pos % 36) + 36) % 36, i = Math.floor(p), q = p - i; const a = cell(i), b = cell((i + 1) % 36); const px = lerp(a[0] + a[2] / 2, b[0] + b[2] / 2, q), py = lerp(a[1] + a[3] / 2, b[1] + b[3] / 2, q); circle(ctx, px, py - Math.sin(q * Math.PI) * 10, cs * 0.18, tk.color, P.ink, 1.5); }
+  ctx.restore();
+}
+// a judge's gavel (swing 0 up … 1 struck) and its block
+export function gavel(ctx, x, y, s = 1, swing = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  rect(ctx, -40, 10, 80, 18, P.brown, P.ink, 2);
+  ctx.save(); ctx.translate(60, 0); ctx.rotate(lerp(-1.1, 0, swing));
+  ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(-70, -10); stroke(ctx, P.ink, 9); stroke(ctx, P.brownLight, 6);
+  rect(ctx, -96, -30, 30, 44, P.brown, P.ink, 2);
+  ctx.restore(); ctx.restore();
+}
+// a stack of coins (n coins), for rewards and royalties
+export function coinStack(ctx, x, base, r, n, color = P.goldLight) {
+  for (let i = 0; i < n; i++) { ctx.beginPath(); ctx.ellipse(x, base - i * r * 0.3, r, r * 0.32, 0, 0, TAU); fillStroke(ctx, i % 2 ? color : shade(color, -0.12), P.ink, 1.4); }
+}
+
 // ---------- colour util ----------
 export function shade(hex, k) {
   if (!hex.startsWith('#')) return hex;
