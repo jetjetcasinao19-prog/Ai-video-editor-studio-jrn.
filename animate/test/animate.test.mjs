@@ -10,6 +10,9 @@ import { fileURLToPath } from 'node:url';
 import { loadProject, makeFrameDrawer, checkStory, render } from '../lib/engine.mjs';
 import { mergePunctuation, applyFix } from '../transcribe.mjs';
 import { ebru, groupLines, LAYOUT } from '../styles/ottoman/page.mjs';
+import { LOOKS, LOOK_NAMES, getLook, buildPage, TRANSITIONS } from '../styles/ottoman/looks.mjs';
+import { dhash, hamming, colorSig, sameDesign } from '../lib/unique.mjs';
+import { chapterList, stamp, slugify } from '../compile.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT = path.join(HERE, '..', 'projects', 'bubble-wrap');
@@ -43,7 +46,7 @@ for (const PROJ of PROJECTS) test(`story ${path.basename(PROJ)}: scenes are orde
 for (const PROJ of PROJECTS) test(`${path.basename(PROJ)}: every scene draws (start, middle, during its transition) and is not blank`, async () => {
   const p = await loadProject(PROJ);
   const fd = await makeFrameDrawer(p);
-  const sc = p.story.scenes, PA = LAYOUT.paint;
+  const sc = p.story.scenes, PA = p.style.layoutOf ? p.style.layoutOf(p.meta).paint : LAYOUT.paint;
   const sig = [];
   for (let i = 0; i < sc.length; i++) {
     const end = i + 1 < sc.length ? sc[i + 1].start : p.meta.duration;
@@ -96,4 +99,57 @@ test('skill trigger "edit this in 2D(OTTOMAN)" points at an existing style', () 
   assert.ok(fs.existsSync(path.join(HERE, '..', 'styles', style, 'index.mjs')), 'styles/' + style + ' exists');
   const editThis = fs.readFileSync(path.join(root, '.claude', 'skills', 'edit-this', 'SKILL.md'), 'utf8');
   assert.match(editThis.split('\n').find(l => l.startsWith('description:')), /NOT for "edit this in 2D/);
+});
+
+test('looks: every look builds its own page and draws a real painting', async () => {
+  assert.ok(LOOK_NAMES.length >= 5, 'at least five looks');
+  const pages = {};
+  for (const name of LOOK_NAMES) {
+    const look = getLook({ look: name });
+    const L = look.layout;
+    assert.equal(L.paint.w, 940); assert.equal(L.paint.h, 1060); // scenes fit every look
+    const pg = buildPage(look, { seed: 11, handle: '@TEST' });
+    assert.equal(pg.width, 1080); assert.equal(pg.height, 1920);
+    pages[name] = { page: dhash(pg), pageColor: colorSig(pg) };
+    for (const tr of look.transitions || []) assert.ok(TRANSITIONS.includes(tr), `${name}: transition ${tr} exists`);
+  }
+  for (const a of LOOK_NAMES) for (const b of LOOK_NAMES) if (a < b) assert.ok(!sameDesign(pages[a], pages[b]), `${a} and ${b} pages look too alike`);
+  assert.ok(sameDesign(pages.night, pages.night));
+  assert.throws(() => getLook({ look: 'nope' }), /unknown look/);
+});
+
+test('looks: a project renders in every look, including mid-transition frames', async () => {
+  for (const name of LOOK_NAMES) {
+    process.env.ANIMATE_LOOK = name;
+    const p = await loadProject(PROJECT);
+    delete process.env.ANIMATE_LOOK;
+    assert.equal(p.meta.look, name);
+    const fd = await makeFrameDrawer(p), PA = p.style.layoutOf(p.meta).paint, sc = p.story.scenes;
+    for (let i = 1; i < Math.min(sc.length, 6); i++) for (const dt of [0.1, 0.25, 0.6]) {
+      fd.frame(sc[i].start + dt);
+      const d = fd.ctx.getImageData(PA.x, PA.y, PA.w, PA.h).data;
+      let sum = 0, sum2 = 0, n = 0;
+      for (let j = 0; j < d.length; j += 4 * 97) { const v = d[j] + d[j + 1] + d[j + 2]; sum += v; sum2 += v * v; n++; }
+      assert.ok(Math.sqrt(sum2 / n - (sum / n) ** 2) > 15, `${name}: scene ${i} at +${dt}s looks blank`);
+    }
+  }
+});
+
+test('uniqueness: the difference hash tells pictures apart', async () => {
+  const { createCanvas } = await import('@napi-rs/canvas');
+  const a = createCanvas(200, 200), b = createCanvas(200, 200);
+  const ga = a.getContext('2d'), gb = b.getContext('2d');
+  const gr = ga.createLinearGradient(0, 0, 200, 0); gr.addColorStop(0, '#000'); gr.addColorStop(1, '#fff'); ga.fillStyle = gr; ga.fillRect(0, 0, 200, 200);
+  const gr2 = gb.createLinearGradient(0, 0, 200, 0); gr2.addColorStop(0, '#fff'); gr2.addColorStop(1, '#000'); gb.fillStyle = gr2; gb.fillRect(0, 0, 200, 200);
+  assert.equal(hamming(dhash(a), dhash(a)), 0);
+  assert.ok(hamming(dhash(a), dhash(b)) > 200);
+});
+
+test('compilation: YouTube chapter rules and timestamps', () => {
+  assert.equal(stamp(0), '0:00'); assert.equal(stamp(64.4), '1:04'); assert.equal(stamp(3725), '1:02:05');
+  assert.equal(slugify('Origins of the Holidays!'), 'origins-of-the-holidays');
+  const good = chapterList([{ at: 0, title: 'A' }, { at: 60, title: 'B' }, { at: 120, title: 'C' }], 180);
+  assert.ok(good.ok); assert.equal(good.text, '0:00 A\n1:00 B\n2:00 C');
+  assert.ok(!chapterList([{ at: 0, title: 'A' }, { at: 60, title: 'B' }], 180).ok, 'needs three chapters');
+  assert.ok(!chapterList([{ at: 0, title: 'A' }, { at: 5, title: 'B' }, { at: 60, title: 'C' }], 180).ok, 'chapters must be 10 s');
 });

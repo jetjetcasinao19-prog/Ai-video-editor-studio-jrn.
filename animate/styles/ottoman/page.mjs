@@ -75,7 +75,7 @@ export function paperTexture(w, h, seed = 5) {
 }
 
 // Golden scrolling vine (rumi/hatayi) along a band.
-function vineBand(ctx, x, y, w, h, color = P.goldLight, bg = P.lapis) {
+export function vineBand(ctx, x, y, w, h, color = P.goldLight, bg = P.lapis) {
   ctx.fillStyle = bg; ctx.fillRect(x, y, w, h);
   const n = Math.max(2, Math.round(w / h / 1.2)), cy = y + h / 2, step = w / n;
   ctx.save(); ctx.beginPath(); ctx.rect(x, y, w, h); ctx.clip();
@@ -93,12 +93,12 @@ function vineBand(ctx, x, y, w, h, color = P.goldLight, bg = P.lapis) {
   }
   ctx.restore();
 }
-function rules(ctx, x, y, w, h) {
+export function rules(ctx, x, y, w, h) {
   // cetvel: ink, gold, ink, blue, red hairlines around the painting
   const lines = [[-14, P.ink, 1.5], [-11, P.gold, 5], [-7, P.ink, 1.2], [-4, P.lapis, 2.5], [-1, P.verm, 1.5]];
   for (const [o, c, lw] of lines) { ctx.strokeStyle = c; ctx.lineWidth = lw; ctx.strokeRect(x + o, y + o, w - 2 * o, h - 2 * o); }
 }
-function cornerRosette(ctx, x, y, r) {
+export function cornerRosette(ctx, x, y, r) {
   for (let i = 0; i < 8; i++) { const a = i / 8 * TAU; ellipse(ctx, x + Math.cos(a) * r * 0.55, y + Math.sin(a) * r * 0.55, r * 0.42, r * 0.2, a, i % 2 ? P.verm : P.goldLight, P.goldDeep, 1); }
   circle(ctx, x, y, r * 0.32, P.lapis, P.goldLight, 2);
 }
@@ -159,29 +159,34 @@ export function staticPage(opts = {}) {
 }
 
 // Chapter title in the header cartouche; animates when it changes.
-export function headerText(ctx, text, k = 1) {
-  const hd = LAYOUT.header, cx = hd.x + hd.w / 2 - 50, cy = hd.y + hd.h / 2 + 3;
+// L = layout (a look can move the title), C = colours.
+export function titleBox(L = LAYOUT) {
+  if (L.title) return L.title;
+  const hd = L.header; return { cx: hd.x + hd.w / 2 - 50, cy: hd.y + hd.h / 2 + 3, w: 640, h: 100 };
+}
+export function headerText(ctx, text, k = 1, L = LAYOUT, C = {}) {
+  const tb = titleBox(L), cx = tb.cx, cy = tb.cy;
   ctx.save();
-  ctx.beginPath(); ctx.rect(cx - 320, cy - 50, 640, 100); ctx.clip();
+  ctx.beginPath(); ctx.rect(cx - tb.w / 2, cy - tb.h / 2, tb.w, tb.h); ctx.clip();
   const e = ease.outCubic(clamp(k));
   ctx.globalAlpha = e; ctx.translate(cx, cy + (1 - e) * 30);
-  let size = 46; ctx.font = `900 ${size}px Deco`;
-  while (ctx.measureText(text).width > 600 && size > 22) { size -= 2; ctx.font = `900 ${size}px Deco`; }
+  let size = C.titleSize || 46; ctx.font = `900 ${size}px Deco`;
+  while (ctx.measureText(text).width > tb.w - 40 && size > 22) { size -= 2; ctx.font = `900 ${size}px Deco`; }
   ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-  ctx.fillStyle = P.verm; ctx.fillText(text, 0, 0);
+  ctx.fillStyle = C.title || P.verm; ctx.fillText(text, 0, 0);
   ctx.restore();
 }
 
 // Progress reed: a gold line that grows under the caption panel, with a tulip tip.
-export function progress(ctx, k) {
-  const cp = LAYOUT.caption, y = cp.y + cp.h + 13, x0 = cp.x, x1 = cp.x + cp.w * clamp(k);
-  ctx.beginPath(); ctx.moveTo(x0, y); ctx.lineTo(x1, y); stroke(ctx, P.gold, 5);
-  circle(ctx, x1, y, 7, P.verm, P.goldDeep, 1.5);
+export function progress(ctx, k, L = LAYOUT, C = {}) {
+  const cp = L.caption, y = cp.y + cp.h + (L.reedGap ?? 13), x0 = cp.x, x1 = cp.x + cp.w * clamp(k);
+  ctx.beginPath(); ctx.moveTo(x0, y); ctx.lineTo(x1, y); stroke(ctx, C.reed || P.gold, 5);
+  circle(ctx, x1, y, 7, C.reedTip || P.verm, P.goldDeep, 1.5);
 }
 
 // Word-by-word caption with the spoken word in vermilion.
-export function captions(ctx, lines, t) {
-  const cp = LAYOUT.caption;
+export function captions(ctx, lines, t, L = LAYOUT, C = {}) {
+  const cp = L.caption;
   const line = lines.findLast(l => t >= l[0].start - 0.15 && t < l[l.length - 1].end + 0.35) || null;
   if (!line) return false;
   const size = 70; ctx.font = `700 ${size}px Garamond`;
@@ -189,6 +194,8 @@ export function captions(ctx, lines, t) {
   // wrap into rows that fit the panel
   const rows = [[]]; let w = 0;
   for (const word of line) { const ww = ctx.measureText(word.w).width; if (w + ww > cp.w - 90 && rows[rows.length - 1].length) { rows.push([]); w = 0; } rows[rows.length - 1].push({ ...word, ww }); w += ww + space; }
+  // never leave one short word alone on the last row: move a word down
+  if (rows.length > 1) { const last = rows[rows.length - 1], prev = rows[rows.length - 2]; if (last.length === 1 && prev.length >= 3) last.unshift(prev.pop()); }
   const lh = size * 1.12, y0 = cp.y + cp.h / 2 - (rows.length - 1) * lh / 2 + 4;
   const fadeIn = 0.35 + 0.65 * clamp((t - (line[0].start - 0.15)) / 0.15);
   // only the newest word that has started is highlighted
@@ -202,8 +209,8 @@ export function captions(ctx, lines, t) {
       const k = active ? ease.outBack(clamp((t - word.start) / 0.18)) : 0;
       ctx.save(); ctx.translate(x + word.ww / 2, y0 + ri * lh - k * 6); ctx.scale(1 + k * 0.06, 1 + k * 0.06);
       ctx.textAlign = 'center';
-      if (active) { ctx.beginPath(); ctx.moveTo(-word.ww / 2, size * 0.42); ctx.quadraticCurveTo(0, size * 0.58, word.ww / 2, size * 0.42); stroke(ctx, P.gold, 4); }
-      ctx.fillStyle = active ? P.verm : said ? P.ink : 'rgba(42,28,18,0.38)';
+      if (active) { ctx.beginPath(); ctx.moveTo(-word.ww / 2, size * 0.42); ctx.quadraticCurveTo(0, size * 0.58, word.ww / 2, size * 0.42); stroke(ctx, C.under || P.gold, 4); }
+      ctx.fillStyle = active ? (C.active || P.verm) : said ? (C.ink || P.ink) : (C.dim || 'rgba(42,28,18,0.38)');
       ctx.fillText(word.w, 0, 0);
       ctx.restore();
       x += word.ww + space;
@@ -214,12 +221,12 @@ export function captions(ctx, lines, t) {
 }
 
 // Closing line in the caption panel (e.g. the brand's call to action).
-export function outroText(ctx, text, q) {
-  const cp = LAYOUT.caption, e = ease.outBack(clamp(q / 0.4));
+export function outroText(ctx, text, q, L = LAYOUT, C = {}) {
+  const cp = L.caption, e = ease.outBack(clamp(q / 0.4));
   ctx.save(); ctx.globalAlpha = clamp(q / 0.25); ctx.translate(cp.x + cp.w / 2, cp.y + cp.h / 2 + 4); ctx.scale(e, e);
   let size = 54; ctx.font = `700 ${size}px GaramondItalic`;
   while (ctx.measureText(text).width > cp.w - 100 && size > 30) { size -= 2; ctx.font = `700 ${size}px GaramondItalic`; }
-  ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillStyle = P.lapis; ctx.fillText(text, 0, 0);
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillStyle = C.outro || P.lapis; ctx.fillText(text, 0, 0);
   ctx.restore();
 }
 

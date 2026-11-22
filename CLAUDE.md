@@ -75,6 +75,10 @@ or sends a voice-over and asks for an animated short / cartoon
 (`.claude/skills/animated-short/SKILL.md`). It lives in `animate/`
 (Node canvas frames → FFmpeg, Python-generated score and sound effects;
 first style: Ottoman miniature painting). Setup: `bash animate/setup.sh`.
+Every video gets its own look (`meta.look`: album, tile, night, scroll,
+classic) and must pass `node animate/check-unique.mjs projects/<slug>` so the
+channel stays monetizable (YouTube's inauthentic-content policy);
+`animate/compile.mjs` stitches shorts into a 16:9 long-form video with chapters.
 Test: `cd animate && npm test`. Example: `animate/projects/bubble-wrap/`.
 Like `pipeline/`, it is not part of the phone app and is left out of Pages.
 

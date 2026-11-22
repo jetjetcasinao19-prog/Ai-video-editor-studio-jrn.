@@ -15,8 +15,11 @@ below without asking questions you can answer yourself:
   newest `.mp3`/`.wav`/`.m4a` in `inbox/`. None → ask for it in one line.
 - **Script** = the text the owner pasted, if any (use it to fix the spelling
   of names); otherwise the transcript.
-- **Finish the whole job**: render → check → send the MP4 → publisher agent
-  writes post copy + schedule rows (step 7) → commit and push.
+- **Finish the whole job**: pick a look → render → check → `check-unique.mjs`
+  passes → send the MP4 → publisher agent writes post copy + schedule rows
+  (step 7) → commit and push.
+- **Monetization comes first**: every video must look and feel like its own
+  piece, never like the last one with new words (see "YouTube monetization" below).
 
 # Animated short from a voice-over — all code
 
@@ -32,7 +35,10 @@ Everything lives in `animate/`:
 |---|---|
 | `animate/setup.sh` | installs/checks the tools (Node 22+, FFmpeg + libx264, Python 3 + numpy, `@napi-rs/canvas`, fonts) |
 | `animate/transcribe.mjs` | voice → `words.json` (word timings; OmniRoute if `OMNIROUTE_URL` is set, else Groq Whisper) |
-| `animate/render.mjs` | CLI: contact sheet, stills, full render |
+| `animate/render.mjs` | CLI: contact sheet, stills, full render; `--look <name>` previews another look |
+| `animate/check-unique.mjs` | compares a project with every other one (page design, near-copy pictures, music, transitions, script formula); exit 1 = too similar |
+| `animate/compile.mjs` | several shorts → one 16:9 long-form video with intro, chapter cards, outro and a YouTube chapters list |
+| `animate/styles/ottoman/looks.mjs` | the looks: `classic`, `album`, `tile`, `night`, `scroll` (page layout, marbling colours, caption colours, particles, colour grade, camera drift, their own transitions) |
 | `animate/lib/engine.mjs` | parallel frame workers → FFmpeg, then soundtrack + mux |
 | `animate/lib/audio.py` | synthesised score (maqam scales, oud/kanun strings, ney, def/darbuka) + 20 sound effects + voice ducking + −14 LUFS |
 | `animate/styles/ottoman/` | the Ottoman miniature style: `kit.mjs` (figures, turbans, cloud bands, spongy rocks, cypresses, tulips, waves, galley, tughra, seals, stamps, sticky notes, books, alembic, jar, hammam + basin, water streams, water gun, rocket, pagoda, flower cards, taxi car, rice bowl, treasure chest, Ultra Hand lattice, handheld console, toy box, lamb, roast turkey, pie, pumpkin, calendar page, quill, envelope, printing press, magazine, peach basket, 1891 leather ball, ladder, maple leaf, snow, gym railing, cookie, chocolate bar + chunks, knife, brick oven, balance scale, coin, chip bag, dough blob, soot, dough can, coal stove, newspaper, cobweb, hillside sign letters (rise/tilt/fall/light up), palm, hourglass, searchlights, film reel, clapperboard, guitar, gas pump, drumstick, striped bucket, bank check, pressure cooker, celestial spheres, galaxy, BBC microphone with radio waves, horn antenna, chalkboard, stepped-gable house, speech bubble, magnifier, drum, reindeer, sleigh, generic soda bottle, easel, gilded frame, toy brick (with tubes cut-away), wooden pull duck, yo-yo, flames, windmill, curved ink stroke, running shoe, ring, share certificate, fireworks bursts, wedge-shaped tower, glowing time ball with bulbs, clock face, street sign, field mouse (also as an ink sketch), hare, steam train, river steamboat, picture-house screen with curtains, padlock…), `page.mjs` (ebru marbled margins, illuminated header, gold-ruled frame, captions, progress reed), `scenes.mjs` (ready backdrops: `land`, `interior`, `lamp`, `compassRose`, `bookCover` for the closing brand card, `bigSign` gold title, `medallion` ?/!, `heart`, `usMap`), `index.mjs` (transitions) |
@@ -53,7 +59,7 @@ Everything lives in `animate/`:
 | `animate/projects/lego/` | fourteenth short (a word built from two words — LEG GODT → LEGO; a factory fire and rebuild; a patent drawing). Tip: `S.at(/^leg$/i)` matches a whole word when a longer word starts the same |
 | `animate/projects/nike-swoosh/` | fifteenth short (a logo's origin told editorially: ink sketches on paper, an invoice, a ring — never a reproduced brand lockup) |
 | `animate/projects/times-square-ball/` | sixteenth short (a night skyline, fireworks then a BANNED stamp, a street sign renamed, a harbor time ball setting ships' clocks, the 1907 ball lowering, homes lighting up one by one). Holiday story: schedule it before the holiday |
-| `animate/projects/mickey-mouse/` | seventeenth short (a famous character's origin without drawing the character: a generic painted mouse and hare, a 1928 film shown in black and white on a picture-house screen, a padlock opening for the public domain). `microphone(..., text)` takes `''` to drop the BBC band |
+| `animate/projects/mickey-mouse/` | seventeenth short (a famous character's origin without drawing the character: a generic painted mouse and hare, a 1928 film shown in black and white on a picture-house screen, a padlock opening for the public domain). `microphone(..., text)` takes `''` to drop the BBC band. First video in a new look: `album` |
 
 Follow CLAUDE.md: never say it works until you rendered and looked at it.
 
@@ -84,6 +90,43 @@ company name is written as a tughra and stamped with a seal, the world map is
 drawn like Piri Reis's 1513 chart, the last bubble grows into the closed book).
 Check facts (dates, names) — the brand is "dramatic but true" (`brand/voice.md`).
 
+**Creativity bar (every video, no exceptions):**
+- At least **three visual metaphors** nobody would draw literally (a contract
+  stamped OWNED, a "?" in a train window turning into a star, homes lighting up
+  one window at a time). A scene that only shows a person standing and talking is
+  not finished.
+- One **hero moment**: the biggest, most animated beat on the story's twist,
+  with a sound hit (gong/stamp/riser) and a camera move.
+- **Open on tension.** The first 2 s must already move and ask a question
+  (fireworks then BANNED; a star sliding away). Nothing static in the first frame.
+- **No recycled compositions.** Don't repeat a layout, prop arrangement or scene
+  idea from an earlier project; `check-unique.mjs` catches near-copies.
+- **New props for new stories.** Add what the story needs to the kit (period
+  objects, places, animals) instead of reusing the nearest old prop.
+- Vary the **music**: a different maqam or root from the previous video, moods
+  that follow the story's turns.
+
+## 3b. Pick the look (never the same as the last three videos)
+Each video gets its own page design so the channel never looks templated:
+
+| look | page | particles | transitions |
+|---|---|---|---|
+| `album` | murakka album page, gold-sprinkled paper, title under the picture, logo roundel | gold dust | unroll, ink, page, iris |
+| `tile` | İznik tile panel, white caption box with cobalt rules | none | tiles, lattice, wipe |
+| `night` | navy lacquer with gold vines, cream captions, moon footer | fireflies | ink, iris, lattice |
+| `scroll` | hanging scroll with wooden rollers, title tag, ribbon captions | petals | unroll, page, wipe, ink |
+| `classic` | the original lapis header page (used by the first 16 videos — avoid for now) | none | as written |
+
+Set `meta.look` in `story.mjs` (optional `meta.ambient`: `dust`, `fireflies`,
+`petals`, `embers`, `snow`, `none`). Pick a look the last three videos did not
+use (`grep -h "look:" animate/projects/*/story.mjs`), and one that fits the story
+(night stories → `night`, holidays/celebrations → `album` or `scroll`, inventions
+and science → `tile`). Preview any look without editing:
+`node render.mjs projects/<slug> --look night --sheet`. A look replaces the
+story's transitions with its own set (except `cut` and `flash`, which are story
+beats); set `transLock: true` on a scene to keep its own. Each look also adds a
+slow camera push-in inside every scene and a colour grade + vignette.
+
 ## 4. Write `story.mjs`
 Start from `projects/bubble-wrap/story.mjs`. It exports:
 - `meta` — title, slug, `style: 'ottoman'`, 1080×1920, 30 fps, `duration`
@@ -93,7 +136,9 @@ Start from `projects/bubble-wrap/story.mjs`. It exports:
   the scene. `S.at('word')` = when that word is spoken (sync moments to it).
   `S.cam(zoom, cx, cy)` = camera. `S.k` = the style kit, `S.P` = palette,
   `S.W/S.H` = painting size (940×1060). Transitions: `iris` (scalloped gold
-  circle), `wipe`, `unroll` (scroll), `flash` (gold), `cut`.
+  circle), `wipe`, `unroll` (scroll), `flash` (gold), `cut`, `ink` (ink blots
+  spread), `lattice` (shutter slats open), `tiles` (tile mosaic), `page` (a leaf
+  turns). With a look other than `classic` the look picks them (see 3b).
 - `sfx` — `{ t, type, gain, pitch }`; types: pop, whoosh, paper, chime, stamp,
   thud, pluck, slide, sizzle, wind, rain, waves, crickets, flop, riser, gong,
   clank, alarm, thunder, crack, coins, spray, splash, drip.
@@ -130,6 +175,16 @@ grab frames at transitions with `ffmpeg -ss <t> -i out.mp4 -frames:v 1`, and
 measure loudness (`ffmpeg -i build/mix.wav -af ebur128 -f null -` → about −14 LUFS).
 You cannot hear the audio — say so, and ask the owner to listen.
 
+Then check that the video is its own piece:
+```bash
+node check-unique.mjs projects/<slug>              # must print UNIQUE ENOUGH ✔ (exit 0)
+node check-unique.mjs projects/<slug> --look tile  # try another look if it fails
+```
+It FAILS when the page design matches one of the last three videos or more than
+a quarter of the scenes are near-copies of other videos' scenes. Fix every FAIL
+before sending; fix warnings when you can (music key, transition order, the
+script's opening formula — tell the owner if the hooks all start the same way).
+
 ## 7. Hand-off: post copy + schedule
 1. Send the MP4 to the owner (SendUserFile).
 2. Use the **publisher** agent (`.claude/agents/publisher.md`) to write
@@ -148,6 +203,51 @@ You cannot hear the audio — say so, and ask the owner to listen.
 
 **Never post anything without the owner's explicit yes**, and never mark a
 row `posted` unless the owner says they posted it.
+
+## YouTube monetization (what this skill does about it)
+Facts to tell the owner honestly (checked Nov 2026; re-check YouTube's help pages):
+- **YPP entry**: 1,000 subscribers **and** 4,000 public watch hours on long-form
+  videos in 12 months, **or** 10 million public Shorts views in 90 days. From
+  **Feb 1, 2027** new applicants need 8,000 hours or 20 million Shorts views.
+  Shorts views never count toward watch hours.
+- **Inauthentic content** (formerly "repetitious"): mass-produced or template
+  videos that differ only on the surface (the same narrated-slideshow format with
+  new words) are not monetized, however they were made. AI tools are allowed;
+  near-identical uploads are not. This is the biggest risk for this channel: the
+  first 16 shorts share one page design, one voice and one script formula.
+- Meeting the numbers starts a human review; nobody can promise approval.
+
+What to do every time:
+1. A different **look** from the last three videos (3b) and `check-unique.mjs` passing.
+2. The **creativity bar** (section 3): new metaphors, a hero moment, new props.
+3. **Original audio**: the score and sound effects are generated here (no
+   Content ID claims). The voice is the owner's — remind them that ElevenLabs
+   voices need a paid plan for commercial use (the free plan is non-commercial
+   and needs attribution); check their plan.
+4. **Vary the scripts**: if `check-unique` warns that hooks share a formula
+   ("X exists because…"), tell the owner; suggest other openings (a question, a
+   number, a twist first, a quote).
+5. **Long-form for watch hours**: every 8–10 shorts, offer a themed
+   compilation (below), ideally with a newly recorded intro so it adds new value.
+6. The publisher adds 1–2 real sources to the YouTube description and never
+   writes a title the video does not deliver.
+
+## Long-form compilations (16:9, for watch hours)
+```bash
+cd animate
+node compile.mjs --title "Origins of the Holidays" projects/thanksgiving projects/santa projects/times-square-ball \
+  [--subtitle "…"] [--intro-voice projects/_intros/holidays.mp3]
+```
+Output in `animate/compilations/<slug>/` (gitignored): `<slug>.mp4` at 1920×1080,
+`chapters.txt` (paste into the YouTube description; first chapter 0:00, ≥3
+chapters of ≥10 s) and the painted cards. Each short plays inside a marbled album
+spread with its chapter number and title on the left and the channel on the
+right; chapter cards get a generated maqam sting. Missing MP4s are rendered
+first. Aim for **8+ minutes** (8–10 shorts) so mid-roll ads are possible. A
+compilation of the owner's own shorts is allowed, but a new spoken intro
+(`--intro-voice`) and a themed order make it a new piece rather than a re-upload.
+Send it to the owner with the chapter list; the publisher writes its post file
+like any other video (one YouTube row, a weekend morning or evening slot).
 
 ## Adding another style
 Make `animate/styles/<style>/index.mjs` exporting `createRenderer(project)`

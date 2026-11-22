@@ -8,6 +8,7 @@ export const meta = {
   title: 'How Mickey Mouse Started',
   slug: 'mickey-mouse-ottoman',
   style: 'ottoman',
+  look: 'album', // gold-sprinkled album page, drifting gold dust (see styles/ottoman/looks.mjs)
   width: 1080, height: 1920, fps: 30,
   duration: 54.5,
   voice: 'voice.mp3',
@@ -292,7 +293,7 @@ export const sfx = [
 ];
 
 export const music = {
-  bpm: 108, root: 'D', maqam: 'rast', gain: 0.32,
+  bpm: 112, root: 'E', maqam: 'nihavend', gain: 0.32,
   sections: [
     { from: 0, to: 5.6, mood: 'intro' },
     { from: 5.6, to: 11.8, mood: 'groove' },

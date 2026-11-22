@@ -6,7 +6,8 @@ import { createRequire } from 'node:module';
 import { GlobalFonts, loadImage } from '@napi-rs/canvas';
 import { TAU, clamp, ease, lerp } from '../../lib/core.mjs';
 import * as kit from './kit.mjs';
-import { LAYOUT, staticPage, paperTexture, headerText, captions, groupLines, progress, outroText } from './page.mjs';
+import { paperTexture, headerText, captions, groupLines, progress, outroText } from './page.mjs';
+import { getLook, buildPage, ambient, grade, transClip, transEdge } from './looks.mjs';
 
 const require = createRequire(import.meta.url);
 export function registerFonts() {
@@ -36,11 +37,17 @@ export async function createRenderer(project) {
   const brand = meta.brand || {};
   let logo = null;
   if (brand.logo && fs.existsSync(path.resolve(dir, brand.logo))) logo = await loadImage(fs.readFileSync(path.resolve(dir, brand.logo)));
-  const page = staticPage({ seed: meta.seed || 11, handle: brand.handle, logo });
-  const PA = LAYOUT.paint;
+  const look = getLook(meta), L = look.layout, C = look.colors;
+  const page = buildPage(look, { seed: meta.seed || 11, handle: brand.handle, logo });
+  const PA = L.paint;
   const grain = paperTexture(PA.w, PA.h, 21);
   const lines = groupLines(words, meta.captionChars || 30);
-  const scenes = story.scenes.map((s, i, a) => ({ ...s, end: i + 1 < a.length ? a[i + 1].start : meta.duration }));
+  // a look brings its own transitions; 'cut' and 'flash' are story beats and stay
+  const pick = (s, i) => {
+    if (!look.transitions || s.trans === 'cut' || s.trans === 'flash' || s.transLock) return s.trans || 'iris';
+    return look.transitions[(i + (meta.seed || 0)) % look.transitions.length];
+  };
+  const scenes = story.scenes.map((s, i, a) => ({ ...s, i, trans: i ? pick(s, i) : s.trans, end: i + 1 < a.length ? a[i + 1].start : meta.duration }));
   const findWord = (re, after = 0) => { const w = words.find(x => x.start >= after - 0.05 && re.test(x.w)); return w ? w.start : null; };
 
   function drawScene(ctx, sc, t) {
@@ -51,7 +58,12 @@ export async function createRenderer(project) {
       at: w => { const g = findWord(w instanceof RegExp ? w : new RegExp('^' + w, 'i'), sc.start); return g == null ? 0 : g - sc.start; },
       cam(z = 1, cx = PA.w / 2, cy = PA.h / 2, rot = 0) { ctx.translate(PA.w / 2, PA.h / 2); ctx.rotate(rot); ctx.scale(z, z); ctx.translate(-cx, -cy); },
     };
-    ctx.save(); sc.draw(ctx, u, S); ctx.restore();
+    ctx.save();
+    if (look.drift) { // a slow push-in (and a little drift sideways) inside every scene
+      const q = ease.inOut(clamp(u / Math.max(1, S.d))), z = 1 + look.drift * q, dx = (sc.i % 2 ? 1 : -1) * 10 * q;
+      ctx.translate(PA.w / 2 + dx, PA.h / 2); ctx.scale(z, z); ctx.translate(-PA.w / 2, -PA.h / 2);
+    }
+    sc.draw(ctx, u, S); ctx.restore();
   }
 
   return function frame(ctx, t) {
@@ -68,7 +80,8 @@ export async function createRenderer(project) {
       const e = ease.inOut(clamp(kTrans));
       ctx.save();
       const type = sc.trans || 'iris';
-      if (type === 'iris') { lobedCircle(ctx, PA.w / 2, PA.h / 2, e * PA.h * 0.82); ctx.clip(); }
+      if (transClip(ctx, type, e, PA.w, PA.h, (meta.seed || 1) + sc.i)) { /* look transition */ }
+      else if (type === 'iris') { lobedCircle(ctx, PA.w / 2, PA.h / 2, e * PA.h * 0.82); ctx.clip(); }
       else if (type === 'wipe') { ctx.beginPath(); ctx.rect(0, 0, PA.w * e, PA.h); ctx.clip(); }
       else if (type === 'unroll') { ctx.beginPath(); ctx.rect(0, 0, PA.w, PA.h * e); ctx.clip(); }
       else if (type === 'flash') { /* drawn below */ }
@@ -76,6 +89,7 @@ export async function createRenderer(project) {
       ctx.restore();
       // gilded edge on the moving boundary
       ctx.save();
+      transEdge(ctx, type, e, PA.w, PA.h, (meta.seed || 1) + sc.i);
       if (type === 'iris') { lobedCircle(ctx, PA.w / 2, PA.h / 2, e * PA.h * 0.82); kit.stroke(ctx, kit.P.gold, 8); kit.stroke(ctx, kit.P.ink, 2); }
       else if (type === 'wipe') { ctx.fillStyle = kit.P.gold; ctx.fillRect(PA.w * e - 6, 0, 12, PA.h); }
       else if (type === 'unroll') { // the scroll's rolled edge
@@ -83,6 +97,8 @@ export async function createRenderer(project) {
       } else if (type === 'flash') { ctx.globalAlpha = 1 - Math.abs(kTrans * 2 - 1); ctx.fillStyle = kit.P.goldLight; ctx.fillRect(0, 0, PA.w, PA.h); }
       ctx.restore();
     } else drawScene(ctx, sc, t);
+    ambient(ctx, look.ambient, t, PA.w, PA.h, meta.seed || 1);
+    grade(ctx, look, PA.w, PA.h, t);
     // paper grain + worn pigment
     ctx.globalCompositeOperation = 'multiply'; ctx.globalAlpha = 0.55; ctx.drawImage(grain, 0, 0); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
     ctx.restore();
@@ -92,9 +108,13 @@ export async function createRenderer(project) {
     if (sc.over) { ctx.save(); ctx.translate(PA.x, PA.y); sc.over(ctx, t - sc.start, { W: PA.w, H: PA.h, k: kit, P: kit.P }); ctx.restore(); }
 
     // ---- chapter title, captions, progress ----
-    headerText(ctx, sc.title, prev ? (t - sc.start) / 0.35 : 1);
-    const spoke = captions(ctx, lines, t);
-    if (!spoke && meta.outro && t >= meta.outro.at) outroText(ctx, meta.outro.text, t - meta.outro.at);
-    progress(ctx, t / meta.duration);
+    headerText(ctx, sc.title, prev ? (t - sc.start) / 0.35 : 1, L, C);
+    const spoke = captions(ctx, lines, t, L, C);
+    if (!spoke && meta.outro && t >= meta.outro.at) outroText(ctx, meta.outro.text, t - meta.outro.at, L, C);
+    progress(ctx, t / meta.duration, L, C);
   };
 }
+
+// Where the painting sits on the page in this project's look (used by check-unique.mjs).
+export function layoutOf(meta) { return getLook(meta).layout; }
+export function lookOf(meta) { return getLook(meta); }

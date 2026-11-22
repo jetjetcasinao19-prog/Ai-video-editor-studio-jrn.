@@ -17,7 +17,9 @@ export async function loadProject(dir) {
   const story = await import(pathToFileURL(path.join(dir, 'story.mjs')).href);
   const words = JSON.parse(fs.readFileSync(path.join(dir, 'words.json'), 'utf8')).words;
   const style = await import(pathToFileURL(path.join(ROOT, 'styles', story.meta.style, 'index.mjs')).href);
-  return { dir, story, words, style, meta: story.meta };
+  // ANIMATE_LOOK (render.mjs --look) previews a project in another look
+  const meta = process.env.ANIMATE_LOOK ? { ...story.meta, look: process.env.ANIMATE_LOOK } : story.meta;
+  return { dir, story, words, style, meta };
 }
 
 export async function makeFrameDrawer(project) {
