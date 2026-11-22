@@ -8,6 +8,7 @@ export const meta = {
   slug: 'nintendo-ottoman',
   style: 'ottoman',
   look: 'night',
+  room: 'tent',
   width: 1080, height: 1920, fps: 30,
   duration: 55.4,
   voice: 'voice.mp3',

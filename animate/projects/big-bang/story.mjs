@@ -9,6 +9,7 @@ export const meta = {
   slug: 'big-bang-ottoman',
   style: 'ottoman',
   look: 'night',
+  room: 'arches',
   width: 1080, height: 1920, fps: 30,
   duration: 57.1,
   voice: 'voice.mp3',

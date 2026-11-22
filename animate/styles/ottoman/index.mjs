@@ -10,6 +10,7 @@ import { paperTexture, headerText, captions, groupLines, progress, outroText } f
 import { getLook, buildPage, ambient, grade, transClip, transEdge } from './looks.mjs';
 import { createBrush, frameGlint, signature } from './brush.mjs';
 import { createCanvas } from '@napi-rs/canvas';
+import { ROOMS } from './scenes.mjs';
 
 const require = createRequire(import.meta.url);
 export function registerFonts() {
@@ -57,13 +58,15 @@ export async function createRenderer(project) {
   const scenes = story.scenes.map((s, i, a) => ({ ...s, i, trans: i ? pick(s, i) : s.trans, end: i + 1 < a.length ? a[i + 1].start : meta.duration }));
   const findWord = (re, after = 0) => { const w = words.find(x => x.start >= after - 0.05 && re.test(x.w)); return w ? w.start : null; };
 
+  // the video's interior design (scenes.mjs interior): meta.room or picked from the slug
+  const room = meta.room || ROOMS[[...(meta.slug || '')].reduce((a, c) => a + c.charCodeAt(0), 0) % ROOMS.length];
   const brush = createBrush(PA.w, PA.h);
   const fx = look.sceneFilter ? createCanvas(PA.w, PA.h) : null;
   function drawScene(ctx, sc, t) {
     const u = t - sc.start, d = sc.end - sc.start;
     const inner = c => {
       const S = {
-        W: PA.w, H: PA.h, t, u, d, k: kit, P: kit.P, logo,
+        W: PA.w, H: PA.h, t, u, d, k: kit, P: kit.P, logo, room,
         // local time of a spoken word inside this scene (regex or string)
         at: w => { const g = findWord(w instanceof RegExp ? w : new RegExp('^' + w, 'i'), sc.start); return g == null ? 0 : g - sc.start; },
         cam(z = 1, cx = PA.w / 2, cy = PA.h / 2, rot = 0) { c.translate(PA.w / 2, PA.h / 2); c.rotate(rot); c.scale(z, z); c.translate(-cx, -cy); },

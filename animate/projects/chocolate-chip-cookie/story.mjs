@@ -8,6 +8,7 @@ export const meta = {
   slug: 'chocolate-chip-cookie-ottoman',
   style: 'ottoman',
   look: 'album',
+  room: 'library',
   width: 1080, height: 1920, fps: 30,
   duration: 55.4,
   voice: 'voice.mp3',

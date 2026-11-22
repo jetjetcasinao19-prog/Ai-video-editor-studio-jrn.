@@ -9,7 +9,7 @@ import { spawnSync } from 'node:child_process';
 import { createCanvas } from '@napi-rs/canvas';
 import { loadProject, makeFrameDrawer, ROOT } from './engine.mjs';
 
-const VERSION = 4; // bump when the fingerprint changes
+const VERSION = 5; // bump when the fingerprint changes
 
 // 256-bit difference hash of a canvas region (robust to small shifts and colour).
 export function dhash(src, x = 0, y = 0, w = src.width, h = src.height) {
@@ -104,7 +104,7 @@ export async function checkUnique(dir, { projectsDir = path.join(ROOT, 'projects
   }
   // the videos posted just before this one (unscheduled = after everything scheduled)
   const before = others.filter(o => o.when < me.when || (o.when === me.when && o.name < path.basename(dir))).sort((a, b) => b.when - a.when);
-  const latest = (before.length ? before : [...others].sort((a, b) => b.when - a.when)).slice(0, recent);
+  const latest = before.slice(0, recent); // the first video in the schedule has nothing before it
   const fails = [], warns = [];
 
   // 1. page design: the same page around the picture as the latest videos?
@@ -114,9 +114,11 @@ export async function checkUnique(dir, { projectsDir = path.join(ROOT, 'projects
   if (sameLookCount / Math.max(1, others.length) > 0.5) warns.push(`${sameLookCount} of ${others.length} other videos use the "${me.look}" look`);
 
   // 2. pictures: scenes that are near-copies of another video's scenes
-  const dupes = me.scenes.map(s => {
+  // the closing brand card is meant to be the same in every video
+  const BRAND = /every legend has a beginning/i;
+  const dupes = me.scenes.filter(s => !BRAND.test(s.title)).map(s => {
     let best = null;
-    for (const o of others) for (const q of o.scenes) { const h = hamming(s.paint, q.paint); if (!best || h < best.h) best = { h, o: o.name, title: q.title }; }
+    for (const o of others) for (const q of o.scenes.filter(q => !BRAND.test(q.title))) { const h = hamming(s.paint, q.paint); if (!best || h < best.h) best = { h, o: o.name, title: q.title }; }
     return best && best.h < 30 ? `"${s.title}" ≈ ${best.o} "${best.title}"` : null;
   }).filter(Boolean);
   const dupeShare = dupes.length / me.scenes.length;

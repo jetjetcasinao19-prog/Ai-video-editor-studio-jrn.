@@ -8,6 +8,7 @@ export const meta = {
   slug: 'times-square-ball-ottoman',
   style: 'ottoman',
   look: 'night', // navy-and-gold lacquer page with fireflies: a New Year's Eve story
+  room: 'library',
   width: 1080, height: 1920, fps: 30,
   duration: 59.0,
   voice: 'voice.mp3',

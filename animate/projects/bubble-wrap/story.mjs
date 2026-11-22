@@ -9,6 +9,7 @@ export const meta = {
   slug: 'bubble-wrap-ottoman',
   style: 'ottoman',
   look: 'tile',
+  room: 'arches',
   width: 1080, height: 1920, fps: 30,
   duration: 59.0,
   voice: 'voice.mp3',

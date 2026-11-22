@@ -8,6 +8,7 @@ export const meta = {
   slug: 'kentucky-fried-chicken-ottoman',
   style: 'ottoman',
   look: 'tile',
+  room: 'tent',
   width: 1080, height: 1920, fps: 30,
   duration: 59.6,
   voice: 'voice.mp3',

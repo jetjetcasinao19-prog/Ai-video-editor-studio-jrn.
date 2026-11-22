@@ -8,6 +8,7 @@ export const meta = {
   slug: 'nike-swoosh-ottoman',
   style: 'ottoman',
   look: 'tile',
+  room: 'tent',
   width: 1080, height: 1920, fps: 30,
   duration: 58.5,
   voice: 'voice.mp3',

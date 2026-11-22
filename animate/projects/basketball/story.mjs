@@ -8,6 +8,7 @@ export const meta = {
   slug: 'basketball-ottoman',
   style: 'ottoman',
   look: 'tile',
+  room: 'arches',
   width: 1080, height: 1920, fps: 30,
   duration: 54.8,
   voice: 'voice.mp3',

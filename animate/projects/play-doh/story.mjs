@@ -8,6 +8,7 @@ export const meta = {
   slug: 'play-doh-ottoman',
   style: 'ottoman',
   look: 'scroll',
+  room: 'lattice',
   width: 1080, height: 1920, fps: 30,
   duration: 56.8,
   voice: 'voice.mp3',

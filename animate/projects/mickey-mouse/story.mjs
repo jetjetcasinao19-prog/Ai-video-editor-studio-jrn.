@@ -9,6 +9,7 @@ export const meta = {
   slug: 'mickey-mouse-ottoman',
   style: 'ottoman',
   look: 'album', // gold-sprinkled album page, drifting gold dust (see styles/ottoman/looks.mjs)
+  room: 'arches',
   width: 1080, height: 1920, fps: 30,
   duration: 54.5,
   voice: 'voice.mp3',

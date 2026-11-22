@@ -8,6 +8,7 @@ export const meta = {
   slug: 'hollywood-sign-ottoman',
   style: 'ottoman',
   look: 'karagoz',
+  room: 'tiles',
   width: 1080, height: 1920, fps: 30,
   duration: 59.8,
   voice: 'voice.mp3',

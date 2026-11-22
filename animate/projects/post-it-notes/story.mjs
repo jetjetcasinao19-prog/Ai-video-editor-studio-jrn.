@@ -8,6 +8,7 @@ export const meta = {
   slug: 'post-it-notes-ottoman',
   style: 'ottoman',
   look: 'scroll',
+  room: 'lattice',
   width: 1080, height: 1920, fps: 30,
   duration: 54.4,
   voice: 'voice.mp3',

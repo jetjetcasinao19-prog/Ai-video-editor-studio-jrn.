@@ -152,6 +152,12 @@ Each video gets its own page design so the channel never looks templated:
 | `karagoz` | Karagöz shadow-theatre booth: backlit muslin screen, red drapes, wooden sign and caption plank, oil lamps; colours glow like translucent leather puppets, lamp flicker | none | curtain, iris, cut |
 | `classic` | the original lapis header page (used by the first 16 videos — avoid for now) | none | as written |
 
+Also set `meta.room` — the design of every indoor scene (`interior()`):
+`arches` (ogee arches, cypresses), `library` (book niches, calligraphy frieze),
+`lattice` (wooden kafes screen with light through it), `tiles` (İznik wall with a
+tulip-vase panel), `tent` (striped campaign tent with appliqué arches). Never the
+same room as the video before.
+
 Set `meta.look` in `story.mjs` (optional `meta.ambient`: `dust`, `fireflies`,
 `petals`, `embers`, `snow`, `none`). Pick a look the three videos posted before it did
 not use (`node check-unique.mjs --all` lists every video's look in posting order), and one that fits the story

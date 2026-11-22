@@ -8,6 +8,7 @@ export const meta = {
   slug: 'super-soaker-ottoman',
   style: 'ottoman',
   look: 'karagoz',
+  room: 'tiles',
   width: 1080, height: 1920, fps: 30,
   duration: 54.6,
   voice: 'voice.mp3',
