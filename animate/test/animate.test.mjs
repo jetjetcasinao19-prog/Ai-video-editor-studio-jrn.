@@ -179,3 +179,33 @@ x = audio.sfx_signal('signature'); assert len(x) > audio.SR and np.abs(x).max() 
   const noSig = colorSig(fd3.frame(t), PA.x, PA.y, 300, 260);
   assert.ok(withSig.some((v, i) => Math.abs(v - noSig[i]) > 8), 'the tughra and seal are drawn at the outro');
 });
+
+test('craft lint: flags narrator-echo labels and stamp habits, passes a clean story', async () => {
+  const { lintStory } = await import('../lib/lint.mjs');
+  const clean = await lintStory(path.join(HERE, '..', 'projects', 'black-friday'));
+  assert.ok(clean.ok, 'black-friday passes: ' + clean.issues.map(i => i.msg).join('; '));
+  const sloppy = await lintStory(path.join(HERE, '..', 'projects', 'microwave'));
+  assert.ok(sloppy.issues.some(i => i.rule === 'echo-labels'), 'microwave has labels that echo the voice');
+  assert.ok(sloppy.issues.some(i => i.rule === 'stamp-habit'), 'microwave stamps too often');
+});
+
+test('hand-made motion: drawings are held two frames on twos', async () => {
+  process.env.ANIMATE_LOOK = 'album';
+  const p = await loadProject(PROJECT);
+  delete process.env.ANIMATE_LOOK;
+  const fd = await makeFrameDrawer(p), PA = p.style.layoutOf(p.meta).paint, t0 = 20 / 30;
+  const a = colorSig(fd.frame(t0 + 3 * 2 / 30), PA.x + 100, PA.y + 100, 600, 600);
+  const b = colorSig(fd.frame(t0 + 3 * 2 / 30 + 0.5 / 30), PA.x + 100, PA.y + 100, 600, 600);
+  assert.deepEqual(a, b, 'a held drawing does not change within its two frames');
+});
+
+test('panorama: a Matrakçı-style city plan draws with rivers, squares and a landmark', async () => {
+  const { panorama } = await import('../styles/ottoman/scenes.mjs');
+  const kitmod = await import('../styles/ottoman/kit.mjs');
+  const { createCanvas } = await import('@napi-rs/canvas');
+  const cv = createCanvas(940, 1060), ctx = cv.getContext('2d');
+  let drew = false;
+  panorama(ctx, { W: 940, H: 1060, k: kitmod, P: kitmod.P, t: 0 }, { grid: { cols: 5, rows: 6 }, squares: [[1, 1]], rivers: ['left', 'right'], landmarkCell: [2, 2], landmark: () => { drew = true; } });
+  assert.ok(drew, 'landmark callback ran');
+  const sig = colorSig(cv); assert.ok(new Set(sig.map(v => Math.round(v / 20))).size > 3, 'the plan is not blank');
+});

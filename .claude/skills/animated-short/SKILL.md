@@ -36,6 +36,7 @@ Everything lives in `animate/`:
 | `animate/setup.sh` | installs/checks the tools (Node 22+, FFmpeg + libx264, Python 3 + numpy, `@napi-rs/canvas`, fonts) |
 | `animate/transcribe.mjs` | voice → `words.json` (word timings; OmniRoute if `OMNIROUTE_URL` is set, else Groq Whisper) |
 | `animate/render.mjs` | CLI: contact sheet, stills, full render; `--look <name>` previews another look |
+| `animate/lint-story.mjs` | craft check of a storyboard: labels that repeat the narration, too many stamps, scenes that don't change, flat camera, one backdrop everywhere (`--all` for every project) |
 | `animate/check-unique.mjs` | compares a project with every other one (page design, near-copy pictures, music, transitions, script formula); exit 1 = too similar |
 | `animate/compile.mjs` | several shorts → one 16:9 long-form video with intro, chapter cards, outro and a YouTube chapters list |
 | `animate/styles/ottoman/looks.mjs` | the looks: `classic`, `album`, `tile`, `night`, `scroll` (page layout, marbling colours, caption colours, particles, colour grade, camera drift, their own transitions) |
@@ -109,6 +110,44 @@ Check facts (dates, names) — the brand is "dramatic but true" (`brand/voice.md
   objects, places, animals) instead of reusing the nearest old prop.
 - Vary the **music**: a different maqam or root from the previous video, moods
   that follow the story's turns.
+
+## Craft rules: no slop
+What makes a code-drawn short feel machine-made, and what to do instead. Run
+`node lint-story.mjs projects/<slug>` (inside `animate/`) after every sheet; it must
+print OK before the full render.
+
+1. **Don't caption the captions.** The narration is already on screen, word by word.
+   A label may only add what the voice does not say: a name's spelling, a date, a
+   number, a place, a street sign, a joke. "LONG SHIFTS" under a tired policeman is
+   slop; a clock whose hands race round is not. (`echo-labels`: more than 3 fails.)
+2. **Two stamps at most**, for the real turning points. Show the other beats with
+   action: a banner that peels off and falls, a red ink line struck through a page,
+   a face that changes. (`stamp-habit`)
+3. **Every scene changes** between its first and last second: someone acts,
+   something arrives or transforms, the light moves. (`static-scenes`)
+4. **Move the camera** like an animator: push in on the key word, pull out for the
+   reveal, a close-up for emotion, a slight tilt when something goes wrong.
+   Aim for half the scenes. (`flat-camera`)
+5. **Vary the setting**; no backdrop behind more than half the scenes. (`same-backdrop`)
+6. **Hand-made motion is on** in every look except classic: drawings are held two
+   frames ("on twos", 15 drawings a second) and the paper grain shifts between
+   them, like cel or stop-motion animation. Don't fight it with very fast motion.
+7. **Borrow from the real tradition**, not from stock-video habits. At least one per video:
+   - *Matrakçı's city panoramas* (`panorama()` in `scenes.mjs`): a city from above
+     like a map, every building standing up in elevation, rivers with boats, gardens
+     as rows of trees, no people, and the important building painted far larger.
+     Use it to establish a place instead of a generic skyline.
+   - *Continuous narration*: the same character appears two or three times in one
+     picture doing successive things (goes in, buys, comes out with parcels).
+   - *Faces hidden in rocks* (`k.rockFace`) for the attentive viewer.
+   - *Figures breaking the frame* (`scene.over`), *stacked registers* (the picture
+     in horizontal bands for depth), *gold skies*, *several viewpoints in one picture*.
+8. **Specific beats generic.** Philadelphia is Penn's grid with City Hall in the
+   centre square, not "a city"; the downtown sign says MARKET ST. Look things up.
+9. **Plant and pay off**: something from the first scene comes back in the last
+   (the bubble in the storyteller's head is struck through at the end).
+10. **The voice is the owner's call**, but say it plainly if a script reads like a
+    template, and suggest a sharper line.
 
 ## The signature (what no other channel has)
 These run automatically in every look except `classic` — they are the channel's
@@ -206,6 +245,7 @@ modern black-and-white one). Animation tools are in
 ```bash
 node render.mjs projects/<slug> --sheet            # one frame per scene → build/sheet.png
 node render.mjs projects/<slug> --stills 3.2,14,41 # full-size PNGs → build/stills/
+node lint-story.mjs projects/<slug>               # craft check (see "Craft rules"); must say OK
 ```
 Open the images (Read tool) and check: nothing important hidden behind the
 header/caption panels, text fits, figures readable at phone size, every

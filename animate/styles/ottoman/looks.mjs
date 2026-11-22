@@ -35,7 +35,7 @@ export const LOOKS = {
     },
     ebru: [['#7a2e3a', '#e8b7b0', '#2f5f7a', '#efe2c0', '#c98a2e', '#3d8458'], ['#5a2a5a', '#c9bede', '#c98a2e', '#efe2c0', '#2f7f7a', '#b8574e']],
     colors: { title: P.vermDark, active: P.verm, under: P.gold, reed: P.goldDark },
-    ambient: 'dust', grade: { mode: 'soft-light', color: '#ffd9a0', a: 0.16 }, vignette: 0.28, drift: 0.035, paintIn: 1.0, glint: true,
+    ambient: 'dust', grade: { mode: 'soft-light', color: '#ffd9a0', a: 0.16 }, vignette: 0.28, drift: 0.035, paintIn: 1.0, glint: true, onTwos: true,
     transitions: ['unroll', 'ink', 'page', 'iris'],
   },
   // İznik tiles: tiled page, white caption panel with cobalt rules
@@ -43,7 +43,7 @@ export const LOOKS = {
     label: 'Iznik tile panel',
     layout: { ...LAYOUT, logo: null },
     colors: { title: P.lapisDeep, active: '#1f5fae', under: P.verm, reed: P.turq, reedTip: P.verm, outro: P.vermDark },
-    ambient: 'none', grade: { mode: 'soft-light', color: '#cfe6ff', a: 0.1 }, vignette: 0.15, drift: 0.025, paintIn: 0.9, glint: true,
+    ambient: 'none', grade: { mode: 'soft-light', color: '#cfe6ff', a: 0.1 }, vignette: 0.15, drift: 0.025, paintIn: 0.9, glint: true, onTwos: true,
     transitions: ['tiles', 'lattice', 'wipe', 'tiles'],
   },
   // a lacquer night page: navy and gold, cream captions, fireflies
@@ -52,7 +52,7 @@ export const LOOKS = {
     layout: { ...LAYOUT, logo: null },
     ebru: [['#0e1630', '#1d2b5c', '#c9a227', '#2a1c12', '#3a6f7a', '#6e510c'], ['#141b38', '#3a2a5a', '#ecd57a', '#0e1630', '#2a5f6a', '#8e2414']],
     colors: { title: P.goldLight, ink: '#f3e6c0', active: P.goldLight, under: P.verm, dim: 'rgba(243,230,192,0.33)', outro: P.goldLight, reed: P.goldLight },
-    ambient: 'fireflies', grade: { mode: 'multiply', color: '#b4c0e8', a: 0.16 }, vignette: 0.45, drift: 0.04, paintIn: 1.0, glint: true,
+    ambient: 'fireflies', grade: { mode: 'multiply', color: '#b4c0e8', a: 0.16 }, vignette: 0.45, drift: 0.04, paintIn: 1.0, glint: true, onTwos: true,
     transitions: ['ink', 'iris', 'lattice', 'ink'],
   },
   // a hanging scroll: wooden rollers, a title tag, captions on a ribbon
@@ -68,7 +68,7 @@ export const LOOKS = {
     },
     ebru: [['#3d8458', '#b9c98a', '#efe2c0', '#a99ac6', '#c4371f', '#24573a'], ['#2f7f7a', '#e9be6e', '#efe2c0', '#e8b7b0', '#7a4a2a', '#20408f']],
     colors: { title: P.ink, active: P.vermDark, under: P.goldDark, reed: P.brownLight },
-    ambient: 'petals', grade: { mode: 'soft-light', color: '#f0c8a0', a: 0.12 }, vignette: 0.3, drift: 0.03, paintIn: 1.0, glint: true,
+    ambient: 'petals', grade: { mode: 'soft-light', color: '#f0c8a0', a: 0.12 }, vignette: 0.3, drift: 0.03, paintIn: 1.0, glint: true, onTwos: true,
     transitions: ['unroll', 'page', 'wipe', 'ink'],
   },
   // Karagöz shadow theatre: the story plays on a backlit muslin screen in a
@@ -86,7 +86,7 @@ export const LOOKS = {
       logo: { cx: 900, cy: 1700, r: 62 }, handle: { cx: 430, cy: 1700 },
     },
     colors: { title: '#1a1410', ink: '#1a1410', active: '#b3261a', under: '#1a1410', dim: 'rgba(26,20,16,0.33)', outro: '#8e2414', reed: '#b3261a', reedTip: '#1a1410' },
-    ambient: 'dust', grade: { mode: 'soft-light', color: '#ffe8c0', a: 0.12 }, vignette: 0.22, drift: 0.03, paintIn: 1.0, glint: true,
+    ambient: 'dust', grade: { mode: 'soft-light', color: '#ffe8c0', a: 0.12 }, vignette: 0.22, drift: 0.03, paintIn: 1.0, glint: true, onTwos: true,
     transitions: ['ink', 'wipe', 'page', 'unroll'],
   },
   karagoz: {
@@ -94,7 +94,7 @@ export const LOOKS = {
     layout: { ...LAYOUT, logo: null },
     colors: { title: '#ffd98a', ink: '#f3e6c0', active: '#ffcf6a', under: P.verm, dim: 'rgba(243,230,192,0.33)', outro: '#ffd98a', reed: '#ffcf6a', reedTip: P.verm },
     ambient: 'none', grade: { mode: 'multiply', color: '#ffe0a8', a: 0.28 }, vignette: 0.55, drift: 0.02,
-    sceneFilter: 'saturate(1.55) contrast(1.12) brightness(1.04)', cloth: true, flicker: true,
+    sceneFilter: 'saturate(1.55) contrast(1.12) brightness(1.04)', cloth: true, flicker: true, onTwos: true,
     transitions: ['curtain', 'iris', 'curtain', 'cut'],
   },
 };

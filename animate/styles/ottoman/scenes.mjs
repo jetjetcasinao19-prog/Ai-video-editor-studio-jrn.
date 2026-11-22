@@ -187,3 +187,39 @@ export function usMap(ctx, S, color = '#cdb57a') {
   ctx.beginPath(); k.smoothPath(ctx, US_SHAPE); k.fillStroke(ctx, color, P.ink, 2.5);
   ctx.save(); ctx.clip(); ctx.fillStyle = k.pattern(ctx, 'dots', color, '#b39a5e', 26); ctx.fillRect(0, 0, W, H); ctx.restore();
 }
+
+// Matrakçı Nasuh's way of painting a city (1530s): seen from above like a map,
+// yet every building stands up in elevation, rivers as blue bands with boats,
+// gardens as rows of trees, and no people at all. o.grid = { cols, rows } for a
+// planned grid, o.squares = [[col,row]…] left green, o.rivers = ['left','right'],
+// o.landmark(ctx, x, y) draws the centrepiece, o.snow, o.seed, o.t
+export function panorama(ctx, S, o = {}) {
+  const { W, H, k, P } = S, R = rng(o.seed || 7), t = o.t ?? S.t;
+  ctx.fillStyle = o.ground || '#e6d6a6'; ctx.fillRect(-80, -80, W + 160, H + 160);
+  const rv = 120, x0 = (o.rivers || []).includes('left') ? rv : 30, x1 = W - ((o.rivers || []).includes('right') ? rv : 30);
+  for (const side of o.rivers || []) {
+    const rx = side === 'left' ? -80 : W - rv;
+    ctx.save(); ctx.beginPath(); ctx.rect(rx, -80, rv + 80, H + 160); ctx.clip();
+    k.waves(ctx, rx, -80, rv + 80, H + 160, t, P.water, P.waterLight, 12, 18); ctx.restore();
+    for (let i = 0; i < 2; i++) k.galley(ctx, rx + (side === 'left' ? 110 : 60), 220 + i * 480 + ((t * 30) % 120), 0.22, t, null, 0);
+  }
+  const g = o.grid || { cols: 5, rows: 6 }, bw = (x1 - x0) / g.cols, bh = (H - 60) / g.rows, sq = new Set((o.squares || []).map(([c, r]) => c + ',' + r));
+  // streets
+  ctx.fillStyle = '#f1e6c4'; for (let c = 0; c <= g.cols; c++) ctx.fillRect(x0 + c * bw - 7, 0, 14, H); for (let r = 0; r <= g.rows; r++) ctx.fillRect(x0, 30 + r * bh - 7, x1 - x0, 14);
+  for (let r = 0; r < g.rows; r++) for (let c = 0; c < g.cols; c++) {
+    const bx = x0 + c * bw + 12, by = 30 + r * bh + 12, w = bw - 24, h = bh - 24;
+    if (sq.has(c + ',' + r)) { k.rect(ctx, bx, by, w, h, P.sage, P.ink, 1.5); for (let i = 0; i < 6; i++) k.circle(ctx, bx + 14 + (i % 3) * (w - 28) / 2, by + 16 + Math.floor(i / 3) * (h - 32), 11, P.green, P.ink, 1); continue; }
+    if (o.landmarkCell && o.landmarkCell[0] === c && o.landmarkCell[1] === r) continue;
+    // two to three houses standing on the block, painted in elevation
+    const n = 2 + Math.floor(R() * 2);
+    for (let i = 0; i < n; i++) {
+      const hw = w / n - 6, hx = bx + i * (w / n) + 3, hh = h * (0.45 + R() * 0.4), hy = by + h - hh;
+      k.rect(ctx, hx, hy, hw, hh, [P.white, '#e8b7b0', '#e9be6e', '#d8c9a8', '#cfe0ea'][Math.floor(R() * 5)], P.ink, 1.3);
+      if (R() > 0.5) k.poly(ctx, [[hx - 2, hy], [hx + hw / 2, hy - hh * 0.35], [hx + hw + 2, hy]], [P.verm, P.vermDark, P.brownLight][Math.floor(R() * 3)], P.ink, 1.2);
+      else k.rect(ctx, hx - 2, hy - 5, hw + 4, 6, P.brown, P.ink, 1);
+      for (let wy = hy + 8; wy < hy + hh - 8; wy += 14) for (let wx = hx + 5; wx < hx + hw - 6; wx += 11) k.rect(ctx, wx, wy, 5, 7, P.lapis, null);
+    }
+  }
+  if (o.landmark && o.landmarkCell) { const [c, r] = o.landmarkCell; o.landmark(ctx, x0 + (c + 0.5) * bw, 30 + (r + 1) * bh - 14, Math.min(bw, bh)); }
+  if (o.snow) k.snow(ctx, -40, -40, W + 80, H + 80, t, 70, o.seed || 3);
+}

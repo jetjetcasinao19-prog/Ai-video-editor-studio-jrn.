@@ -48,7 +48,10 @@ export async function createRenderer(project) {
   const signOff = (meta.signature ?? look.name !== 'classic') && meta.outro;
   const page = buildPage(look, { seed: meta.seed || 11, handle: brand.handle, logo });
   const PA = L.paint;
-  const grain = paperTexture(PA.w, PA.h, 21);
+  // hand-made motion: the painting is drawn "on twos" (each drawing held two frames, as
+  // hand animators do) and the paper grain shifts a pixel or two between drawings
+  const onTwos = meta.onTwos ?? look.onTwos ?? false, step = 2 / (meta.fps || 30);
+  const grain = paperTexture(PA.w + 6, PA.h + 6, 21);
   const lines = groupLines(words, meta.captionChars || 30);
   // a look brings its own transitions; 'cut' and 'flash' are story beats and stay
   const pick = (s, i) => {
@@ -90,12 +93,13 @@ export async function createRenderer(project) {
     const i = Math.max(0, scenes.findLastIndex(s => t >= s.start));
     const sc = scenes[i], prev = scenes[i - 1];
     const kTrans = prev ? (t - sc.start) / TRANS : 1;
+    const th = onTwos ? Math.max(sc.start, Math.floor(t / step + 1e-6) * step) : t; // held time for the drawing
 
     // ---- the painting ----
     ctx.save(); ctx.translate(PA.x, PA.y);
     ctx.beginPath(); ctx.rect(0, 0, PA.w, PA.h); ctx.clip();
     if (kTrans < 1 && prev && sc.trans !== 'cut') {
-      drawScene(ctx, prev, t);
+      drawScene(ctx, prev, th);
       const e = ease.inOut(clamp(kTrans));
       ctx.save();
       const type = sc.trans || 'iris';
@@ -104,7 +108,7 @@ export async function createRenderer(project) {
       else if (type === 'wipe') { ctx.beginPath(); ctx.rect(0, 0, PA.w * e, PA.h); ctx.clip(); }
       else if (type === 'unroll') { ctx.beginPath(); ctx.rect(0, 0, PA.w, PA.h * e); ctx.clip(); }
       else if (type === 'flash') { /* drawn below */ }
-      drawScene(ctx, sc, t);
+      drawScene(ctx, sc, th);
       ctx.restore();
       // gilded edge on the moving boundary
       ctx.save();
@@ -115,11 +119,11 @@ export async function createRenderer(project) {
         const y = PA.h * e; ctx.fillStyle = kit.P.paperDark; ctx.fillRect(0, y - 14, PA.w, 28); ctx.fillStyle = kit.P.goldDark; ctx.fillRect(0, y - 3, PA.w, 6);
       } else if (type === 'flash') { ctx.globalAlpha = 1 - Math.abs(kTrans * 2 - 1); ctx.fillStyle = kit.P.goldLight; ctx.fillRect(0, 0, PA.w, PA.h); }
       ctx.restore();
-    } else drawScene(ctx, sc, t);
-    ambient(ctx, look.ambient, t, PA.w, PA.h, meta.seed || 1);
+    } else drawScene(ctx, sc, th);
+    ambient(ctx, look.ambient, th, PA.w, PA.h, meta.seed || 1);
     grade(ctx, look, PA.w, PA.h, t);
     // paper grain + worn pigment
-    ctx.globalCompositeOperation = 'multiply'; ctx.globalAlpha = 0.55; ctx.drawImage(grain, 0, 0); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+    const hold = Math.floor(th / step); ctx.globalCompositeOperation = 'multiply'; ctx.globalAlpha = 0.55; ctx.drawImage(grain, onTwos ? -((hold * 7) % 5) : 0, onTwos ? -((hold * 11) % 5) : 0); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
     ctx.restore();
     // re-draw the frame rules on top so the picture sits inside them
     for (const [o, c, lw] of [[-11, look.frameColor || kit.P.gold, 5], [-1, kit.P.verm, 1.5]]) { ctx.strokeStyle = c; ctx.lineWidth = lw; ctx.strokeRect(PA.x + o, PA.y + o, PA.w - 2 * o, PA.h - 2 * o); }

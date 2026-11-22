@@ -438,6 +438,7 @@ export function figure(ctx, x, y, o = {}) {
   head(ctx, 0, top - 30, o);
   // front arm
   arm(ctx, 12, top + 14, o.armF || [-0.1, 0.6], robe, o.robeP, s, o.hold, kneel);
+  if (o.badge) { star(ctx, 16, (o.kneel ? -150 : -214), 10, 1); circle(ctx, 16, (o.kneel ? -150 : -214), 4, P.goldLight, P.ink, 1); }
   ctx.restore();
 }
 function arm(ctx, sx, sy, [a1, a2], robe, robeP, s, hold, kneel) {
@@ -1992,6 +1993,18 @@ export function gavel(ctx, x, y, s = 1, swing = 0) {
 // a stack of coins (n coins), for rewards and royalties
 export function coinStack(ctx, x, base, r, n, color = P.goldLight) {
   for (let i = 0; i < n; i++) { ctx.beginPath(); ctx.ellipse(x, base - i * r * 0.3, r, r * 0.32, 0, 0, TAU); fillStroke(ctx, i % 2 ? color : shade(color, -0.12), P.ink, 1.4); }
+}
+
+// A face hidden in a rock, as Persian and Ottoman painters liked to do: two
+// half-closed eyes and a mouth in a darker shade of the stone. Easy to miss.
+export function rockFace(ctx, x, y, s = 1, color = '#8a7a6a', mood = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s); ctx.globalAlpha *= 0.55;
+  const c = shade(color, -0.35);
+  ctx.beginPath(); ctx.arc(-14, 0, 7, Math.PI * 0.1, Math.PI * 0.9); stroke(ctx, c, 2.5);
+  ctx.beginPath(); ctx.arc(14, 0, 7, Math.PI * 0.1, Math.PI * 0.9); stroke(ctx, c, 2.5);
+  ctx.beginPath(); ctx.moveTo(-6, 10); ctx.lineTo(-2, 18); ctx.lineTo(2, 12); stroke(ctx, c, 2);
+  ctx.beginPath(); ctx.arc(0, 30 - mood * 8, 12, Math.PI * (0.15 + mood * 1.0), Math.PI * (0.85 + mood * 1.0)); stroke(ctx, c, 2.5);
+  ctx.restore();
 }
 
 // ---------- colour util ----------

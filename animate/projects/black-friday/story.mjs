@@ -2,7 +2,7 @@
 // storyteller with a handkerchief and a stick, to listeners who react; the
 // page is an Ottoman account book (the ledger look), red ink and black.
 import { clamp, lerp, ease, tween, rng, TAU, shake, pop } from '../../lib/core.mjs';
-import { interior, lamp, bookCover, bigSign, medallion } from '../../styles/ottoman/scenes.mjs';
+import { interior, lamp, bookCover, bigSign, medallion, panorama } from '../../styles/ottoman/scenes.mjs';
 
 export const meta = {
   title: 'Where Black Friday Got Its Name',
@@ -24,7 +24,7 @@ export const meta = {
 const INK = '#1a1410', RED = '#b3261a';
 const SKINS = ['#f1d1a8', '#8a5a3c', '#c68a5e', '#e2b48a', '#a86c45', '#f1d1a8'];
 const MEDDAH = { robe: '#c4371f', robeP: 'stripes', robePc: '#d65a3a', inner: '#f7eed6', sash: '#ecd57a', hat: 'turban', hatColor: '#f8f2e2', beard: 'short', skin: '#c68a5e' };
-const COP = { robe: '#1f2f5a', robeP: 'dots', robePc: '#2c3f72', inner: '#cfd8e8', sash: '#ecd57a', hat: 'cap', hatColor: '#1f2f5a', mustache: true };
+const COP = { badge: true, robe: '#1f2f5a', robeP: 'dots', robePc: '#2c3f72', inner: '#cfd8e8', sash: '#ecd57a', hat: 'cap', hatColor: '#1f2f5a', mustache: true };
 
 // the coffeehouse storyteller on his high seat, stick in hand, cloth on his shoulder
 function meddah(ctx, S, x, u, o = {}) {
@@ -90,12 +90,12 @@ export const scenes = [
     draw(ctx, u, S) {
       const { k, P, W } = S;
       const bf = S.at('Black'), pr = S.at('profit.');
+      S.cam(lerp(1.0, 1.08, tween(u, 0, 4)), 400, 560);
       interior(ctx, S, { carpetColor: P.vermDark });
       lamp(ctx, S, 470, 150, 1);
       meddah(ctx, S, 230, u);
       listeners(ctx, S, u, tween(u, pr, pr + 0.3) * 0.6);
       thought(ctx, S, 650, 330, 380, 240, tween(u, bf - 0.2, bf + 0.3), c => { ledgerPage(c, S, 380, 240, tween(u, 1.5, pr)); c.fillStyle = INK; c.font = '900 34px Deco'; c.textAlign = 'center'; c.fillText('PROFIT?', -40, 0); });
-      k.label(ctx, "THE STORY YOU'VE HEARD", W / 2, 1040, 24, tween(u, 0.3, 0.7));
     },
   },
   { // 4.3 "That's not where the name came from."
@@ -116,29 +116,39 @@ export const scenes = [
     draw(ctx, u, S) {
       const { k, P, W } = S;
       const yr = S.at('1960s'), ph = S.at('Philadelphia,'), th = S.at('Thanksgiving'), ch = S.at('chaos.');
-      const sh = shake(u, ch, 12, 0.8); ctx.translate(sh[0], sh[1]);
-      k.goldSky(ctx, -60, -60, W + 120, 1200, S.t);
-      for (let i = 0; i < 7; i++) { const x = 60 + i * 140, h = 200 + ((i * 71) % 200); if (i === 3) continue; k.rect(ctx, x - 50, 880 - h, 100, h, ['#e8b7b0', '#e9be6e', '#d8c9a8', '#b9c98a'][i % 4], P.ink, 2); for (let r = 1; r < h / 46; r++) k.rect(ctx, x - 30, 880 - h + r * 46, 60, 22, '#cfe0ea', null); }
-      cityHall(ctx, k, P, W / 2, 880, 1.0);
-      ctx.fillStyle = '#5a5a5a'; ctx.fillRect(-60, 880, W + 120, 300);
-      k.seal(ctx, 140, 160, 64, ' THE EARLY 1960s ·', '1960s', tween(u, yr - 0.1, yr + 0.3, ease.linear));
-      k.label(ctx, 'PHILADELPHIA', W / 2, 1000, 28, tween(u, ph, ph + 0.3));
+      const sh = shake(u, ch, 10, 0.8); ctx.translate(sh[0], sh[1]);
+      // Penn's grid seen the way Matrakçı painted cities: from above, buildings standing up,
+      // City Hall in the centre square, four green squares, a river on each side
+      S.cam(lerp(1.45, 1.0, tween(u, 0.2, 2.6, ease.inOut)), W / 2, lerp(470, 540, tween(u, 0.2, 2.6)));
+      panorama(ctx, S, { grid: { cols: 5, rows: 6 }, squares: [[1, 1], [3, 1], [1, 4], [3, 4]], landmarkCell: [2, 2], rivers: ['left', 'right'], snow: true, seed: 19,
+        // important buildings are painted much larger than the houses around them, as Matrakçı did
+        landmark: (c, x, y, sz) => { k.rect(c, x - sz * 0.62, y - sz * 0.95, sz * 1.24, sz * 0.95, '#efe3c6', P.ink, 1.5); cityHall(c, k, P, x, y, sz / 230); } });
+      // on "chaos" the streets fill: carts, cars and people swarm every block
+      const sw = tween(u, ch - 0.6, ch + 0.4);
+      if (sw > 0) { const R = rng(11); for (let i = 0; i < 160 * sw; i++) { const horiz = R() > 0.5, lane = Math.floor(R() * (horiz ? 7 : 6)), q = (R() + u * (0.15 + R() * 0.2)) % 1; const x = horiz ? 120 + q * 700 : 120 + lane * 140, y = horiz ? 30 + lane * 167 : 30 + q * 1000; k.circle(ctx, x, y, 5 + R() * 3, [RED, P.lapis, P.green, P.ochre, INK][i % 5], P.ink, 1); } }
+      k.seal(ctx, 140, 150, 60, ' THE EARLY 1960s ·', '1960s', tween(u, yr - 0.1, yr + 0.3, ease.linear));
       const cp = pop(u, th - 0.2, 0.35);
-      if (cp > 0) { ctx.save(); ctx.translate(820, 230); ctx.scale(cp, cp); k.calendarPage(ctx, 0, 0, 140, 'FRI', '', 0.06); ctx.restore(); k.label(ctx, 'THE DAY AFTER THANKSGIVING', 760, 380, 18, cp); }
-      if (u > ch - 0.2) for (let i = 0; i < 10; i++) { const q = clamp((u - ch + 0.2) / 1.2), a = i / 10 * TAU; k.rect(ctx, W / 2 + Math.cos(a) * 300 * q - 14, 600 + Math.sin(a) * 200 * q - 18, 28, 36, [RED, P.white, P.ochre][i % 3], P.ink, 1.5); }
-      k.stamp(ctx, 'CHAOS', W / 2, 260, 64, tween(u, ch, ch + 0.25, ease.linear), -0.12, RED);
+      if (cp > 0) { ctx.save(); ctx.translate(800, 150); ctx.scale(cp, cp); k.calendarPage(ctx, 0, 0, 130, 'NOV', 'FRI', 0.06); ctx.restore(); }
     },
   },
   { // 13.1 "Shoppers flood downtown."
     start: 12.9, title: 'Shoppers Flood Downtown', trans: 'wipe',
     draw(ctx, u, S) {
       const { k, P, W } = S;
-      const fl = S.at('flood');
+      const fl = S.at('flood'), dt = S.at('downtown.');
+      S.cam(lerp(1.0, 1.06, tween(u, 0, 2)), W / 2, 700);
       k.goldSky(ctx, -60, -60, W + 120, 1200, S.t);
       ['DEPT. STORE', 'TOYS', 'COATS'].forEach((n, i) => storefront(ctx, k, P, 160 + i * 310, 860, 280, ['#e8b7b0', '#d8c9a8', '#b9c98a'][i], n));
       ctx.fillStyle = '#6a6a6a'; ctx.fillRect(-60, 860, W + 120, 300);
-      for (let i = 0; i < 12; i++) { const x = ((u - fl + 1) * 260 + i * 95) % (W + 200) - 100, y = 990 + (i % 3) * 22; if (u > fl - 1) shopper(ctx, k, P, x, y, i, 0.55, S.t * 8 + i); }
-      k.label(ctx, 'DOWNTOWN', W / 2, 140, 28, tween(u, fl, fl + 0.3));
+      k.streetSign(ctx, 860, 120, 240, 'MARKET ST', P.green, 0.04);
+      // the crowd keeps coming
+      for (let i = 0; i < 10; i++) { const x = ((u - fl + 1) * 240 + i * 110) % (W + 200) - 100, y = 1000 + (i % 3) * 20; if (u > fl - 1) shopper(ctx, k, P, x, y, i + 3, 0.5, S.t * 8 + i); }
+      // continuous narration, as miniaturists told a story in one picture: the same
+      // shopper (red coat) goes in, buys, and comes out loaded with parcels
+      const one = { robe: RED, robeP: 'dots', hat: 'longhair', hair: '#6a4a2a', skin: SKINS[2], s: 0.7, mood: 'happy' };
+      k.figure(ctx, 140, 980, { ...one, face: 1, walk: S.t * 7, armF: [0.5, 0.2] });
+      k.figure(ctx, 470, 860, { ...one, face: 1, armF: [1.6, 0.2], hold: c => k.coin(c, 0, 0, 12, S.t * 4, '$') });
+      if (u > dt - 0.4) k.figure(ctx, 800, 980, { ...one, face: -1, walk: S.t * 7, armF: [0.9, 0.3], hold: c => { for (let j = 0; j < 3; j++) k.rect(c, -24 + j * 8, -10 - j * 22, 40, 26, [P.white, P.lapis, P.ochre][j], P.ink, 1.5); } });
     },
   },
   { // 15.0 "The Army-Navy football game is that weekend too."
@@ -165,10 +175,10 @@ export const scenes = [
     draw(ctx, u, S) {
       const { k, P, W } = S;
       const tr = S.at('Traffic'), ev = S.at('everywhere.');
+      S.cam(lerp(1.2, 1.0, tween(u, 0, 1.8, ease.inOut)), lerp(300, 470, tween(u, 0, 1.8)), 640);
       k.goldSky(ctx, -60, -60, W + 120, 1200, S.t);
       ctx.fillStyle = '#6a6a6a'; ctx.fillRect(-60, 420, W + 120, 700);
       for (let r = 0; r < 4; r++) for (let c = 0; c < 5; c++) { const p = pop(u, tr - 0.4 + (r * 5 + c) * 0.06, 0.3); if (p <= 0) continue; const x = 110 + c * 190 + (r % 2) * 60, y = 520 + r * 150; ctx.save(); ctx.translate(x, y); ctx.scale(p * 0.75, p * 0.75); k.car(ctx, 0, 0, 1, 0, [P.verm, P.lapis, P.ochre, P.green, P.lav][(r + c) % 5], '', 0); ctx.restore(); if ((r + c) % 3 === 0 && Math.sin(S.t * 6 + r + c) > 0.5) k.speechBubble(ctx, x + 40, y - 70, 'HONK!', 20, 1); }
-      k.label(ctx, 'EVERYWHERE', W / 2, 160, 30, tween(u, ev, ev + 0.3));
     },
   },
   { // 20.0 "Police officers have to work long shifts."
@@ -176,14 +186,13 @@ export const scenes = [
     draw(ctx, u, S) {
       const { k, P, W } = S;
       const po = S.at('Police'), lo = S.at('long');
+      S.cam(lerp(1.0, 1.25, tween(u, lo - 0.4, lo + 1.0, ease.inOut)), lerp(470, 640, tween(u, lo - 0.4, lo + 1.0)), 520);
       k.nightSky(ctx, -60, -60, W + 120, 1200, S.t);
       ctx.fillStyle = '#4a4a4a'; ctx.fillRect(-60, 760, W + 120, 400);
       k.figure(ctx, 330, 1010, { ...COP, skin: SKINS[1], s: 1.25, face: 1, mood: u > lo ? 'sad' : 'calm', armF: [2.4 + Math.sin(u * 5) * 0.2, 0.1] });
       // the clock runs on and on
       const spin = tween(u, lo - 0.3, lo + 1.6) * 10;
       k.clockFace(ctx, 730, 400, 150, (8 + spin) % 12, (spin * 60) % 60);
-      k.label(ctx, 'POLICE OFFICERS', 330, 520, 24, tween(u, po, po + 0.3));
-      k.label(ctx, 'LONG SHIFTS', 730, 600, 26, tween(u, lo, lo + 0.3));
     },
   },
   { // 22.7 "They give the day a grumpy nickname, Black Friday."
@@ -191,13 +200,13 @@ export const scenes = [
     draw(ctx, u, S) {
       const { k, P, W } = S;
       const gr = S.at('grumpy'), bf = S.at('Black');
+      S.cam(lerp(1.0, 1.18, tween(u, bf - 0.6, bf + 0.6, ease.inOut)), 560, 600);
       k.nightSky(ctx, -60, -60, W + 120, 1200, S.t);
       ctx.fillStyle = '#4a4a4a'; ctx.fillRect(-60, 760, W + 120, 400);
       for (let i = 0; i < 3; i++) k.cloud(ctx, 220 + i * 280, 160, 1.1, i + 50, '#5a5a6a', INK);
       [200, 470].forEach((x, i) => k.figure(ctx, x, 1010, { ...COP, skin: SKINS[i * 2 + 1], s: 1.05, face: 1, mood: 'sad', armF: [lerp(0.6, 1.6, tween(u, gr - 0.3, gr)), -0.4] }));
       const b = pop(u, bf - 0.2, 0.45);
       if (b > 0) { ctx.save(); ctx.translate(560, 560); ctx.scale(b * 1.25, b * 1.25); k.speechBubble(ctx, 0, 0, 'BLACK FRIDAY!', 52, -1, INK); ctx.fillStyle = '#f6eed8'; ctx.font = '900 52px Deco'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('BLACK FRIDAY!', 0, 2); ctx.restore(); }
-      k.label(ctx, 'A GRUMPY NICKNAME', W / 2, 340, 26, tween(u, gr, gr + 0.3));
     },
   },
   { // 26.9 "Store owners hate it. They try to rebrand it Big Friday. It doesn't stick."
@@ -205,6 +214,7 @@ export const scenes = [
     draw(ctx, u, S) {
       const { k, P, W } = S;
       const ha = S.at('hate'), bi = S.at('Big'), st = S.at("doesn't");
+      S.cam(1 + 0.06 * tween(u, st, st + 0.8), W / 2, 600, -0.03 * tween(u, st, st + 0.8));
       k.goldSky(ctx, -60, -60, W + 120, 1200, S.t);
       storefront(ctx, k, P, W / 2, 900, 640, '#e8b7b0', 'DEPARTMENT STORE');
       ctx.fillStyle = '#6a6a6a'; ctx.fillRect(-60, 900, W + 120, 300);
@@ -212,8 +222,6 @@ export const scenes = [
       // the new banner goes up… and one corner gives way
       const up = tween(u, bi - 0.4, bi + 0.2, ease.outBack), fall = tween(u, st, st + 0.8, ease.inCubic);
       if (up > 0) { ctx.save(); ctx.translate(W / 2, 300 + fall * 420); ctx.rotate(fall * 0.5); ctx.scale(up, up); k.rect(ctx, -280, -60, 560, 120, '#f6eed8', INK, 3); ctx.fillStyle = RED; ctx.font = '900 64px Deco'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('BIG FRIDAY', 0, 4); ctx.restore(); }
-      k.label(ctx, 'STORE OWNERS HATE IT', W / 2, 140, 24, tween(u, ha, ha + 0.3) * (1 - tween(u, bi - 0.5, bi - 0.2)));
-      k.stamp(ctx, "DIDN'T STICK", W / 2, 520, 50, tween(u, st + 0.5, st + 0.75, ease.linear), -0.14, RED);
     },
   },
   { // 33.0 "By the 1980s, a happier story appears. Black Friday is when stores go from red ink to black."
@@ -221,6 +229,7 @@ export const scenes = [
     draw(ctx, u, S) {
       const { k, P, W } = S;
       const yr = S.at('1980s,'), ha = S.at('happier'), re = S.at('red'), bl = S.at('black.');
+      S.cam(lerp(1.0, 1.15, tween(u, re - 0.5, bl + 0.5, ease.inOut)), W / 2, 600);
       ctx.fillStyle = '#efe3c6'; ctx.fillRect(-60, -60, W + 120, 1200);
       k.seal(ctx, 140, 150, 64, ' THE 1980s · THE 1980s ·', '1980s', tween(u, yr - 0.1, yr + 0.3, ease.linear));
       // the account book: red ink turns to black, line by line
@@ -228,9 +237,6 @@ export const scenes = [
       if (bk > 0) { ctx.save(); ctx.translate(W / 2, 560); ctx.scale(bk, bk); k.rect(ctx, -330, -300, 660, 600, P.brown, P.ink, 3); ctx.save(); ctx.beginPath(); ctx.rect(-310, -280, 620, 560); ctx.clip(); ledgerPage(ctx, S, 620, 560, tween(u, re + 0.3, bl + 0.5)); ctx.restore(); ctx.beginPath(); ctx.moveTo(0, -280); ctx.lineTo(0, 280); k.stroke(ctx, P.ink, 3); ctx.restore(); }
       const q = tween(u, re + 0.3, bl + 0.5);
       if (q > 0 && q < 1) k.quill(ctx, W / 2 + 200, 300 + q * 520, 0.9, -0.5);
-      k.label(ctx, 'RED INK', 220, 920, 26, tween(u, re, re + 0.3));
-      k.label(ctx, 'BLACK INK', 720, 920, 26, tween(u, bl, bl + 0.3));
-      k.label(ctx, 'A HAPPIER STORY', W / 2, 160, 26, tween(u, ha, ha + 0.3));
     },
   },
   { // 40.6 "A nice story, just not the original one."
@@ -243,8 +249,8 @@ export const scenes = [
       meddah(ctx, S, 230, u, { arm: lerp(1.4, 2.5, tween(u, or - 0.3, or)), mood: 'happy' });
       listeners(ctx, S, u, tween(u, or, or + 0.3), true);
       thought(ctx, S, 650, 330, 380, 240, 1, c => ledgerPage(c, S, 380, 240, 1));
-      k.label(ctx, 'A NICE STORY', 650, 160, 24, tween(u, ni, ni + 0.3));
-      k.stamp(ctx, 'NOT THE ORIGINAL', 650, 330, 42, tween(u, or, or + 0.25, ease.linear), -0.15, RED);
+      const strike = tween(u, or - 0.2, or + 0.4, ease.inOut);
+      if (strike > 0) { ctx.beginPath(); ctx.moveTo(470, 230); ctx.lineTo(470 + 360 * strike, 230 + 200 * strike); k.stroke(ctx, RED, 10); if (strike > 0.5) { ctx.beginPath(); ctx.moveTo(830, 230); ctx.lineTo(830 - 360 * (strike - 0.5) * 2, 230 + 200 * (strike - 0.5) * 2); k.stroke(ctx, RED, 10); } }
     },
   },
   { // 44.2 "A cop's complaint that became one of America's biggest shopping days."
@@ -252,6 +258,7 @@ export const scenes = [
     draw(ctx, u, S) {
       const { k, P, W } = S;
       const cc = S.at("cop's"), be = S.at('became'), bg = S.at('biggest');
+      S.cam(lerp(1.25, 1.0, tween(u, be - 0.4, be + 1.2, ease.inOut)), lerp(260, W / 2, tween(u, be - 0.4, be + 1.2)), 640);
       k.goldSky(ctx, -60, -60, W + 120, 1200, S.t);
       ['SALE', 'SALE', 'SALE'].forEach((n, i) => storefront(ctx, k, P, 160 + i * 310, 900, 280, ['#e8b7b0', '#d8c9a8', '#b9c98a'][i], n));
       ctx.fillStyle = '#6a6a6a'; ctx.fillRect(-60, 900, W + 120, 300);
@@ -262,7 +269,6 @@ export const scenes = [
       k.rect(ctx, -280, -60, 560, 120, INK, P.goldLight, 4); ctx.fillStyle = '#f6eed8'; ctx.font = '900 56px Deco'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('BLACK FRIDAY', 0, 4); ctx.restore();
       for (let i = 0; i < 10; i++) { const x = ((u * 200 + i * 105) % (W + 200)) - 100; if (u > bg - 0.6) shopper(ctx, k, P, x, 1000 + (i % 3) * 20, i, 0.5, S.t * 8 + i); }
       for (let i = 0; i < 5; i++) { const p = pop(u, bg - 0.2 + i * 0.12, 0.3); if (p > 0) { ctx.save(); ctx.translate(120 + i * 180, 520); ctx.rotate(-0.2 + i * 0.1); ctx.scale(p, p); k.rect(ctx, -40, -24, 80, 48, RED, P.ink, 2); ctx.fillStyle = P.white; ctx.font = '900 22px Deco'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('SALE', 0, 2); ctx.restore(); } }
-      k.label(ctx, "A COP'S COMPLAINT", W / 2, 400, 24, tween(u, cc, cc + 0.3) * (1 - tween(u, be, be + 0.3)));
     },
   },
   { // 49.4 "Every legend has a beginning."
