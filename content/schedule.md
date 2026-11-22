@@ -77,6 +77,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-12-22 Tue | 8:00 PM | Wed Dec 23, 9:00 AM | TikTok | Mickey Mouse was born because Walt Disney lost his biggest star. | content/posts/2026-11-21-mickey-mouse-ottoman.md | ready |
 | 2026-12-23 Wed | 7:00 PM | Thu Dec 24, 8:00 AM | Instagram Reels | Mickey Mouse was born because Walt Disney lost his biggest star. | content/posts/2026-11-21-mickey-mouse-ottoman.md | ready |
 | 2026-12-23 Wed | 8:00 PM | Thu Dec 24, 9:00 AM | Facebook Reels | Mickey Mouse was born because Walt Disney lost his biggest star. | content/posts/2026-11-21-mickey-mouse-ottoman.md | ready |
+| 2026-12-26 Sat | 7:00 PM | Sun Dec 27, 8:00 AM | YouTube Shorts | The Microwave Oven Was Invented Because of a Melted Candy Bar | content/posts/2026-11-21-microwave-ottoman.md | ready |
+| 2026-12-26 Sat | 8:00 PM | Sun Dec 27, 9:00 AM | TikTok | A melted candy bar gave us the microwave. | content/posts/2026-11-21-microwave-ottoman.md | ready |
+| 2026-12-27 Sun | 7:00 PM | Mon Dec 28, 8:00 AM | Instagram Reels | It started with a candy bar in his pocket. | content/posts/2026-11-21-microwave-ottoman.md | ready |
+| 2026-12-27 Sun | 8:00 PM | Mon Dec 28, 9:00 AM | Facebook Reels | Think your microwave is ordinary? It came from a melted snack. | content/posts/2026-11-21-microwave-ottoman.md | ready |
 | 2026-12-29 Tue | 7:00 PM | Wed Dec 30, 8:00 AM | YouTube Shorts | The Times Square Ball Drop Exists Because Fireworks Got Banned | content/posts/2026-11-21-times-square-ball-ottoman.md | ready |
 | 2026-12-29 Tue | 8:00 PM | Wed Dec 30, 9:00 AM | TikTok | The Times Square ball drop exists because fireworks got banned. | content/posts/2026-11-21-times-square-ball-ottoman.md | ready |
 | 2026-12-30 Wed | 7:00 PM | Thu Dec 31, 8:00 AM | Instagram Reels | The Times Square ball drop exists because fireworks got banned. | content/posts/2026-11-21-times-square-ball-ottoman.md | ready |
