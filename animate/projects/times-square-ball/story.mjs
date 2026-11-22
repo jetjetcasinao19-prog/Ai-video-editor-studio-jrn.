@@ -7,6 +7,7 @@ export const meta = {
   title: 'How the Times Square Ball Drop Started',
   slug: 'times-square-ball-ottoman',
   style: 'ottoman',
+  look: 'night', // navy-and-gold lacquer page with fireflies: a New Year's Eve story
   width: 1080, height: 1920, fps: 30,
   duration: 59.0,
   voice: 'voice.mp3',
@@ -251,7 +252,7 @@ export const sfx = [
 ];
 
 export const music = {
-  bpm: 104, root: 'D', maqam: 'rast', gain: 0.32,
+  bpm: 100, root: 'G', maqam: 'hicaz', gain: 0.32,
   sections: [
     { from: 0, to: 5.8, mood: 'intro' },
     { from: 5.8, to: 24.2, mood: 'groove' },

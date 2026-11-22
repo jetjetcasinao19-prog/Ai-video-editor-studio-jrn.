@@ -35,7 +35,7 @@ export const LOOKS = {
     },
     ebru: [['#7a2e3a', '#e8b7b0', '#2f5f7a', '#efe2c0', '#c98a2e', '#3d8458'], ['#5a2a5a', '#c9bede', '#c98a2e', '#efe2c0', '#2f7f7a', '#b8574e']],
     colors: { title: P.vermDark, active: P.verm, under: P.gold, reed: P.goldDark },
-    ambient: 'dust', grade: { mode: 'soft-light', color: '#ffd9a0', a: 0.16 }, vignette: 0.28, drift: 0.035,
+    ambient: 'dust', grade: { mode: 'soft-light', color: '#ffd9a0', a: 0.16 }, vignette: 0.28, drift: 0.035, paintIn: 1.0, glint: true,
     transitions: ['unroll', 'ink', 'page', 'iris'],
   },
   // İznik tiles: tiled page, white caption panel with cobalt rules
@@ -43,7 +43,7 @@ export const LOOKS = {
     label: 'Iznik tile panel',
     layout: { ...LAYOUT, logo: null },
     colors: { title: P.lapisDeep, active: '#1f5fae', under: P.verm, reed: P.turq, reedTip: P.verm, outro: P.vermDark },
-    ambient: 'none', grade: { mode: 'soft-light', color: '#cfe6ff', a: 0.1 }, vignette: 0.15, drift: 0.025,
+    ambient: 'none', grade: { mode: 'soft-light', color: '#cfe6ff', a: 0.1 }, vignette: 0.15, drift: 0.025, paintIn: 0.9, glint: true,
     transitions: ['tiles', 'lattice', 'wipe', 'tiles'],
   },
   // a lacquer night page: navy and gold, cream captions, fireflies
@@ -52,7 +52,7 @@ export const LOOKS = {
     layout: { ...LAYOUT, logo: null },
     ebru: [['#0e1630', '#1d2b5c', '#c9a227', '#2a1c12', '#3a6f7a', '#6e510c'], ['#141b38', '#3a2a5a', '#ecd57a', '#0e1630', '#2a5f6a', '#8e2414']],
     colors: { title: P.goldLight, ink: '#f3e6c0', active: P.goldLight, under: P.verm, dim: 'rgba(243,230,192,0.33)', outro: P.goldLight, reed: P.goldLight },
-    ambient: 'fireflies', grade: { mode: 'multiply', color: '#b4c0e8', a: 0.16 }, vignette: 0.45, drift: 0.04,
+    ambient: 'fireflies', grade: { mode: 'multiply', color: '#b4c0e8', a: 0.16 }, vignette: 0.45, drift: 0.04, paintIn: 1.0, glint: true,
     transitions: ['ink', 'iris', 'lattice', 'ink'],
   },
   // a hanging scroll: wooden rollers, a title tag, captions on a ribbon
@@ -68,8 +68,18 @@ export const LOOKS = {
     },
     ebru: [['#3d8458', '#b9c98a', '#efe2c0', '#a99ac6', '#c4371f', '#24573a'], ['#2f7f7a', '#e9be6e', '#efe2c0', '#e8b7b0', '#7a4a2a', '#20408f']],
     colors: { title: P.ink, active: P.vermDark, under: P.goldDark, reed: P.brownLight },
-    ambient: 'petals', grade: { mode: 'soft-light', color: '#f0c8a0', a: 0.12 }, vignette: 0.3, drift: 0.03,
+    ambient: 'petals', grade: { mode: 'soft-light', color: '#f0c8a0', a: 0.12 }, vignette: 0.3, drift: 0.03, paintIn: 1.0, glint: true,
     transitions: ['unroll', 'page', 'wipe', 'ink'],
+  },
+  // Karagöz shadow theatre: the story plays on a backlit muslin screen in a
+  // wooden booth, colours glowing like translucent leather puppets, lamp flicker
+  karagoz: {
+    label: 'Karagöz shadow-theatre booth',
+    layout: { ...LAYOUT, logo: null },
+    colors: { title: '#ffd98a', ink: '#f3e6c0', active: '#ffcf6a', under: P.verm, dim: 'rgba(243,230,192,0.33)', outro: '#ffd98a', reed: '#ffcf6a', reedTip: P.verm },
+    ambient: 'none', grade: { mode: 'multiply', color: '#ffe0a8', a: 0.28 }, vignette: 0.55, drift: 0.02,
+    sceneFilter: 'saturate(1.55) contrast(1.12) brightness(1.04)', cloth: true, flicker: true,
+    transitions: ['curtain', 'iris', 'curtain', 'cut'],
   },
 };
 export const LOOK_NAMES = Object.keys(LOOKS);
@@ -78,7 +88,7 @@ export function getLook(meta) {
   const name = meta.look || 'classic';
   const look = LOOKS[name];
   if (!look) throw new Error(`unknown look "${name}" (choose from ${LOOK_NAMES.join(', ')})`);
-  return { name, ...look, ambient: meta.ambient ?? look.ambient };
+  return { name, ...look, ambient: meta.ambient ?? look.ambient, paintIn: meta.paintIn ?? look.paintIn ?? 0 };
 }
 
 // ---------- the static page for each look ----------
@@ -198,7 +208,55 @@ export function buildPage(look, opts = {}) {
     logoRoundel(ctx, opts.logo, L.logo.cx, L.logo.cy, L.logo.r);
     handlePlate(ctx, opts.handle, L.handle.cx, L.handle.cy, P.vermDark, P.goldLight);
   }
+  else if (look.name === 'karagoz') {
+    woodGrain(ctx, 0, 0, L.W, L.H, (opts.seed || 11) + 4);
+    // valance: scalloped red drape with gold fringe
+    ctx.fillStyle = P.vermDark; ctx.fillRect(0, 0, L.W, 76);
+    ctx.beginPath(); ctx.moveTo(0, 76); for (let i = 0; i <= 12; i++) ctx.quadraticCurveTo(i * 90 + 45, 116, i * 90 + 90, 76); ctx.lineTo(L.W, 0); ctx.lineTo(0, 0); ctx.closePath(); fillStroke(ctx, P.verm, P.ink, 2);
+    for (let x = 6; x < L.W; x += 12) { ctx.beginPath(); ctx.moveTo(x, 84 + Math.abs(Math.sin(x / 90 * Math.PI)) * 30); ctx.lineTo(x, 100 + Math.abs(Math.sin(x / 90 * Math.PI)) * 30); stroke(ctx, P.goldLight, 3); }
+    // the carved sign with the chapter title
+    const hd = L.header;
+    ctx.fillStyle = '#5a3418'; ctx.fillRect(hd.x + 40, hd.y + 20, hd.w - 80, hd.h - 30);
+    for (const [o, c, lw] of [[0, P.goldDark, 5], [8, P.gold, 2]]) { ctx.strokeStyle = c; ctx.lineWidth = lw; ctx.strokeRect(hd.x + 40 + o, hd.y + 20 + o, hd.w - 80 - 2 * o, hd.h - 30 - 2 * o); }
+    cartouche(ctx, hd.x + hd.w / 2 - 50, hd.y + hd.h / 2 + 5, 690, 100, '#3a2010', P.goldLight, 3);
+    circle(ctx, hd.x + 92, hd.y + hd.h / 2 + 5, 40, '#3a2010', P.gold, 3); kit.star(ctx, hd.x + 92, hd.y + hd.h / 2 + 5, 24, 1);
+    logoRoundel(ctx, opts.logo, hd.x + hd.w - 98, hd.y + hd.h / 2 + 5, 52);
+    // the screen: muslin edge inside a wooden frame, red drapes tied back at the sides
+    ctx.fillStyle = '#2a160c'; ctx.fillRect(PA.x - 40, PA.y - 40, PA.w + 80, PA.h + 80);
+    ctx.fillStyle = '#efe6cf'; ctx.fillRect(PA.x - 16, PA.y - 16, PA.w + 32, PA.h + 32);
+    for (const side of [-1, 1]) {
+      const x0 = side < 0 ? 0 : L.W, x1 = side < 0 ? PA.x - 18 : PA.x + PA.w + 18;
+      ctx.beginPath(); ctx.moveTo(x0, 100); ctx.lineTo(x1 + side * -10, 100); ctx.quadraticCurveTo(x1, PA.y + PA.h * 0.45, x1 - side * 20, PA.y + PA.h * 0.55); ctx.quadraticCurveTo(x1, PA.y + PA.h, x0 + side * -0, PA.y + PA.h + 50); ctx.closePath(); fillStroke(ctx, P.verm, P.ink, 2);
+      for (let i = 1; i < 4; i++) { ctx.beginPath(); ctx.moveTo(lerp(x0, x1, i / 4), 100); ctx.quadraticCurveTo(lerp(x0, x1, i / 4) + side * 6, PA.y + PA.h * 0.5, lerp(x0, x1, i / 4 * 0.6), PA.y + PA.h + 40); stroke(ctx, P.vermDark, 2); }
+      circle(ctx, lerp(x0, x1, 0.6), PA.y + PA.h * 0.55, 12, P.gold, P.ink, 2);
+    }
+    // caption plank
+    const cp = L.caption;
+    ctx.fillStyle = '#3a2010'; ctx.fillRect(cp.x, cp.y, cp.w, cp.h);
+    woodGrain(ctx, cp.x, cp.y, cp.w, cp.h, 77, 0.25);
+    for (const [o, c, lw] of [[-10, P.goldDark, 5], [-3, P.gold, 2]]) { ctx.strokeStyle = c; ctx.lineWidth = lw; ctx.strokeRect(cp.x + o, cp.y + o, cp.w - 2 * o, cp.h - 2 * o); }
+    // footer: oil lamps lighting the screen, and the handle
+    const ft = L.footer;
+    ctx.fillStyle = '#24130a'; ctx.fillRect(ft.x, ft.y + 60, ft.w, ft.h - 60);
+    ctx.strokeStyle = P.goldDark; ctx.lineWidth = 3; ctx.strokeRect(ft.x, ft.y + 60, ft.w, ft.h - 60);
+    for (const lx of [ft.x + 80, ft.x + 190, ft.x + ft.w - 190, ft.x + ft.w - 80]) {
+      const ly = ft.y + ft.h - 40;
+      const g = ctx.createRadialGradient(lx, ly - 46, 0, lx, ly - 46, 70); g.addColorStop(0, 'rgba(255,200,90,0.55)'); g.addColorStop(1, 'rgba(255,200,90,0)'); ctx.fillStyle = g; ctx.fillRect(lx - 70, ly - 116, 140, 140);
+      ctx.beginPath(); ctx.ellipse(lx, ly - 10, 34, 14, 0, 0, Math.PI); fillStroke(ctx, P.brownLight, P.ink, 2);
+      ctx.beginPath(); ctx.moveTo(lx + 30, ly - 12); ctx.quadraticCurveTo(lx + 50, ly - 20, lx + 44, ly - 30); stroke(ctx, P.ink, 3);
+      ctx.beginPath(); ctx.moveTo(lx - 30, ly - 12); ctx.quadraticCurveTo(lx - 40, ly - 50, lx - 34, ly - 66); ctx.quadraticCurveTo(lx - 24, ly - 46, lx - 22, ly - 12); fillStroke(ctx, '#ffcf6a', P.verm, 1.5);
+    }
+    handlePlate(ctx, opts.handle, ft.x + ft.w / 2, ft.y + 130, '#3a2010', P.goldLight);
+  }
   return cv;
+}
+
+function woodGrain(ctx, x, y, w, h, seed, a = 1) {
+  const R = rng(seed);
+  ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = '#3a2212'; ctx.fillRect(x, y, w, h);
+  ctx.beginPath(); ctx.rect(x, y, w, h); ctx.clip();
+  for (let i = 0; i < h / 3; i++) { const yy = y + i * 3 + R() * 2; ctx.strokeStyle = `rgba(${90 + R() * 40},${50 + R() * 25},${20 + R() * 10},${0.25 + R() * 0.4})`; ctx.lineWidth = 1 + R() * 2; ctx.beginPath(); ctx.moveTo(x, yy); for (let xx = 0; xx <= w; xx += 60) ctx.lineTo(x + xx, yy + Math.sin(xx / 140 + i * 0.3) * 3); ctx.stroke(); }
+  ctx.restore();
 }
 
 // ---------- light and particles over the painting ----------
@@ -219,10 +277,18 @@ export function ambient(ctx, type, t, W, H, seed = 1) {
 }
 
 // colour grade + vignette (a candle-lit, hand-painted finish)
+let WEAVE = null;
 export function grade(ctx, look, W, H, t) {
+  if (look.cloth) { // the muslin weave and the lamp behind the screen
+    if (!WEAVE) { WEAVE = createCanvas(8, 8); const g = WEAVE.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, 8, 8); g.fillStyle = 'rgba(120,90,50,0.5)'; g.fillRect(0, 0, 8, 1); g.fillRect(0, 0, 1, 8); }
+    ctx.save(); ctx.globalCompositeOperation = 'multiply'; ctx.globalAlpha = 0.35; ctx.fillStyle = ctx.createPattern(WEAVE, 'repeat'); ctx.fillRect(0, 0, W, H); ctx.restore();
+    const f = 0.85 + 0.15 * Math.sin(t * 9) * Math.sin(t * 3.1 + 1), g = ctx.createRadialGradient(W / 2, H * 0.55, 40, W / 2, H * 0.55, H * 0.7);
+    g.addColorStop(0, `rgba(255,236,190,${0.35 * f})`); g.addColorStop(1, 'rgba(255,236,190,0)');
+    ctx.save(); ctx.globalCompositeOperation = 'screen'; ctx.fillStyle = g; ctx.fillRect(0, 0, W, H); ctx.restore();
+  }
   if (look.grade) { ctx.save(); ctx.globalCompositeOperation = look.grade.mode; ctx.globalAlpha = look.grade.a; ctx.fillStyle = look.grade.color; ctx.fillRect(0, 0, W, H); ctx.restore(); }
   if (look.vignette > 0) {
-    const flick = look.name === 'night' ? 0.04 * Math.sin(t * 7) * Math.sin(t * 2.3) : 0;
+    const flick = look.name === 'night' || look.flicker ? 0.04 * Math.sin(t * 7) * Math.sin(t * 2.3) : 0;
     const g = ctx.createRadialGradient(W / 2, H * 0.45, Math.min(W, H) * 0.35, W / 2, H / 2, Math.max(W, H) * 0.72);
     g.addColorStop(0, 'rgba(30,18,8,0)'); g.addColorStop(1, `rgba(30,18,8,${clamp(look.vignette + flick)})`);
     ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
@@ -243,6 +309,7 @@ export function transClip(ctx, type, e, W, H, seed = 1) {
   else if (type === 'lattice') { const n = 8, sw = W / n; for (let i = 0; i < n; i++) { const p = clamp(e * 1.4 - (i % 2) * 0.25 - Math.abs(i - n / 2 + 0.5) * 0.02); ctx.rect(i * sw + sw / 2 * (1 - p), 0, sw * p, H); } }
   else if (type === 'tiles') { const c = 6, r = 7, tw = W / c, th = H / r; for (let y = 0; y < r; y++) for (let x = 0; x < c; x++) { const p = clamp(e * 1.8 - (x + y) / (c + r - 2) * 0.8); if (p > 0) ctx.rect(x * tw + tw / 2 * (1 - p), y * th + th / 2 * (1 - p), tw * p, th * p); } }
   else if (type === 'page') ctx.rect(W * (1 - e), 0, W * e + 1, H);
+  else if (type === 'curtain') { if (e >= 0.5) ctx.rect(0, 0, W, H); }
   else return false;
   ctx.clip();
   return true;
@@ -257,7 +324,15 @@ export function transEdge(ctx, type, e, W, H, seed = 1) {
     const g = ctx.createLinearGradient(x - fw, 0, x, 0); g.addColorStop(0, P.paperDark); g.addColorStop(0.7, P.paperLight); g.addColorStop(1, '#c9b48a');
     ctx.fillStyle = g; ctx.fillRect(x - fw, 0, fw, H); ctx.strokeStyle = P.ink; ctx.lineWidth = 2; ctx.strokeRect(x - fw, -2, fw, H + 4);
     const s = ctx.createLinearGradient(x, 0, x + 60, 0); s.addColorStop(0, 'rgba(0,0,0,0.3)'); s.addColorStop(1, 'rgba(0,0,0,0)'); ctx.fillStyle = s; ctx.fillRect(x, 0, 60, H);
+  } else if (type === 'curtain') { // the booth's curtains close on one scene and open on the next
+    const c = ease.inOut(e < 0.5 ? e * 2 : (1 - e) * 2), cw = (W / 2 + 20) * c;
+    for (const sx of [-1, 1]) {
+      ctx.save(); if (sx > 0) { ctx.translate(W, 0); ctx.scale(-1, 1); }
+      ctx.beginPath(); ctx.moveTo(-10, -10); ctx.lineTo(cw, -10); ctx.quadraticCurveTo(cw - 30, H / 2, cw, H + 10); ctx.lineTo(-10, H + 10); ctx.closePath(); fillStroke(ctx, P.verm, P.ink, 3);
+      for (let i = 1; i < 6; i++) { ctx.beginPath(); ctx.moveTo(cw * i / 6, -10); ctx.lineTo(cw * i / 6 - 10, H + 10); stroke(ctx, P.vermDark, 3); }
+      ctx.restore();
+    }
   }
   ctx.restore();
 }
-export const TRANSITIONS = ['iris', 'wipe', 'unroll', 'flash', 'cut', 'ink', 'lattice', 'tiles', 'page'];
+export const TRANSITIONS = ['iris', 'wipe', 'unroll', 'flash', 'cut', 'ink', 'lattice', 'tiles', 'page', 'curtain'];

@@ -221,6 +221,16 @@ def sfx_signal(kind, pitch=1.0):
     if kind == 'riser':
         tt = t(0.6); f = 200 + 1400 * (tt / tt[-1]) ** 2
         return (np.sin(2 * np.pi * np.cumsum(f) / SR) * 0.3 + bandnoise(len(tt), 1000, 8000) * 0.3) * (tt / tt[-1]) ** 2
+    if kind == 'signature':  # the channel's sound logo: a kanun run in hicaz, a ney answer, a soft gong
+        out = np.zeros(int(2.6 * SR))
+        root = 293.66 * pitch
+        for i, (deg, at) in enumerate(((0, 0.0), (1, 0.09), (2, 0.18), (3, 0.27), (4, 0.36))):
+            f = root * 2 ** (MAQAM['hicaz'][deg] / 12); s = ks_string(f, 1.2, 0.6, 0.997)
+            j = int(at * SR); out[j:j + len(s)] += s[:len(out) - j] * (0.55 + 0.1 * i)
+        n = ney(root * 2 ** (MAQAM['hicaz'][4] / 12) * 2, 1.4, 0.2) * 0.45
+        j = int(0.55 * SR); out[j:j + len(n)] += n[:len(out) - j]
+        g = sfx_signal('gong', 1.0 * pitch) * 0.5; j = int(0.45 * SR); out[j:j + len(g)] += g[:len(out) - j]
+        return out * 0.8
     if kind == 'gong':
         tt = t(3.0); s = 0
         for f, g, d in ((110, 1, 1.2), (164, 0.6, 1.5), (233, 0.4, 2), (397, 0.25, 3)):

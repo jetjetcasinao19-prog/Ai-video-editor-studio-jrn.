@@ -8,6 +8,8 @@ import { TAU, clamp, ease, lerp } from '../../lib/core.mjs';
 import * as kit from './kit.mjs';
 import { paperTexture, headerText, captions, groupLines, progress, outroText } from './page.mjs';
 import { getLook, buildPage, ambient, grade, transClip, transEdge } from './looks.mjs';
+import { createBrush, frameGlint, signature } from './brush.mjs';
+import { createCanvas } from '@napi-rs/canvas';
 
 const require = createRequire(import.meta.url);
 export function registerFonts() {
@@ -38,6 +40,11 @@ export async function createRenderer(project) {
   let logo = null;
   if (brand.logo && fs.existsSync(path.resolve(dir, brand.logo))) logo = await loadImage(fs.readFileSync(path.resolve(dir, brand.logo)));
   const look = getLook(meta), L = look.layout, C = look.colors;
+  // the sign-off seal reads the channel's name from brand/brand.json (next to the logo)
+  let brandName = brand.name || '';
+  if (!brandName && brand.logo) { const bj = path.join(path.dirname(path.resolve(dir, brand.logo)), 'brand.json'); if (fs.existsSync(bj)) brandName = JSON.parse(fs.readFileSync(bj, 'utf8')).name || ''; }
+  const initials = brandName.split(/\s+/).map(w => w[0] || '').join('').toUpperCase().slice(0, 3);
+  const signOff = (meta.signature ?? look.name !== 'classic') && meta.outro;
   const page = buildPage(look, { seed: meta.seed || 11, handle: brand.handle, logo });
   const PA = L.paint;
   const grain = paperTexture(PA.w, PA.h, 21);
@@ -50,20 +57,29 @@ export async function createRenderer(project) {
   const scenes = story.scenes.map((s, i, a) => ({ ...s, i, trans: i ? pick(s, i) : s.trans, end: i + 1 < a.length ? a[i + 1].start : meta.duration }));
   const findWord = (re, after = 0) => { const w = words.find(x => x.start >= after - 0.05 && re.test(x.w)); return w ? w.start : null; };
 
+  const brush = createBrush(PA.w, PA.h);
+  const fx = look.sceneFilter ? createCanvas(PA.w, PA.h) : null;
   function drawScene(ctx, sc, t) {
-    const u = t - sc.start;
-    const S = {
-      W: PA.w, H: PA.h, t, u, d: sc.end - sc.start, k: kit, P: kit.P, logo,
-      // local time of a spoken word inside this scene (regex or string)
-      at: w => { const g = findWord(w instanceof RegExp ? w : new RegExp('^' + w, 'i'), sc.start); return g == null ? 0 : g - sc.start; },
-      cam(z = 1, cx = PA.w / 2, cy = PA.h / 2, rot = 0) { ctx.translate(PA.w / 2, PA.h / 2); ctx.rotate(rot); ctx.scale(z, z); ctx.translate(-cx, -cy); },
+    const u = t - sc.start, d = sc.end - sc.start;
+    const inner = c => {
+      const S = {
+        W: PA.w, H: PA.h, t, u, d, k: kit, P: kit.P, logo,
+        // local time of a spoken word inside this scene (regex or string)
+        at: w => { const g = findWord(w instanceof RegExp ? w : new RegExp('^' + w, 'i'), sc.start); return g == null ? 0 : g - sc.start; },
+        cam(z = 1, cx = PA.w / 2, cy = PA.h / 2, rot = 0) { c.translate(PA.w / 2, PA.h / 2); c.rotate(rot); c.scale(z, z); c.translate(-cx, -cy); },
+      };
+      c.save();
+      if (look.drift) { // a slow push-in (and a little drift sideways) inside every scene
+        const q = ease.inOut(clamp(u / Math.max(1, d))), z = 1 + look.drift * q, dx = (sc.i % 2 ? 1 : -1) * 10 * q;
+        c.translate(PA.w / 2 + dx, PA.h / 2); c.scale(z, z); c.translate(-PA.w / 2, -PA.h / 2);
+      }
+      sc.draw(c, u, S); c.restore();
     };
-    ctx.save();
-    if (look.drift) { // a slow push-in (and a little drift sideways) inside every scene
-      const q = ease.inOut(clamp(u / Math.max(1, S.d))), z = 1 + look.drift * q, dx = (sc.i % 2 ? 1 : -1) * 10 * q;
-      ctx.translate(PA.w / 2 + dx, PA.h / 2); ctx.scale(z, z); ctx.translate(-PA.w / 2, -PA.h / 2);
-    }
-    sc.draw(ctx, u, S); ctx.restore();
+    // the painter's brush washes colour over an ink drawing at the start of each scene
+    const D = look.paintIn ? Math.min(look.paintIn, d * 0.45) : 0;
+    if (D && u < D && sc.paint !== false) brush.paint(ctx, inner, clamp(u / D), (meta.seed || 1) * 13 + sc.i);
+    else if (fx) { const g = fx.getContext('2d'); g.save(); g.clearRect(0, 0, PA.w, PA.h); inner(g); g.restore(); ctx.save(); ctx.filter = look.sceneFilter; ctx.drawImage(fx, 0, 0); ctx.restore(); }
+    else inner(ctx);
   }
 
   return function frame(ctx, t) {
@@ -103,7 +119,9 @@ export async function createRenderer(project) {
     ctx.globalCompositeOperation = 'multiply'; ctx.globalAlpha = 0.55; ctx.drawImage(grain, 0, 0); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
     ctx.restore();
     // re-draw the frame rules on top so the picture sits inside them
-    for (const [o, c, lw] of [[-11, kit.P.gold, 5], [-1, kit.P.verm, 1.5]]) { ctx.strokeStyle = c; ctx.lineWidth = lw; ctx.strokeRect(PA.x + o, PA.y + o, PA.w - 2 * o, PA.h - 2 * o); }
+    for (const [o, c, lw] of [[-11, look.frameColor || kit.P.gold, 5], [-1, kit.P.verm, 1.5]]) { ctx.strokeStyle = c; ctx.lineWidth = lw; ctx.strokeRect(PA.x + o, PA.y + o, PA.w - 2 * o, PA.h - 2 * o); }
+    if (signOff && t >= meta.outro.at) signature(ctx, PA.x + 44, PA.y + 190, 0.66, (t - meta.outro.at) / 1.3, { initials, ring: ` PAINTED IN CODE · ${brandName.toUpperCase()} ·` }, (x, y, r, ring, inner, k) => kit.seal(ctx, x, y, r, ring, inner, k));
+    if (look.glint && prev) frameGlint(ctx, PA.x - 11, PA.y - 11, PA.w + 22, PA.h + 22, (t - sc.start) / 0.9);
     // things that break out of the frame (a miniature tradition)
     if (sc.over) { ctx.save(); ctx.translate(PA.x, PA.y); sc.over(ctx, t - sc.start, { W: PA.w, H: PA.h, k: kit, P: kit.P }); ctx.restore(); }
 

@@ -15,7 +15,7 @@ below without asking questions you can answer yourself:
   newest `.mp3`/`.wav`/`.m4a` in `inbox/`. None → ask for it in one line.
 - **Script** = the text the owner pasted, if any (use it to fix the spelling
   of names); otherwise the transcript.
-- **Finish the whole job**: pick a look → render → check → `check-unique.mjs`
+- **Finish the whole job**: pick a device and a look → render → check → `check-unique.mjs`
   passes → send the MP4 → publisher agent writes post copy + schedule rows
   (step 7) → commit and push.
 - **Monetization comes first**: every video must look and feel like its own
@@ -106,6 +106,40 @@ Check facts (dates, names) — the brand is "dramatic but true" (`brand/voice.md
 - Vary the **music**: a different maqam or root from the previous video, moods
   that follow the story's turns.
 
+## The signature (what no other channel has)
+These run automatically in every look except `classic` — they are the channel's
+fingerprint, so keep them on:
+- **The painter's brush (nakkaş).** Every scene first appears as an ink drawing
+  on paper; a reed brush with a vermilion tip sweeps across in dry-brush strokes
+  and the colour floods in behind it (`styles/ottoman/brush.mjs`, about 1 s;
+  `meta.paintIn: 0` turns it off, `paint: false` on one scene skips it there).
+  Karagöz uses lamp-lit screen colour instead.
+- **Gold glint.** A light runs round the gilded frame at every scene change.
+- **The sign-off.** When the outro starts, a gold tughra-style monogram is
+  written stroke by stroke in the painting's corner and the channel's seal
+  (initials from `brand/brand.json`) stamps beside it, on the **sound logo**: a
+  kanun run in maqam hicaz, a ney answer and a soft gong (`signature` sound
+  effect, mixed in by the engine; `meta.signature: false` turns both off).
+- **Generated score in maqams** and hand-made sound effects — no stock music, so
+  no Content ID claims, and the sound is as recognisable as the look.
+
+## 3a. Pick a storytelling device (rotate them)
+A device is HOW the story is told; it changes the whole structure, not only the
+page. Set `meta.device`; `check-unique.mjs` warns when the last videos all use
+the same one. Pick what fits the story, never the same as the previous video:
+
+| device | how to build it |
+|---|---|
+| `chronicle` | a court chronicle: one painted scene per beat (the first 16 videos) |
+| `meddah` | a coffeehouse storyteller (figure with a handkerchief over the shoulder and a stick) tells the tale: open on him and his listeners, cut into the story, come back to him for the twist and the ending; listeners react (gasp, laugh) |
+| `karagoz` | a shadow play: use the `karagoz` look; two rival puppets argue the story out (inventor vs. doubter, brand vs. rival); jointed figures swing in profile, the curtain closes between acts |
+| `voyage` | the story is a journey on a portolan chart: a ship or caravan moves along a dotted route; every beat is a stop with a vignette, place names written as the ship arrives; end with the whole chart |
+| `loom` | a carpet being woven: each scene appears row by row from the bottom (unroll/wipe up), the borders gain a motif per beat; pull out at the end to show the finished carpet with every scene as a medallion |
+| `marvels` | a Book of Wonders (acaib): the subject treated as a marvel — labelled diagrams, cutaways, measurements in gold, astonished onlookers pointing |
+| `mosaic` | an İznik tile mural assembled tile by tile (`tile` look); each beat adds a panel; the last shot reveals the whole wall |
+
+Write the device into the beat list (step 3) before any code.
+
 ## 3b. Pick the look (never the same as the last three videos)
 Each video gets its own page design so the channel never looks templated:
 
@@ -115,13 +149,14 @@ Each video gets its own page design so the channel never looks templated:
 | `tile` | İznik tile panel, white caption box with cobalt rules | none | tiles, lattice, wipe |
 | `night` | navy lacquer with gold vines, cream captions, moon footer | fireflies | ink, iris, lattice |
 | `scroll` | hanging scroll with wooden rollers, title tag, ribbon captions | petals | unroll, page, wipe, ink |
+| `karagoz` | Karagöz shadow-theatre booth: backlit muslin screen, red drapes, wooden sign and caption plank, oil lamps; colours glow like translucent leather puppets, lamp flicker | none | curtain, iris, cut |
 | `classic` | the original lapis header page (used by the first 16 videos — avoid for now) | none | as written |
 
 Set `meta.look` in `story.mjs` (optional `meta.ambient`: `dust`, `fireflies`,
 `petals`, `embers`, `snow`, `none`). Pick a look the last three videos did not
 use (`grep -h "look:" animate/projects/*/story.mjs`), and one that fits the story
 (night stories → `night`, holidays/celebrations → `album` or `scroll`, inventions
-and science → `tile`). Preview any look without editing:
+and science → `tile`, rivalries, comedy, showbiz and characters → `karagoz`). Preview any look without editing:
 `node render.mjs projects/<slug> --look night --sheet`. A look replaces the
 story's transitions with its own set (except `cut` and `flash`, which are story
 beats); set `transLock: true` on a scene to keep its own. Each look also adds a
@@ -138,7 +173,7 @@ Start from `projects/bubble-wrap/story.mjs`. It exports:
   `S.W/S.H` = painting size (940×1060). Transitions: `iris` (scalloped gold
   circle), `wipe`, `unroll` (scroll), `flash` (gold), `cut`, `ink` (ink blots
   spread), `lattice` (shutter slats open), `tiles` (tile mosaic), `page` (a leaf
-  turns). With a look other than `classic` the look picks them (see 3b).
+  turns), `curtain` (booth curtains close and open). With a look other than `classic` the look picks them (see 3b).
 - `sfx` — `{ t, type, gain, pitch }`; types: pop, whoosh, paper, chime, stamp,
   thud, pluck, slide, sizzle, wind, rain, waves, crickets, flop, riser, gong,
   clank, alarm, thunder, crack, coins, spray, splash, drip.
@@ -218,7 +253,8 @@ Facts to tell the owner honestly (checked Nov 2026; re-check YouTube's help page
 - Meeting the numbers starts a human review; nobody can promise approval.
 
 What to do every time:
-1. A different **look** from the last three videos (3b) and `check-unique.mjs` passing.
+1. A different **look** from the last three videos (3b), a rotated **device**
+   (3a), the signature on, and `check-unique.mjs` passing.
 2. The **creativity bar** (section 3): new metaphors, a hero moment, new props.
 3. **Original audio**: the score and sound effects are generated here (no
    Content ID claims). The voice is the owner's — remind them that ElevenLabs

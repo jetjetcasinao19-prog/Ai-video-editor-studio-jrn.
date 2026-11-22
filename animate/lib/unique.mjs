@@ -9,7 +9,7 @@ import { spawnSync } from 'node:child_process';
 import { createCanvas } from '@napi-rs/canvas';
 import { loadProject, makeFrameDrawer, ROOT } from './engine.mjs';
 
-const VERSION = 3; // bump when the fingerprint changes
+const VERSION = 4; // bump when the fingerprint changes
 
 // 256-bit difference hash of a canvas region (robust to small shifts and colour).
 export function dhash(src, x = 0, y = 0, w = src.width, h = src.height) {
@@ -61,7 +61,7 @@ export async function fingerprint(dir, { cache = true, look = null } = {}) {
   g.fillStyle = '#808080'; g.fillRect(PA.x, PA.y, PA.w, PA.h);
   const text = words.map(w => w.w).join(' ');
   const fp = {
-    stamp, slug: meta.slug, look: lk.name, ambient: lk.ambient || 'none',
+    stamp, slug: meta.slug, look: lk.name, ambient: lk.ambient || 'none', device: meta.device || 'chronicle',
     transitions: sc.slice(1).map((s, j) => (!lk.transitions || s.trans === 'cut' || s.trans === 'flash' || s.transLock) ? (s.trans || 'iris') : lk.transitions[(j + 1 + (meta.seed || 0)) % lk.transitions.length]),
     music: story.music ? `${story.music.maqam}/${story.music.root}/${story.music.bpm}` : 'none',
     duration: meta.duration, sceneCount: sc.length, page: dhash(cv), pageColor: colorSig(cv), scenes,
@@ -108,11 +108,13 @@ export async function checkUnique(dir, { projectsDir = path.join(ROOT, 'projects
   const key = m => m.split('/').slice(0, 2).join('/');
   if (latest[0] && key(latest[0].music) === key(me.music)) warns.push(`same maqam and key (${key(me.music)}) as ${latest[0].name} — change maqam or root`);
   if (latest[0] && latest[0].transitions.join() === me.transitions.join()) warns.push(`same transition order as ${latest[0].name}`);
+  if (latest[0] && latest[0].device === me.device && me.device !== 'chronicle') warns.push(`same storytelling device (${me.device}) as ${latest[0].name}`);
+  if (latest.length >= 3 && latest.every(o => (o.device || 'chronicle') === me.device)) warns.push(`the last ${latest.length} videos and this one all use the "${me.device}" device — try meddah, voyage, loom, marvels, mosaic or karagoz`);
   if (me.ambient === 'none' && me.look !== 'classic') warns.push('no ambient light/particles in this look');
 
   // 4. script shape (the owner writes these; it is advice only)
   const f = FORMULA(me.opening), sameOpen = others.filter(o => FORMULA(o.opening) === f && f.startsWith('…'));
   if (sameOpen.length >= 3) warns.push(`opening line uses the same formula ("${f}") as ${sameOpen.length} other videos — vary the hook`);
 
-  return { ok: fails.length === 0, fails, warns, facts: { look: me.look, ambient: me.ambient, music: me.music, scenes: me.sceneCount, compared: others.length, latest: latest.map(o => `${o.name} (${o.look})`) } };
+  return { ok: fails.length === 0, fails, warns, facts: { look: me.look, device: me.device, ambient: me.ambient, music: me.music, scenes: me.sceneCount, compared: others.length, latest: latest.map(o => `${o.name} (${o.look})`) } };
 }

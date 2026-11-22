@@ -153,3 +153,29 @@ test('compilation: YouTube chapter rules and timestamps', () => {
   assert.ok(!chapterList([{ at: 0, title: 'A' }, { at: 60, title: 'B' }], 180).ok, 'needs three chapters');
   assert.ok(!chapterList([{ at: 0, title: 'A' }, { at: 5, title: 'B' }, { at: 60, title: 'C' }], 180).ok, 'chapters must be 10 s');
 });
+
+test('signature: sound logo, brush paint-in and sign-off are drawn', async () => {
+  const r = spawnSync('python3', ['-I', '-c', `import sys; sys.path.insert(0, ${JSON.stringify(path.join(HERE, '..', 'lib'))})
+import audio, numpy as np
+x = audio.sfx_signal('signature'); assert len(x) > audio.SR and np.abs(x).max() > 0.1; print('ok')`], { encoding: 'utf8' });
+  assert.match(r.stdout, /ok/, r.stderr);
+  const frameAt = async (env, t) => {
+    for (const [k, v] of Object.entries(env)) process.env[k] = v;
+    const p = await loadProject(PROJECT);
+    for (const k of Object.keys(env)) delete process.env[k];
+    return { p, fd: await makeFrameDrawer(p), t };
+  };
+  // paint-in: early in a scene the album look shows an ink sketch, so it differs from the finished picture
+  const { p, fd } = await frameAt({ ANIMATE_LOOK: 'album' }, 0);
+  const sc = p.story.scenes[2], PA = p.style.layoutOf(p.meta).paint;
+  const early = dhash(fd.frame(sc.start + 0.3), PA.x, PA.y, PA.w, PA.h), early2 = colorSig(fd.frame(sc.start + 0.3), PA.x, PA.y, PA.w, PA.h);
+  const p2 = { ...p, meta: { ...p.meta, paintIn: 0 } }, fd2 = await makeFrameDrawer(p2);
+  const plain = colorSig(fd2.frame(sc.start + 0.3), PA.x, PA.y, PA.w, PA.h);
+  assert.ok(early && early2.some((v, i) => Math.abs(v - plain[i]) > 12), 'the brush sketch shows at the start of a scene');
+  // sign-off: the outro frame changes when the signature is on
+  const t = p.meta.outro.at + 1.2;
+  const withSig = colorSig(fd.frame(t), PA.x, PA.y, 300, 260);
+  const fd3 = await makeFrameDrawer({ ...p, meta: { ...p.meta, signature: false } });
+  const noSig = colorSig(fd3.frame(t), PA.x, PA.y, 300, 260);
+  assert.ok(withSig.some((v, i) => Math.abs(v - noSig[i]) > 8), 'the tughra and seal are drawn at the outro');
+});

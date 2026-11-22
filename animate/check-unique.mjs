@@ -14,7 +14,7 @@ const i = args.indexOf('--look'), look = i >= 0 ? args[i + 1] : null;
 if (!dir) { console.error('usage: node check-unique.mjs <project> [--look name]'); process.exit(2); }
 
 const r = await checkUnique(dir, { look, log: m => process.stderr.write(m + '\n') });
-console.log(`look: ${r.facts.look} · particles: ${r.facts.ambient} · music: ${r.facts.music} · ${r.facts.scenes} scenes · compared with ${r.facts.compared} videos`);
+console.log(`look: ${r.facts.look} · device: ${r.facts.device} · particles: ${r.facts.ambient} · music: ${r.facts.music} · ${r.facts.scenes} scenes · compared with ${r.facts.compared} videos`);
 console.log(`latest videos: ${r.facts.latest.join(', ') || 'none'}`);
 for (const f of r.fails) console.log('FAIL  ' + f);
 for (const w of r.warns) console.log('warn  ' + w);
