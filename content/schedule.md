@@ -81,6 +81,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-12-22 Tue | 8:00 PM | Wed Dec 23, 9:00 AM | TikTok | Mickey Mouse was born because Walt Disney lost his biggest star. | content/posts/2026-11-21-mickey-mouse-ottoman.md | ready |
 | 2026-12-23 Wed | 7:00 PM | Thu Dec 24, 8:00 AM | Instagram Reels | Mickey Mouse was born because Walt Disney lost his biggest star. | content/posts/2026-11-21-mickey-mouse-ottoman.md | ready |
 | 2026-12-23 Wed | 8:00 PM | Thu Dec 24, 9:00 AM | Facebook Reels | Mickey Mouse was born because Walt Disney lost his biggest star. | content/posts/2026-11-21-mickey-mouse-ottoman.md | ready |
+| 2026-12-24 Thu | 7:00 PM | Fri Dec 25, 8:00 AM | YouTube Shorts | The Christmas Truce Started With a Song | content/posts/2026-11-21-christmas-truce-ottoman.md | ready |
+| 2026-12-24 Thu | 8:00 PM | Fri Dec 25, 9:00 AM | TikTok | Christmas Eve, on the Western Front, the British heard singing from the German side. | content/posts/2026-11-21-christmas-truce-ottoman.md | ready |
+| 2026-12-25 Fri | 9:00 AM | Fri Dec 25, 10:00 PM | Instagram Reels | Merry Christmas. Here is a Christmas story that really happened. | content/posts/2026-11-21-christmas-truce-ottoman.md | ready |
+| 2026-12-25 Fri | 10:00 AM | Fri Dec 25, 11:00 PM | Facebook Reels | Enemies stopped fighting for Christmas. | content/posts/2026-11-21-christmas-truce-ottoman.md | ready |
 | 2026-12-26 Sat | 7:00 PM | Sun Dec 27, 8:00 AM | YouTube Shorts | The Microwave Oven Was Invented Because of a Melted Candy Bar | content/posts/2026-11-21-microwave-ottoman.md | ready |
 | 2026-12-26 Sat | 8:00 PM | Sun Dec 27, 9:00 AM | TikTok | A melted candy bar gave us the microwave. | content/posts/2026-11-21-microwave-ottoman.md | ready |
 | 2026-12-27 Sun | 7:00 PM | Mon Dec 28, 8:00 AM | Instagram Reels | It started with a candy bar in his pocket. | content/posts/2026-11-21-microwave-ottoman.md | ready |
