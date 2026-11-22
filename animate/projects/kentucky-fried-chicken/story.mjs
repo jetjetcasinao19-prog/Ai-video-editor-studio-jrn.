@@ -7,6 +7,7 @@ export const meta = {
   title: 'How Kentucky Fried Chicken Started',
   slug: 'kentucky-fried-chicken-ottoman',
   style: 'ottoman',
+  look: 'tile',
   width: 1080, height: 1920, fps: 30,
   duration: 59.6,
   voice: 'voice.mp3',
@@ -316,7 +317,7 @@ export const sfx = [
 ];
 
 export const music = {
-  bpm: 98, root: 'D', maqam: 'rast', gain: 0.32,
+  bpm: 98, root: 'C', maqam: 'rast', gain: 0.32,
   sections: [
     { from: 0, to: 7.6, mood: 'sad' },
     { from: 7.6, to: 16.2, mood: 'groove' },

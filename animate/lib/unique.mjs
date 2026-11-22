@@ -31,6 +31,24 @@ export const colorDist = (a, b) => a.reduce((s, v, i) => s + Math.abs(v - b[i]),
 export const sameDesign = (a, b) => hamming(a.page, b.page) < 26 && colorDist(a.pageColor, b.pageColor) < 25;
 export const hamming = (a, b) => { let n = 0; for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) n++; return n; };
 
+// Posting order comes from content/schedule.md (the first row that links the
+// project's post file); a project that is not scheduled yet is the newest.
+let SCHEDULE = null;
+function scheduledAt(slug) {
+  if (!SCHEDULE) {
+    SCHEDULE = {};
+    const f = path.join(ROOT, '..', 'content', 'schedule.md');
+    if (fs.existsSync(f)) for (const line of fs.readFileSync(f, 'utf8').split('\n')) {
+      const m = /^\|\s*(\d{4})-(\d{2})-(\d{2})[^|]*\|\s*(\d{1,2}):(\d{2})\s*(AM|PM)[^|]*\|.*?content\/posts\/([^\s|]+)\.md/.exec(line);
+      if (!m) continue;
+      const h = (+m[4] % 12) + (m[6] === 'PM' ? 12 : 0), ts = Date.UTC(+m[1], +m[2] - 1, +m[3], h, +m[5]) / 1000, key = m[7];
+      if (!(key in SCHEDULE) || ts < SCHEDULE[key]) SCHEDULE[key] = ts;
+    }
+  }
+  const key = Object.keys(SCHEDULE).find(k => slug && k.endsWith(slug));
+  return key ? SCHEDULE[key] : Infinity;
+}
+function orderOf(dir, slug) { const s = scheduledAt(slug); return Number.isFinite(s) ? s : Infinity; }
 function committedAt(dir) {
   const r = spawnSync('git', ['log', '-1', '--format=%ct', '--', path.join(dir, 'story.mjs')], { cwd: ROOT, encoding: 'utf8' });
   const t = parseInt(r.stdout, 10);
@@ -42,7 +60,7 @@ export async function fingerprint(dir, { cache = true, look = null } = {}) {
   dir = path.resolve(dir);
   const storyFile = path.join(dir, 'story.mjs'), cacheFile = path.join(dir, 'build', 'fingerprint.json');
   const stamp = [VERSION, fs.statSync(storyFile).mtimeMs, fs.statSync(path.join(ROOT, 'styles', 'ottoman', 'looks.mjs')).mtimeMs].join(':');
-  if (cache && !look && fs.existsSync(cacheFile)) { const fp = JSON.parse(fs.readFileSync(cacheFile, 'utf8')); if (fp.stamp === stamp) return { ...fp, when: committedAt(dir) }; }
+  if (cache && !look && fs.existsSync(cacheFile)) { const fp = JSON.parse(fs.readFileSync(cacheFile, 'utf8')); if (fp.stamp === stamp) return { ...fp, when: orderOf(dir, fp.slug) }; }
   const saved = process.env.ANIMATE_LOOK;
   if (look) process.env.ANIMATE_LOOK = look; else delete process.env.ANIMATE_LOOK;
   const project = await loadProject(dir), { meta, story, words } = project;
@@ -68,7 +86,7 @@ export async function fingerprint(dir, { cache = true, look = null } = {}) {
     opening: text.split(/(?<=[.!?])\s/)[0], closing: text.split(/(?<=[.!?])\s/).slice(-1)[0],
   };
   if (cache && !look) { fs.mkdirSync(path.dirname(cacheFile), { recursive: true }); fs.writeFileSync(cacheFile, JSON.stringify(fp)); }
-  return { ...fp, when: committedAt(dir) };
+  return { ...fp, when: orderOf(dir, fp.slug) };
 }
 
 const FORMULA = s => s.toLowerCase().replace(/^.*?\b(exists|was born|started|began|got (its|their|his|her) name)\b/, '… $1').replace(/[^a-z… ]/g, '').split(' ').slice(0, 4).join(' ');
@@ -84,7 +102,8 @@ export async function checkUnique(dir, { projectsDir = path.join(ROOT, 'projects
     log(`  fingerprinting ${name}…`);
     others.push({ name, ...(await fingerprint(d)) });
   }
-  const before = others.filter(o => o.when <= me.when).sort((a, b) => b.when - a.when);
+  // the videos posted just before this one (unscheduled = after everything scheduled)
+  const before = others.filter(o => o.when < me.when || (o.when === me.when && o.name < path.basename(dir))).sort((a, b) => b.when - a.when);
   const latest = (before.length ? before : [...others].sort((a, b) => b.when - a.when)).slice(0, recent);
   const fails = [], warns = [];
 
@@ -116,5 +135,5 @@ export async function checkUnique(dir, { projectsDir = path.join(ROOT, 'projects
   const f = FORMULA(me.opening), sameOpen = others.filter(o => FORMULA(o.opening) === f && f.startsWith('…'));
   if (sameOpen.length >= 3) warns.push(`opening line uses the same formula ("${f}") as ${sameOpen.length} other videos — vary the hook`);
 
-  return { ok: fails.length === 0, fails, warns, facts: { look: me.look, device: me.device, ambient: me.ambient, music: me.music, scenes: me.sceneCount, compared: others.length, latest: latest.map(o => `${o.name} (${o.look})`) } };
+  return { ok: fails.length === 0, fails, warns, facts: { order: me.when, look: me.look, device: me.device, ambient: me.ambient, music: me.music, scenes: me.sceneCount, compared: others.length, latest: latest.map(o => `${o.name} (${o.look})`) } };
 }

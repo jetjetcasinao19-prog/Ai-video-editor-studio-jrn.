@@ -7,6 +7,7 @@ export const meta = {
   title: 'How Santa Became Red',
   slug: 'santa-ottoman',
   style: 'ottoman',
+  look: 'scroll',
   width: 1080, height: 1920, fps: 30,
   duration: 56.0,
   voice: 'voice.mp3',
@@ -240,7 +241,7 @@ export const sfx = [
 ];
 
 export const music = {
-  bpm: 100, root: 'D', maqam: 'rast', gain: 0.32,
+  bpm: 100, root: 'A', maqam: 'rast', gain: 0.32,
   sections: [
     { from: 0, to: 3.85, mood: 'intro' },
     { from: 3.85, to: 13.5, mood: 'groove' },

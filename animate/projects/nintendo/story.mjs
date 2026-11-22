@@ -7,6 +7,7 @@ export const meta = {
   title: 'How Nintendo Started',
   slug: 'nintendo-ottoman',
   style: 'ottoman',
+  look: 'night',
   width: 1080, height: 1920, fps: 30,
   duration: 55.4,
   voice: 'voice.mp3',
@@ -361,7 +362,7 @@ export const sfx = [
 ];
 
 export const music = {
-  bpm: 98, root: 'D', maqam: 'hicaz', gain: 0.32,
+  bpm: 98, root: 'G', maqam: 'rast', gain: 0.32,
   sections: [
     { from: 0, to: 7.2, mood: 'intro' },
     { from: 7.2, to: 19.1, mood: 'groove' },

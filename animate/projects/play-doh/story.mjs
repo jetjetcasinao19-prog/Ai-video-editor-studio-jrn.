@@ -7,6 +7,7 @@ export const meta = {
   title: 'How Play-Doh Started',
   slug: 'play-doh-ottoman',
   style: 'ottoman',
+  look: 'scroll',
   width: 1080, height: 1920, fps: 30,
   duration: 56.8,
   voice: 'voice.mp3',
@@ -293,7 +294,7 @@ export const sfx = [
 ];
 
 export const music = {
-  bpm: 100, root: 'D', maqam: 'rast', gain: 0.32,
+  bpm: 100, root: 'E', maqam: 'rast', gain: 0.32,
   sections: [
     { from: 0, to: 7.45, mood: 'intro' },
     { from: 7.45, to: 18.95, mood: 'groove' },

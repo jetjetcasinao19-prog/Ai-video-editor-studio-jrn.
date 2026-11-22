@@ -7,6 +7,7 @@ export const meta = {
   title: 'How the Hollywood Sign Started',
   slug: 'hollywood-sign-ottoman',
   style: 'ottoman',
+  look: 'karagoz',
   width: 1080, height: 1920, fps: 30,
   duration: 59.8,
   voice: 'voice.mp3',
@@ -269,7 +270,7 @@ export const sfx = [
 ];
 
 export const music = {
-  bpm: 100, root: 'D', maqam: 'rast', gain: 0.32,
+  bpm: 100, root: 'G', maqam: 'hicaz', gain: 0.32,
   sections: [
     { from: 0, to: 8.95, mood: 'intro' },
     { from: 8.95, to: 22.0, mood: 'groove' },

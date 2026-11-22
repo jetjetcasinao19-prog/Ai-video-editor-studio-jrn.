@@ -7,6 +7,7 @@ export const meta = {
   title: 'How the Nike Swoosh Started',
   slug: 'nike-swoosh-ottoman',
   style: 'ottoman',
+  look: 'tile',
   width: 1080, height: 1920, fps: 30,
   duration: 58.5,
   voice: 'voice.mp3',
@@ -253,7 +254,7 @@ export const sfx = [
 ];
 
 export const music = {
-  bpm: 104, root: 'D', maqam: 'rast', gain: 0.32,
+  bpm: 104, root: 'F', maqam: 'hicaz', gain: 0.32,
   sections: [
     { from: 0, to: 7.45, mood: 'intro' },
     { from: 7.45, to: 18.1, mood: 'groove' },

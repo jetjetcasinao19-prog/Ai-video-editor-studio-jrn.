@@ -7,6 +7,7 @@ export const meta = {
   title: 'How OK Started',
   slug: 'ok-ottoman',
   style: 'ottoman',
+  look: 'album',
   width: 1080, height: 1920, fps: 30,
   duration: 59.8,
   voice: 'voice.mp3',
@@ -300,7 +301,7 @@ export const sfx = [
 ];
 
 export const music = {
-  bpm: 104, root: 'D', maqam: 'rast', gain: 0.32,
+  bpm: 104, root: 'C', maqam: 'hicaz', gain: 0.32,
   sections: [
     { from: 0, to: 6.8, mood: 'intro' },
     { from: 6.8, to: 25.4, mood: 'groove' },

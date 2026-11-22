@@ -8,6 +8,7 @@ export const meta = {
   title: 'How the Big Bang Got Its Name',
   slug: 'big-bang-ottoman',
   style: 'ottoman',
+  look: 'night',
   width: 1080, height: 1920, fps: 30,
   duration: 57.1,
   voice: 'voice.mp3',
@@ -244,7 +245,7 @@ export const sfx = [
 ];
 
 export const music = {
-  bpm: 88, root: 'D', maqam: 'nihavend', gain: 0.32,
+  bpm: 88, root: 'F', maqam: 'nihavend', gain: 0.32,
   sections: [
     { from: 0, to: 8.05, mood: 'intro' },
     { from: 8.05, to: 19.4, mood: 'groove' },

@@ -153,8 +153,8 @@ Each video gets its own page design so the channel never looks templated:
 | `classic` | the original lapis header page (used by the first 16 videos — avoid for now) | none | as written |
 
 Set `meta.look` in `story.mjs` (optional `meta.ambient`: `dust`, `fireflies`,
-`petals`, `embers`, `snow`, `none`). Pick a look the last three videos did not
-use (`grep -h "look:" animate/projects/*/story.mjs`), and one that fits the story
+`petals`, `embers`, `snow`, `none`). Pick a look the three videos posted before it did
+not use (`node check-unique.mjs --all` lists every video's look in posting order), and one that fits the story
 (night stories → `night`, holidays/celebrations → `album` or `scroll`, inventions
 and science → `tile`, rivalries, comedy, showbiz and characters → `karagoz`). Preview any look without editing:
 `node render.mjs projects/<slug> --look night --sheet`. A look replaces the
@@ -214,7 +214,10 @@ Then check that the video is its own piece:
 ```bash
 node check-unique.mjs projects/<slug>              # must print UNIQUE ENOUGH ✔ (exit 0)
 node check-unique.mjs projects/<slug> --look tile  # try another look if it fails
+node check-unique.mjs --all                        # the whole channel, in posting order
 ```
+"Latest videos" means the ones posted just before this one, read from
+`content/schedule.md` (a project not scheduled yet counts as the newest).
 It FAILS when the page design matches one of the last three videos or more than
 a quarter of the scenes are near-copies of other videos' scenes. Fix every FAIL
 before sending; fix warnings when you can (music key, transition order, the

@@ -7,6 +7,7 @@ export const meta = {
   title: 'How Basketball Started',
   slug: 'basketball-ottoman',
   style: 'ottoman',
+  look: 'tile',
   width: 1080, height: 1920, fps: 30,
   duration: 54.8,
   voice: 'voice.mp3',
@@ -329,7 +330,7 @@ export const sfx = [
 ];
 
 export const music = {
-  bpm: 108, root: 'D', maqam: 'rast', gain: 0.32,
+  bpm: 108, root: 'A', maqam: 'hicaz', gain: 0.32,
   sections: [
     { from: 0, to: 6.2, mood: 'intro' },
     { from: 6.2, to: 9.4, mood: 'sad' },

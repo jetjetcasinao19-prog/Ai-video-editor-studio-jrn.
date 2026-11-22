@@ -7,6 +7,7 @@ export const meta = {
   title: 'How Thanksgiving Became a National Holiday',
   slug: 'thanksgiving-ottoman',
   style: 'ottoman',
+  look: 'album',
   width: 1080, height: 1920, fps: 30,
   duration: 57.0,
   voice: 'voice.mp3',
@@ -355,7 +356,7 @@ export const sfx = [
 ];
 
 export const music = {
-  bpm: 92, root: 'D', maqam: 'rast', gain: 0.32,
+  bpm: 92, root: 'F', maqam: 'rast', gain: 0.32,
   sections: [
     { from: 0, to: 8.85, mood: 'intro' },
     { from: 8.85, to: 16.9, mood: 'groove' },

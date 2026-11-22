@@ -7,6 +7,7 @@ export const meta = {
   title: 'How the Super Soaker Started',
   slug: 'super-soaker-ottoman',
   style: 'ottoman',
+  look: 'karagoz',
   width: 1080, height: 1920, fps: 30,
   duration: 54.6,
   voice: 'voice.mp3',
@@ -335,7 +336,7 @@ export const sfx = [
 ];
 
 export const music = {
-  bpm: 104, root: 'D', maqam: 'hicaz', gain: 0.32,
+  bpm: 104, root: 'E', maqam: 'hicaz', gain: 0.32,
   sections: [
     { from: 0, to: 4.5, mood: 'intro' },
     { from: 4.5, to: 16.3, mood: 'groove' },
