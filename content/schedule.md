@@ -89,6 +89,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-01-02 Sat | 8:00 PM | Sun Jan 3, 9:00 AM | TikTok | She wasn't born green. | content/posts/2026-11-21-statue-of-liberty-ottoman.md | ready |
 | 2027-01-03 Sun | 7:00 PM | Mon Jan 4, 8:00 AM | Instagram Reels | Picture a shiny new penny. That's how Lady Liberty looked in October 1886. | content/posts/2026-11-21-statue-of-liberty-ottoman.md | ready |
 | 2027-01-03 Sun | 8:00 PM | Mon Jan 4, 9:00 AM | Facebook Reels | Ever wonder why Lady Liberty is green? Because she wasn't always. | content/posts/2026-11-21-statue-of-liberty-ottoman.md | ready |
+| 2027-01-05 Tue | 7:00 PM | Wed Jan 6, 8:00 AM | YouTube Shorts | Monopoly Was Invented to Show How Unfair Monopolies Are | content/posts/2026-11-21-monopoly-ottoman.md | ready |
+| 2027-01-05 Tue | 8:00 PM | Wed Jan 6, 9:00 AM | TikTok | The most famous game about getting rich began as a warning. | content/posts/2026-11-21-monopoly-ottoman.md | ready |
+| 2027-01-06 Wed | 7:00 PM | Thu Jan 7, 8:00 AM | Instagram Reels | Think you know who invented Monopoly? | content/posts/2026-11-21-monopoly-ottoman.md | ready |
+| 2027-01-06 Wed | 8:00 PM | Thu Jan 7, 9:00 AM | Facebook Reels | Here's a twist about a game you may have played at your kitchen table. | content/posts/2026-11-21-monopoly-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
