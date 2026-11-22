@@ -1,0 +1,551 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "The Statue of Liberty wasn't always green. She used to look like a shiny new penny. October 1886, New York Harbor. Lady Liberty is unveiled, covered in about 300 thin copper sheets, roughly as thick as two pennies. But copper changes in the sea air. Year by year, she turns from brown to green. In 1906, Congress sets aside money to paint her and make her look new again. People are furious. One newspaper calls it sacrilege. The plan is dropped. And it's a good thing. That green layer, called a patina, actually protects the copper underneath. A flaw that became her famous color. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "The",
+   "start": 0,
+   "end": 0.22
+  },
+  {
+   "w": "Statue",
+   "start": 0.22,
+   "end": 0.52
+  },
+  {
+   "w": "of",
+   "start": 0.52,
+   "end": 0.7
+  },
+  {
+   "w": "Liberty",
+   "start": 0.7,
+   "end": 0.98
+  },
+  {
+   "w": "wasn't",
+   "start": 0.98,
+   "end": 1.56
+  },
+  {
+   "w": "always",
+   "start": 1.56,
+   "end": 2.02
+  },
+  {
+   "w": "green.",
+   "start": 2.02,
+   "end": 2.98
+  },
+  {
+   "w": "She",
+   "start": 3.24,
+   "end": 3.34
+  },
+  {
+   "w": "used",
+   "start": 3.34,
+   "end": 3.52
+  },
+  {
+   "w": "to",
+   "start": 3.52,
+   "end": 3.68
+  },
+  {
+   "w": "look",
+   "start": 3.68,
+   "end": 3.88
+  },
+  {
+   "w": "like",
+   "start": 3.88,
+   "end": 4.08
+  },
+  {
+   "w": "a",
+   "start": 4.08,
+   "end": 4.2
+  },
+  {
+   "w": "shiny",
+   "start": 4.2,
+   "end": 4.64
+  },
+  {
+   "w": "new",
+   "start": 4.64,
+   "end": 5
+  },
+  {
+   "w": "penny.",
+   "start": 5,
+   "end": 5.86
+  },
+  {
+   "w": "October",
+   "start": 6.58,
+   "end": 6.94
+  },
+  {
+   "w": "1886,",
+   "start": 6.94,
+   "end": 8.92
+  },
+  {
+   "w": "New",
+   "start": 8.92,
+   "end": 9.06
+  },
+  {
+   "w": "York",
+   "start": 9.06,
+   "end": 9.38
+  },
+  {
+   "w": "Harbor.",
+   "start": 9.38,
+   "end": 10.2
+  },
+  {
+   "w": "Lady",
+   "start": 10.62,
+   "end": 10.92
+  },
+  {
+   "w": "Liberty",
+   "start": 10.92,
+   "end": 11.28
+  },
+  {
+   "w": "is",
+   "start": 11.28,
+   "end": 11.66
+  },
+  {
+   "w": "unveiled,",
+   "start": 11.66,
+   "end": 12.76
+  },
+  {
+   "w": "covered",
+   "start": 12.76,
+   "end": 12.9
+  },
+  {
+   "w": "in",
+   "start": 12.9,
+   "end": 13.08
+  },
+  {
+   "w": "about",
+   "start": 13.08,
+   "end": 13.32
+  },
+  {
+   "w": "300",
+   "start": 13.32,
+   "end": 13.84
+  },
+  {
+   "w": "thin",
+   "start": 13.84,
+   "end": 14.6
+  },
+  {
+   "w": "copper",
+   "start": 14.6,
+   "end": 15.04
+  },
+  {
+   "w": "sheets,",
+   "start": 15.04,
+   "end": 16
+  },
+  {
+   "w": "roughly",
+   "start": 16.06,
+   "end": 16.26
+  },
+  {
+   "w": "as",
+   "start": 16.26,
+   "end": 16.48
+  },
+  {
+   "w": "thick",
+   "start": 16.48,
+   "end": 16.68
+  },
+  {
+   "w": "as",
+   "start": 16.68,
+   "end": 16.86
+  },
+  {
+   "w": "two",
+   "start": 16.86,
+   "end": 17.1
+  },
+  {
+   "w": "pennies.",
+   "start": 17.1,
+   "end": 17.48
+  },
+  {
+   "w": "But",
+   "start": 18.28,
+   "end": 18.44
+  },
+  {
+   "w": "copper",
+   "start": 18.44,
+   "end": 18.8
+  },
+  {
+   "w": "changes",
+   "start": 18.8,
+   "end": 19.5
+  },
+  {
+   "w": "in",
+   "start": 19.5,
+   "end": 19.8
+  },
+  {
+   "w": "the",
+   "start": 19.8,
+   "end": 19.98
+  },
+  {
+   "w": "sea",
+   "start": 19.98,
+   "end": 20.24
+  },
+  {
+   "w": "air.",
+   "start": 20.24,
+   "end": 21.02
+  },
+  {
+   "w": "Year",
+   "start": 21.36,
+   "end": 21.54
+  },
+  {
+   "w": "by",
+   "start": 21.54,
+   "end": 21.78
+  },
+  {
+   "w": "year,",
+   "start": 21.78,
+   "end": 22.52
+  },
+  {
+   "w": "she",
+   "start": 22.52,
+   "end": 22.54
+  },
+  {
+   "w": "turns",
+   "start": 22.54,
+   "end": 22.94
+  },
+  {
+   "w": "from",
+   "start": 22.94,
+   "end": 23.2
+  },
+  {
+   "w": "brown",
+   "start": 23.2,
+   "end": 23.6
+  },
+  {
+   "w": "to",
+   "start": 23.6,
+   "end": 24.46
+  },
+  {
+   "w": "green.",
+   "start": 24.46,
+   "end": 24.82
+  },
+  {
+   "w": "In",
+   "start": 25.9,
+   "end": 25.96
+  },
+  {
+   "w": "1906,",
+   "start": 25.96,
+   "end": 27.22
+  },
+  {
+   "w": "Congress",
+   "start": 27.22,
+   "end": 27.52
+  },
+  {
+   "w": "sets",
+   "start": 27.52,
+   "end": 27.84
+  },
+  {
+   "w": "aside",
+   "start": 27.84,
+   "end": 28.16
+  },
+  {
+   "w": "money",
+   "start": 28.16,
+   "end": 28.52
+  },
+  {
+   "w": "to",
+   "start": 28.52,
+   "end": 28.74
+  },
+  {
+   "w": "paint",
+   "start": 28.74,
+   "end": 29.06
+  },
+  {
+   "w": "her",
+   "start": 29.06,
+   "end": 29.18
+  },
+  {
+   "w": "and",
+   "start": 29.18,
+   "end": 29.6
+  },
+  {
+   "w": "make",
+   "start": 29.6,
+   "end": 29.86
+  },
+  {
+   "w": "her",
+   "start": 29.86,
+   "end": 30
+  },
+  {
+   "w": "look",
+   "start": 30,
+   "end": 30.18
+  },
+  {
+   "w": "new",
+   "start": 30.18,
+   "end": 30.44
+  },
+  {
+   "w": "again.",
+   "start": 30.44,
+   "end": 31.3
+  },
+  {
+   "w": "People",
+   "start": 31.54,
+   "end": 31.76
+  },
+  {
+   "w": "are",
+   "start": 31.76,
+   "end": 31.92
+  },
+  {
+   "w": "furious.",
+   "start": 31.92,
+   "end": 32.84
+  },
+  {
+   "w": "One",
+   "start": 33.14,
+   "end": 33.3
+  },
+  {
+   "w": "newspaper",
+   "start": 33.3,
+   "end": 33.78
+  },
+  {
+   "w": "calls",
+   "start": 33.78,
+   "end": 34.1
+  },
+  {
+   "w": "it",
+   "start": 34.1,
+   "end": 34.34
+  },
+  {
+   "w": "sacrilege.",
+   "start": 34.34,
+   "end": 35.72
+  },
+  {
+   "w": "The",
+   "start": 36.02,
+   "end": 36.14
+  },
+  {
+   "w": "plan",
+   "start": 36.14,
+   "end": 36.44
+  },
+  {
+   "w": "is",
+   "start": 36.44,
+   "end": 36.62
+  },
+  {
+   "w": "dropped.",
+   "start": 36.62,
+   "end": 37.4
+  },
+  {
+   "w": "And",
+   "start": 37.68,
+   "end": 37.82
+  },
+  {
+   "w": "it's",
+   "start": 37.82,
+   "end": 37.98
+  },
+  {
+   "w": "a",
+   "start": 37.98,
+   "end": 38.06
+  },
+  {
+   "w": "good",
+   "start": 38.06,
+   "end": 38.18
+  },
+  {
+   "w": "thing.",
+   "start": 38.18,
+   "end": 39.02
+  },
+  {
+   "w": "That",
+   "start": 39.2,
+   "end": 39.36
+  },
+  {
+   "w": "green",
+   "start": 39.36,
+   "end": 39.74
+  },
+  {
+   "w": "layer,",
+   "start": 39.74,
+   "end": 40.4
+  },
+  {
+   "w": "called",
+   "start": 40.4,
+   "end": 40.62
+  },
+  {
+   "w": "a",
+   "start": 40.62,
+   "end": 40.78
+  },
+  {
+   "w": "patina,",
+   "start": 40.78,
+   "end": 41.54
+  },
+  {
+   "w": "actually",
+   "start": 41.54,
+   "end": 41.98
+  },
+  {
+   "w": "protects",
+   "start": 41.98,
+   "end": 42.66
+  },
+  {
+   "w": "the",
+   "start": 42.66,
+   "end": 42.86
+  },
+  {
+   "w": "copper",
+   "start": 42.86,
+   "end": 43.18
+  },
+  {
+   "w": "underneath.",
+   "start": 43.18,
+   "end": 44.26
+  },
+  {
+   "w": "A",
+   "start": 44.44,
+   "end": 44.76
+  },
+  {
+   "w": "flaw",
+   "start": 44.76,
+   "end": 45.08
+  },
+  {
+   "w": "that",
+   "start": 45.08,
+   "end": 45.8
+  },
+  {
+   "w": "became",
+   "start": 45.8,
+   "end": 46.26
+  },
+  {
+   "w": "her",
+   "start": 46.26,
+   "end": 46.56
+  },
+  {
+   "w": "famous",
+   "start": 46.56,
+   "end": 47.16
+  },
+  {
+   "w": "color.",
+   "start": 47.16,
+   "end": 47.98
+  },
+  {
+   "w": "Every",
+   "start": 48.68,
+   "end": 48.98
+  },
+  {
+   "w": "legend",
+   "start": 48.98,
+   "end": 49.34
+  },
+  {
+   "w": "has",
+   "start": 49.34,
+   "end": 49.9
+  },
+  {
+   "w": "a",
+   "start": 49.9,
+   "end": 50
+  },
+  {
+   "w": "beginning.",
+   "start": 50,
+   "end": 50.8
+  }
+ ]
+}

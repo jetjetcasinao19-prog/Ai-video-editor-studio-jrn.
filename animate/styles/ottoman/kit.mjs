@@ -1849,6 +1849,68 @@ export function measureRod(ctx, x, yTop, yBot, k = 1, text = '') {
   ctx.restore();
 }
 
+// ---------- Statue of Liberty story ----------
+// mix two #rrggbb colours (k = 0 → a, 1 → b)
+export function mixColor(a, b, k) {
+  const pa = parseInt(a.slice(1), 16), pb = parseInt(b.slice(1), 16), q = clamp(k);
+  const c = [16, 8, 0].map(sh => Math.round(((pa >> sh) & 255) * (1 - q) + ((pb >> sh) & 255) * q));
+  return '#' + c.map(v => v.toString(16).padStart(2, '0')).join('');
+}
+export const COPPER = { new: '#d77a3e', brown: '#6e4024', green: '#79b8a0' };
+// the statue as a miniature painter would draw her: robe, rayed crown, raised torch,
+// tablet; metal = her colour, shine 0..1 adds a polished glint. Base at (x, base); about 800·s tall.
+export function liberty(ctx, x, base, s = 1, o = {}) {
+  const metal = o.metal || COPPER.green, dark = shade(metal, -0.28), light = shade(metal, 0.25), t = o.t || 0;
+  ctx.save(); ctx.translate(x, base); ctx.scale(s, s);
+  // raised right arm and torch
+  ctx.beginPath(); ctx.moveTo(30, -500); ctx.quadraticCurveTo(70, -600, 60, -700); ctx.lineTo(90, -700); ctx.quadraticCurveTo(100, -600, 60, -495); ctx.closePath(); fillStroke(ctx, metal, P.ink, 2.5);
+  rect(ctx, 56, -760, 38, 64, metal, P.ink, 2.5); rect(ctx, 48, -772, 54, 14, dark, P.ink, 2);
+  ctx.beginPath(); ctx.moveTo(52, -772); ctx.quadraticCurveTo(48, -830, 75, -860); ctx.quadraticCurveTo(102, -830, 98, -772); ctx.closePath(); fillStroke(ctx, o.flame || P.goldLight, P.ink, 2);
+  if (o.glow) { const g = ctx.createRadialGradient(75, -815, 5, 75, -815, 90); g.addColorStop(0, `rgba(255,230,150,${0.6 * o.glow})`); g.addColorStop(1, 'rgba(255,230,150,0)'); ctx.fillStyle = g; ctx.fillRect(-15, -905, 180, 180); }
+  // gown with folds
+  ctx.beginPath(); ctx.moveTo(-62, -515); ctx.quadraticCurveTo(-80, -300, -118, 0); ctx.lineTo(118, 0); ctx.quadraticCurveTo(84, -300, 62, -515); ctx.closePath(); fillStroke(ctx, metal, P.ink, 2.5);
+  for (let i = -3; i <= 3; i++) { ctx.beginPath(); ctx.moveTo(i * 14, -470); ctx.quadraticCurveTo(i * 22 + Math.sin(i) * 8, -240, i * 32, -4); stroke(ctx, dark, 2); }
+  // toga draped over the left shoulder
+  ctx.beginPath(); ctx.moveTo(-64, -510); ctx.quadraticCurveTo(10, -430, 64, -300); ctx.lineTo(70, -250); ctx.quadraticCurveTo(0, -380, -70, -440); ctx.closePath(); fillStroke(ctx, light, P.ink, 2);
+  // left arm and the tablet
+  ctx.save(); ctx.translate(-70, -400); ctx.rotate(-0.18);
+  rect(ctx, -42, -70, 70, 130, metal, P.ink, 2.5); ctx.fillStyle = dark; ctx.font = '700 11px Garamond'; ctx.textAlign = 'center'; ctx.fillText('JULY IV', -7, -10); ctx.fillText('MDCCLXXVI', -7, 6);
+  ctx.restore();
+  // head, face, crown with seven rays
+  circle(ctx, 0, -556, 36, metal, P.ink, 2.5);
+  ctx.beginPath(); ctx.moveTo(-10, -560); ctx.lineTo(-4, -560); ctx.moveTo(4, -560); ctx.lineTo(10, -560); ctx.moveTo(0, -556); ctx.lineTo(0, -546); stroke(ctx, P.ink, 1.6);
+  rect(ctx, -38, -592, 76, 16, dark, P.ink, 2);
+  for (let i = 0; i < 7; i++) { const a = -Math.PI / 2 + (i - 3) * 0.32; poly(ctx, [[Math.cos(a - 0.08) * 36, -584 + Math.sin(a - 0.08) * 36], [Math.cos(a) * 92, -584 + Math.sin(a) * 92], [Math.cos(a + 0.08) * 36, -584 + Math.sin(a + 0.08) * 36]], metal, P.ink, 1.8); }
+  if (o.shine) { ctx.save(); ctx.globalAlpha *= o.shine; ctx.globalCompositeOperation = 'screen'; const sx = -120 + ((t * 120) % 360); const g = ctx.createLinearGradient(sx - 40, 0, sx + 40, 0); g.addColorStop(0, 'rgba(255,255,255,0)'); g.addColorStop(0.5, 'rgba(255,240,210,0.7)'); g.addColorStop(1, 'rgba(255,255,255,0)'); ctx.fillStyle = g; ctx.fillRect(-130, -870, 260, 870); ctx.restore(); }
+  ctx.restore();
+}
+// The star-shaped fort and stone pedestal she stands on.
+export function libertyPedestal(ctx, x, top, s = 1) {
+  ctx.save(); ctx.translate(x, top); ctx.scale(s, s);
+  poly(ctx, [[-90, 0], [90, 0], [110, 260], [-110, 260]], '#d8c9a8', P.ink, 2.5);
+  for (let i = 1; i < 4; i++) { ctx.beginPath(); ctx.moveTo(-90 - i * 5, i * 65); ctx.lineTo(90 + i * 5, i * 65); stroke(ctx, '#b9a888', 2); }
+  rect(ctx, -60, 60, 120, 70, '#c9b890', P.ink, 2);
+  poly(ctx, [[-200, 260], [200, 260], [240, 330], [0, 370], [-240, 330]], '#bcae8e', P.ink, 2.5);
+  ctx.restore();
+}
+// a copper penny (one cent), with a moving glint
+export function penny(ctx, x, y, r, t = 0, color = COPPER.new) {
+  ctx.save(); ctx.translate(x, y);
+  circle(ctx, 0, 0, r, color, P.ink, 2.5); circle(ctx, 0, 0, r * 0.84, null, shade(color, -0.25), 2);
+  ctx.fillStyle = shade(color, -0.35); ctx.font = `900 ${Math.round(r * 0.34)}px Deco`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('ONE', 0, -r * 0.18); ctx.fillText('CENT', 0, r * 0.22);
+  ctx.save(); ctx.beginPath(); ctx.arc(0, 0, r, 0, TAU); ctx.clip(); ctx.globalCompositeOperation = 'screen'; const sx = -r * 2 + ((t * r * 2) % (r * 4)); const g = ctx.createLinearGradient(sx - r * 0.3, -r, sx + r * 0.3, r); g.addColorStop(0, 'rgba(255,255,255,0)'); g.addColorStop(0.5, 'rgba(255,240,210,0.8)'); g.addColorStop(1, 'rgba(255,255,255,0)'); ctx.fillStyle = g; ctx.fillRect(-r, -r, r * 2, r * 2); ctx.restore();
+  ctx.restore();
+}
+// a paint bucket with a brush
+export function paintBucket(ctx, x, y, s = 1, color = COPPER.new, rot = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
+  poly(ctx, [[-40, -50], [40, -50], [32, 30], [-32, 30]], '#9aa4b0', P.ink, 2.5);
+  ctx.beginPath(); ctx.ellipse(0, -50, 40, 10, 0, 0, TAU); fillStroke(ctx, color, P.ink, 2);
+  ctx.beginPath(); ctx.arc(0, -50, 44, Math.PI * 1.05, Math.PI * 1.95); stroke(ctx, P.ink, 3);
+  ctx.beginPath(); ctx.moveTo(10, -50); ctx.lineTo(40, -120); stroke(ctx, P.brownLight, 6); rect(ctx, 34, -134, 14, 18, P.ink, P.ink, 1);
+  ctx.restore();
+}
+
 // ---------- colour util ----------
 export function shade(hex, k) {
   if (!hex.startsWith('#')) return hex;
