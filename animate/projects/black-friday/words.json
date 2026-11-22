@@ -1,0 +1,591 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "You've heard Black Friday mean stores finally make a profit. That's not where the name came from. Back in the early 1960s in Philadelphia, the day after Thanksgiving is total chaos. Shoppers flood downtown. The Army-Navy football game is that weekend too. Traffic jams everywhere. Police officers have to work long shifts. They give the day a grumpy nickname, Black Friday. Store owners hate it. They try to rebrand it Big Friday. It doesn't stick. By the 1980s, a happier story appears. Black Friday is when stores go from red ink to black. A nice story, just not the original one. A cop's complaint that became one of America's biggest shopping days. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "You've",
+   "start": 0,
+   "end": 0.34
+  },
+  {
+   "w": "heard",
+   "start": 0.34,
+   "end": 0.64
+  },
+  {
+   "w": "Black",
+   "start": 0.64,
+   "end": 1.04
+  },
+  {
+   "w": "Friday",
+   "start": 1.04,
+   "end": 1.52
+  },
+  {
+   "w": "mean",
+   "start": 1.52,
+   "end": 1.88
+  },
+  {
+   "w": "stores",
+   "start": 1.88,
+   "end": 2.28
+  },
+  {
+   "w": "finally",
+   "start": 2.28,
+   "end": 2.82
+  },
+  {
+   "w": "make",
+   "start": 2.82,
+   "end": 3.12
+  },
+  {
+   "w": "a",
+   "start": 3.12,
+   "end": 3.24
+  },
+  {
+   "w": "profit.",
+   "start": 3.24,
+   "end": 4.02
+  },
+  {
+   "w": "That's",
+   "start": 4.26,
+   "end": 4.54
+  },
+  {
+   "w": "not",
+   "start": 4.54,
+   "end": 4.76
+  },
+  {
+   "w": "where",
+   "start": 4.76,
+   "end": 4.92
+  },
+  {
+   "w": "the",
+   "start": 4.92,
+   "end": 5.06
+  },
+  {
+   "w": "name",
+   "start": 5.06,
+   "end": 5.26
+  },
+  {
+   "w": "came",
+   "start": 5.26,
+   "end": 5.52
+  },
+  {
+   "w": "from.",
+   "start": 5.52,
+   "end": 6.3
+  },
+  {
+   "w": "Back",
+   "start": 6.66,
+   "end": 6.76
+  },
+  {
+   "w": "in",
+   "start": 6.76,
+   "end": 6.9
+  },
+  {
+   "w": "the",
+   "start": 6.9,
+   "end": 7.02
+  },
+  {
+   "w": "early",
+   "start": 7.02,
+   "end": 7.28
+  },
+  {
+   "w": "1960s",
+   "start": 7.28,
+   "end": 8.3
+  },
+  {
+   "w": "in",
+   "start": 8.3,
+   "end": 8.52
+  },
+  {
+   "w": "Philadelphia,",
+   "start": 8.52,
+   "end": 9.68
+  },
+  {
+   "w": "the",
+   "start": 9.68,
+   "end": 9.7
+  },
+  {
+   "w": "day",
+   "start": 9.7,
+   "end": 9.88
+  },
+  {
+   "w": "after",
+   "start": 9.88,
+   "end": 10.2
+  },
+  {
+   "w": "Thanksgiving",
+   "start": 10.2,
+   "end": 10.66
+  },
+  {
+   "w": "is",
+   "start": 10.66,
+   "end": 11.14
+  },
+  {
+   "w": "total",
+   "start": 11.14,
+   "end": 11.68
+  },
+  {
+   "w": "chaos.",
+   "start": 11.68,
+   "end": 12.82
+  },
+  {
+   "w": "Shoppers",
+   "start": 13.12,
+   "end": 13.36
+  },
+  {
+   "w": "flood",
+   "start": 13.36,
+   "end": 13.78
+  },
+  {
+   "w": "downtown.",
+   "start": 13.78,
+   "end": 14.8
+  },
+  {
+   "w": "The",
+   "start": 15,
+   "end": 15.12
+  },
+  {
+   "w": "Army-Navy",
+   "start": 15.12,
+   "end": 15.64
+  },
+  {
+   "w": "football",
+   "start": 15.64,
+   "end": 16.04
+  },
+  {
+   "w": "game",
+   "start": 16.04,
+   "end": 16.32
+  },
+  {
+   "w": "is",
+   "start": 16.32,
+   "end": 16.48
+  },
+  {
+   "w": "that",
+   "start": 16.48,
+   "end": 16.6
+  },
+  {
+   "w": "weekend",
+   "start": 16.6,
+   "end": 16.98
+  },
+  {
+   "w": "too.",
+   "start": 16.98,
+   "end": 17.26
+  },
+  {
+   "w": "Traffic",
+   "start": 18,
+   "end": 18.2
+  },
+  {
+   "w": "jams",
+   "start": 18.2,
+   "end": 18.58
+  },
+  {
+   "w": "everywhere.",
+   "start": 18.58,
+   "end": 19.72
+  },
+  {
+   "w": "Police",
+   "start": 20.04,
+   "end": 20.22
+  },
+  {
+   "w": "officers",
+   "start": 20.22,
+   "end": 20.62
+  },
+  {
+   "w": "have",
+   "start": 20.62,
+   "end": 20.8
+  },
+  {
+   "w": "to",
+   "start": 20.8,
+   "end": 20.94
+  },
+  {
+   "w": "work",
+   "start": 20.94,
+   "end": 21.16
+  },
+  {
+   "w": "long",
+   "start": 21.16,
+   "end": 21.56
+  },
+  {
+   "w": "shifts.",
+   "start": 21.56,
+   "end": 22.5
+  },
+  {
+   "w": "They",
+   "start": 22.74,
+   "end": 22.86
+  },
+  {
+   "w": "give",
+   "start": 22.86,
+   "end": 23.02
+  },
+  {
+   "w": "the",
+   "start": 23.02,
+   "end": 23.16
+  },
+  {
+   "w": "day",
+   "start": 23.16,
+   "end": 23.38
+  },
+  {
+   "w": "a",
+   "start": 23.38,
+   "end": 23.62
+  },
+  {
+   "w": "grumpy",
+   "start": 23.62,
+   "end": 24.06
+  },
+  {
+   "w": "nickname,",
+   "start": 24.06,
+   "end": 25.26
+  },
+  {
+   "w": "Black",
+   "start": 25.26,
+   "end": 25.52
+  },
+  {
+   "w": "Friday.",
+   "start": 25.52,
+   "end": 25.92
+  },
+  {
+   "w": "Store",
+   "start": 26.88,
+   "end": 27.1
+  },
+  {
+   "w": "owners",
+   "start": 27.1,
+   "end": 27.46
+  },
+  {
+   "w": "hate",
+   "start": 27.46,
+   "end": 27.8
+  },
+  {
+   "w": "it.",
+   "start": 27.8,
+   "end": 28.44
+  },
+  {
+   "w": "They",
+   "start": 28.5,
+   "end": 28.6
+  },
+  {
+   "w": "try",
+   "start": 28.6,
+   "end": 28.8
+  },
+  {
+   "w": "to",
+   "start": 28.8,
+   "end": 28.96
+  },
+  {
+   "w": "rebrand",
+   "start": 28.96,
+   "end": 29.32
+  },
+  {
+   "w": "it",
+   "start": 29.32,
+   "end": 29.58
+  },
+  {
+   "w": "Big",
+   "start": 29.58,
+   "end": 30.08
+  },
+  {
+   "w": "Friday.",
+   "start": 30.08,
+   "end": 31.3
+  },
+  {
+   "w": "It",
+   "start": 31.3,
+   "end": 31.36
+  },
+  {
+   "w": "doesn't",
+   "start": 31.36,
+   "end": 31.64
+  },
+  {
+   "w": "stick.",
+   "start": 31.64,
+   "end": 32.98
+  },
+  {
+   "w": "By",
+   "start": 32.98,
+   "end": 33.04
+  },
+  {
+   "w": "the",
+   "start": 33.04,
+   "end": 33.18
+  },
+  {
+   "w": "1980s,",
+   "start": 33.18,
+   "end": 34.04
+  },
+  {
+   "w": "a",
+   "start": 34.04,
+   "end": 34.32
+  },
+  {
+   "w": "happier",
+   "start": 34.32,
+   "end": 34.68
+  },
+  {
+   "w": "story",
+   "start": 34.68,
+   "end": 35.04
+  },
+  {
+   "w": "appears.",
+   "start": 35.04,
+   "end": 36
+  },
+  {
+   "w": "Black",
+   "start": 36.2,
+   "end": 36.42
+  },
+  {
+   "w": "Friday",
+   "start": 36.42,
+   "end": 36.78
+  },
+  {
+   "w": "is",
+   "start": 36.78,
+   "end": 37.02
+  },
+  {
+   "w": "when",
+   "start": 37.02,
+   "end": 37.18
+  },
+  {
+   "w": "stores",
+   "start": 37.18,
+   "end": 37.58
+  },
+  {
+   "w": "go",
+   "start": 37.58,
+   "end": 37.86
+  },
+  {
+   "w": "from",
+   "start": 37.86,
+   "end": 38.18
+  },
+  {
+   "w": "red",
+   "start": 38.18,
+   "end": 38.56
+  },
+  {
+   "w": "ink",
+   "start": 38.56,
+   "end": 38.78
+  },
+  {
+   "w": "to",
+   "start": 38.78,
+   "end": 39.36
+  },
+  {
+   "w": "black.",
+   "start": 39.36,
+   "end": 40.62
+  },
+  {
+   "w": "A",
+   "start": 40.62,
+   "end": 40.74
+  },
+  {
+   "w": "nice",
+   "start": 40.74,
+   "end": 40.88
+  },
+  {
+   "w": "story,",
+   "start": 40.88,
+   "end": 41.86
+  },
+  {
+   "w": "just",
+   "start": 41.86,
+   "end": 42.08
+  },
+  {
+   "w": "not",
+   "start": 42.08,
+   "end": 42.54
+  },
+  {
+   "w": "the",
+   "start": 42.54,
+   "end": 42.72
+  },
+  {
+   "w": "original",
+   "start": 42.72,
+   "end": 43.14
+  },
+  {
+   "w": "one.",
+   "start": 43.14,
+   "end": 43.44
+  },
+  {
+   "w": "A",
+   "start": 44.2,
+   "end": 44.34
+  },
+  {
+   "w": "cop's",
+   "start": 44.34,
+   "end": 44.64
+  },
+  {
+   "w": "complaint",
+   "start": 44.64,
+   "end": 45.16
+  },
+  {
+   "w": "that",
+   "start": 45.16,
+   "end": 45.7
+  },
+  {
+   "w": "became",
+   "start": 45.7,
+   "end": 46.02
+  },
+  {
+   "w": "one",
+   "start": 46.02,
+   "end": 46.3
+  },
+  {
+   "w": "of",
+   "start": 46.3,
+   "end": 46.44
+  },
+  {
+   "w": "America's",
+   "start": 46.44,
+   "end": 47
+  },
+  {
+   "w": "biggest",
+   "start": 47,
+   "end": 47.54
+  },
+  {
+   "w": "shopping",
+   "start": 47.54,
+   "end": 48
+  },
+  {
+   "w": "days.",
+   "start": 48,
+   "end": 49.44
+  },
+  {
+   "w": "Every",
+   "start": 49.44,
+   "end": 49.64
+  },
+  {
+   "w": "legend",
+   "start": 49.64,
+   "end": 50.1
+  },
+  {
+   "w": "has",
+   "start": 50.1,
+   "end": 50.6
+  },
+  {
+   "w": "a",
+   "start": 50.6,
+   "end": 50.68
+  },
+  {
+   "w": "beginning.",
+   "start": 50.68,
+   "end": 51.48
+  }
+ ]
+}

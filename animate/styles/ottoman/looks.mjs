@@ -73,6 +73,22 @@ export const LOOKS = {
   },
   // Karagöz shadow theatre: the story plays on a backlit muslin screen in a
   // wooden booth, colours glowing like translucent leather puppets, lamp flicker
+  // an Ottoman account book (defter): ruled paper, red and black ink, the
+  // spoken word written in red; numbers in the margins
+  ledger: {
+    label: 'Account book (defter) in red and black ink',
+    layout: {
+      W: 1080, H: 1920, header: null,
+      title: { cx: 540, cy: 128, w: 780, h: 92 },
+      paint: { x: 70, y: 210, ...PAINT },
+      caption: { x: 70, y: 1302, w: 940, h: 220 },
+      footer: { x: 70, y: 1560, w: 940, h: 280 },
+      logo: { cx: 900, cy: 1700, r: 62 }, handle: { cx: 430, cy: 1700 },
+    },
+    colors: { title: '#1a1410', ink: '#1a1410', active: '#b3261a', under: '#1a1410', dim: 'rgba(26,20,16,0.33)', outro: '#8e2414', reed: '#b3261a', reedTip: '#1a1410' },
+    ambient: 'dust', grade: { mode: 'soft-light', color: '#ffe8c0', a: 0.12 }, vignette: 0.22, drift: 0.03, paintIn: 1.0, glint: true,
+    transitions: ['ink', 'wipe', 'page', 'unroll'],
+  },
   karagoz: {
     label: 'Karagöz shadow-theatre booth',
     layout: { ...LAYOUT, logo: null },
@@ -207,6 +223,31 @@ export function buildPage(look, opts = {}) {
     const cp = L.caption; ribbon(ctx, cp.x, cp.y, cp.w, cp.h, P.paperLight, P.goldDark);
     logoRoundel(ctx, opts.logo, L.logo.cx, L.logo.cy, L.logo.r);
     handlePlate(ctx, opts.handle, L.handle.cx, L.handle.cy, P.vermDark, P.goldLight);
+  }
+  else if (look.name === 'ledger') {
+    const R2 = rng((opts.seed || 11) + 21);
+    ctx.fillStyle = '#efe3c6'; ctx.fillRect(0, 0, L.W, L.H);
+    const tex = paperTexture(L.W, L.H, 31); ctx.save(); ctx.globalCompositeOperation = 'multiply'; ctx.drawImage(tex, 0, 0); ctx.restore();
+    // ruled lines and double margin rules, as in a register
+    ctx.strokeStyle = 'rgba(70,90,120,0.22)'; ctx.lineWidth = 1.2; for (let y = 40; y < L.H; y += 34) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(L.W, y); ctx.stroke(); }
+    for (const [x, c] of [[40, '#b3261a'], [48, '#b3261a'], [L.W - 48, '#1a1410'], [L.W - 40, '#1a1410']]) { ctx.strokeStyle = c; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, L.H); ctx.stroke(); }
+    // the title band between red rules, with ink flourishes
+    const tb = L.title;
+    for (const y of [tb.cy - 52, tb.cy + 52]) { ctx.strokeStyle = '#b3261a'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(70, y); ctx.lineTo(L.W - 70, y); ctx.stroke(); }
+    for (const sx of [-1, 1]) { ctx.beginPath(); ctx.moveTo(tb.cx + sx * 400, tb.cy); ctx.bezierCurveTo(tb.cx + sx * 440, tb.cy - 40, tb.cx + sx * 470, tb.cy + 40, tb.cx + sx * 500, tb.cy); stroke(ctx, '#1a1410', 3); circle(ctx, tb.cx + sx * 410, tb.cy, 6, '#b3261a', null); }
+    // the painting: black and red ink frame
+    for (const [o, c, lw] of [[-14, '#1a1410', 3], [-8, '#b3261a', 2], [-3, '#1a1410', 1.2]]) { ctx.strokeStyle = c; ctx.lineWidth = lw; ctx.strokeRect(PA.x + o, PA.y + o, PA.w - 2 * o, PA.h - 2 * o); }
+    // caption: written on the ruled page between ink rules
+    const cp = L.caption; ctx.fillStyle = 'rgba(246,238,216,0.85)'; ctx.fillRect(cp.x, cp.y, cp.w, cp.h);
+    for (const [o, c, lw] of [[-6, '#1a1410', 2.5], [-1, '#b3261a', 1.5]]) { ctx.strokeStyle = c; ctx.lineWidth = lw; ctx.strokeRect(cp.x + o, cp.y + o, cp.w - 2 * o, cp.h - 2 * o); }
+    // footer: columns of accounts in red and black, the seal, the handle
+    const ft = L.footer;
+    ctx.font = '700 24px Garamond'; ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+    for (let r = 0; r < 6; r++) for (let c = 0; c < 2; c++) { ctx.fillStyle = (r + c) % 3 ? '#1a1410' : '#b3261a'; ctx.fillText(String(Math.floor(100 + R2() * 9800)), 170 + c * 110, ft.y + 40 + r * 38); }
+    ctx.strokeStyle = '#1a1410'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(80, ft.y + 250); ctx.lineTo(300, ft.y + 250); ctx.stroke();
+    logoRoundel(ctx, opts.logo, L.logo.cx, L.logo.cy, L.logo.r);
+    kit.seal(ctx, L.logo.cx, L.logo.cy + 110, 40, ' DEFTER · DEFTER ·', '1', 1, '#b3261a');
+    handlePlate(ctx, opts.handle, L.handle.cx, L.handle.cy, '#1a1410', '#efe3c6');
   }
   else if (look.name === 'karagoz') {
     woodGrain(ctx, 0, 0, L.W, L.H, (opts.seed || 11) + 4);

@@ -63,6 +63,7 @@ Everything lives in `animate/`:
 | `animate/projects/microwave/` | eighteenth short, first `marvels` device (Book of Wonders: magnetron cutaway with gold callouts, a measuring rod and balance for 6 ft / 750 lb, astonished onlookers with `mood: 'wow'`, a wheel of kitchens), `scroll` look, `tiles` room |
 | `animate/projects/statue-of-liberty/` | nineteenth short, first `mosaic` device: the statue cut into ~300 tiles from cached copper/brown/green layers (`mosaicStatue` in the story) — tiles pop in, then the patina spreads tile by tile; `tile` look with `ambient: 'dust'`, `lattice` room |
 | `animate/projects/monopoly/` | twentieth short, first `karagoz` device: Lizzie Magie vs. Charles Darrow as jointed shadow puppets (draw them 30% larger than the kit default), curtain between acts, a spotlight for the twist; generic board, never the brand's design; `karagoz` look, `tent` room |
+| `animate/projects/black-friday/` | twenty-first short, first `meddah` device (a coffeehouse storyteller on a high seat with stick and handkerchief, listeners with coffee cups who react; story scenes in between, back to him for the twist) and the new `ledger` look; posted between existing videos, so it needed a look none of its neighbours use — when inserting a video into the schedule, check the looks of the videos before AND after it (`check-unique.mjs --all`) |
 
 Follow CLAUDE.md: never say it works until you rendered and looked at it.
 
@@ -152,6 +153,7 @@ Each video gets its own page design so the channel never looks templated:
 | `tile` | İznik tile panel, white caption box with cobalt rules | none | tiles, lattice, wipe |
 | `night` | navy lacquer with gold vines, cream captions, moon footer | fireflies | ink, iris, lattice |
 | `scroll` | hanging scroll with wooden rollers, title tag, ribbon captions | petals | unroll, page, wipe, ink |
+| `ledger` | an Ottoman account book (defter): ruled paper, red and black ink rules, the title written between red rules, spoken words highlighted in red ink, columns of accounts in the footer | dust | ink, wipe, page, unroll |
 | `karagoz` | Karagöz shadow-theatre booth: backlit muslin screen, red drapes, wooden sign and caption plank, oil lamps; colours glow like translucent leather puppets, lamp flicker | none | curtain, iris, cut |
 | `classic` | the original lapis header page (used by the first 16 videos — avoid for now) | none | as written |
 
