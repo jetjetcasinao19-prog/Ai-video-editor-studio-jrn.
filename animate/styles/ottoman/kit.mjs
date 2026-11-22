@@ -497,6 +497,18 @@ function head(ctx, x, y, o) {
     ctx.beginPath(); ctx.moveTo(0, -40); ctx.quadraticCurveTo(-10, -36, -16, -22); stroke(ctx, P.ink, 2);
   } else if (hat === 'cap') {
     ctx.beginPath(); ctx.ellipse(2, -12, 18, 14, 0, Math.PI, TAU); fillStroke(ctx, o.hatColor || P.ochre, P.ink, 1.6);
+  } else if (hat === 'servicecap') { // 1914 British peaked service cap
+    ctx.beginPath(); ctx.ellipse(2, -16, 20, 9, 0, 0, TAU); fillStroke(ctx, o.hatColor || '#7c6e44', P.ink, 1.6);
+    ctx.beginPath(); ctx.moveTo(-18, -16); ctx.quadraticCurveTo(-14, -34, 4, -34); ctx.quadraticCurveTo(24, -34, 22, -16); ctx.closePath(); fillStroke(ctx, o.hatColor || '#7c6e44', P.ink, 1.6);
+    ctx.beginPath(); ctx.moveTo(6, -12); ctx.quadraticCurveTo(22, -12, 28, -6); stroke(ctx, '#3a2a14', 4);
+    circle(ctx, 4, -26, 3, P.goldLight, P.ink, 0.8);
+  } else if (hat === 'pickelhaube') { // 1914 German spiked helmet in its grey cloth field cover
+    ctx.beginPath(); ctx.moveTo(-20, -10); ctx.quadraticCurveTo(-22, -40, 2, -42); ctx.quadraticCurveTo(24, -40, 22, -10); ctx.closePath(); fillStroke(ctx, o.hatColor || '#8a8c78', P.ink, 1.6);
+    ctx.beginPath(); ctx.moveTo(10, -10); ctx.lineTo(28, -6); stroke(ctx, P.ink, 3);
+    poly(ctx, [[-2, -42], [6, -42], [2, -58]], o.hatColor || '#8a8c78', P.ink, 1.4);
+  } else if (hat === 'zucchetto') { // a white skullcap
+    ctx.beginPath(); ctx.moveTo(-14, -2); ctx.quadraticCurveTo(-20, -24, 0, -22); ctx.quadraticCurveTo(22, -24, 18, -2); ctx.quadraticCurveTo(10, -14, -4, -12); ctx.closePath(); fillStroke(ctx, o.hair || '#cfcfcf', P.ink, 1.2);
+    ctx.beginPath(); ctx.ellipse(2, -18, 13, 7, 0, Math.PI, TAU); fillStroke(ctx, P.white, P.ink, 1.4);
   } else if (hat === 'hotoz') { // a lady's tall cap with a flowing veil
     ctx.beginPath(); ctx.moveTo(-14, -16); ctx.quadraticCurveTo(-40, 20, -30, 70); ctx.lineTo(-10, 60); ctx.quadraticCurveTo(-16, 20, -4, -6); ctx.closePath(); fillStroke(ctx, o.veil || P.white, P.ink, 1.3);
     ctx.beginPath(); ctx.ellipse(2, -14, 19, 11, 0, Math.PI, TAU); fillStroke(ctx, o.hair || '#3a2a20', P.ink, 1.2);
@@ -2004,6 +2016,55 @@ export function rockFace(ctx, x, y, s = 1, color = '#8a7a6a', mood = 0) {
   ctx.beginPath(); ctx.arc(14, 0, 7, Math.PI * 0.1, Math.PI * 0.9); stroke(ctx, c, 2.5);
   ctx.beginPath(); ctx.moveTo(-6, 10); ctx.lineTo(-2, 18); ctx.lineTo(2, 12); stroke(ctx, c, 2);
   ctx.beginPath(); ctx.arc(0, 30 - mood * 8, 12, Math.PI * (0.15 + mood * 1.0), Math.PI * (0.85 + mood * 1.0)); stroke(ctx, c, 2.5);
+  ctx.restore();
+}
+
+// ---------- Christmas truce (1914) ----------
+// a small fir tree with lit candles, as the Germans set them on their parapets
+export function candleTree(ctx, x, base, s = 1, t = 0, lit = 1) {
+  ctx.save(); ctx.translate(x, base); ctx.scale(s, s);
+  rect(ctx, -5, -14, 10, 14, P.brown, P.ink, 1.2);
+  for (let i = 0; i < 3; i++) poly(ctx, [[-38 + i * 8, -14 - i * 26], [38 - i * 8, -14 - i * 26], [0, -58 - i * 26]], i % 2 ? P.green : P.greenDark, P.ink, 1.5);
+  if (lit > 0) for (const [cx, cy, j] of [[-22, -20, 0], [20, -22, 1], [-12, -46, 2], [14, -48, 3], [0, -72, 4], [-6, -96, 5]]) {
+    rect(ctx, cx - 2, cy - 9, 4, 9, P.white, null);
+    const f = lit * (0.75 + 0.25 * Math.sin(t * 13 + j * 2.1)), g = ctx.createRadialGradient(cx, cy - 13, 0, cx, cy - 13, 16);
+    g.addColorStop(0, `rgba(255,225,140,${0.7 * f})`); g.addColorStop(1, 'rgba(255,225,140,0)'); ctx.fillStyle = g; ctx.fillRect(cx - 16, cy - 29, 32, 32);
+    ctx.beginPath(); ctx.ellipse(cx, cy - 13, 2.6 * f, 5 * f, 0, 0, TAU); ctx.fillStyle = '#ffd86a'; ctx.fill();
+  }
+  ctx.restore();
+}
+// barbed wire on crossed stakes from x0 to x1
+export function barbedWire(ctx, x0, x1, y, h = 50) {
+  for (let x = x0; x <= x1; x += 120) for (const d of [-1, 1]) { ctx.beginPath(); ctx.moveTo(x - 18 * d, y); ctx.lineTo(x + 18 * d, y - h); stroke(ctx, P.brown, 4); }
+  for (const yy of [y - h * 0.35, y - h * 0.75]) {
+    ctx.beginPath(); for (let x = x0; x <= x1; x += 10) ctx[x === x0 ? 'moveTo' : 'lineTo'](x, yy + Math.sin(x * 0.2) * 3); stroke(ctx, '#4a4a4a', 1.6);
+    for (let x = x0 + 8; x <= x1; x += 22) { ctx.beginPath(); ctx.moveTo(x - 4, yy - 4); ctx.lineTo(x + 4, yy + 4); ctx.moveTo(x + 4, yy - 4); ctx.lineTo(x - 4, yy + 4); stroke(ctx, '#4a4a4a', 1.4); }
+  }
+}
+// a trench in cross-section: a dug channel with sandbag parapet, duckboards and mud
+export function trench(ctx, x, top, w, depth, side = 1) {
+  ctx.save(); ctx.translate(x, top);
+  ctx.fillStyle = '#5a4630'; ctx.fillRect(-w / 2, 0, w, depth);
+  ctx.fillStyle = '#3e2f20'; ctx.beginPath(); ctx.moveTo(-w / 2 + 20, 0); ctx.lineTo(-w / 2 + 40, depth - 20); ctx.lineTo(w / 2 - 40, depth - 20); ctx.lineTo(w / 2 - 20, 0); ctx.closePath(); ctx.fill();
+  for (let i = 0; i < Math.floor(w / 46); i++) ellipse(ctx, -w / 2 + 23 + i * 46, -10 - (i % 2) * 14, 24, 12, 0, '#a89366', P.ink, 1.3);
+  for (let i = 0; i < 6; i++) rect(ctx, -w / 2 + 50 + i * (w - 100) / 6, depth - 30, (w - 100) / 6 - 6, 8, P.brownLight, P.ink, 1);
+  ctx.globalAlpha = 0.5; for (let i = 0; i < 10; i++) ellipse(ctx, -w / 2 + 40 + ((i * 97) % (w - 80)), depth - 14, 26, 5, 0, '#6e5a3e', null); ctx.globalAlpha = 1;
+  ctx.restore();
+}
+// a letter on lined paper; lines = [text…] written so far (k 0..1 of the last line)
+export function letter(ctx, x, y, w, h, lines = [], k = 1, rot = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot);
+  rect(ctx, -w / 2, -h / 2, w, h, '#f6efdc', P.ink, 2);
+  ctx.strokeStyle = 'rgba(70,90,140,0.3)'; ctx.lineWidth = 1; for (let yy = -h / 2 + 50; yy < h / 2 - 10; yy += 34) { ctx.beginPath(); ctx.moveTo(-w / 2 + 16, yy); ctx.lineTo(w / 2 - 16, yy); ctx.stroke(); }
+  ctx.font = '600 28px GaramondItalic'; ctx.fillStyle = '#2a2a50'; ctx.textBaseline = 'alphabetic';
+  lines.forEach((l, i) => { const txt = i === lines.length - 1 ? l.slice(0, Math.ceil(l.length * clamp(k))) : l; ctx.fillText(txt, -w / 2 + 24, -h / 2 + 46 + i * 34); });
+  ctx.restore();
+}
+export function candle(ctx, x, y, s = 1, t = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  const g = ctx.createRadialGradient(0, -46, 2, 0, -46, 140); g.addColorStop(0, 'rgba(255,220,140,0.55)'); g.addColorStop(1, 'rgba(255,220,140,0)'); ctx.fillStyle = g; ctx.fillRect(-140, -186, 280, 280);
+  rect(ctx, -10, -36, 20, 36, P.white, P.ink, 1.5); rect(ctx, -24, -4, 48, 8, P.steel, P.ink, 1.5);
+  const f = 1 + 0.12 * Math.sin(t * 15); ctx.beginPath(); ctx.ellipse(0, -48, 5 * f, 11 * f, 0, 0, TAU); ctx.fillStyle = '#ffcf5a'; ctx.fill();
   ctx.restore();
 }
 

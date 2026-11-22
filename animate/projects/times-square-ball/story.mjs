@@ -7,7 +7,7 @@ export const meta = {
   title: 'How the Times Square Ball Drop Started',
   slug: 'times-square-ball-ottoman',
   style: 'ottoman',
-  look: 'night', // navy-and-gold lacquer page with fireflies: a New Year's Eve story
+  look: 'ledger', // ink on ruled paper: the newspaper's story (night went to the Christmas truce)
   room: 'library',
   width: 1080, height: 1920, fps: 30,
   duration: 59.0,

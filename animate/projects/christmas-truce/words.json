@@ -1,0 +1,606 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "In the middle of World War I, enemies stopped fighting for Christmas. December 1914. The Western Front. British and German soldiers face each other from muddy, freezing trenches. Earlier that month, the Pope asked for a Christmas truce. Leaders said no. But on Christmas Eve, the British hear something from the German side. Singing. Silent night. Soon soldiers climb out and meet in no man's land, the deadly ground between the trenches. They shake hands, share food, swap gifts, bury their dead together. In some places, they even play soccer. The generals are furious. They order it never to happen again. It never happens on that scale again. One silent night when enemies chose peace. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "In",
+   "start": 0,
+   "end": 0.14
+  },
+  {
+   "w": "the",
+   "start": 0.14,
+   "end": 0.22
+  },
+  {
+   "w": "middle",
+   "start": 0.22,
+   "end": 0.42
+  },
+  {
+   "w": "of",
+   "start": 0.42,
+   "end": 0.62
+  },
+  {
+   "w": "World",
+   "start": 0.62,
+   "end": 0.98
+  },
+  {
+   "w": "War",
+   "start": 0.98,
+   "end": 1.2
+  },
+  {
+   "w": "I,",
+   "start": 1.2,
+   "end": 2.48
+  },
+  {
+   "w": "enemies",
+   "start": 2.48,
+   "end": 2.7
+  },
+  {
+   "w": "stopped",
+   "start": 2.7,
+   "end": 3.32
+  },
+  {
+   "w": "fighting",
+   "start": 3.32,
+   "end": 3.74
+  },
+  {
+   "w": "for",
+   "start": 3.74,
+   "end": 4.18
+  },
+  {
+   "w": "Christmas.",
+   "start": 4.18,
+   "end": 4.58
+  },
+  {
+   "w": "December",
+   "start": 6,
+   "end": 6.4
+  },
+  {
+   "w": "1914.",
+   "start": 6.4,
+   "end": 7.14
+  },
+  {
+   "w": "The",
+   "start": 7.14,
+   "end": 8.24
+  },
+  {
+   "w": "Western",
+   "start": 8.24,
+   "end": 8.66
+  },
+  {
+   "w": "Front.",
+   "start": 8.66,
+   "end": 9.44
+  },
+  {
+   "w": "British",
+   "start": 10.1,
+   "end": 10.38
+  },
+  {
+   "w": "and",
+   "start": 10.38,
+   "end": 10.62
+  },
+  {
+   "w": "German",
+   "start": 10.62,
+   "end": 11.04
+  },
+  {
+   "w": "soldiers",
+   "start": 11.04,
+   "end": 11.46
+  },
+  {
+   "w": "face",
+   "start": 11.46,
+   "end": 11.78
+  },
+  {
+   "w": "each",
+   "start": 11.78,
+   "end": 12
+  },
+  {
+   "w": "other",
+   "start": 12,
+   "end": 12.2
+  },
+  {
+   "w": "from",
+   "start": 12.2,
+   "end": 12.44
+  },
+  {
+   "w": "muddy,",
+   "start": 12.44,
+   "end": 13.18
+  },
+  {
+   "w": "freezing",
+   "start": 13.18,
+   "end": 13.5
+  },
+  {
+   "w": "trenches.",
+   "start": 13.5,
+   "end": 13.96
+  },
+  {
+   "w": "Earlier",
+   "start": 14.96,
+   "end": 15.16
+  },
+  {
+   "w": "that",
+   "start": 15.16,
+   "end": 15.44
+  },
+  {
+   "w": "month,",
+   "start": 15.44,
+   "end": 16.1
+  },
+  {
+   "w": "the",
+   "start": 16.1,
+   "end": 16.24
+  },
+  {
+   "w": "Pope",
+   "start": 16.24,
+   "end": 16.52
+  },
+  {
+   "w": "asked",
+   "start": 16.52,
+   "end": 16.94
+  },
+  {
+   "w": "for",
+   "start": 16.94,
+   "end": 17.12
+  },
+  {
+   "w": "a",
+   "start": 17.12,
+   "end": 17.26
+  },
+  {
+   "w": "Christmas",
+   "start": 17.26,
+   "end": 17.62
+  },
+  {
+   "w": "truce.",
+   "start": 17.62,
+   "end": 18.5
+  },
+  {
+   "w": "Leaders",
+   "start": 18.86,
+   "end": 19.1
+  },
+  {
+   "w": "said",
+   "start": 19.1,
+   "end": 19.52
+  },
+  {
+   "w": "no.",
+   "start": 19.52,
+   "end": 19.82
+  },
+  {
+   "w": "But",
+   "start": 20.8,
+   "end": 20.92
+  },
+  {
+   "w": "on",
+   "start": 20.92,
+   "end": 21.08
+  },
+  {
+   "w": "Christmas",
+   "start": 21.08,
+   "end": 21.52
+  },
+  {
+   "w": "Eve,",
+   "start": 21.52,
+   "end": 22.18
+  },
+  {
+   "w": "the",
+   "start": 22.18,
+   "end": 22.24
+  },
+  {
+   "w": "British",
+   "start": 22.24,
+   "end": 22.56
+  },
+  {
+   "w": "hear",
+   "start": 22.56,
+   "end": 22.76
+  },
+  {
+   "w": "something",
+   "start": 22.76,
+   "end": 23.1
+  },
+  {
+   "w": "from",
+   "start": 23.1,
+   "end": 23.34
+  },
+  {
+   "w": "the",
+   "start": 23.34,
+   "end": 23.46
+  },
+  {
+   "w": "German",
+   "start": 23.46,
+   "end": 23.82
+  },
+  {
+   "w": "side.",
+   "start": 23.82,
+   "end": 24.62
+  },
+  {
+   "w": "Singing.",
+   "start": 24.98,
+   "end": 26.28
+  },
+  {
+   "w": "Silent",
+   "start": 26.28,
+   "end": 26.7
+  },
+  {
+   "w": "night.",
+   "start": 26.7,
+   "end": 27.06
+  },
+  {
+   "w": "Soon",
+   "start": 28.26,
+   "end": 28.48
+  },
+  {
+   "w": "soldiers",
+   "start": 28.48,
+   "end": 29.1
+  },
+  {
+   "w": "climb",
+   "start": 29.1,
+   "end": 29.46
+  },
+  {
+   "w": "out",
+   "start": 29.46,
+   "end": 29.7
+  },
+  {
+   "w": "and",
+   "start": 29.7,
+   "end": 30
+  },
+  {
+   "w": "meet",
+   "start": 30,
+   "end": 30.3
+  },
+  {
+   "w": "in",
+   "start": 30.3,
+   "end": 30.52
+  },
+  {
+   "w": "no",
+   "start": 30.52,
+   "end": 30.74
+  },
+  {
+   "w": "man's",
+   "start": 30.74,
+   "end": 31
+  },
+  {
+   "w": "land,",
+   "start": 31,
+   "end": 31.76
+  },
+  {
+   "w": "the",
+   "start": 31.76,
+   "end": 31.84
+  },
+  {
+   "w": "deadly",
+   "start": 31.84,
+   "end": 32.2
+  },
+  {
+   "w": "ground",
+   "start": 32.2,
+   "end": 32.6
+  },
+  {
+   "w": "between",
+   "start": 32.6,
+   "end": 33
+  },
+  {
+   "w": "the",
+   "start": 33,
+   "end": 33.24
+  },
+  {
+   "w": "trenches.",
+   "start": 33.24,
+   "end": 34.06
+  },
+  {
+   "w": "They",
+   "start": 34.46,
+   "end": 34.58
+  },
+  {
+   "w": "shake",
+   "start": 34.58,
+   "end": 34.78
+  },
+  {
+   "w": "hands,",
+   "start": 34.78,
+   "end": 35.8
+  },
+  {
+   "w": "share",
+   "start": 35.8,
+   "end": 35.96
+  },
+  {
+   "w": "food,",
+   "start": 35.96,
+   "end": 37.02
+  },
+  {
+   "w": "swap",
+   "start": 37.02,
+   "end": 37.2
+  },
+  {
+   "w": "gifts,",
+   "start": 37.2,
+   "end": 38.34
+  },
+  {
+   "w": "bury",
+   "start": 38.34,
+   "end": 38.56
+  },
+  {
+   "w": "their",
+   "start": 38.56,
+   "end": 38.82
+  },
+  {
+   "w": "dead",
+   "start": 38.82,
+   "end": 39.1
+  },
+  {
+   "w": "together.",
+   "start": 39.1,
+   "end": 40.58
+  },
+  {
+   "w": "In",
+   "start": 40.58,
+   "end": 40.68
+  },
+  {
+   "w": "some",
+   "start": 40.68,
+   "end": 40.9
+  },
+  {
+   "w": "places,",
+   "start": 40.9,
+   "end": 41.68
+  },
+  {
+   "w": "they",
+   "start": 41.62,
+   "end": 41.72
+  },
+  {
+   "w": "even",
+   "start": 41.72,
+   "end": 41.96
+  },
+  {
+   "w": "play",
+   "start": 41.96,
+   "end": 42.18
+  },
+  {
+   "w": "soccer.",
+   "start": 42.18,
+   "end": 43.32
+  },
+  {
+   "w": "The",
+   "start": 43.32,
+   "end": 43.48
+  },
+  {
+   "w": "generals",
+   "start": 43.48,
+   "end": 43.94
+  },
+  {
+   "w": "are",
+   "start": 43.94,
+   "end": 44.16
+  },
+  {
+   "w": "furious.",
+   "start": 44.16,
+   "end": 45.28
+  },
+  {
+   "w": "They",
+   "start": 45.28,
+   "end": 45.36
+  },
+  {
+   "w": "order",
+   "start": 45.36,
+   "end": 45.64
+  },
+  {
+   "w": "it",
+   "start": 45.64,
+   "end": 45.82
+  },
+  {
+   "w": "never",
+   "start": 45.82,
+   "end": 46.16
+  },
+  {
+   "w": "to",
+   "start": 46.16,
+   "end": 46.32
+  },
+  {
+   "w": "happen",
+   "start": 46.32,
+   "end": 46.5
+  },
+  {
+   "w": "again.",
+   "start": 46.5,
+   "end": 46.86
+  },
+  {
+   "w": "It",
+   "start": 47.88,
+   "end": 48.02
+  },
+  {
+   "w": "never",
+   "start": 48.02,
+   "end": 48.28
+  },
+  {
+   "w": "happens",
+   "start": 48.28,
+   "end": 48.66
+  },
+  {
+   "w": "on",
+   "start": 48.66,
+   "end": 48.86
+  },
+  {
+   "w": "that",
+   "start": 48.86,
+   "end": 49.08
+  },
+  {
+   "w": "scale",
+   "start": 49.08,
+   "end": 49.48
+  },
+  {
+   "w": "again.",
+   "start": 49.48,
+   "end": 50.94
+  },
+  {
+   "w": "One",
+   "start": 50.94,
+   "end": 51.24
+  },
+  {
+   "w": "silent",
+   "start": 51.24,
+   "end": 51.86
+  },
+  {
+   "w": "night",
+   "start": 51.86,
+   "end": 52.3
+  },
+  {
+   "w": "when",
+   "start": 52.3,
+   "end": 53
+  },
+  {
+   "w": "enemies",
+   "start": 53,
+   "end": 53.46
+  },
+  {
+   "w": "chose",
+   "start": 53.46,
+   "end": 54
+  },
+  {
+   "w": "peace.",
+   "start": 54,
+   "end": 54.52
+  },
+  {
+   "w": "Every",
+   "start": 55.9,
+   "end": 56.08
+  },
+  {
+   "w": "legend",
+   "start": 56.08,
+   "end": 56.42
+  },
+  {
+   "w": "has",
+   "start": 56.42,
+   "end": 56.94
+  },
+  {
+   "w": "a",
+   "start": 56.94,
+   "end": 57.04
+  },
+  {
+   "w": "beginning.",
+   "start": 57.04,
+   "end": 57.82
+  }
+ ]
+}

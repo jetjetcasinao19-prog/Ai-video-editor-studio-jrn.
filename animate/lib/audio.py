@@ -221,6 +221,13 @@ def sfx_signal(kind, pitch=1.0):
     if kind == 'riser':
         tt = t(0.6); f = 200 + 1400 * (tt / tt[-1]) ** 2
         return (np.sin(2 * np.pi * np.cumsum(f) / SR) * 0.3 + bandnoise(len(tt), 1000, 8000) * 0.3) * (tt / tt[-1]) ** 2
+    if kind == 'silentnight':  # the opening of "Silent Night" (Gruber, 1818, public domain) on a ney, in C × pitch
+        e = 0.24; mel = [(67, 3), (69, 1), (67, 2), (64, 6), (67, 3), (69, 1), (67, 2), (64, 6)]
+        out = np.zeros(int(sum(d for _, d in mel) * e * SR + SR)); at = 0
+        for m, d in mel:
+            f = 440 * 2 ** ((m - 69) / 12) * pitch; n = ney(f, d * e * 1.08, 0.18)
+            j = int(at * e * SR); out[j:j + len(n)] += n[:len(out) - j]; at += d
+        return out * 0.7
     if kind == 'signature':  # the channel's sound logo: a kanun run in hicaz, a ney answer, a soft gong
         out = np.zeros(int(2.6 * SR))
         root = 293.66 * pitch
