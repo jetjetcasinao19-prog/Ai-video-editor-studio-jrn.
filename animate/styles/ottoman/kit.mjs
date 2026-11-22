@@ -1584,6 +1584,53 @@ export function certificate(ctx, x, y, w, rot = 0, title = 'SHARES', line = '') 
   ctx.restore();
 }
 
+// ---------- city nights & time ----------
+export function fireworks(ctx, x, y, r, k, color = P.goldLight, seed = 1) {
+  if (k <= 0 || k >= 1.2) return;
+  const R = rng(seed), n = 18, a = clamp(1.2 - k);
+  ctx.save(); ctx.translate(x, y); ctx.globalAlpha *= a;
+  for (let i = 0; i < n; i++) { const ang = i / n * TAU + R() * 0.2, d = r * ease.outCubic(clamp(k)); ctx.beginPath(); ctx.moveTo(Math.cos(ang) * d * 0.55, Math.sin(ang) * d * 0.55 + k * 10); ctx.lineTo(Math.cos(ang) * d, Math.sin(ang) * d + k * 20); stroke(ctx, i % 2 ? color : P.white, 3); star(ctx, Math.cos(ang) * d, Math.sin(ang) * d + k * 20, 5, 1); }
+  ctx.restore();
+}
+// The narrow wedge-shaped Times Tower; h = height (rise animates it).
+export function wedgeTower(ctx, x, base, w, h, lit = 0) {
+  ctx.save(); ctx.translate(x, base);
+  poly(ctx, [[-w / 2, 0], [-w * 0.42, -h], [w * 0.42, -h], [w / 2, 0]], '#d8c9a8', P.ink, 2.5);
+  for (let r = 1; r < Math.floor(h / 44); r++) for (let c = 0; c < 3; c++) rect(ctx, -w * 0.32 + c * w * 0.24, -r * 44 - 8, w * 0.14, 22, lit > 0 ? (((r + c) % 3) ? P.goldLight : '#5a5f7a') : P.lapis, P.ink, 1);
+  rect(ctx, -w * 0.46, -h - 20, w * 0.92, 20, '#c9b890', P.ink, 2);
+  rect(ctx, -w * 0.3, -h - 60, w * 0.6, 40, '#d8c9a8', P.ink, 2);
+  ctx.beginPath(); ctx.moveTo(0, -h - 60); ctx.lineTo(0, -h - 220); stroke(ctx, P.ink, 6);
+  ctx.restore();
+}
+// The ball: a lattice sphere of iron and wood studded with bulbs; glow 0..1.
+export function timeBall(ctx, x, y, r, t = 0, glow = 1, bulbs = 100) {
+  ctx.save(); ctx.translate(x, y);
+  if (glow > 0) { const g = ctx.createRadialGradient(0, 0, r * 0.3, 0, 0, r * 2.6); g.addColorStop(0, `rgba(255,240,170,${0.75 * glow})`); g.addColorStop(1, 'rgba(255,240,170,0)'); ctx.fillStyle = g; ctx.fillRect(-r * 2.7, -r * 2.7, r * 5.4, r * 5.4); }
+  circle(ctx, 0, 0, r, '#6a4a2a', P.ink, 3);
+  ctx.strokeStyle = '#3a3a3a'; ctx.lineWidth = Math.max(2, r * 0.05);
+  for (let i = -2; i <= 2; i++) { ctx.beginPath(); ctx.ellipse(0, 0, r * Math.abs(Math.cos(i * 0.6)) || 1, r, 0, 0, TAU); ctx.stroke(); ctx.beginPath(); ctx.ellipse(0, 0, r, r * Math.abs(Math.cos(i * 0.6)) || 1, 0, 0, TAU); ctx.stroke(); }
+  const R = rng(7), n = Math.min(bulbs, 100);
+  for (let i = 0; i < n; i++) { const a = R() * TAU, d = Math.sqrt(R()) * r * 0.92; circle(ctx, Math.cos(a) * d, Math.sin(a) * d, Math.max(1.5, r * 0.045), (0.5 + 0.5 * Math.sin(t * 7 + i)) * glow > 0.25 ? '#fff6c8' : '#8a7a5a', null); }
+  ctx.restore();
+}
+export function clockFace(ctx, x, y, r, hour = 12, minute = 0, color = P.paperLight) {
+  ctx.save(); ctx.translate(x, y);
+  circle(ctx, 0, 0, r, color, P.goldDark, Math.max(3, r * 0.08));
+  for (let i = 0; i < 12; i++) { const a = i / 12 * TAU; ctx.beginPath(); ctx.moveTo(Math.sin(a) * r * 0.78, -Math.cos(a) * r * 0.78); ctx.lineTo(Math.sin(a) * r * 0.9, -Math.cos(a) * r * 0.9); stroke(ctx, P.ink, Math.max(1.5, r * 0.04)); }
+  const ha = (hour % 12 + minute / 60) / 12 * TAU, ma = minute / 60 * TAU;
+  ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(Math.sin(ha) * r * 0.5, -Math.cos(ha) * r * 0.5); stroke(ctx, P.ink, Math.max(3, r * 0.08));
+  ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(Math.sin(ma) * r * 0.75, -Math.cos(ma) * r * 0.75); stroke(ctx, P.ink, Math.max(2, r * 0.05));
+  circle(ctx, 0, 0, r * 0.06, P.ink, null);
+  ctx.restore();
+}
+export function streetSign(ctx, x, y, w, text, color = P.green, rot = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot);
+  rect(ctx, -w / 2, -w * 0.11, w, w * 0.22, color, P.ink, 2.5);
+  ctx.strokeStyle = P.white; ctx.lineWidth = 2; ctx.strokeRect(-w / 2 + 6, -w * 0.11 + 6, w - 12, w * 0.22 - 12);
+  ctx.fillStyle = P.white; ctx.font = `900 ${Math.round(w * 0.085)}px Deco`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(text, 0, 2);
+  ctx.restore();
+}
+
 // ---------- colour util ----------
 export function shade(hex, k) {
   if (!hex.startsWith('#')) return hex;
