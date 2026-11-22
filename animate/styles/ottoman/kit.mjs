@@ -480,7 +480,7 @@ function head(ctx, x, y, o) {
   ctx.beginPath(); ctx.moveTo(4, -2); ctx.quadraticCurveTo(10, 6, 5, 7); stroke(ctx, P.ink, 1.1);
   const mood = o.mood || 'calm';
   ctx.beginPath();
-  if (mood === 'happy') ctx.arc(4, 9, 4, 0.1 * Math.PI, 0.9 * Math.PI); else if (mood === 'sad') ctx.arc(4, 15, 4, 1.15 * Math.PI, 1.85 * Math.PI); else { ctx.moveTo(1, 12); ctx.lineTo(7, 12); }
+  if (mood === 'wow') { ctx.ellipse(4, 12, 2.6, 3.6, 0, 0, TAU); ctx.fillStyle = P.ink; ctx.fill(); } else if (mood === 'happy') ctx.arc(4, 9, 4, 0.1 * Math.PI, 0.9 * Math.PI); else if (mood === 'sad') ctx.arc(4, 15, 4, 1.15 * Math.PI, 1.85 * Math.PI); else { ctx.moveTo(1, 12); ctx.lineTo(7, 12); }
   stroke(ctx, P.vermDark, 1.6);
   if (o.mustache) { ctx.beginPath(); ctx.moveTo(-3, 9); ctx.quadraticCurveTo(4, 6, 11, 9); stroke(ctx, o.mustacheColor || '#3a2a20', 2.5); }
   if (o.glasses) { circle(ctx, -3, -3, 5, 'rgba(220,240,255,0.35)', P.ink, 1.3); circle(ctx, 9, -3, 5, 'rgba(220,240,255,0.35)', P.ink, 1.3); ctx.beginPath(); ctx.moveTo(2, -3); ctx.lineTo(4, -3); stroke(ctx, P.ink, 1.2); }
@@ -1741,6 +1741,111 @@ export function padlock(ctx, x, y, s = 1, open = 0, color = P.gold) {
   ctx.restore();
   rect(ctx, -55, -10, 110, 90, color, P.ink, 3);
   circle(ctx, 0, 25, 11, P.ink, null); poly(ctx, [[-6, 28], [6, 28], [4, 55], [-4, 55]], P.ink, null);
+  ctx.restore();
+}
+
+// ---------- microwave story: melting sweets, the magnetron, radar, an egg, the first oven ----------
+// A wrapped chocolate bar; melt 0..1 slumps it and lets drips fall (generic wrapper, no brand).
+export function candyBar(ctx, x, y, s = 1, melt = 0, rot = 0, t = 0, labelText = 'CHOCOLATE') {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
+  const sag = melt * 26;
+  // the bar (bends in the middle as it melts)
+  ctx.beginPath(); ctx.moveTo(-110, -22); ctx.quadraticCurveTo(0, -22 + sag * 1.4, 110, -22); ctx.lineTo(110, 22); ctx.quadraticCurveTo(0, 22 + sag * 1.8, -110, 22); ctx.closePath(); fillStroke(ctx, '#5a3218', P.ink, 2.5);
+  if (melt < 0.6) for (let i = 0; i < 6; i++) { const bx = -100 + i * 36; ctx.save(); ctx.globalAlpha *= 1 - melt / 0.6; rect(ctx, bx, -16 + sag * 0.6 * Math.sin(Math.PI * (i + 0.5) / 6), 30, 30, '#6e3c1c', '#3a1e0c', 1.2); ctx.restore(); }
+  // wrapper over the left half
+  ctx.beginPath(); ctx.moveTo(-118, -26); ctx.lineTo(-10, -26 + sag * 0.9); ctx.lineTo(-10, 26 + sag * 1.2); ctx.lineTo(-118, 26); ctx.closePath(); fillStroke(ctx, P.verm, P.ink, 2.5);
+  for (let i = 0; i < 5; i++) { ctx.beginPath(); ctx.moveTo(-118, -26 + i * 13); ctx.lineTo(-128, -22 + i * 13); stroke(ctx, P.ink, 1.5); }
+  ctx.fillStyle = P.goldLight; ctx.font = '900 15px Deco'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(labelText, -64, sag * 0.4);
+  // drips
+  for (let i = 0; i < 5; i++) { const dx = -4 + i * 26, len = melt * (30 + (i % 3) * 22) * (0.6 + 0.4 * Math.sin(t * 2 + i)); if (len > 2) { ctx.beginPath(); ctx.moveTo(dx - 6, 18 + sag * 1.6); ctx.quadraticCurveTo(dx - 7, 18 + sag * 1.6 + len, dx, 18 + sag * 1.6 + len + 6); ctx.quadraticCurveTo(dx + 7, 18 + sag * 1.6 + len, dx + 6, 18 + sag * 1.6); fillStroke(ctx, '#5a3218', P.ink, 1.2); } }
+  ctx.restore();
+}
+// A cutaway of a cavity magnetron: copper block, ring of cavities, cathode, electrons spiralling.
+export function magnetron(ctx, x, y, r, t = 0, on = 1) {
+  ctx.save(); ctx.translate(x, y);
+  circle(ctx, 0, 0, r, '#c47a3a', P.ink, 3);
+  circle(ctx, 0, 0, r * 0.82, '#d9935a', P.ink, 1.5);
+  circle(ctx, 0, 0, r * 0.46, '#2a1c12', P.ink, 2);
+  for (let i = 0; i < 8; i++) { const a = i / 8 * TAU; circle(ctx, Math.cos(a) * r * 0.64, Math.sin(a) * r * 0.64, r * 0.11, '#2a1c12', P.ink, 1.5); ctx.beginPath(); ctx.moveTo(Math.cos(a) * r * 0.46, Math.sin(a) * r * 0.46); ctx.lineTo(Math.cos(a) * r * 0.54, Math.sin(a) * r * 0.54); stroke(ctx, '#2a1c12', r * 0.06); }
+  circle(ctx, 0, 0, r * 0.12, P.steel, P.ink, 1.5);
+  if (on > 0) for (let i = 0; i < 12; i++) { const ph = t * 3 + i / 12 * TAU; ctx.beginPath(); for (let j = 0; j <= 20; j++) { const q = j / 20, a = ph + q * 2.4, rr = r * (0.14 + q * 0.3); j ? ctx.lineTo(Math.cos(a) * rr, Math.sin(a) * rr) : ctx.moveTo(Math.cos(a) * rr, Math.sin(a) * rr); } ctx.save(); ctx.globalAlpha *= on * 0.8; stroke(ctx, P.goldLight, 2); ctx.restore(); }
+  // the output antenna
+  rect(ctx, -r * 0.08, -r - 60, r * 0.16, 60, P.steel, P.ink, 2);
+  ctx.restore();
+}
+// Wavy gold rays from (x0,y0) to (x1,y1); k = how far they have travelled.
+export function waveRays(ctx, x0, y0, x1, y1, k = 1, t = 0, n = 3, color = P.goldLight) {
+  const dx = x1 - x0, dy = y1 - y0, L = Math.hypot(dx, dy), a = Math.atan2(dy, dx);
+  ctx.save(); ctx.translate(x0, y0); ctx.rotate(a); ctx.lineCap = 'round';
+  for (let j = 0; j < n; j++) { const off = (j - (n - 1) / 2) * 26; ctx.beginPath(); for (let i = 0; i <= 60; i++) { const q = i / 60 * k; ctx[i ? 'lineTo' : 'moveTo'](q * L, off + Math.sin(q * L / 18 - t * 10 + j) * 9); } stroke(ctx, P.ink, 6); stroke(ctx, color, 3.5); }
+  ctx.restore();
+}
+// A rotating radar dish on a mast, with an optional sweep scope beside it.
+export function radarDish(ctx, x, base, s = 1, t = 0) {
+  ctx.save(); ctx.translate(x, base); ctx.scale(s, s);
+  poly(ctx, [[-60, 0], [60, 0], [14, -150], [-14, -150]], P.steel, P.ink, 2.5);
+  const sq = Math.cos(t * 1.6);
+  ctx.save(); ctx.translate(0, -180); ctx.scale(Math.max(0.15, Math.abs(sq)), 1);
+  ctx.beginPath(); ctx.ellipse(0, 0, 110, 60, 0, Math.PI * 1.02, Math.PI * 1.98, true); ctx.closePath(); fillStroke(ctx, sq > 0 ? '#c9cfd6' : '#9aa4b0', P.ink, 2.5);
+  for (let i = -2; i <= 2; i++) { ctx.beginPath(); ctx.moveTo(i * 40, 0); ctx.lineTo(i * 30, 50); stroke(ctx, P.ink, 1.2); }
+  ctx.restore();
+  ctx.beginPath(); ctx.moveTo(0, -180); ctx.lineTo(0, -240); stroke(ctx, P.ink, 4); circle(ctx, 0, -244, 8, P.verm, P.ink, 2);
+  ctx.restore();
+}
+export function radarScope(ctx, x, y, r, t = 0, blips = []) {
+  ctx.save(); ctx.translate(x, y);
+  circle(ctx, 0, 0, r + 14, P.steel, P.ink, 3); circle(ctx, 0, 0, r, '#0e2a1c', P.ink, 2);
+  for (const k of [0.33, 0.66]) circle(ctx, 0, 0, r * k, null, 'rgba(120,230,150,0.35)', 1.5);
+  const a = t * 2.2;
+  ctx.save(); ctx.beginPath(); ctx.moveTo(0, 0); ctx.arc(0, 0, r, a - 0.7, a); ctx.closePath(); const g = ctx.createRadialGradient(0, 0, 0, 0, 0, r); g.addColorStop(0, 'rgba(120,255,160,0.05)'); g.addColorStop(1, 'rgba(120,255,160,0.45)'); ctx.fillStyle = g; ctx.fill(); ctx.restore();
+  ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(Math.cos(a) * r, Math.sin(a) * r); stroke(ctx, '#9cffb8', 2.5);
+  for (const [bx, by] of blips) circle(ctx, bx * r, by * r, 5, '#c8ffd8', null);
+  ctx.restore();
+}
+// An egg in a cup; crack 0..1, burst 0..1 throws shell and yolk outwards.
+export function egg(ctx, x, y, s = 1, crack = 0, burst = 0, seed = 5) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  // cup
+  ctx.beginPath(); ctx.moveTo(-40, 0); ctx.quadraticCurveTo(-40, 40, 0, 44); ctx.quadraticCurveTo(40, 40, 40, 0); ctx.closePath(); fillStroke(ctx, P.lapisLight, P.ink, 2.5);
+  rect(ctx, -24, 44, 48, 12, P.lapisLight, P.ink, 2);
+  if (burst <= 0) {
+    ctx.beginPath(); ctx.ellipse(0, -34, 32, 44, 0, 0, TAU); fillStroke(ctx, '#f6ecd8', P.ink, 2.5);
+    if (crack > 0) { ctx.beginPath(); ctx.moveTo(-30, -40); const n = Math.ceil(crack * 6); for (let i = 1; i <= n; i++) ctx.lineTo(-30 + i * 10, -40 + (i % 2 ? -8 : 6)); stroke(ctx, P.ink, 2); }
+  } else {
+    const R = rng(seed);
+    for (let i = 0; i < 14; i++) { const a = R() * TAU, d = burst * (80 + R() * 160); ctx.save(); ctx.translate(Math.cos(a) * d, -40 + Math.sin(a) * d * 0.8 + burst * burst * 60); ctx.rotate(a * 3 + burst * 4); poly(ctx, [[-10, -6], [12, -4], [4, 10]], '#f6ecd8', P.ink, 1.5); ctx.restore(); }
+    for (let i = 0; i < 10; i++) { const a = R() * TAU, d = burst * (60 + R() * 120); circle(ctx, Math.cos(a) * d, -40 + Math.sin(a) * d * 0.8, 6 + R() * 10, i % 3 ? '#f2b62a' : '#fff8e6', P.ink, 1); }
+  }
+  ctx.restore();
+}
+// The first microwave oven: a tall steel cabinet (no brand), door window glowing when on.
+export function bigOven(ctx, x, base, s = 1, on = 0, t = 0) {
+  ctx.save(); ctx.translate(x, base); ctx.scale(s, s);
+  rect(ctx, -110, -560, 220, 560, '#b9c2cc', P.ink, 3);
+  rect(ctx, -110, -560, 220, 40, '#9aa4b0', P.ink, 2);
+  rect(ctx, -80, -470, 160, 150, '#2a2f45', P.ink, 2.5);
+  if (on > 0) { ctx.save(); ctx.globalAlpha *= on; rect(ctx, -74, -464, 148, 138, '#ffd98a', null); bowl(ctx, 0, -360, 0.5, t, P.white, true); ctx.restore(); }
+  rect(ctx, 86, -470, 10, 150, P.steel, P.ink, 1.5);
+  for (let i = 0; i < 3; i++) circle(ctx, -50 + i * 50, -280, 16, P.ochreLight, P.ink, 2);
+  for (let i = 0; i < 6; i++) { ctx.beginPath(); ctx.moveTo(-90, -220 + i * 30); ctx.lineTo(90, -220 + i * 30); stroke(ctx, '#8a949e', 3); }
+  rect(ctx, -110, -14, 220, 14, '#6f7a86', P.ink, 2);
+  ctx.restore();
+}
+// A small modern countertop microwave (generic) for the ending.
+export function smallOven(ctx, x, y, s = 1, on = 1, t = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  rect(ctx, -90, -55, 180, 110, '#e8e2d6', P.ink, 2.5);
+  rect(ctx, -76, -42, 110, 84, on ? '#ffd98a' : '#2a2f45', P.ink, 2);
+  if (on) circle(ctx, -21, 14 + Math.sin(t * 3) * 2, 14, P.verm, P.ink, 1.5);
+  for (let i = 0; i < 4; i++) rect(ctx, 46, -36 + i * 18, 30, 10, '#b9c2cc', P.ink, 1);
+  ctx.restore();
+}
+// A measuring rod in gold with tick marks (for "Book of Wonders" measurements).
+export function measureRod(ctx, x, yTop, yBot, k = 1, text = '') {
+  const y = lerp(yBot, yTop, clamp(k));
+  ctx.save(); ctx.beginPath(); ctx.moveTo(x, yBot); ctx.lineTo(x, y); stroke(ctx, P.ink, 8); stroke(ctx, P.gold, 5);
+  for (let yy = yBot; yy > y; yy -= 30) { ctx.beginPath(); ctx.moveTo(x - 12, yy); ctx.lineTo(x + 12, yy); stroke(ctx, P.ink, 2); }
+  poly(ctx, [[x - 14, y], [x + 14, y], [x, y - 18]], P.gold, P.ink, 2);
   ctx.restore();
 }
 
