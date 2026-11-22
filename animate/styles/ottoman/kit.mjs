@@ -1380,12 +1380,12 @@ export function galaxy(ctx, x, y, r, rot = 0, color = '#f6e7b4') {
   ctx.restore();
 }
 // A vintage broadcast microphone on a stand; waves 0..1 draws radio waves.
-export function microphone(ctx, x, base, s = 1, waves = 0, t = 0) {
+export function microphone(ctx, x, base, s = 1, waves = 0, t = 0, text = 'BBC') {
   ctx.save(); ctx.translate(x, base); ctx.scale(s, s);
   rect(ctx, -40, -10, 80, 10, P.ink, P.ink, 1); rect(ctx, -4, -260, 8, 250, P.steel, P.ink, 1.5);
   ctx.beginPath(); ctx.ellipse(0, -300, 34, 46, 0, 0, TAU); fillStroke(ctx, '#3a3f4a', P.ink, 2.5);
   for (let i = -3; i <= 3; i++) { ctx.beginPath(); ctx.moveTo(-28, -300 + i * 10); ctx.lineTo(28, -300 + i * 10); stroke(ctx, '#6a7080', 1.5); }
-  rect(ctx, -40, -310, 80, 20, P.verm, P.ink, 1.5); ctx.fillStyle = P.white; ctx.font = '900 14px Deco'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('BBC', 0, -299);
+  if (text) { rect(ctx, -40, -310, 80, 20, P.verm, P.ink, 1.5); ctx.fillStyle = P.white; ctx.font = '900 14px Deco'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(text, 0, -299); }
   if (waves > 0) for (let i = 0; i < 4; i++) { const q = (t * 0.8 + i / 4) % 1; ctx.save(); ctx.globalAlpha = (1 - q) * waves; ctx.beginPath(); ctx.arc(0, -300, 60 + q * 260, -0.7, 0.7); stroke(ctx, P.goldLight, 4); ctx.beginPath(); ctx.arc(0, -300, 60 + q * 260, Math.PI - 0.7, Math.PI + 0.7); stroke(ctx, P.goldLight, 4); ctx.restore(); }
   ctx.restore();
 }
@@ -1628,6 +1628,119 @@ export function streetSign(ctx, x, y, w, text, color = P.green, rot = 0) {
   rect(ctx, -w / 2, -w * 0.11, w, w * 0.22, color, P.ink, 2.5);
   ctx.strokeStyle = P.white; ctx.lineWidth = 2; ctx.strokeRect(-w / 2 + 6, -w * 0.11 + 6, w - 12, w * 0.22 - 12);
   ctx.fillStyle = P.white; ctx.font = `900 ${Math.round(w * 0.085)}px Deco`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(text, 0, 2);
+  ctx.restore();
+}
+
+// ---------- Mickey Mouse story: generic animals, train, steamboat, cinema ----------
+// A field mouse in profile, the way miniatures paint animals (not any studio's character).
+// sketch = 1 draws it as ink lines on paper; run = phase for the legs; t sways the tail.
+export function mouse(ctx, x, y, s = 1, o = {}) {
+  const t = o.t || 0, sk = o.sketch || 0, body = sk ? 'rgba(0,0,0,0)' : (o.color || '#8a7a6a'), belly = sk ? 'rgba(0,0,0,0)' : '#d9c8a8', line = sk ? P.ink : P.ink;
+  const run = o.run ?? null, up = o.up || 0;
+  ctx.save(); ctx.translate(x, y); ctx.scale(s * (o.face || 1), s);
+  // tail
+  ctx.beginPath(); ctx.moveTo(-70, -30); ctx.bezierCurveTo(-130, -20 + Math.sin(t * 3) * 10, -150, -90 + Math.sin(t * 3 + 1) * 15, -110, -110); stroke(ctx, line, 3); ctx.beginPath(); ctx.moveTo(-70, -30); ctx.bezierCurveTo(-130, -20 + Math.sin(t * 3) * 10, -150, -90 + Math.sin(t * 3 + 1) * 15, -110, -110); stroke(ctx, sk ? P.ink : '#d8a9a0', 1.5);
+  // legs
+  const lp = run != null ? Math.sin(run) * 12 : 0;
+  for (const [dx, d] of [[-40, lp], [30, -lp]]) { ctx.beginPath(); ctx.moveTo(dx, -20); ctx.lineTo(dx + d, 0); ctx.lineTo(dx + d + 12, 0); stroke(ctx, line, 3); }
+  ctx.save(); ctx.rotate(-up);
+  // body
+  ellipse(ctx, 0, -42, 78, 42, -0.08, body, line, 2.5);
+  ellipse(ctx, 8, -26, 50, 18, -0.05, belly, null);
+  // head
+  ctx.beginPath(); ctx.moveTo(48, -78); ctx.quadraticCurveTo(110, -70, 118, -50); ctx.quadraticCurveTo(100, -34, 52, -30); ctx.closePath(); fillStroke(ctx, body, line, 2.5);
+  circle(ctx, 118, -50, 6, sk ? null : '#c9786c', line, 1.5);
+  // ear: a small rounded leaf-shaped ear, set back on the head
+  ellipse(ctx, 58, -88, 16, 22, -0.4, sk ? null : '#b8a090', line, 2);
+  ellipse(ctx, 58, -86, 9, 13, -0.4, sk ? null : '#d8a9a0', null);
+  // eye + whiskers
+  circle(ctx, 88, -60, 4.5, P.ink, null); circle(ctx, 89.5, -61.5, 1.4, P.white, null);
+  for (const a of [-0.25, 0, 0.25]) { ctx.beginPath(); ctx.moveTo(112, -48); ctx.lineTo(112 + Math.cos(a) * 34, -48 + Math.sin(a) * 26); stroke(ctx, line, 1); }
+  // front paw
+  ctx.beginPath(); ctx.moveTo(60, -34); ctx.lineTo(70 - lp * 0.5, -4); stroke(ctx, line, 3);
+  ctx.restore();
+  ctx.restore();
+}
+// A hare sitting in profile with long ears; droop 0..1 lowers the ears (sad).
+export function rabbit(ctx, x, y, s = 1, o = {}) {
+  const t = o.t || 0, droop = o.droop || 0, c = o.color || '#b89a74';
+  ctx.save(); ctx.translate(x, y); ctx.scale(s * (o.face || 1), s);
+  ellipse(ctx, -10, -60, 70, 60, 0, c, P.ink, 2.5);
+  circle(ctx, -78, -50, 16, P.white, P.ink, 2);
+  ellipse(ctx, 30, -10, 40, 12, 0, shade(c, -0.15), P.ink, 2);
+  // head
+  ellipse(ctx, 50, -125, 38, 32, 0.2, c, P.ink, 2.5);
+  // ears
+  for (const [dx, k] of [[30, 1], [44, 0.85]]) { ctx.save(); ctx.translate(dx, -150); ctx.rotate(lerp(-0.15, -1.9, droop) * k + Math.sin(t * 2 + dx) * 0.04); ellipse(ctx, 0, -48, 13, 50, 0, c, P.ink, 2); ellipse(ctx, 0, -48, 6, 38, 0, '#e3b2a6', null); ctx.restore(); }
+  circle(ctx, 62, -132, 4.5, P.ink, null); circle(ctx, 63.5, -133.5, 1.4, P.white, null);
+  circle(ctx, 86, -118, 4, '#c9786c', null);
+  ctx.restore();
+}
+// A steam locomotive pulling one carriage; t turns the wheels, smoke puffs from the stack.
+export function train(ctx, x, y, s = 1, t = 0, o = {}) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  const roll = t * 6;
+  // carriage
+  if (o.carriage !== false) {
+    rect(ctx, -560, -190, 300, 150, o.coach || P.greenDark, P.ink, 2.5);
+    rect(ctx, -570, -205, 320, 18, P.brown, P.ink, 2);
+    for (let i = 0; i < 4; i++) rect(ctx, -540 + i * 70, -165, 48, 56, o.lit ? P.goldLight : P.paperLight, P.ink, 1.8);
+    for (const wx of [-520, -300]) wheel(wx);
+    rect(ctx, -262, -70, 50, 10, P.ink, null);
+  }
+  // locomotive: cab, boiler, stack, cow-catcher
+  rect(ctx, -210, -210, 110, 170, P.verm, P.ink, 2.5); rect(ctx, -220, -225, 130, 18, P.ink, P.ink, 1);
+  rect(ctx, -190, -185, 70, 55, P.goldLight, P.ink, 1.8);
+  rect(ctx, -100, -150, 220, 100, '#2a2f45', P.ink, 2.5);
+  for (const bx of [-60, 0, 60]) { ctx.beginPath(); ctx.moveTo(bx, -150); ctx.lineTo(bx, -50); stroke(ctx, P.gold, 3); }
+  rect(ctx, 60, -215, 36, 65, '#2a2f45', P.ink, 2.5); rect(ctx, 50, -228, 56, 16, P.gold, P.ink, 2);
+  circle(ctx, -20, -162, 16, P.gold, P.ink, 2);
+  poly(ctx, [[120, -50], [175, -10], [120, -10]], P.verm, P.ink, 2);
+  circle(ctx, 120, -120, 12, P.goldLight, P.ink, 2);
+  for (const wx of [-170, -60, 50]) wheel(wx, wx === -170 ? 44 : 34);
+  ctx.beginPath(); ctx.moveTo(-170, -40); ctx.lineTo(50, -40); stroke(ctx, P.steel, 6);
+  // smoke
+  if (o.smoke !== false) for (let i = 0; i < 5; i++) { const k = (t * 0.8 + i / 5) % 1; ctx.save(); ctx.globalAlpha *= 1 - k; cloud(ctx, 78 - k * 320, -250 - k * 160, 0.35 + k * 0.6, i + 40); ctx.restore(); }
+  ctx.restore();
+  function wheel(wx, r = 36) { ctx.save(); ctx.translate(wx, -36 + (36 - r) * 0 ); circle(ctx, 0, 0, r, P.verm, P.ink, 2.5); for (let i = 0; i < 6; i++) { const a = roll + i / 6 * TAU; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(Math.cos(a) * r, Math.sin(a) * r); stroke(ctx, P.ink, 2); } circle(ctx, 0, 0, r * 0.2, P.gold, P.ink, 1.5); ctx.restore(); }
+}
+// A generic river steamboat: two stacks, a white deck house and a turning paddle wheel.
+export function steamboat(ctx, x, y, s = 1, t = 0, o = {}) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s); ctx.rotate(Math.sin(t * 1.3) * 0.02);
+  // paddle wheel at the stern
+  ctx.save(); ctx.translate(-250, -40); circle(ctx, 0, 0, 70, P.verm, P.ink, 2.5); for (let i = 0; i < 8; i++) { const a = t * 2 + i / 8 * TAU; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(Math.cos(a) * 70, Math.sin(a) * 70); stroke(ctx, P.ink, 4); } ctx.restore();
+  // hull
+  ctx.beginPath(); ctx.moveTo(-260, -40); ctx.lineTo(250, -40); ctx.quadraticCurveTo(250, 20, 180, 30); ctx.lineTo(-230, 30); ctx.closePath(); fillStroke(ctx, o.hull || P.ink, P.ink, 2.5);
+  ctx.beginPath(); ctx.moveTo(-250, -28); ctx.lineTo(245, -28); stroke(ctx, P.verm, 5);
+  // decks
+  rect(ctx, -200, -130, 330, 90, P.white, P.ink, 2.5); rect(ctx, -150, -200, 220, 70, P.white, P.ink, 2.5);
+  for (let i = 0; i < 7; i++) arch(ctx, -175 + i * 46, -55, 26, 52, P.lapis);
+  for (let i = 0; i < 4; i++) rect(ctx, -130 + i * 52, -185, 30, 34, P.goldLight, P.ink, 1.5);
+  rect(ctx, -60, -250, 90, 50, P.white, P.ink, 2.5);
+  // stacks
+  for (const sx of [70, 120]) { rect(ctx, sx, -330, 30, 200, '#2a2f45', P.ink, 2.5); rect(ctx, sx - 8, -345, 46, 16, P.gold, P.ink, 2); }
+  if (o.smoke !== false) for (let i = 0; i < 6; i++) { const k = (t * 0.5 + i / 6) % 1; ctx.save(); ctx.globalAlpha *= 1 - k; cloud(ctx, 100 - k * 260, -380 - k * 120, 0.3 + k * 0.5, i + 60); ctx.restore(); }
+  ctx.restore();
+}
+// A picture-house stage: an arch, red curtains drawn open by k, the screen painted by paint(ctx, w, h).
+export function cinema(ctx, x, y, w, h, k = 1, paint = null) {
+  ctx.save(); ctx.translate(x, y);
+  rect(ctx, -w / 2 - 40, -h / 2 - 70, w + 80, h + 110, P.vermDark, P.ink, 3);
+  ctx.beginPath(); ctx.moveTo(-w / 2 - 20, h / 2 + 20); ctx.lineTo(-w / 2 - 20, -h / 2 - 10); ctx.quadraticCurveTo(0, -h / 2 - 90, w / 2 + 20, -h / 2 - 10); ctx.lineTo(w / 2 + 20, h / 2 + 20); fillStroke(ctx, P.goldLight, P.goldDark, 4);
+  rect(ctx, -w / 2, -h / 2, w, h, '#f3f0e6', P.ink, 2.5);
+  if (paint) { ctx.save(); ctx.beginPath(); ctx.rect(-w / 2, -h / 2, w, h); ctx.clip(); paint(ctx, w, h); ctx.restore(); }
+  const cw = (w / 2 + 10) * (1 - k * 0.82);
+  for (const sx of [-1, 1]) { ctx.save(); ctx.scale(sx, 1); ctx.beginPath(); ctx.moveTo(-w / 2 - 20, -h / 2 - 20); ctx.lineTo(-w / 2 - 20 + cw, -h / 2 - 20); ctx.quadraticCurveTo(-w / 2 - 20 + cw * 0.8, 0, -w / 2 - 20 + cw, h / 2 + 20); ctx.lineTo(-w / 2 - 20, h / 2 + 20); ctx.closePath(); fillStroke(ctx, P.verm, P.ink, 2.5); for (let i = 1; i < 5; i++) { ctx.beginPath(); ctx.moveTo(-w / 2 - 20 + cw * i / 5, -h / 2 - 20); ctx.lineTo(-w / 2 - 20 + cw * i / 5 * 0.95, h / 2 + 20); stroke(ctx, P.vermDark, 2); } ctx.restore(); }
+  ctx.restore();
+}
+// A padlock; open 0..1 lifts the shackle.
+export function padlock(ctx, x, y, s = 1, open = 0, color = P.gold) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  ctx.save(); ctx.translate(0, -open * 40); ctx.rotate(open * 0.5);
+  ctx.beginPath(); ctx.moveTo(-34, 0); ctx.lineTo(-34, -40); ctx.arc(0, -40, 34, Math.PI, 0); ctx.lineTo(34, 0); stroke(ctx, P.ink, 18); stroke(ctx, P.steel, 12);
+  ctx.restore();
+  rect(ctx, -55, -10, 110, 90, color, P.ink, 3);
+  circle(ctx, 0, 25, 11, P.ink, null); poly(ctx, [[-6, 28], [6, 28], [4, 55], [-4, 55]], P.ink, null);
   ctx.restore();
 }
 

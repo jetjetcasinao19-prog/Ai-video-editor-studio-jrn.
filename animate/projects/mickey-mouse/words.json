@@ -1,0 +1,536 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "Mickey Mouse was born because Walt Disney lost his biggest star. 1928. Walt Disney has a hit cartoon, Oswald the Lucky Rabbit. In New York, he learns Universal owns Oswald, and most of his animators are leaving him. On the train home, he needs a new star. With his loyal animator Ub Iwerks, he creates a mouse. Then Walt tries something new, a cartoon with sound. November 1928. Steamboat Willie opens in New York. Mickey whistles. The crowd loves it. And in 2024, that very first Mickey entered the public domain. A lost rabbit gave the world its most famous mouse. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "Mickey",
+   "start": 0.02,
+   "end": 0.32
+  },
+  {
+   "w": "Mouse",
+   "start": 0.32,
+   "end": 0.56
+  },
+  {
+   "w": "was",
+   "start": 0.56,
+   "end": 0.8
+  },
+  {
+   "w": "born",
+   "start": 0.8,
+   "end": 1.2
+  },
+  {
+   "w": "because",
+   "start": 1.2,
+   "end": 2.06
+  },
+  {
+   "w": "Walt",
+   "start": 2.06,
+   "end": 2.4
+  },
+  {
+   "w": "Disney",
+   "start": 2.4,
+   "end": 2.82
+  },
+  {
+   "w": "lost",
+   "start": 2.82,
+   "end": 3.44
+  },
+  {
+   "w": "his",
+   "start": 3.44,
+   "end": 3.72
+  },
+  {
+   "w": "biggest",
+   "start": 3.72,
+   "end": 4.2
+  },
+  {
+   "w": "star.",
+   "start": 4.2,
+   "end": 4.7
+  },
+  {
+   "w": "1928.",
+   "start": 5.8,
+   "end": 7.16
+  },
+  {
+   "w": "Walt",
+   "start": 7.48,
+   "end": 7.66
+  },
+  {
+   "w": "Disney",
+   "start": 7.66,
+   "end": 8.04
+  },
+  {
+   "w": "has",
+   "start": 8.04,
+   "end": 8.28
+  },
+  {
+   "w": "a",
+   "start": 8.28,
+   "end": 8.42
+  },
+  {
+   "w": "hit",
+   "start": 8.42,
+   "end": 8.6
+  },
+  {
+   "w": "cartoon,",
+   "start": 8.6,
+   "end": 9.8
+  },
+  {
+   "w": "Oswald",
+   "start": 9.8,
+   "end": 10.2
+  },
+  {
+   "w": "the",
+   "start": 10.2,
+   "end": 10.46
+  },
+  {
+   "w": "Lucky",
+   "start": 10.46,
+   "end": 10.84
+  },
+  {
+   "w": "Rabbit.",
+   "start": 10.84,
+   "end": 11.06
+  },
+  {
+   "w": "In",
+   "start": 11.98,
+   "end": 12.08
+  },
+  {
+   "w": "New",
+   "start": 12.08,
+   "end": 12.34
+  },
+  {
+   "w": "York,",
+   "start": 12.34,
+   "end": 12.78
+  },
+  {
+   "w": "he",
+   "start": 12.78,
+   "end": 12.92
+  },
+  {
+   "w": "learns",
+   "start": 12.92,
+   "end": 13.22
+  },
+  {
+   "w": "Universal",
+   "start": 13.22,
+   "end": 13.82
+  },
+  {
+   "w": "owns",
+   "start": 13.82,
+   "end": 14.28
+  },
+  {
+   "w": "Oswald,",
+   "start": 14.28,
+   "end": 15.48
+  },
+  {
+   "w": "and",
+   "start": 15.48,
+   "end": 15.52
+  },
+  {
+   "w": "most",
+   "start": 15.52,
+   "end": 15.8
+  },
+  {
+   "w": "of",
+   "start": 15.8,
+   "end": 15.96
+  },
+  {
+   "w": "his",
+   "start": 15.96,
+   "end": 16.06
+  },
+  {
+   "w": "animators",
+   "start": 16.06,
+   "end": 16.54
+  },
+  {
+   "w": "are",
+   "start": 16.54,
+   "end": 16.8
+  },
+  {
+   "w": "leaving",
+   "start": 16.8,
+   "end": 17.16
+  },
+  {
+   "w": "him.",
+   "start": 17.16,
+   "end": 17.92
+  },
+  {
+   "w": "On",
+   "start": 18.32,
+   "end": 18.42
+  },
+  {
+   "w": "the",
+   "start": 18.42,
+   "end": 18.56
+  },
+  {
+   "w": "train",
+   "start": 18.56,
+   "end": 18.82
+  },
+  {
+   "w": "home,",
+   "start": 18.82,
+   "end": 19.48
+  },
+  {
+   "w": "he",
+   "start": 19.48,
+   "end": 19.6
+  },
+  {
+   "w": "needs",
+   "start": 19.6,
+   "end": 19.96
+  },
+  {
+   "w": "a",
+   "start": 19.96,
+   "end": 20.18
+  },
+  {
+   "w": "new",
+   "start": 20.18,
+   "end": 20.5
+  },
+  {
+   "w": "star.",
+   "start": 20.5,
+   "end": 21.44
+  },
+  {
+   "w": "With",
+   "start": 21.7,
+   "end": 21.84
+  },
+  {
+   "w": "his",
+   "start": 21.84,
+   "end": 21.98
+  },
+  {
+   "w": "loyal",
+   "start": 21.98,
+   "end": 22.32
+  },
+  {
+   "w": "animator",
+   "start": 22.32,
+   "end": 22.82
+  },
+  {
+   "w": "Ub",
+   "start": 22.82,
+   "end": 23.1
+  },
+  {
+   "w": "Iwerks,",
+   "start": 23.1,
+   "end": 24
+  },
+  {
+   "w": "he",
+   "start": 24,
+   "end": 24.08
+  },
+  {
+   "w": "creates",
+   "start": 24.08,
+   "end": 24.62
+  },
+  {
+   "w": "a",
+   "start": 24.62,
+   "end": 25.24
+  },
+  {
+   "w": "mouse.",
+   "start": 25.24,
+   "end": 25.64
+  },
+  {
+   "w": "Then",
+   "start": 26.46,
+   "end": 26.76
+  },
+  {
+   "w": "Walt",
+   "start": 26.76,
+   "end": 27.16
+  },
+  {
+   "w": "tries",
+   "start": 27.16,
+   "end": 27.56
+  },
+  {
+   "w": "something",
+   "start": 27.56,
+   "end": 27.92
+  },
+  {
+   "w": "new,",
+   "start": 27.92,
+   "end": 28.94
+  },
+  {
+   "w": "a",
+   "start": 28.94,
+   "end": 28.98
+  },
+  {
+   "w": "cartoon",
+   "start": 28.98,
+   "end": 29.5
+  },
+  {
+   "w": "with",
+   "start": 29.5,
+   "end": 30
+  },
+  {
+   "w": "sound.",
+   "start": 30,
+   "end": 30.52
+  },
+  {
+   "w": "November",
+   "start": 31.82,
+   "end": 32.18
+  },
+  {
+   "w": "1928.",
+   "start": 32.18,
+   "end": 33.76
+  },
+  {
+   "w": "Steamboat",
+   "start": 34.04,
+   "end": 34.52
+  },
+  {
+   "w": "Willie",
+   "start": 34.52,
+   "end": 34.8
+  },
+  {
+   "w": "opens",
+   "start": 34.8,
+   "end": 35.3
+  },
+  {
+   "w": "in",
+   "start": 35.3,
+   "end": 35.58
+  },
+  {
+   "w": "New",
+   "start": 35.58,
+   "end": 35.8
+  },
+  {
+   "w": "York.",
+   "start": 35.8,
+   "end": 36.6
+  },
+  {
+   "w": "Mickey",
+   "start": 36.88,
+   "end": 37.04
+  },
+  {
+   "w": "whistles.",
+   "start": 37.04,
+   "end": 38
+  },
+  {
+   "w": "The",
+   "start": 38.2,
+   "end": 38.28
+  },
+  {
+   "w": "crowd",
+   "start": 38.28,
+   "end": 38.8
+  },
+  {
+   "w": "loves",
+   "start": 38.8,
+   "end": 39.34
+  },
+  {
+   "w": "it.",
+   "start": 39.34,
+   "end": 39.54
+  },
+  {
+   "w": "And",
+   "start": 40.4,
+   "end": 40.56
+  },
+  {
+   "w": "in",
+   "start": 40.56,
+   "end": 40.66
+  },
+  {
+   "w": "2024,",
+   "start": 40.66,
+   "end": 41.96
+  },
+  {
+   "w": "that",
+   "start": 41.96,
+   "end": 42.06
+  },
+  {
+   "w": "very",
+   "start": 42.06,
+   "end": 42.38
+  },
+  {
+   "w": "first",
+   "start": 42.38,
+   "end": 42.82
+  },
+  {
+   "w": "Mickey",
+   "start": 42.82,
+   "end": 43.04
+  },
+  {
+   "w": "entered",
+   "start": 43.04,
+   "end": 43.6
+  },
+  {
+   "w": "the",
+   "start": 43.6,
+   "end": 43.8
+  },
+  {
+   "w": "public",
+   "start": 43.8,
+   "end": 44.16
+  },
+  {
+   "w": "domain.",
+   "start": 44.16,
+   "end": 45.1
+  },
+  {
+   "w": "A",
+   "start": 45.44,
+   "end": 45.64
+  },
+  {
+   "w": "lost",
+   "start": 45.64,
+   "end": 45.94
+  },
+  {
+   "w": "rabbit",
+   "start": 45.94,
+   "end": 46.32
+  },
+  {
+   "w": "gave",
+   "start": 46.32,
+   "end": 46.98
+  },
+  {
+   "w": "the",
+   "start": 46.98,
+   "end": 47.16
+  },
+  {
+   "w": "world",
+   "start": 47.16,
+   "end": 47.58
+  },
+  {
+   "w": "its",
+   "start": 47.58,
+   "end": 47.88
+  },
+  {
+   "w": "most",
+   "start": 47.88,
+   "end": 48.16
+  },
+  {
+   "w": "famous",
+   "start": 48.16,
+   "end": 48.74
+  },
+  {
+   "w": "mouse.",
+   "start": 48.74,
+   "end": 49.62
+  },
+  {
+   "w": "Every",
+   "start": 50.28,
+   "end": 50.52
+  },
+  {
+   "w": "legend",
+   "start": 50.52,
+   "end": 50.96
+  },
+  {
+   "w": "has",
+   "start": 50.96,
+   "end": 51.54
+  },
+  {
+   "w": "a",
+   "start": 51.54,
+   "end": 51.62
+  },
+  {
+   "w": "beginning.",
+   "start": 51.62,
+   "end": 52.44
+  }
+ ]
+}
