@@ -85,6 +85,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-12-29 Tue | 8:00 PM | Wed Dec 30, 9:00 AM | TikTok | The Times Square ball drop exists because fireworks got banned. | content/posts/2026-11-21-times-square-ball-ottoman.md | ready |
 | 2026-12-30 Wed | 7:00 PM | Thu Dec 31, 8:00 AM | Instagram Reels | The Times Square ball drop exists because fireworks got banned. | content/posts/2026-11-21-times-square-ball-ottoman.md | ready |
 | 2026-12-30 Wed | 8:00 PM | Thu Dec 31, 9:00 AM | Facebook Reels | The Times Square ball drop exists because fireworks got banned. | content/posts/2026-11-21-times-square-ball-ottoman.md | ready |
+| 2027-01-02 Sat | 7:00 PM | Sun Jan 3, 8:00 AM | YouTube Shorts | The Statue of Liberty Wasn't Always Green | content/posts/2026-11-21-statue-of-liberty-ottoman.md | ready |
+| 2027-01-02 Sat | 8:00 PM | Sun Jan 3, 9:00 AM | TikTok | She wasn't born green. | content/posts/2026-11-21-statue-of-liberty-ottoman.md | ready |
+| 2027-01-03 Sun | 7:00 PM | Mon Jan 4, 8:00 AM | Instagram Reels | Picture a shiny new penny. That's how Lady Liberty looked in October 1886. | content/posts/2026-11-21-statue-of-liberty-ottoman.md | ready |
+| 2027-01-03 Sun | 8:00 PM | Mon Jan 4, 9:00 AM | Facebook Reels | Ever wonder why Lady Liberty is green? Because she wasn't always. | content/posts/2026-11-21-statue-of-liberty-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
