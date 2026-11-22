@@ -59,7 +59,6 @@ export const scenes = [
       const bq = tween(u, pb - 0.2, pb + 0.4, ease.inQuad);
       if (bq > 0 && bq < 1) k.leatherBall(ctx, 610, lerp(120, 830, bq), 1.4, u * 6);
       k.label(ctx, 'BASKETBALL', W / 2, 260, 40, tween(u, 0.0, 0.3));
-      k.label(ctx, 'TWO PEACH BASKETS', W / 2, 1010, 26, tween(u, pb, pb + 0.3));
     },
   },
   { // 4.4 "Springfield, Massachusetts."
@@ -105,7 +104,6 @@ export const scenes = [
       k.label(ctx, 'JAMES NAISMITH', 280, 560, 28, tween(u, jn, jn + 0.3));
       const bx = lerp(1100, 700, tween(u, ch - 0.6, ch + 0.2, ease.outCubic));
       k.figure(ctx, bx, 1010, { ...BOSS, s: 1.15, face: -1, mood: 'calm', armF: [1.6, 0.1], hold: c => { c.rotate(-0.2); k.rect(c, -10, -60, 20, 110, P.paperLight, P.ink, 2); }, walk: u < ch + 0.2 ? u * 7 : null });
-      k.label(ctx, 'HIS BOSS', bx, 580, 24, tween(u, bo, bo + 0.3));
       if (u > ch) medallion(ctx, k, P, '!', W / 2, 400, pop(u, ch, 0.35), P.verm);
     },
   },
@@ -153,7 +151,6 @@ export const scenes = [
       const has = u > gr + 0.1;
       k.figure(ctx, 330, 1010, { ...NAISMITH, s: 1.2, face: 1, mood: 'happy', armF: has ? [2.2, -0.2] : [1.0, 0.6], hold: has ? c => k.leatherBall(c, 14, -14, 1.4) : null });
       if (!has) k.leatherBall(ctx, 560, 960 - Math.abs(Math.sin(u * 8)) * 60, 1.4, u * 5);
-      k.label(ctx, 'A SOCCER BALL', 470, 420, 30, tween(u, gr, gr + 0.3));
     },
   },
   { // 23.5 "He nails two peach baskets ten feet up."
@@ -284,7 +281,6 @@ export const scenes = [
       spots.forEach(([x, y], i) => { const p = pop(u, be - 0.3 + i * 0.15, 0.3); if (p <= 0) return; k.peachBasket(ctx, x + 30, y - 20, 0.4 * p); k.leatherBall(ctx, x - 10, y - Math.abs(Math.sin(u * 5 + i)) * 40 * p, 0.9 * p, u * 4); });
       // the rule scroll at the centre
       k.rect(ctx, W / 2 - 70, 470, 140, 150, P.paperLight, P.ink, 2.5); ctx.fillStyle = P.verm; ctx.font = '900 34px Deco'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('XIII', W / 2, 545);
-      k.label(ctx, 'ON EARTH', W / 2, 1010, 30, tween(u, ea, ea + 0.3));
       if (u > ea) for (let i = 0; i < 16; i++) { const a = i / 16 * TAU, r = 120 + (u - ea) * 420; k.star(ctx, W / 2 + Math.cos(a) * r, 540 + Math.sin(a) * r, 12, 1 - (u - ea) * 0.7); }
     },
   },

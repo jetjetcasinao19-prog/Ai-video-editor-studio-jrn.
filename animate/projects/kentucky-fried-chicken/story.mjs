@@ -110,7 +110,6 @@ export const scenes = [
         ctx.beginPath(); ctx.moveTo(W / 2 + 40, 80); ctx.bezierCurveTo(W + 260, 300, W + 260, 820, W / 2 + 40, 1040);
         k.stroke(ctx, P.ink, 34); k.stroke(ctx, P.verm, 26); ctx.restore();
       }
-      k.label(ctx, 'NEW HIGHWAY', 820, 560, 26, tween(u, hw, hw + 0.3));
       k.stamp(ctx, 'BYPASSED', W / 2, 220, 60, tween(u, sk + 0.3, sk + 0.55, ease.linear), -0.1);
       k.seal(ctx, 160, 960, 62, ' PLANS ANNOUNCED · NEW ROAD ·', '1956', tween(u, S.at('1956'), S.at('1956') + 0.3, ease.linear));
     },
@@ -155,7 +154,6 @@ export const scenes = [
       for (let i = 0; i < 4; i++) k.rect(ctx, -110, -400 + i * 60, 30, 10, P.brown, P.ink, 1);
       for (const lx of [-100, 80]) k.rect(ctx, lx, -140, 16, 140, P.brown, P.ink, 1.5);
       ctx.restore();
-      k.label(ctx, 'RETIRE?', W / 2, 330, 36, tween(u, 0.2, 0.5));
     },
   },
   { // 27.9 "Instead, he takes his recipe on the road."
@@ -223,7 +221,6 @@ export const scenes = [
       const spots = [[620, 420], [560, 500], [700, 360], [480, 330], [760, 520], [400, 470], [300, 360], [660, 580], [220, 300], [520, 620], [800, 300], [350, 580]];
       spots.forEach(([x, y], i) => { const p = pop(u, wk + i * 0.16, 0.3); if (p <= 0) return; ctx.save(); ctx.translate(x, y); ctx.scale(p, p); k.house(ctx, 0, 0, 46, 36, { wall: P.white, roof: P.verm }); k.drumstick(ctx, 0, -60, 0.7, -0.3); ctx.restore(); });
       k.label(ctx, 'KENTUCKY', 600, 470, 18, 1);
-      k.label(ctx, 'IT WORKS!', W / 2, 860, 36, tween(u, wk, wk + 0.3));
       k.label(ctx, 'SIGNING UP', W / 2, 960, 24, tween(u, sg, sg + 0.3));
     },
   },
@@ -251,7 +248,6 @@ export const scenes = [
       k.figure(ctx, W / 2, 1000, { ...COLONEL, s: 1.5, face: 1, mood: 'happy', armF: [2.6, 0.1] });
       const p = pop(u, sf - 0.1, 0.35);
       if (p > 0) { ctx.save(); ctx.translate(W / 2, 280); ctx.scale(p * 1.4, p * 1.4); k.circle(ctx, 0, 0, 56, P.lapis, P.goldLight, 5); ctx.fillStyle = P.goldLight; ctx.font = '900 54px Deco'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('65', 0, 2); ctx.restore(); }
-      k.label(ctx, 'STARTED OVER', W / 2, 420, 30, tween(u, so, so + 0.3));
     },
   },
   { // 51.1 "became the face of Kentucky Fried Chicken."

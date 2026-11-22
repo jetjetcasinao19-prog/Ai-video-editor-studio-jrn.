@@ -62,7 +62,6 @@ export const scenes = [
       const x = lerp(-60, W + 60, tween(u, cl - 0.9, wa + 0.9, ease.inOut));
       sootyRoom(ctx, S, 1, [[0, 270, Math.max(0, x), 140]]);
       k.dough(ctx, x, 340, 72, PUTTY, 0.1 + 0.1 * Math.sin(u * 10), 2);
-      k.label(ctx, 'PLAY-DOH', W / 2, 760, 40, tween(u, 0, 0.3));
       k.stamp(ctx, 'A WALL CLEANER', W / 2, 960, 60, tween(u, wa, wa + 0.25, ease.linear), -0.08);
     },
   },
@@ -97,9 +96,7 @@ export const scenes = [
       k.coalStove(ctx, 640, 1000, 1.05, S.t, 1, 1);
       // a coal scuttle
       k.rect(ctx, 780, 920, 110, 80, '#3a3a3a', P.ink, 2); for (let i = 0; i < 8; i++) k.circle(ctx, 795 + (i % 4) * 26, 915 - Math.floor(i / 4) * 14, 12, '#1a1a1a', P.ink, 1);
-      k.label(ctx, 'COAL', 830, 840, 22, tween(u, co, co + 0.3));
       k.figure(ctx, 230, 1010, { ...MAID, s: 1.05, face: 1, mood: u > bl ? 'sad' : 'calm', look: u > bl ? -0.4 : 0, armF: [0.6, 1.4] });
-      k.stamp(ctx, 'SOOT!', 420, 300, 70, tween(u, bl, bl + 0.25, ease.linear), -0.12);
     },
   },
   { // 12.4 "A soap company called Kutol sells a soft, doughy putty that rolls the dirt right off."
@@ -140,7 +137,6 @@ export const scenes = [
         for (let i = 0; i < 6; i++) { const f = 1 + 0.2 * Math.sin(S.t * 16 + i); ctx.beginPath(); ctx.moveTo(-70 + i * 28, -30); ctx.quadraticCurveTo(-76 + i * 28, -46 * f, -64 + i * 28, -60 * f); ctx.quadraticCurveTo(-56 + i * 28, -46 * f, -52 + i * 28, -30); k.fillStroke(ctx, '#5fa8e8', '#1f4f8f', 1); }
         ctx.restore();
       }
-      k.label(ctx, 'COAL', 300, 360, 26, 1 - out);
       k.label(ctx, 'GAS & OIL', 640, 640, 28, tween(u, ga, ga + 0.3));
       k.seal(ctx, 820, 250, 60, ' AFTER THE WAR · AFTER ·', 'WWII', tween(u, 0.3, 0.6, ease.linear), P.lapis);
     },
@@ -185,7 +181,6 @@ export const scenes = [
       lamp(ctx, S, 760, 230, 1);
       k.figure(ctx, 280, 1000, { ...KAY, s: 1.25, face: 1, mood: u > re + 0.8 ? 'happy' : 'calm', armF: [1.6, 0.4], kneel: true });
       k.label(ctx, 'KAY ZUFALL', 280, 560, 28, tween(u, ka, ka + 0.3));
-      k.label(ctx, 'NURSERY SCHOOL TEACHER', 280, 620, 20, tween(u, nu, nu + 0.3));
       const np = tween(u, re - 0.2, re + 0.4, ease.outBack);
       if (np > 0) { ctx.save(); ctx.translate(620, 690); ctx.scale(np, np); k.newspaper(ctx, 0, 0, 340, -0.06, 'CHILDREN MODEL WITH\nWALLPAPER CLEANER', 'THE DAILY NEWS'); ctx.restore(); }
       if (u > re + 1.2) medallion(ctx, k, P, '!', 840, 420, pop(u, re + 1.2, 0.3), P.verm);
@@ -202,7 +197,6 @@ export const scenes = [
       k.figure(ctx, 840, 820, { ...KAY, s: 0.85, face: -1, mood: 'happy', armF: [1.4, 0.4] });
       kidsTable(ctx, S, u, false, lo - 0.2);
       if (u > lo - 0.1) for (let i = 0; i < 10; i++) { const q = ((u - lo) * 0.8 + i / 10) % 1; heart(ctx, k, P, 80 + (i * 97) % 760, 620 - q * 420, 1.3, 1 - q); }
-      k.label(ctx, 'THE KIDS LOVE IT', W / 2, 260, 30, tween(u, lo, lo + 0.3));
     },
   },
   { // 39.9 "Her idea? Sell it as a toy."
@@ -237,7 +231,6 @@ export const scenes = [
       if (peel > 0 && peel < 1) { ctx.save(); ctx.translate(W / 2 + peel * 300, 820 - peel * 200); ctx.rotate(peel * 2); k.rect(ctx, -100, -60, 200, 120, P.paperLight, P.ink, 1.5); ctx.restore(); }
       if (u > nn) for (let i = 0; i < 14; i++) { const a = i / 14 * TAU, r = 120 + (u - nn) * 360; k.star(ctx, W / 2 + Math.cos(a) * r, 700 + Math.sin(a) * r * 0.6, 11, 1 - (u - nn) * 0.7); }
       k.seal(ctx, 820, 260, 66, ' REBORN · REBORN · REBORN ·', '1956', tween(u, yr, yr + 0.3, ease.linear));
-      k.label(ctx, 'A NEW NAME', W / 2, 330, 30, tween(u, nn, nn + 0.3));
     },
   },
   { // 46.7 "Play-Doh. A wall cleaner that became a childhood classic."
@@ -251,7 +244,6 @@ export const scenes = [
       // over the years: the colours arrive, can by can
       COLORS.forEach((c, i) => { const p = pop(u, pd + 0.6 + i * 0.25, 0.3); if (p <= 0) return; ctx.save(); ctx.translate(230 + i * 160, 720); ctx.scale(p, p); k.doughCan(ctx, 0, 0, 1.0, 'PLAY-DOH', P.ochre, c, 1, c); ctx.restore(); });
       kidsTable(ctx, S, u, true, cl - 0.3);
-      k.label(ctx, 'A CHILDHOOD CLASSIC', W / 2, 520, 28, tween(u, cl, cl + 0.3));
     },
   },
   { // 52.6 "Every legend has a beginning."

@@ -45,8 +45,6 @@ export const scenes = [
       ctx.beginPath(); ctx.ellipse(W / 2, 760, 230, 60, 0, 0, TAU); k.fillStroke(ctx, P.white, P.ink, 2.5);
       ctx.fillStyle = k.pattern(ctx, 'tiles', P.white, P.lapisLight, 34); ctx.beginPath(); ctx.ellipse(W / 2, 760, 225, 56, 0, 0, TAU); ctx.ellipse(W / 2, 755, 170, 40, 0, 0, TAU); ctx.fill('evenodd');
       k.cookie(ctx, W / 2, 610 + Math.sin(u * 2) * 6, 170 * pop(u, ck - 0.4, 0.4), u * 0.1);
-      k.label(ctx, 'THE CHOCOLATE CHIP COOKIE', W / 2, 260, 28, tween(u, ck - 0.3, ck));
-      k.stamp(ctx, 'AN ACCIDENT?', W / 2, 980, 64, tween(u, ac, ac + 0.25, ease.linear), -0.08);
     },
   },
   { // 3.5 "It wasn't."
@@ -108,7 +106,6 @@ export const scenes = [
       // the balance settles perfectly level on "exactly"
       const tilt = Math.sin(u * 4) * 0.8 * (1 - tween(u, ex - 0.4, ex + 0.1));
       k.balance(ctx, 620, 760, 1.05, tilt);
-      if (u > ex) k.label(ctx, 'EXACTLY', 620, 450, 30, tween(u, ex, ex + 0.3));
       // her diploma
       const dp = tween(u, di - 0.2, di + 0.3, ease.outBack);
       if (dp > 0) { ctx.save(); ctx.translate(250, 330); ctx.scale(dp, dp); k.rect(ctx, -130, -80, 260, 160, P.paperLight, P.goldDark, 5); ctx.fillStyle = P.verm; ctx.font = '900 30px Deco'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('DIETITIAN', 0, -20); ctx.fillStyle = P.ink; ctx.font = '700 18px Fell'; ctx.fillText('TRAINED · CERTIFIED', 0, 20); k.seal(ctx, 90, 50, 26, ' ✓ · ✓ · ✓ ·', '✓', 1, P.verm); ctx.restore(); }
@@ -138,7 +135,6 @@ export const scenes = [
       ctx.save(); ctx.clip(); ctx.fillStyle = k.pattern(ctx, 'tiles', P.white, P.lapisLight, 34); ctx.fillRect(530, 680, 320, 60); ctx.restore();
       const stir = tween(u, dg - 0.6, dg + 1.0);
       if (stir > 0) { ctx.save(); ctx.translate(690 + Math.cos(u * 8) * 50, 640 + Math.sin(u * 8) * 10); ctx.rotate(-0.4); k.rect(ctx, -8, -160, 16, 170, P.brownLight, P.ink, 2); ctx.restore(); }
-      k.label(ctx, 'COOKIE DOUGH', 690, 520, 24, tween(u, dg, dg + 0.3));
       k.figure(ctx, 110, 1010, { ...RUTH, s: 0.95, face: 1, mood: 'happy', armF: [1.6 + Math.sin(u * 9) * 0.15 * (u < mx ? 1 : 0), 0.2] });
     },
   },
@@ -150,7 +146,6 @@ export const scenes = [
       kitchen(ctx, S, { tray: tween(u, 0.1, hi - 0.2, ease.outCubic) });
       for (let i = 0; i < 5; i++) { const x = 110 + i * 150, jump = Math.abs(Math.sin(u * 7 + i)) * 16 * tween(u, hi - 0.2, hi); k.figure(ctx, x, 1010 - jump, { s: 0.7, face: 1, skin: GUEST_SKINS[i], robe: [P.green, P.lav, P.ochre, P.turq, P.pink][i], robeP: 'dots', hat: i % 2 ? 'hotoz' : 'turban', hatColor: P.lapis, veil: P.white, mood: 'happy', armF: [2.5, 0.2], hold: c => k.cookie(c, 0, -20, 22, i) }); }
       if (u > hi - 0.1) { for (let i = 0; i < 10; i++) { const q = ((u - hi) * 0.8 + i / 10) % 1; heart(ctx, k, P, 80 + (i * 97) % 760, 620 - q * 420, 1.3, 1 - q); } for (let i = 0; i < 14; i++) { const a = i / 14 * TAU, r = 80 + (u - hi) * 380; k.star(ctx, W - 170 + Math.cos(a) * r, 600 + Math.sin(a) * r * 0.6, 11, 1 - (u - hi) * 0.7); } }
-      k.label(ctx, 'A HIT!', W / 2, 300, 40, tween(u, hi, hi + 0.3));
     },
   },
   { // 24.8 "In 1938, she puts the recipe in her cookbook."
@@ -211,7 +206,6 @@ export const scenes = [
       const cx = lerp(W / 2, W + 200, away), cy = 560;
       if (u > on - 0.1 && away < 1) k.coin(ctx, cx, cy, 120 * pop(u, on - 0.1, 0.35), u * (u > ng - 0.2 ? 10 : 1.5));
       k.figure(ctx, 260, 1000, { ...RUTH, s: 1.15, face: 1, mood: u > ng ? 'sad' : 'happy', look: u > ng ? 0.3 : 0, armF: u > ng ? [1.4, 1.2] : [1.6, 0.2], armB: u > ng ? [1.4, 1.2] : [0.2, 0.2] });
-      k.label(ctx, 'ONE DOLLAR', W / 2, 380, 30, tween(u, on, on + 0.3) * (1 - tween(u, ng, ng + 0.3)));
       k.stamp(ctx, 'NEVER GOT IT', 650, 820, 54, tween(u, S.at('got'), S.at('got') + 0.25, ease.linear), -0.12);
     },
   },
@@ -225,7 +219,6 @@ export const scenes = [
       const R = rng(23);
       for (let i = 0; i < 40; i++) { const d = R(), x = 80 + R() * 780, st = fr - 0.4 + d * 1.2, q = clamp((u - st) / 0.6); if (q <= 0) continue; const yEnd = 740 - Math.floor(i / 8) * 26 - R() * 10; k.chocBar(ctx, x, lerp(-60, yEnd, ease.outBounce(q)), 120, (R() - 0.5) * 0.6, i % 3 ? '' : 'NESTLÉ'); }
       k.figure(ctx, W / 2, 1010, { ...RUTH, s: 1.15, face: 1, mood: 'happy', armF: [2.7, 0.1], armB: [2.4, 0.1] });
-      k.label(ctx, 'FOR LIFE', W / 2, 280, 36, tween(u, li, li + 0.3));
     },
   },
   { // 43.2 "Soon, Nestlé starts selling chocolate chips,"
@@ -239,7 +232,6 @@ export const scenes = [
       k.canopy(ctx, 470, 400, 680, 120, P.verm, S.t);
       for (let row = 0; row < 2; row++) { k.rect(ctx, 170, 640 + row * 170, 600, 12, P.brown, P.ink, 1.5); for (let i = 0; i < 5; i++) k.chipBag(ctx, 230 + i * 120, 638 + row * 170, 0.75 * pop(u, se - 0.3 + (row * 5 + i) * 0.06, 0.3)); }
       if (u > cp - 0.1) { const R = rng(31); for (let i = 0; i < 40; i++) { const q = ((u - cp) * (0.6 + R() * 0.6) + R()) % 1; k.chocChunk(ctx, 60 + R() * 820, -20 + q * 1100, 1.4, q * 10 + i); } }
-      k.label(ctx, 'CHOCOLATE CHIPS', W / 2, 360, 32, tween(u, cp, cp + 0.3));
       for (let i = 0; i < 3; i++) k.figure(ctx, 170 + i * 300, 1010, { s: 0.62, face: i ? -1 : 1, skin: GUEST_SKINS[i + 1], robe: [P.green, P.lav, P.ochre][i], robeP: 'dots', hat: i % 2 ? 'hotoz' : 'turban', hatColor: P.lapis, veil: P.white, mood: 'happy', armF: [2.2, 0.3], hold: c => k.chipBag(c, 10, 0, 0.3) });
     },
   },

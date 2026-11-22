@@ -103,7 +103,6 @@ export const scenes = [
       S.cam(lerp(1.0, 1.12, tween(u, 0, 4)), W / 2, 540);
       hillside(ctx, S, { text: OLD, f: i => ({ show: tween(u, pu - 0.3 + i * 0.14, pu + 0.0 + i * 0.14, ease.outBack) }) });
       for (let i = 0; i < 3; i++) k.figure(ctx, 280 + i * 220, 760, { ...DEV, s: 0.55, face: 1, robe: [P.verm, P.lapis, P.green][i], hat: 'cap', hatColor: P.ochre, mood: 'happy', armF: [2.6 + Math.sin(u * 8 + i) * 0.3, 0.2] });
-      k.label(ctx, 'A GIANT AD', W / 2, 260, 32, tween(u, hs, hs + 0.3));
     },
   },
   { // 18.6 "Huge white letters, lit up at night."
@@ -116,8 +115,6 @@ export const scenes = [
       hillside(ctx, S, { text: OLD, night: dark > 0.5, f: () => ({ lit: tween(u, lt - 0.05, lt + 0.3) }) });
       if (dark > 0 && dark < 1) { ctx.save(); ctx.fillStyle = `rgba(20,25,60,${dark * 0.6})`; ctx.fillRect(-60, -60, W + 120, 1200); ctx.restore(); }
       if (dark > 0.5) k.moon(ctx, 840, 140, 40);
-      k.label(ctx, 'HUGE WHITE LETTERS', W / 2, 260, 28, tween(u, 0.1, 0.4) * (1 - tween(u, lt - 0.2, lt)));
-      if (u > ni) k.label(ctx, 'LIT UP AT NIGHT', W / 2, 260, 28, tween(u, ni, ni + 0.3));
     },
   },
   { // 22.2 "But it never comes down."
@@ -141,7 +138,6 @@ export const scenes = [
       hillside(ctx, S, { text: OLD, f: i => { const R = rng(i + 1); const d = R(); return { tilt: (d - 0.5) * 0.6 * f, drop: d > 0.7 ? f * 90 : f * 10, color: '#d9d2c4' }; } });
       ctx.save(); ctx.fillStyle = `rgba(90,80,60,${0.25 * f})`; ctx.fillRect(-60, -60, W + 120, 1200); ctx.restore();
       ctx.save(); ctx.translate(lerp(900, 600, u / 2.8), 300 + Math.sin(u * 7) * 10); ctx.beginPath(); ctx.moveTo(-26, 0); ctx.quadraticCurveTo(-10, -18 * Math.sin(u * 14), 0, 0); ctx.quadraticCurveTo(10, -18 * Math.sin(u * 14), 26, 0); k.stroke(ctx, P.ink, 3); ctx.restore();
-      k.label(ctx, 'YEARS LATER', W / 2, 260, 28, tween(u, 0.1, 0.4));
     },
   },
   { // 27.7 "In 1949, the Hollywood Chamber of Commerce repairs it and removes the word land."
@@ -154,8 +150,6 @@ export const scenes = [
       const away = tween(u, rm - 0.2, ld + 0.6, ease.inCubic);
       hillside(ctx, S, { text: OLD, f: i => { const R = rng(i + 1); const d = R(); const broke = 1 - fix; const isLand = i >= 9; return { tilt: (d - 0.5) * 0.6 * broke, drop: (d > 0.7 ? 90 : 10) * broke - (isLand ? away * 600 : 0), dx: isLand ? away * 200 : 0, show: isLand ? 1 - away * 0.9 : 1, color: fix > 0.5 ? P.white : '#d9d2c4' }; } });
       for (let i = 0; i < 3; i++) k.figure(ctx, 230 + i * 250, 1010, { ...DEV, s: 0.85, face: i < 1 ? 1 : -1, robe: [P.lapis, P.verm, P.green][i], robeP: 'cintamani', hat: 'turban', hatColor: [P.verm, P.ochre, P.lapis][i], mood: 'happy', armF: [2.0, 0.3] });
-      k.label(ctx, 'HOLLYWOOD CHAMBER OF COMMERCE', W / 2, 860, 22, tween(u, ch, ch + 0.3));
-      k.label(ctx, '− LAND', 820, 230, 30, tween(u, ld, ld + 0.3));
       k.seal(ctx, 150, 220, 60, ' REPAIRED · REPAIRED ·', '1949', tween(u, S.at('1949'), S.at('1949') + 0.3, ease.linear));
     },
   },
@@ -168,7 +162,6 @@ export const scenes = [
       S.cam(1.0, W / 2 + shake(u, wr, 8, 0.4), 560);
       hillside(ctx, S, { text: NEW, f: i => { const R = rng(i + 7); const d = R(); return { tilt: (d - 0.5) * 1.2 * f, drop: (d > 0.5 ? 140 : 30) * f, show: i === 6 ? 1 - f * 0.9 : 1, color: '#c9bfae' }; } });
       ctx.save(); ctx.fillStyle = `rgba(80,70,60,${0.3 * f})`; ctx.fillRect(-60, -60, W + 120, 1200); ctx.restore();
-      k.stamp(ctx, 'A WRECK', W / 2, 300, 80, tween(u, wr, wr + 0.25, ease.linear), -0.12);
     },
   },
   { // 38.1 "So, celebrities step in. Each donor pays for one letter."
@@ -225,7 +218,6 @@ export const scenes = [
       const { k, P, W, H } = S;
       const ad = S.at('estate'), sy = S.at('symbol'), mv = S.at('movies');
       hillside(ctx, S, { text: NEW, night: true, sky: c => k.searchlights(c, W / 2, 900, W, H, S.t, 5, tween(u, sy - 0.4, sy + 0.2)), f: () => ({ lit: 1 }) });
-      k.label(ctx, 'A REAL ESTATE AD', W / 2, 250, 28, tween(u, ad - 0.2, ad + 0.1) * (1 - tween(u, sy - 0.3, sy)));
       // the movies arrive: reel, clapperboard
       const mp = pop(u, sy - 0.1, 0.4);
       if (mp > 0) { k.filmReel(ctx, 230, 860, 90 * mp, u * 2); k.filmReel(ctx, 400, 820, 60 * mp, -u * 2.5); ctx.save(); ctx.translate(760, 880); ctx.scale(mp, mp); k.clapper(ctx, 0, 0, 1.1, Math.abs(Math.sin(u * 4)) * tween(u, mv - 0.2, mv)); ctx.restore(); }

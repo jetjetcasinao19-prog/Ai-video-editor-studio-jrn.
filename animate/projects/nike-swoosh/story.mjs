@@ -99,7 +99,6 @@ export const scenes = [
       medallion(ctx, k, P, '?', W / 2 + 10, 600, pop(u, lo - 0.2, 0.35));
       const hg = tween(u, 0.2, fa + 0.6);
       k.hourglass(ctx, 830, 330, 0.8, hg, Math.sin(u * 8) * 0.06 * tween(u, fa - 0.2, fa));
-      k.label(ctx, 'NEEDS A LOGO', W / 2, 240, 30, tween(u, lo, lo + 0.3));
     },
   },
   { // 14.6 "He hires a graphic design student, Carolyn Davidson."
@@ -112,7 +111,6 @@ export const scenes = [
       k.easel(ctx, 640, 1000, 320, 300, c => { c.fillStyle = P.white; c.fillRect(-160, -160, 320, 320); });
       k.figure(ctx, 320, 1010, { ...CAROLYN, s: 1.2, face: 1, mood: 'happy', armF: [1.7, 0.3], hold: c => { c.rotate(-0.5); k.rect(c, -3, -46, 6, 50, P.ink, P.ink, 1); } });
       k.label(ctx, 'CAROLYN DAVIDSON', 330, 560, 26, tween(u, cd, cd + 0.3));
-      k.label(ctx, 'GRAPHIC DESIGN STUDENT', 330, 620, 20, tween(u, gd, gd + 0.3));
     },
   },
   { // 18.4 "She sketches idea after idea. One looks like motion, a simple curved stroke."
@@ -127,7 +125,6 @@ export const scenes = [
       // the one that looks like motion
       const ms = tween(u, mo - 0.3, mo + 0.2, ease.outBack);
       if (ms > 0) sketchSheet(ctx, S, W / 2, 620, 420 * ms, 'stroke', tween(u, mo, cs + 0.6), -0.03, 0.6);
-      k.label(ctx, 'MOTION', W / 2, 980, 32, tween(u, mo + 0.2, mo + 0.5));
     },
   },
   { // 24.9 "Knight's reaction? I don't love it, but maybe it will grow on me."
@@ -184,7 +181,6 @@ export const scenes = [
         ctx.restore();
       }
       k.label(ctx, 'NIKE', W / 2, 220, 36, tween(u, nk, nk + 0.3));
-      k.label(ctx, 'ONE OF THE BIGGEST', W / 2, 1000, 24, tween(u, ea - 0.6, ea - 0.3));
     },
   },
   { // 40.9 "In 1983, Knight surprises her with a gold swoosh ring with a diamond and shares of Nike stock."
@@ -216,7 +212,6 @@ export const scenes = [
       ctx.save(); ctx.translate(W / 2, 520); for (let i = 0; i < 24; i++) { ctx.rotate(TAU / 24); ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(-30, 900); ctx.lineTo(30, 900); ctx.closePath(); ctx.fillStyle = `rgba(255,250,210,${0.3 * tween(u, fm - 0.4, fm)})`; ctx.fill(); } ctx.restore();
       k.frame(ctx, W / 2, 520, 460, 380, c => { c.fillStyle = P.white; c.fillRect(-240, -200, 480, 400); k.curvedStroke(c, 0, 0, 1.5, P.ink, 1); });
       dollarCoin(ctx, S, 820, 850, 90, pop(u, sk - 0.3, 0.35));
-      k.label(ctx, 'ONE OF THE MOST FAMOUS LOGOS', W / 2, 900, 22, tween(u, fm, fm + 0.3));
     },
   },
   { // 54.3 "Every legend has a beginning."

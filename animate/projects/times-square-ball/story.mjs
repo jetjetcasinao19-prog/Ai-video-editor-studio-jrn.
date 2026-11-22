@@ -77,7 +77,6 @@ export const scenes = [
       ctx.save(); ctx.beginPath(); ctx.rect(-60, -60, W + 120, 940); ctx.clip(); k.wedgeTower(ctx, W / 2, 900, 240, 600 * rise, 0); ctx.restore();
       const np = pop(u, nt - 0.2, 0.35);
       if (np > 0) { ctx.save(); ctx.translate(200, 760); ctx.scale(np, np); k.newspaper(ctx, 0, 0, 220, -0.1, 'A NEW HOME', 'THE NEW YORK TIMES'); ctx.restore(); }
-      k.label(ctx, 'A BRAND NEW TOWER', W / 2, 1000, 26, tween(u, tw, tw + 0.3));
     },
   },
   { // 11.8 "The area gets renamed Times Square."
@@ -94,7 +93,6 @@ export const scenes = [
       ctx.save(); ctx.globalAlpha = 1 - off; k.streetSign(ctx, 300 - off * 200, 470 + off * 400, 380, 'LONGACRE SQ', P.green, -off * 1.2); ctx.restore();
       const on = tween(u, ts - 0.3, ts + 0.2, ease.outBack);
       if (on > 0) { ctx.save(); ctx.translate(300, 470); ctx.scale(on, on); k.streetSign(ctx, 0, 0, 400, 'TIMES SQ', P.verm); ctx.restore(); }
-      k.label(ctx, 'RENAMED', 300, 300, 28, tween(u, rn, rn + 0.3));
     },
   },
   { // 15.3 "To celebrate New Year's Eve, the newspaper's owner, Adolph Ochs, sets off fireworks from the roof."
@@ -107,7 +105,6 @@ export const scenes = [
       for (let i = 0; i < 7; i++) k.fireworks(ctx, 160 + (i * 137) % 760, 150 + (i % 3) * 90, 110, (u - so + 0.2 - i * 0.25) / 0.9, FW[i % 5], i + 11);
       k.label(ctx, "NEW YEAR'S EVE", W / 2, 960, 28, tween(u, ny, ny + 0.3));
       k.label(ctx, 'ADOLPH OCHS', W / 2, 260, 24, tween(u, ad, ad + 0.3) * (1 - tween(u, so, so + 0.3)));
-      k.label(ctx, 'FROM THE ROOF', W / 2, 260, 24, tween(u, rf, rf + 0.3));
     },
   },
   { // 21.9 "Huge crowds show up."
@@ -117,7 +114,6 @@ export const scenes = [
       cityNight(ctx, S);
       for (let i = 0; i < 4; i++) k.fireworks(ctx, 200 + i * 220, 160 + (i % 2) * 100, 110, ((u + i * 0.4) % 1.3) / 0.9, FW[i], i + 21);
       crowd(ctx, S, 18, 960, u);
-      k.label(ctx, 'HUGE CROWDS', W / 2, 820, 30, tween(u, 0.2, 0.5));
     },
   },
   { // 24.5 "Then the city bans the fireworks."
@@ -129,7 +125,6 @@ export const scenes = [
       // the last fireworks fizzle out
       for (let i = 0; i < 3; i++) k.fireworks(ctx, 220 + i * 260, 200, 90 * (1 - tween(u, bn, bn + 0.5)), (u + i * 0.3) / 0.9, FW[i], i + 31);
       k.figure(ctx, 760, 1010, { ...OFFICIAL, s: 1.0, face: -1, mood: 'calm', armF: [lerp(0.6, 2.2, tween(u, bn - 0.4, bn)), 0.1], hold: c => { c.rotate(-1.5); k.rect(c, -30, -90, 60, 100, P.paperLight, P.ink, 2); } });
-      k.label(ctx, 'THE CITY', 760, 620, 24, tween(u, 0.3, 0.6));
       k.stamp(ctx, 'NO FIREWORKS', W / 2 - 80, 470, 64, tween(u, bn, bn + 0.25, ease.linear), -0.12);
     },
   },
@@ -143,7 +138,7 @@ export const scenes = [
       if (u > id) for (let i = 0; i < 12; i++) { const a = i / 12 * TAU, r = 60 + (u - id) * 300; k.star(ctx, W / 2 + Math.cos(a) * r, 230 + Math.sin(a) * r * 0.6, 10, 1 - (u - id) * 0.7); }
       k.figure(ctx, 280, 1010, { ...OCHS, s: 1.2, face: 1, mood: u > id ? 'happy' : 'calm', armF: [u > id ? 2.5 : 1.2, 0.3] });
       const sp = pop(u, sa - 0.2, 0.35);
-      if (sp > 0) { ctx.save(); ctx.translate(680, 740); ctx.scale(sp, sp); k.circle(ctx, 0, -40, 150, P.paperLight, P.goldLight, 6); ctx.save(); ctx.beginPath(); ctx.arc(0, -40, 144, 0, TAU); ctx.clip(); k.waves(ctx, -150, 0, 300, 120, S.t, P.water, P.waterLight, 16, 18); k.galley(ctx, 0, 20, 0.45, S.t); ctx.restore(); ctx.restore(); k.label(ctx, 'FROM SAILORS', 680, 960, 24, sp); }
+      if (sp > 0) { ctx.save(); ctx.translate(680, 740); ctx.scale(sp, sp); k.circle(ctx, 0, -40, 150, P.paperLight, P.goldLight, 6); ctx.save(); ctx.beginPath(); ctx.arc(0, -40, 144, 0, TAU); ctx.clip(); k.waves(ctx, -150, 0, 300, 120, S.t, P.water, P.waterLight, 16, 18); k.galley(ctx, 0, 20, 0.45, S.t); ctx.restore(); ctx.restore();  }
     },
   },
   { // 32.0 "For decades, ships set their clocks by watching time balls drop from towers at an exact time."
@@ -163,8 +158,6 @@ export const scenes = [
       // the captain's clock, set at the exact moment
       const cp = pop(u, cl - 0.2, 0.35);
       if (cp > 0) { ctx.save(); ctx.translate(820, 330); ctx.scale(cp, cp); k.clockFace(ctx, 0, 0, 90, 1, u > dr ? 0 : 58 + tween(u, cl, dr) * 2); ctx.restore(); }
-      k.label(ctx, 'TIME BALLS', 180, 720, 24, tween(u, dr - 0.3, dr));
-      k.label(ctx, 'AN EXACT TIME', 820, 470, 22, tween(u, ex, ex + 0.3));
     },
   },
   { // 39.1 "On December 31st, 1907, a 700-pound ball of iron and wood, covered in 100 light bulbs, drops at midnight."
@@ -183,7 +176,7 @@ export const scenes = [
       k.label(ctx, '100 LIGHT BULBS', 230, 420, 22, tween(u, lt, lt + 0.3));
       const cp = pop(u, de - 0.2, 0.35);
       if (cp > 0) { ctx.save(); ctx.translate(850, 470); ctx.scale(cp, cp); k.calendarPage(ctx, 0, 0, 120, 'DEC', 31, 0.06); ctx.restore(); }
-      if (u > mn) { for (let i = 0; i < 16; i++) { const a = i / 16 * TAU, r = 90 + (u - mn) * 400; k.star(ctx, W / 2 + Math.cos(a) * r, by + Math.sin(a) * r, 12, 1 - (u - mn) * 0.7); } k.label(ctx, 'MIDNIGHT', 820, 640, 30, tween(u, mn, mn + 0.3)); }
+      if (u > mn) { for (let i = 0; i < 16; i++) { const a = i / 16 * TAU, r = 90 + (u - mn) * 400; k.star(ctx, W / 2 + Math.cos(a) * r, by + Math.sin(a) * r, 12, 1 - (u - mn) * 0.7); }  }
       crowd(ctx, S, 12, 1040, u);
       k.seal(ctx, 150, 600, 56, ' THE FIRST DROP · 1907 ·', '1907', tween(u, S.at('1907'), S.at('1907') + 0.3, ease.linear));
     },
@@ -211,8 +204,6 @@ export const scenes = [
         }
       });
       ctx.fillStyle = '#2a2a33'; ctx.fillRect(-60, 1000, W + 120, 200);
-      k.label(ctx, 'A PARTY TRICK', W / 2, 320, 26, tween(u, pt, pt + 0.3));
-      k.label(ctx, 'MILLIONS, EVERY YEAR', W / 2, 1050, 26, tween(u, mi, mi + 0.3));
     },
   },
   { // 54.4 "Every legend has a beginning."

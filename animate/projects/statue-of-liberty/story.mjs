@@ -134,7 +134,6 @@ export const scenes = [
       ctx.restore();
       if (u > un) for (let i = 0; i < 14; i++) { const a = i / 14 * TAU, r = 120 + (u - un) * 320; k.star(ctx, W / 2 - 20 + Math.cos(a) * r, 620 + Math.sin(a) * r, 12, 1 - (u - un) * 0.6); }
       k.label(ctx, 'LADY LIBERTY', W / 2, 160, 28, tween(u, 0.2, 0.5));
-      k.label(ctx, 'UNVEILED', W / 2, 1000, 28, tween(u, un, un + 0.3));
     },
   },
   { // 12.8 "covered in about 300 thin copper sheets, roughly as thick as two pennies."
@@ -156,7 +155,6 @@ export const scenes = [
         for (let q = 0; q < 2; q++) { ctx.beginPath(); ctx.ellipse(0, 40 + q * 12, 60, 14, 0, 0, TAU); k.fillStroke(ctx, k.COPPER.new, P.ink, 2); }
         ctx.beginPath(); ctx.moveTo(100, -14); ctx.lineTo(100, 0); ctx.moveTo(70, 40); ctx.lineTo(70, 64); k.stroke(ctx, P.verm, 3);
         ctx.restore();
-        k.label(ctx, 'AS THICK AS TWO PENNIES', 790, 800, 20, tween(u, pn - 0.2, pn + 0.2));
       }
     },
   },
@@ -173,8 +171,6 @@ export const scenes = [
       // salt wind and spray blow across her
       for (let i = 0; i < 6; i++) { const x = ((S.t * 260 + i * 210) % (W + 300)) - 150, y = 160 + i * 120; ctx.beginPath(); ctx.moveTo(x, y); ctx.bezierCurveTo(x + 60, y - 30, x + 120, y + 30, x + 180, y); ctx.arc(x + 180, y - 14, 14, Math.PI / 2, Math.PI * 2.2); k.stroke(ctx, 'rgba(248,242,226,0.85)', 4); }
       for (let i = 0; i < 40; i++) { const x = ((S.t * 300 + i * 53) % (W + 100)) - 50, y = ((i * 97 + S.t * 500) % 1000); ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + 12, y + 20); k.stroke(ctx, 'rgba(220,235,245,0.7)', 2); }
-      k.label(ctx, 'SEA AIR', 170, 140, 28, tween(u, sa, sa + 0.3));
-      k.label(ctx, 'COPPER CHANGES', W / 2, 1010, 26, tween(u, ch, ch + 0.3));
     },
   },
   { // 21.4 "Year by year, she turns from brown to green."
@@ -189,9 +185,6 @@ export const scenes = [
       mosaicStatue(ctx, S, () => 1, (i, j) => 0.55 + toBrown * 0.45 + clamp((toGreen * 1.6 - nz(i, j) * 0.6 - (j / ROWS) * 0.3) * 2.2), 1);
       // pages of years flying off a calendar
       for (let q = 0; q < 6; q++) { const f = ((u * 2.2 + q / 6) % 1); if (u < ye) break; ctx.save(); ctx.globalAlpha *= 1 - f; ctx.translate(800 + f * 120, 230 - f * 160); ctx.rotate(f * 2); k.rect(ctx, -40, -46, 80, 92, P.paperLight, P.ink, 2); k.rect(ctx, -40, -46, 80, 22, P.verm, P.ink, 1.5); ctx.restore(); }
-      k.label(ctx, 'YEAR BY YEAR', 800, 360, 24, tween(u, ye, ye + 0.3));
-      k.label(ctx, 'BROWN…', 170, 360, 26, tween(u, br - 0.1, br + 0.2) * (1 - tween(u, gr - 0.2, gr)));
-      k.label(ctx, '…TO GREEN', 170, 360, 26, tween(u, gr - 0.1, gr + 0.2));
     },
   },
   { // 25.9 "In 1906, Congress sets aside money to paint her and make her look new again."
@@ -272,11 +265,8 @@ export const scenes = [
       ctx.restore();
       ctx.beginPath(); ctx.moveTo(500, 700); ctx.lineTo(560, 700); k.stroke(ctx, P.goldDark, 3);
       k.magnifier(ctx, 470, 700, 60 * cut, 0.7);
-      k.label(ctx, 'PATINA', 740, 690, 24, tween(u, pt, pt + 0.3));
-      k.label(ctx, 'COPPER', 740, 900, 24, tween(u, cu, cu + 0.3));
       medallion(ctx, k, P, '!', 740, 470, pop(u, pr - 0.2, 0.35), P.green);
       k.label(ctx, 'IT PROTECTS HER', 740, 380, 22, tween(u, pr, pr + 0.3));
-      k.label(ctx, 'A GOOD THING', 200, 140, 24, tween(u, gt, gt + 0.3) * (1 - tween(u, la - 0.2, la)));
     },
   },
   { // 44.5 "A flaw that became her famous color."
@@ -292,8 +282,6 @@ export const scenes = [
       tiles.forEach(([i, j], n) => { const g = Math.sin(S.t * 3 - n * 0.35); if (g > 0.93) k.star(ctx, GX + i * TW + TW / 2, GY + j * TH + TH / 2, 8, (g - 0.93) * 14); });
       const fr = tween(u, fa - 0.4, fa + 0.6);
       if (fr > 0) { ctx.save(); ctx.strokeStyle = '#1f5fae'; ctx.lineWidth = 26; ctx.setLineDash([1400 * fr, 3000]); ctx.strokeRect(GX - 60, GY - 40, COLS * TW + 120, ROWS * TH + 70); ctx.strokeStyle = P.turq; ctx.lineWidth = 8; ctx.strokeRect(GX - 60, GY - 40, COLS * TW + 120, ROWS * TH + 70); ctx.restore(); }
-      k.label(ctx, 'A FLAW…', 170, 220, 26, tween(u, fl, fl + 0.3) * (1 - tween(u, fa - 0.2, fa)));
-      k.label(ctx, 'HER FAMOUS COLOR', W / 2, 1030, 28, tween(u, fa, fa + 0.3));
     },
   },
   { // 48.7 "Every legend has a beginning."

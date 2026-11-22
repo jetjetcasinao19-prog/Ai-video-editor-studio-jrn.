@@ -63,7 +63,6 @@ export const scenes = [
       const b = pop(u, bo - 0.2, 0.4);
       if (b > 0) { ctx.save(); ctx.translate(300, 830); ctx.scale(b, b); k.circle(ctx, 0, -60, 150, P.paperLight, P.goldLight, 6); k.mouse(ctx, 0, 30, 1.3, { t: S.t }); ctx.restore(); }
       k.figure(ctx, 560, 1000, { ...WALT, s: 0.9, face: 1, mood: u > lo ? 'sad' : 'calm', armF: [u > lo ? 2.3 : 0.8, -0.1] });
-      k.label(ctx, 'HIS BIGGEST STAR', 760, 600, 24, tween(u, st - 0.3, st) * (1 - gone * 0.6));
     },
   },
   { // 5.8 "1928."
@@ -93,8 +92,6 @@ export const scenes = [
         oldFilm(c, w, h);
       });
       k.figure(ctx, 170, 1010, { ...WALT, s: 1.1, face: 1, mood: 'happy', armF: [2.2, -0.2] });
-      k.label(ctx, 'A HIT CARTOON', 560, 690, 26, tween(u, hc, hc + 0.3) * (1 - tween(u, os, os + 0.3)));
-      k.label(ctx, 'OSWALD THE LUCKY RABBIT', 560, 690, 24, tween(u, os, os + 0.3));
       for (let i = 0; i < 4; i++) { const p = pop(u, lr + i * 0.15, 0.3); if (p > 0) starBadge(ctx, k, P, 330 + i * 160, 120, 26 * p, u); }
     },
   },
@@ -123,7 +120,6 @@ export const scenes = [
       for (let i = 0; i < 3; i++) { k.rect(ctx, 520 + i * 140, 840, 110, 18, P.brownLight, P.ink, 2); k.rect(ctx, 530 + i * 140, 858, 10, 130, P.brown, P.ink, 1.5); k.rect(ctx, 610 + i * 140, 858, 10, 130, P.brown, P.ink, 1.5); }
       ANIM.forEach((a, i) => { const go = tween(u, lv - 0.8 + i * 0.25, lv + 1.6 + i * 0.25, ease.inOut); k.figure(ctx, lerp(560 + i * 140, 1200 + i * 120, go), 1010, { ...a, s: 0.95, face: go > 0 ? 1 : -1, walk: go > 0 && go < 1 ? u * 9 + i : null, mood: 'calm', armF: [1.6, 0.2], hold: c => { c.rotate(-1.4); k.rect(c, -40, -30, 80, 60, P.paperLight, P.ink, 2); } }); });
       k.figure(ctx, 180, 1010, { ...WALT, s: 1.1, face: 1, mood: 'sad', armF: [0.4, 0.1] });
-      k.label(ctx, 'HIS ANIMATORS', 700, 330, 26, tween(u, 0.6, 0.9));
     },
   },
   { // 18.3 "On the train home, he needs a new star."
@@ -139,7 +135,7 @@ export const scenes = [
       // the thought in the window
       const q = pop(u, ne - 0.2, 0.35), sp = pop(u, st - 0.2, 0.4);
       if (q > 0 && sp <= 0) medallion(ctx, k, P, '?', 330, 380, q, P.lapis);
-      if (sp > 0) { starBadge(ctx, k, P, 330, 380, 120 * sp, 0); k.label(ctx, 'A NEW STAR', 330, 540, 26, sp); }
+      if (sp > 0) { starBadge(ctx, k, P, 330, 380, 120 * sp, 0);  }
       for (let i = 0; i < 3; i++) k.circle(ctx, 300 + i * 30, 560 + i * 50, 8 + i * 3, P.paperLight, P.ink, 1.5);
     },
   },
@@ -174,8 +170,6 @@ export const scenes = [
       k.microphone(ctx, 820, 1000, 1.3, tween(u, so - 0.4, so + 0.2), S.t, '');
       k.drum(ctx, 600, 960, 0.8, S.t);
       if (u > so - 0.3) for (let i = 0; i < 7; i++) { const q = ((u - so + 0.3) * 0.6 + i / 7) % 1; ctx.save(); ctx.globalAlpha = 1 - q; k.musicNote(ctx, 300 + i * 90, 900 - q * 300, 1.1, [P.verm, P.lapis, P.goldDark][i % 3]); ctx.restore(); }
-      k.label(ctx, 'SOMETHING NEW', W / 2, 120, 26, tween(u, nw, nw + 0.3) * (1 - tween(u, so, so + 0.3)));
-      k.label(ctx, 'WITH SOUND!', W / 2, 120, 30, tween(u, so, so + 0.3));
     },
   },
   { // 31.8 "November 1928. Steamboat Willie opens in New York."
@@ -219,7 +213,6 @@ export const scenes = [
       audience(ctx, S, 900, u, tween(u, lv - 0.3, lv + 0.2));
       if (u > lv) for (let i = 0; i < 8; i++) { const q = ((u - lv) * 0.7 + i / 8) % 1; ctx.save(); ctx.globalAlpha = 1 - q; heart(ctx, k, P, 100 + i * 115, 820 - q * 200, 1.5); ctx.restore(); }
       k.label(ctx, 'IT WHISTLES', W / 2, 740, 26, tween(u, wh, wh + 0.3) * (1 - tween(u, cr, cr + 0.3)));
-      k.label(ctx, 'THE CROWD LOVES IT', W / 2, 740, 26, tween(u, lv, lv + 0.3));
     },
   },
   { // 40.4 "And in 2024, that very first Mickey entered the public domain."
@@ -236,7 +229,6 @@ export const scenes = [
       const op = tween(u, en - 0.1, en + 0.4, ease.outBack);
       k.padlock(ctx, W / 2, 900, 1.2, op);
       if (u > en) for (let i = 0; i < 12; i++) { const a = i / 12 * TAU, r = 80 + (u - en) * 260; k.star(ctx, W / 2 + Math.cos(a) * r, 920 + Math.sin(a) * r * 0.6, 10, 1 - (u - en) * 0.8); }
-      k.label(ctx, 'PUBLIC DOMAIN', W / 2, 1030, 30, tween(u, pd, pd + 0.3));
     },
   },
   { // 45.4 "A lost rabbit gave the world its most famous mouse."
@@ -251,7 +243,6 @@ export const scenes = [
       const rise = tween(u, wo - 0.6, fa, ease.outCubic);
       starBadge(ctx, k, P, 620, lerp(820, 470, rise), lerp(80, 260, rise), Math.sin(S.t) * 0.05);
       k.mouse(ctx, 620, lerp(860, 560, rise), lerp(0.5, 1.4, rise), { t: S.t });
-      k.label(ctx, 'A LOST RABBIT', 200, 700, 24, tween(u, lo, lo + 0.3) * (1 - away));
       k.label(ctx, 'THE MOST FAMOUS MOUSE', W / 2, 1020, 28, tween(u, fa, fa + 0.3));
       if (u > fa) for (let i = 0; i < 14; i++) { const a = i / 14 * TAU, r = 280 + (u - fa) * 200; k.star(ctx, 620 + Math.cos(a) * r, 470 + Math.sin(a) * r * 0.8, 12, 1 - (u - fa) * 0.5); }
     },

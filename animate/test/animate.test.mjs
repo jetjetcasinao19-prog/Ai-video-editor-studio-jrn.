@@ -184,7 +184,16 @@ test('craft lint: flags narrator-echo labels and stamp habits, passes a clean st
   const { lintStory } = await import('../lib/lint.mjs');
   const clean = await lintStory(path.join(HERE, '..', 'projects', 'black-friday'));
   assert.ok(clean.ok, 'black-friday passes: ' + clean.issues.map(i => i.msg).join('; '));
-  const sloppy = await lintStory(path.join(HERE, '..', 'projects', 'microwave'));
+  // a deliberately sloppy copy: every spoken sentence pasted on screen and stamped
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'slop-'));
+  for (const f of ['voice.mp3', 'words.json']) fs.copyFileSync(path.join(HERE, '..', 'projects', 'microwave', f), path.join(tmp, f));
+  const words = JSON.parse(fs.readFileSync(path.join(tmp, 'words.json'), 'utf8')).words.map(w => w.w.replace(/[^A-Za-z']/g, '').toUpperCase());
+  const echoes = [2, 12, 22, 32, 42, 52, 62].map(i => words.slice(i, i + 3).join(' ').toLowerCase()).filter(e => !/\d/.test(e));
+  const story = fs.readFileSync(path.join(HERE, '..', 'projects', 'microwave', 'story.mjs'), 'utf8')
+    .replace(/from '\.\.\/\.\.\//g, `from '${path.join(HERE, '..')}/`)
+    .replace("const { k, P, W } = S;", "const { k, P, W } = S;\n" + echoes.map(e => `      k.label(ctx, '${e}', 100, 100, 20, 1);`).join('\n') + "\n      k.stamp(ctx, 'ONE', 9, 9, 9, 1); k.stamp(ctx, 'TWO', 9, 9, 9, 1); k.stamp(ctx, 'THREE', 9, 9, 9, 1);");
+  fs.writeFileSync(path.join(tmp, 'story.mjs'), story);
+  const sloppy = await lintStory(tmp);
   assert.ok(sloppy.issues.some(i => i.rule === 'echo-labels'), 'microwave has labels that echo the voice');
   assert.ok(sloppy.issues.some(i => i.rule === 'stamp-habit'), 'microwave stamps too often');
 });
@@ -208,4 +217,28 @@ test('panorama: a Matrakçı-style city plan draws with rivers, squares and a la
   panorama(ctx, { W: 940, H: 1060, k: kitmod, P: kitmod.P, t: 0 }, { grid: { cols: 5, rows: 6 }, squares: [[1, 1]], rivers: ['left', 'right'], landmarkCell: [2, 2], landmark: () => { drew = true; } });
   assert.ok(drew, 'landmark callback ran');
   const sig = colorSig(cv); assert.ok(new Set(sig.map(v => Math.round(v / 20))).size > 3, 'the plan is not blank');
+});
+
+test('host: lip-sync follows the voice and the Nakkaş appears for the sign-off', async () => {
+  const H = await import('../styles/ottoman/host.mjs');
+  const p0 = await loadProject(PROJECT);
+  const env = H.voiceEnvelope(p0.dir, p0.meta.voice, 30);
+  assert.ok(env.length > 30 * 50, 'one value per frame');
+  const loud = env.filter(v => v > 0.4).length, quiet = env.filter(v => v < 0.05).length;
+  assert.ok(loud > 100 && quiet > 30, 'speech and pauses are both present');
+  process.env.ANIMATE_LOOK = 'album';
+  const p = await loadProject(PROJECT);
+  delete process.env.ANIMATE_LOOK;
+  const PA = p.style.layoutOf(p.meta).paint, w = p.words, i = w.findIndex(x => /^every$/i.test(x.w.replace(/[^A-Za-z]/g, '')));
+  assert.ok(i > 0, 'the story has the closing line');
+  const t = w[i].start + 0.5, region = [PA.x + PA.w / 2 - 150, PA.y + PA.h - 480, 300, 460];
+  const withHost = colorSig((await makeFrameDrawer(p)).frame(t), ...region);
+  const noHost = colorSig((await makeFrameDrawer({ ...p, meta: { ...p.meta, host: false } })).frame(t), ...region);
+  assert.ok(withHost.some((v, j) => Math.abs(v - noHost[j]) > 15), 'the host is drawn at the sign-off');
+});
+
+test('acting: every gesture gives arm angles and blends from rest', async () => {
+  const { act, GESTURES } = await import('../styles/ottoman/acting.mjs');
+  for (const n of Object.keys(GESTURES)) { const a = act(n, 0.5, 1); assert.ok(Array.isArray(a.armF) && a.armF.every(Number.isFinite), n); }
+  assert.deepEqual(act('cheer', 0, 0).armF, act('rest', 0, 1).armF, 'k = 0 is the resting pose');
 });

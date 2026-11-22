@@ -11,6 +11,7 @@ export const meta = {
   look: 'scroll',   // hanging scroll, petals (the three videos before used night, album, tile)
   room: 'tiles',    // İznik-tiled laboratory
   device: 'marvels',
+  cameos: [{ at: 'bonus', dur: 1.7, mood: 'wow' }],
   width: 1080, height: 1920, fps: 30,
   duration: 55.9,
   voice: 'voice.mp3',
@@ -58,7 +59,6 @@ export const scenes = [
       // a ghost of what it will become
       const gh = tween(u, inv - 0.2, inv + 0.4) * (1 - tween(u, me - 0.3, me));
       if (gh > 0) { ctx.save(); ctx.globalAlpha *= gh * 0.7; k.smallOven(ctx, W / 2, 300, 1.4, 1, S.t); ctx.restore(); }
-      k.label(ctx, 'THE MICROWAVE OVEN', W / 2, 150, 28, tween(u, mw, mw + 0.3) * (1 - tween(u, me - 0.3, me)));
       k.label(ctx, 'BORN FROM THIS', W / 2, 150, 28, tween(u, me, me + 0.3));
       onlookers(ctx, S, [150, 790], 1010, 0.95, u, tween(u, me, me + 0.3));
     },
@@ -95,7 +95,6 @@ export const scenes = [
       k.stamp(ctx, 'NEVER', 700, 760, 54, tween(u, nv, nv + 0.25, ease.linear), -0.2);
       k.figure(ctx, 400, 890, { ...SPENCER, s: 1.0, face: 1, mood: u > nv ? 'calm' : 'happy', armF: [1.4, 0.2] });
       k.label(ctx, 'PERCY SPENCER', 400, 520, 26, tween(u, pe, pe + 0.3));
-      k.label(ctx, 'ENGINEER', 400, 570, 22, tween(u, en, en + 0.3));
       if (u > gr) k.star(ctx, 300, 860, 18, 1);
     },
   },
@@ -109,7 +108,6 @@ export const scenes = [
       k.factory(ctx, 280, 830, 460, 220, S.t, false);
       k.radarDish(ctx, 280, 610, 0.9, S.t);
       k.radarScope(ctx, 720, 460, 170, S.t, [[0.4, -0.3], [-0.5, 0.2], [0.1, 0.6]]);
-      k.label(ctx, 'RADAR', 720, 680, 28, tween(u, ra, ra + 0.3));
       k.label(ctx, 'RAYTHEON', 280, 900, 26, tween(u, ry, ry + 0.3));
       k.figure(ctx, 560, 1010, { ...SPENCER, s: 0.9, face: 1, mood: 'calm', armF: [1.9, 0.2] });
     },
@@ -148,7 +146,6 @@ export const scenes = [
       for (let i = 0; i < 4; i++) { const q = clamp(melt * 1.4 - i * 0.15); if (q > 0) k.blob(ctx, 360 + i * 80, 560 + q * 160, 26 + q * 24, i + 3, 0.3, 10, '#5a3218', P.ink, 1.5, 1.3); }
       k.waveRays(ctx, W + 60, 200, 620, 420, tween(u, 0, 1.2), S.t, 3);
       if (u > no - 0.2) k.magnifier(ctx, 300 + Math.sin(u * 2) * 20, 320, 90, 0.7);
-      k.stamp(ctx, 'MELTED!', W / 2, 960, 62, tween(u, me, me + 0.25, ease.linear), -0.12);
     },
   },
   { // 23.2 "Most people would shrug. He gets curious."
@@ -161,14 +158,12 @@ export const scenes = [
       ctx.save(); ctx.globalAlpha *= lerp(1, 0.45, tween(u, cu - 0.3, cu));
       [90, 220, 350].forEach((x, i) => k.figure(ctx, x, 1010, { ...ONLOOK[i], skin: SKINS[i], s: 0.85, face: 1, mood: 'calm', armF: [lerp(0.3, 1.5, tween(u, sh - 0.3, sh)), lerp(0.2, -1.8, tween(u, sh - 0.3, sh))], armB: [lerp(0.15, 1.2, tween(u, sh - 0.3, sh)), -1.4] }));
       ctx.restore();
-      k.label(ctx, 'MOST PEOPLE', 220, 640, 24, tween(u, 0.2, 0.5));
       ctx.beginPath(); ctx.moveTo(W / 2 + 30, 120); ctx.lineTo(W / 2 + 30, 1060); k.stroke(ctx, P.goldDark, 4);
       // right: Spencer leans in with a glass
       const c = tween(u, cu - 0.4, cu + 0.2);
       k.figure(ctx, 720, 1010, { ...SPENCER, s: 1.05, face: -1, mood: c > 0.5 ? 'wow' : 'calm', armF: [lerp(1.0, 2.2, c), 0.2] });
       if (c > 0) k.magnifier(ctx, 600, 560, 70 * c, 0.7);
       medallion(ctx, k, P, '?', 720, 360, pop(u, cu - 0.3, 0.4), P.verm);
-      k.label(ctx, 'CURIOUS', 720, 200, 28, c);
     },
   },
   { // 26.9 "He aims the tube at an egg. It explodes."
@@ -187,7 +182,6 @@ export const scenes = [
       k.egg(ctx, 680, 640 + Math.sin(u * 40) * 3 * crack, 1.2, crack, burst, 9);
       if (burst > 0 && burst < 1) { ctx.save(); ctx.globalAlpha *= 1 - burst; k.circle(ctx, 680, 590, 60 + burst * 260, null, P.goldLight, 10); ctx.restore(); }
       onlookers(ctx, S, [120, 900], 1010, 0.9, u, tween(u, ex, ex + 0.2));
-      k.label(ctx, 'AN EGG', 680, 430, 24, tween(u, eg, eg + 0.3) * (1 - burst));
       k.stamp(ctx, 'IT EXPLODES', W / 2, 280, 60, tween(u, ex + 0.1, ex + 0.35, ease.linear), -0.12);
     },
   },
@@ -200,9 +194,9 @@ export const scenes = [
       ctx.fillStyle = k.pattern(ctx, 'flowers', P.paperLight, P.paperDark, 30); ctx.fillRect(-60, -60, W + 120, 1200);
       // the wonder, written as a diagram: waves → heat → cooked food
       const a = pop(u, wa - 0.2, 0.35), b = pop(u, co - 0.2, 0.35), c = pop(u, fo - 0.2, 0.35);
-      if (a > 0) { k.circle(ctx, 190, 420, 130 * a, P.paperLight, P.goldDark, 5); ctx.save(); ctx.beginPath(); ctx.arc(190, 420, 124 * a, 0, TAU); ctx.clip(); k.waveRays(ctx, 70, 420, 320, 420, 1, S.t, 3); ctx.restore(); k.label(ctx, 'WAVES', 190, 590, 24, a); }
+      if (a > 0) { k.circle(ctx, 190, 420, 130 * a, P.paperLight, P.goldDark, 5); ctx.save(); ctx.beginPath(); ctx.arc(190, 420, 124 * a, 0, TAU); ctx.clip(); k.waveRays(ctx, 70, 420, 320, 420, 1, S.t, 3); ctx.restore();  }
       if (b > 0) { k.circle(ctx, 470, 420, 130 * b, P.paperLight, P.goldDark, 5); k.flames(ctx, 470, 480, 140 * b, 1, S.t); k.label(ctx, 'HEAT', 470, 590, 24, b); }
-      if (c > 0) { k.circle(ctx, 750, 420, 130 * c, P.paperLight, P.goldDark, 5); k.bowl(ctx, 750, 450, 1.0 * c, S.t, P.white, true); k.label(ctx, 'FOOD', 750, 590, 24, c); }
+      if (c > 0) { k.circle(ctx, 750, 420, 130 * c, P.paperLight, P.goldDark, 5); k.bowl(ctx, 750, 450, 1.0 * c, S.t, P.white, true);  }
       for (const [x, q] of [[330, b], [610, c]]) if (q > 0) { ctx.save(); ctx.globalAlpha *= q; k.poly(ctx, [[x - 18, 400], [x + 18, 420], [x - 18, 440]], P.verm, P.ink, 2); ctx.restore(); }
       k.figure(ctx, 470, 1010, { ...SPENCER, s: 1.05, face: 1, mood: c > 0 ? 'happy' : 'calm', armF: [2.4, 0.1] });
     },
@@ -215,10 +209,8 @@ export const scenes = [
       interior(ctx, S, { carpetColor: P.verm });
       const cp = pop(u, pa - 0.3, 0.35) * (1 - tween(u, fi - 0.3, fi));
       if (cp > 0) { ctx.save(); ctx.translate(W / 2, 460); ctx.scale(cp, cp); k.certificate(ctx, 0, 0, 520, -0.04, 'PATENT', 'A WAY TO COOK WITH WAVES'); ctx.restore(); }
-      k.stamp(ctx, 'PATENTED', W / 2 + 60, 560, 54, tween(u, pa + 0.3, pa + 0.55, ease.linear) * (1 - tween(u, fi - 0.3, fi)), -0.2);
       const ov = tween(u, fi - 0.2, fi + 0.5, ease.outBack);
       if (ov > 0) k.bigOven(ctx, lerp(W + 200, W / 2, ov), 1000, 1.25, tween(u, sa - 0.4, sa), S.t);
-      k.label(ctx, 'THE FIRST MICROWAVE OVEN', W / 2, 150, 26, tween(u, fi + 0.3, fi + 0.6));
       const tag = pop(u, sa - 0.1, 0.35);
       if (tag > 0) { ctx.save(); ctx.translate(780, 360); ctx.rotate(0.2 + Math.sin(u * 3) * 0.05); ctx.scale(tag, tag); ctx.beginPath(); ctx.moveTo(-40, -110); ctx.lineTo(0, -40); k.stroke(ctx, P.ink, 2); k.rect(ctx, -70, -40, 140, 80, P.goldLight, P.ink, 2.5); ctx.fillStyle = P.vermDark; ctx.font = '900 26px Deco'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('ON SALE', 0, 2); ctx.restore(); }
     },
@@ -252,11 +244,9 @@ export const scenes = [
       if (op > 0.5) { ctx.save(); ctx.globalAlpha *= 0.7; const g = ctx.createRadialGradient(0, 700, 10, 0, 700, 200); g.addColorStop(0, 'rgba(255,240,170,0.8)'); g.addColorStop(1, 'rgba(255,240,170,0)'); ctx.fillStyle = g; ctx.fillRect(-200, 500, 400, 400); ctx.restore(); }
       const cn = pop(u, tw - 0.1, 0.35); if (cn > 0) k.coin(ctx, 0, 620 - cn * 40, 46 * cn, S.t * 2, '$2');
       ctx.restore();
-      k.label(ctx, 'HIS REWARD?', W / 2, 150, 28, tween(u, re, re + 0.3) * (1 - dn));
       k.label(ctx, 'THE SAME $2', W / 2, 150, 28, tween(u, tw + 0.2, tw + 0.5));
       // every inventor on staff gets one too
       for (let i = 0; i < 4; i++) { const a = pop(u, inv - 0.3 + i * 0.2, 0.3); if (a <= 0) continue; const x = 470 + i * 140; k.figure(ctx, x, 1010, { ...ONLOOK[i % 3], skin: SKINS[(i + 1) % 3], s: 0.75 * a, face: -1, mood: 'calm', armF: [1.8, 0.2] }); k.coin(ctx, x - 40, 640, 24 * a, S.t * 2 + i, '$2'); }
-      k.label(ctx, 'EVERY INVENTOR', 680, 520, 22, tween(u, inv, inv + 0.3));
     },
   },
   { // 48.2 "A melted snack, now in kitchens everywhere."
@@ -279,8 +269,6 @@ export const scenes = [
       const mo = tween(u, no - 0.3, no + 0.3);
       if (mo < 1) { ctx.save(); ctx.globalAlpha *= 1 - mo; k.candyBar(ctx, cx, cy, 1.1, 1, 0, S.t); ctx.restore(); }
       if (mo > 0) { ctx.save(); ctx.globalAlpha *= mo; k.smallOven(ctx, cx, cy, 1.25, 1, S.t); ctx.restore(); }
-      k.label(ctx, 'A MELTED SNACK', cx, 990, 26, tween(u, me, me + 0.3) * (1 - tween(u, ki - 0.3, ki)));
-      k.label(ctx, 'IN KITCHENS EVERYWHERE', cx, 990, 26, tween(u, ki, ki + 0.3));
     },
   },
   { // 52.0 "Every legend has a beginning."

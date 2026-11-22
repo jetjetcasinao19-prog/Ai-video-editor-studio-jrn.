@@ -83,7 +83,6 @@ export const scenes = [
       for (let i = 0; i < 8; i++) { const p = pop(u, ei - 0.6 + i * 0.08, 0.25); if (p <= 0) continue; const col = i % 2, row = Math.floor(i / 2); k.reindeer(ctx, fx + 230 + row * 95, fy - 20 + col * 40 - row * 18, 0.75 * p, S.t, i); }
       k.sleigh(ctx, fx, fy + 40, 0.9);
       k.figure(ctx, fx - 10, fy + 10, { ...SANTA_NAST, robe: '#3d8458', inner: '#f8f2e2', s: 0.45, face: 1, mood: 'happy', armF: [2.2, 0.2] });
-      k.label(ctx, 'EIGHT REINDEER', W / 2, 760, 28, tween(u, ei + 0.2, ei + 0.5));
     },
   },
   { // 13.7 "In the 1860s, cartoonist Thomas Nast starts drawing Santa for Harper's Weekly."
@@ -117,7 +116,6 @@ export const scenes = [
       // three pictures across the years: ink → tan → red
       const looks = [{ robe: '#e8e4da', inner: '#ffffff', hatColor: '#cfcac0' }, { robe: '#8a5a3a', inner: '#c9b89a' }, { robe: '#c4371f', inner: '#f8f2e2', hatColor: '#c4371f', hat: 'santa' }];
       looks.forEach((lk, i) => { const p = pop(u, 0.2 + i * 0.6 + (i === 2 ? rd - 1.6 : 0), 0.35); if (p <= 0) return; ctx.save(); ctx.translate(180 + i * 290, 420); ctx.scale(p, p); k.frame(ctx, 0, 0, 200, 270, miniSanta({ ...SANTA_NAST, ...lk }, 0.55, 120)); ctx.restore(); if (i < 2 && p > 0.5) { ctx.beginPath(); ctx.moveTo(300 + i * 290, 420); ctx.lineTo(340 + i * 290, 420); k.stroke(ctx, P.goldDark, 6); } });
-      k.label(ctx, 'OVER THE YEARS', W / 2, 700, 28, tween(u, 0.2, 0.5));
       if (u > rd) for (let i = 0; i < 12; i++) { const a = i / 12 * TAU, r = 170 + (u - rd) * 300; k.star(ctx, 760 + Math.cos(a) * r, 420 + Math.sin(a) * r, 10, 1 - (u - rd)); }
     },
   },
@@ -131,7 +129,6 @@ export const scenes = [
       const R = rng(3);
       for (let i = 0; i < 6; i++) { const p = pop(u, oa - 0.4 + i * 0.25, 0.3); if (p <= 0) continue; const x = 170 + (i % 3) * 300, y = 260 + Math.floor(i / 3) * 360; ctx.save(); ctx.translate(x, y); ctx.scale(p, p); k.frame(ctx, 0, 0, 180 + (i % 2) * 30, 240, miniSanta({ ...SANTA, robe: ['#c4371f', '#a8301c', '#d4452a'][i % 3] }, 0.5, 110), (R() - 0.5) * 0.08); ctx.restore(); }
       k.stamp(ctx, 'BEFORE COKE', W / 2, 960, 64, tween(u, S.at('Coke'), S.at('Coke') + 0.25, ease.linear), -0.1);
-      k.label(ctx, 'OTHER ARTISTS', W / 2, 90, 24, tween(u, oa, oa + 0.3));
     },
   },
   { // 27.0 "Then, in 1931, Coca-Cola hires artist Haddon Sundblom to paint Santa for its ads."
@@ -147,7 +144,6 @@ export const scenes = [
       const ep = pop(u, cc - 0.2, 0.35);
       if (ep > 0) k.figure(ctx, 840, 1010, { ...ENVOY, s: 0.95 * ep, face: -1, mood: 'happy', armF: [1.7, 0.1], hold: c => k.sodaBottle(c, 10, -30, 0.8, -0.2) });
       k.label(ctx, 'HADDON SUNDBLOM', 280, 560, 24, tween(u, hs, hs + 0.3));
-      k.label(ctx, 'COCA-COLA', 840, 640, 22, tween(u, cc, cc + 0.3));
       k.seal(ctx, 150, 230, 60, ' FOR ITS ADS · FOR ITS ADS ·', '1931', tween(u, S.at('1931'), S.at('1931') + 0.3, ease.linear));
     },
   },
@@ -174,7 +170,6 @@ export const scenes = [
       k.figure(ctx, 330, 1010, { ...ENVOY, s: 1.2, face: 1, mood: 'happy', armF: [1.6, 0.1], hold: c => { c.rotate(-1.5); k.rect(c, -40, -110, 80, 150, P.paperLight, P.ink, 2); } });
       const sc = tween(u, di - 0.3, di + 0.2, ease.outBack);
       if (sc > 0) { ctx.save(); ctx.translate(620, 380); ctx.scale(sc, sc); k.speechBubble(ctx, 0, 0, "WE DIDN'T INVENT HIM", 30, -1); ctx.restore(); }
-      k.label(ctx, 'EVEN COCA-COLA SAYS', W / 2, 200, 24, tween(u, 0.1, 0.4));
     },
   },
   { // 44.0 "The red? That's just luck."
@@ -189,7 +184,6 @@ export const scenes = [
       ctx.beginPath(); ctx.moveTo(450, 520); ctx.lineTo(600, 520); k.stroke(ctx, P.goldDark, 6);
       const lp = pop(u, lu - 0.1, 0.35);
       if (lp > 0) { ctx.save(); ctx.translate(W / 2, 220); ctx.scale(lp, lp); k.circle(ctx, 0, 0, 70, P.green, P.goldLight, 6); for (let i = 0; i < 4; i++) { ctx.save(); ctx.rotate(i * Math.PI / 2 + 0.785); k.ellipse(ctx, 0, -24, 18, 26, 0, '#5fb36a', P.ink, 1.5); ctx.restore(); } ctx.restore(); }
-      k.label(ctx, 'JUST LUCK', W / 2, 960, 34, tween(u, lu, lu + 0.3));
     },
   },
   { // 46.4 "A poem, a cartoonist, and a soda ad built the Santa we know."

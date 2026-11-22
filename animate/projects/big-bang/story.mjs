@@ -51,7 +51,6 @@ export const scenes = [
       k.carpet(ctx, 100, 860, W - 200, 180, P.lapis, P.verm);
       k.microphone(ctx, 700, 1010, 0.9, 0, S.t);
       k.figure(ctx, 330, 1010, { ...HOYLE, s: 1.2, face: 1, mood: u > di ? 'sad' : 'calm', look: u > di ? Math.sin(u * 6) * 0.4 : 0, armF: u > di ? [0.9, 1.9] : [1.4, 0.4], armB: u > di ? [0.9, 1.9] : [0.2, 0.2] });
-      k.stamp(ctx, 'NOT A BELIEVER', W / 2, 720, 56, tween(u, S.at('believe'), S.at('believe') + 0.25, ease.linear), -0.1);
     },
   },
   { // 5.2 "1927, Belgium."
@@ -82,7 +81,6 @@ export const scenes = [
       ctx.save(); ctx.translate(760, 840); ctx.rotate(-0.7); k.rect(ctx, -10, -150, 22, 170, P.gold, P.ink, 2); k.rect(ctx, -14, -170, 30, 30, P.goldDark, P.ink, 2); ctx.restore();
       for (const sx of [-1, 1]) { ctx.beginPath(); ctx.moveTo(760, 860); ctx.lineTo(760 + sx * 60, 1000); k.stroke(ctx, P.brown, 6); }
       k.figure(ctx, 300, 1010, { ...LEMAITRE, s: 1.25, face: 1, mood: u > id ? 'happy' : 'calm', armF: [u > id ? 2.5 : 1.4, 0.3] });
-      k.label(ctx, 'GEORGES LEMAÎTRE', 300, 560, 26, tween(u, gl, gl + 0.3));
       k.label(ctx, 'PRIEST & PHYSICIST', 300, 620, 20, tween(u, pr, pr + 0.3));
       if (u > id) for (let i = 0; i < 12; i++) { const a = i / 12 * TAU, r = 60 + (u - id) * 300; k.star(ctx, 150 + Math.cos(a) * r, 230 + Math.sin(a) * r * 0.7, 9, 1 - (u - id) * 0.8); }
     },
@@ -100,8 +98,6 @@ export const scenes = [
       const R = rng(4);
       for (let i = 0; i < 10; i++) { const a = R() * TAU, d = (120 + R() * 320) * kk; k.galaxy(ctx, W / 2 + Math.cos(a) * d * 1.05, 540 + Math.sin(a) * d * 1.05, 28 + R() * 20, a); }
       if (back > 0.8) { const g = ctx.createRadialGradient(W / 2, 540, 2, W / 2, 540, 160); g.addColorStop(0, 'rgba(255,250,220,1)'); g.addColorStop(1, 'rgba(255,240,170,0)'); ctx.fillStyle = g; ctx.fillRect(W / 2 - 170, 370, 340, 340); k.circle(ctx, W / 2, 540, 10, P.white, P.goldDeep, 2); }
-      k.label(ctx, 'EXPANDING', W / 2, 1000, 30, tween(u, ex, ex + 0.3) * (1 - tween(u, tp - 0.4, tp - 0.1)));
-      k.label(ctx, 'ONE TINY POINT', W / 2, 1000, 30, tween(u, pt - 0.1, pt + 0.2));
     },
   },
   { // 19.6 "Einstein reportedly told him, 'Your math is correct, but your physics is abominable.'"
@@ -113,7 +109,6 @@ export const scenes = [
       k.figure(ctx, 250, 1010, { ...LEMAITRE, s: 1.1, face: 1, mood: u > ab ? 'sad' : 'calm', look: u > ab ? 0.4 : 0, armF: [1.3, 0.4] });
       k.figure(ctx, 700, 1010, { ...EINSTEIN, s: 1.15, face: -1, mood: 'calm', armF: [lerp(0.5, 1.7, tween(u, ma - 0.3, ma)), 0.2] });
       k.label(ctx, 'ALBERT EINSTEIN', 700, 560, 24, tween(u, ei, ei + 0.3));
-      k.label(ctx, '(REPORTEDLY)', 700, 610, 16, tween(u, ei + 0.4, ei + 0.7));
       const sc = tween(u, ma - 0.2, ma + 0.3, ease.outBack);
       if (sc > 0) { ctx.save(); ctx.translate(W / 2, 270); ctx.scale(sc, sc); k.cartouche(ctx, 0, 0, 700, 100, P.paperLight, P.goldDark, 4); ctx.fillStyle = P.green; ctx.font = 'italic 700 42px GaramondItalic'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('“Your math is correct…”', 0, 2); ctx.restore(); }
       k.stamp(ctx, '…YOUR PHYSICS IS ABOMINABLE', W / 2, 420, 38, tween(u, ab, ab + 0.25, ease.linear), -0.06);
@@ -131,7 +126,7 @@ export const scenes = [
       k.figure(ctx, W / 2, 1010, { ...HOYLE, s: 1.2, face: 1, mood: 'calm', armF: [1.4, 0.5] });
       k.label(ctx, 'FRED HOYLE', W / 2, 560, 28, tween(u, fh, fh + 0.3));
       const nbk = pop(u, nb - 0.1, 0.35);
-      if (nbk > 0) { ctx.save(); ctx.translate(W / 2, 470); ctx.scale(nbk, nbk); k.circle(ctx, 0, 0, 70, P.paperLight, P.goldLight, 6); ctx.fillStyle = P.lapis; ctx.font = '900 80px Garamond'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('∞', 0, 6); ctx.restore(); k.label(ctx, 'NO BEGINNING', W / 2, 610, 24, tween(u, nb, nb + 0.3)); }
+      if (nbk > 0) { ctx.save(); ctx.translate(W / 2, 470); ctx.scale(nbk, nbk); k.circle(ctx, 0, 0, 70, P.paperLight, P.goldLight, 6); ctx.fillStyle = P.lapis; ctx.font = '900 80px Garamond'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('∞', 0, 6); ctx.restore();  }
       k.seal(ctx, 830, 200, 60, ' ASTRONOMER · ASTRONOMER ·', '1949', tween(u, 0.2, 0.5, ease.linear));
     },
   },
@@ -171,8 +166,6 @@ export const scenes = [
       ctx.fillStyle = '#4e5d4a'; ctx.fillRect(-60, 880, W + 120, 300);
       k.hornAntenna(ctx, 560, 820, 1.2);
       for (let i = 0; i < 2; i++) { const p = pop(u, sc - 0.2 + i * 0.15, 0.3); if (p > 0) k.figure(ctx, 160 + i * 150, 1010, { ...SCI[i], s: 0.85 * p, face: 1, mood: u > fa ? 'happy' : 'calm', armF: [1.8, 0.3] }); }
-      k.label(ctx, 'TWO AMERICAN SCIENTISTS', W / 2, 1000, 22, tween(u, sc, sc + 0.3));
-      k.label(ctx, 'LEFTOVER HEAT', W / 2, 220, 32, tween(u, fa + 0.6, fa + 0.9));
       k.seal(ctx, 840, 300, 60, ' FAINT · LEFTOVER · HEAT ·', '1965', tween(u, S.at('1965'), S.at('1965') + 0.3, ease.linear));
     },
   },
@@ -207,8 +200,6 @@ export const scenes = [
       k.figure(ctx, 240, 1000, { ...LEMAITRE, s: 1.0, face: 1, mood: 'happy', armF: [2.4, 0.2] });
       burst(ctx, S, 710, 420, 190, tween(u, na - 0.2, na + 0.4, ease.outBack));
       k.figure(ctx, 710, 1000, { ...HOYLE, s: 1.0, face: -1, mood: 'happy', armF: [2.0, 0.3] });
-      k.label(ctx, "A PRIEST'S IDEA", 240, 640, 22, tween(u, id - 0.3, id));
-      k.label(ctx, 'ITS BIGGEST DOUBTER', 710, 640, 22, tween(u, dt - 0.2, dt + 0.1));
     },
   },
   { // 53.2 "Every legend has a beginning."

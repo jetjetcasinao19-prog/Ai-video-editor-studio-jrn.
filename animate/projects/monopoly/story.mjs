@@ -11,6 +11,7 @@ export const meta = {
   look: 'karagoz',  // shadow-theatre booth (the three videos before used tile, scroll, night)
   room: 'tent',
   device: 'karagoz',
+  cameos: [{ at: /^\$500/.source, dur: 1.7, mood: 'wow' }],
   width: 1080, height: 1920, fps: 30,
   duration: 55.0,
   voice: 'voice.mp3',
@@ -87,7 +88,6 @@ export const scenes = [
       const c = pop(u, pa - 0.1, 0.35) * (1 - tween(u, bo - 0.3, bo));
       if (c > 0) { ctx.save(); ctx.translate(640, 460); ctx.scale(c, c); k.certificate(ctx, 0, 0, 420, -0.05, 'PATENT', 'A GAME BOARD'); ctx.restore(); }
       k.label(ctx, 'LIZZIE MAGIE', 230, 380, 28, tween(u, li, li + 0.3));
-      k.stamp(ctx, 'PATENTED', 640, 860, 50, tween(u, bo, bo + 0.25, ease.linear), -0.14);
     },
   },
   { // 10.9 "Players buy property, charge rent, and watch others go broke."
@@ -119,7 +119,6 @@ export const scenes = [
       k.coinStack(ctx, 520, 700 + tilt * 60, 34, 10);
       k.label(ctx, 'THE FEW', 520, 520 + tilt * 60, 22, tween(u, se, se + 0.3));
       k.label(ctx, 'EVERYONE ELSE', 770, 560 - tilt * 60, 22, tween(u, se, se + 0.3));
-      k.stamp(ctx, 'UNFAIR', 640, 280, 58, tween(u, un, un + 0.25, ease.linear), -0.12);
     },
   },
   { // 18.3 "For years, people make their own homemade copies."
@@ -137,8 +136,6 @@ export const scenes = [
         if (d < 1) k.quill(ctx, x - 160 + 320 * d, y + 60, 0.7, -0.4);
       });
       pup(ctx, k, 470, 1010, 0.95, { ...PLAYERS[2], t: S.t, face: 1, arm: 0.6 + Math.sin(u * 6) * 0.15 });
-      k.label(ctx, 'HOMEMADE COPIES', W / 2, 960, 26, tween(u, co, co + 0.3));
-      k.label(ctx, 'FOR YEARS', W / 2, 130, 24, tween(u, ho - 0.3, ho));
     },
   },
   { // 21.5 "Players in Atlantic City add their own street names."
@@ -189,7 +186,6 @@ export const scenes = [
       if (bn > 0) { ctx.save(); ctx.translate(480, 230); ctx.scale(bn, bn); k.rect(ctx, -220, -40, 440, 80, P.verm, P.ink, 3); ctx.fillStyle = P.goldLight; ctx.font = '900 40px Deco'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('THE INVENTOR', 0, 2); ctx.restore(); }
       if (u > ro - 0.2) for (let i = 0; i < 18; i++) { const q = ((u - ro) * 0.9 + i / 18) % 1, x = 140 + ((i * 131) % 700); k.coin(ctx, x, -40 + q * 1000, 18, S.t * 4 + i, '$'); }
       k.coinStack(ctx, 760, 1000, 40, Math.round(tween(u, ro, mi + 0.5) * 14));
-      k.label(ctx, 'MILLIONAIRE', 760, 520, 28, tween(u, mi, mi + 0.3));
       // Lizzie, small and in the dark corner
       ctx.save(); ctx.globalAlpha *= 0.55; pup(ctx, k, 110, 1010, 0.8, { ...LIZZIE, t: S.t, face: 1, arm: 0 }); ctx.restore();
     },
@@ -232,7 +228,6 @@ export const scenes = [
       // the truth unrolls with her name
       const ro = tween(u, tr - 0.1, tr + 0.8, ease.outCubic);
       if (ro > 0) { k.rect(ctx, 80, 300, 400 * ro, 160, P.paperLight, P.goldDark, 4); if (ro > 0.8) { ctx.fillStyle = P.vermDark; ctx.font = '900 34px Deco'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('THE TRUTH:', 280, 350); ctx.font = '700 30px GaramondItalic'; ctx.fillStyle = P.ink; ctx.fillText('Lizzie Magie, 1904', 280, 410); } }
-      k.label(ctx, 'A COURT FIGHT', 730, 230, 24, tween(u, co, co + 0.3));
     },
   },
   { // 45.7 "A game about unfairness with an unfair origin story."
@@ -247,8 +242,6 @@ export const scenes = [
       pup(ctx, k, 200, 1000, 1.45, { ...LIZZIE, t: S.t, face: 1, arm: 0.3 + 0.6 * back, talk: tween(u, uf, or + 0.6) });
       pup(ctx, k, 770, 1000, 1.4, { ...DARROW, t: S.t, face: -1, arm: 0.5 * (1 - back), tilt: -0.08 * back });
       if (back > 0.5) for (let i = 0; i < 10; i++) { const a = i / 10 * TAU + S.t, r = 120 + Math.sin(S.t * 3 + i) * 10; k.star(ctx, 200 + Math.cos(a) * r, 700 + Math.sin(a) * r * 0.6, 10, 0.9); }
-      k.label(ctx, 'A GAME ABOUT UNFAIRNESS', W / 2, 720, 24, tween(u, un, un + 0.3) * (1 - tween(u, uf - 0.3, uf)));
-      k.label(ctx, 'AN UNFAIR ORIGIN', W / 2, 720, 28, tween(u, or, or + 0.3));
     },
   },
   { // 51.0 "Every legend has a beginning."

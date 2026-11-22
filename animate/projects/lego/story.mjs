@@ -51,7 +51,6 @@ export const scenes = [
       // a ledger with empty pages
       k.openBook(ctx, 620, 720, 260, 110, { cover: P.brown });
       k.figure(ctx, 300, 1010, { ...OLE, s: 1.2, face: 1, mood: u > ro ? 'sad' : 'calm', look: u > ro ? 0.4 : 0, armF: [1.4, 0.3], hold: c => { c.rotate(-0.2); k.rect(c, -40, -10, 80, 26, P.brownLight, P.ink, 1.5); k.rect(c, -10, -24, 20, 16, P.ink, P.ink, 1); } });
-      k.label(ctx, 'A CARPENTER', 300, 560, 26, tween(u, ca, ca + 0.3));
       k.stamp(ctx, 'NO WORK', 620, 440, 70, tween(u, S.at('work'), S.at('work') + 0.25, ease.linear), -0.12);
     },
   },
@@ -95,7 +94,6 @@ export const scenes = [
       const yp = pop(u, yo - 0.2, 0.35);
       if (yp > 0) k.yoyo(ctx, 820, 420 + Math.sin(u * 5) * 90, 36 * yp, S.t, 220 + Math.sin(u * 5) * 90);
       k.figure(ctx, 280, 1010, { ...OLE, s: 1.15, face: 1, mood: 'happy', armF: [1.4 + Math.sin(u * 10) * 0.12, 0.5], hold: c => { c.rotate(-0.6); k.rect(c, -3, -40, 6, 46, P.steel, P.ink, 1); } });
-      k.label(ctx, 'WOODEN TOYS', W / 2, 250, 32, tween(u, cv + 0.6, cv + 0.9));
     },
   },
   { // 20.4 "In 1934, he names his company Lego, from the Danish words leg godt, meaning play well."
@@ -117,7 +115,6 @@ export const scenes = [
       for (const [t, col, fade] of [['LE', P.verm, 0], ['G', P.paperLight, 1], ['GO', P.verm, 0], ['DT', P.paperLight, 1]]) txt(t, lerp(pos[t][0], pos[t][1], join), 360, col, show * (fade ? 1 - join : 1));
       ctx.textAlign = 'center';
       ctx.font = 'italic 700 40px GaramondItalic'; ctx.fillStyle = P.ink; ctx.globalAlpha = show * (1 - join); ctx.fillText('leg godt', W / 2, 470); ctx.globalAlpha = 1;
-      k.label(ctx, '“PLAY WELL”', W / 2, 560, 36, tween(u, pw, pw + 0.3));
       brickWall(ctx, S, W / 2, 980, 5, 4, tween(u, lg - 0.6, pw + 1.2), 110);
       k.seal(ctx, 840, 200, 60, ' THE COMPANY IS NAMED ·', '1934', tween(u, S.at('1934'), S.at('1934') + 0.3, ease.linear));
     },
@@ -147,7 +144,6 @@ export const scenes = [
       k.sun(ctx, W / 2, lerp(460, 220, up), 60, S.t);
       ctx.save(); ctx.beginPath(); ctx.rect(-60, 860 - 420 * up, W + 120, 1000); ctx.clip(); k.factory(ctx, W / 2, 860, 520, 260, S.t, true); ctx.restore();
       k.figure(ctx, 200, 1010, { ...OLE, s: 1.0, face: 1, mood: 'happy', armF: [2.6, 0.1] });
-      k.label(ctx, 'HE REBUILDS', W / 2, 1000, 30, tween(u, 0.2, 0.5));
     },
   },
   { // 34.9 "In 1949, the company starts making a new kind of toy. Plastic bricks that stack together, inspired by a British toy."
@@ -163,7 +159,6 @@ export const scenes = [
       const bp = pop(u, br - 0.2, 0.35);
       if (bp > 0) { ctx.save(); ctx.translate(820, 380); ctx.scale(bp, bp); k.rect(ctx, -90, -70, 180, 140, P.paperLight, P.ink, 2); ctx.fillStyle = P.lapis; ctx.font = '900 18px Deco'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('A BRITISH TOY', 0, -40); k.brick(ctx, 0, 20, 90, '#8a98a8', 4); ctx.restore(); }
       k.figure(ctx, 200, 1010, { ...OLE, s: 1.0, face: 1, mood: 'happy', armF: [1.8, 0.3] });
-      k.label(ctx, 'PLASTIC BRICKS', W / 2 - 60, 250, 28, tween(u, pl, pl + 0.3));
       k.seal(ctx, 840, 620, 56, ' A NEW KIND OF TOY ·', '1949', tween(u, S.at('1949'), S.at('1949') + 0.3, ease.linear));
     },
   },
@@ -177,12 +172,11 @@ export const scenes = [
       ctx.save(); ctx.globalAlpha = 0.35; ctx.strokeStyle = P.lapisLight; ctx.lineWidth = 1; for (let i = 0; i < 24; i++) { ctx.beginPath(); ctx.moveTo(i * 44, 0); ctx.lineTo(i * 44, 1060); ctx.stroke(); } for (let i = 0; i < 26; i++) { ctx.beginPath(); ctx.moveTo(0, i * 44); ctx.lineTo(W, i * 44); ctx.stroke(); } ctx.restore();
       ctx.fillStyle = P.lapis; ctx.font = '900 40px Deco'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('PATENT', W / 2, 120);
       k.brick(ctx, W / 2, 380, 380, '#c9d6e4', 4, tween(u, tu - 0.3, tu + 0.2) > 0.5);
-      k.label(ctx, 'TUBES INSIDE', W / 2, 520, 24, tween(u, tu, tu + 0.3));
       // two bricks click together
       const cp = tween(u, cl - 0.5, cl, ease.inCubic);
       k.brick(ctx, W / 2, 860, 300, P.verm, 4);
       k.brick(ctx, W / 2 + 37, lerp(600, 860 - 300 * 0.36, cp), 300, P.ochre, 4);
-      if (u > cl) { k.label(ctx, 'CLICK!', W / 2 + 260, 700, 30, tween(u, cl, cl + 0.2)); for (let i = 0; i < 10; i++) { const a = i / 10 * TAU, r = 60 + (u - cl) * 260; k.star(ctx, W / 2 + Math.cos(a) * r, 780 + Math.sin(a) * r * 0.5, 9, 1 - (u - cl)); } }
+      if (u > cl) {  for (let i = 0; i < 10; i++) { const a = i / 10 * TAU, r = 60 + (u - cl) * 260; k.star(ctx, W / 2 + Math.cos(a) * r, 780 + Math.sin(a) * r * 0.5, 9, 1 - (u - cl)); } }
       k.seal(ctx, 840, 220, 60, ' PATENTED · PATENTED ·', '1958', tween(u, S.at('1958'), S.at('1958') + 0.3, ease.linear));
     },
   },
@@ -210,7 +204,6 @@ export const scenes = [
       for (const pts of [land1, land2]) { ctx.beginPath(); k.smoothPath(ctx, pts); k.fillStroke(ctx, '#cdb57a', P.ink, 2.5); }
       const spots = [[230, 250], [300, 640], [220, 880], [760, 170], [800, 420], [770, 720], [160, 420], [680, 600], [720, 300]];
       spots.forEach(([x, y], i) => { const p = pop(u, ho - 0.6 + i * 0.15, 0.3); if (p <= 0) return; ctx.save(); ctx.translate(x, y); ctx.scale(p, p); k.house(ctx, 0, 0, 50, 38, { wall: P.white, roof: P.verm }); k.brick(ctx, 0, -70, 50, COLORS[i % 4]); ctx.restore(); });
-      k.label(ctx, 'AROUND THE WORLD', W / 2, 1000, 28, tween(u, wo, wo + 0.3));
     },
   },
   { // 56.6 "Every legend has a beginning."

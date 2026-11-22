@@ -48,7 +48,6 @@ export const scenes = [
       const r = tween(u, 0.1, 2.6, ease.inQuad);
       k.rocket(ctx, lerp(240, 720, r), lerp(840, 120, r), 1.1, 0.55, S.t, 1);
       for (let i = 0; i < 6; i++) { const q = clamp(r - i * 0.08); if (q <= 0) continue; ctx.save(); ctx.globalAlpha = 0.8 - i * 0.1; k.cloud(ctx, lerp(240, 720, q) - 60, lerp(840, 120, q) + 120, 0.6, 70 + i, P.white, P.grey); ctx.restore(); }
-      k.label(ctx, 'ROCKET SCIENTIST', W / 2, 760, 30, tween(u, 0.2, 0.5));
       // …and the toy he made by accident
       const g = pop(u, toy, 0.4);
       if (g > 0) { ctx.save(); ctx.translate(320, 470); ctx.rotate(-0.15 + Math.sin(u * 3) * 0.05); ctx.scale(g, g); k.waterGun(ctx, 0, 0, 1.25); ctx.restore(); }
@@ -106,7 +105,6 @@ export const scenes = [
       ctx.save(); ctx.setLineDash([18, 22]); ctx.lineDashOffset = -u * 160; ctx.beginPath(); pipe(ctx); k.stroke(ctx, '#7cc6e6', 9); ctx.restore();
       // cool air: snowflake stars drifting out
       if (u > wa - 0.5) for (let i = 0; i < 10; i++) { const q = ((u - wa) * 0.4 + i / 10) % 1; k.star(ctx, 790 + q * 140 + Math.sin(i + u) * 20, 440 + i * 30 - q * 60, 8, 1 - q); }
-      k.label(ctx, 'COOLING SYSTEM', 640, 370, 26, tween(u, co, co + 0.3));
       k.figure(ctx, 250, 1000, { ...LONNIE, s: 1.15, face: 1, mood: 'calm', armF: [1.4 + Math.sin(u * 5) * 0.15, 0.6], hold: c => { c.rotate(0.3); k.rect(c, -5, -8, 10, 64, P.grey, P.ink, 1.5); k.circle(c, 0, 60, 11, null, P.ink, 4); } });
     },
   },
@@ -122,7 +120,6 @@ export const scenes = [
       const on = tween(u, nz - 0.5, nz, ease.outCubic);
       ctx.save(); ctx.translate(lerp(tx + 160, tx + 8, on), lerp(ty - 160, ty + 6, on)); ctx.rotate(lerp(1.2, 0.35, on) + (u > nz ? Math.sin(u * 30) * 0.05 * (1 - tween(u, nz, nz + 0.4)) : 0));
       k.rect(ctx, -10, -6, 52, 16, P.goldLight, P.ink, 2); k.rect(ctx, 38, -2, 18, 8, P.verm, P.ink, 1.5); ctx.restore();
-      k.label(ctx, 'HOMEMADE NOZZLE', 560, 600, 26, tween(u, nz, nz + 0.3));
       k.figure(ctx, 230, 1010, { ...LONNIE, s: 1.2, face: 1, mood: 'calm', look: 0.25, armF: [1.7, 0.2] });
     },
   },
@@ -173,7 +170,6 @@ export const scenes = [
       ctx.restore();
       const g = tween(u, pt + 0.35, pt + 0.6, ease.outBack);
       if (g > 0) { ctx.save(); ctx.translate(470, 660); ctx.scale(g, g); k.waterGun(ctx, 0, 0, 1.3, -0.05, P.white, 'rgba(200,235,240,0.9)'); ctx.restore(); }
-      k.label(ctx, 'PROTOTYPE', 470, 470, 30, tween(u, pt, pt + 0.3));
       k.figure(ctx, 840, 1010, { ...LONNIE, s: 1.0, face: -1, mood: 'happy', armF: [1.6 + Math.sin(u * 8) * 0.2, 0.3] });
     },
   },
@@ -187,18 +183,20 @@ export const scenes = [
       land(ctx, S, { horizon: 420, seed: 71, clouds: 2, night });
       const arcX = lerp(-60, W + 60, (u * 1.8) % 1), arcY = 300 - Math.sin(((u * 1.8) % 1) * Math.PI) * 220;
       if (night) k.moon(ctx, arcX, arcY, 40); else k.sun(ctx, arcX, arcY, 44, S.t);
-      // three palace gates of toy makers, each says no
+      // three toy companies' offices (flat roofs, signboards with a toy on them), each says no
       for (const [i, at] of [[0, ye], [1, tc], [2, bd]]) {
         const x = 170 + i * 300;
         k.rect(ctx, x - 100, 420, 200, 360, [P.pink, P.ochreLight, P.lavLight][i], P.ink, 2.5);
-        k.dome(ctx, x, 420, 70, [P.lapisLight, P.turq, P.green][i]);
-        k.arch(ctx, x, 780, 110, 200, P.brown);
+        k.rect(ctx, x - 110, 404, 220, 20, P.brown, P.ink, 2);
+        k.rect(ctx, x - 80, 340, 160, 60, P.white, P.ink, 2);
+        if (i === 0) k.leatherBall(ctx, x, 370, 0.35); else if (i === 1) k.woodenDuck(ctx, x, 392, 0.35, 0); else k.yoyo(ctx, x, 370, 22, 0, 0);
+        for (let r = 0; r < 3; r++) for (let c = 0; c < 3; c++) k.rect(ctx, x - 75 + c * 55, 450 + r * 70, 40, 46, '#cfe0ea', P.ink, 1.2);
+        k.rect(ctx, x - 40, 680, 80, 100, P.brown, P.ink, 2);
         k.stamp(ctx, 'NO', x, 560, 72, tween(u, at, at + 0.25, ease.linear), [-0.2, 0.15, -0.1][i]);
       }
       // Lonnie keeps walking from gate to gate
       const x = lerp(80, 860, tween(u, 0, 4.6, ease.linear));
       k.figure(ctx, x, 1010, { ...LONNIE, s: 1.0, face: 1, walk: u * 8, mood: u > pu ? 'happy' : 'calm', look: u > pu ? -0.2 : 0.3, armF: [1.3, 0.2], hold: gunHold(0.32) });
-      if (u > pu) k.label(ctx, 'KEEPS PUSHING', W / 2, 300, 28, tween(u, pu, pu + 0.3));
     },
   },
   { // 29.5 "Finally, a company called Larami says yes."
@@ -265,7 +263,6 @@ export const scenes = [
       k.cartouche(ctx, W / 2, 370, 640, 140, P.lapis, P.goldLight, 6);
       ctx.fillStyle = P.goldLight; ctx.font = '900 70px Deco'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
       ctx.fillText((u > mi + 0.3 ? '≈ ' : '') + n.toLocaleString('en-US'), W / 2, 376);
-      k.label(ctx, 'IN THREE YEARS', W / 2, 232, 26, tween(u, th, th + 0.3));
       if (u > mi) for (let i = 0; i < 14; i++) { const a = i / 14 * TAU, r = 120 + (u - mi) * 420; k.star(ctx, W / 2 + Math.cos(a) * r, 370 + Math.sin(a) * r * 0.5, 12, 1 - (u - mi) * 0.7); }
     },
   },
@@ -289,7 +286,6 @@ export const scenes = [
         const st = so - 0.8 + i * 0.25, hx = x + f * 120 * 0.6 * 1.3, hy = y - 175 * 0.6;
         k.waterStream(ctx, hx, hy, hx + f * 140, hy - 120, hx + f * 300, hy + 40, tween(u, st, st + 0.4), S.t + i, 8);
       });
-      k.label(ctx, 'A WHOLE GENERATION', W / 2, 220, 28, tween(u, ge, ge + 0.3));
     },
   },
   { // 50.7 "Every legend has a beginning."

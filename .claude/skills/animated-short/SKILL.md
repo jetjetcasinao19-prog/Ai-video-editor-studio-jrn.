@@ -149,6 +149,27 @@ print OK before the full render.
 10. **The voice is the owner's call**, but say it plainly if a script reads like a
     template, and suggest a sharper line.
 
+## The host: the Nakkaş (and acting)
+The channel has an original host: **the Nakkaş**, a young miniature painter
+(saffron turban with a red reed pen tucked in, teal kaftan with gold dots, an ink
+pot on his sash), drawn in `styles/ottoman/host.mjs`. He is the narrator.
+- **Sign-off** (automatic in every look except classic; `meta.host: false` turns it
+  off): as the voice reaches "Every legend has a beginning", an arched window opens
+  at the bottom of the painting and he says the line on screen. His mouth follows
+  the loudness of the real voice-over (`voiceEnvelope`), he blinks, lifts his brows
+  on stressed words and raises his reed pen on "beginning"; then the book opens.
+- **Cameos** (optional): `meta.cameos: [{ at: 'word' | seconds, dur: 1.6, mood: 'wow' | 'smile' | 'calm' }]`
+  pops him into the lower corner for a reaction at a twist. One or two per video, never more.
+- Stories can read the voice's loudness too: `S.voice` (0..1 at this frame), e.g. to
+  make a character in the scene speak a quoted line.
+
+**Acting.** Characters perform instead of standing with an arm out. Use the gesture
+library in `styles/ottoman/acting.mjs`:
+`k.figure(ctx, x, y, { ...LOOK, ...act('shrug', u, tween(u, at, at + 0.3)) })`.
+Gestures: `point`, `present`, `wave`, `cheer`, `shrug` (open palms), `think`,
+`worry`, `angry`, `surprise`, `count`, `walk`, `rest`. Change gesture on the word
+that motivates it (a character starts to `worry` on "broke", `cheer`s on "hit").
+
 ## The signature (what no other channel has)
 These run automatically in every look except `classic` — they are the channel's
 fingerprint, so keep them on:

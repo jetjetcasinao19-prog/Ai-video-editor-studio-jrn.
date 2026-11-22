@@ -93,7 +93,6 @@ export const scenes = [
         ctx.fillStyle = P.ink; ctx.font = 'italic 700 26px GaramondItalic'; ctx.fillText('“' + full.toLowerCase() + '”', 0, 40);
         ctx.restore();
       });
-      k.label(ctx, 'JOKE ABBREVIATIONS', W / 2, 180, 28, tween(u, ab, ab + 0.3));
     },
   },
   { // 14.7 "On March 23rd, 1839, the Boston Morning Post prints OK,"
@@ -130,7 +129,6 @@ export const scenes = [
       line('OLL', 330, P.verm, sw); line('KORRECT', 460, P.verm, sw);
       if (sw > 0.5) { for (const [x, y] of [[W / 2 - 115, 330], [W / 2 - 205, 460]]) { ctx.beginPath(); ctx.arc(x, y, 62, 0, TAU); k.stroke(ctx, P.goldLight, 6); } }
       okMedal(ctx, S, W / 2, 760, 120, pop(u, wr + 0.2, 0.4), 0.5);
-      if (u > pu) k.label(ctx, 'ON PURPOSE ;)', W / 2, 960, 28, tween(u, pu, pu + 0.3));
     },
   },
   { // 25.6 "Most of these jokes died fast."
@@ -224,7 +222,6 @@ export const scenes = [
       k.stamp(ctx, 'LOST', 240, 560, 60, tween(u, lo, lo + 0.25, ease.linear), -0.15);
       const rise = tween(u, wi - 0.5, wi + 0.3, ease.outBack);
       okMedal(ctx, S, 680, lerp(900, 480, rise), 150, rise, rise);
-      if (u > wi) k.label(ctx, 'THE WORD WINS', 680, 700, 26, tween(u, wi, wi + 0.3));
     },
   },
   { // 46.3 "In the 1960s, a language researcher traced it back to that one newspaper joke."
@@ -244,7 +241,6 @@ export const scenes = [
       const mg = tween(u, tr - 0.3, tr + 0.6, ease.inOut);
       k.magnifier(ctx, lerp(800, 630, mg), lerp(960, 770, mg), 70);
       k.figure(ctx, 330, 1010, { ...RESEARCHER, s: 1.15, face: 1, mood: u > jk ? 'happy' : 'calm', armF: [1.6, 0.2] });
-      k.label(ctx, 'LANGUAGE RESEARCHER', 330, 560, 22, tween(u, la, la + 0.3));
       k.seal(ctx, 160, 240, 60, ' TRACED BACK · TRACED ·', '1960s', tween(u, S.at('1960s'), S.at('1960s') + 0.3, ease.linear));
     },
   },

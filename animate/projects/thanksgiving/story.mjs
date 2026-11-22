@@ -126,7 +126,6 @@ export const scenes = [
         k.house(ctx, x, y, 170, 120, { wall: [P.white, P.pink, P.ochreLight, P.lavLight, P.turqLight, P.sageLight][i], roof: P.verm, lit: !none });
         if (dark > 0) { ctx.save(); ctx.globalAlpha = 0.55 * dark; k.rect(ctx, x - 90, y - 210, 180, 212, '#2a2f45', null); ctx.restore(); }
         ctx.save(); ctx.translate(x + 90, y - 180); ctx.scale(pop(u, 0.15 + i * 0.12, 0.3), pop(u, 0.15 + i * 0.12, 0.3)); k.calendarPage(ctx, 0, 0, 62, days[i][0], days[i][1], (i % 2 ? 0.12 : -0.1)); ctx.restore();
-        if (none) k.stamp(ctx, 'NONE', x, y - 60, 40, tween(u, ma + 0.2 + i * 0.05, ma + 0.45 + i * 0.05, ease.linear), -0.2);
       }
     },
   },
@@ -232,7 +231,6 @@ export const scenes = [
       const fly = tween(u, ab - 0.4, ab + 0.6, ease.inOut);
       const seal = tween(u, wr + 0.8, wr + 1.1);
       k.envelope(ctx, lerp(540, 900, fly), lerp(900, 230, fly) - Math.sin(fly * Math.PI) * 120, lerp(1.0, 0.5, fly), fly * 0.6, seal > 0.5 ? P.verm : P.paperLight);
-      k.label(ctx, 'TO ABRAHAM LINCOLN', W / 2, 300, 30, tween(u, ab, ab + 0.3));
       k.seal(ctx, 820, 600, 60, ' SEPTEMBER · SEPTEMBER ·', '1863', tween(u, wr, wr + 0.3, ease.linear));
     },
   },
@@ -279,7 +277,6 @@ export const scenes = [
       const cx = x0 + cw * 4 + cw / 2, cy = y0 + 20 + 3 * ch, ck = tween(u, th - 0.1, th + 0.5);
       if (ck > 0) { ctx.beginPath(); ctx.ellipse(cx, cy, 44, 36, -0.1, -Math.PI / 2, -Math.PI / 2 + TAU * ck); k.stroke(ctx, P.verm, 6); }
       if (u > th + 0.4) { k.turkey(ctx, cx + 4, cy - 30, 0.32 * pop(u, th + 0.4, 0.3), S.t); }
-      k.label(ctx, 'THE LAST THURSDAY', W / 2, 900, 30, tween(u, th, th + 0.3));
     },
   },
   { // 46.5 "One woman, one pen,"
@@ -293,8 +290,6 @@ export const scenes = [
       const g = ctx.createRadialGradient(W / 2, 700, 20, W / 2, 700, 420); g.addColorStop(0, 'rgba(255,240,170,0.45)'); g.addColorStop(1, 'rgba(255,240,170,0)'); ctx.fillStyle = g; ctx.fillRect(0, 300, W, 800);
       k.figure(ctx, 360, 1000, { ...SARAH, s: 1.35, face: 1, mood: 'happy', armF: [1.6, 0.2] });
       k.quill(ctx, 660, 820, 2.2 * pop(u, pe - 0.1, 0.4), 0.3, tween(u, pe, pe + 0.4));
-      k.label(ctx, 'ONE WOMAN', 360, 520, 28, tween(u, wo, wo + 0.3));
-      k.label(ctx, 'ONE PEN', 660, 380, 28, tween(u, pe, pe + 0.3));
     },
   },
   { // 49.3 "and a holiday the whole country shares."
@@ -308,7 +303,6 @@ export const scenes = [
       for (let i = 0; i < 8; i++) { const x = 100 + i * 105, f = i < 4 ? 1 : -1; k.figure(ctx, x, 900 + (i % 2) * 12, { s: 0.62, face: f, kneel: true, skin: FAMILY_SKINS[i % 6], robe: [P.green, P.lapis, P.ochre, P.verm, P.lav, P.turq, P.pink, P.brownLight][i], robeP: 'dots', hat: i % 2 ? 'hotoz' : 'turban', hatColor: [P.verm, P.lapis, P.green][i % 3], veil: P.white, mood: 'happy', armF: [1.1 + Math.sin(u * 4 + i) * 0.2, 0.6] }); }
       feastTable(ctx, S, 760, 820, S.t, 1);
       if (u > wh) for (let i = 0; i < 10; i++) { const q = ((u - wh) * 0.6 + i / 10) % 1; k.star(ctx, 80 + (i * 97) % 780, 640 - q * 400, 10, 1 - q); }
-      k.label(ctx, 'THE WHOLE COUNTRY', W / 2, 240, 30, tween(u, sh - 0.2, sh + 0.1));
     },
   },
   { // 51.9 "Every legend has a beginning."
