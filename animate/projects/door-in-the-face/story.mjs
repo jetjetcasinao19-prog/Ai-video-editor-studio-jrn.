@@ -145,10 +145,10 @@ export const scenes = [
       k.figure(ctx, lerp(150, 380, fwd), 860, { s: 0.9, face: 1, look: [1, 0], mood: 'worry', walk: fwd > 0 && fwd < 1 ? u * 1.5 : 0 });
       k.arrow(ctx, 600, 400, 760, 400, tween(u, bd, bd + 0.4), P.inkSoft, 6, 0);
       k.arrow(ctx, 180, 400, 380, 400, tween(u, hw - 0.4, hw), P.red, 6, 0);
-      k.line(ctx, W / 2, 300, W / 2, 860, P.red, 3);
-      k.scrawl(ctx, 'halfway', W / 2, 260, 56, tween(u, hw, hw + 0.4));
-      k.scrawl(ctx, 'they gave up something…', 300, 520, 44, tween(u, bd + 0.2, bd + 0.8), { rot: -0.03 });
-      k.scrawl(ctx, '…so you feel you owe them', 650, 600, 44, tween(u, hw - 0.2, hw + 0.4), { rot: 0.03 });
+      k.line(ctx, W / 2, 440, W / 2, 860, P.red, 3);
+      k.scrawl(ctx, 'halfway', W / 2, 950, 60, tween(u, hw, hw + 0.4));
+      k.scrawl(ctx, 'they gave up something…', 620, 240, 46, tween(u, bd + 0.2, bd + 0.8), { rot: -0.03 });
+      k.scrawl(ctx, '…so you feel you owe them', 330, 320, 46, tween(u, hw - 0.2, hw + 0.4), { rot: 0.03 });
     },
   },
   { // 37.88 'So when a big ask suddenly shrinks, ask yourself, "would I say yes to this one alone?"'
