@@ -878,6 +878,32 @@ export function grudge(ctx, x, y, r, t = 0, k = 1, color = P.ink) {
   ctx.restore();
 }
 
+// ---------- more props (stage) ----------
+// A theatre spotlight: a lamp at (x, y) throwing a cone onto (tx, ty); k 0..1 = brightness.
+export function spotlight(ctx, x, y, tx, ty, w = 220, k = 1, o = {}) {
+  if (k <= 0) return;
+  const a = Math.atan2(ty - y, tx - x), d = Math.hypot(tx - x, ty - y), nx = -Math.sin(a), ny = Math.cos(a);
+  ctx.save();
+  const g = ctx.createLinearGradient(x, y, tx, ty); g.addColorStop(0, `rgba(255,246,205,${0.75 * k})`); g.addColorStop(1, `rgba(255,246,205,${0.4 * k})`);
+  ctx.beginPath(); ctx.moveTo(x + nx * 22, y + ny * 22); ctx.lineTo(tx + nx * w, ty + ny * w * 0.2); ctx.lineTo(tx - nx * w, ty - ny * w * 0.2); ctx.lineTo(x - nx * 22, y - ny * 22); ctx.closePath(); fill(ctx, g);
+  ellipse(ctx, tx, ty, w, w * 0.22, 0, `rgba(255,246,205,${0.8 * k})`);
+  ctx.restore();
+  if (o.lamp !== false) {
+    ctx.save(); ctx.translate(x, y); ctx.rotate(a - Math.PI / 2);
+    rect(ctx, -40, -80, 80, 90, P.ink, null, 0, 10); ellipse(ctx, 0, 12, 46, 12, 0, '#fff6cd', P.ink, 4);
+    line(ctx, 0, -80, 0, -140, P.ink, 8);
+    ctx.restore();
+  }
+}
+// A ring of watching eyes in the dark; closed: how many of n are shut (fractional ok).
+export function watchers(ctx, cx, cy, rx, ry, n, closed = 0, t = 0, look = null) {
+  for (let i = 0; i < n; i++) {
+    const a = i / n * TAU + 0.3, x = cx + Math.cos(a) * rx, y = cy + Math.sin(a) * ry;
+    const shut = clamp(closed - i);
+    eye(ctx, x, y, 26, { open: 1 - shut, look: look || [(cx - x) / rx * 0.8, (cy - y) / ry * 0.8], lashes: false, white: P.paperLight });
+  }
+}
+
 // Card-stock texture (fibres, mottling, foxing spots) — multiply it on top.
 export function paperTexture(w, h, seed = 5) {
   const cv = createCanvas(w, h), ctx = cv.getContext('2d'), R = rng(seed);
