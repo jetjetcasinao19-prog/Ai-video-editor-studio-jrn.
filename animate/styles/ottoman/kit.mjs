@@ -566,6 +566,12 @@ function head(ctx, x, y, o) {
     const hc = o.hatColor || '#c9a227';
     ctx.beginPath(); ctx.moveTo(-18, 14); ctx.quadraticCurveTo(-26, -30, 0, -34); ctx.quadraticCurveTo(10, -26, 20, -14); ctx.lineTo(14, -10); ctx.quadraticCurveTo(0, -18, -8, -6); ctx.lineTo(-8, 16); ctx.closePath(); fillStroke(ctx, hc, P.ink, 1.5);
     ctx.beginPath(); ctx.moveTo(-14, -20); ctx.quadraticCurveTo(0, -26, 12, -16); stroke(ctx, P.ink, 0.8);
+  } else if (hat === 'gladhelm') { // gladiator's bronze helmet: broad brim, tall crest, a grille over the face
+    const hc = o.hatColor || '#c9a24a';
+    ctx.beginPath(); ctx.moveTo(-20, 8); ctx.quadraticCurveTo(-24, -30, 2, -32); ctx.quadraticCurveTo(28, -30, 22, 8); ctx.closePath(); fillStroke(ctx, hc, P.ink, 1.6);
+    ctx.beginPath(); ctx.ellipse(2, 8, 30, 6, 0, 0, TAU); fillStroke(ctx, hc, P.ink, 1.4);
+    circle(ctx, 4, -6, 11, '#6a5a3a', P.ink, 1.2); for (let gx = -4; gx <= 12; gx += 5) for (let gy = -14; gy <= 2; gy += 5) circle(ctx, gx, gy, 1.3, '#2a1c12', null);
+    ctx.beginPath(); ctx.moveTo(-18, -26); ctx.quadraticCurveTo(-4, -58, 22, -50); ctx.quadraticCurveTo(10, -40, 18, -28); ctx.quadraticCurveTo(0, -38, -18, -26); fillStroke(ctx, o.crest || P.verm, P.ink, 1.2);
   } else if (hat === 'wreath') { // short hair with a laurel crown
     ctx.beginPath(); ctx.moveTo(-15, -2); ctx.quadraticCurveTo(-20, -24, 0, -22); ctx.quadraticCurveTo(22, -24, 18, -2); ctx.quadraticCurveTo(10, -14, -4, -12); ctx.quadraticCurveTo(-10, -10, -15, -2); ctx.closePath(); fillStroke(ctx, o.hair || '#3a2a20', P.ink, 1.2);
     for (let i = 0; i < 9; i++) { const a = Math.PI * (1.05 + i * 0.1); ellipse(ctx, 2 + Math.cos(a) * 19, -8 + Math.sin(a) * 15, 6, 3, a + 1.2, P.green, P.ink, 0.9); }
