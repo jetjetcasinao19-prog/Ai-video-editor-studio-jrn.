@@ -109,6 +109,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-01-11 Mon | 8:00 PM | Tue Jan 12, 9:00 AM | TikTok | Long before the metal tags you know, a soldier's ID was a scrap of paper. | content/posts/2026-11-21-dog-tags-ottoman.md | ready |
 | 2027-01-12 Tue | 7:00 PM | Wed Jan 13, 8:00 AM | Instagram Reels | A tradition every soldier wears began as a homemade note. | content/posts/2026-11-21-dog-tags-ottoman.md | ready |
 | 2027-01-12 Tue | 8:00 PM | Wed Jan 13, 9:00 AM | Facebook Reels | Ever wonder where dog tags came from? Not from the military at first. | content/posts/2026-11-21-dog-tags-ottoman.md | ready |
+| 2027-01-14 Thu | 7:00 PM | Fri Jan 15, 8:00 AM | YouTube Shorts | Taps Began as a Bedtime Bugle Call | content/posts/2026-11-21-taps-ottoman.md | ready |
+| 2027-01-14 Thu | 8:00 PM | Fri Jan 15, 9:00 AM | TikTok | Think Taps was first found in a fallen soldier's pocket? That is a legend. | content/posts/2026-11-21-taps-ottoman.md | ready |
+| 2027-01-15 Fri | 7:00 PM | Sat Jan 16, 8:00 AM | Instagram Reels | One of America's most solemn sounds started as a way to say goodnight. | content/posts/2026-11-21-taps-ottoman.md | ready |
+| 2027-01-15 Fri | 8:00 PM | Sat Jan 16, 9:00 AM | Facebook Reels | Have you heard that Taps was found in a soldier's pocket? It is a legend. | content/posts/2026-11-21-taps-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
