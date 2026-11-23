@@ -1,0 +1,551 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "In World War II, one code was never broken, and it was built by 29 Navajo Marines. 1942. Philip Johnston, a missionary's son who grew up speaking Navajo, has an idea. Use the Navajo language as a secret code. The Marines say yes. They recruit 29 young Navajo men. They build a code inside their own language. Everyday Navajo words become military terms, In battles across the Pacific, they send message after message. The enemy never breaks the code. But when they come home, they can't tell anyone. The code stays secret until 1968. Their language became the code that helped win a war. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "In",
+   "start": 0.02,
+   "end": 0.2
+  },
+  {
+   "w": "World",
+   "start": 0.2,
+   "end": 0.54
+  },
+  {
+   "w": "War",
+   "start": 0.54,
+   "end": 0.74
+  },
+  {
+   "w": "II,",
+   "start": 0.74,
+   "end": 1.52
+  },
+  {
+   "w": "one",
+   "start": 1.52,
+   "end": 1.68
+  },
+  {
+   "w": "code",
+   "start": 1.68,
+   "end": 2.04
+  },
+  {
+   "w": "was",
+   "start": 2.04,
+   "end": 2.42
+  },
+  {
+   "w": "never",
+   "start": 2.42,
+   "end": 2.8
+  },
+  {
+   "w": "broken,",
+   "start": 2.8,
+   "end": 4.04
+  },
+  {
+   "w": "and",
+   "start": 4.04,
+   "end": 4.14
+  },
+  {
+   "w": "it",
+   "start": 4.14,
+   "end": 4.24
+  },
+  {
+   "w": "was",
+   "start": 4.24,
+   "end": 4.38
+  },
+  {
+   "w": "built",
+   "start": 4.38,
+   "end": 4.6
+  },
+  {
+   "w": "by",
+   "start": 4.6,
+   "end": 4.94
+  },
+  {
+   "w": "29",
+   "start": 4.94,
+   "end": 5.72
+  },
+  {
+   "w": "Navajo",
+   "start": 5.72,
+   "end": 6.46
+  },
+  {
+   "w": "Marines.",
+   "start": 6.46,
+   "end": 6.9
+  },
+  {
+   "w": "1942.",
+   "start": 8.22,
+   "end": 10.14
+  },
+  {
+   "w": "Philip",
+   "start": 10.14,
+   "end": 10.3
+  },
+  {
+   "w": "Johnston,",
+   "start": 10.3,
+   "end": 11.1
+  },
+  {
+   "w": "a",
+   "start": 11.1,
+   "end": 11.22
+  },
+  {
+   "w": "missionary's",
+   "start": 11.22,
+   "end": 11.82
+  },
+  {
+   "w": "son",
+   "start": 11.82,
+   "end": 12.02
+  },
+  {
+   "w": "who",
+   "start": 12.02,
+   "end": 12.2
+  },
+  {
+   "w": "grew",
+   "start": 12.2,
+   "end": 12.42
+  },
+  {
+   "w": "up",
+   "start": 12.42,
+   "end": 12.64
+  },
+  {
+   "w": "speaking",
+   "start": 12.64,
+   "end": 13.04
+  },
+  {
+   "w": "Navajo,",
+   "start": 13.04,
+   "end": 13.98
+  },
+  {
+   "w": "has",
+   "start": 13.98,
+   "end": 14.06
+  },
+  {
+   "w": "an",
+   "start": 14.06,
+   "end": 14.24
+  },
+  {
+   "w": "idea.",
+   "start": 14.24,
+   "end": 15.26
+  },
+  {
+   "w": "Use",
+   "start": 15.26,
+   "end": 15.52
+  },
+  {
+   "w": "the",
+   "start": 15.52,
+   "end": 15.74
+  },
+  {
+   "w": "Navajo",
+   "start": 15.3,
+   "end": 16.24
+  },
+  {
+   "w": "language",
+   "start": 16.24,
+   "end": 16.78
+  },
+  {
+   "w": "as",
+   "start": 16.78,
+   "end": 17.06
+  },
+  {
+   "w": "a",
+   "start": 17.06,
+   "end": 17.22
+  },
+  {
+   "w": "secret",
+   "start": 17.22,
+   "end": 17.6
+  },
+  {
+   "w": "code.",
+   "start": 17.6,
+   "end": 18.82
+  },
+  {
+   "w": "The",
+   "start": 18.82,
+   "end": 19
+  },
+  {
+   "w": "Marines",
+   "start": 19,
+   "end": 19.46
+  },
+  {
+   "w": "say",
+   "start": 19.46,
+   "end": 19.88
+  },
+  {
+   "w": "yes.",
+   "start": 19.88,
+   "end": 20.9
+  },
+  {
+   "w": "They",
+   "start": 20.9,
+   "end": 20.98
+  },
+  {
+   "w": "recruit",
+   "start": 20.98,
+   "end": 21.34
+  },
+  {
+   "w": "29",
+   "start": 21.34,
+   "end": 21.96
+  },
+  {
+   "w": "young",
+   "start": 21.96,
+   "end": 22.48
+  },
+  {
+   "w": "Navajo",
+   "start": 22.48,
+   "end": 22.94
+  },
+  {
+   "w": "men.",
+   "start": 22.94,
+   "end": 23.72
+  },
+  {
+   "w": "They",
+   "start": 23.86,
+   "end": 23.92
+  },
+  {
+   "w": "build",
+   "start": 23.92,
+   "end": 24.16
+  },
+  {
+   "w": "a",
+   "start": 24.16,
+   "end": 24.32
+  },
+  {
+   "w": "code",
+   "start": 24.32,
+   "end": 24.68
+  },
+  {
+   "w": "inside",
+   "start": 24.68,
+   "end": 25.26
+  },
+  {
+   "w": "their",
+   "start": 25.26,
+   "end": 25.48
+  },
+  {
+   "w": "own",
+   "start": 25.48,
+   "end": 25.76
+  },
+  {
+   "w": "language.",
+   "start": 25.76,
+   "end": 27
+  },
+  {
+   "w": "Everyday",
+   "start": 27,
+   "end": 27.38
+  },
+  {
+   "w": "Navajo",
+   "start": 27.38,
+   "end": 27.84
+  },
+  {
+   "w": "words",
+   "start": 27.84,
+   "end": 28.28
+  },
+  {
+   "w": "become",
+   "start": 28.28,
+   "end": 28.64
+  },
+  {
+   "w": "military",
+   "start": 28.64,
+   "end": 29.08
+  },
+  {
+   "w": "terms.",
+   "start": 29.08,
+   "end": 29.98
+  },
+  {
+   "w": "In",
+   "start": 30.32,
+   "end": 30.44
+  },
+  {
+   "w": "battles",
+   "start": 30.44,
+   "end": 30.82
+  },
+  {
+   "w": "across",
+   "start": 30.82,
+   "end": 31.16
+  },
+  {
+   "w": "the",
+   "start": 31.16,
+   "end": 31.36
+  },
+  {
+   "w": "Pacific,",
+   "start": 31.36,
+   "end": 32.18
+  },
+  {
+   "w": "they",
+   "start": 32.18,
+   "end": 32.26
+  },
+  {
+   "w": "send",
+   "start": 32.26,
+   "end": 32.62
+  },
+  {
+   "w": "message",
+   "start": 32.62,
+   "end": 33.14
+  },
+  {
+   "w": "after",
+   "start": 33.14,
+   "end": 33.56
+  },
+  {
+   "w": "message.",
+   "start": 33.56,
+   "end": 34.54
+  },
+  {
+   "w": "The",
+   "start": 34.74,
+   "end": 34.86
+  },
+  {
+   "w": "enemy",
+   "start": 34.86,
+   "end": 35.18
+  },
+  {
+   "w": "never",
+   "start": 35.18,
+   "end": 35.72
+  },
+  {
+   "w": "breaks",
+   "start": 35.72,
+   "end": 36.1
+  },
+  {
+   "w": "the",
+   "start": 36.1,
+   "end": 36.28
+  },
+  {
+   "w": "code.",
+   "start": 36.28,
+   "end": 36.46
+  },
+  {
+   "w": "But",
+   "start": 37.4,
+   "end": 37.52
+  },
+  {
+   "w": "when",
+   "start": 37.52,
+   "end": 37.66
+  },
+  {
+   "w": "they",
+   "start": 37.66,
+   "end": 37.8
+  },
+  {
+   "w": "come",
+   "start": 37.8,
+   "end": 38.04
+  },
+  {
+   "w": "home,",
+   "start": 38.04,
+   "end": 38.9
+  },
+  {
+   "w": "they",
+   "start": 38.9,
+   "end": 39
+  },
+  {
+   "w": "can't",
+   "start": 39,
+   "end": 39.24
+  },
+  {
+   "w": "tell",
+   "start": 39.24,
+   "end": 39.48
+  },
+  {
+   "w": "anyone.",
+   "start": 39.48,
+   "end": 39.82
+  },
+  {
+   "w": "The",
+   "start": 40.6,
+   "end": 40.74
+  },
+  {
+   "w": "code",
+   "start": 40.74,
+   "end": 41
+  },
+  {
+   "w": "stays",
+   "start": 41,
+   "end": 41.34
+  },
+  {
+   "w": "secret",
+   "start": 41.34,
+   "end": 41.8
+  },
+  {
+   "w": "until",
+   "start": 41.8,
+   "end": 42.2
+  },
+  {
+   "w": "1968.",
+   "start": 42.2,
+   "end": 43.16
+  },
+  {
+   "w": "Their",
+   "start": 44.42,
+   "end": 44.6
+  },
+  {
+   "w": "language",
+   "start": 44.6,
+   "end": 45.18
+  },
+  {
+   "w": "became",
+   "start": 45.18,
+   "end": 46.04
+  },
+  {
+   "w": "the",
+   "start": 46.04,
+   "end": 46.34
+  },
+  {
+   "w": "code",
+   "start": 46.34,
+   "end": 46.74
+  },
+  {
+   "w": "that",
+   "start": 46.74,
+   "end": 47.22
+  },
+  {
+   "w": "helped",
+   "start": 47.22,
+   "end": 47.54
+  },
+  {
+   "w": "win",
+   "start": 47.54,
+   "end": 47.92
+  },
+  {
+   "w": "a",
+   "start": 47.92,
+   "end": 48.26
+  },
+  {
+   "w": "war.",
+   "start": 48.26,
+   "end": 48.54
+  },
+  {
+   "w": "Every",
+   "start": 49.64,
+   "end": 49.92
+  },
+  {
+   "w": "legend",
+   "start": 49.92,
+   "end": 50.34
+  },
+  {
+   "w": "has",
+   "start": 50.34,
+   "end": 50.76
+  },
+  {
+   "w": "a",
+   "start": 50.76,
+   "end": 50.84
+  },
+  {
+   "w": "beginning.",
+   "start": 50.84,
+   "end": 51.14
+  }
+ ]
+}

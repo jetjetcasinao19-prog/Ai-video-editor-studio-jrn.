@@ -509,6 +509,10 @@ function head(ctx, x, y, o) {
   } else if (hat === 'campaignhat') { // 1916 broad-brimmed campaign hat with a pinched crown
     ctx.beginPath(); ctx.ellipse(2, -14, 30, 7, 0, 0, TAU); fillStroke(ctx, o.hatColor || '#8a7a4a', P.ink, 1.6);
     ctx.beginPath(); ctx.moveTo(-14, -14); ctx.lineTo(-6, -42); ctx.lineTo(2, -36); ctx.lineTo(10, -42); ctx.lineTo(18, -14); ctx.closePath(); fillStroke(ctx, o.hatColor || '#8a7a4a', P.ink, 1.6);
+  } else if (hat === 'helmet') { // WWII M1 helmet with a cloth cover
+    ctx.beginPath(); ctx.moveTo(-24, -6); ctx.quadraticCurveTo(-26, -38, 2, -40); ctx.quadraticCurveTo(30, -38, 28, -6); ctx.closePath(); fillStroke(ctx, o.hatColor || '#5e6a44', P.ink, 1.6);
+    ctx.beginPath(); ctx.moveTo(-26, -6); ctx.lineTo(30, -6); stroke(ctx, P.ink, 3);
+    for (const [dx, dy] of [[-12, -24], [6, -30], [14, -16], [-4, -14]]) circle(ctx, dx, dy, 3, '#4a5434', null);
   } else if (hat === 'servicecap') { // 1914 British peaked service cap
     ctx.beginPath(); ctx.ellipse(2, -16, 20, 9, 0, 0, TAU); fillStroke(ctx, o.hatColor || '#7c6e44', P.ink, 1.6);
     ctx.beginPath(); ctx.moveTo(-18, -16); ctx.quadraticCurveTo(-14, -34, 4, -34); ctx.quadraticCurveTo(24, -34, 22, -16); ctx.closePath(); fillStroke(ctx, o.hatColor || '#7c6e44', P.ink, 1.6);
@@ -2206,6 +2210,57 @@ export function usFlag(ctx, x, y, w, t = 0) {
   ctx.fillStyle = P.lapisDeep; ctx.fillRect(0, 0, w * 0.4, h * 7 / 13);
   for (let r = 0; r < 5; r++) for (let c = 0; c < 7; c++) circle(ctx, w * 0.04 + c * w * 0.052, h * 0.06 + r * h * 0.1, 1.6, P.white, null);
   ctx.strokeStyle = P.ink; ctx.lineWidth = 1.5; ctx.strokeRect(0, 0, w, h);
+  ctx.restore();
+}
+
+// ---------- Navajo Code Talkers story ----------
+// mesas and buttes of the Navajo Nation, in miniature style (spongy rock layers)
+export function mesas(ctx, W, base, t = 0, seed = 2) {
+  const R = rng(seed);
+  for (let i = 0; i < 5; i++) {
+    const x = R() * W, w = 120 + R() * 200, h = 140 + R() * 220, c = ['#c4633a', '#b0532e', '#d07a48', '#a8492a'][i % 4];
+    ctx.beginPath(); ctx.moveTo(x - w / 2 - 40, base); ctx.lineTo(x - w / 2, base - h); ctx.lineTo(x + w / 2, base - h); ctx.lineTo(x + w / 2 + 40, base); ctx.closePath(); fillStroke(ctx, c, P.ink, 2);
+    for (let j = 1; j < 4; j++) { ctx.beginPath(); ctx.moveTo(x - w / 2 - j * 6, base - h + j * h / 4); ctx.lineTo(x + w / 2 + j * 6, base - h + j * h / 4); stroke(ctx, shade(c, -0.2), 2); }
+    rockFace(ctx, x, base - h * 0.5, 0.9, c, 0);
+  }
+}
+// a traditional hogan: round log house with an earthen dome and an east-facing door
+export function hogan(ctx, x, base, s = 1) {
+  ctx.save(); ctx.translate(x, base); ctx.scale(s, s);
+  ctx.beginPath(); ctx.moveTo(-90, 0); ctx.lineTo(-80, -60); ctx.quadraticCurveTo(0, -130, 80, -60); ctx.lineTo(90, 0); ctx.closePath(); fillStroke(ctx, '#b08a5a', P.ink, 2.5);
+  for (let i = 1; i < 4; i++) { ctx.beginPath(); ctx.moveTo(-86 + i * 2, -i * 16); ctx.lineTo(86 - i * 2, -i * 16); stroke(ctx, '#8a6a3e', 2); }
+  rect(ctx, -18, -46, 36, 46, '#3a2a1a', P.ink, 2);
+  ctx.beginPath(); ctx.moveTo(0, -110); ctx.lineTo(0, -126); stroke(ctx, '#5a4a3a', 4);
+  ctx.restore();
+}
+// a WWII field radio with handset; on 0..1 makes the dial glow
+export function fieldRadio(ctx, x, y, s = 1, on = 1, t = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  rect(ctx, -70, -60, 140, 110, '#5e6a44', P.ink, 2.5); rect(ctx, -56, -46, 70, 40, '#2a2a2a', P.ink, 1.5);
+  if (on > 0) { ctx.save(); ctx.globalAlpha = on; rect(ctx, -52, -42, 62, 32, '#c9e08a', null); ctx.beginPath(); for (let i = 0; i <= 30; i++) ctx[i ? 'lineTo' : 'moveTo'](-50 + i * 2, -26 + Math.sin(t * 9 + i * 0.7) * 10 * on); stroke(ctx, '#2a4a1a', 2); ctx.restore(); }
+  for (let i = 0; i < 2; i++) circle(ctx, 40, -34 + i * 34, 12, '#3a3a3a', P.ink, 1.5);
+  ctx.beginPath(); ctx.moveTo(60, -60); ctx.lineTo(80, -170); stroke(ctx, P.ink, 3);
+  ctx.beginPath(); ctx.moveTo(-70, 0); ctx.bezierCurveTo(-120, 10, -110, 70, -80, 70); stroke(ctx, P.ink, 3);
+  ctx.restore();
+}
+// a rug on an upright loom; rows 0..1 = how much is woven from the bottom; bands = colours of the story's bands
+export function loomRug(ctx, x, y, w, h, rows = 1, o = {}) {
+  ctx.save(); ctx.translate(x, y);
+  rect(ctx, -w / 2 - 30, -h / 2 - 50, 22, h + 100, P.brown, P.ink, 2); rect(ctx, w / 2 + 8, -h / 2 - 50, 22, h + 100, P.brown, P.ink, 2);
+  rect(ctx, -w / 2 - 40, -h / 2 - 50, w + 80, 18, P.brownLight, P.ink, 2); rect(ctx, -w / 2 - 40, h / 2 + 32, w + 80, 18, P.brownLight, P.ink, 2);
+  ctx.strokeStyle = 'rgba(240,230,200,0.8)'; ctx.lineWidth = 1; for (let i = 0; i <= 40; i++) { ctx.beginPath(); ctx.moveTo(-w / 2 + i * w / 40, -h / 2 - 32); ctx.lineTo(-w / 2 + i * w / 40, h / 2 + 32); ctx.stroke(); }
+  const done = h * clamp(rows), cols = o.colors || ['#9a2a1e', '#efe6cf', '#2a2a2a', '#b0532e'];
+  ctx.save(); ctx.beginPath(); ctx.rect(-w / 2, h / 2 - done, w, done); ctx.clip();
+  ctx.fillStyle = cols[0]; ctx.fillRect(-w / 2, -h / 2, w, h);
+  const bands = 6;
+  for (let b = 0; b < bands; b++) {
+    const by = h / 2 - (b + 0.5) * h / bands, c = cols[(b % (cols.length - 1)) + 1];
+    for (let i = 0; i < 5; i++) { const cx = -w / 2 + (i + 0.5) * w / 5, r = h / bands * 0.38; ctx.beginPath(); ctx.moveTo(cx, by - r); ctx.lineTo(cx + r, by); ctx.lineTo(cx, by + r); ctx.lineTo(cx - r, by); ctx.closePath(); ctx.fillStyle = c; ctx.fill(); }
+    ctx.fillStyle = cols[2]; ctx.fillRect(-w / 2, h / 2 - (b + 1) * h / bands, w, 4);
+  }
+  ctx.restore();
+  ctx.strokeStyle = P.ink; ctx.lineWidth = 2; ctx.strokeRect(-w / 2, -h / 2, w, h);
+  if (rows > 0 && rows < 1) { ctx.beginPath(); ctx.moveTo(-w / 2 - 10, h / 2 - done); ctx.lineTo(w / 2 + 10, h / 2 - done); stroke(ctx, P.goldDark, 6); }
   ctx.restore();
 }
 
