@@ -5,3 +5,6 @@ animate/node_modules/
 animate/projects/*/build/
 animate/projects/*/out/
 __pycache__/
+animate/.voice/
+animate/.voice-tmp-*/
+animate/projects/*/voice.tmp.wav

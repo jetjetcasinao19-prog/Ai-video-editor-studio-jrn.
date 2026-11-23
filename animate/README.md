@@ -6,7 +6,8 @@ parallel and encoded with FFmpeg. The soundtrack (score + sound effects) is
 synthesised in `lib/audio.py`. No stock footage and no AI images.
 
 ```bash
-bash setup.sh                                              # once
+bash setup.sh                                              # once (add --voice for the local TTS)
+node voice.mjs script.txt projects/my-short                # only if there is no recording: script → voice.mp3
 node transcribe.mjs voice.mp3 projects/my-short            # word timings
 # write projects/my-short/story.mjs (copy projects/bubble-wrap/story.mjs)
 node render.mjs projects/my-short --sheet                  # preview every scene
@@ -16,5 +17,9 @@ npm test
 
 Styles: `styles/ottoman/` (Ottoman miniature painting: ebru margins,
 illuminated header, gold-ruled frame, cloud bands, spongy rocks, figures in
-kaftans and turbans, tughra, seals). Full workflow:
+kaftans and turbans, tughra, seals) and `styles/inkblot/` (a psychology
+case file: living mirror-symmetric Rorschach blots, numbered plates, silhouette
+people with paper-white eyes, red-pen notes, typewriter captions, an EEG
+polygraph progress line; music-box/felt-piano score — see its `STYLE.md`).
+Full workflow:
 `.claude/skills/animated-short/SKILL.md`.

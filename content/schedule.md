@@ -21,6 +21,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-11-25 Wed | 8:00 PM | Thu Nov 26, 9:00 AM | TikTok | This glue was a failure. Now it's on desks everywhere. | content/posts/2026-11-21-post-it-notes-ottoman.md | ready |
 | 2026-11-27 Fri | 7:00 PM | Sat Nov 28, 8:00 AM | Instagram Reels | A glue so weak it peeled right off | content/posts/2026-11-21-post-it-notes-ottoman.md | ready |
 | 2026-11-27 Fri | 8:00 PM | Sat Nov 28, 9:00 AM | Facebook Reels | This glue was a failure. Now it's on desks everywhere. | content/posts/2026-11-21-post-it-notes-ottoman.md | ready |
+| 2026-11-28 Sat | 7:00 PM | Sun Nov 29, 8:00 AM | YouTube Shorts | Your Brain Is Keeping a To-Do List You Never Wrote | content/posts/2026-11-23-zeigarnik-effect-inkblot.md | ready |
+| 2026-11-28 Sat | 8:00 PM | Sun Nov 29, 9:00 AM | TikTok | Your brain is keeping a to-do list you never wrote | content/posts/2026-11-23-zeigarnik-effect-inkblot.md | ready |
+| 2026-11-29 Sun | 7:00 PM | Mon Nov 30, 8:00 AM | Instagram Reels | Why that unanswered text bugs you at night | content/posts/2026-11-23-zeigarnik-effect-inkblot.md | ready |
+| 2026-11-29 Sun | 8:00 PM | Mon Nov 30, 9:00 AM | Facebook Reels | Your brain is keeping a to-do list you never wrote | content/posts/2026-11-23-zeigarnik-effect-inkblot.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the

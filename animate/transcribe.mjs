@@ -48,6 +48,23 @@ export function applyFix(words, fixes) {
   });
 }
 
+// Whisper sometimes returns a word that starts before the one in front of it
+// (or ends before it starts). Keep the timeline in order so scenes and
+// captions can be cut on word times.
+export function fixTimings(words) {
+  const out = [];
+  for (const w of words) {
+    const prev = out[out.length - 1];
+    let start = w.start, end = w.end;
+    if (prev && start < prev.start + 0.04) start = +Math.min(prev.end, prev.start + 0.12).toFixed(2);
+    // a long word that overlaps the one before really starts near its end
+    if (prev && start < prev.end - 0.02 && end - start > 0.5) start = +Math.max(prev.end, end - 0.4).toFixed(2);
+    if (end < start + 0.04) end = +(start + 0.12).toFixed(2);
+    out.push({ ...w, start, end });
+  }
+  return out;
+}
+
 export async function transcribe(audio, { language = 'en' } = {}) {
   let lastErr;
   for (const ep of endpoints()) {
@@ -77,7 +94,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const [audio, project] = args;
   if (!audio || !project) { console.error('usage: node transcribe.mjs <voice.mp3> <project-folder> [--fix "Mark=Marc"]'); process.exit(2); }
   const out = await transcribe(audio);
-  out.words = applyFix(out.words, fixes);
+  out.words = fixTimings(applyFix(out.words, fixes));
   fs.mkdirSync(project, { recursive: true });
   fs.writeFileSync(path.join(project, 'words.json'), JSON.stringify(out, null, 1));
   console.log(`${out.words.length} words (${out.engine}) → ${path.join(project, 'words.json')}`);

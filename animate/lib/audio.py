@@ -9,7 +9,10 @@ cues.json (written by lib/engine.mjs):
   sfx       [{t, type, gain, pitch}]
   out       output .wav (voice + score + effects, ducked and loudness-normalised)
 
-Score: Ottoman-flavoured — ney drone, plucked oud and kanun (Karplus-Strong
+Scores: music.kit = 'ottoman' (default) or 'mind' (INKBLOT: music box, felt
+piano, low strings, ticking clock, heartbeat; music.scale = minor | dorian |
+harmonic | major | lydian).
+Ottoman kit: — ney drone, plucked oud and kanun (Karplus-Strong
 strings), def/darbuka (düm / tek / ka) in a maqsum rhythm; moods: intro,
 groove, sad, drive, triumph, end. Needs numpy and ffmpeg.
 """
@@ -178,6 +181,140 @@ def score(cfg, dur):
     return left[:L], right[:L]
 
 
+# ---------- 'mind' kit (INKBLOT style): music box, felt piano, low strings,
+# a ticking clock and a heartbeat. Moods: intro, groove, sad, drive, tense,
+# triumph, end. Select with music.kit = 'mind' and music.scale. ----------
+SCALES = {
+    'minor': [0, 2, 3, 5, 7, 8, 10, 12], 'dorian': [0, 2, 3, 5, 7, 9, 10, 12],
+    'harmonic': [0, 2, 3, 5, 7, 8, 11, 12], 'major': [0, 2, 4, 5, 7, 9, 11, 12],
+    'lydian': [0, 2, 4, 6, 7, 9, 11, 12],
+}
+PROGRESSION = [0, 5, 2, 6]  # i – VI – III – VII (the "sad but driving" loop)
+
+
+def musicbox(freq, dur=1.6):
+    t = np.arange(int(dur * SR)) / SR
+    s = (np.sin(2 * np.pi * freq * t) * np.exp(-t * 3.2)
+         + 0.35 * np.sin(2 * np.pi * freq * 2.005 * t) * np.exp(-t * 5)
+         + 0.12 * np.sin(2 * np.pi * freq * 5.43 * t) * np.exp(-t * 11))
+    return s * np.clip(t / 0.002, 0, 1)
+
+
+def piano(freq, dur=2.0, soft=0.6):
+    t = np.arange(int(dur * SR)) / SR
+    s = np.zeros_like(t)
+    for k in range(1, 7):
+        s += (1 / k ** 1.4) * np.sin(2 * np.pi * freq * k * (1 + 0.0004 * k * k) * t) * np.exp(-t * (1.6 + k * soft))
+    s *= np.clip(t / 0.008, 0, 1)
+    n = min(len(t), int(0.03 * SR))
+    s[:n] += bandnoise(n, 200, 2500) * np.exp(-t[:n] * 200) * 0.15
+    return s * 0.5
+
+
+def strings(freq, dur):
+    t = np.arange(int(dur * SR)) / SR
+    s = np.zeros_like(t)
+    for det in (-0.004, 0, 0.0035):
+        for k in range(1, 7):
+            s += (1 / k) * np.sin(2 * np.pi * freq * (1 + det) * k * t + k * det * 400)
+    vib = 1 + 0.15 * np.sin(2 * np.pi * 4.8 * t)
+    e = np.clip(t / 0.8, 0, 1) * np.clip((dur - t) / 0.6, 0, 1)
+    return s * e * vib * 0.12
+
+
+def tick(high=True):
+    n = int(0.05 * SR); t = np.arange(n) / SR
+    f = 3200 if high else 2100
+    return (bandnoise(n, f * 0.7, f * 2.2) * 0.6 + np.sin(2 * np.pi * f * t)) * np.exp(-t * 160)
+
+
+def kick(dur=0.35):
+    t = np.arange(int(dur * SR)) / SR
+    f = 48 + 90 * np.exp(-t * 35)
+    return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 11)
+
+
+def brush(dur=0.25):
+    t = np.arange(int(dur * SR)) / SR
+    return bandnoise(len(t), 1800, 9000) * np.clip(t / 0.02, 0, 1) * np.exp(-t * 18) * 0.5
+
+
+def heartbeat():
+    out = np.zeros(int(0.7 * SR))
+    for at, g in ((0, 1.0), (0.22, 0.7)):
+        k = kick(0.3) * g; i = int(at * SR); out[i:i + len(k)] += k
+    return out
+
+
+def score_mind(cfg, dur):
+    L = int(dur * SR)
+    left = np.zeros(L + SR * 4); right = np.zeros(L + SR * 4)
+    root = NOTE.get(cfg.get('root', 'D'), 293.66) / 2
+    scale = SCALES.get(cfg.get('scale', 'minor'), SCALES['minor'])
+    beat = 60 / cfg.get('bpm', 92); eighth = beat / 2
+    cache = {}
+
+    def add(sig, t, g=1.0, pan=0.0):
+        i = int(t * SR)
+        if i < 0 or i >= len(left): return
+        s = sig[:len(left) - i] * g
+        left[i:i + len(s)] += s * (1 - max(0, pan)); right[i:i + len(s)] += s * (1 + min(0, pan))
+
+    def inst(name, f, d):
+        k = (name, round(f, 2), d)
+        if k not in cache: cache[k] = {'box': musicbox, 'piano': piano}[name](f, d)
+        return cache[k]
+
+    tk, tc, kk, br, hb = tick(True), tick(False), kick(), brush(), heartbeat()
+    F = lambda deg, octv=0: degree_freq(root, scale, deg, octv)
+    for sec in cfg.get('sections', []):
+        a, b, mood = sec['from'], sec['to'], sec['mood']
+        bar = int(a / (beat * 4)); t = bar * beat * 4
+        while t < b:
+            ch = PROGRESSION[bar % 4]
+            tones = [ch, ch + 2, ch + 4]
+            # pad under each bar
+            if mood in ('intro', 'sad', 'tense', 'drive', 'triumph', 'groove'):
+                pg = {'intro': 0.5, 'sad': 0.6, 'tense': 0.55, 'drive': 0.35, 'triumph': 0.45, 'groove': 0.25}[mood]
+                st = max(t, a); d = min(beat * 4, b - st) + 0.5
+                if d > 0.3:
+                    for j, dg in enumerate(tones):
+                        add(strings(F(dg, -1 if mood == 'tense' else 0), d), st, pg * (0.9 if j == 0 else 0.6), (j - 1) * 0.4)
+            for k8 in range(8):
+                tt = t + k8 * eighth
+                if tt < a or tt >= b: continue
+                on_beat = k8 % 2 == 0
+                # clock ticks
+                if mood in ('intro', 'tense', 'groove') and on_beat: add(tk if (k8 // 2) % 2 == 0 else tc, tt, 0.35 if mood != 'groove' else 0.22, 0.35)
+                if mood == 'drive': add(tk, tt, 0.16, 0.4)
+                # drums
+                if mood in ('groove',) and k8 in (0, 4): add(kk, tt, 0.6)
+                if mood in ('drive', 'triumph') and on_beat: add(kk, tt, 0.7)
+                if mood in ('drive', 'triumph') and k8 in (2, 6): add(br, tt, 0.9, -0.2)
+                if mood in ('tense', 'sad') and k8 == 0: add(hb, tt, 0.8 if mood == 'tense' else 0.5)
+                # piano broken chords
+                if mood in ('groove', 'drive', 'triumph'):
+                    pat = [0, 2, 1, 2, 0, 2, 1, 2] if mood == 'groove' else [0, 1, 2, 1, 2, 1, 0, 1]
+                    dg = tones[pat[k8]]
+                    add(inst('piano', F(dg, 0 if pat[k8] else -1), 1.2), tt, 0.5 if mood == 'groove' else 0.45, -0.15)
+                if mood == 'sad' and k8 == 0:
+                    for j, dg in enumerate(tones): add(inst('piano', F(dg, -1 if j == 0 else 0), 3.0), tt + j * 0.03, 0.4)
+                # music box
+                if mood == 'intro' and on_beat: add(inst('box', F(tones[(k8 // 2) % 3], 2), 1.6), tt, 0.35, 0.3)
+                if mood == 'sad' and k8 in (2, 6): add(inst('box', F(tones[(k8 // 4 + bar) % 3], 2), 1.6), tt, 0.3, 0.3)
+                if mood == 'tense' and k8 == 6 and bar % 2: add(inst('box', F(ch, 2) * 2 ** (1 / 12), 1.6), tt, 0.25, 0.3)
+                if mood == 'triumph': add(inst('box', F(tones[[0, 1, 2, 1, 2, 3, 2, 1][k8] % 3] + (7 if k8 == 5 else 0), 2), 1.6), tt, 0.3, 0.3)
+                if mood == 'groove' and k8 in (3, 7) and bar % 2: add(inst('box', F(tones[2], 2), 1.6), tt, 0.2, 0.35)
+            t += beat * 4; bar += 1
+        if mood == 'end':
+            for j, dg in enumerate((0, 2, 4, 7)):
+                add(inst('piano', F(dg, -1 if j == 0 else 0), 4.0), a + 0.03 * j, 0.55, (j - 1.5) * 0.3)
+                add(inst('box', F(dg, 2), 1.6), a + 0.25 + 0.18 * j, 0.3, 0.3)
+            add(strings(F(0, -1), 4.0), a, 0.5)
+            add(kk, a, 0.8)
+    return left[:L], right[:L]
+
+
 # ---------- sound effects ----------
 def sfx_signal(kind, pitch=1.0):
     t = lambda d: np.arange(int(d * SR)) / SR
@@ -245,6 +382,50 @@ def sfx_signal(kind, pitch=1.0):
             c = sum(np.sin(2 * np.pi * f * RNG.uniform(0.9, 1.2) * tt) for f in (2600, 3900, 5200)) * np.exp(-tt * 22) * 0.2
             out[s:s + len(c)] += c[:len(out) - s]
         return out
+    # --- inkblot kit ---
+    if kind == 'tick':
+        out = np.zeros(int(1.0 * SR))
+        for i in range(4):
+            k = tick(i % 2 == 0); j = int(i * 0.25 * SR); out[j:j + len(k)] += k
+        return out * 0.8
+    if kind == 'heartbeat':
+        out = np.zeros(int(1.6 * SR)); h = heartbeat()
+        for at in (0, 0.8): j = int(at * SR); out[j:j + len(h)] += h[:len(out) - j]
+        return out
+    if kind == 'splat':  # wet ink hitting card
+        tt = t(0.4)
+        out = bandnoise(len(tt), 150, 2500) * np.exp(-tt * 14) * 0.9
+        k = kick(0.3); out[:len(k)] += k * 0.5
+        return out
+    if kind == 'fold':  # card folding: soft swish + crease
+        tt = t(0.45); sw = bandnoise(len(tt), 600, 5000) * np.sin(np.pi * tt / tt[-1]) ** 3 * 0.45
+        c = bandnoise(int(0.05 * SR), 1500, 7000) * np.exp(-np.arange(int(0.05 * SR)) / SR * 90) * 0.5
+        sw[-len(c):] += c
+        return sw
+    if kind == 'blink':
+        tt = t(0.3); return bandnoise(len(tt), 200, 1500) * np.sin(np.pi * tt / tt[-1]) ** 2 * 0.4
+    if kind == 'typewriter':
+        out = np.zeros(int(0.9 * SR)); g = np.random.default_rng(3)
+        for i in range(7):
+            j = int((i * 0.11 + g.uniform(0, 0.03)) * SR); n = int(0.04 * SR); tt = np.arange(n) / SR
+            k = (bandnoise(n, 1000, 7000) + 0.6 * np.sin(2 * np.pi * 1400 * tt)) * np.exp(-tt * 140)
+            out[j:j + n] += k * 0.7
+        return out
+    if kind == 'bell':  # typewriter carriage bell
+        tt = t(1.2); return sum(g * np.sin(2 * np.pi * f * pitch * tt) for f, g in ((2093, 1), (4186, 0.3), (5600, 0.15))) * np.exp(-tt * 4) * 0.5
+    if kind == 'click':  # mouse click
+        tt = t(0.04); return bandnoise(len(tt), 2000, 9000) * np.exp(-tt * 260)
+    if kind == 'snap':  # a loop snapping shut
+        tt = t(0.25); f = 1800 * np.exp(-tt * 18) + 200
+        return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-tt * 22) * 0.6 + bandnoise(len(tt), 3000, 10000) * np.exp(-tt * 90) * 0.4
+    if kind == 'buzz':  # phone vibrating on a nightstand
+        tt = t(0.9); on = ((tt % 0.45) < 0.3).astype(float)
+        return (np.sign(np.sin(2 * np.pi * 150 * tt)) * 0.3 + np.sin(2 * np.pi * 300 * tt) * 0.3) * on * 0.5
+    if kind == 'pen':  # pen scratching paper
+        tt = t(0.6); n = bandnoise(len(tt), 2500, 9000)
+        return n * (0.4 + 0.6 * np.abs(np.sin(2 * np.pi * 7 * tt))) * np.sin(np.pi * tt / tt[-1]) * 0.35
+    if kind == 'moth':  # fluttering wings
+        tt = t(1.0); return bandnoise(len(tt), 150, 900) * (0.5 + 0.5 * np.sin(2 * np.pi * 24 * tt)) * np.sin(np.pi * tt / tt[-1]) * 0.6
     raise ValueError('unknown sfx ' + kind)
 
 
@@ -254,7 +435,7 @@ def main(path):
     voice = load_voice(cue['voice'], dur)
     L = R = np.zeros(int(dur * SR))
     if cue.get('music'):
-        ml, mr = score(cue['music'], dur)
+        ml, mr = (score_mind if cue['music'].get('kit') == 'mind' else score)(cue['music'], dur)
         # duck the score under the voice
         win = int(0.02 * SR)
         rms = np.sqrt(np.convolve(voice ** 2, np.ones(win) / win, mode='same'))

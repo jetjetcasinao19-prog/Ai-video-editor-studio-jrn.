@@ -1,18 +1,23 @@
 {
   "name": "code-animated-short",
   "private": true,
-  "description": "2D animated shorts drawn entirely in code (canvas → FFmpeg). First style: Ottoman miniature.",
+  "description": "2D animated shorts drawn entirely in code (canvas → FFmpeg). Styles: Ottoman miniature, INKBLOT (psychology).",
   "type": "module",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "setup": "bash setup.sh",
     "render": "node render.mjs",
     "test": "node test/animate.test.mjs"
   },
   "dependencies": {
-    "@napi-rs/canvas": "1.1.0",
+    "@fontsource/caveat": "5.3.0",
     "@fontsource/cinzel-decorative": "5.3.0",
     "@fontsource/cormorant-garamond": "5.3.0",
-    "@fontsource/im-fell-english-sc": "5.3.0"
+    "@fontsource/im-fell-english-sc": "5.3.0",
+    "@fontsource/playfair-display": "5.3.0",
+    "@fontsource/special-elite": "5.3.0",
+    "@napi-rs/canvas": "1.1.0"
   }
 }

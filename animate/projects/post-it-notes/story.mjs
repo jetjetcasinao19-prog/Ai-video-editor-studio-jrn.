@@ -12,7 +12,7 @@ export const meta = {
   voice: 'voice.mp3',
   seed: 31,
   captionChars: 30,
-  brand: { handle: '@HOWITSTARTED-YT1', logo: '../../../brand/logo.png' },
+  brand: { handle: '@MINDTRACEOFFICIAL-YT', logo: '../../../brand/logo.png' },
   outro: { at: 52.1, text: 'Subscribe for more origin stories' },
 };
 

@@ -69,13 +69,18 @@ OmniRoute gateway if `OMNIROUTE_URL` is set, else Groq Whisper or local Whisper
 explicit yes in the conversation. Guide: `docs/AI-WORKFLOW.md`.
 
 ## Animated shorts from code (server side)
-When the owner says **"edit this in 2D(OTTOMAN)"** (or "edit this in 2D(<style>)"),
-or sends a voice-over and asks for an animated short / cartoon
-"written from code", use the `animated-short` skill
+When the owner says **"edit this in 2D(OTTOMAN)"**, **"edit this in 2D(INKBLOT)"**
+(or "edit this in 2D(<style>)"), or sends a voice-over or script and asks for an
+animated short / cartoon "written from code", use the `animated-short` skill
 (`.claude/skills/animated-short/SKILL.md`). It lives in `animate/`
-(Node canvas frames → FFmpeg, Python-generated score and sound effects;
-first style: Ottoman miniature painting). Setup: `bash animate/setup.sh`.
-Test: `cd animate && npm test`. Example: `animate/projects/bubble-wrap/`.
+(Node canvas frames → FFmpeg, Python-generated score and sound effects).
+Styles: OTTOMAN (Ottoman miniature painting) and INKBLOT (Rorschach psychology
+case file: living mirror-symmetric ink blots, red-pen notes — for psychology
+topics; guide `animate/styles/inkblot/STYLE.md`). Script only, no recording:
+`node animate/voice.mjs` (Groq Orpheus or local Kokoro TTS).
+Setup: `bash animate/setup.sh` (`--voice` also installs Kokoro).
+Test: `cd animate && npm test`. Examples: `animate/projects/bubble-wrap/`
+(Ottoman), `animate/projects/zeigarnik-effect/` (INKBLOT).
 Like `pipeline/`, it is not part of the phone app and is left out of Pages.
 
 ## Google Flow MCP (merged repo)

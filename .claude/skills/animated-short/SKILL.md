@@ -1,6 +1,6 @@
 ---
 name: animated-short
-description: Turn a voice-over into a 2D animated short drawn entirely in code (no stock footage, no AI images) — every frame painted on a canvas, synced word-by-word to the voice, with a generated soundtrack, sound effects, post copy and a schedule row. ALWAYS use when the owner says "edit this in 2D(OTTOMAN)" or "edit this in 2D (<style>)" (any spacing or capitals, e.g. "edit this in 2d ottoman"), and when the owner sends a voice-over (mp3/wav) and asks for an animated video, a cartoon, a "2D animated short", or a video "written from code". Styles: OTTOMAN (Ottoman miniature painting).
+description: Turn a voice-over (or just a script) into a 2D animated short drawn entirely in code (no stock footage, no AI images) — every frame painted on a canvas, synced word-by-word to the voice, with a generated soundtrack, sound effects, post copy and a schedule row. ALWAYS use when the owner says "edit this in 2D(OTTOMAN)", "edit this in 2D(INKBLOT)" or "edit this in 2D (<style>)" (any spacing or capitals, e.g. "edit this in 2d inkblot"), and when the owner sends a voice-over (mp3/wav) or a script and asks for an animated video, a cartoon, a "2D animated short", a psychology explainer, or a video "written from code". Styles: OTTOMAN (Ottoman miniature painting — history/origins), INKBLOT (Rorschach case file — psychology).
 ---
 
 ## Trigger: "edit this in 2D(STYLE)"
@@ -8,11 +8,13 @@ This is the owner's one-command phrase for this skill (the plain "edit this"
 skill is for real footage; anything with "in 2D" comes here). Do every step
 below without asking questions you can answer yourself:
 - **Style** = the word in brackets, lower-cased → `animate/styles/<style>/`
-  (`OTTOMAN` → `styles/ottoman`). No brackets → Ottoman. A style that does
+  (`OTTOMAN` → `styles/ottoman`, `INKBLOT` → `styles/inkblot`). No brackets →
+  INKBLOT for psychology / mind / behaviour topics, Ottoman for everything else. A style that does
   not exist yet: say so in one line and offer to build it as a new style
   (see the end of this file) or to use Ottoman now.
 - **Voice-over** = the audio file attached in this conversation; else the
-  newest `.mp3`/`.wav`/`.m4a` in `inbox/`. None → ask for it in one line.
+  newest `.mp3`/`.wav`/`.m4a` in `inbox/`. No audio but a script (pasted or
+  `.txt`) → make the voice with `voice.mjs` (step 2b). Neither → ask in one line.
 - **Script** = the text the owner pasted, if any (use it to fix the spelling
   of names); otherwise the transcript.
 - **Finish the whole job**: render → check → send the MP4 → publisher agent
@@ -31,11 +33,14 @@ Everything lives in `animate/`:
 | Path | What it is |
 |---|---|
 | `animate/setup.sh` | installs/checks the tools (Node 22+, FFmpeg + libx264, Python 3 + numpy, `@napi-rs/canvas`, fonts) |
-| `animate/transcribe.mjs` | voice → `words.json` (word timings; OmniRoute if `OMNIROUTE_URL` is set, else Groq Whisper) |
+| `animate/voice.mjs` | script → `voice.mp3` (Groq Orpheus TTS if its terms are accepted, else Kokoro-82M on this machine — free, installs itself into `animate/.voice/` on first use) |
+| `animate/transcribe.mjs` | voice → `words.json` (word timings; OmniRoute if `OMNIROUTE_URL` is set, else Groq Whisper; repairs out-of-order word times) |
 | `animate/render.mjs` | CLI: contact sheet, stills, full render |
 | `animate/lib/engine.mjs` | parallel frame workers → FFmpeg, then soundtrack + mux |
-| `animate/lib/audio.py` | synthesised score (maqam scales, oud/kanun strings, ney, def/darbuka) + 20 sound effects + voice ducking + −14 LUFS |
+| `animate/lib/audio.py` | synthesised scores — `kit: 'ottoman'` (maqam scales, oud/kanun, ney, def/darbuka) or `kit: 'mind'` (music box, felt piano, low strings, ticking clock, heartbeat) — + 32 sound effects + voice ducking + −14 LUFS |
 | `animate/styles/ottoman/` | the Ottoman miniature style: `kit.mjs` (figures, turbans, cloud bands, spongy rocks, cypresses, tulips, waves, galley, tughra, seals, stamps…), `page.mjs` (ebru marbled margins, illuminated header, gold-ruled frame, captions, progress reed), `scenes.mjs` (ready backdrops: `land`, `interior`, `lamp`, `compassRose`, `bookCover` for the closing brand card), `index.mjs` (transitions) |
+| `animate/styles/inkblot/` | the INKBLOT psychology style — read its `STYLE.md` first: `kit.mjs` (living mirror-symmetric ink blots, profile head with opening skull, brain, eye, open loop, silhouette people, café props, food icons, bill, notepad, tabs, phone, bed, cliff, bar chart, Rubin's vase, stamps, typewriter + red-pen notes), `page.mjs` (case-file page: plate numerals I–XXII, typewriter captions, EEG polygraph progress), `scenes.mjs` (`plate`, `cafe`, `study`, `night`, `dream`, and the outro template `caseCover` + `inkReveal`: the closing case-file brand card, INKBLOT's version of Ottoman's `bookCover`), `index.mjs` (transitions `fold`, `bleed`, `blink`, `wipe`, `flash`, `cut`) |
+| `animate/projects/zeigarnik-effect/` | the first INKBLOT short (22 plates) — **copy it as the INKBLOT template** |
 | `animate/projects/<name>/` | one video: `voice.mp3`, `words.json`, `story.mjs` → `out/<slug>.mp4` |
 | `animate/projects/bubble-wrap/` | the first finished short — **copy it as the template** |
 | `animate/projects/post-it-notes/` | second short (sticky notes, alembic, choir, hymn book, bazaar stall, map of America) |
@@ -53,6 +58,16 @@ cd animate
 mkdir -p projects/<slug> && cp <voice-file> projects/<slug>/voice.mp3
 node transcribe.mjs projects/<slug>/voice.mp3 projects/<slug> --fix "Mark=Marc"
 ```
+**2b. Only a script, no recording?** Save it as `projects/<slug>/script.txt`
+(blank line = paragraph pause, "..." = dramatic pause), then:
+```bash
+node voice.mjs projects/<slug>/script.txt projects/<slug> --voice af_heart --speed 1.1
+```
+Kokoro voices: `af_heart` (best, warm female), `af_bella`, `am_michael`,
+`am_fenrir`, `bm_george`. Groq voices (after the owner accepts the Orpheus
+terms once at console.groq.com): `daniel`, `troy`, `austin`, `diana`, `hannah`,
+`autumn`. Tell the owner it is an AI voice and that their own recording or
+ElevenLabs voice can replace `voice.mp3` at any time (re-run transcribe).
 Read the printed transcript. Fix misheard names with `--fix "Heard=Right"`
 (check spellings of real people/brands with a quick search). If the owner
 also pasted the script, use its spelling. Note the word times — scenes
@@ -71,7 +86,7 @@ Check facts (dates, names) — the brand is "dramatic but true" (`brand/voice.md
 
 ## 4. Write `story.mjs`
 Start from `projects/bubble-wrap/story.mjs`. It exports:
-- `meta` — title, slug, `style: 'ottoman'`, 1080×1920, 30 fps, `duration`
+- `meta` — title, slug, `style: 'ottoman'` or `'inkblot'`, 1080×1920, 30 fps, `duration`
   (voice end + ~2.5 s for the outro), `voice`, `brand` (handle + logo from
   `brand/brand.json`), `outro` (call to action shown in the caption panel).
 - `scenes` — `{ start, title, trans, draw(ctx, u, S) }`. `u` = seconds into
@@ -82,9 +97,13 @@ Start from `projects/bubble-wrap/story.mjs`. It exports:
 - `sfx` — `{ t, type, gain, pitch }`; types: pop, whoosh, paper, chime, stamp,
   thud, pluck, slide, sizzle, wind, rain, waves, crickets, flop, riser, gong,
   clank, alarm, thunder, crack, coins.
-- `music` — `{ bpm, root, maqam: 'hicaz'|'rast'|'nihavend', gain, sections:[{from,to,mood}] }`,
-  moods: intro, groove, sad, drive, triumph, end. Match moods to the story's
-  turns (failure → sad, comeback → drive, payoff → triumph).
+- `music` — Ottoman: `{ bpm, root, maqam: 'hicaz'|'rast'|'nihavend', gain, sections:[{from,to,mood}] }`;
+  INKBLOT: `{ kit: 'mind', bpm, root, scale: 'minor'|'dorian'|'harmonic'|'major'|'lydian', gain, sections }`.
+  Moods: intro, groove, sad, drive, triumph, end (+ `tense` in the mind kit:
+  heartbeat + ticking). Match moods to the story's turns (failure → sad,
+  comeback → drive, revelation → tense, payoff → triumph).
+- INKBLOT sfx extras: tick, heartbeat, splat, fold, blink, typewriter, bell,
+  click, snap, buzz, pen, moth.
 
 Use helpers from the kit before drawing by hand. Animation tools are in
 `lib/core.mjs`: `tween`, `ease.*`, `pop`, `shake`, `rng` (seeded — never
@@ -127,6 +146,20 @@ You cannot hear the audio — say so, and ask the owner to listen.
 
 **Never post anything without the owner's explicit yes**, and never mark a
 row `posted` unless the owner says they posted it.
+
+## Style menu (unique, code-drawn, viral-friendly)
+Built: **OTTOMAN** (history/origins), **INKBLOT** (psychology). When the owner
+asks for a new look, offer these (each is a new `styles/<name>/`):
+- **ANATOMY** — 1800s anatomical engraving: cross-hatched brains and nerves,
+  Latin labels, sepia plates (neuroscience, body facts).
+- **DREAMCORE** — surrealist dream painting: endless plains, melting clocks,
+  doors in the sky, long shadows (dreams, the subconscious).
+- **UKIYO** — Japanese woodblock print: flat colour, bold outlines, wave
+  patterns, wood grain (discipline, philosophy, focus).
+- **BAUHAUS** — 1920s posters: circles, squares, primary colours, big type
+  (cognitive biases as geometry).
+- **SILHOUETTE** — paper-cut shadow puppets in front of a lamp (fables,
+  dark psychology, stories).
 
 ## Adding another style
 Make `animate/styles/<style>/index.mjs` exporting `createRenderer(project)`
