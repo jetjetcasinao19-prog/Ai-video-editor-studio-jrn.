@@ -25,6 +25,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-11-28 Sat | 8:00 PM | Sun Nov 29, 9:00 AM | TikTok | Your brain is keeping a to-do list you never wrote | content/posts/2026-11-23-zeigarnik-effect-inkblot.md | ready |
 | 2026-11-29 Sun | 7:00 PM | Mon Nov 30, 8:00 AM | Instagram Reels | Why that unanswered text bugs you at night | content/posts/2026-11-23-zeigarnik-effect-inkblot.md | ready |
 | 2026-11-29 Sun | 8:00 PM | Mon Nov 30, 9:00 AM | Facebook Reels | Your brain is keeping a to-do list you never wrote | content/posts/2026-11-23-zeigarnik-effect-inkblot.md | ready |
+| 2026-11-30 Mon | 7:00 PM | Tue Dec 1, 8:00 AM | YouTube Shorts | One Word Makes People Say Yes (The Copy Machine Study) | content/posts/2026-11-23-because-copy-machine-inkblot.md | ready |
+| 2026-11-30 Mon | 8:00 PM | Tue Dec 1, 9:00 AM | TikTok | One word makes people say yes, and it's not please | content/posts/2026-11-23-because-copy-machine-inkblot.md | ready |
+| 2026-12-01 Tue | 7:00 PM | Wed Dec 2, 8:00 AM | Instagram Reels | The tiny word that makes people say yes | content/posts/2026-11-23-because-copy-machine-inkblot.md | ready |
+| 2026-12-01 Tue | 8:00 PM | Wed Dec 2, 9:00 AM | Facebook Reels | One word makes people say yes, and it's not please | content/posts/2026-11-23-because-copy-machine-inkblot.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the

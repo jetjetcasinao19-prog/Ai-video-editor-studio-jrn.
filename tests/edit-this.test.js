@@ -93,7 +93,7 @@ const dark = c => c[0] < 60 && c[1] < 60 && c[2] < 60;
     await page.goto(PAGE);
     check('Edit this panel and tab shown', await page.isVisible('#editThisBox') && !!(await page.$('#topTabs button[data-go="editThisBox"]')));
     check('brand kit filled with How it Started', (await page.inputValue('#etBrandHandle')) === '@MINDTRACEOFFICIAL-YT' &&
-      (await page.inputValue('#etBrandOutro')) === 'Subscribe for more origin stories');
+      (await page.inputValue('#etBrandOutro')) === 'Subscribe to trace your mind');
     await page.click('#etRun');
     check('asks for a video first', /Import a video first/.test(await page.textContent('#etLog')));
 
@@ -160,7 +160,7 @@ const dark = c => c[0] < 60 && c[1] < 60 && c[2] < 60;
 
     // Post text, thumbnail, schedule
     const post = await page.inputValue('#etPost');
-    check('post text: hook title, CTA and brand hashtags', /^# In 1908 Henry Ford started selling/.test(post) && /Subscribe for more origin stories\./.test(post) && /#HowItStarted/.test(post));
+    check('post text: hook title, CTA and brand hashtags', /^# In 1908 Henry Ford started selling/.test(post) && /Subscribe to trace your mind\./.test(post) && /#HowItStarted/.test(post));
     check('post text: B-roll credit', /B-roll: Jane Photo, CC BY-SA 4\.0, via Wikimedia Commons/.test(post));
     check('post text: ET time with PHT next to it', /7:00 PM ET \([A-Z][a-z]{2}, [A-Z][a-z]{2} \d+, 8:00 AM PHT\)/.test(post), post.match(/.*PHT.*/)?.[0]);
     check('post text says posting is the owner\'s decision', /Posting is your decision/.test(post));

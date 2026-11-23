@@ -14,7 +14,7 @@ export const meta = {
   captionChars: 24,
   caseLine: 'THE MIND FILES  ·  CASE No. 1927  ·  CONFIDENTIAL',
   brand: { handle: '@MINDTRACEOFFICIAL-YT', logo: '../../../brand/logo.png' },
-  outro: { at: 49.5, text: 'Subscribe for more origin stories' },
+  outro: { at: 49.5, text: 'Subscribe to trace your mind' },
 };
 
 // ---- the cast ----

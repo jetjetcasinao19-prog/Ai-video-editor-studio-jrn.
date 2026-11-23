@@ -247,7 +247,7 @@ function directStory(text){
   lines.push(act+": "+s);
  });
  if(lines.length && /\b(subscribe|follow)\b/i.test(sents[sents.length-1]||"")===false && sents.length>2){
-  lines.push("wave: Subscribe for more origin stories");
+  lines.push("wave: Subscribe to trace your mind");
  }
  return lines.join("\n");
 }
