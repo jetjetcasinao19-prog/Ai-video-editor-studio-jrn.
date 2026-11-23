@@ -35,6 +35,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-11-30 Mon | 8:00 PM | Tue Dec 1, 9:00 AM | MindTrace | TikTok | One word makes people say yes, and it's not please | content/posts/2026-11-23-because-copy-machine-inkblot.md | ready |
 | 2026-12-01 Tue | 7:00 PM | Wed Dec 2, 8:00 AM | MindTrace | Instagram Reels | The tiny word that makes people say yes | content/posts/2026-11-23-because-copy-machine-inkblot.md | ready |
 | 2026-12-01 Tue | 8:00 PM | Wed Dec 2, 9:00 AM | MindTrace | Facebook Reels | One word makes people say yes, and it's not please | content/posts/2026-11-23-because-copy-machine-inkblot.md | ready |
+| 2026-12-02 Wed | 7:00 PM | Thu Dec 3, 8:00 AM | MindTrace | YouTube Shorts | Want a Big Yes? Ask Small First (Foot-in-the-Door Study) | content/posts/2026-11-23-foot-in-the-door-inkblot.md | ready |
+| 2026-12-02 Wed | 8:00 PM | Thu Dec 3, 9:00 AM | MindTrace | TikTok | Want a big yes? Don't ask for it. Not yet. | content/posts/2026-11-23-foot-in-the-door-inkblot.md | ready |
+| 2026-12-03 Thu | 7:00 PM | Fri Dec 4, 8:00 AM | MindTrace | Instagram Reels | The tiny yes that leads to a big yes | content/posts/2026-11-23-foot-in-the-door-inkblot.md | ready |
+| 2026-12-03 Thu | 8:00 PM | Fri Dec 4, 9:00 AM | MindTrace | Facebook Reels | Want a big yes? Don't ask for it. Not yet. | content/posts/2026-11-23-foot-in-the-door-inkblot.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
