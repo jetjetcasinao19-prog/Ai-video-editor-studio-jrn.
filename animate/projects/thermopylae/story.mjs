@@ -291,7 +291,7 @@ export const scenes = [
       const cut = tween(u, be, hi + 0.4, ease.linear) * lines.length;
       ctx.fillStyle = '#4a3a2a'; ctx.font = 'italic 700 46px GaramondItalic'; ctx.textAlign = 'center';
       lines.forEach((l, i) => { const q = clamp(cut - i); if (q > 0 && rise > 0.9) ctx.fillText(l.slice(0, Math.ceil(l.length * q)), W / 2, 520 + i * 70); });
-      k.label(ctx, 'SIMONIDES’ EPITAPH', W / 2, 920, 20, tween(u, hi, hi + 0.5));
+      k.label(ctx, 'THE EPITAPH AT THE PASS', W / 2, 920, 20, tween(u, hi, hi + 0.5));
       // a single shield leans at its foot, with laurel
       k.aspis(ctx, W / 2 + 300, 940, 60, BRONZE, EMBLEM.L);
       for (let i = 0; i < 7; i++) k.ellipse(ctx, W / 2 + 250 + i * 16, 990 - Math.sin(i) * 10, 10, 5, i, P.green, P.ink, 1);

@@ -121,6 +121,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-01-20 Wed | 8:00 PM | Thu Jan 21, 9:00 AM | TikTok | Plot twist for runners: the story behind the marathon is probably a legend. | content/posts/2026-11-23-marathon-ottoman.md | ready |
 | 2027-01-21 Thu | 7:00 PM | Fri Jan 22, 8:00 AM | Instagram Reels | A battle legend became the most famous race on earth. | content/posts/2026-11-23-marathon-ottoman.md | ready |
 | 2027-01-21 Thu | 8:00 PM | Fri Jan 22, 9:00 AM | Facebook Reels | Did you know the famous story behind the marathon probably never happened? | content/posts/2026-11-23-marathon-ottoman.md | ready |
+| 2027-01-22 Fri | 7:00 PM | Sat Jan 23, 8:00 AM | YouTube Shorts | The 300 Weren't Alone: The Last Stand at Thermopylae | content/posts/2026-11-23-thermopylae-ottoman.md | ready |
+| 2027-01-22 Fri | 8:00 PM | Sat Jan 23, 9:00 AM | TikTok | You know the Spartans. Meet the rest of the story. | content/posts/2026-11-23-thermopylae-ottoman.md | ready |
+| 2027-01-23 Sat | 7:00 PM | Sun Jan 24, 8:00 AM | Instagram Reels | A pass called the "hot gates," three days, and a path nobody was supposed to find. | content/posts/2026-11-23-thermopylae-ottoman.md | ready |
+| 2027-01-23 Sat | 8:00 PM | Sun Jan 24, 9:00 AM | Facebook Reels | Think the Battle of Thermopylae was just 300 Spartans? Not quite. | content/posts/2026-11-23-thermopylae-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
