@@ -1,0 +1,566 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "Ever heard of a Pyrrhic victory? It's named after a king who kept winning and still lost. 280 BC. King Pyrrhus of Epirus in Greece sails to Italy to fight Rome, bringing war elephants. At Heraclea, he beats the Romans. A year later, at Asculum, he beats them again. But each win costs him thousands of his best soldiers and officers, men he can't replace. When someone congratulates him, Pyrrhus reportedly says, one more victory like this and we're ruined. Rome just keeps sending more armies. A few years later, Pyrrhus gives up and leaves Italy. His name became a word for winning that costs too much. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "Ever",
+   "start": 0,
+   "end": 0.26
+  },
+  {
+   "w": "heard",
+   "start": 0.26,
+   "end": 0.52
+  },
+  {
+   "w": "of",
+   "start": 0.52,
+   "end": 0.66
+  },
+  {
+   "w": "a",
+   "start": 0.66,
+   "end": 1.02
+  },
+  {
+   "w": "Pyrrhic",
+   "start": 1.02,
+   "end": 1.4
+  },
+  {
+   "w": "victory?",
+   "start": 1.4,
+   "end": 2.8
+  },
+  {
+   "w": "It's",
+   "start": 2.8,
+   "end": 2.94
+  },
+  {
+   "w": "named",
+   "start": 2.94,
+   "end": 3.14
+  },
+  {
+   "w": "after",
+   "start": 3.14,
+   "end": 3.38
+  },
+  {
+   "w": "a",
+   "start": 3.38,
+   "end": 3.64
+  },
+  {
+   "w": "king",
+   "start": 3.64,
+   "end": 3.86
+  },
+  {
+   "w": "who",
+   "start": 3.86,
+   "end": 4.12
+  },
+  {
+   "w": "kept",
+   "start": 4.12,
+   "end": 4.42
+  },
+  {
+   "w": "winning",
+   "start": 4.42,
+   "end": 4.76
+  },
+  {
+   "w": "and",
+   "start": 4.76,
+   "end": 5.46
+  },
+  {
+   "w": "still",
+   "start": 5.46,
+   "end": 5.84
+  },
+  {
+   "w": "lost.",
+   "start": 5.84,
+   "end": 6.32
+  },
+  {
+   "w": "280",
+   "start": 7.3,
+   "end": 7.7
+  },
+  {
+   "w": "BC.",
+   "start": 7.7,
+   "end": 9.24
+  },
+  {
+   "w": "King",
+   "start": 9.24,
+   "end": 9.38
+  },
+  {
+   "w": "Pyrrhus",
+   "start": 9.38,
+   "end": 9.92
+  },
+  {
+   "w": "of",
+   "start": 9.92,
+   "end": 10.22
+  },
+  {
+   "w": "Epirus",
+   "start": 10.22,
+   "end": 10.76
+  },
+  {
+   "w": "in",
+   "start": 10.76,
+   "end": 11.02
+  },
+  {
+   "w": "Greece",
+   "start": 11.02,
+   "end": 11.42
+  },
+  {
+   "w": "sails",
+   "start": 11.42,
+   "end": 12.1
+  },
+  {
+   "w": "to",
+   "start": 12.1,
+   "end": 12.32
+  },
+  {
+   "w": "Italy",
+   "start": 12.32,
+   "end": 12.62
+  },
+  {
+   "w": "to",
+   "start": 12.62,
+   "end": 12.82
+  },
+  {
+   "w": "fight",
+   "start": 12.82,
+   "end": 13.08
+  },
+  {
+   "w": "Rome,",
+   "start": 13.08,
+   "end": 13.86
+  },
+  {
+   "w": "bringing",
+   "start": 13.86,
+   "end": 14.12
+  },
+  {
+   "w": "war",
+   "start": 14.12,
+   "end": 14.6
+  },
+  {
+   "w": "elephants.",
+   "start": 14.6,
+   "end": 14.94
+  },
+  {
+   "w": "At",
+   "start": 15.94,
+   "end": 16.1
+  },
+  {
+   "w": "Heraclea,",
+   "start": 16.1,
+   "end": 16.9
+  },
+  {
+   "w": "he",
+   "start": 16.9,
+   "end": 16.98
+  },
+  {
+   "w": "beats",
+   "start": 16.98,
+   "end": 17.34
+  },
+  {
+   "w": "the",
+   "start": 17.34,
+   "end": 17.5
+  },
+  {
+   "w": "Romans.",
+   "start": 17.5,
+   "end": 18.52
+  },
+  {
+   "w": "A",
+   "start": 18.52,
+   "end": 18.64
+  },
+  {
+   "w": "year",
+   "start": 18.64,
+   "end": 18.82
+  },
+  {
+   "w": "later,",
+   "start": 18.82,
+   "end": 19.4
+  },
+  {
+   "w": "at",
+   "start": 19.4,
+   "end": 19.54
+  },
+  {
+   "w": "Asculum,",
+   "start": 19.54,
+   "end": 20.04
+  },
+  {
+   "w": "he",
+   "start": 20.04,
+   "end": 20.4
+  },
+  {
+   "w": "beats",
+   "start": 20.4,
+   "end": 20.66
+  },
+  {
+   "w": "them",
+   "start": 20.66,
+   "end": 20.8
+  },
+  {
+   "w": "again.",
+   "start": 20.8,
+   "end": 21.92
+  },
+  {
+   "w": "But",
+   "start": 21.92,
+   "end": 22.02
+  },
+  {
+   "w": "each",
+   "start": 22.02,
+   "end": 22.32
+  },
+  {
+   "w": "win",
+   "start": 22.32,
+   "end": 22.64
+  },
+  {
+   "w": "costs",
+   "start": 22.64,
+   "end": 23.14
+  },
+  {
+   "w": "him",
+   "start": 23.14,
+   "end": 23.3
+  },
+  {
+   "w": "thousands",
+   "start": 23.3,
+   "end": 23.96
+  },
+  {
+   "w": "of",
+   "start": 23.96,
+   "end": 24.18
+  },
+  {
+   "w": "his",
+   "start": 24.18,
+   "end": 24.32
+  },
+  {
+   "w": "best",
+   "start": 24.32,
+   "end": 24.72
+  },
+  {
+   "w": "soldiers",
+   "start": 24.72,
+   "end": 25.24
+  },
+  {
+   "w": "and",
+   "start": 25.24,
+   "end": 25.48
+  },
+  {
+   "w": "officers,",
+   "start": 25.48,
+   "end": 26.5
+  },
+  {
+   "w": "men",
+   "start": 26.5,
+   "end": 26.74
+  },
+  {
+   "w": "he",
+   "start": 26.74,
+   "end": 26.88
+  },
+  {
+   "w": "can't",
+   "start": 26.88,
+   "end": 27.28
+  },
+  {
+   "w": "replace.",
+   "start": 27.28,
+   "end": 28.62
+  },
+  {
+   "w": "When",
+   "start": 28.62,
+   "end": 28.72
+  },
+  {
+   "w": "someone",
+   "start": 28.72,
+   "end": 29.02
+  },
+  {
+   "w": "congratulates",
+   "start": 29.04,
+   "end": 29.78
+  },
+  {
+   "w": "him,",
+   "start": 29.78,
+   "end": 30.48
+  },
+  {
+   "w": "Pyrrhus",
+   "start": 30.48,
+   "end": 30.52
+  },
+  {
+   "w": "reportedly",
+   "start": 30.52,
+   "end": 31.06
+  },
+  {
+   "w": "says,",
+   "start": 31.06,
+   "end": 32.06
+  },
+  {
+   "w": "one",
+   "start": 32.06,
+   "end": 32.18
+  },
+  {
+   "w": "more",
+   "start": 32.18,
+   "end": 32.42
+  },
+  {
+   "w": "victory",
+   "start": 32.42,
+   "end": 32.78
+  },
+  {
+   "w": "like",
+   "start": 32.78,
+   "end": 33.08
+  },
+  {
+   "w": "this",
+   "start": 33.08,
+   "end": 33.44
+  },
+  {
+   "w": "and",
+   "start": 33.44,
+   "end": 33.86
+  },
+  {
+   "w": "we're",
+   "start": 33.86,
+   "end": 34.08
+  },
+  {
+   "w": "ruined.",
+   "start": 34.08,
+   "end": 35.5
+  },
+  {
+   "w": "Rome",
+   "start": 35.5,
+   "end": 35.68
+  },
+  {
+   "w": "just",
+   "start": 35.68,
+   "end": 36.02
+  },
+  {
+   "w": "keeps",
+   "start": 35.88,
+   "end": 36.52
+  },
+  {
+   "w": "sending",
+   "start": 36.52,
+   "end": 36.92
+  },
+  {
+   "w": "more",
+   "start": 36.92,
+   "end": 37.32
+  },
+  {
+   "w": "armies.",
+   "start": 37.32,
+   "end": 38.66
+  },
+  {
+   "w": "A",
+   "start": 38.66,
+   "end": 38.72
+  },
+  {
+   "w": "few",
+   "start": 38.72,
+   "end": 38.9
+  },
+  {
+   "w": "years",
+   "start": 38.9,
+   "end": 39.18
+  },
+  {
+   "w": "later,",
+   "start": 39.18,
+   "end": 39.86
+  },
+  {
+   "w": "Pyrrhus",
+   "start": 39.86,
+   "end": 40.16
+  },
+  {
+   "w": "gives",
+   "start": 40.16,
+   "end": 40.48
+  },
+  {
+   "w": "up",
+   "start": 40.48,
+   "end": 40.74
+  },
+  {
+   "w": "and",
+   "start": 40.74,
+   "end": 41.08
+  },
+  {
+   "w": "leaves",
+   "start": 41.08,
+   "end": 41.48
+  },
+  {
+   "w": "Italy.",
+   "start": 41.48,
+   "end": 42.64
+  },
+  {
+   "w": "His",
+   "start": 42.64,
+   "end": 42.78
+  },
+  {
+   "w": "name",
+   "start": 42.78,
+   "end": 43.12
+  },
+  {
+   "w": "became",
+   "start": 42.9,
+   "end": 43.54
+  },
+  {
+   "w": "a",
+   "start": 43.54,
+   "end": 43.76
+  },
+  {
+   "w": "word",
+   "start": 43.76,
+   "end": 44.12
+  },
+  {
+   "w": "for",
+   "start": 44.12,
+   "end": 44.62
+  },
+  {
+   "w": "winning",
+   "start": 44.62,
+   "end": 44.96
+  },
+  {
+   "w": "that",
+   "start": 44.96,
+   "end": 45.44
+  },
+  {
+   "w": "costs",
+   "start": 45.44,
+   "end": 45.96
+  },
+  {
+   "w": "too",
+   "start": 45.96,
+   "end": 46.32
+  },
+  {
+   "w": "much.",
+   "start": 46.32,
+   "end": 47.8
+  },
+  {
+   "w": "Every",
+   "start": 47.8,
+   "end": 48.06
+  },
+  {
+   "w": "legend",
+   "start": 48.06,
+   "end": 48.42
+  },
+  {
+   "w": "has",
+   "start": 48.42,
+   "end": 48.98
+  },
+  {
+   "w": "a",
+   "start": 48.98,
+   "end": 49.08
+  },
+  {
+   "w": "beginning.",
+   "start": 49.08,
+   "end": 49.36
+  }
+ ]
+}
