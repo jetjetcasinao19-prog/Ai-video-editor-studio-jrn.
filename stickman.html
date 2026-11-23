@@ -108,7 +108,7 @@ Tap an action to add a line:</p>
 <label for="style">Character</label>
 <select id="style"><option value="signature">Signature (gold scarf, minimalist)</option><option value="classic">Classic stick figure</option></select>
 <label for="handle">Watermark (empty = none)</label>
-<input id="handle" value="@MINDTRACEOFFICIAL-YT">
+<input id="handle" value="@HOWITSTARTED-YT1">
 <label for="capSize">Caption size <span id="capSizeVal"></span></label>
 <input id="capSize" type="range" min="0.6" max="1.6" step="0.05" value="1">
 </section>
@@ -247,7 +247,7 @@ function directStory(text){
   lines.push(act+": "+s);
  });
  if(lines.length && /\b(subscribe|follow)\b/i.test(sents[sents.length-1]||"")===false && sents.length>2){
-  lines.push("wave: Subscribe to trace your mind");
+  lines.push("wave: Subscribe for more origin stories");
  }
  return lines.join("\n");
 }

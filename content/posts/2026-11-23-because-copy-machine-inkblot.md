@@ -1,5 +1,6 @@
 # One Word Makes People Say Yes — The Magic Word "Because", INKBLOT short
 
+- **Channel:** MindTrace (@MINDTRACEOFFICIAL-YT) — brand kit `brand/mindtrace/`
 - **Video:** `animate/projects/because-copy-machine/out/because-copy-machine-inkblot.mp4`
   (64 s, 9:16, 1080x1920, @MINDTRACEOFFICIAL-YT mask logo, voice-over by the owner
   (ElevenLabs voice "Bradford"), end card: case-file cover with the logo, stamped
@@ -44,22 +45,22 @@
 In 1978, psychologist Ellen Langer asked people to cut in line at a copy machine, three different ways. One tiny word pushed a 60% yes up to 94%. Even a reason that was no reason at all got 93%.
 Why does your brain fall for "because", and when does it stop working? Source: Langer, Blank & Chanowitz (1978), Journal of Personality and Social Psychology. Animated in code in an ink blot case-file style.
 Subscribe to trace your mind.
-**Hashtags:** #Psychology #MindTricks #PsychologyFacts #Persuasion #SocialPsychology #shorts
+**Hashtags:** #MindTrace #Psychology #MindTricks #PsychologyFacts #Persuasion #SocialPsychology #shorts
 
 ## TikTok
 **Caption:**
 One word makes people say yes, and it's not please. 🧠 A 1978 copy machine study: 60% said yes with no reason, 94% with a real one, and 93% with a reason that meant nothing. The catch? It fails on big favors.
 Subscribe to trace your mind 👇
-**Hashtags:** #Psychology #MindTricks #PsychologyFacts #Persuasion #LifeHacks #learnontiktok
+**Hashtags:** #MindTrace #Psychology #MindTricks #PsychologyFacts #Persuasion #LifeHacks #learnontiktok
 
 ## Instagram Reels
 **Caption:**
 The tiny word that makes people say yes. 🧠
 In 1978, psychologist Ellen Langer tested it at a busy copy machine. "May I use the copy machine?" got 60% yes. Add "because I'm in a rush" and it jumped to 94%. Add "because I have to make copies" (a reason that says nothing) and it still got 93%. Your brain runs on autopilot: it hears "because" and stops checking. But for a big favor (20 pages), the empty "because" did nothing.
 Small favor? Say because. Big favor? Bring a real reason. Save this for your next ask. Animated in code in an ink blot case-file style. Subscribe to trace your mind.
-**Hashtags:** #Psychology #MindTricks #PsychologyFacts #Persuasion #SocialPsychology #Animation
+**Hashtags:** #MindTrace #Psychology #MindTricks #PsychologyFacts #Persuasion #SocialPsychology #Animation
 
 ## Facebook Reels
 **Caption:**
 One word makes people say yes, and it's not please. 🧠 Here is the 1978 copy machine study behind "because", and the catch: it only works on small favors.
-Follow @MINDTRACEOFFICIAL-YT to trace your mind. #Psychology #MindTricks #PsychologyFacts #Persuasion
+Follow @MINDTRACEOFFICIAL-YT to trace your mind. #MindTrace #Psychology #MindTricks #PsychologyFacts #Persuasion

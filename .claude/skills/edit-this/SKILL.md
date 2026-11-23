@@ -35,8 +35,14 @@ command -v ffmpeg && node -v          # needs ffmpeg and Node 22+
 [ -d pipeline/node_modules ] || (cd pipeline && npm ci)
 ```
 
-## 3. Use the brand kit
-The pipeline reads `brand/brand.json` automatically: brand colours, caption
+## 3. Use the brand kit — pick the channel first
+The owner has two channels (see CLAUDE.md → Brand kits): **How it Started**
+(`brand/`, origin stories) and **MindTrace** (`brand/mindtrace/`, psychology).
+Use the one the owner names; if they don't say, psychology/mind topics →
+MindTrace (add `--brand brand/mindtrace/brand.json` to every pipeline command
+and read `brand/mindtrace/voice.md`), everything else → How it Started. Tell
+the owner which channel you used.
+The pipeline reads `brand/brand.json` (How it Started) by default: brand colours, caption
 style, logo watermark and the outro card with the owner's @handle. Read
 `brand/voice.md` before writing any title, description or hashtag, and add
 `hashtags` from `brand.json` to every post. If `brand.json` has no `name` and

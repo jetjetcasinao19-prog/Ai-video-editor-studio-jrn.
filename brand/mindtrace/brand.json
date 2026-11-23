@@ -1,0 +1,42 @@
+{
+  "name": "MindTrace",
+  "handle": "@MINDTRACEOFFICIAL-YT",
+  "tagline": "Why You Think What You Think",
+  "colors": {
+    "background": "#000000",
+    "text": "#ffffff",
+    "accent": "#c61f2a",
+    "captionText": "#ffffff",
+    "captionHighlight": "#e4636a"
+  },
+  "captions": {
+    "style": "creator"
+  },
+  "intro": {
+    "enabled": true
+  },
+  "outro": {
+    "enabled": true,
+    "text": "Subscribe to trace your mind",
+    "seconds": 2.5
+  },
+  "watermark": {
+    "enabled": true,
+    "position": "top-right",
+    "size": 0.14,
+    "opacity": 0.9
+  },
+  "effects": {
+    "zoom": "punch",
+    "sfx": true,
+    "progressBar": true
+  },
+  "logo": "logo.png",
+  "music": {
+    "volume": 0.2
+  },
+  "hashtags": [
+    "#MindTrace",
+    "#Psychology"
+  ]
+}

@@ -14,8 +14,8 @@ export const meta = {
   seed: 33,
   captionChars: 24,
   caseLine: 'THE MIND FILES  ·  CASE No. 1978  ·  CONFIDENTIAL',
-  brand: { handle: '@MINDTRACEOFFICIAL-YT', logo: '../../../brand/logo.png' },
-  outro: { at: 61.3, text: 'Subscribe to trace your mind' },
+  brandKit: 'mindtrace', // MindTrace (brand/mindtrace/): logo, handle, tagline, outro text
+  outro: { at: 61.3 },
 };
 
 // ---- the cast ----

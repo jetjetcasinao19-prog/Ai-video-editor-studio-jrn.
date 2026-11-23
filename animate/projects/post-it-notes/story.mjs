@@ -12,8 +12,8 @@ export const meta = {
   voice: 'voice.mp3',
   seed: 31,
   captionChars: 30,
-  brand: { handle: '@MINDTRACEOFFICIAL-YT', logo: '../../../brand/logo.png' },
-  outro: { at: 52.1, text: 'Subscribe for more origin stories' },
+  brandKit: '', // How it Started (brand/): logo, handle, tagline, outro text
+  outro: { at: 52.1 },
 };
 
 const YEL = '#f4d63e';

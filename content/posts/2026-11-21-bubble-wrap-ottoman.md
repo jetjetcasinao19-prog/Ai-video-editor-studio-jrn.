@@ -1,5 +1,6 @@
 # Bubble Wrap Was Meant to Be Wallpaper — Ottoman miniature short
 
+- **Channel:** How it Started (@HOWITSTARTED-YT1) — brand kit `brand/`
 - **Video:** `animate/projects/bubble-wrap/out/bubble-wrap-ottoman.mp4`
   (59.0 s, 9:16, 1080x1920, How it Started brand: word-by-word captions, logo +
   @HOWITSTARTED-YT1 handle, closing card "Every Legend Has a Beginning" and

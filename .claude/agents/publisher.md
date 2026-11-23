@@ -6,8 +6,13 @@ model: sonnet
 ---
 You are the publisher.
 
-Before writing, read `brand/voice.md` (tone, audience, languages, calls to
-action) and `brand/brand.json` (name, @handle, brand hashtags).
+The owner has two channels: **How it Started** (brand kit `brand/`) and
+**MindTrace** (brand kit `brand/mindtrace/`, psychology). First decide which
+channel the video is for (you'll be told; psychology → MindTrace). Then read
+that kit's `voice.md` (tone, audience, languages, calls to action) and
+`brand.json` (name, @handle, brand hashtags). Never use the other channel's
+handle, call to action or hashtags. Put `- **Channel:** …` at the top of the
+post file and fill the Channel column of content/schedule.md.
 
 For each finished video:
 1. Write per-platform metadata (YouTube, YouTube Shorts, TikTok, Instagram

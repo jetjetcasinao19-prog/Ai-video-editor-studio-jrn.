@@ -107,13 +107,24 @@ submodules, `pipeline/` and `google-flow-mcp/` out (Settings → Pages → Sourc
 GitHub Actions). Never switch Pages back to "Deploy from a branch": the default
 builder downloads the submodules and fails.
 
-## Brand kit
-`brand/brand.json` (name, @handle, colours, caption style, intro, outro,
-watermark, music volume, hashtags), `brand/voice.md` (how posts sound),
-`brand/logo.png` (optional; otherwise an initials logo is made),
-`brand/music/` (licensed songs). The pipeline applies it automatically
-(`--no-brand` turns it off). Preview: `node pipeline/brand-preview.mjs` →
-`brand/preview.png`. All writing must follow `brand/voice.md`.
+## Brand kits — the owner has TWO channels
+| Channel | Niche | Brand kit | Animated style |
+|---|---|---|---|
+| **How it Started** (@HOWITSTARTED-YT1) | origin stories | `brand/` | OTTOMAN |
+| **MindTrace** (@MINDTRACEOFFICIAL-YT) | psychology | `brand/mindtrace/` | INKBLOT |
+
+Each kit has `brand.json` (name, @handle, colours, caption style, intro, outro,
+watermark, music volume, hashtags), `voice.md` (how posts sound), `logo.png`
+and `preview.png`; `brand/music/` (licensed songs) is shared. Pick the channel
+from what the owner says ("for MindTrace", "for How it Started"); if they don't
+say, psychology/mind topics → MindTrace, everything else → How it Started, and
+say which one you used. Never mix the two channels' handles, logos, calls to
+action or hashtags in one video or post. The pipeline uses `brand/brand.json`
+unless given `--brand brand/mindtrace/brand.json` (`--no-brand` turns it off);
+animated shorts pick the kit with `meta.brandKit` ('' or 'mindtrace').
+Preview: `node pipeline/brand-preview.mjs [--brand <kit>/brand.json]` →
+`<kit>/preview.png`. All writing must follow that channel's `voice.md`.
+The phone app's built-in brand defaults are How it Started.
 Publishing target: **US audience** — US English, US Eastern Time posting
 schedule (with the owner's Philippine time shown next to it).
 

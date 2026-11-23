@@ -1,0 +1,511 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "Want a big yes? Don't ask for it. Not yet. In 1966, Stanford researchers asked people to put a huge, ugly sign on their front lawn. Only 17% said yes. But one group got a tiny ask first. A small sign for the window. Easy yes. Two weeks later, the giant sign. 76% said yes. Here's the trick. That first yes changes how you see yourself. I'm someone who cares about this. And you act like that person. So start small. Then make the big ask. Someone doing it to you? You can still say no. Follow for more mind tricks.",
+ "words": [
+  {
+   "w": "Want",
+   "start": 0,
+   "end": 0.22
+  },
+  {
+   "w": "a",
+   "start": 0.22,
+   "end": 0.4
+  },
+  {
+   "w": "big",
+   "start": 0.4,
+   "end": 0.76
+  },
+  {
+   "w": "yes?",
+   "start": 0.76,
+   "end": 1.48
+  },
+  {
+   "w": "Don't",
+   "start": 1.48,
+   "end": 1.9
+  },
+  {
+   "w": "ask",
+   "start": 1.9,
+   "end": 2.18
+  },
+  {
+   "w": "for",
+   "start": 2.18,
+   "end": 2.34
+  },
+  {
+   "w": "it.",
+   "start": 2.34,
+   "end": 2.6
+  },
+  {
+   "w": "Not",
+   "start": 2.6,
+   "end": 3.18
+  },
+  {
+   "w": "yet.",
+   "start": 3.18,
+   "end": 3.96
+  },
+  {
+   "w": "In",
+   "start": 4.54,
+   "end": 4.64
+  },
+  {
+   "w": "1966,",
+   "start": 4.64,
+   "end": 6.08
+  },
+  {
+   "w": "Stanford",
+   "start": 6.08,
+   "end": 6.46
+  },
+  {
+   "w": "researchers",
+   "start": 6.46,
+   "end": 6.96
+  },
+  {
+   "w": "asked",
+   "start": 6.96,
+   "end": 7.38
+  },
+  {
+   "w": "people",
+   "start": 7.38,
+   "end": 7.68
+  },
+  {
+   "w": "to",
+   "start": 7.68,
+   "end": 7.84
+  },
+  {
+   "w": "put",
+   "start": 7.84,
+   "end": 7.96
+  },
+  {
+   "w": "a",
+   "start": 7.96,
+   "end": 8.06
+  },
+  {
+   "w": "huge,",
+   "start": 8.06,
+   "end": 9.1
+  },
+  {
+   "w": "ugly",
+   "start": 9.1,
+   "end": 9.22
+  },
+  {
+   "w": "sign",
+   "start": 9.22,
+   "end": 9.52
+  },
+  {
+   "w": "on",
+   "start": 9.52,
+   "end": 9.76
+  },
+  {
+   "w": "their",
+   "start": 9.76,
+   "end": 9.9
+  },
+  {
+   "w": "front",
+   "start": 9.9,
+   "end": 10.22
+  },
+  {
+   "w": "lawn.",
+   "start": 10.22,
+   "end": 11
+  },
+  {
+   "w": "Only",
+   "start": 11.3,
+   "end": 11.54
+  },
+  {
+   "w": "17%",
+   "start": 11.54,
+   "end": 12.58
+  },
+  {
+   "w": "said",
+   "start": 12.58,
+   "end": 13.02
+  },
+  {
+   "w": "yes.",
+   "start": 13.02,
+   "end": 13.84
+  },
+  {
+   "w": "But",
+   "start": 14.06,
+   "end": 14.18
+  },
+  {
+   "w": "one",
+   "start": 14.18,
+   "end": 14.36
+  },
+  {
+   "w": "group",
+   "start": 14.36,
+   "end": 14.64
+  },
+  {
+   "w": "got",
+   "start": 14.64,
+   "end": 14.8
+  },
+  {
+   "w": "a",
+   "start": 14.8,
+   "end": 14.98
+  },
+  {
+   "w": "tiny",
+   "start": 14.98,
+   "end": 15.4
+  },
+  {
+   "w": "ask",
+   "start": 15.4,
+   "end": 15.76
+  },
+  {
+   "w": "first.",
+   "start": 15.76,
+   "end": 16.16
+  },
+  {
+   "w": "A",
+   "start": 16.66,
+   "end": 16.74
+  },
+  {
+   "w": "small",
+   "start": 16.74,
+   "end": 17.08
+  },
+  {
+   "w": "sign",
+   "start": 17.08,
+   "end": 17.42
+  },
+  {
+   "w": "for",
+   "start": 17.42,
+   "end": 17.62
+  },
+  {
+   "w": "the",
+   "start": 17.62,
+   "end": 17.7
+  },
+  {
+   "w": "window.",
+   "start": 17.7,
+   "end": 18.46
+  },
+  {
+   "w": "Easy",
+   "start": 18.68,
+   "end": 19
+  },
+  {
+   "w": "yes.",
+   "start": 19,
+   "end": 19.76
+  },
+  {
+   "w": "Two",
+   "start": 20.12,
+   "end": 20.26
+  },
+  {
+   "w": "weeks",
+   "start": 20.26,
+   "end": 20.48
+  },
+  {
+   "w": "later,",
+   "start": 20.48,
+   "end": 21.2
+  },
+  {
+   "w": "the",
+   "start": 21.2,
+   "end": 21.34
+  },
+  {
+   "w": "giant",
+   "start": 21.34,
+   "end": 21.74
+  },
+  {
+   "w": "sign.",
+   "start": 21.74,
+   "end": 22.54
+  },
+  {
+   "w": "76%",
+   "start": 22.88,
+   "end": 23.84
+  },
+  {
+   "w": "said",
+   "start": 23.84,
+   "end": 24.38
+  },
+  {
+   "w": "yes.",
+   "start": 24.38,
+   "end": 25.22
+  },
+  {
+   "w": "Here's",
+   "start": 25.62,
+   "end": 25.84
+  },
+  {
+   "w": "the",
+   "start": 25.84,
+   "end": 25.98
+  },
+  {
+   "w": "trick.",
+   "start": 25.98,
+   "end": 26.74
+  },
+  {
+   "w": "That",
+   "start": 26.74,
+   "end": 26.96
+  },
+  {
+   "w": "first",
+   "start": 26.96,
+   "end": 27.42
+  },
+  {
+   "w": "yes",
+   "start": 27.42,
+   "end": 27.82
+  },
+  {
+   "w": "changes",
+   "start": 27.82,
+   "end": 28.44
+  },
+  {
+   "w": "how",
+   "start": 28.44,
+   "end": 28.72
+  },
+  {
+   "w": "you",
+   "start": 28.72,
+   "end": 28.9
+  },
+  {
+   "w": "see",
+   "start": 28.9,
+   "end": 29.16
+  },
+  {
+   "w": "yourself.",
+   "start": 29.16,
+   "end": 29.98
+  },
+  {
+   "w": "I'm",
+   "start": 30.36,
+   "end": 30.58
+  },
+  {
+   "w": "someone",
+   "start": 30.58,
+   "end": 30.9
+  },
+  {
+   "w": "who",
+   "start": 30.9,
+   "end": 31.12
+  },
+  {
+   "w": "cares",
+   "start": 31.12,
+   "end": 31.52
+  },
+  {
+   "w": "about",
+   "start": 31.52,
+   "end": 31.82
+  },
+  {
+   "w": "this.",
+   "start": 31.82,
+   "end": 32.68
+  },
+  {
+   "w": "And",
+   "start": 32.96,
+   "end": 33.1
+  },
+  {
+   "w": "you",
+   "start": 33.1,
+   "end": 33.18
+  },
+  {
+   "w": "act",
+   "start": 33.18,
+   "end": 33.54
+  },
+  {
+   "w": "like",
+   "start": 33.54,
+   "end": 33.84
+  },
+  {
+   "w": "that",
+   "start": 33.84,
+   "end": 34.02
+  },
+  {
+   "w": "person.",
+   "start": 34.02,
+   "end": 34.96
+  },
+  {
+   "w": "So",
+   "start": 35.24,
+   "end": 35.38
+  },
+  {
+   "w": "start",
+   "start": 35.38,
+   "end": 35.62
+  },
+  {
+   "w": "small.",
+   "start": 35.62,
+   "end": 36.06
+  },
+  {
+   "w": "Then",
+   "start": 36.62,
+   "end": 36.92
+  },
+  {
+   "w": "make",
+   "start": 36.92,
+   "end": 37.32
+  },
+  {
+   "w": "the",
+   "start": 37.32,
+   "end": 37.48
+  },
+  {
+   "w": "big",
+   "start": 37.48,
+   "end": 37.74
+  },
+  {
+   "w": "ask.",
+   "start": 37.74,
+   "end": 38.1
+  },
+  {
+   "w": "Someone",
+   "start": 38.9,
+   "end": 39.16
+  },
+  {
+   "w": "doing",
+   "start": 39.16,
+   "end": 39.42
+  },
+  {
+   "w": "it",
+   "start": 39.42,
+   "end": 39.56
+  },
+  {
+   "w": "to",
+   "start": 39.56,
+   "end": 39.68
+  },
+  {
+   "w": "you?",
+   "start": 39.68,
+   "end": 40.34
+  },
+  {
+   "w": "You",
+   "start": 40.48,
+   "end": 40.6
+  },
+  {
+   "w": "can",
+   "start": 40.6,
+   "end": 40.74
+  },
+  {
+   "w": "still",
+   "start": 40.74,
+   "end": 41.06
+  },
+  {
+   "w": "say",
+   "start": 41.06,
+   "end": 41.34
+  },
+  {
+   "w": "no.",
+   "start": 41.34,
+   "end": 42.08
+  },
+  {
+   "w": "Follow",
+   "start": 42.52,
+   "end": 42.74
+  },
+  {
+   "w": "for",
+   "start": 42.74,
+   "end": 43
+  },
+  {
+   "w": "more",
+   "start": 43,
+   "end": 43.2
+  },
+  {
+   "w": "mind",
+   "start": 43.2,
+   "end": 43.56
+  },
+  {
+   "w": "tricks.",
+   "start": 43.56,
+   "end": 44.34
+  }
+ ]
+}

@@ -13,8 +13,8 @@ export const meta = {
   voice: 'voice.mp3',
   seed: 23,
   captionChars: 30,
-  brand: { handle: '@MINDTRACEOFFICIAL-YT', logo: '../../../brand/logo.png' },
-  outro: { at: 56.75, text: 'Subscribe for more origin stories' },
+  brandKit: '', // How it Started (brand/): logo, handle, tagline, outro text
+  outro: { at: 56.75 },
 };
 
 // ---------- the scenes ----------

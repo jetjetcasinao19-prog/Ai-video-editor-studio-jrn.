@@ -1,5 +1,6 @@
 # This Glue Was a Failure — Post-it Notes, Ottoman miniature short
 
+- **Channel:** How it Started (@HOWITSTARTED-YT1) — brand kit `brand/`
 - **Video:** `animate/projects/post-it-notes/out/post-it-notes-ottoman.mp4`
   (54.4 s, 9:16, 1080x1920, How it Started brand: word-by-word captions, logo +
   @HOWITSTARTED-YT1 handle, closing card "Every Legend Has a Beginning" and

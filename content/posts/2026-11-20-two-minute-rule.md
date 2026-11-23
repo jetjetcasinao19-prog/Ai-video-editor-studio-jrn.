@@ -1,5 +1,6 @@
 # Why Starting Feels Impossible — the 2-Minute Rule
 
+- **Channel:** How it Started (@HOWITSTARTED-YT1) — brand kit `brand/`
 - **Video:** `lv_0_20261110223842.mp4` (owner's Google Drive) → edited `final.mp4`
   (59.0 s, 9:16, How it Started brand: gold word captions, logo watermark, outro)
 - **Hook (first line of the video):** "Why does starting any new task feel so impossible?"

@@ -17,7 +17,25 @@ export async function loadProject(dir) {
   const story = await import(pathToFileURL(path.join(dir, 'story.mjs')).href);
   const words = JSON.parse(fs.readFileSync(path.join(dir, 'words.json'), 'utf8')).words;
   const style = await import(pathToFileURL(path.join(ROOT, 'styles', story.meta.style, 'index.mjs')).href);
+  applyBrandKit(story.meta);
   return { dir, story, words, style, meta: story.meta };
+}
+
+// The owner runs two channels, each with a brand kit in the repo:
+//   brandKit: ''          → brand/            (How it Started — origins, Ottoman)
+//   brandKit: 'mindtrace' → brand/mindtrace/  (MindTrace — psychology, INKBLOT)
+// The kit fills meta.brand (handle, logo, tagline, name) and the outro text,
+// unless the story sets them itself.
+export const BRAND_ROOT = path.resolve(ROOT, '..', 'brand');
+export function applyBrandKit(meta) {
+  if (meta.brandKit === undefined || meta.brandKit === null) return meta;
+  const dir = path.join(BRAND_ROOT, meta.brandKit), file = path.join(dir, 'brand.json');
+  if (!fs.existsSync(file)) throw new Error(`brand kit "${meta.brandKit}" not found (${file})`);
+  const kit = JSON.parse(fs.readFileSync(file, 'utf8'));
+  const logo = path.join(dir, kit.logo || 'logo.png');
+  meta.brand = { name: kit.name, handle: kit.handle, tagline: kit.tagline, hashtags: kit.hashtags || [], ...(fs.existsSync(logo) ? { logo } : {}), ...(meta.brand || {}) };
+  if (meta.outro && !meta.outro.text && kit.outro?.text) meta.outro.text = kit.outro.text;
+  return meta;
 }
 
 export async function makeFrameDrawer(project) {
