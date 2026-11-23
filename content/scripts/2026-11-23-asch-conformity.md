@@ -1,7 +1,7 @@
 # A Group Can Make You Deny Your Own Eyes (Asch's Line Test)
 
 - Format: 9:16 (YouTube Shorts; also Reels / TikTok)
-- Target length: about 45 seconds of voice (about 105 words), under 60 s
+- Target length: about 47 seconds of voice (about 115 words), under 60 s
   with the 2.5 s brand outro and natural pauses
 - Platform(s): YouTube Shorts
 - Niche: psychology / mind tricks (manipulation series)
@@ -12,7 +12,7 @@
 2. 3 out of 4 gave the wrong answer
 3. Would you go along? Be honest.
 
-## Hook (0–3.5 s)
+## Hook (0–4 s)
 "A group can make you deny what you see with your own eyes. Here's proof."
 (On screen: one person surrounded by a crowd all pointing the same way; text **"WOULD YOU GO ALONG?"**.)
 
@@ -41,14 +41,14 @@
 ## Scenes
 | # | Time | Visual | Voice-over | On-screen text |
 |---|---|---|---|---|
-| 1 | 0–3.5 s | One person in a crowd that all points the same way; punch zoom | A group can make you deny what you see with your own eyes. Here's proof. | WOULD YOU GO ALONG? 👀 |
-| 2 | 3.5–11.5 s | Card with a standard line and lines A, B, C (C clearly matches); 1950s classroom look | In the 1950s, psychologist Solomon Asch showed people three lines. Which one matches this one? Easy. Alone, people got it wrong less than 1% of the time. | WHICH LINE MATCHES? (let viewers answer: C) |
-| 3 | 11.5–16 s | Row of people at a table; each one says "B" (the wrong one) | But everyone else in the room was an actor. One by one, they all gave the same wrong answer. | THEY WERE ALL ACTORS 🎭 |
-| 4 | 16–20 s | Real participant sweating, then quietly says "…B" | Three out of four real people went along at least once. | 3 OUT OF 4 WENT ALONG 🤯 |
-| 5 | 20–23.5 s | Hard cut, black screen, yellow text | **Here's the trick.** Your brain hates standing out. | HERE'S THE TRICK |
-| 6 | 23.5–30 s | One actor says "C"; the participant relaxes and also says "C" | But when just one other person gave the right answer, going along dropped sharply. | ONE ALLY CHANGES EVERYTHING |
-| 7 | 30–37 s | Face to camera; then two people standing side by side against a crowd | So if you know you're right, say it. And if someone stands alone? Stand with them. | STAND WITH THEM 🤝 |
-| 8 | 37–39.5 s | Logo / subscribe | Follow for more mind tricks. | FOLLOW FOR MORE |
+| 1 | 0–4 s | One person in a crowd that all points the same way; punch zoom | A group can make you deny what you see with your own eyes. Here's proof. | WOULD YOU GO ALONG? 👀 |
+| 2 | 4–13.5 s | Card with a standard line and lines A, B, C (C clearly matches); 1950s classroom look | In the 1950s, psychologist Solomon Asch showed people three lines. Which one matches this one? Easy. Alone, people got it wrong less than 1% of the time. | WHICH LINE MATCHES? (let viewers answer: C) |
+| 3 | 13.5–19 s | Row of people at a table; each one says "B" (the wrong one) | But everyone else in the room was an actor. One by one, they all gave the same wrong answer. | THEY WERE ALL ACTORS 🎭 |
+| 4 | 19–24 s | Real participant sweating, then quietly says "…B" | Three out of four real people went along at least once. | 3 OUT OF 4 WENT ALONG 🤯 |
+| 5 | 24–28 s | Hard cut, black screen, yellow text | **Here's the trick.** Your brain hates standing out. | HERE'S THE TRICK |
+| 6 | 28–35.5 s | One actor says "C"; the participant relaxes and also says "C" | But when just one other person gave the right answer, going along dropped sharply. | ONE ALLY CHANGES EVERYTHING |
+| 7 | 35.5–44 s | Face to camera; then two people standing side by side against a crowd | So if you know you're right, say it. And if someone stands alone? Stand with them. | STAND WITH THEM 🤝 |
+| 8 | 44–47 s | Logo / subscribe | Follow for more mind tricks. | FOLLOW FOR MORE |
 
 ## Call to action
 "Follow for more mind tricks." Pinned comment: "Be honest: would you have said B? 👇"
@@ -63,75 +63,75 @@ Follow for more mind tricks.
 ## Captions (SRT — import in the app: 04 — Captions → Import subtitles)
 ```
 1
-00:00:00,000 --> 00:00:02,000
+00:00:00,000 --> 00:00:02,500
 A group can make you deny
 
 2
-00:00:02,000 --> 00:00:03,500
+00:00:02,500 --> 00:00:04,000
 your own eyes. Here's proof.
 
 3
-00:00:03,500 --> 00:00:06,000
+00:00:04,000 --> 00:00:07,000
 In the 1950s, Solomon Asch
 
 4
-00:00:06,000 --> 00:00:07,500
+00:00:07,000 --> 00:00:09,000
 showed people three lines.
 
 5
-00:00:07,500 --> 00:00:09,500
+00:00:09,000 --> 00:00:11,500
 Which one matches? Easy.
 
 6
-00:00:09,500 --> 00:00:11,500
+00:00:11,500 --> 00:00:13,500
 Alone, under 1% got it wrong.
 
 7
-00:00:11,500 --> 00:00:13,500
+00:00:13,500 --> 00:00:16,000
 But everyone else was an actor.
 
 8
-00:00:13,500 --> 00:00:16,000
+00:00:16,000 --> 00:00:19,000
 They all gave the same wrong answer.
 
 9
-00:00:16,000 --> 00:00:18,000
+00:00:19,000 --> 00:00:21,500
 3 out of 4 real people
 
 10
-00:00:18,000 --> 00:00:20,000
+00:00:21,500 --> 00:00:24,000
 went along at least once.
 
 11
-00:00:20,000 --> 00:00:21,500
+00:00:24,000 --> 00:00:25,500
 Here's the trick.
 
 12
-00:00:21,500 --> 00:00:23,500
+00:00:25,500 --> 00:00:28,000
 Your brain hates standing out.
 
 13
-00:00:23,500 --> 00:00:26,500
+00:00:28,000 --> 00:00:31,500
 But with just one person on their side,
 
 14
-00:00:26,500 --> 00:00:30,000
+00:00:31,500 --> 00:00:35,500
 going along dropped sharply.
 
 15
-00:00:30,000 --> 00:00:32,500
+00:00:35,500 --> 00:00:38,500
 Know you're right? Say it.
 
 16
-00:00:32,500 --> 00:00:35,000
+00:00:38,500 --> 00:00:41,500
 Someone standing alone?
 
 17
-00:00:35,000 --> 00:00:37,000
+00:00:41,500 --> 00:00:44,000
 Stand with them.
 
 18
-00:00:37,000 --> 00:00:39,500
+00:00:44,000 --> 00:00:47,000
 Follow for more mind tricks.
 ```
 
