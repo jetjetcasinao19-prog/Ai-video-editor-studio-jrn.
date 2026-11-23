@@ -195,9 +195,9 @@ export const scenes = [
       k.ground(ctx, -80, 500, W + 160, 760, '#ecdcb4', 5, 0.15);
       // the onlookers, the family in front
       for (let i = 0; i < 9; i++) k.figure(ctx, 60 + i * 120, 560, { ...TOGA(i), robe: i < 3 ? '#3a3a4a' : ['#efe9dc', '#c9b89a', '#d8c9a8'][i % 3], s: 0.5, face: 1, mood: 'wow', armF: [0.4, 0.3] });
-      // Livy counts three pairs
+      // three pairs, by one ancient account (Ausonius); Livy gives no number
       for (let p = 0; p < 3; p++) { const a = tween(u, ar - 0.3 + p * 0.3, ar + 0.2 + p * 0.3, ease.outBack); if (a <= 0) continue; ctx.save(); ctx.translate(200 + p * 340, 980 - (p % 2) * 160); ctx.scale(a, a); pair(ctx, S, 0, 0, 0.7, p, u > fi ? S.t * 7 + p : 0); ctx.restore(); }
-      k.label(ctx, 'THREE PAIRS · AS LIVY TELLS IT', W / 2, 260, 20, tween(u, pa, pa + 0.4));
+      k.label(ctx, 'THREE PAIRS · BY ONE ANCIENT ACCOUNT', W / 2, 260, 20, tween(u, pa, pa + 0.4));
     },
   },
   { // 21.0 "The Romans called it a munus, a duty owed to the dead."

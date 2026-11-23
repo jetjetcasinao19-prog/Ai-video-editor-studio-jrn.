@@ -9,7 +9,8 @@ the next video, and help YouTube recommend the channel as a whole.
 | Holiday Origins | Thanksgiving · Black Friday · Santa · Christmas Truce · Times Square Ball Drop |
 | Accidental Inventions | Bubble Wrap · Post-it Notes · Super Soaker · Chocolate Chip Cookie · Play-Doh · Microwave |
 | Brand Origins | Nintendo · KFC · LEGO · Nike Swoosh · Mickey Mouse · Monopoly |
-| Words & Symbols | OK · Big Bang · Basketball · We Can Do It! · Taps · Navajo Code Talkers · Marathon · Thermopylae |
+| Words & Symbols | OK · Big Bang · Basketball · We Can Do It! · Taps · Navajo Code Talkers |
+| Ancient Origins | Marathon · Thermopylae · Gladiators |
 | Landmarks | Hollywood Sign · Statue of Liberty |
 | Everyday Objects | Dog Tags |
 

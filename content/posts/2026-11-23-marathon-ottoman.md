@@ -27,9 +27,8 @@
   by Herodotus, never mentions that run; a poem in 1879 makes the legend famous; Michel Bréal, a
   French scholar, suggests a Marathon-to-Athens race for the first modern Olympics in 1896. No
   other numbers, names or quotes. Judgment calls:
-  (1) Series: filed under "Words & Symbols" (see content/playlists.md). It is the closest fit
-  ("named after", legend vs. record, same shelf as Basketball). A "Sports Origins" series would
-  have only two videos so far (Basketball + this one); owner can split it out later.
+  (1) Series: moved to "Ancient Origins" (see content/playlists.md) together with Thermopylae and
+  Gladiators, now that three ancient-world stories exist. It was first filed under "Words & Symbols".
   (2) Verified through WebSearch summaries: Herodotus has Pheidippides running Athens to Sparta,
   and does not mention a Marathon-to-Athens run or a runner dying; Browning's 1879 poem popularized
   the legend; Bréal proposed the Marathon-to-Athens race for 1896 and gave a silver cup; Spyridon
@@ -57,7 +56,7 @@
 **Description:**
 The marathon is named after a battle, but its most famous story probably never happened. In 490 BC, a huge Persian army landed at Marathon, near Athens. Athens sent a runner, Pheidippides, to Sparta to ask for help, and the Athenians won the battle. Centuries later, writers added a twist: a runner raced from Marathon to Athens, announced the victory, and dropped dead. The oldest account, by Herodotus, never mentions that run. In 1879, a poem made the legend famous. Then a French scholar, Michel Bréal, suggested a race from Marathon to Athens for the first modern Olympics in 1896. A battle legend became the most famous race on earth.
 Animated entirely in code in the style of Ottoman miniatures, told on a painted map of Greece. Not affiliated with the IOC or any marathon organizer.
-Series: Words & Symbols
+Series: Ancient Origins
 Sources: National Geographic, "Who invented the marathon? It's not as ancient as you think" (https://www.nationalgeographic.com/history/article/marathon-ancient-history-modern-origins); World Athletics Heritage, "1896 Olympic marathon, Spiridon Louis and the Bréal Cup" (https://worldathletics.org/heritage/news/1896-olympic-marathon-spiridon-louis-125-anniversary-breal-cup).
 Subtitles: upload the .srt file from animate/projects/marathon/out/marathon-ottoman.srt with this video.
 Every legend has a beginning. Subscribe for more origin stories.

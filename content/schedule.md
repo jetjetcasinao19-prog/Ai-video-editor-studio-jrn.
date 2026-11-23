@@ -125,6 +125,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-01-22 Fri | 8:00 PM | Sat Jan 23, 9:00 AM | TikTok | You know the Spartans. Meet the rest of the story. | content/posts/2026-11-23-thermopylae-ottoman.md | ready |
 | 2027-01-23 Sat | 7:00 PM | Sun Jan 24, 8:00 AM | Instagram Reels | A pass called the "hot gates," three days, and a path nobody was supposed to find. | content/posts/2026-11-23-thermopylae-ottoman.md | ready |
 | 2027-01-23 Sat | 8:00 PM | Sun Jan 24, 9:00 AM | Facebook Reels | Think the Battle of Thermopylae was just 300 Spartans? Not quite. | content/posts/2026-11-23-thermopylae-ottoman.md | ready |
+| 2027-01-24 Sun | 7:00 PM | Mon Jan 25, 8:00 AM | YouTube Shorts | Gladiators Began at a Funeral | content/posts/2026-11-23-gladiators-ottoman.md | ready |
+| 2027-01-24 Sun | 8:00 PM | Mon Jan 25, 9:00 AM | TikTok | Gladiator fights didn't start as entertainment. | content/posts/2026-11-23-gladiators-ottoman.md | ready |
+| 2027-01-25 Mon | 7:00 PM | Tue Jan 26, 8:00 AM | Instagram Reels | A duty owed to the dead, laid out tile by tile. | content/posts/2026-11-23-gladiators-ottoman.md | ready |
+| 2027-01-25 Mon | 8:00 PM | Tue Jan 26, 9:00 AM | Facebook Reels | Did you know gladiator fights in Rome began as part of a funeral? | content/posts/2026-11-23-gladiators-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the

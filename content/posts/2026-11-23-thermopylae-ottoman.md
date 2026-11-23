@@ -27,9 +27,8 @@
   Persians a secret mountain path; Leonidas sends most of the army away; the Spartans and about 700
   Thespians stay and fight to the end; the epitaph is traditionally attributed to the poet Simonides.
   Judgment calls:
-  (1) Series: kept in "Words & Symbols" with Marathon (see content/playlists.md). A new "Ancient
-  Legends" series would hold only two videos and would mean editing the finished Marathon post;
-  owner can split it out later once a third ancient story exists.
+  (1) Series: moved to "Ancient Origins" (see content/playlists.md) with Marathon and Gladiators,
+  now that a third ancient story exists. It was first filed under "Words & Symbols".
   (2) Verified through WebSearch summaries: Britannica says the battle was fought in August 480 BC,
   Greek force about 7,000 led by Leonidas, held the pass for three days, Ephialtes (a Greek
   seeking reward) told Xerxes of a path around the pass, and the Persians attacked the Greek rear.
@@ -62,7 +61,7 @@
 **Description:**
 Everyone remembers the 300 Spartans, but they were not alone. In 480 BC, Persian King Xerxes invaded Greece with a massive army. About 7,000 Greeks blocked a narrow mountain pass called Thermopylae, and 300 of them were Spartans led by King Leonidas. For three days the pass held. Then a local man named Ephialtes showed the Persians a secret path around the mountains. Leonidas sent most of the army away, but the Spartans stayed, and so did about 700 soldiers from the small city of Thespiae. History mostly remembers the Spartans, and a defeat became the most famous last stand in history.
 Animated entirely in code in the style of Ottoman miniatures, told as a Karagöz shadow play. Not based on any film.
-Series: Words & Symbols
+Series: Ancient Origins
 Sources: Britannica, "Battle of Thermopylae" (https://www.britannica.com/event/Battle-of-Thermopylae-Greek-history-480-BC); World History Encyclopedia, "Battle of Thermopylae" (https://www.worldhistory.org/thermopylae/).
 Subtitles: upload the .srt file from animate/projects/thermopylae/out/thermopylae-ottoman.srt with this video.
 Every legend has a beginning. Whose beginning should we tell next? Comment below.
