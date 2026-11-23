@@ -586,6 +586,12 @@ function head(ctx, x, y, o) {
     const hc = o.hatColor || '#7a7a7a';
     ctx.beginPath(); ctx.moveTo(-18, -4); ctx.quadraticCurveTo(-20, -32, 2, -32); ctx.quadraticCurveTo(24, -32, 22, -4); ctx.closePath(); fillStroke(ctx, hc, P.ink, 1.5);
     ctx.beginPath(); ctx.moveTo(2, -32); ctx.lineTo(2, -48); stroke(ctx, P.ink, 2.5); ctx.beginPath(); ctx.moveTo(2, -44); ctx.quadraticCurveTo(-8, -40, -10, -30); ctx.quadraticCurveTo(2, -38, 2, -44); fillStroke(ctx, P.verm, P.ink, 1);
+  } else if (hat === 'heguan') { // a Qin general's cap: a stiff double tail bent back, tied under the chin
+    const hc = o.hatColor || '#6a5a4a';
+    ctx.beginPath(); ctx.moveTo(-15, -2); ctx.quadraticCurveTo(-20, -24, 0, -22); ctx.quadraticCurveTo(22, -24, 18, -2); ctx.quadraticCurveTo(8, -16, -4, -14); ctx.closePath(); fillStroke(ctx, o.hair || '#1a1a1a', P.ink, 1.2);
+    ctx.beginPath(); ctx.moveTo(-10, -20); ctx.quadraticCurveTo(-6, -40, 6, -44); ctx.quadraticCurveTo(-18, -54, -30, -36); ctx.quadraticCurveTo(-22, -26, -10, -20); fillStroke(ctx, hc, P.ink, 1.4);
+    ctx.beginPath(); ctx.moveTo(-2, -42); ctx.quadraticCurveTo(-24, -62, -36, -46); stroke(ctx, P.ink, 1.2);
+    ctx.beginPath(); ctx.moveTo(-12, -20); ctx.quadraticCurveTo(-16, 4, 0, 16); stroke(ctx, hc, 2);
   } else if (hat === 'wreath') { // short hair with a laurel crown
     ctx.beginPath(); ctx.moveTo(-15, -2); ctx.quadraticCurveTo(-20, -24, 0, -22); ctx.quadraticCurveTo(22, -24, 18, -2); ctx.quadraticCurveTo(10, -14, -4, -12); ctx.quadraticCurveTo(-10, -10, -15, -2); ctx.closePath(); fillStroke(ctx, o.hair || '#3a2a20', P.ink, 1.2);
     for (let i = 0; i < 9; i++) { const a = Math.PI * (1.05 + i * 0.1); ellipse(ctx, 2 + Math.cos(a) * 19, -8 + Math.sin(a) * 15, 6, 3, a + 1.2, P.green, P.ink, 0.9); }
