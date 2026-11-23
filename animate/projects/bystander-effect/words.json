@@ -1,0 +1,481 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "If you ever need help in a crowd, don't yell, \"Somebody help!\" In 1968, Columbia psychologists filled a room with smoke. It poured in through a vent. When people were alone, 75% went to report it. But with two strangers who just kept working, only 10% did. They sat in the smoke, coughing, rubbing their eyes. Here's the trick. It's called the bystander effect. In a crowd, everyone waits for someone else. So point at one person. \"You, in the red shirt. Call 911.\" Now it's not somebody, it's them. Follow for more mind tricks.",
+ "words": [
+  {
+   "w": "If",
+   "start": 0,
+   "end": 0.18
+  },
+  {
+   "w": "you",
+   "start": 0.18,
+   "end": 0.26
+  },
+  {
+   "w": "ever",
+   "start": 0.26,
+   "end": 0.52
+  },
+  {
+   "w": "need",
+   "start": 0.52,
+   "end": 0.7
+  },
+  {
+   "w": "help",
+   "start": 0.7,
+   "end": 0.98
+  },
+  {
+   "w": "in",
+   "start": 0.98,
+   "end": 1.14
+  },
+  {
+   "w": "a",
+   "start": 1.14,
+   "end": 1.28
+  },
+  {
+   "w": "crowd,",
+   "start": 1.28,
+   "end": 2.24
+  },
+  {
+   "w": "don't",
+   "start": 2.24,
+   "end": 2.38
+  },
+  {
+   "w": "yell,",
+   "start": 2.38,
+   "end": 3.02
+  },
+  {
+   "w": "\"Somebody",
+   "start": 3.02,
+   "end": 3.34
+  },
+  {
+   "w": "help!\"",
+   "start": 3.34,
+   "end": 3.78
+  },
+  {
+   "w": "In",
+   "start": 4.88,
+   "end": 4.98
+  },
+  {
+   "w": "1968,",
+   "start": 4.98,
+   "end": 6.32
+  },
+  {
+   "w": "Columbia",
+   "start": 6.32,
+   "end": 6.66
+  },
+  {
+   "w": "psychologists",
+   "start": 6.66,
+   "end": 7.26
+  },
+  {
+   "w": "filled",
+   "start": 7.26,
+   "end": 7.86
+  },
+  {
+   "w": "a",
+   "start": 7.86,
+   "end": 8.02
+  },
+  {
+   "w": "room",
+   "start": 8.02,
+   "end": 8.28
+  },
+  {
+   "w": "with",
+   "start": 8.28,
+   "end": 8.54
+  },
+  {
+   "w": "smoke.",
+   "start": 8.54,
+   "end": 9.5
+  },
+  {
+   "w": "It",
+   "start": 9.62,
+   "end": 9.74
+  },
+  {
+   "w": "poured",
+   "start": 9.74,
+   "end": 10.06
+  },
+  {
+   "w": "in",
+   "start": 10.06,
+   "end": 10.28
+  },
+  {
+   "w": "through",
+   "start": 10.28,
+   "end": 10.5
+  },
+  {
+   "w": "a",
+   "start": 10.5,
+   "end": 10.62
+  },
+  {
+   "w": "vent.",
+   "start": 10.62,
+   "end": 10.8
+  },
+  {
+   "w": "When",
+   "start": 11.72,
+   "end": 11.8
+  },
+  {
+   "w": "people",
+   "start": 11.8,
+   "end": 12.06
+  },
+  {
+   "w": "were",
+   "start": 12.06,
+   "end": 12.24
+  },
+  {
+   "w": "alone,",
+   "start": 12.24,
+   "end": 13.04
+  },
+  {
+   "w": "75%",
+   "start": 13.04,
+   "end": 14.1
+  },
+  {
+   "w": "went",
+   "start": 14.1,
+   "end": 14.54
+  },
+  {
+   "w": "to",
+   "start": 14.54,
+   "end": 14.72
+  },
+  {
+   "w": "report",
+   "start": 14.72,
+   "end": 15.06
+  },
+  {
+   "w": "it.",
+   "start": 15.06,
+   "end": 15.22
+  },
+  {
+   "w": "But",
+   "start": 15.86,
+   "end": 15.98
+  },
+  {
+   "w": "with",
+   "start": 15.98,
+   "end": 16.14
+  },
+  {
+   "w": "two",
+   "start": 16.14,
+   "end": 16.36
+  },
+  {
+   "w": "strangers",
+   "start": 16.36,
+   "end": 17.02
+  },
+  {
+   "w": "who",
+   "start": 17.02,
+   "end": 17.2
+  },
+  {
+   "w": "just",
+   "start": 17.2,
+   "end": 17.46
+  },
+  {
+   "w": "kept",
+   "start": 17.46,
+   "end": 17.74
+  },
+  {
+   "w": "working,",
+   "start": 17.74,
+   "end": 18.7
+  },
+  {
+   "w": "only",
+   "start": 18.7,
+   "end": 18.94
+  },
+  {
+   "w": "10%",
+   "start": 18.94,
+   "end": 19.68
+  },
+  {
+   "w": "did.",
+   "start": 19.68,
+   "end": 20.46
+  },
+  {
+   "w": "They",
+   "start": 20.74,
+   "end": 20.86
+  },
+  {
+   "w": "sat",
+   "start": 20.86,
+   "end": 21.1
+  },
+  {
+   "w": "in",
+   "start": 21.1,
+   "end": 21.22
+  },
+  {
+   "w": "the",
+   "start": 21.22,
+   "end": 21.34
+  },
+  {
+   "w": "smoke,",
+   "start": 21.34,
+   "end": 22.08
+  },
+  {
+   "w": "coughing,",
+   "start": 22.08,
+   "end": 22.88
+  },
+  {
+   "w": "rubbing",
+   "start": 22.88,
+   "end": 23.1
+  },
+  {
+   "w": "their",
+   "start": 23.1,
+   "end": 23.3
+  },
+  {
+   "w": "eyes.",
+   "start": 23.3,
+   "end": 24.12
+  },
+  {
+   "w": "Here's",
+   "start": 24.52,
+   "end": 24.74
+  },
+  {
+   "w": "the",
+   "start": 24.74,
+   "end": 24.88
+  },
+  {
+   "w": "trick.",
+   "start": 24.88,
+   "end": 25.72
+  },
+  {
+   "w": "It's",
+   "start": 25.72,
+   "end": 25.88
+  },
+  {
+   "w": "called",
+   "start": 25.88,
+   "end": 26.26
+  },
+  {
+   "w": "the",
+   "start": 26.26,
+   "end": 26.58
+  },
+  {
+   "w": "bystander",
+   "start": 26.58,
+   "end": 27.34
+  },
+  {
+   "w": "effect.",
+   "start": 27.34,
+   "end": 27.56
+  },
+  {
+   "w": "In",
+   "start": 28.5,
+   "end": 28.56
+  },
+  {
+   "w": "a",
+   "start": 28.56,
+   "end": 28.68
+  },
+  {
+   "w": "crowd,",
+   "start": 28.68,
+   "end": 29.54
+  },
+  {
+   "w": "everyone",
+   "start": 29.54,
+   "end": 29.74
+  },
+  {
+   "w": "waits",
+   "start": 29.74,
+   "end": 30.18
+  },
+  {
+   "w": "for",
+   "start": 30.18,
+   "end": 30.4
+  },
+  {
+   "w": "someone",
+   "start": 30.4,
+   "end": 30.76
+  },
+  {
+   "w": "else.",
+   "start": 30.76,
+   "end": 31.16
+  },
+  {
+   "w": "So",
+   "start": 31.74,
+   "end": 31.96
+  },
+  {
+   "w": "point",
+   "start": 31.96,
+   "end": 32.28
+  },
+  {
+   "w": "at",
+   "start": 32.28,
+   "end": 32.42
+  },
+  {
+   "w": "one",
+   "start": 32.42,
+   "end": 32.72
+  },
+  {
+   "w": "person.",
+   "start": 32.72,
+   "end": 33.2
+  },
+  {
+   "w": "\"You,",
+   "start": 33.74,
+   "end": 34.28
+  },
+  {
+   "w": "in",
+   "start": 34.28,
+   "end": 34.4
+  },
+  {
+   "w": "the",
+   "start": 34.4,
+   "end": 34.5
+  },
+  {
+   "w": "red",
+   "start": 34.5,
+   "end": 34.66
+  },
+  {
+   "w": "shirt.",
+   "start": 34.66,
+   "end": 34.96
+  },
+  {
+   "w": "Call",
+   "start": 35.32,
+   "end": 35.72
+  },
+  {
+   "w": "911.\"",
+   "start": 35.72,
+   "end": 36.14
+  },
+  {
+   "w": "Now",
+   "start": 37.16,
+   "end": 37.56
+  },
+  {
+   "w": "it's",
+   "start": 37.56,
+   "end": 37.8
+  },
+  {
+   "w": "not",
+   "start": 37.8,
+   "end": 38.04
+  },
+  {
+   "w": "somebody,",
+   "start": 38.04,
+   "end": 39.04
+  },
+  {
+   "w": "it's",
+   "start": 39.04,
+   "end": 39.54
+  },
+  {
+   "w": "them.",
+   "start": 39.54,
+   "end": 39.9
+  },
+  {
+   "w": "Follow",
+   "start": 40.86,
+   "end": 41.12
+  },
+  {
+   "w": "for",
+   "start": 41.12,
+   "end": 41.36
+  },
+  {
+   "w": "more",
+   "start": 41.36,
+   "end": 41.54
+  },
+  {
+   "w": "mind",
+   "start": 41.54,
+   "end": 41.9
+  },
+  {
+   "w": "tricks.",
+   "start": 41.9,
+   "end": 42.18
+  }
+ ]
+}

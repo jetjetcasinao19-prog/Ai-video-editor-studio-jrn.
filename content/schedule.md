@@ -63,6 +63,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-12-14 Mon | 8:00 PM | Tue Dec 15, 9:00 AM | MindTrace | TikTok | Someone's making fun of you? Don't fight back. Do this. | content/posts/2026-11-23-fogging-inkblot.md | ready |
 | 2026-12-15 Tue | 7:00 PM | Wed Dec 16, 8:00 AM | MindTrace | Instagram Reels | The comeback that gives a tease nothing to grab | content/posts/2026-11-23-fogging-inkblot.md | ready |
 | 2026-12-15 Tue | 8:00 PM | Wed Dec 16, 9:00 AM | MindTrace | Facebook Reels | Someone's making fun of you? Don't fight back. Do this. | content/posts/2026-11-23-fogging-inkblot.md | ready |
+| 2026-12-16 Wed | 7:00 PM | Thu Dec 17, 8:00 AM | MindTrace | YouTube Shorts | Never Yell "Somebody Help!" in a Crowd (The Bystander Effect) | content/posts/2026-11-23-bystander-effect-inkblot.md | ready |
+| 2026-12-16 Wed | 8:00 PM | Thu Dec 17, 9:00 AM | MindTrace | TikTok | If you ever need help in a crowd, don't yell "Somebody help!" | content/posts/2026-11-23-bystander-effect-inkblot.md | ready |
+| 2026-12-17 Thu | 7:00 PM | Fri Dec 18, 8:00 AM | MindTrace | Instagram Reels | Why nobody helps in a crowd (and how to fix it) | content/posts/2026-11-23-bystander-effect-inkblot.md | ready |
+| 2026-12-17 Thu | 8:00 PM | Fri Dec 18, 9:00 AM | MindTrace | Facebook Reels | If you ever need help in a crowd, don't yell "Somebody help!" | content/posts/2026-11-23-bystander-effect-inkblot.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
