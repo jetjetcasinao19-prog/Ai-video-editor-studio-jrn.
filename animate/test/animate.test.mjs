@@ -59,6 +59,18 @@ test('inkblot: blots are deterministic and mirror-symmetric (the Rorschach fold)
   assert.deepEqual([1, 4, 9, 14, 22].map(roman), ['I', 'IV', 'IX', 'XIV', 'XXII']);
 });
 
+test('two channels: Ottoman shorts use How it Started, INKBLOT shorts use MindTrace', async () => {
+  for (const PROJ of PROJECTS) {
+    const p = await loadProject(PROJ);
+    assert.ok(p.meta.brandKit !== undefined, path.basename(PROJ) + ' names its brand kit');
+    const want = p.meta.style === 'inkblot' ? { handle: '@MINDTRACEOFFICIAL-YT', kit: 'mindtrace' } : { handle: '@HOWITSTARTED-YT1', kit: '' };
+    assert.equal(p.meta.brandKit, want.kit, path.basename(PROJ) + ' brand kit');
+    assert.equal(p.meta.brand.handle, want.handle, path.basename(PROJ) + ' handle');
+    assert.ok(fs.existsSync(p.meta.brand.logo), path.basename(PROJ) + ' logo exists');
+    assert.ok(p.meta.outro.text, path.basename(PROJ) + ' has an outro line');
+  }
+});
+
 test('ebru marbling is deterministic', () => {
   const a = ebru(60, 40, 3).getContext('2d').getImageData(0, 0, 60, 40).data;
   const b = ebru(60, 40, 3).getContext('2d').getImageData(0, 0, 60, 40).data;

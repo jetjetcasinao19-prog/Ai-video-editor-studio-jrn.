@@ -17,6 +17,10 @@ below without asking questions you can answer yourself:
   `.txt`) → make the voice with `voice.mjs` (step 2b). Neither → ask in one line.
 - **Script** = the text the owner pasted, if any (use it to fix the spelling
   of names); otherwise the transcript.
+- **Channel** = the one the owner names; else INKBLOT → MindTrace
+  (`meta.brandKit: 'mindtrace'`, `brand/mindtrace/`), OTTOMAN → How it Started
+  (`meta.brandKit: ''`, `brand/`). The kit supplies the logo, handle, tagline
+  and outro line; never hard-code them in the story.
 - **Finish the whole job**: render → check → send the MP4 → publisher agent
   writes post copy + schedule rows (step 7) → commit and push.
 
@@ -87,8 +91,10 @@ Check facts (dates, names) — the brand is "dramatic but true" (`brand/voice.md
 ## 4. Write `story.mjs`
 Start from `projects/bubble-wrap/story.mjs`. It exports:
 - `meta` — title, slug, `style: 'ottoman'` or `'inkblot'`, 1080×1920, 30 fps, `duration`
-  (voice end + ~2.5 s for the outro), `voice`, `brand` (handle + logo from
-  `brand/brand.json`), `outro` (call to action shown in the caption panel).
+  (voice end + ~2.5 s for the outro), `voice`, `brandKit` ('' = How it
+  Started, 'mindtrace' = MindTrace: logo, handle, tagline and outro text come
+  from that kit), `outro: { at }` (when the call to action types into the
+  caption panel; `text` only to override the kit's).
 - `scenes` — `{ start, title, trans, draw(ctx, u, S) }`. `u` = seconds into
   the scene. `S.at('word')` = when that word is spoken (sync moments to it).
   `S.cam(zoom, cx, cy)` = camera. `S.k` = the style kit, `S.P` = palette,

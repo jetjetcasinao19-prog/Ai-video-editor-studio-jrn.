@@ -1,4 +1,17 @@
-# Brand kit
+# Brand kits
+
+The owner has **two channels**, each with its own kit:
+
+| Channel | Folder | Look |
+|---|---|---|
+| How it Started (@HOWITSTARTED-YT1) — origin stories | `brand/` (this folder) | black + yellow, Ottoman animated shorts |
+| MindTrace (@MINDTRACEOFFICIAL-YT) — psychology | `brand/mindtrace/` | black + white + red, INKBLOT animated shorts |
+
+Both folders have the same files (`brand.json`, `voice.md`, `logo.png`,
+`preview.png`). Tell Claude which channel a video is for ("edit this for
+MindTrace"); psychology topics go to MindTrace by default.
+
+## How it Started
 
 Everything here makes every "edit this" video and post look and sound like
 **your** channel. Change it once; every new video follows it.

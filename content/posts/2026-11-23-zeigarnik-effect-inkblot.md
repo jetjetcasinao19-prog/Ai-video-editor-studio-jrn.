@@ -1,5 +1,6 @@
 # Your Brain Is Keeping a To-Do List — The Zeigarnik Effect, INKBLOT short
 
+- **Channel:** MindTrace (@MINDTRACEOFFICIAL-YT) — brand kit `brand/mindtrace/`
 - **Video:** `animate/projects/zeigarnik-effect/out/zeigarnik-effect-inkblot.mp4`
   (53 s, 9:16, 1080x1920, @MINDTRACEOFFICIAL-YT brand and mask logo, AI narration voice, end card
   stamped "CASE: OPEN" and "Subscribe to trace your mind")
@@ -44,22 +45,22 @@
 Why does an unfinished task keep nagging you? The story goes it began in a Berlin café in the 1920s, with a waiter who forgot an order the moment the bill was paid.
 Meet Bluma Zeigarnik, who tested it, and learn the trick for when you can't start. Animated in code in an ink blot case-file style.
 Subscribe to trace your mind.
-**Hashtags:** #HowItStarted #EveryLegendHasABeginning #ZeigarnikEffect #Psychology #OriginStory #shorts
+**Hashtags:** #MindTrace #Psychology #ZeigarnikEffect #PsychologyFacts #Procrastination #shorts
 
 ## TikTok
 **Caption:**
 Your brain is keeping a to-do list you never wrote. 🧠 The Zeigarnik effect, from a Berlin café story to a 1927 paper. Can't start something? Just start it.
 Which habit should we trace back next? Comment below 👇
-**Hashtags:** #HowItStarted #EveryLegendHasABeginning #zeigarnikeffect #psychologyfacts #originstory #learnontiktok
+**Hashtags:** #MindTrace #Psychology #zeigarnikeffect #psychologyfacts #procrastination #learnontiktok
 
 ## Instagram Reels
 **Caption:**
 Why does that unanswered text bug you at night? 🧠
 The story goes that psychologist Kurt Lewin noticed a waiter remember a huge order, then forget it once the bill was paid. His student, Bluma Zeigarnik, tested it and published her results in 1927: interrupted tasks were remembered almost twice as well. An unfinished task stays open in your mind, like a tab you can't close.
 Animated in code in an ink blot case-file style. Save this for the next time you can't start. Subscribe to trace your mind.
-**Hashtags:** #HowItStarted #EveryLegendHasABeginning #ZeigarnikEffect #Psychology #PsychologyFacts #Animation
+**Hashtags:** #MindTrace #Psychology #ZeigarnikEffect #PsychologyFacts #Animation
 
 ## Facebook Reels
 **Caption:**
 Your brain is keeping a to-do list you never wrote. 🧠 Here is the story behind the Zeigarnik effect, and the trick for when you can't start: just start it.
-Follow @MINDTRACEOFFICIAL-YT to trace your mind. #HowItStarted #EveryLegendHasABeginning #ZeigarnikEffect #Psychology
+Follow @MINDTRACEOFFICIAL-YT to trace your mind. #MindTrace #Psychology #ZeigarnikEffect
