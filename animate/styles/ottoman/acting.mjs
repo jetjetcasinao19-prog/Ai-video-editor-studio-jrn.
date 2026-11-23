@@ -18,6 +18,7 @@ export const GESTURES = {
   worry:    u => ({ armF: [0.8, 1.6], armB: [0.75, 1.6], mood: 'sad' }),
   angry:    u => ({ armF: [2.5 + Math.sin(u * 14) * 0.18, -0.5], mood: 'sad' }),
   surprise: u => ({ armF: [2.2, 0.9], armB: [2.1, 0.9], mood: 'happy' }),
+  flex:     u => ({ armF: [1.57, 1.6 + Math.sin(u * 3) * 0.06], mood: 'calm' }),
   count:    u => ({ armF: [1.5 + Math.sin(u * 5) * 0.15, 0.6] }),
   walk:     u => ({ walk: u * 8, armF: [0.35 + Math.sin(u * 8) * 0.3, 0.2], armB: [0.35 - Math.sin(u * 8) * 0.3, 0.2] }),
 };

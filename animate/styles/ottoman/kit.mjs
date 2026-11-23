@@ -497,6 +497,12 @@ function head(ctx, x, y, o) {
     ctx.beginPath(); ctx.moveTo(0, -40); ctx.quadraticCurveTo(-10, -36, -16, -22); stroke(ctx, P.ink, 2);
   } else if (hat === 'cap') {
     ctx.beginPath(); ctx.ellipse(2, -12, 18, 14, 0, Math.PI, TAU); fillStroke(ctx, o.hatColor || P.ochre, P.ink, 1.6);
+  } else if (hat === 'bandana') { // a 1940s factory head scarf, red with white dots, knotted on top
+    const bc = o.hatColor || P.verm;
+    ctx.beginPath(); ctx.moveTo(-17, -2); ctx.quadraticCurveTo(-22, -28, 2, -28); ctx.quadraticCurveTo(26, -28, 20, -2); ctx.quadraticCurveTo(4, -14, -17, -2); ctx.closePath(); fillStroke(ctx, bc, P.ink, 1.4);
+    for (const [dx, dy] of [[-10, -16], [0, -22], [10, -15], [-2, -10], [14, -24], [-14, -24]]) circle(ctx, dx, dy, 2, P.white, null);
+    ellipse(ctx, -4, -30, 7, 5, -0.5, bc, P.ink, 1.2); ellipse(ctx, 8, -31, 7, 5, 0.5, bc, P.ink, 1.2);
+    ctx.beginPath(); ctx.moveTo(-17, -2); ctx.quadraticCurveTo(-20, 6, -14, 10); stroke(ctx, o.hair || '#4a2a1a', 4);
   } else if (hat === 'servicecap') { // 1914 British peaked service cap
     ctx.beginPath(); ctx.ellipse(2, -16, 20, 9, 0, 0, TAU); fillStroke(ctx, o.hatColor || '#7c6e44', P.ink, 1.6);
     ctx.beginPath(); ctx.moveTo(-18, -16); ctx.quadraticCurveTo(-14, -34, 4, -34); ctx.quadraticCurveTo(24, -34, 22, -16); ctx.closePath(); fillStroke(ctx, o.hatColor || '#7c6e44', P.ink, 1.6);
@@ -2066,6 +2072,62 @@ export function candle(ctx, x, y, s = 1, t = 0) {
   rect(ctx, -10, -36, 20, 36, P.white, P.ink, 1.5); rect(ctx, -24, -4, 48, 8, P.steel, P.ink, 1.5);
   const f = 1 + 0.12 * Math.sin(t * 15); ctx.beginPath(); ctx.ellipse(0, -48, 5 * f, 11 * f, 0, 0, TAU); ctx.fillStyle = '#ffcf5a'; ctx.fill();
   ctx.restore();
+}
+
+// ---------- "We Can Do It!" story ----------
+// The 1943 factory poster re-painted in this style: yellow ground, a woman in a blue
+// work shirt and red dotted bandana flexing her arm, a blue speech balloon. k 0..1 paints it in.
+export function wcdiPoster(ctx, x, y, w, o = {}) {
+  const h = w * 1.3, k = o.k ?? 1, age = o.age || 0;
+  ctx.save(); ctx.translate(x, y); ctx.rotate(o.rot || 0);
+  rect(ctx, -w / 2 - 6, -h / 2 - 6, w + 12, h + 12, '#efe6cf', P.ink, 2);
+  ctx.save(); ctx.beginPath(); ctx.rect(-w / 2, -h / 2, w, h * clamp(k)); ctx.clip();
+  ctx.fillStyle = shade('#f2c230', -age * 0.3); ctx.fillRect(-w / 2, -h / 2, w, h);
+  const s = w / 260, skin = o.skin || '#e8b896', shirt = '#2f5fa8';
+  ctx.save(); ctx.scale(s, s); ctx.translate(56, 14); // a waist-up portrait, 260 × 338 units, origin at the centre
+  // shoulders and shirt
+  ctx.beginPath(); ctx.moveTo(-130, 169); ctx.lineTo(-120, 70); ctx.quadraticCurveTo(-100, 30, -40, 22); ctx.lineTo(40, 22); ctx.quadraticCurveTo(110, 30, 125, 70); ctx.lineTo(130, 169); ctx.closePath(); fillStroke(ctx, shirt, P.ink, 3);
+  poly(ctx, [[-28, 22], [0, 60], [28, 22], [14, 18], [0, 34], [-14, 18]], shirt, P.ink, 2); // collar
+  circle(ctx, 0, 80, 4, P.white, P.ink, 1); circle(ctx, 0, 120, 4, P.white, P.ink, 1);
+  // the flexed arm: upper arm out to the left, forearm up, fist by the head
+  ctx.beginPath(); ctx.moveTo(-100, 60); ctx.lineTo(-150, 40); ctx.lineTo(-150, 0); ctx.lineTo(-96, 18); ctx.closePath(); fillStroke(ctx, shirt, P.ink, 2.5);   // rolled sleeve
+  ctx.beginPath(); ctx.moveTo(-150, 36); ctx.quadraticCurveTo(-178, 20, -168, -40); ctx.lineTo(-136, -40); ctx.quadraticCurveTo(-140, 0, -150, 4); ctx.closePath(); fillStroke(ctx, skin, P.ink, 2.5); // forearm
+  ellipse(ctx, -150, -54, 22, 20, 0, skin, P.ink, 2.5); // fist
+  // the other hand rolling the sleeve
+  ctx.beginPath(); ctx.moveTo(30, 90); ctx.quadraticCurveTo(-30, 70, -88, 44); stroke(ctx, P.ink, 22); ctx.beginPath(); ctx.moveTo(30, 90); ctx.quadraticCurveTo(-30, 70, -88, 44); stroke(ctx, skin, 17); ellipse(ctx, -94, 38, 16, 13, -0.4, skin, P.ink, 2);
+  // neck, head, face
+  rect(ctx, -16, -10, 32, 34, skin, P.ink, 2);
+  ellipse(ctx, 6, -48, 40, 48, 0, skin, P.ink, 2.5);
+  for (const ex of [-6, 22]) { ellipse(ctx, ex, -52, 6, 4, 0, P.white, P.ink, 1.3); circle(ctx, ex - 1, -52, 2.6, P.ink, null); ctx.beginPath(); ctx.moveTo(ex - 8, -62); ctx.quadraticCurveTo(ex, -66, ex + 8, -62); stroke(ctx, P.ink, 2.5); }
+  ctx.beginPath(); ctx.moveTo(8, -48); ctx.quadraticCurveTo(4, -34, 10, -32); stroke(ctx, shade(skin, -0.3), 2);
+  ctx.beginPath(); ctx.moveTo(-2, -20); ctx.quadraticCurveTo(10, -16, 20, -20); stroke(ctx, P.vermDark, 4);
+  // dark hair and the red dotted bandana knotted on top
+  ctx.beginPath(); ctx.moveTo(-32, -40); ctx.quadraticCurveTo(-40, -70, -20, -84); ctx.lineTo(-20, -40); ctx.closePath(); fillStroke(ctx, '#4a2814', P.ink, 1.5);
+  ctx.beginPath(); ctx.moveTo(-34, -66); ctx.quadraticCurveTo(-30, -104, 8, -104); ctx.quadraticCurveTo(48, -104, 46, -64); ctx.quadraticCurveTo(8, -78, -34, -66); ctx.closePath(); fillStroke(ctx, P.verm, P.ink, 2);
+  for (const [dx, dy] of [[-18, -84], [0, -94], [18, -90], [34, -78], [8, -80], [-26, -72]]) circle(ctx, dx, dy, 3.2, P.white, null);
+  ellipse(ctx, 0, -110, 12, 8, -0.5, P.verm, P.ink, 1.5); ellipse(ctx, 18, -111, 12, 8, 0.5, P.verm, P.ink, 1.5);
+  ctx.restore();
+  ctx.beginPath(); ctx.ellipse(w * 0.02, -h * 0.39, w * 0.42, h * 0.08, 0, 0, TAU); fillStroke(ctx, '#2b3f8f', P.white, 3);
+  ctx.beginPath(); ctx.moveTo(w * 0.12, -h * 0.33); ctx.lineTo(w * 0.2, -h * 0.26); ctx.lineTo(w * 0.22, -h * 0.33); ctx.fillStyle = '#2b3f8f'; ctx.fill();
+  ctx.fillStyle = P.white; ctx.font = `900 ${Math.round(w * 0.085)}px Deco`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('We Can Do It!', w * 0.02, -h * 0.385);
+  ctx.restore();
+  if (age > 0) { ctx.save(); ctx.globalAlpha = age * 0.5; ctx.fillStyle = '#8a6a3a'; ctx.fillRect(-w / 2, -h / 2, w, h); ctx.restore(); }
+  ctx.restore();
+}
+// a wind-up gramophone (for a hit song)
+export function gramophone(ctx, x, base, s = 1, t = 0, playing = 1) {
+  ctx.save(); ctx.translate(x, base); ctx.scale(s, s);
+  rect(ctx, -70, -60, 140, 60, P.brown, P.ink, 2.5);
+  ctx.beginPath(); ctx.ellipse(0, -62, 62, 12, 0, 0, TAU); fillStroke(ctx, P.ink, P.ink, 1);
+  ctx.beginPath(); ctx.moveTo(40, -66); ctx.lineTo(20, -130); stroke(ctx, P.goldDark, 5);
+  ctx.beginPath(); ctx.moveTo(20, -130); ctx.quadraticCurveTo(10, -200, -70, -220); ctx.lineTo(-40, -170); ctx.quadraticCurveTo(0, -150, 20, -130); ctx.closePath(); fillStroke(ctx, P.gold, P.ink, 2.5);
+  if (playing) for (let i = 0; i < 4; i++) { const q = (t * 0.6 + i / 4) % 1; ctx.save(); ctx.globalAlpha = (1 - q) * playing; musicNote(ctx, -80 - q * 120, -200 - q * 90 + Math.sin(q * 8 + i) * 12, 0.9, P.goldDark); ctx.restore(); }
+  ctx.restore();
+}
+// a wooden archive drawer; open 0..1
+export function archiveDrawer(ctx, x, y, w, open = 0) {
+  rect(ctx, x - w / 2, y - 140, w, 280, P.brown, P.ink, 3);
+  for (let i = 0; i < 3; i++) { const oy = y - 130 + i * 90, out = i === 1 ? open * 60 : 0; rect(ctx, x - w / 2 + 12 - out * 0.3, oy + out * 0.4, w - 24 + out * 0.6, 80, P.brownLight, P.ink, 2); rect(ctx, x - 24, oy + 34 + out * 0.4, 48, 12, P.goldDark, P.ink, 1.5); }
 }
 
 // ---------- colour util ----------
