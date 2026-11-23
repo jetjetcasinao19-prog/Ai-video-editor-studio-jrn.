@@ -39,6 +39,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-12-02 Wed | 8:00 PM | Thu Dec 3, 9:00 AM | MindTrace | TikTok | Want a big yes? Don't ask for it. Not yet. | content/posts/2026-11-23-foot-in-the-door-inkblot.md | ready |
 | 2026-12-03 Thu | 7:00 PM | Fri Dec 4, 8:00 AM | MindTrace | Instagram Reels | The tiny yes that leads to a big yes | content/posts/2026-11-23-foot-in-the-door-inkblot.md | ready |
 | 2026-12-03 Thu | 8:00 PM | Fri Dec 4, 9:00 AM | MindTrace | Facebook Reels | Want a big yes? Don't ask for it. Not yet. | content/posts/2026-11-23-foot-in-the-door-inkblot.md | ready |
+| 2026-12-04 Fri | 7:00 PM | Sat Dec 5, 8:00 AM | MindTrace | YouTube Shorts | A Random Number Changed Their Answer (The Anchoring Effect) | content/posts/2026-11-23-anchoring-effect-inkblot.md | ready |
+| 2026-12-04 Fri | 8:00 PM | Sat Dec 5, 9:00 AM | MindTrace | TikTok | A random number just changed your answer. You didn't even notice. | content/posts/2026-11-23-anchoring-effect-inkblot.md | ready |
+| 2026-12-05 Sat | 7:00 PM | Sun Dec 6, 8:00 AM | MindTrace | Instagram Reels | The first number you hear is already steering you | content/posts/2026-11-23-anchoring-effect-inkblot.md | ready |
+| 2026-12-05 Sat | 8:00 PM | Sun Dec 6, 9:00 AM | MindTrace | Facebook Reels | A random number just changed your answer. You didn't even notice. | content/posts/2026-11-23-anchoring-effect-inkblot.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
