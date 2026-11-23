@@ -51,6 +51,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-12-08 Tue | 8:00 PM | Wed Dec 9, 9:00 AM | MindTrace | TikTok | Nobody picked this option, and that's exactly why it worked. | content/posts/2026-11-23-decoy-effect-inkblot.md | ready |
 | 2026-12-09 Wed | 7:00 PM | Thu Dec 10, 8:00 AM | MindTrace | Instagram Reels | The useless price that makes you spend more | content/posts/2026-11-23-decoy-effect-inkblot.md | ready |
 | 2026-12-09 Wed | 8:00 PM | Thu Dec 10, 9:00 AM | MindTrace | Facebook Reels | Nobody picked this option, and that's exactly why it worked. | content/posts/2026-11-23-decoy-effect-inkblot.md | ready |
+| 2026-12-10 Thu | 7:00 PM | Fri Dec 11, 8:00 AM | MindTrace | YouTube Shorts | You Think Everyone Noticed. They Didn't. (The Spotlight Effect) | content/posts/2026-11-23-spotlight-effect-inkblot.md | ready |
+| 2026-12-10 Thu | 8:00 PM | Fri Dec 11, 9:00 AM | MindTrace | TikTok | You think everyone noticed. They didn't. | content/posts/2026-11-23-spotlight-effect-inkblot.md | ready |
+| 2026-12-11 Fri | 7:00 PM | Sat Dec 12, 8:00 AM | MindTrace | Instagram Reels | Why fewer people noticed than you think | content/posts/2026-11-23-spotlight-effect-inkblot.md | ready |
+| 2026-12-11 Fri | 8:00 PM | Sat Dec 12, 9:00 AM | MindTrace | Facebook Reels | You think everyone noticed. They didn't. | content/posts/2026-11-23-spotlight-effect-inkblot.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
