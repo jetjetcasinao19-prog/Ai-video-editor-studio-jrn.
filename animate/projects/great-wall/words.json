@@ -1,0 +1,611 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "The Great Wall of China isn't one wall, and it wasn't built at once. Around the 600s BC, China is split into rival kingdoms at war. They build walls against each other. In 221 BC, one kingdom, Qin, conquers them all. Its ruler becomes China's first emperor. He connects many old walls into one system to keep out raiders from the north. The twist? Some of those walls were built to keep the Qin out. Most of the wall you see in photos today was built much later by the Ming dynasty. And no, you can't see it from space with just your eyes. A patchwork of enemy walls that became a symbol of a nation. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "The",
+   "start": 0,
+   "end": 0.22
+  },
+  {
+   "w": "Great",
+   "start": 0.22,
+   "end": 0.52
+  },
+  {
+   "w": "Wall",
+   "start": 0.52,
+   "end": 0.66
+  },
+  {
+   "w": "of",
+   "start": 0.66,
+   "end": 0.84
+  },
+  {
+   "w": "China",
+   "start": 0.84,
+   "end": 1.18
+  },
+  {
+   "w": "isn't",
+   "start": 1.18,
+   "end": 1.76
+  },
+  {
+   "w": "one",
+   "start": 1.76,
+   "end": 2.22
+  },
+  {
+   "w": "wall,",
+   "start": 2.22,
+   "end": 3.28
+  },
+  {
+   "w": "and",
+   "start": 3.28,
+   "end": 3.36
+  },
+  {
+   "w": "it",
+   "start": 3.36,
+   "end": 3.48
+  },
+  {
+   "w": "wasn't",
+   "start": 3.48,
+   "end": 3.74
+  },
+  {
+   "w": "built",
+   "start": 3.74,
+   "end": 4
+  },
+  {
+   "w": "at",
+   "start": 4,
+   "end": 4.18
+  },
+  {
+   "w": "once.",
+   "start": 4.18,
+   "end": 5.04
+  },
+  {
+   "w": "Around",
+   "start": 5.5,
+   "end": 5.74
+  },
+  {
+   "w": "the",
+   "start": 5.74,
+   "end": 5.92
+  },
+  {
+   "w": "600s",
+   "start": 5.92,
+   "end": 6.66
+  },
+  {
+   "w": "BC,",
+   "start": 6.66,
+   "end": 7.52
+  },
+  {
+   "w": "China",
+   "start": 7.52,
+   "end": 7.8
+  },
+  {
+   "w": "is",
+   "start": 7.8,
+   "end": 8.02
+  },
+  {
+   "w": "split",
+   "start": 8.02,
+   "end": 8.32
+  },
+  {
+   "w": "into",
+   "start": 8.32,
+   "end": 8.6
+  },
+  {
+   "w": "rival",
+   "start": 8.6,
+   "end": 9.06
+  },
+  {
+   "w": "kingdoms",
+   "start": 9.06,
+   "end": 9.48
+  },
+  {
+   "w": "at",
+   "start": 9.48,
+   "end": 9.88
+  },
+  {
+   "w": "war.",
+   "start": 9.88,
+   "end": 10.62
+  },
+  {
+   "w": "They",
+   "start": 10.82,
+   "end": 10.92
+  },
+  {
+   "w": "build",
+   "start": 10.92,
+   "end": 11.22
+  },
+  {
+   "w": "walls",
+   "start": 11.22,
+   "end": 11.64
+  },
+  {
+   "w": "against",
+   "start": 11.64,
+   "end": 12.04
+  },
+  {
+   "w": "each",
+   "start": 12.04,
+   "end": 12.28
+  },
+  {
+   "w": "other.",
+   "start": 12.28,
+   "end": 12.98
+  },
+  {
+   "w": "In",
+   "start": 13.28,
+   "end": 13.42
+  },
+  {
+   "w": "221",
+   "start": 13.42,
+   "end": 14.12
+  },
+  {
+   "w": "BC,",
+   "start": 14.12,
+   "end": 15.14
+  },
+  {
+   "w": "one",
+   "start": 15.14,
+   "end": 15.36
+  },
+  {
+   "w": "kingdom,",
+   "start": 15.36,
+   "end": 16.18
+  },
+  {
+   "w": "Qin,",
+   "start": 16.18,
+   "end": 16.72
+  },
+  {
+   "w": "conquers",
+   "start": 16.72,
+   "end": 17.2
+  },
+  {
+   "w": "them",
+   "start": 17.2,
+   "end": 17.44
+  },
+  {
+   "w": "all.",
+   "start": 17.44,
+   "end": 17.66
+  },
+  {
+   "w": "Its",
+   "start": 18.4,
+   "end": 18.54
+  },
+  {
+   "w": "ruler",
+   "start": 18.54,
+   "end": 18.88
+  },
+  {
+   "w": "becomes",
+   "start": 18.88,
+   "end": 19.3
+  },
+  {
+   "w": "China's",
+   "start": 19.3,
+   "end": 19.86
+  },
+  {
+   "w": "first",
+   "start": 19.86,
+   "end": 20.42
+  },
+  {
+   "w": "emperor.",
+   "start": 20.42,
+   "end": 21.34
+  },
+  {
+   "w": "He",
+   "start": 21.62,
+   "end": 21.72
+  },
+  {
+   "w": "connects",
+   "start": 21.72,
+   "end": 22.16
+  },
+  {
+   "w": "many",
+   "start": 22.16,
+   "end": 22.5
+  },
+  {
+   "w": "old",
+   "start": 22.5,
+   "end": 22.94
+  },
+  {
+   "w": "walls",
+   "start": 22.94,
+   "end": 23.32
+  },
+  {
+   "w": "into",
+   "start": 23.32,
+   "end": 23.6
+  },
+  {
+   "w": "one",
+   "start": 23.6,
+   "end": 23.96
+  },
+  {
+   "w": "system",
+   "start": 23.96,
+   "end": 24.46
+  },
+  {
+   "w": "to",
+   "start": 24.46,
+   "end": 24.94
+  },
+  {
+   "w": "keep",
+   "start": 24.94,
+   "end": 25.16
+  },
+  {
+   "w": "out",
+   "start": 25.16,
+   "end": 25.46
+  },
+  {
+   "w": "raiders",
+   "start": 25.46,
+   "end": 25.7
+  },
+  {
+   "w": "from",
+   "start": 25.7,
+   "end": 26.02
+  },
+  {
+   "w": "the",
+   "start": 26.02,
+   "end": 26.16
+  },
+  {
+   "w": "north.",
+   "start": 26.16,
+   "end": 26.4
+  },
+  {
+   "w": "The",
+   "start": 27.28,
+   "end": 27.42
+  },
+  {
+   "w": "twist?",
+   "start": 27.42,
+   "end": 28.18
+  },
+  {
+   "w": "Some",
+   "start": 28.52,
+   "end": 28.68
+  },
+  {
+   "w": "of",
+   "start": 28.68,
+   "end": 28.84
+  },
+  {
+   "w": "those",
+   "start": 28.84,
+   "end": 29.08
+  },
+  {
+   "w": "walls",
+   "start": 29.08,
+   "end": 29.36
+  },
+  {
+   "w": "were",
+   "start": 29.36,
+   "end": 29.56
+  },
+  {
+   "w": "built",
+   "start": 29.56,
+   "end": 29.78
+  },
+  {
+   "w": "to",
+   "start": 29.78,
+   "end": 30.02
+  },
+  {
+   "w": "keep",
+   "start": 30.02,
+   "end": 30.28
+  },
+  {
+   "w": "the",
+   "start": 30.28,
+   "end": 30.46
+  },
+  {
+   "w": "Qin",
+   "start": 30.46,
+   "end": 30.78
+  },
+  {
+   "w": "out.",
+   "start": 30.78,
+   "end": 31.7
+  },
+  {
+   "w": "Most",
+   "start": 32.14,
+   "end": 32.38
+  },
+  {
+   "w": "of",
+   "start": 32.38,
+   "end": 32.48
+  },
+  {
+   "w": "the",
+   "start": 32.48,
+   "end": 32.62
+  },
+  {
+   "w": "wall",
+   "start": 32.62,
+   "end": 32.82
+  },
+  {
+   "w": "you",
+   "start": 32.82,
+   "end": 32.98
+  },
+  {
+   "w": "see",
+   "start": 32.98,
+   "end": 33.2
+  },
+  {
+   "w": "in",
+   "start": 33.2,
+   "end": 33.36
+  },
+  {
+   "w": "photos",
+   "start": 33.36,
+   "end": 33.76
+  },
+  {
+   "w": "today",
+   "start": 33.76,
+   "end": 34.14
+  },
+  {
+   "w": "was",
+   "start": 34.14,
+   "end": 34.58
+  },
+  {
+   "w": "built",
+   "start": 34.58,
+   "end": 34.84
+  },
+  {
+   "w": "much",
+   "start": 34.84,
+   "end": 35.26
+  },
+  {
+   "w": "later",
+   "start": 35.26,
+   "end": 35.66
+  },
+  {
+   "w": "by",
+   "start": 35.66,
+   "end": 36.14
+  },
+  {
+   "w": "the",
+   "start": 36.14,
+   "end": 36.38
+  },
+  {
+   "w": "Ming",
+   "start": 36.38,
+   "end": 36.6
+  },
+  {
+   "w": "dynasty.",
+   "start": 36.6,
+   "end": 37.06
+  },
+  {
+   "w": "And",
+   "start": 37.9,
+   "end": 38.12
+  },
+  {
+   "w": "no,",
+   "start": 38.12,
+   "end": 38.66
+  },
+  {
+   "w": "you",
+   "start": 38.66,
+   "end": 38.74
+  },
+  {
+   "w": "can't",
+   "start": 38.74,
+   "end": 39.08
+  },
+  {
+   "w": "see",
+   "start": 39.08,
+   "end": 39.28
+  },
+  {
+   "w": "it",
+   "start": 39.28,
+   "end": 39.4
+  },
+  {
+   "w": "from",
+   "start": 39.4,
+   "end": 39.54
+  },
+  {
+   "w": "space",
+   "start": 39.54,
+   "end": 39.98
+  },
+  {
+   "w": "with",
+   "start": 39.98,
+   "end": 40.3
+  },
+  {
+   "w": "just",
+   "start": 40.3,
+   "end": 40.62
+  },
+  {
+   "w": "your",
+   "start": 40.62,
+   "end": 40.82
+  },
+  {
+   "w": "eyes.",
+   "start": 40.82,
+   "end": 41.2
+  },
+  {
+   "w": "A",
+   "start": 42.1,
+   "end": 42.24
+  },
+  {
+   "w": "patchwork",
+   "start": 42.24,
+   "end": 42.76
+  },
+  {
+   "w": "of",
+   "start": 42.76,
+   "end": 43
+  },
+  {
+   "w": "enemy",
+   "start": 43,
+   "end": 43.4
+  },
+  {
+   "w": "walls",
+   "start": 43.4,
+   "end": 43.82
+  },
+  {
+   "w": "that",
+   "start": 43.82,
+   "end": 44.64
+  },
+  {
+   "w": "became",
+   "start": 44.64,
+   "end": 45.02
+  },
+  {
+   "w": "a",
+   "start": 45.02,
+   "end": 45.28
+  },
+  {
+   "w": "symbol",
+   "start": 45.28,
+   "end": 45.66
+  },
+  {
+   "w": "of",
+   "start": 45.66,
+   "end": 45.98
+  },
+  {
+   "w": "a",
+   "start": 45.98,
+   "end": 46.12
+  },
+  {
+   "w": "nation.",
+   "start": 46.12,
+   "end": 46.42
+  },
+  {
+   "w": "Every",
+   "start": 47.56,
+   "end": 47.82
+  },
+  {
+   "w": "legend",
+   "start": 47.82,
+   "end": 48.18
+  },
+  {
+   "w": "has",
+   "start": 48.18,
+   "end": 48.66
+  },
+  {
+   "w": "a",
+   "start": 48.66,
+   "end": 48.74
+  },
+  {
+   "w": "beginning.",
+   "start": 48.74,
+   "end": 49.54
+  }
+ ]
+}

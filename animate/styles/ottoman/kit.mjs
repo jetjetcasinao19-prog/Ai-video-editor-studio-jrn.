@@ -572,6 +572,20 @@ function head(ctx, x, y, o) {
     ctx.beginPath(); ctx.ellipse(2, 8, 30, 6, 0, 0, TAU); fillStroke(ctx, hc, P.ink, 1.4);
     circle(ctx, 4, -6, 11, '#6a5a3a', P.ink, 1.2); for (let gx = -4; gx <= 12; gx += 5) for (let gy = -14; gy <= 2; gy += 5) circle(ctx, gx, gy, 1.3, '#2a1c12', null);
     ctx.beginPath(); ctx.moveTo(-18, -26); ctx.quadraticCurveTo(-4, -58, 22, -50); ctx.quadraticCurveTo(10, -40, 18, -28); ctx.quadraticCurveTo(0, -38, -18, -26); fillStroke(ctx, o.crest || P.verm, P.ink, 1.2);
+  } else if (hat === 'topknot') { // hair drawn back into a knot on top, as Qin soldiers wore it
+    const hc = o.hair || '#1a1a1a';
+    ctx.beginPath(); ctx.moveTo(-15, -2); ctx.quadraticCurveTo(-20, -24, 0, -22); ctx.quadraticCurveTo(22, -24, 18, -2); ctx.quadraticCurveTo(8, -16, -4, -14); ctx.quadraticCurveTo(-10, -12, -15, -2); ctx.closePath(); fillStroke(ctx, hc, P.ink, 1.2);
+    circle(ctx, -6, -26, 8, hc, P.ink, 1.2); ctx.beginPath(); ctx.moveTo(-14, -26); ctx.lineTo(2, -26); stroke(ctx, o.hatColor || P.verm, 2.5);
+  } else if (hat === 'mianguan') { // an emperor's crown: a flat board with strings of beads at front and back
+    const hc = o.hatColor || '#1a1a1a';
+    ctx.beginPath(); ctx.moveTo(-15, -2); ctx.quadraticCurveTo(-20, -24, 0, -22); ctx.quadraticCurveTo(22, -24, 18, -2); ctx.quadraticCurveTo(8, -16, -4, -14); ctx.closePath(); fillStroke(ctx, o.hair || '#1a1a1a', P.ink, 1.2);
+    rect(ctx, -8, -36, 18, 14, hc, P.ink, 1.2);
+    ctx.save(); ctx.rotate(-0.06); rect(ctx, -26, -42, 58, 7, hc, P.ink, 1.4); ctx.restore();
+    for (const bx of [-22, -17, 24, 29]) { ctx.beginPath(); ctx.moveTo(bx, -38); ctx.lineTo(bx, -10); stroke(ctx, P.ink, 0.8); for (let by = -32; by <= -12; by += 6) circle(ctx, bx, by, 2, bx > 0 ? P.verm : P.goldLight, null); }
+  } else if (hat === 'minghelm') { // a Ming soldier's round helmet with a spike and a red tassel
+    const hc = o.hatColor || '#7a7a7a';
+    ctx.beginPath(); ctx.moveTo(-18, -4); ctx.quadraticCurveTo(-20, -32, 2, -32); ctx.quadraticCurveTo(24, -32, 22, -4); ctx.closePath(); fillStroke(ctx, hc, P.ink, 1.5);
+    ctx.beginPath(); ctx.moveTo(2, -32); ctx.lineTo(2, -48); stroke(ctx, P.ink, 2.5); ctx.beginPath(); ctx.moveTo(2, -44); ctx.quadraticCurveTo(-8, -40, -10, -30); ctx.quadraticCurveTo(2, -38, 2, -44); fillStroke(ctx, P.verm, P.ink, 1);
   } else if (hat === 'wreath') { // short hair with a laurel crown
     ctx.beginPath(); ctx.moveTo(-15, -2); ctx.quadraticCurveTo(-20, -24, 0, -22); ctx.quadraticCurveTo(22, -24, 18, -2); ctx.quadraticCurveTo(10, -14, -4, -12); ctx.quadraticCurveTo(-10, -10, -15, -2); ctx.closePath(); fillStroke(ctx, o.hair || '#3a2a20', P.ink, 1.2);
     for (let i = 0; i < 9; i++) { const a = Math.PI * (1.05 + i * 0.1); ellipse(ctx, 2 + Math.cos(a) * 19, -8 + Math.sin(a) * 15, 6, 3, a + 1.2, P.green, P.ink, 0.9); }
