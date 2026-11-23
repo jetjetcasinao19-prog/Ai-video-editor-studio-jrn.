@@ -1,0 +1,551 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "You may have heard, Taps was found in a fallen soldier's pocket. That story is a legend. Here's the real one. July 1862, Virginia. The Civil War. Union General Daniel Butterfield's brigade is camped at Harrison's Landing. Butterfield wants a new lights-out call. So he reworks an older tune with his brigade bugler, Oliver Norton. That night, Norton plays it for the first time. Soon, other units copy it. Its official name? Extinguish Lights. But soldiers call it Taps. Before long, it's played at military funerals. By 1891, it's a standard part of them. A bedtime bugle call that became America's song of goodbye. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "You",
+   "start": 0,
+   "end": 0.16
+  },
+  {
+   "w": "may",
+   "start": 0.16,
+   "end": 0.32
+  },
+  {
+   "w": "have",
+   "start": 0.32,
+   "end": 0.46
+  },
+  {
+   "w": "heard,",
+   "start": 0.46,
+   "end": 0.98
+  },
+  {
+   "w": "Taps",
+   "start": 0.98,
+   "end": 1.32
+  },
+  {
+   "w": "was",
+   "start": 1.32,
+   "end": 1.54
+  },
+  {
+   "w": "found",
+   "start": 1.54,
+   "end": 1.88
+  },
+  {
+   "w": "in",
+   "start": 1.88,
+   "end": 2.12
+  },
+  {
+   "w": "a",
+   "start": 2.12,
+   "end": 2.26
+  },
+  {
+   "w": "fallen",
+   "start": 2.26,
+   "end": 2.56
+  },
+  {
+   "w": "soldier's",
+   "start": 2.56,
+   "end": 3.12
+  },
+  {
+   "w": "pocket.",
+   "start": 3.12,
+   "end": 3.94
+  },
+  {
+   "w": "That",
+   "start": 4.34,
+   "end": 4.5
+  },
+  {
+   "w": "story",
+   "start": 4.5,
+   "end": 4.88
+  },
+  {
+   "w": "is",
+   "start": 4.88,
+   "end": 5.08
+  },
+  {
+   "w": "a",
+   "start": 5.08,
+   "end": 5.16
+  },
+  {
+   "w": "legend.",
+   "start": 5.16,
+   "end": 5.94
+  },
+  {
+   "w": "Here's",
+   "start": 6.18,
+   "end": 6.4
+  },
+  {
+   "w": "the",
+   "start": 6.4,
+   "end": 6.56
+  },
+  {
+   "w": "real",
+   "start": 6.56,
+   "end": 6.8
+  },
+  {
+   "w": "one.",
+   "start": 6.8,
+   "end": 7.04
+  },
+  {
+   "w": "July",
+   "start": 8.02,
+   "end": 8.4
+  },
+  {
+   "w": "1862,",
+   "start": 8.4,
+   "end": 10.24
+  },
+  {
+   "w": "Virginia.",
+   "start": 10.24,
+   "end": 11.08
+  },
+  {
+   "w": "The",
+   "start": 11.32,
+   "end": 11.42
+  },
+  {
+   "w": "Civil",
+   "start": 11.42,
+   "end": 11.76
+  },
+  {
+   "w": "War.",
+   "start": 11.76,
+   "end": 12.5
+  },
+  {
+   "w": "Union",
+   "start": 12.96,
+   "end": 13.2
+  },
+  {
+   "w": "General",
+   "start": 13.2,
+   "end": 13.62
+  },
+  {
+   "w": "Daniel",
+   "start": 13.62,
+   "end": 14.14
+  },
+  {
+   "w": "Butterfield's",
+   "start": 14.14,
+   "end": 14.78
+  },
+  {
+   "w": "brigade",
+   "start": 14.78,
+   "end": 15.04
+  },
+  {
+   "w": "is",
+   "start": 15.04,
+   "end": 15.44
+  },
+  {
+   "w": "camped",
+   "start": 15.44,
+   "end": 15.82
+  },
+  {
+   "w": "at",
+   "start": 15.82,
+   "end": 15.96
+  },
+  {
+   "w": "Harrison's",
+   "start": 15.96,
+   "end": 16.56
+  },
+  {
+   "w": "Landing.",
+   "start": 16.56,
+   "end": 17.32
+  },
+  {
+   "w": "Butterfield",
+   "start": 17.72,
+   "end": 18.1
+  },
+  {
+   "w": "wants",
+   "start": 18.1,
+   "end": 18.38
+  },
+  {
+   "w": "a",
+   "start": 18.38,
+   "end": 18.54
+  },
+  {
+   "w": "new",
+   "start": 18.54,
+   "end": 18.78
+  },
+  {
+   "w": "lights-out",
+   "start": 18.78,
+   "end": 19.4
+  },
+  {
+   "w": "call.",
+   "start": 19.4,
+   "end": 20.2
+  },
+  {
+   "w": "So",
+   "start": 20.38,
+   "end": 20.58
+  },
+  {
+   "w": "he",
+   "start": 20.58,
+   "end": 20.76
+  },
+  {
+   "w": "reworks",
+   "start": 20.76,
+   "end": 21.24
+  },
+  {
+   "w": "an",
+   "start": 21.24,
+   "end": 21.44
+  },
+  {
+   "w": "older",
+   "start": 21.44,
+   "end": 21.78
+  },
+  {
+   "w": "tune",
+   "start": 21.78,
+   "end": 22.08
+  },
+  {
+   "w": "with",
+   "start": 22.08,
+   "end": 22.32
+  },
+  {
+   "w": "his",
+   "start": 22.32,
+   "end": 22.48
+  },
+  {
+   "w": "brigade",
+   "start": 22.48,
+   "end": 22.92
+  },
+  {
+   "w": "bugler,",
+   "start": 22.92,
+   "end": 23.64
+  },
+  {
+   "w": "Oliver",
+   "start": 23.64,
+   "end": 23.9
+  },
+  {
+   "w": "Norton.",
+   "start": 23.9,
+   "end": 24.18
+  },
+  {
+   "w": "That",
+   "start": 25.1,
+   "end": 25.32
+  },
+  {
+   "w": "night,",
+   "start": 25.32,
+   "end": 25.96
+  },
+  {
+   "w": "Norton",
+   "start": 25.96,
+   "end": 26.2
+  },
+  {
+   "w": "plays",
+   "start": 26.2,
+   "end": 26.52
+  },
+  {
+   "w": "it",
+   "start": 26.52,
+   "end": 26.7
+  },
+  {
+   "w": "for",
+   "start": 26.7,
+   "end": 26.86
+  },
+  {
+   "w": "the",
+   "start": 26.86,
+   "end": 26.98
+  },
+  {
+   "w": "first",
+   "start": 26.98,
+   "end": 27.28
+  },
+  {
+   "w": "time.",
+   "start": 27.28,
+   "end": 28.12
+  },
+  {
+   "w": "Soon,",
+   "start": 28.48,
+   "end": 29.12
+  },
+  {
+   "w": "other",
+   "start": 29.12,
+   "end": 29.22
+  },
+  {
+   "w": "units",
+   "start": 29.22,
+   "end": 29.58
+  },
+  {
+   "w": "copy",
+   "start": 29.58,
+   "end": 29.9
+  },
+  {
+   "w": "it.",
+   "start": 29.9,
+   "end": 30.6
+  },
+  {
+   "w": "Its",
+   "start": 30.86,
+   "end": 30.94
+  },
+  {
+   "w": "official",
+   "start": 30.94,
+   "end": 31.26
+  },
+  {
+   "w": "name?",
+   "start": 31.26,
+   "end": 32.02
+  },
+  {
+   "w": "Extinguish",
+   "start": 32.36,
+   "end": 32.94
+  },
+  {
+   "w": "Lights.",
+   "start": 32.94,
+   "end": 33.2
+  },
+  {
+   "w": "But",
+   "start": 34.1,
+   "end": 34.24
+  },
+  {
+   "w": "soldiers",
+   "start": 34.24,
+   "end": 34.6
+  },
+  {
+   "w": "call",
+   "start": 34.6,
+   "end": 34.96
+  },
+  {
+   "w": "it",
+   "start": 34.96,
+   "end": 35.22
+  },
+  {
+   "w": "Taps.",
+   "start": 35.22,
+   "end": 35.7
+  },
+  {
+   "w": "Before",
+   "start": 36.78,
+   "end": 37.02
+  },
+  {
+   "w": "long,",
+   "start": 37.02,
+   "end": 37.62
+  },
+  {
+   "w": "it's",
+   "start": 37.62,
+   "end": 37.74
+  },
+  {
+   "w": "played",
+   "start": 37.74,
+   "end": 38
+  },
+  {
+   "w": "at",
+   "start": 38,
+   "end": 38.14
+  },
+  {
+   "w": "military",
+   "start": 38.14,
+   "end": 38.52
+  },
+  {
+   "w": "funerals.",
+   "start": 38.52,
+   "end": 39.18
+  },
+  {
+   "w": "By",
+   "start": 39.88,
+   "end": 40
+  },
+  {
+   "w": "1891,",
+   "start": 40,
+   "end": 41.22
+  },
+  {
+   "w": "it's",
+   "start": 41.22,
+   "end": 41.34
+  },
+  {
+   "w": "a",
+   "start": 41.34,
+   "end": 41.42
+  },
+  {
+   "w": "standard",
+   "start": 41.42,
+   "end": 41.82
+  },
+  {
+   "w": "part",
+   "start": 41.82,
+   "end": 42.12
+  },
+  {
+   "w": "of",
+   "start": 42.12,
+   "end": 42.26
+  },
+  {
+   "w": "them.",
+   "start": 42.26,
+   "end": 42.4
+  },
+  {
+   "w": "A",
+   "start": 43.08,
+   "end": 43.22
+  },
+  {
+   "w": "bedtime",
+   "start": 43.22,
+   "end": 43.72
+  },
+  {
+   "w": "bugle",
+   "start": 43.72,
+   "end": 44.12
+  },
+  {
+   "w": "call",
+   "start": 44.12,
+   "end": 44.38
+  },
+  {
+   "w": "that",
+   "start": 44.38,
+   "end": 45.06
+  },
+  {
+   "w": "became",
+   "start": 45.06,
+   "end": 45.4
+  },
+  {
+   "w": "America's",
+   "start": 45.4,
+   "end": 46.1
+  },
+  {
+   "w": "song",
+   "start": 46.1,
+   "end": 46.44
+  },
+  {
+   "w": "of",
+   "start": 46.44,
+   "end": 46.76
+  },
+  {
+   "w": "goodbye.",
+   "start": 46.76,
+   "end": 47.08
+  },
+  {
+   "w": "Every",
+   "start": 48.42,
+   "end": 48.66
+  },
+  {
+   "w": "legend",
+   "start": 48.66,
+   "end": 49.04
+  },
+  {
+   "w": "has",
+   "start": 49.04,
+   "end": 49.46
+  },
+  {
+   "w": "a",
+   "start": 49.46,
+   "end": 49.54
+  },
+  {
+   "w": "beginning.",
+   "start": 49.54,
+   "end": 50.34
+  }
+ ]
+}

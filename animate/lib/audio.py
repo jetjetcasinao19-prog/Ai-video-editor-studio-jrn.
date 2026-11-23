@@ -221,6 +221,19 @@ def sfx_signal(kind, pitch=1.0):
     if kind == 'riser':
         tt = t(0.6); f = 200 + 1400 * (tt / tt[-1]) ** 2
         return (np.sin(2 * np.pi * np.cumsum(f) / SR) * 0.3 + bandnoise(len(tt), 1000, 8000) * 0.3) * (tt / tt[-1]) ** 2
+    if kind in ('taps1', 'taps2', 'taps'):  # the 1862 bugle call (public domain), brass tone, in C × pitch
+        G, C, E, G5 = 55, 60, 64, 67  # MIDI: G3 C4 E4 G4 (bugle sounds an octave up)
+        groups = [(G, G, C), (G, C, E), (G, C, E), (G, C, E), (G, C, E), (C, E, G5), (E, C, G), (G, G, C)]
+        part = groups[:3] if kind == 'taps1' else groups[5:] if kind == 'taps2' else groups
+        notes = []
+        for a, b, c in part: notes += [(a + 12, 0.42), (b + 12, 0.14), (c + 12, 1.35)]
+        out = np.zeros(int((sum(d for _, d in notes) + 1.0) * SR)); at = 0.0
+        for m, d in notes:
+            f = 440 * 2 ** ((m - 69) / 12) * pitch; n = int((d + 0.25) * SR); tt = np.arange(n) / SR
+            env = np.minimum(1, tt / 0.03) * np.exp(-np.maximum(0, tt - d) * 12) * (1 + 0.04 * np.sin(2 * np.pi * 5 * tt) * (tt > 0.3))
+            tone = sum(a * np.sin(2 * np.pi * f * h * tt) for h, a in ((1, 1), (2, 0.55), (3, 0.38), (4, 0.22), (5, 0.12), (6, 0.06)))
+            j = int(at * SR); out[j:j + n] += (tone * env)[:len(out) - j]; at += d
+        return lowpass(out, 3200) * 0.32
     if kind == 'silentnight':  # the opening of "Silent Night" (Gruber, 1818, public domain) on a ney, in C × pitch
         e = 0.24; mel = [(67, 3), (69, 1), (67, 2), (64, 6), (67, 3), (69, 1), (67, 2), (64, 6)]
         out = np.zeros(int(sum(d for _, d in mel) * e * SR + SR)); at = 0

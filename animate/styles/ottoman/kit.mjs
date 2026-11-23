@@ -2163,6 +2163,52 @@ export function aTent(ctx, x, base, s = 1, color = '#efe6d0') {
   ctx.restore();
 }
 
+// ---------- Taps story ----------
+// a brass bugle (no valves), mouthpiece at the origin, bell pointing +x
+export function bugle(ctx, x, y, s = 1, rot = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
+  ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(70, 0); ctx.quadraticCurveTo(100, 0, 100, -18); ctx.quadraticCurveTo(100, -36, 70, -36); ctx.lineTo(30, -36); ctx.quadraticCurveTo(10, -36, 10, -22); ctx.quadraticCurveTo(10, -10, 40, -10); ctx.lineTo(80, -10);
+  stroke(ctx, P.ink, 8); stroke(ctx, P.goldLight, 5);
+  ctx.beginPath(); ctx.moveTo(80, -14); ctx.lineTo(118, -26); ctx.lineTo(118, 6); ctx.lineTo(80, -6); ctx.closePath(); fillStroke(ctx, P.gold, P.ink, 2);
+  rect(ctx, -10, -3, 12, 6, P.goldDark, P.ink, 1);
+  ctx.beginPath(); ctx.moveTo(40, 0); ctx.quadraticCurveTo(50, 30, 60, -10); stroke(ctx, P.verm, 3);
+  ctx.restore();
+}
+// a camp lantern; lit 0..1
+export function lantern(ctx, x, y, s = 1, lit = 1, t = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  if (lit > 0) { const f = lit * (0.85 + 0.15 * Math.sin(t * 11 + x)); const g = ctx.createRadialGradient(0, 0, 2, 0, 0, 70); g.addColorStop(0, `rgba(255,210,120,${0.55 * f})`); g.addColorStop(1, 'rgba(255,210,120,0)'); ctx.fillStyle = g; ctx.fillRect(-70, -70, 140, 140); }
+  ctx.beginPath(); ctx.arc(0, -22, 8, Math.PI, 0); stroke(ctx, P.ink, 2);
+  rect(ctx, -12, -18, 24, 32, lit > 0 ? `rgba(255,220,140,${0.4 + 0.6 * lit})` : '#4a4a4a', P.ink, 2);
+  rect(ctx, -15, -20, 30, 5, P.ink, P.ink, 1); rect(ctx, -15, 13, 30, 5, P.ink, P.ink, 1);
+  ctx.restore();
+}
+// a five-line music staff with the Taps notes; n = how many notes are written; lit = notes glowing
+export const TAPS_NOTES = [[0, 0, 4], [0, 0, 4], [0, 4, 8], [0, 4, 8], [0, 4, 8], [4, 8, 12], [8, 4, 0], [0, 0, 4]];
+export function staff(ctx, x, y, w, n = 24, o = {}) {
+  ctx.save(); ctx.translate(x, y);
+  for (let i = 0; i < 5; i++) { ctx.beginPath(); ctx.moveTo(-w / 2, i * 16); ctx.lineTo(w / 2, i * 16); stroke(ctx, o.ink || P.ink, 1.5); }
+  const notes = TAPS_NOTES.flat(), step = (w - 40) / notes.length;
+  notes.forEach((p, i) => { if (i >= n) return; const nx = -w / 2 + 24 + i * step, ny = 56 - p * 4; ellipse(ctx, nx, ny, 7, 5, -0.4, o.glow && i < o.glow ? P.goldLight : (o.ink || P.ink), o.ink || P.ink, 1); ctx.beginPath(); ctx.moveTo(nx + 6, ny); ctx.lineTo(nx + 6, ny - 34); stroke(ctx, o.ink || P.ink, 1.5); });
+  ctx.restore();
+}
+export function headstone(ctx, x, base, s = 1) {
+  ctx.save(); ctx.translate(x, base); ctx.scale(s, s);
+  ctx.beginPath(); ctx.moveTo(-30, 0); ctx.lineTo(-30, -70); ctx.quadraticCurveTo(0, -96, 30, -70); ctx.lineTo(30, 0); ctx.closePath(); fillStroke(ctx, '#e6e2d6', P.ink, 2);
+  ctx.beginPath(); ctx.moveTo(-14, -56); ctx.lineTo(14, -56); ctx.moveTo(-12, -44); ctx.lineTo(12, -44); stroke(ctx, '#9a968a', 2);
+  ctx.restore();
+}
+// a US flag of 1862 (34 stars shown as a field of dots); wave = time
+export function usFlag(ctx, x, y, w, t = 0) {
+  const h = w * 0.55;
+  ctx.save(); ctx.translate(x, y);
+  for (let i = 0; i < 13; i++) { ctx.beginPath(); for (let j = 0; j <= 20; j++) { const q = j / 20, wy = Math.sin(t * 3 + q * 5) * 6 * q; ctx[j ? 'lineTo' : 'moveTo'](q * w, i * h / 13 + wy); } for (let j = 20; j >= 0; j--) { const q = j / 20, wy = Math.sin(t * 3 + q * 5) * 6 * q; ctx.lineTo(q * w, (i + 1) * h / 13 + wy); } ctx.closePath(); ctx.fillStyle = i % 2 ? P.white : P.verm; ctx.fill(); }
+  ctx.fillStyle = P.lapisDeep; ctx.fillRect(0, 0, w * 0.4, h * 7 / 13);
+  for (let r = 0; r < 5; r++) for (let c = 0; c < 7; c++) circle(ctx, w * 0.04 + c * w * 0.052, h * 0.06 + r * h * 0.1, 1.6, P.white, null);
+  ctx.strokeStyle = P.ink; ctx.lineWidth = 1.5; ctx.strokeRect(0, 0, w, h);
+  ctx.restore();
+}
+
 // ---------- colour util ----------
 export function shade(hex, k) {
   if (!hex.startsWith('#')) return hex;
