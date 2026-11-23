@@ -614,6 +614,97 @@ export function splat(ctx, x, y, r, seed = 1, color = P.ink, k = 1) {
   ctx.restore();
 }
 
+// ---------- more props (office, requests, locks) ----------
+// A 1970s photocopier; o.light (0..1) runs the scan light, o.eyes draws a face
+// on the lid (o.lids 0..1 = half-shut, o.look), o.out = sheets in the tray.
+export function copier(ctx, x, y, s = 1, t = 0, o = {}) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  rect(ctx, -170, -230, 340, 230, P.paperDark, P.ink, 6, 10);           // body
+  rect(ctx, -150, -200, 300, 70, P.greyLight, P.ink, 4, 6);             // front panel
+  for (let i = 0; i < 3; i++) rect(ctx, -130 + i * 90, -180, 70, 30, P.paperLight, P.ink, 3, 4); // paper drawers
+  rect(ctx, -170, -300, 340, 70, P.ink, null, 0, 8);                     // top + glass
+  rect(ctx, -150, -290, 300, 40, P.inkSoft, null, 0, 4);
+  if (o.light != null && o.light > 0 && o.light < 1) { const lx = lerp(-145, 145, o.light); ctx.save(); ctx.globalAlpha = 0.9; rect(ctx, lx - 8, -292, 16, 44, '#e9ffe9'); ctx.restore(); }
+  rect(ctx, -176, -312, 352, 18, P.ink, null, 0, 6);                     // lid
+  rect(ctx, 120, -120, 40, 22, P.red, P.ink, 3, 4);                      // big button
+  rect(ctx, 170, -130, 70, 14, P.paperLight, P.ink, 3);                  // output tray
+  for (let i = 0; i < (o.out || 0); i++) rect(ctx, 176 + i * 2, -144 - i * 4, 58, 10, P.paperLight, P.ink, 2);
+  if (o.eyes) for (const ex of [-60, 60]) { ctx.save(); eye(ctx, ex, -268, 34, { open: 1 - (o.lids || 0) * 0.55, look: o.look || [0, 0], lashes: false }); ctx.restore(); }
+  rect(ctx, -160, 0, 30, 14, P.ink); rect(ctx, 130, 0, 30, 14, P.ink);
+  ctx.restore();
+}
+// A stack of n pages (fanned a little), labelled.
+export function pages(ctx, x, y, n, s = 1, o = {}) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  const R = rng(n * 13 + 1);
+  for (let i = 0; i < n; i++) { ctx.save(); ctx.translate((R() - 0.5) * 8, -i * (o.gap || 7)); ctx.rotate((R() - 0.5) * 0.05); rect(ctx, -60, -76, 120, 76, P.paperLight, P.ink, 3, 2); ctx.restore(); }
+  if (o.label) text(ctx, o.label, 0, -n * (o.gap || 7) - 40, 30, { font: 'serif', color: o.labelColor || P.red });
+  ctx.restore();
+}
+// 10 × 10 grid of ink drops; the first `n` turn red (n may be fractional while animating).
+export function percentGrid(ctx, x, y, size, n, o = {}) {
+  const c = size / 10;
+  for (let i = 0; i < 100; i++) {
+    const gx = x + (i % 10 + 0.5) * c, gy = y + (Math.floor(i / 10) + 0.5) * c, on = i < Math.floor(n);
+    const k = on ? 1 : clamp(n - i);
+    circle(ctx, gx, gy, c * 0.36, on || k > 0.5 ? (o.on || P.red) : (o.off || P.greyLight));
+  }
+}
+export function padlock(ctx, x, y, s = 1, open = 0, color = P.ink) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  ctx.save(); ctx.translate(46, -110); ctx.rotate(-open * 0.9); ctx.translate(-46, 110 - open * 50);
+  ctx.beginPath(); ctx.moveTo(-46, -100); ctx.lineTo(-46, -150); ctx.arc(0, -150, 46, Math.PI, 0); ctx.lineTo(46, -100); stroke(ctx, color, 22);
+  ctx.restore();
+  rect(ctx, -90, -110, 180, 150, color, null, 0, 18);
+  circle(ctx, 0, -50, 18, P.paperLight); poly(ctx, [[-8, -46], [8, -46], [12, 4], [-12, 4]], P.paperLight);
+  ctx.restore();
+}
+export function key(ctx, x, y, s = 1, rot = 0, label = null, color = P.red) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
+  circle(ctx, -110, 0, 44, color); circle(ctx, -110, 0, 18, P.paperLight);
+  rect(ctx, -70, -10, 150, 20, color); rect(ctx, 50, 10, 14, 26, color); rect(ctx, 22, 10, 14, 18, color);
+  if (label) { ctx.save(); ctx.rotate(-rot); text(ctx, label, -110, 80, 30, { font: 'serif', color }); ctx.restore(); }
+  ctx.restore();
+}
+// A mousetrap; snap 0 (set) … 1 (shut).
+export function mousetrap(ctx, x, y, s = 1, snap = 0, bait = null) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  rect(ctx, -170, -30, 340, 40, P.ochre, P.ink, 5, 4);
+  for (let i = 0; i < 6; i++) line(ctx, -150 + i * 60, -20, -130 + i * 60, 0, '#b88a2c', 3);
+  if (bait) bait(ctx);
+  const a = lerp(-Math.PI * 0.95, 0, ease.outBounce(clamp(snap)));
+  ctx.save(); ctx.translate(-60, -32); ctx.rotate(a); ctx.beginPath(); ctx.rect(0, -4, 210, 8); fill(ctx, P.greyLight); stroke(ctx, P.ink, 3); ctx.restore();
+  circle(ctx, -60, -32, 14, P.grey, P.ink, 3);
+  ctx.restore();
+}
+// A little plane towing a banner (facing right).
+export function plane(ctx, x, y, s = 1, t = 0, banner = null, color = P.ink) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s); ctx.rotate(Math.sin(t * 2) * 0.05);
+  if (banner) {
+    font(ctx, 34, 'type'); const w = ctx.measureText(banner).width + 40;
+    line(ctx, -80, 0, -120, 0, color, 3);
+    ctx.beginPath(); for (let i = 0; i <= 20; i++) { const xx = -120 - i / 20 * w, yy = Math.sin(t * 6 + i * 0.6) * 6; i ? ctx.lineTo(xx, yy - 26) : ctx.moveTo(xx, yy - 26); }
+    for (let i = 20; i >= 0; i--) { const xx = -120 - i / 20 * w, yy = Math.sin(t * 6 + i * 0.6) * 6; ctx.lineTo(xx, yy + 26); }
+    ctx.closePath(); fill(ctx, P.paperLight); stroke(ctx, color, 3);
+    text(ctx, banner, -120 - w / 2, Math.sin(t * 6 + 10 * 0.6) * 6, 30, { color: P.red });
+  }
+  ellipse(ctx, 0, 0, 90, 22, 0, color);
+  poly(ctx, [[-20, -6], [30, -6], [-30, -80], [-50, -80]], color);
+  poly(ctx, [[-20, 6], [30, 6], [-40, 60], [-58, 60]], color);
+  poly(ctx, [[-70, -4], [-92, -4], [-100, -44], [-84, -44]], color);
+  ellipse(ctx, 40, -8, 18, 9, 0, P.sky);
+  const pr = Math.abs(Math.sin(t * 40));
+  ellipse(ctx, 94, 0, 6, 34 * pr + 4, 0, P.grey);
+  ctx.restore();
+}
+export function magnifier(ctx, x, y, s = 1, rot = 0.6) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
+  rect(ctx, -12, 60, 24, 110, P.ink, null, 0, 8);
+  circle(ctx, 0, 0, 64, 'rgba(200,220,240,0.35)', P.ink, 12);
+  ctx.beginPath(); ctx.arc(0, 0, 44, -2.6, -1.8); stroke(ctx, P.paperLight, 6);
+  ctx.restore();
+}
+
 // Card-stock texture (fibres, mottling, foxing spots) — multiply it on top.
 export function paperTexture(w, h, seed = 5) {
   const cv = createCanvas(w, h), ctx = cv.getContext('2d'), R = rng(seed);
