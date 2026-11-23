@@ -1,0 +1,586 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "The man famous for finding Troy may have destroyed the real Troy. For centuries, people think the Trojan War is just a myth from Homer. Then a British official, Frank Calvert, becomes convinced Troy lies under a hill in Turkey called Hisarlik. In 1870, a rich German businessman, Heinrich Schliemann, arrives, on Calvert's advice. He cuts a giant trench straight through the hill, tossing away layers he thinks are too young. In 1873, he announces Priam's Treasure, gold of Troy's legendary king. But it's from a layer about 1,000 years older than Homer's Troy, and he smuggles it out of the country. A legend found, and nearly ruined, by its hunter. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "The",
+   "start": 0,
+   "end": 0.18
+  },
+  {
+   "w": "man",
+   "start": 0.18,
+   "end": 0.48
+  },
+  {
+   "w": "famous",
+   "start": 0.48,
+   "end": 1
+  },
+  {
+   "w": "for",
+   "start": 1,
+   "end": 1.26
+  },
+  {
+   "w": "finding",
+   "start": 1.26,
+   "end": 1.74
+  },
+  {
+   "w": "Troy",
+   "start": 1.74,
+   "end": 2.26
+  },
+  {
+   "w": "may",
+   "start": 2.26,
+   "end": 3.24
+  },
+  {
+   "w": "have",
+   "start": 3.24,
+   "end": 3.46
+  },
+  {
+   "w": "destroyed",
+   "start": 3.46,
+   "end": 4.04
+  },
+  {
+   "w": "the",
+   "start": 4.04,
+   "end": 4.4
+  },
+  {
+   "w": "real",
+   "start": 4.4,
+   "end": 4.82
+  },
+  {
+   "w": "Troy.",
+   "start": 4.82,
+   "end": 5.74
+  },
+  {
+   "w": "For",
+   "start": 6.28,
+   "end": 6.36
+  },
+  {
+   "w": "centuries,",
+   "start": 6.36,
+   "end": 6.88
+  },
+  {
+   "w": "people",
+   "start": 6.88,
+   "end": 7.34
+  },
+  {
+   "w": "think",
+   "start": 7.34,
+   "end": 7.62
+  },
+  {
+   "w": "the",
+   "start": 7.62,
+   "end": 7.78
+  },
+  {
+   "w": "Trojan",
+   "start": 7.78,
+   "end": 8.26
+  },
+  {
+   "w": "War",
+   "start": 8.26,
+   "end": 8.46
+  },
+  {
+   "w": "is",
+   "start": 8.46,
+   "end": 8.8
+  },
+  {
+   "w": "just",
+   "start": 8.8,
+   "end": 9.04
+  },
+  {
+   "w": "a",
+   "start": 9.04,
+   "end": 9.2
+  },
+  {
+   "w": "myth",
+   "start": 9.2,
+   "end": 9.54
+  },
+  {
+   "w": "from",
+   "start": 9.54,
+   "end": 9.82
+  },
+  {
+   "w": "Homer.",
+   "start": 9.82,
+   "end": 10.62
+  },
+  {
+   "w": "Then",
+   "start": 10.92,
+   "end": 11.14
+  },
+  {
+   "w": "a",
+   "start": 11.14,
+   "end": 11.34
+  },
+  {
+   "w": "British",
+   "start": 11.34,
+   "end": 11.66
+  },
+  {
+   "w": "official,",
+   "start": 11.66,
+   "end": 12.34
+  },
+  {
+   "w": "Frank",
+   "start": 12.34,
+   "end": 12.68
+  },
+  {
+   "w": "Calvert,",
+   "start": 12.68,
+   "end": 13.38
+  },
+  {
+   "w": "becomes",
+   "start": 13.38,
+   "end": 13.64
+  },
+  {
+   "w": "convinced",
+   "start": 13.64,
+   "end": 14.24
+  },
+  {
+   "w": "Troy",
+   "start": 14.24,
+   "end": 14.76
+  },
+  {
+   "w": "lies",
+   "start": 14.76,
+   "end": 15.18
+  },
+  {
+   "w": "under",
+   "start": 15.18,
+   "end": 15.52
+  },
+  {
+   "w": "a",
+   "start": 15.52,
+   "end": 15.7
+  },
+  {
+   "w": "hill",
+   "start": 15.7,
+   "end": 15.92
+  },
+  {
+   "w": "in",
+   "start": 15.92,
+   "end": 16.14
+  },
+  {
+   "w": "Turkey",
+   "start": 16.14,
+   "end": 16.58
+  },
+  {
+   "w": "called",
+   "start": 16.58,
+   "end": 17.3
+  },
+  {
+   "w": "Hisarlik.",
+   "start": 17.3,
+   "end": 18.48
+  },
+  {
+   "w": "In",
+   "start": 18.86,
+   "end": 19
+  },
+  {
+   "w": "1870,",
+   "start": 19,
+   "end": 20.16
+  },
+  {
+   "w": "a",
+   "start": 20.16,
+   "end": 20.28
+  },
+  {
+   "w": "rich",
+   "start": 20.28,
+   "end": 20.54
+  },
+  {
+   "w": "German",
+   "start": 20.54,
+   "end": 21
+  },
+  {
+   "w": "businessman,",
+   "start": 21,
+   "end": 21.9
+  },
+  {
+   "w": "Heinrich",
+   "start": 21.9,
+   "end": 22.28
+  },
+  {
+   "w": "Schliemann,",
+   "start": 22.28,
+   "end": 23.12
+  },
+  {
+   "w": "arrives,",
+   "start": 23.12,
+   "end": 24.02
+  },
+  {
+   "w": "on",
+   "start": 24.02,
+   "end": 24.26
+  },
+  {
+   "w": "Calvert's",
+   "start": 24.26,
+   "end": 24.84
+  },
+  {
+   "w": "advice.",
+   "start": 24.84,
+   "end": 25.22
+  },
+  {
+   "w": "He",
+   "start": 25.28,
+   "end": 26.1
+  },
+  {
+   "w": "cuts",
+   "start": 26.1,
+   "end": 26.36
+  },
+  {
+   "w": "a",
+   "start": 26.36,
+   "end": 26.52
+  },
+  {
+   "w": "giant",
+   "start": 26.52,
+   "end": 26.98
+  },
+  {
+   "w": "trench",
+   "start": 26.98,
+   "end": 27.48
+  },
+  {
+   "w": "straight",
+   "start": 27.48,
+   "end": 27.94
+  },
+  {
+   "w": "through",
+   "start": 27.94,
+   "end": 28.3
+  },
+  {
+   "w": "the",
+   "start": 28.3,
+   "end": 28.5
+  },
+  {
+   "w": "hill,",
+   "start": 28.5,
+   "end": 29.28
+  },
+  {
+   "w": "tossing",
+   "start": 29.28,
+   "end": 29.5
+  },
+  {
+   "w": "away",
+   "start": 29.5,
+   "end": 29.82
+  },
+  {
+   "w": "layers",
+   "start": 29.82,
+   "end": 30.14
+  },
+  {
+   "w": "he",
+   "start": 30.14,
+   "end": 30.34
+  },
+  {
+   "w": "thinks",
+   "start": 30.34,
+   "end": 30.68
+  },
+  {
+   "w": "are",
+   "start": 30.68,
+   "end": 30.88
+  },
+  {
+   "w": "too",
+   "start": 30.88,
+   "end": 31.04
+  },
+  {
+   "w": "young.",
+   "start": 31.04,
+   "end": 31.92
+  },
+  {
+   "w": "In",
+   "start": 32.1,
+   "end": 32.2
+  },
+  {
+   "w": "1873,",
+   "start": 32.2,
+   "end": 33.14
+  },
+  {
+   "w": "he",
+   "start": 33.14,
+   "end": 33.68
+  },
+  {
+   "w": "announces",
+   "start": 33.68,
+   "end": 34.22
+  },
+  {
+   "w": "Priam's",
+   "start": 34.22,
+   "end": 35.34
+  },
+  {
+   "w": "Treasure,",
+   "start": 35.34,
+   "end": 36.32
+  },
+  {
+   "w": "gold",
+   "start": 36.32,
+   "end": 36.74
+  },
+  {
+   "w": "of",
+   "start": 36.74,
+   "end": 37
+  },
+  {
+   "w": "Troy's",
+   "start": 37,
+   "end": 37.48
+  },
+  {
+   "w": "legendary",
+   "start": 37.48,
+   "end": 38.12
+  },
+  {
+   "w": "king.",
+   "start": 38.12,
+   "end": 38.5
+  },
+  {
+   "w": "But",
+   "start": 39.2,
+   "end": 39.32
+  },
+  {
+   "w": "it's",
+   "start": 39.32,
+   "end": 39.48
+  },
+  {
+   "w": "from",
+   "start": 39.48,
+   "end": 39.7
+  },
+  {
+   "w": "a",
+   "start": 39.7,
+   "end": 39.86
+  },
+  {
+   "w": "layer",
+   "start": 39.86,
+   "end": 40.06
+  },
+  {
+   "w": "about",
+   "start": 40.06,
+   "end": 40.48
+  },
+  {
+   "w": "1,000",
+   "start": 40.48,
+   "end": 41.44
+  },
+  {
+   "w": "years",
+   "start": 41.44,
+   "end": 41.8
+  },
+  {
+   "w": "older",
+   "start": 41.8,
+   "end": 42.3
+  },
+  {
+   "w": "than",
+   "start": 42.3,
+   "end": 42.66
+  },
+  {
+   "w": "Homer's",
+   "start": 42.66,
+   "end": 43.18
+  },
+  {
+   "w": "Troy,",
+   "start": 43.18,
+   "end": 44.22
+  },
+  {
+   "w": "and",
+   "start": 44.22,
+   "end": 44.4
+  },
+  {
+   "w": "he",
+   "start": 44.4,
+   "end": 44.66
+  },
+  {
+   "w": "smuggles",
+   "start": 44.66,
+   "end": 45.18
+  },
+  {
+   "w": "it",
+   "start": 45.18,
+   "end": 45.38
+  },
+  {
+   "w": "out",
+   "start": 45.38,
+   "end": 45.6
+  },
+  {
+   "w": "of",
+   "start": 45.6,
+   "end": 45.74
+  },
+  {
+   "w": "the",
+   "start": 45.74,
+   "end": 45.84
+  },
+  {
+   "w": "country.",
+   "start": 45.84,
+   "end": 46.24
+  },
+  {
+   "w": "A",
+   "start": 47.14,
+   "end": 47.28
+  },
+  {
+   "w": "legend",
+   "start": 47.28,
+   "end": 47.68
+  },
+  {
+   "w": "found,",
+   "start": 47.68,
+   "end": 48.26
+  },
+  {
+   "w": "and",
+   "start": 48.26,
+   "end": 48.86
+  },
+  {
+   "w": "nearly",
+   "start": 48.86,
+   "end": 49.3
+  },
+  {
+   "w": "ruined,",
+   "start": 49.3,
+   "end": 50.06
+  },
+  {
+   "w": "by",
+   "start": 50.06,
+   "end": 50.34
+  },
+  {
+   "w": "its",
+   "start": 50.34,
+   "end": 50.58
+  },
+  {
+   "w": "hunter.",
+   "start": 50.58,
+   "end": 50.82
+  },
+  {
+   "w": "Every",
+   "start": 52.04,
+   "end": 52.34
+  },
+  {
+   "w": "legend",
+   "start": 52.34,
+   "end": 52.84
+  },
+  {
+   "w": "has",
+   "start": 52.84,
+   "end": 53.34
+  },
+  {
+   "w": "a",
+   "start": 53.34,
+   "end": 53.42
+  },
+  {
+   "w": "beginning.",
+   "start": 53.42,
+   "end": 54.26
+  }
+ ]
+}
