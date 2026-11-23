@@ -121,18 +121,22 @@ Here's the trick.
 The middle option was a decoy.
 
 16
-00:00:31,500 --> 00:00:35,000
-It made the combo look like a free upgrade.
+00:00:31,500 --> 00:00:33,000
+It made the combo look
 
 17
+00:00:33,000 --> 00:00:35,000
+like a free upgrade.
+
+18
 00:00:35,000 --> 00:00:37,500
 See three prices?
 
-18
+19
 00:00:37,500 --> 00:00:41,000
 Ask which one is there to push you.
 
-19
+20
 00:00:41,000 --> 00:00:43,500
 Follow for more mind tricks.
 ```
