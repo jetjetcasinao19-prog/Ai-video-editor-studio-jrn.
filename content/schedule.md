@@ -105,6 +105,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-01-08 Fri | 8:00 PM | Sat Jan 9, 9:00 AM | TikTok | Most people think this poster was everywhere during World War II. It wasn't. | content/posts/2026-11-21-we-can-do-it-ottoman.md | ready |
 | 2027-01-09 Sat | 7:00 PM | Sun Jan 10, 8:00 AM | Instagram Reels | One of the most famous images in American history started as a tiny factory job. | content/posts/2026-11-21-we-can-do-it-ottoman.md | ready |
 | 2027-01-09 Sat | 8:00 PM | Sun Jan 10, 9:00 AM | Facebook Reels | Here's a twist about a poster you've probably seen a hundred times. | content/posts/2026-11-21-we-can-do-it-ottoman.md | ready |
+| 2027-01-11 Mon | 7:00 PM | Tue Jan 12, 8:00 AM | YouTube Shorts | Dog Tags Started as Paper Notes Pinned to Coats | content/posts/2026-11-21-dog-tags-ottoman.md | ready |
+| 2027-01-11 Mon | 8:00 PM | Tue Jan 12, 9:00 AM | TikTok | Long before the metal tags you know, a soldier's ID was a scrap of paper. | content/posts/2026-11-21-dog-tags-ottoman.md | ready |
+| 2027-01-12 Tue | 7:00 PM | Wed Jan 13, 8:00 AM | Instagram Reels | A tradition every soldier wears began as a homemade note. | content/posts/2026-11-21-dog-tags-ottoman.md | ready |
+| 2027-01-12 Tue | 8:00 PM | Wed Jan 13, 9:00 AM | Facebook Reels | Ever wonder where dog tags came from? Not from the military at first. | content/posts/2026-11-21-dog-tags-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
