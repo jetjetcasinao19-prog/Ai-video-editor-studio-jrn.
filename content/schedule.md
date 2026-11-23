@@ -145,6 +145,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-02-01 Mon | 8:00 PM | Tue Feb 2, 9:00 AM | TikTok | Everyone says Schliemann found Troy. Fewer people say what his trench did to it. | content/posts/2026-11-23-troy-ottoman.md | ready |
 | 2027-02-02 Tue | 7:00 PM | Wed Feb 3, 8:00 AM | Instagram Reels | A hill in Turkey. Nine cities. One enormous trench. | content/posts/2026-11-23-troy-ottoman.md | ready |
 | 2027-02-02 Tue | 8:00 PM | Wed Feb 3, 9:00 AM | Facebook Reels | Did you know the man who made Troy famous also damaged it? | content/posts/2026-11-23-troy-ottoman.md | ready |
+| 2027-02-03 Wed | 7:00 PM | Thu Feb 4, 8:00 AM | YouTube Shorts | The King Who Won Too Much | content/posts/2026-11-23-pyrrhic-ottoman.md | ready |
+| 2027-02-03 Wed | 8:00 PM | Thu Feb 4, 9:00 AM | TikTok | You've heard "that was a Pyrrhic victory." The king behind it won twice and was still in trouble. | content/posts/2026-11-23-pyrrhic-ottoman.md | ready |
+| 2027-02-04 Thu | 7:00 PM | Fri Feb 5, 8:00 AM | Instagram Reels | Two battles. Two wins. And a king who still left Italy. | content/posts/2026-11-23-pyrrhic-ottoman.md | ready |
+| 2027-02-04 Thu | 8:00 PM | Fri Feb 5, 9:00 AM | Facebook Reels | Did you know the phrase "Pyrrhic victory" comes from a real king? | content/posts/2026-11-23-pyrrhic-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
