@@ -47,6 +47,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-12-06 Sun | 8:00 PM | Mon Dec 7, 9:00 AM | MindTrace | TikTok | Want your enemy to like you? Ask them for a favor. | content/posts/2026-11-23-ben-franklin-effect-inkblot.md | ready |
 | 2026-12-07 Mon | 7:00 PM | Tue Dec 8, 8:00 AM | MindTrace | Instagram Reels | The favor trick Ben Franklin used on a rival | content/posts/2026-11-23-ben-franklin-effect-inkblot.md | ready |
 | 2026-12-07 Mon | 8:00 PM | Tue Dec 8, 9:00 AM | MindTrace | Facebook Reels | Want your enemy to like you? Ask them for a favor. | content/posts/2026-11-23-ben-franklin-effect-inkblot.md | ready |
+| 2026-12-08 Tue | 7:00 PM | Wed Dec 9, 8:00 AM | MindTrace | YouTube Shorts | Nobody Picks This Option, and That's the Point (The Decoy Effect) | content/posts/2026-11-23-decoy-effect-inkblot.md | ready |
+| 2026-12-08 Tue | 8:00 PM | Wed Dec 9, 9:00 AM | MindTrace | TikTok | Nobody picked this option, and that's exactly why it worked. | content/posts/2026-11-23-decoy-effect-inkblot.md | ready |
+| 2026-12-09 Wed | 7:00 PM | Thu Dec 10, 8:00 AM | MindTrace | Instagram Reels | The useless price that makes you spend more | content/posts/2026-11-23-decoy-effect-inkblot.md | ready |
+| 2026-12-09 Wed | 8:00 PM | Thu Dec 10, 9:00 AM | MindTrace | Facebook Reels | Nobody picked this option, and that's exactly why it worked. | content/posts/2026-11-23-decoy-effect-inkblot.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
