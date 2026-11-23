@@ -1,0 +1,596 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "Everyone remembers the 300 Spartans, but they weren't alone. 480 BC. Persian King Xerxes invades Greece with a massive army. About 7,000 Greeks block a narrow mountain pass called Thermopylae. Only 300 of them are Spartans, led by King Leonidas. For three days, the pass holds. Then a local man named Ephialtes shows the Persians a secret path around the mountains, the Greeks are about to be surrounded. Leonidas sends most of the army away, but the Spartans stay, and so do about 700 soldiers from a small city called Thespiae. They fight to the very end. History mostly remembers the Spartans, a defeat that became the most famous last stand in history. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "Everyone",
+   "start": 0.04,
+   "end": 0.5
+  },
+  {
+   "w": "remembers",
+   "start": 0.5,
+   "end": 1.1
+  },
+  {
+   "w": "the",
+   "start": 1.1,
+   "end": 1.32
+  },
+  {
+   "w": "300",
+   "start": 1.32,
+   "end": 2.06
+  },
+  {
+   "w": "Spartans,",
+   "start": 2.06,
+   "end": 2.82
+  },
+  {
+   "w": "but",
+   "start": 2.82,
+   "end": 3.64
+  },
+  {
+   "w": "they",
+   "start": 3.64,
+   "end": 3.78
+  },
+  {
+   "w": "weren't",
+   "start": 3.78,
+   "end": 4.04
+  },
+  {
+   "w": "alone.",
+   "start": 4.04,
+   "end": 4.96
+  },
+  {
+   "w": "480",
+   "start": 5.62,
+   "end": 6.22
+  },
+  {
+   "w": "BC.",
+   "start": 6.22,
+   "end": 7.38
+  },
+  {
+   "w": "Persian",
+   "start": 7.38,
+   "end": 7.66
+  },
+  {
+   "w": "King",
+   "start": 7.66,
+   "end": 8
+  },
+  {
+   "w": "Xerxes",
+   "start": 8,
+   "end": 8.46
+  },
+  {
+   "w": "invades",
+   "start": 8.46,
+   "end": 9.1
+  },
+  {
+   "w": "Greece",
+   "start": 9.1,
+   "end": 9.5
+  },
+  {
+   "w": "with",
+   "start": 9.5,
+   "end": 9.74
+  },
+  {
+   "w": "a",
+   "start": 9.74,
+   "end": 9.86
+  },
+  {
+   "w": "massive",
+   "start": 9.86,
+   "end": 10.28
+  },
+  {
+   "w": "army.",
+   "start": 10.28,
+   "end": 11.42
+  },
+  {
+   "w": "About",
+   "start": 11.42,
+   "end": 11.56
+  },
+  {
+   "w": "7,000",
+   "start": 11.56,
+   "end": 12.4
+  },
+  {
+   "w": "Greeks",
+   "start": 12.4,
+   "end": 12.88
+  },
+  {
+   "w": "block",
+   "start": 12.88,
+   "end": 13.24
+  },
+  {
+   "w": "a",
+   "start": 13.24,
+   "end": 13.44
+  },
+  {
+   "w": "narrow",
+   "start": 13.44,
+   "end": 13.78
+  },
+  {
+   "w": "mountain",
+   "start": 13.88,
+   "end": 14.42
+  },
+  {
+   "w": "pass",
+   "start": 14.42,
+   "end": 14.76
+  },
+  {
+   "w": "called",
+   "start": 14.76,
+   "end": 15.36
+  },
+  {
+   "w": "Thermopylae.",
+   "start": 15.36,
+   "end": 16.72
+  },
+  {
+   "w": "Only",
+   "start": 16.72,
+   "end": 17.02
+  },
+  {
+   "w": "300",
+   "start": 17.02,
+   "end": 17.64
+  },
+  {
+   "w": "of",
+   "start": 17.64,
+   "end": 17.98
+  },
+  {
+   "w": "them",
+   "start": 17.98,
+   "end": 18.14
+  },
+  {
+   "w": "are",
+   "start": 18.14,
+   "end": 18.4
+  },
+  {
+   "w": "Spartans,",
+   "start": 18.4,
+   "end": 18.98
+  },
+  {
+   "w": "led",
+   "start": 18.98,
+   "end": 19.48
+  },
+  {
+   "w": "by",
+   "start": 19.48,
+   "end": 19.74
+  },
+  {
+   "w": "King",
+   "start": 19.74,
+   "end": 20.02
+  },
+  {
+   "w": "Leonidas.",
+   "start": 20.02,
+   "end": 20.96
+  },
+  {
+   "w": "For",
+   "start": 21.36,
+   "end": 21.48
+  },
+  {
+   "w": "three",
+   "start": 21.48,
+   "end": 21.8
+  },
+  {
+   "w": "days,",
+   "start": 21.8,
+   "end": 22.48
+  },
+  {
+   "w": "the",
+   "start": 22.48,
+   "end": 22.64
+  },
+  {
+   "w": "pass",
+   "start": 22.64,
+   "end": 22.96
+  },
+  {
+   "w": "holds.",
+   "start": 22.96,
+   "end": 24.2
+  },
+  {
+   "w": "Then",
+   "start": 24.2,
+   "end": 24.44
+  },
+  {
+   "w": "a",
+   "start": 24.44,
+   "end": 24.64
+  },
+  {
+   "w": "local",
+   "start": 24.64,
+   "end": 25.04
+  },
+  {
+   "w": "man",
+   "start": 25.04,
+   "end": 25.26
+  },
+  {
+   "w": "named",
+   "start": 25.26,
+   "end": 25.62
+  },
+  {
+   "w": "Ephialtes",
+   "start": 25.62,
+   "end": 26.26
+  },
+  {
+   "w": "shows",
+   "start": 26.26,
+   "end": 26.84
+  },
+  {
+   "w": "the",
+   "start": 26.84,
+   "end": 27.04
+  },
+  {
+   "w": "Persians",
+   "start": 27.04,
+   "end": 27.46
+  },
+  {
+   "w": "a",
+   "start": 27.46,
+   "end": 27.68
+  },
+  {
+   "w": "secret",
+   "start": 27.68,
+   "end": 28.06
+  },
+  {
+   "w": "path",
+   "start": 28.06,
+   "end": 28.6
+  },
+  {
+   "w": "around",
+   "start": 28.64,
+   "end": 29.06
+  },
+  {
+   "w": "the",
+   "start": 29.06,
+   "end": 29.28
+  },
+  {
+   "w": "mountains,",
+   "start": 29.28,
+   "end": 30.44
+  },
+  {
+   "w": "the",
+   "start": 30.44,
+   "end": 30.54
+  },
+  {
+   "w": "Greeks",
+   "start": 30.54,
+   "end": 30.86
+  },
+  {
+   "w": "are",
+   "start": 30.86,
+   "end": 31.18
+  },
+  {
+   "w": "about",
+   "start": 31.18,
+   "end": 31.46
+  },
+  {
+   "w": "to",
+   "start": 31.46,
+   "end": 31.68
+  },
+  {
+   "w": "be",
+   "start": 31.68,
+   "end": 31.8
+  },
+  {
+   "w": "surrounded.",
+   "start": 31.8,
+   "end": 33.3
+  },
+  {
+   "w": "Leonidas",
+   "start": 33.3,
+   "end": 33.68
+  },
+  {
+   "w": "sends",
+   "start": 33.68,
+   "end": 34.1
+  },
+  {
+   "w": "most",
+   "start": 34.1,
+   "end": 34.44
+  },
+  {
+   "w": "of",
+   "start": 34.44,
+   "end": 34.56
+  },
+  {
+   "w": "the",
+   "start": 34.56,
+   "end": 34.66
+  },
+  {
+   "w": "army",
+   "start": 34.66,
+   "end": 34.92
+  },
+  {
+   "w": "away,",
+   "start": 34.92,
+   "end": 35.76
+  },
+  {
+   "w": "but",
+   "start": 36,
+   "end": 36.1
+  },
+  {
+   "w": "the",
+   "start": 36.1,
+   "end": 36.3
+  },
+  {
+   "w": "Spartans",
+   "start": 36.3,
+   "end": 36.84
+  },
+  {
+   "w": "stay,",
+   "start": 36.84,
+   "end": 37.4
+  },
+  {
+   "w": "and",
+   "start": 37.4,
+   "end": 38.22
+  },
+  {
+   "w": "so",
+   "start": 38.22,
+   "end": 38.44
+  },
+  {
+   "w": "do",
+   "start": 38.44,
+   "end": 38.64
+  },
+  {
+   "w": "about",
+   "start": 38.64,
+   "end": 38.88
+  },
+  {
+   "w": "700",
+   "start": 38.88,
+   "end": 39.46
+  },
+  {
+   "w": "soldiers",
+   "start": 39.46,
+   "end": 40.12
+  },
+  {
+   "w": "from",
+   "start": 40.12,
+   "end": 40.4
+  },
+  {
+   "w": "a",
+   "start": 40.4,
+   "end": 40.5
+  },
+  {
+   "w": "small",
+   "start": 40.5,
+   "end": 40.84
+  },
+  {
+   "w": "city",
+   "start": 40.84,
+   "end": 41.16
+  },
+  {
+   "w": "called",
+   "start": 41.16,
+   "end": 41.56
+  },
+  {
+   "w": "Thespiae.",
+   "start": 41.56,
+   "end": 42.64
+  },
+  {
+   "w": "They",
+   "start": 42.96,
+   "end": 43.08
+  },
+  {
+   "w": "fight",
+   "start": 43.08,
+   "end": 43.52
+  },
+  {
+   "w": "to",
+   "start": 43.52,
+   "end": 43.78
+  },
+  {
+   "w": "the",
+   "start": 43.78,
+   "end": 43.94
+  },
+  {
+   "w": "very",
+   "start": 43.94,
+   "end": 44.28
+  },
+  {
+   "w": "end.",
+   "start": 44.28,
+   "end": 45.66
+  },
+  {
+   "w": "History",
+   "start": 45.66,
+   "end": 46.1
+  },
+  {
+   "w": "mostly",
+   "start": 46.1,
+   "end": 46.62
+  },
+  {
+   "w": "remembers",
+   "start": 46.62,
+   "end": 47.18
+  },
+  {
+   "w": "the",
+   "start": 47.18,
+   "end": 47.36
+  },
+  {
+   "w": "Spartans,",
+   "start": 47.36,
+   "end": 48.38
+  },
+  {
+   "w": "a",
+   "start": 48.66,
+   "end": 48.72
+  },
+  {
+   "w": "defeat",
+   "start": 48.72,
+   "end": 49.16
+  },
+  {
+   "w": "that",
+   "start": 49.16,
+   "end": 49.64
+  },
+  {
+   "w": "became",
+   "start": 49.64,
+   "end": 49.98
+  },
+  {
+   "w": "the",
+   "start": 49.98,
+   "end": 50.2
+  },
+  {
+   "w": "most",
+   "start": 50.2,
+   "end": 50.5
+  },
+  {
+   "w": "famous",
+   "start": 50.5,
+   "end": 51.08
+  },
+  {
+   "w": "last",
+   "start": 51.08,
+   "end": 51.58
+  },
+  {
+   "w": "stand",
+   "start": 51.58,
+   "end": 52.06
+  },
+  {
+   "w": "in",
+   "start": 52.06,
+   "end": 52.38
+  },
+  {
+   "w": "history.",
+   "start": 52.38,
+   "end": 53.96
+  },
+  {
+   "w": "Every",
+   "start": 53.96,
+   "end": 54.28
+  },
+  {
+   "w": "legend",
+   "start": 54.28,
+   "end": 54.76
+  },
+  {
+   "w": "has",
+   "start": 54.76,
+   "end": 55.22
+  },
+  {
+   "w": "a",
+   "start": 55.22,
+   "end": 55.34
+  },
+  {
+   "w": "beginning.",
+   "start": 55.34,
+   "end": 56.48
+  }
+ ]
+}
