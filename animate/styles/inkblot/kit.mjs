@@ -409,6 +409,7 @@ export function figure(ctx, x, y, o = {}) {
   const hair = o.hair;
   if (hair === 'bob') { ctx.beginPath(); ctx.moveTo(-50, 22); ctx.bezierCurveTo(-62, -60, 62, -60, 50, 22); ctx.lineTo(36, 22); ctx.bezierCurveTo(34, -20, -34, -20, -36, 22); ctx.closePath(); fill(ctx, c); }
   if (hair === 'bun') circle(ctx, -face * 30, -44, 18, c);
+  if (hair === 'long') { for (const sx of [-1, 1]) { ctx.beginPath(); ctx.moveTo(sx * 40, -20); ctx.quadraticCurveTo(sx * 62, 20, sx * 54, 62); ctx.lineTo(sx * 36, 58); ctx.quadraticCurveTo(sx * 44, 20, sx * 30, -6); ctx.closePath(); fill(ctx, c); } }
   if (hair === 'slick') { ctx.beginPath(); ctx.ellipse(0, -18, 46, 34, 0, Math.PI, TAU); fill(ctx, c); line(ctx, -20, -44, 18, -40, P.inkSoft, 3); }
   // eyes (paper-white), brows by mood
   const look = o.look || [face * 0.4, 0], mood = o.mood || 'calm', bl = o.blink ?? 1;
@@ -426,6 +427,7 @@ export function figure(ctx, x, y, o = {}) {
   // hats
   if (o.hat === 'bowler') { ctx.beginPath(); ctx.ellipse(0, -30, 62, 10, 0, 0, TAU); fill(ctx, c); ctx.beginPath(); ctx.ellipse(0, -38, 40, 40, 0, Math.PI, TAU); fill(ctx, c); line(ctx, -40, -40, 40, -40, o.band || P.inkSoft, 6); }
   if (o.hat === 'cloche') { ctx.beginPath(); ctx.ellipse(0, -18, 50, 44, 0, Math.PI * 0.95, TAU + 0.05); fill(ctx, c); ctx.beginPath(); ctx.ellipse(-face * 12, -16, 56, 10, -face * 0.1, 0, TAU); fill(ctx, c); line(ctx, -46, -28, 46, -28, o.band || P.red, 6); }
+  if (o.hat === 'tricorn') { poly(ctx, [[-66, -26], [66, -26], [0, -84]], c); poly(ctx, [[-70, -22], [-40, -60], [-24, -24]], c); poly(ctx, [[70, -22], [40, -60], [24, -24]], c); line(ctx, -58, -28, 58, -28, o.band || P.paperDark, 4); }
   if (o.hat === 'cap') { ctx.beginPath(); ctx.ellipse(0, -32, 44, 22, 0, Math.PI, TAU); fill(ctx, c); ctx.beginPath(); ctx.ellipse(face * 30, -32, 34, 8, 0, 0, TAU); fill(ctx, c); }
   if (o.think) { ctx.save(); o.think(ctx); ctx.restore(); }
   ctx.restore();
@@ -827,6 +829,53 @@ export function numberLine(ctx, x, y, w, a = 0, b = 100, step = 10) {
   line(ctx, x, y, x + w, y, P.ink, 6);
   for (let v = a; v <= b; v += step) { const px = x + (v - a) / (b - a) * w; line(ctx, px, y - 16, px, y + 16, P.ink, 4); text(ctx, String(v), px, y + 44, 30, {}); }
   return v => x + (v - a) / (b - a) * w;
+}
+
+// ---------- more props (letters & feelings) ----------
+// A closed book (o.open 0..1 opens the cover), o.glow lights it.
+export function book(ctx, x, y, s = 1, o = {}) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(o.rot || 0); ctx.scale(s, s);
+  if (o.glow) { const g = ctx.createRadialGradient(0, 0, 10, 0, 0, 200); g.addColorStop(0, `rgba(255,236,170,${0.8 * o.glow})`); g.addColorStop(1, 'rgba(255,236,170,0)'); ctx.fillStyle = g; ctx.fillRect(-210, -210, 420, 420); }
+  rect(ctx, -90, -120, 180, 240, P.paperLight, P.ink, 4, 4);
+  for (let i = 0; i < 6; i++) line(ctx, 80, -110 + i * 44, 88, -110 + i * 44, P.greyLight, 2);
+  const w = 190 * Math.cos(clamp(o.open || 0) * Math.PI * 0.85);
+  poly(ctx, [[-96, -126], [-96 + w, -126], [-96 + w, 126], [-96, 126]], o.color || P.redDark, P.ink, 5);
+  if (w > 80) { rect(ctx, -96 + w * 0.2, -60, w * 0.6, 50, null, P.ochre, 3); if (o.title) text(ctx, o.title, -96 + w / 2, -35, 22, { font: 'serif', color: P.ochre, max: w * 0.55 }); }
+  rect(ctx, -104, -126, 16, 252, P.ink, null, 0, 4);
+  ctx.restore();
+}
+// A folded letter / note with handwriting; k writes it on.
+export function letter(ctx, x, y, w, h, lines = [], k = 1, o = {}) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(o.rot || 0);
+  rect(ctx, -w / 2, -h / 2, w, h, o.fill || '#f3e6c4', P.ink, 4, 4);
+  line(ctx, -w / 2, -h / 6, w / 2, -h / 6, 'rgba(0,0,0,0.08)', 3); line(ctx, -w / 2, h / 6, w / 2, h / 6, 'rgba(0,0,0,0.08)', 3);
+  const size = o.size || h / (lines.length + 1.5) * 0.8;
+  lines.forEach((t, i) => scrawl(ctx, t, -w / 2 + 30, -h / 2 + (i + 1) * h / (lines.length + 1), size, clamp(k * lines.length - i), { align: 'left', color: o.color || P.ink, rot: 0 }));
+  if (o.seal) { circle(ctx, w / 2 - 50, h / 2 - 46, 30 * o.seal, P.red, P.redDark, 3); text(ctx, o.sealText || 'BF', w / 2 - 50, h / 2 - 44, 22 * o.seal, { font: 'serif', color: P.paperLight }); }
+  ctx.restore();
+}
+export function quill(ctx, x, y, s = 1, rot = -0.6) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
+  ctx.beginPath(); ctx.moveTo(0, 0); ctx.quadraticCurveTo(-30, -120, 10, -240); ctx.quadraticCurveTo(40, -120, 0, 0); fill(ctx, P.paperLight); stroke(ctx, P.ink, 3);
+  line(ctx, 0, 0, 8, -230, P.ink, 3);
+  for (let i = 0; i < 9; i++) line(ctx, 3 + i, -40 - i * 22, -18 + i * 1.5, -60 - i * 22, P.greyLight, 2);
+  ctx.restore();
+}
+// A heart (k pops it in).
+export function heart(ctx, x, y, r, color = P.red, k = 1) {
+  if (k <= 0) return;
+  ctx.save(); ctx.translate(x, y); ctx.scale(k * r / 30, k * r / 30);
+  ctx.beginPath(); ctx.moveTo(0, 26); ctx.bezierCurveTo(-46, -4, -26, -42, 0, -18); ctx.bezierCurveTo(26, -42, 46, -4, 0, 26); fill(ctx, color);
+  ctx.restore();
+}
+// An angry scribble cloud (a grudge) above a head; k 0..1 grows it.
+export function grudge(ctx, x, y, r, t = 0, k = 1, color = P.ink) {
+  if (k <= 0) return;
+  ctx.save(); ctx.translate(x, y); ctx.scale(k, k);
+  ctx.beginPath();
+  for (let i = 0; i <= 90; i++) { const a = i / 90 * TAU * 4, rr = r * (0.55 + 0.45 * Math.abs(Math.sin(i * 1.7 + t * 9))); i ? ctx.lineTo(Math.cos(a) * rr, Math.sin(a) * rr * 0.6) : ctx.moveTo(rr, 0); }
+  stroke(ctx, color, 4);
+  ctx.restore();
 }
 
 // Card-stock texture (fibres, mottling, foxing spots) — multiply it on top.

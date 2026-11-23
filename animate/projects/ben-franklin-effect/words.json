@@ -1,0 +1,566 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "Want your enemy to like you? Ask them for a favor. In the 1730s, Benjamin Franklin had a rival who spoke out against him. Franklin didn't flatter him. He asked to borrow a rare book. The rival sent it. Franklin returned it with a thank you note. Next time they met, the rival spoke to him for the first time. Kindly. They became friends for life. Here's the trick. Your brain hates a contradiction. I helped him, so I must like him. In 1969, psychologists tested it. People who did the researcher a personal favor liked him more. So, keep the favor small, and always say thanks. Follow for more mind tricks.",
+ "words": [
+  {
+   "w": "Want",
+   "start": 0.04,
+   "end": 0.22
+  },
+  {
+   "w": "your",
+   "start": 0.22,
+   "end": 0.44
+  },
+  {
+   "w": "enemy",
+   "start": 0.44,
+   "end": 0.74
+  },
+  {
+   "w": "to",
+   "start": 0.74,
+   "end": 0.92
+  },
+  {
+   "w": "like",
+   "start": 0.92,
+   "end": 1.12
+  },
+  {
+   "w": "you?",
+   "start": 1.12,
+   "end": 2.06
+  },
+  {
+   "w": "Ask",
+   "start": 2.06,
+   "end": 2.18
+  },
+  {
+   "w": "them",
+   "start": 2.18,
+   "end": 2.38
+  },
+  {
+   "w": "for",
+   "start": 2.38,
+   "end": 2.54
+  },
+  {
+   "w": "a",
+   "start": 2.54,
+   "end": 2.7
+  },
+  {
+   "w": "favor.",
+   "start": 2.7,
+   "end": 3.44
+  },
+  {
+   "w": "In",
+   "start": 4.08,
+   "end": 4.16
+  },
+  {
+   "w": "the",
+   "start": 4.16,
+   "end": 4.28
+  },
+  {
+   "w": "1730s,",
+   "start": 4.28,
+   "end": 5.48
+  },
+  {
+   "w": "Benjamin",
+   "start": 5.48,
+   "end": 5.84
+  },
+  {
+   "w": "Franklin",
+   "start": 5.84,
+   "end": 6.22
+  },
+  {
+   "w": "had",
+   "start": 6.22,
+   "end": 6.48
+  },
+  {
+   "w": "a",
+   "start": 6.48,
+   "end": 6.64
+  },
+  {
+   "w": "rival",
+   "start": 6.64,
+   "end": 7
+  },
+  {
+   "w": "who",
+   "start": 7,
+   "end": 7.22
+  },
+  {
+   "w": "spoke",
+   "start": 7.22,
+   "end": 7.5
+  },
+  {
+   "w": "out",
+   "start": 7.5,
+   "end": 7.76
+  },
+  {
+   "w": "against",
+   "start": 7.76,
+   "end": 8.04
+  },
+  {
+   "w": "him.",
+   "start": 8.04,
+   "end": 8.76
+  },
+  {
+   "w": "Franklin",
+   "start": 9.12,
+   "end": 9.34
+  },
+  {
+   "w": "didn't",
+   "start": 9.34,
+   "end": 9.76
+  },
+  {
+   "w": "flatter",
+   "start": 9.76,
+   "end": 10.1
+  },
+  {
+   "w": "him.",
+   "start": 10.1,
+   "end": 10.92
+  },
+  {
+   "w": "He",
+   "start": 10.92,
+   "end": 11.04
+  },
+  {
+   "w": "asked",
+   "start": 11.04,
+   "end": 11.3
+  },
+  {
+   "w": "to",
+   "start": 11.3,
+   "end": 11.54
+  },
+  {
+   "w": "borrow",
+   "start": 11.54,
+   "end": 11.78
+  },
+  {
+   "w": "a",
+   "start": 11.78,
+   "end": 12.06
+  },
+  {
+   "w": "rare",
+   "start": 12.06,
+   "end": 12.38
+  },
+  {
+   "w": "book.",
+   "start": 12.38,
+   "end": 13.28
+  },
+  {
+   "w": "The",
+   "start": 13.42,
+   "end": 13.52
+  },
+  {
+   "w": "rival",
+   "start": 13.52,
+   "end": 13.78
+  },
+  {
+   "w": "sent",
+   "start": 13.78,
+   "end": 14.04
+  },
+  {
+   "w": "it.",
+   "start": 14.04,
+   "end": 14.9
+  },
+  {
+   "w": "Franklin",
+   "start": 14.9,
+   "end": 15.12
+  },
+  {
+   "w": "returned",
+   "start": 15.12,
+   "end": 15.58
+  },
+  {
+   "w": "it",
+   "start": 15.58,
+   "end": 15.8
+  },
+  {
+   "w": "with",
+   "start": 15.8,
+   "end": 16.1
+  },
+  {
+   "w": "a",
+   "start": 16.1,
+   "end": 16.24
+  },
+  {
+   "w": "thank",
+   "start": 16.24,
+   "end": 16.44
+  },
+  {
+   "w": "you",
+   "start": 16.44,
+   "end": 16.54
+  },
+  {
+   "w": "note.",
+   "start": 16.54,
+   "end": 17.28
+  },
+  {
+   "w": "Next",
+   "start": 17.66,
+   "end": 17.86
+  },
+  {
+   "w": "time",
+   "start": 17.86,
+   "end": 18.12
+  },
+  {
+   "w": "they",
+   "start": 18.12,
+   "end": 18.26
+  },
+  {
+   "w": "met,",
+   "start": 18.26,
+   "end": 18.72
+  },
+  {
+   "w": "the",
+   "start": 18.72,
+   "end": 18.84
+  },
+  {
+   "w": "rival",
+   "start": 18.84,
+   "end": 19.12
+  },
+  {
+   "w": "spoke",
+   "start": 19.12,
+   "end": 19.46
+  },
+  {
+   "w": "to",
+   "start": 19.46,
+   "end": 19.64
+  },
+  {
+   "w": "him",
+   "start": 19.64,
+   "end": 19.78
+  },
+  {
+   "w": "for",
+   "start": 19.78,
+   "end": 19.92
+  },
+  {
+   "w": "the",
+   "start": 19.92,
+   "end": 20.02
+  },
+  {
+   "w": "first",
+   "start": 20.02,
+   "end": 20.3
+  },
+  {
+   "w": "time.",
+   "start": 20.3,
+   "end": 20.7
+  },
+  {
+   "w": "Kindly.",
+   "start": 21.36,
+   "end": 21.78
+  },
+  {
+   "w": "They",
+   "start": 21.78,
+   "end": 22.58
+  },
+  {
+   "w": "became",
+   "start": 22.58,
+   "end": 22.9
+  },
+  {
+   "w": "friends",
+   "start": 22.9,
+   "end": 23.32
+  },
+  {
+   "w": "for",
+   "start": 23.32,
+   "end": 23.54
+  },
+  {
+   "w": "life.",
+   "start": 23.54,
+   "end": 24.36
+  },
+  {
+   "w": "Here's",
+   "start": 24.86,
+   "end": 25.1
+  },
+  {
+   "w": "the",
+   "start": 25.1,
+   "end": 25.24
+  },
+  {
+   "w": "trick.",
+   "start": 25.24,
+   "end": 26.12
+  },
+  {
+   "w": "Your",
+   "start": 26.12,
+   "end": 26.22
+  },
+  {
+   "w": "brain",
+   "start": 26.22,
+   "end": 26.74
+  },
+  {
+   "w": "hates",
+   "start": 26.74,
+   "end": 27.34
+  },
+  {
+   "w": "a",
+   "start": 27.34,
+   "end": 27.52
+  },
+  {
+   "w": "contradiction.",
+   "start": 27.52,
+   "end": 28.5
+  },
+  {
+   "w": "I",
+   "start": 28.62,
+   "end": 29.02
+  },
+  {
+   "w": "helped",
+   "start": 29.02,
+   "end": 29.36
+  },
+  {
+   "w": "him,",
+   "start": 29.36,
+   "end": 30.18
+  },
+  {
+   "w": "so",
+   "start": 30.18,
+   "end": 30.28
+  },
+  {
+   "w": "I",
+   "start": 30.28,
+   "end": 30.42
+  },
+  {
+   "w": "must",
+   "start": 30.42,
+   "end": 30.66
+  },
+  {
+   "w": "like",
+   "start": 30.66,
+   "end": 30.94
+  },
+  {
+   "w": "him.",
+   "start": 30.94,
+   "end": 32.1
+  },
+  {
+   "w": "In",
+   "start": 32.1,
+   "end": 32.2
+  },
+  {
+   "w": "1969,",
+   "start": 32.2,
+   "end": 33.46
+  },
+  {
+   "w": "psychologists",
+   "start": 33.46,
+   "end": 34.02
+  },
+  {
+   "w": "tested",
+   "start": 34.02,
+   "end": 34.66
+  },
+  {
+   "w": "it.",
+   "start": 34.66,
+   "end": 35.64
+  },
+  {
+   "w": "People",
+   "start": 35.64,
+   "end": 35.74
+  },
+  {
+   "w": "who",
+   "start": 35.74,
+   "end": 35.92
+  },
+  {
+   "w": "did",
+   "start": 35.92,
+   "end": 36.12
+  },
+  {
+   "w": "the",
+   "start": 36.12,
+   "end": 36.22
+  },
+  {
+   "w": "researcher",
+   "start": 36.22,
+   "end": 36.8
+  },
+  {
+   "w": "a",
+   "start": 36.8,
+   "end": 36.96
+  },
+  {
+   "w": "personal",
+   "start": 36.96,
+   "end": 37.48
+  },
+  {
+   "w": "favor",
+   "start": 37.48,
+   "end": 37.88
+  },
+  {
+   "w": "liked",
+   "start": 37.88,
+   "end": 38.5
+  },
+  {
+   "w": "him",
+   "start": 38.5,
+   "end": 38.68
+  },
+  {
+   "w": "more.",
+   "start": 38.68,
+   "end": 39.74
+  },
+  {
+   "w": "So,",
+   "start": 39.74,
+   "end": 39.96
+  },
+  {
+   "w": "keep",
+   "start": 39.96,
+   "end": 40.54
+  },
+  {
+   "w": "the",
+   "start": 40.54,
+   "end": 40.7
+  },
+  {
+   "w": "favor",
+   "start": 40.7,
+   "end": 41.02
+  },
+  {
+   "w": "small,",
+   "start": 41.02,
+   "end": 41.52
+  },
+  {
+   "w": "and",
+   "start": 41.52,
+   "end": 42.26
+  },
+  {
+   "w": "always",
+   "start": 42.26,
+   "end": 42.82
+  },
+  {
+   "w": "say",
+   "start": 42.82,
+   "end": 43.32
+  },
+  {
+   "w": "thanks.",
+   "start": 43.32,
+   "end": 43.8
+  },
+  {
+   "w": "Follow",
+   "start": 44.78,
+   "end": 45
+  },
+  {
+   "w": "for",
+   "start": 45,
+   "end": 45.34
+  },
+  {
+   "w": "more",
+   "start": 45.34,
+   "end": 45.58
+  },
+  {
+   "w": "mind",
+   "start": 45.58,
+   "end": 45.96
+  },
+  {
+   "w": "tricks.",
+   "start": 45.96,
+   "end": 46.24
+  }
+ ]
+}
