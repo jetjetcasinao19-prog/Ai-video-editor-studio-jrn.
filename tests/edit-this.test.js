@@ -92,7 +92,7 @@ const dark = c => c[0] < 60 && c[1] < 60 && c[2] < 60;
   try {
     await page.goto(PAGE);
     check('Edit this panel and tab shown', await page.isVisible('#editThisBox') && !!(await page.$('#topTabs button[data-go="editThisBox"]')));
-    check('brand kit filled with How it Started', (await page.inputValue('#etBrandHandle')) === '@HOWITSTARTED-YT1' &&
+    check('brand kit filled with How it Started', (await page.inputValue('#etBrandHandle')) === '@MINDTRACEOFFICIAL-YT' &&
       (await page.inputValue('#etBrandOutro')) === 'Subscribe for more origin stories');
     await page.click('#etRun');
     check('asks for a video first', /Import a video first/.test(await page.textContent('#etLog')));

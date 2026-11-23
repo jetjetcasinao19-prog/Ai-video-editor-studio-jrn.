@@ -13,7 +13,7 @@ export const meta = {
   seed: 27,
   captionChars: 24,
   caseLine: 'THE MIND FILES  ·  CASE No. 1927  ·  CONFIDENTIAL',
-  brand: { handle: '@HOWITSTARTED-YT1', logo: '../../../brand/logo.png' },
+  brand: { handle: '@MINDTRACEOFFICIAL-YT', logo: '../../../brand/logo.png' },
   outro: { at: 49.35, text: 'Subscribe for more origin stories' },
 };
 
