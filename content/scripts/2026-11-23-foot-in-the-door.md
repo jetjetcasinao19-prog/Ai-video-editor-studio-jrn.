@@ -1,7 +1,8 @@
 # Ask Small First: The Foot-in-the-Door Trick
 
 - Format: 9:16 (YouTube Shorts; also Reels / TikTok)
-- Target length: 60 seconds (about 160 spoken words)
+- Target length: about 48 seconds of voice (about 110 words), under 60 s
+  with the 2.5 s brand outro and natural pauses
 - Platform(s): YouTube Shorts
 - Niche: psychology / mind tricks
 - Research file: content/research/2026-11-23-foot-in-the-door.md
@@ -11,33 +12,26 @@
 2. How 17% became 76%
 3. The sneakiest way to get a yes
 
-## Hook (0–3 s)
+## Hook (0–3.5 s)
 "Want a big yes? Don't ask for it. Not yet."
 (On screen: hand reaching for a door, it slams; text **"NOT YET."**)
 
 ## Full voice-over (read this)
 > Want a big yes? Don't ask for it. Not yet.
 >
-> In 1966, two Stanford researchers went door to door in California.
-> They asked people to put a huge, ugly "Drive Carefully" sign on their front lawn.
+> In 1966, Stanford researchers asked people to put a huge, ugly sign on their front lawn.
+> Only seventeen percent said yes.
 >
-> Almost everyone said no. Only seventeen percent agreed.
->
-> But one group got an earlier visit, two weeks before.
-> Just a tiny ask: a three-inch "Be a safe driver" sign for the window.
-> Easy yes.
->
-> Then a different person showed up with the giant sign.
-> This time, seventy-six percent said yes.
+> But one group got a tiny ask first: a small sign for the window. Easy yes.
+> Two weeks later, the giant sign. Seventy-six percent said yes.
 >
 > **Here's the trick.**
-> That first tiny yes changes how you see yourself.
-> "I'm the kind of person who cares about this."
-> And people act like the person they think they are.
+> That first yes changes how you see yourself.
+> "I'm someone who cares about this." And you act like that person.
 >
-> So start small. Get the first yes. Then make the big ask.
+> So start small. Then make the big ask.
 >
-> And if someone's doing it to you? Now you know. You can still say no.
+> Someone doing it to you? You can still say no.
 >
 > Follow for more mind tricks.
 
@@ -45,14 +39,13 @@
 | # | Time | Visual | Voice-over | On-screen text |
 |---|---|---|---|---|
 | 1 | 0–3.5 s | Knock on a door, door slams; punch zoom on face | Want a big yes? Don't ask for it. Not yet. | NOT YET. |
-| 2 | 3.5–11 s | 1960s suburban street, person with clipboard (B-roll or stickman) | In 1966, two Stanford researchers went door to door in California. They asked people to put a huge, ugly "Drive Carefully" sign on their front lawn. | 1966 EXPERIMENT |
-| 3 | 11–16 s | Giant sign covering a house; heads shaking | Almost everyone said no. Only seventeen percent agreed. | ASKED COLD → 17% |
-| 4 | 16–25.5 s | Calendar flips back 2 weeks; tiny sign stuck in a window, nod | But one group got an earlier visit, two weeks before. Just a tiny ask: a three-inch "Be a safe driver" sign for the window. Easy yes. | STEP 1: TINY ASK ✅ |
-| 5 | 25.5–33 s | New person at the door with the giant sign; nod, sign goes up | Then a different person showed up with the giant sign. This time, seventy-six percent said yes. | AFTER A TINY YES → 76% 🤯 |
-| 6 | 33–46 s | Hard cut, black screen, yellow text; then person looking in a mirror | **Here's the trick.** That first tiny yes changes how you see yourself. "I'm the kind of person who cares about this." And people act like the person they think they are. | HERE'S THE TRICK |
-| 7 | 46–52 s | Three steps drawn as stairs | So start small. Get the first yes. Then make the big ask. | SMALL YES → BIG YES |
-| 8 | 52–58 s | Face to camera, raised eyebrow | And if someone's doing it to you? Now you know. You can still say no. | NOW YOU KNOW 👀 |
-| 9 | 58–60 s | Logo / subscribe | Follow for more mind tricks. | FOLLOW FOR MORE |
+| 2 | 3.5–13.5 s | 1960s street, person with clipboard; giant sign covering a house; heads shaking | In 1966, Stanford researchers asked people to put a huge, ugly sign on their front lawn. Only seventeen percent said yes. | ASKED COLD → 17% |
+| 3 | 13.5–20.5 s | Tiny sign stuck in a window, nod | But one group got a tiny ask first: a small sign for the window. Easy yes. | STEP 1: TINY ASK ✅ |
+| 4 | 20.5–26 s | Calendar flips 2 weeks; giant sign goes up on the lawn | Two weeks later, the giant sign. Seventy-six percent said yes. | AFTER A TINY YES → 76% 🤯 |
+| 5 | 26–37 s | Hard cut, black screen, yellow text; then person looking in a mirror | **Here's the trick.** That first yes changes how you see yourself. "I'm someone who cares about this." And you act like that person. | HERE'S THE TRICK |
+| 6 | 37–41 s | Two steps drawn as stairs | So start small. Then make the big ask. | SMALL YES → BIG YES |
+| 7 | 41–46 s | Face to camera, raised eyebrow | Someone doing it to you? You can still say no. | NOW YOU KNOW 👀 |
+| 8 | 46–48 s | Logo / subscribe | Follow for more mind tricks. | FOLLOW FOR MORE |
 
 ## Call to action
 "Follow for more mind tricks." Pinned comment: "Has someone used this on you? 👇"
@@ -75,87 +68,79 @@ Want a big yes?
 Don't ask for it. Not yet.
 
 3
-00:00:03,500 --> 00:00:07,000
-In 1966, two Stanford researchers
+00:00:03,500 --> 00:00:06,500
+In 1966, Stanford researchers
 
 4
-00:00:07,000 --> 00:00:09,000
-went door to door in California.
+00:00:06,500 --> 00:00:09,500
+asked people for a huge, ugly sign
 
 5
-00:00:09,000 --> 00:00:11,000
-They asked for a huge, ugly sign
+00:00:09,500 --> 00:00:11,000
+on their front lawn.
 
 6
-00:00:11,000 --> 00:00:13,000
-on people's front lawns.
+00:00:11,000 --> 00:00:13,500
+Only 17% said yes.
 
 7
-00:00:13,000 --> 00:00:16,000
-Only 17% agreed.
+00:00:13,500 --> 00:00:16,500
+But one group got a tiny ask first:
 
 8
-00:00:16,000 --> 00:00:19,500
-But one group got an earlier visit.
+00:00:16,500 --> 00:00:19,000
+a small sign for the window.
 
 9
-00:00:19,500 --> 00:00:23,000
-A tiny ask: a 3-inch window sign.
-
-10
-00:00:23,000 --> 00:00:25,500
+00:00:19,000 --> 00:00:20,500
 Easy yes.
 
+10
+00:00:20,500 --> 00:00:23,000
+Two weeks later, the giant sign.
+
 11
-00:00:25,500 --> 00:00:29,500
-Then came the giant sign.
+00:00:23,000 --> 00:00:26,000
+76% said yes.
 
 12
-00:00:29,500 --> 00:00:33,000
-This time, 76% said yes.
-
-13
-00:00:33,000 --> 00:00:35,000
+00:00:26,000 --> 00:00:28,000
 Here's the trick.
 
+13
+00:00:28,000 --> 00:00:30,000
+That first yes changes
+
 14
-00:00:35,000 --> 00:00:38,500
-That first yes changes how you
+00:00:30,000 --> 00:00:32,000
+how you see yourself.
 
 15
-00:00:38,500 --> 00:00:40,500
-see yourself.
-
-16
-00:00:40,500 --> 00:00:43,500
+00:00:32,000 --> 00:00:35,000
 "I'm someone who cares about this."
 
-17
-00:00:43,500 --> 00:00:46,000
+16
+00:00:35,000 --> 00:00:37,000
 And you act like that person.
 
-18
-00:00:46,000 --> 00:00:48,000
+17
+00:00:37,000 --> 00:00:39,000
 So start small.
 
-19
-00:00:48,000 --> 00:00:50,000
-Get the first yes.
-
-20
-00:00:50,000 --> 00:00:52,000
+18
+00:00:39,000 --> 00:00:41,000
 Then make the big ask.
 
-21
-00:00:52,000 --> 00:00:55,000
+19
+00:00:41,000 --> 00:00:43,500
 Someone doing it to you?
 
-22
-00:00:55,000 --> 00:00:58,000
-Now you know. You can still say no.
+20
+00:00:43,500 --> 00:00:46,000
+You can still say no.
 
-23
-00:00:58,000 --> 00:01:00,000
+21
+00:00:46,000 --> 00:00:48,000
 Follow for more mind tricks.
 ```
 
