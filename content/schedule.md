@@ -129,6 +129,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-01-24 Sun | 8:00 PM | Mon Jan 25, 9:00 AM | TikTok | Gladiator fights didn't start as entertainment. | content/posts/2026-11-23-gladiators-ottoman.md | ready |
 | 2027-01-25 Mon | 7:00 PM | Tue Jan 26, 8:00 AM | Instagram Reels | A duty owed to the dead, laid out tile by tile. | content/posts/2026-11-23-gladiators-ottoman.md | ready |
 | 2027-01-25 Mon | 8:00 PM | Tue Jan 26, 9:00 AM | Facebook Reels | Did you know gladiator fights in Rome began as part of a funeral? | content/posts/2026-11-23-gladiators-ottoman.md | ready |
+| 2027-01-26 Tue | 7:00 PM | Wed Jan 27, 8:00 AM | YouTube Shorts | The Great Wall Is Many Walls | content/posts/2026-11-23-great-wall-ottoman.md | ready |
+| 2027-01-26 Tue | 8:00 PM | Wed Jan 27, 9:00 AM | TikTok | Plot twist: there is no single Great Wall. | content/posts/2026-11-23-great-wall-ottoman.md | ready |
+| 2027-01-27 Wed | 7:00 PM | Thu Jan 28, 8:00 AM | Instagram Reels | Not one wall. Many. | content/posts/2026-11-23-great-wall-ottoman.md | ready |
+| 2027-01-27 Wed | 8:00 PM | Thu Jan 28, 9:00 AM | Facebook Reels | Think the Great Wall of China was built in one go by one emperor? Not quite. | content/posts/2026-11-23-great-wall-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the

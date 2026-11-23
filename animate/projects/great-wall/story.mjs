@@ -257,7 +257,7 @@ export const scenes = [
       // an eye looking down from orbit, crossed out
       const e = tween(u, ey - 0.6, ey);
       if (e > 0) { ctx.save(); ctx.globalAlpha = e; ctx.translate(W / 2, 220); ctx.beginPath(); ctx.moveTo(-120, 0); ctx.quadraticCurveTo(0, -80, 120, 0); ctx.quadraticCurveTo(0, 80, -120, 0); k.fillStroke(ctx, P.white, P.ink, 4); k.circle(ctx, 0, 0, 34, '#5a3a1a', P.ink, 2); k.circle(ctx, 0, 0, 14, P.ink, null); ctx.beginPath(); ctx.moveTo(-140, -70); ctx.lineTo(140, 70); k.stroke(ctx, P.verm, 14); ctx.restore(); }
-      k.label(ctx, 'ASTRONAUTS IN LOW ORBIT AGREE', W / 2, 1040, 20, tween(u, ey, ey + 0.4));
+      k.label(ctx, 'NASA: HARD TO SPOT EVEN FROM ORBIT', W / 2, 1040, 20, tween(u, ey, ey + 0.4));
     },
   },
   { // 42.3 "A patchwork of enemy walls that became a symbol of a nation."
