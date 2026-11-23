@@ -1,0 +1,536 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "A random number just changed your answer. You didn't even notice. In 1974, psychologists Daniel Kahneman and Amos Tversky spun a wheel in front of people. It landed on 10, or 65. Then they asked, what percent of UN countries are in Africa? People who saw 10 guessed about 25%. People who saw 65 guessed about 45. A random wheel, almost double the answer. Here's the trick. The first number you hear becomes an anchor. Your brain starts there and doesn't move far enough. So in a negotiation, say your number first. And that \"was $200, now $99\" tag? That's an anchor too. Follow for more mind tricks.",
+ "words": [
+  {
+   "w": "A",
+   "start": 0,
+   "end": 0.16
+  },
+  {
+   "w": "random",
+   "start": 0.16,
+   "end": 0.5
+  },
+  {
+   "w": "number",
+   "start": 0.5,
+   "end": 0.94
+  },
+  {
+   "w": "just",
+   "start": 0.94,
+   "end": 1.32
+  },
+  {
+   "w": "changed",
+   "start": 1.32,
+   "end": 1.84
+  },
+  {
+   "w": "your",
+   "start": 1.84,
+   "end": 2.04
+  },
+  {
+   "w": "answer.",
+   "start": 2.04,
+   "end": 2.94
+  },
+  {
+   "w": "You",
+   "start": 3.08,
+   "end": 3.16
+  },
+  {
+   "w": "didn't",
+   "start": 3.16,
+   "end": 3.38
+  },
+  {
+   "w": "even",
+   "start": 3.38,
+   "end": 3.64
+  },
+  {
+   "w": "notice.",
+   "start": 3.64,
+   "end": 4.48
+  },
+  {
+   "w": "In",
+   "start": 4.94,
+   "end": 5.04
+  },
+  {
+   "w": "1974,",
+   "start": 5.04,
+   "end": 6.64
+  },
+  {
+   "w": "psychologists",
+   "start": 6.64,
+   "end": 6.9
+  },
+  {
+   "w": "Daniel",
+   "start": 6.9,
+   "end": 7.5
+  },
+  {
+   "w": "Kahneman",
+   "start": 7.5,
+   "end": 7.9
+  },
+  {
+   "w": "and",
+   "start": 7.9,
+   "end": 8.22
+  },
+  {
+   "w": "Amos",
+   "start": 8.22,
+   "end": 8.62
+  },
+  {
+   "w": "Tversky",
+   "start": 8.62,
+   "end": 9.08
+  },
+  {
+   "w": "spun",
+   "start": 9.48,
+   "end": 9.76
+  },
+  {
+   "w": "a",
+   "start": 9.76,
+   "end": 9.96
+  },
+  {
+   "w": "wheel",
+   "start": 9.96,
+   "end": 10.22
+  },
+  {
+   "w": "in",
+   "start": 10.22,
+   "end": 10.44
+  },
+  {
+   "w": "front",
+   "start": 10.44,
+   "end": 10.62
+  },
+  {
+   "w": "of",
+   "start": 10.62,
+   "end": 10.76
+  },
+  {
+   "w": "people.",
+   "start": 10.76,
+   "end": 11.04
+  },
+  {
+   "w": "It",
+   "start": 11.64,
+   "end": 11.76
+  },
+  {
+   "w": "landed",
+   "start": 11.76,
+   "end": 12.02
+  },
+  {
+   "w": "on",
+   "start": 12.02,
+   "end": 12.26
+  },
+  {
+   "w": "10,",
+   "start": 12.26,
+   "end": 12.56
+  },
+  {
+   "w": "or",
+   "start": 12.56,
+   "end": 13.16
+  },
+  {
+   "w": "65.",
+   "start": 13.16,
+   "end": 13.66
+  },
+  {
+   "w": "Then",
+   "start": 14.64,
+   "end": 14.82
+  },
+  {
+   "w": "they",
+   "start": 14.82,
+   "end": 14.96
+  },
+  {
+   "w": "asked,",
+   "start": 14.96,
+   "end": 15.82
+  },
+  {
+   "w": "what",
+   "start": 15.9,
+   "end": 16
+  },
+  {
+   "w": "percent",
+   "start": 16,
+   "end": 16.46
+  },
+  {
+   "w": "of",
+   "start": 16.46,
+   "end": 16.74
+  },
+  {
+   "w": "UN",
+   "start": 16.74,
+   "end": 17.14
+  },
+  {
+   "w": "countries",
+   "start": 17.14,
+   "end": 17.68
+  },
+  {
+   "w": "are",
+   "start": 17.68,
+   "end": 18.02
+  },
+  {
+   "w": "in",
+   "start": 18.02,
+   "end": 18.16
+  },
+  {
+   "w": "Africa?",
+   "start": 18.16,
+   "end": 18.56
+  },
+  {
+   "w": "People",
+   "start": 19.62,
+   "end": 19.84
+  },
+  {
+   "w": "who",
+   "start": 19.84,
+   "end": 20.02
+  },
+  {
+   "w": "saw",
+   "start": 20.02,
+   "end": 20.22
+  },
+  {
+   "w": "10",
+   "start": 20.22,
+   "end": 20.66
+  },
+  {
+   "w": "guessed",
+   "start": 20.66,
+   "end": 21.24
+  },
+  {
+   "w": "about",
+   "start": 21.24,
+   "end": 21.52
+  },
+  {
+   "w": "25%.",
+   "start": 21.52,
+   "end": 22.58
+  },
+  {
+   "w": "People",
+   "start": 23.16,
+   "end": 23.56
+  },
+  {
+   "w": "who",
+   "start": 23.56,
+   "end": 23.74
+  },
+  {
+   "w": "saw",
+   "start": 23.74,
+   "end": 23.98
+  },
+  {
+   "w": "65",
+   "start": 23.98,
+   "end": 24.56
+  },
+  {
+   "w": "guessed",
+   "start": 24.56,
+   "end": 25.3
+  },
+  {
+   "w": "about",
+   "start": 25.3,
+   "end": 25.6
+  },
+  {
+   "w": "45.",
+   "start": 25.6,
+   "end": 26.16
+  },
+  {
+   "w": "A",
+   "start": 26.14,
+   "end": 27.16
+  },
+  {
+   "w": "random",
+   "start": 27.16,
+   "end": 27.7
+  },
+  {
+   "w": "wheel,",
+   "start": 27.7,
+   "end": 28.66
+  },
+  {
+   "w": "almost",
+   "start": 28.66,
+   "end": 29.02
+  },
+  {
+   "w": "double",
+   "start": 29.02,
+   "end": 29.58
+  },
+  {
+   "w": "the",
+   "start": 29.58,
+   "end": 29.78
+  },
+  {
+   "w": "answer.",
+   "start": 29.78,
+   "end": 30.66
+  },
+  {
+   "w": "Here's",
+   "start": 31.16,
+   "end": 31.4
+  },
+  {
+   "w": "the",
+   "start": 31.4,
+   "end": 31.54
+  },
+  {
+   "w": "trick.",
+   "start": 31.54,
+   "end": 32.32
+  },
+  {
+   "w": "The",
+   "start": 32.5,
+   "end": 32.6
+  },
+  {
+   "w": "first",
+   "start": 32.6,
+   "end": 32.96
+  },
+  {
+   "w": "number",
+   "start": 32.96,
+   "end": 33.3
+  },
+  {
+   "w": "you",
+   "start": 33.3,
+   "end": 33.48
+  },
+  {
+   "w": "hear",
+   "start": 33.48,
+   "end": 33.78
+  },
+  {
+   "w": "becomes",
+   "start": 33.78,
+   "end": 34.32
+  },
+  {
+   "w": "an",
+   "start": 34.32,
+   "end": 34.62
+  },
+  {
+   "w": "anchor.",
+   "start": 34.62,
+   "end": 35.54
+  },
+  {
+   "w": "Your",
+   "start": 35.7,
+   "end": 35.82
+  },
+  {
+   "w": "brain",
+   "start": 35.82,
+   "end": 36.16
+  },
+  {
+   "w": "starts",
+   "start": 36.16,
+   "end": 36.62
+  },
+  {
+   "w": "there",
+   "start": 36.62,
+   "end": 36.94
+  },
+  {
+   "w": "and",
+   "start": 36.94,
+   "end": 37.28
+  },
+  {
+   "w": "doesn't",
+   "start": 37.28,
+   "end": 37.62
+  },
+  {
+   "w": "move",
+   "start": 37.62,
+   "end": 37.88
+  },
+  {
+   "w": "far",
+   "start": 37.88,
+   "end": 38.18
+  },
+  {
+   "w": "enough.",
+   "start": 38.18,
+   "end": 39.04
+  },
+  {
+   "w": "So",
+   "start": 39.32,
+   "end": 39.54
+  },
+  {
+   "w": "in",
+   "start": 39.54,
+   "end": 39.76
+  },
+  {
+   "w": "a",
+   "start": 39.76,
+   "end": 39.9
+  },
+  {
+   "w": "negotiation,",
+   "start": 39.9,
+   "end": 41.16
+  },
+  {
+   "w": "say",
+   "start": 41.16,
+   "end": 41.32
+  },
+  {
+   "w": "your",
+   "start": 41.32,
+   "end": 41.68
+  },
+  {
+   "w": "number",
+   "start": 41.68,
+   "end": 42.08
+  },
+  {
+   "w": "first.",
+   "start": 42.08,
+   "end": 42.62
+  },
+  {
+   "w": "And",
+   "start": 43.38,
+   "end": 43.52
+  },
+  {
+   "w": "that",
+   "start": 43.52,
+   "end": 43.72
+  },
+  {
+   "w": "\"was $200,",
+   "start": 43.72,
+   "end": 45.28
+  },
+  {
+   "w": "now $99\"",
+   "start": 45.28,
+   "end": 46.8
+  },
+  {
+   "w": "tag?",
+   "start": 46.8,
+   "end": 47.52
+  },
+  {
+   "w": "That's",
+   "start": 47.68,
+   "end": 48
+  },
+  {
+   "w": "an",
+   "start": 48,
+   "end": 48.1
+  },
+  {
+   "w": "anchor",
+   "start": 48.1,
+   "end": 48.4
+  },
+  {
+   "w": "too.",
+   "start": 48.4,
+   "end": 48.7
+  },
+  {
+   "w": "Follow",
+   "start": 49.66,
+   "end": 49.86
+  },
+  {
+   "w": "for",
+   "start": 49.86,
+   "end": 50.1
+  },
+  {
+   "w": "more",
+   "start": 50.1,
+   "end": 50.36
+  },
+  {
+   "w": "mind",
+   "start": 50.36,
+   "end": 50.7
+  },
+  {
+   "w": "tricks.",
+   "start": 50.7,
+   "end": 51.5
+  }
+ ]
+}

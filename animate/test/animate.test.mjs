@@ -71,6 +71,23 @@ test('two channels: Ottoman shorts use How it Started, INKBLOT shorts use MindTr
   }
 });
 
+test('captions never blank out between two back-to-back lines', async () => {
+  for (const PROJ of PROJECTS) {
+    const p = await loadProject(PROJ);
+    const fd = await makeFrameDrawer(p);
+    const lines = groupLines(p.words, p.meta.captionChars || 26);
+    const cap = (p.meta.style === 'inkblot' ? (await import('../styles/inkblot/page.mjs')).LAYOUT : LAYOUT).caption;
+    for (let i = 1; i < lines.length; i++) {
+      const prevEnd = lines[i - 1][lines[i - 1].length - 1].end, t = lines[i][0].start - 0.14;
+      if (t >= prevEnd + 0.35 || t <= lines[i - 1][0].start) continue; // a real pause: the box may be empty
+      fd.frame(t);
+      const d = fd.ctx.getImageData(cap.x + 80, cap.y + 20, cap.w - 160, cap.h - 40).data;
+      let dark = 0; for (let j = 0; j < d.length; j += 4) if (d[j] + d[j + 1] + d[j + 2] < 300) dark++;
+      assert.ok(dark > 200, `${path.basename(PROJ)}: caption box empty at ${t.toFixed(2)}s`);
+    }
+  }
+});
+
 test('ebru marbling is deterministic', () => {
   const a = ebru(60, 40, 3).getContext('2d').getImageData(0, 0, 60, 40).data;
   const b = ebru(60, 40, 3).getContext('2d').getImageData(0, 0, 60, 40).data;

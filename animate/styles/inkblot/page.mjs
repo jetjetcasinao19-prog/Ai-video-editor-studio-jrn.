@@ -121,7 +121,10 @@ export function makePolygraph(words, duration) {
 // Word-by-word typewriter captions: the spoken word in red with a marker swipe.
 export function captions(ctx, lines, t) {
   const cp = LAYOUT.caption;
-  const line_ = lines.findLast(l => t >= l[0].start - 0.15 && t < l[l.length - 1].end + 0.35) || null;
+  // a line shows from 0.15 s before its first word until 0.35 s after its last;
+  // when two overlap, keep the one already speaking (the next one is still fading in)
+  const live = lines.filter(l => t >= l[0].start - 0.15 && t < l[l.length - 1].end + 0.35);
+  const line_ = live.findLast(l => t >= l[0].start) || live[live.length - 1] || null;
   if (!line_) return false;
   const size = 66; font(ctx, size, 'type');
   const space = size * 0.42;

@@ -780,6 +780,55 @@ export function mirrorFrame(ctx, x, y, rx, ry, draw) {
   ctx.restore();
 }
 
+// ---------- more props (numbers & money) ----------
+// A wheel of fortune numbered 0–95 in steps of 5; `rot` in radians.
+// wheelAngleFor(n) gives the rotation that brings number n under the pointer.
+export const wheelAngleFor = n => -(n / 5) / 20 * TAU;
+export function wheel(ctx, x, y, r, rot = 0, o = {}) {
+  ctx.save(); ctx.translate(x, y);
+  circle(ctx, 0, 0, r + 18, P.ink);
+  ctx.save(); ctx.rotate(rot);
+  for (let i = 0; i < 20; i++) {
+    const a0 = -Math.PI / 2 + (i - 0.5) / 20 * TAU, a1 = a0 + TAU / 20;
+    ctx.beginPath(); ctx.moveTo(0, 0); ctx.arc(0, 0, r, a0, a1); ctx.closePath();
+    fill(ctx, [P.paperLight, P.red, P.paperDark, P.inkSoft][i % 4]); stroke(ctx, P.ink, 2);
+    ctx.save(); ctx.rotate(i / 20 * TAU); text(ctx, String(i * 5), 0, -r * 0.8, r * 0.11, { font: 'serif', color: i % 4 === 1 || i % 4 === 3 ? P.paperLight : P.ink }); ctx.restore();
+  }
+  ctx.restore();
+  circle(ctx, 0, 0, r * 0.14, P.ochre, P.ink, 4);
+  poly(ctx, [[-r * 0.09, -r - 40], [r * 0.09, -r - 40], [0, -r + 18]], o.pointer || P.red, P.ink, 4);  // pointer
+  ctx.restore();
+}
+// A ship's anchor hanging from (x, y) by a chain of `chain` px.
+export function anchor(ctx, x, y, s = 1, chain = 0, color = P.ink) {
+  ctx.save(); ctx.translate(x, y);
+  for (let i = 0; i < chain; i += 26) ellipse(ctx, 0, i + 13, 8, 14, 0, null, color, 5);
+  ctx.translate(0, chain); ctx.scale(s, s);
+  circle(ctx, 0, 14, 16, null, color, 8);
+  rect(ctx, -8, 28, 16, 170, color);
+  rect(ctx, -60, 60, 120, 16, color, null, 0, 8);
+  ctx.beginPath(); ctx.arc(0, 140, 90, 0.15, Math.PI - 0.15); stroke(ctx, color, 16);
+  for (const sx of [-1, 1]) poly(ctx, [[sx * 88, 152], [sx * 112, 118], [sx * 70, 128]], color);
+  ctx.restore();
+}
+// A shop price tag (hole + string). old = crossed-out price, price = new price; k strikes it.
+export function priceTag(ctx, x, y, s = 1, old = '$200', price = '$99', k = 1, rot = -0.1) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
+  poly(ctx, [[-160, -100], [150, -100], [220, 0], [150, 100], [-160, 100]], P.paperLight, P.ink, 6);
+  circle(ctx, 165, 0, 18, P.paperDark, P.ink, 4);
+  ctx.beginPath(); ctx.moveTo(183, 0); ctx.bezierCurveTo(260, -40, 280, -120, 240, -170); stroke(ctx, P.ink, 4);
+  text(ctx, old, -20, -40, 64, { font: 'display', color: P.grey });
+  penLine(ctx, [[-120, -30], [80, -50]], k, P.red, 10);
+  if (k > 0.6) text(ctx, price, -20, 45, 86, { font: 'display', color: P.red });
+  ctx.restore();
+}
+// A horizontal number line from a to b (values) over w px.
+export function numberLine(ctx, x, y, w, a = 0, b = 100, step = 10) {
+  line(ctx, x, y, x + w, y, P.ink, 6);
+  for (let v = a; v <= b; v += step) { const px = x + (v - a) / (b - a) * w; line(ctx, px, y - 16, px, y + 16, P.ink, 4); text(ctx, String(v), px, y + 44, 30, {}); }
+  return v => x + (v - a) / (b - a) * w;
+}
+
 // Card-stock texture (fibres, mottling, foxing spots) — multiply it on top.
 export function paperTexture(w, h, seed = 5) {
   const cv = createCanvas(w, h), ctx = cv.getContext('2d'), R = rng(seed);
