@@ -1,0 +1,611 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "Rome's greatest enemy made his promise when he was nine years old. Carthage, North Africa. Hannibal begs his father, the general Hamilcar, to take him to war. As Hannibal later told it, his father agreed on one condition, swear never to be a friend of Rome. He keeps that promise. 218 BC. Now a general, Hannibal marches an army from Spain over the snowy Alps into Italy, with dozens of war elephants. Many soldiers and elephants don't survive the crossing. Two years later, at Cannae, he crushes a Roman army about twice the size of his own, but he never takes the city of Rome itself. A child's promise that nearly brought Rome to its knees. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "Rome's",
+   "start": 0.02,
+   "end": 0.52
+  },
+  {
+   "w": "greatest",
+   "start": 0.52,
+   "end": 1
+  },
+  {
+   "w": "enemy",
+   "start": 1,
+   "end": 1.48
+  },
+  {
+   "w": "made",
+   "start": 1.48,
+   "end": 1.86
+  },
+  {
+   "w": "his",
+   "start": 1.86,
+   "end": 2.1
+  },
+  {
+   "w": "promise",
+   "start": 2.1,
+   "end": 2.52
+  },
+  {
+   "w": "when",
+   "start": 2.52,
+   "end": 3.56
+  },
+  {
+   "w": "he",
+   "start": 3.56,
+   "end": 3.66
+  },
+  {
+   "w": "was",
+   "start": 3.66,
+   "end": 3.86
+  },
+  {
+   "w": "nine",
+   "start": 3.86,
+   "end": 4.24
+  },
+  {
+   "w": "years",
+   "start": 4.24,
+   "end": 4.7
+  },
+  {
+   "w": "old.",
+   "start": 4.7,
+   "end": 5.64
+  },
+  {
+   "w": "Carthage,",
+   "start": 6.34,
+   "end": 7.16
+  },
+  {
+   "w": "North",
+   "start": 7.16,
+   "end": 7.34
+  },
+  {
+   "w": "Africa.",
+   "start": 7.34,
+   "end": 8.22
+  },
+  {
+   "w": "Hannibal",
+   "start": 8.88,
+   "end": 9.06
+  },
+  {
+   "w": "begs",
+   "start": 9.06,
+   "end": 9.6
+  },
+  {
+   "w": "his",
+   "start": 9.6,
+   "end": 9.76
+  },
+  {
+   "w": "father,",
+   "start": 9.76,
+   "end": 10.42
+  },
+  {
+   "w": "the",
+   "start": 10.42,
+   "end": 10.52
+  },
+  {
+   "w": "general",
+   "start": 10.52,
+   "end": 10.9
+  },
+  {
+   "w": "Hamilcar,",
+   "start": 10.9,
+   "end": 11.78
+  },
+  {
+   "w": "to",
+   "start": 11.78,
+   "end": 11.86
+  },
+  {
+   "w": "take",
+   "start": 11.86,
+   "end": 12.14
+  },
+  {
+   "w": "him",
+   "start": 12.14,
+   "end": 12.3
+  },
+  {
+   "w": "to",
+   "start": 12.3,
+   "end": 12.46
+  },
+  {
+   "w": "war.",
+   "start": 12.46,
+   "end": 13.3
+  },
+  {
+   "w": "As",
+   "start": 13.6,
+   "end": 13.76
+  },
+  {
+   "w": "Hannibal",
+   "start": 13.76,
+   "end": 14.02
+  },
+  {
+   "w": "later",
+   "start": 14.02,
+   "end": 14.32
+  },
+  {
+   "w": "told",
+   "start": 14.32,
+   "end": 14.62
+  },
+  {
+   "w": "it,",
+   "start": 14.62,
+   "end": 15.06
+  },
+  {
+   "w": "his",
+   "start": 15.06,
+   "end": 15.16
+  },
+  {
+   "w": "father",
+   "start": 15.16,
+   "end": 15.48
+  },
+  {
+   "w": "agreed",
+   "start": 15.48,
+   "end": 15.92
+  },
+  {
+   "w": "on",
+   "start": 15.92,
+   "end": 16.22
+  },
+  {
+   "w": "one",
+   "start": 16.22,
+   "end": 16.54
+  },
+  {
+   "w": "condition,",
+   "start": 16.54,
+   "end": 17.54
+  },
+  {
+   "w": "swear",
+   "start": 17.9,
+   "end": 18.22
+  },
+  {
+   "w": "never",
+   "start": 18.22,
+   "end": 18.78
+  },
+  {
+   "w": "to",
+   "start": 18.78,
+   "end": 19.06
+  },
+  {
+   "w": "be",
+   "start": 19.06,
+   "end": 19.18
+  },
+  {
+   "w": "a",
+   "start": 19.18,
+   "end": 19.4
+  },
+  {
+   "w": "friend",
+   "start": 19.4,
+   "end": 19.56
+  },
+  {
+   "w": "of",
+   "start": 19.56,
+   "end": 19.82
+  },
+  {
+   "w": "Rome.",
+   "start": 19.82,
+   "end": 20.2
+  },
+  {
+   "w": "He",
+   "start": 21.18,
+   "end": 21.3
+  },
+  {
+   "w": "keeps",
+   "start": 21.3,
+   "end": 21.6
+  },
+  {
+   "w": "that",
+   "start": 21.6,
+   "end": 21.8
+  },
+  {
+   "w": "promise.",
+   "start": 21.8,
+   "end": 22.22
+  },
+  {
+   "w": "218",
+   "start": 23.3,
+   "end": 24
+  },
+  {
+   "w": "BC.",
+   "start": 24,
+   "end": 24.46
+  },
+  {
+   "w": "Now",
+   "start": 24.5,
+   "end": 25.78
+  },
+  {
+   "w": "a",
+   "start": 25.78,
+   "end": 26.16
+  },
+  {
+   "w": "general,",
+   "start": 26.16,
+   "end": 26.96
+  },
+  {
+   "w": "Hannibal",
+   "start": 26.96,
+   "end": 27.18
+  },
+  {
+   "w": "marches",
+   "start": 27.18,
+   "end": 27.66
+  },
+  {
+   "w": "an",
+   "start": 27.66,
+   "end": 27.84
+  },
+  {
+   "w": "army",
+   "start": 27.84,
+   "end": 28.08
+  },
+  {
+   "w": "from",
+   "start": 28.08,
+   "end": 28.3
+  },
+  {
+   "w": "Spain",
+   "start": 28.3,
+   "end": 28.74
+  },
+  {
+   "w": "over",
+   "start": 28.74,
+   "end": 29.16
+  },
+  {
+   "w": "the",
+   "start": 29.16,
+   "end": 29.34
+  },
+  {
+   "w": "snowy",
+   "start": 29.34,
+   "end": 29.74
+  },
+  {
+   "w": "Alps",
+   "start": 29.74,
+   "end": 30.12
+  },
+  {
+   "w": "into",
+   "start": 30.12,
+   "end": 30.5
+  },
+  {
+   "w": "Italy,",
+   "start": 30.5,
+   "end": 31.32
+  },
+  {
+   "w": "with",
+   "start": 31.36,
+   "end": 31.5
+  },
+  {
+   "w": "dozens",
+   "start": 31.5,
+   "end": 32.02
+  },
+  {
+   "w": "of",
+   "start": 32.02,
+   "end": 32.32
+  },
+  {
+   "w": "war",
+   "start": 32.32,
+   "end": 32.66
+  },
+  {
+   "w": "elephants.",
+   "start": 32.66,
+   "end": 33.98
+  },
+  {
+   "w": "Many",
+   "start": 33.98,
+   "end": 34.18
+  },
+  {
+   "w": "soldiers",
+   "start": 34.18,
+   "end": 34.66
+  },
+  {
+   "w": "and",
+   "start": 34.66,
+   "end": 34.92
+  },
+  {
+   "w": "elephants",
+   "start": 34.92,
+   "end": 35.36
+  },
+  {
+   "w": "don't",
+   "start": 35.36,
+   "end": 35.74
+  },
+  {
+   "w": "survive",
+   "start": 35.74,
+   "end": 36.22
+  },
+  {
+   "w": "the",
+   "start": 36.22,
+   "end": 36.46
+  },
+  {
+   "w": "crossing.",
+   "start": 36.46,
+   "end": 37.26
+  },
+  {
+   "w": "Two",
+   "start": 37.74,
+   "end": 37.88
+  },
+  {
+   "w": "years",
+   "start": 37.88,
+   "end": 38.18
+  },
+  {
+   "w": "later,",
+   "start": 38.18,
+   "end": 38.76
+  },
+  {
+   "w": "at",
+   "start": 38.76,
+   "end": 38.96
+  },
+  {
+   "w": "Cannae,",
+   "start": 38.96,
+   "end": 39.62
+  },
+  {
+   "w": "he",
+   "start": 39.62,
+   "end": 39.74
+  },
+  {
+   "w": "crushes",
+   "start": 39.74,
+   "end": 40.3
+  },
+  {
+   "w": "a",
+   "start": 40.3,
+   "end": 40.46
+  },
+  {
+   "w": "Roman",
+   "start": 40.46,
+   "end": 40.74
+  },
+  {
+   "w": "army",
+   "start": 40.74,
+   "end": 41.08
+  },
+  {
+   "w": "about",
+   "start": 41.08,
+   "end": 41.34
+  },
+  {
+   "w": "twice",
+   "start": 41.34,
+   "end": 41.84
+  },
+  {
+   "w": "the",
+   "start": 41.84,
+   "end": 42.02
+  },
+  {
+   "w": "size",
+   "start": 42.02,
+   "end": 42.38
+  },
+  {
+   "w": "of",
+   "start": 42.38,
+   "end": 42.56
+  },
+  {
+   "w": "his",
+   "start": 42.56,
+   "end": 42.66
+  },
+  {
+   "w": "own,",
+   "start": 42.66,
+   "end": 42.94
+  },
+  {
+   "w": "but",
+   "start": 43.6,
+   "end": 43.72
+  },
+  {
+   "w": "he",
+   "start": 43.72,
+   "end": 43.82
+  },
+  {
+   "w": "never",
+   "start": 43.82,
+   "end": 44.1
+  },
+  {
+   "w": "takes",
+   "start": 44.1,
+   "end": 44.5
+  },
+  {
+   "w": "the",
+   "start": 44.5,
+   "end": 44.72
+  },
+  {
+   "w": "city",
+   "start": 44.72,
+   "end": 44.94
+  },
+  {
+   "w": "of",
+   "start": 44.94,
+   "end": 45.18
+  },
+  {
+   "w": "Rome",
+   "start": 45.18,
+   "end": 45.46
+  },
+  {
+   "w": "itself.",
+   "start": 45.46,
+   "end": 47.12
+  },
+  {
+   "w": "A",
+   "start": 47.12,
+   "end": 47.2
+  },
+  {
+   "w": "child's",
+   "start": 47.2,
+   "end": 47.9
+  },
+  {
+   "w": "promise",
+   "start": 47.9,
+   "end": 48.34
+  },
+  {
+   "w": "that",
+   "start": 48.34,
+   "end": 49.06
+  },
+  {
+   "w": "nearly",
+   "start": 49.06,
+   "end": 49.5
+  },
+  {
+   "w": "brought",
+   "start": 49.5,
+   "end": 49.88
+  },
+  {
+   "w": "Rome",
+   "start": 49.88,
+   "end": 50.26
+  },
+  {
+   "w": "to",
+   "start": 50.26,
+   "end": 50.52
+  },
+  {
+   "w": "its",
+   "start": 50.52,
+   "end": 50.76
+  },
+  {
+   "w": "knees.",
+   "start": 50.8,
+   "end": 52.34
+  },
+  {
+   "w": "Every",
+   "start": 52.34,
+   "end": 52.68
+  },
+  {
+   "w": "legend",
+   "start": 52.68,
+   "end": 53
+  },
+  {
+   "w": "has",
+   "start": 53,
+   "end": 53.58
+  },
+  {
+   "w": "a",
+   "start": 53.58,
+   "end": 53.72
+  },
+  {
+   "w": "beginning.",
+   "start": 53.72,
+   "end": 54.02
+  }
+ ]
+}
