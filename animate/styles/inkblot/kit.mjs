@@ -705,6 +705,81 @@ export function magnifier(ctx, x, y, s = 1, rot = 0.6) {
   ctx.restore();
 }
 
+// ---------- more props (home, signs, door, calendar, mirror) ----------
+// A 1960s suburban house on a lawn with a picket fence. (x, y) = ground centre.
+// o.windowSign(ctx) draws into the front window; o.lit lights the window.
+export function house(ctx, x, y, s = 1, o = {}) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  ellipse(ctx, 0, 6, 420, 40, 0, o.lawn || P.sage);
+  rect(ctx, -260, -260, 520, 260, o.wall || P.paperLight, P.ink, 6);
+  poly(ctx, [[-300, -250], [0, -420], [300, -250]], o.roof || P.ink);
+  rect(ctx, 150, -400, 50, 110, P.inkSoft);                                 // chimney
+  rect(ctx, -40, -170, 90, 170, P.redDark, P.ink, 5, 4); circle(ctx, 30, -84, 6, P.ochre); // door
+  rect(ctx, -220, -200, 140, 110, o.lit ? '#fff3c8' : P.sky, P.ink, 6);   // front window
+  ctx.save(); ctx.beginPath(); ctx.rect(-220, -200, 140, 110); ctx.clip(); if (o.windowSign) { ctx.translate(-150, -145); o.windowSign(ctx); } ctx.restore();
+  line(ctx, -150, -200, -150, -90, P.ink, 4); line(ctx, -220, -145, -80, -145, P.ink, 4);
+  rect(ctx, 100, -200, 120, 110, P.sky, P.ink, 6); line(ctx, 160, -200, 160, -90, P.ink, 4);
+  for (let i = -9; i <= 9; i++) { if (Math.abs(i) < 2) continue; const fx = i * 42; poly(ctx, [[fx - 12, 30], [fx - 12, -30], [fx, -44], [fx + 12, -30], [fx + 12, 30]], P.paperLight, P.ink, 3); }
+  line(ctx, -400, -10, -80, -10, P.ink, 4); line(ctx, 80, -10, 400, -10, P.ink, 4);
+  ctx.restore();
+}
+// A lawn / window sign. o.ugly = crooked hand-painted letters; o.post = on a stake.
+export function sign(ctx, x, y, w, h, label, o = {}) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(o.rot || 0);
+  if (o.post) { rect(ctx, -w * 0.3 - 10, 0, 20, o.post, P.brown || '#6b4a2b', P.ink, 3); rect(ctx, w * 0.3 - 10, 0, 20, o.post, '#6b4a2b', P.ink, 3); }
+  rect(ctx, -w / 2, -h, w, h, o.fill || P.paperLight, P.ink, Math.max(3, w * 0.012), 4);
+  const words = String(label).split(' ');
+  font(ctx, 10, o.ugly ? 'hand' : 'serif');
+  const rows = o.rows || (words.length > 1 && w / h < 3 ? words.map(x => [x]) : [words]);
+  const size = Math.min(h / rows.length * 0.72, w / Math.max(...rows.map(r => r.join(' ').length)) * 1.5);
+  rows.forEach((r, i) => {
+    const yy = -h + (i + 0.5) * h / rows.length;
+    if (o.ugly) { ctx.save(); ctx.translate(0, yy); ctx.rotate(Math.sin(i * 3.1) * 0.06); text(ctx, r.join(' '), 0, 0, size * 1.1, { font: 'hand', color: o.color || P.redDark, max: w * 0.9 }); ctx.restore(); }
+    else text(ctx, r.join(' '), 0, yy, size, { font: 'serif', color: o.color || P.ink, max: w * 0.9 });
+  });
+  ctx.restore();
+}
+// A door seen from the front, hinged on the left; open 0..1 (perspective squash),
+// o.foot (0..1) slides a shoe into the gap.
+export function door(ctx, x, y, s = 1, open = 0, o = {}) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  rect(ctx, -170, -520, 340, 520, o.inside || P.ink);                     // the dark room behind
+  if (o.glow) { const g = ctx.createRadialGradient(0, -260, 10, 0, -260, 300); g.addColorStop(0, `rgba(255,235,170,${0.9 * o.glow})`); g.addColorStop(1, 'rgba(255,235,170,0)'); ctx.fillStyle = g; ctx.fillRect(-170, -520, 340, 520); }
+  if (o.behind) { ctx.save(); ctx.beginPath(); ctx.rect(-170, -520, 340, 520); ctx.clip(); o.behind(ctx); ctx.restore(); }
+  const w = 340 * Math.cos(clamp(open) * 1.35);
+  poly(ctx, [[-170, -520], [-170 + w, -520 + 30 * open], [-170 + w, -30 * open], [-170, 0]], o.color || P.redDark, P.ink, 5);
+  if (w > 60) { circle(ctx, -170 + w - 30, -250, 12, P.ochre, P.ink, 3); rect(ctx, -170 + w * 0.15, -470, w * 0.7, 180, null, P.ink, 3); rect(ctx, -170 + w * 0.15, -250, w * 0.7, 200, null, P.ink, 3); }
+  rect(ctx, -190, -540, 380, 24, P.inkSoft); rect(ctx, -190, -540, 22, 540, P.inkSoft); rect(ctx, 168, -540, 22, 540, P.inkSoft);
+  if (o.foot) { // a shoe wedged in the gap
+    const fx = lerp(420, -170 + w + 30, ease.outCubic(clamp(o.foot)));
+    ctx.save(); ctx.translate(fx, -18);
+    rect(ctx, 30, -120, 60, 110, P.inkSoft); // trouser leg
+    ctx.beginPath(); ctx.moveTo(110, -10); ctx.lineTo(110, -50); ctx.quadraticCurveTo(40, -60, -20, -36); ctx.quadraticCurveTo(-50, -26, -40, -8); ctx.closePath(); fill(ctx, P.ink);
+    line(ctx, -30, -4, 110, -4, P.inkSoft, 6);
+    ctx.restore();
+  }
+  ctx.restore();
+}
+// A tear-off wall calendar showing `day` (number) of `month`; flip 0..1 tears the top page.
+export function calendar(ctx, x, y, s = 1, day = 1, month = 'MAY', flip = 0) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  const pageAt = d => { rect(ctx, -110, -60, 220, 230, P.paperLight, P.ink, 5, 6); rect(ctx, -110, -60, 220, 56, P.red, P.ink, 5, 6); text(ctx, month, 0, -31, 34, { color: P.paperLight }); text(ctx, String(d), 0, 80, 120, { font: 'display' }); };
+  pageAt(day + 1);
+  if (flip < 1) { ctx.save(); ctx.translate(0, -60); ctx.rotate(-flip * 1.2); ctx.translate(flip * 200, flip * 120); ctx.globalAlpha = 1 - flip; ctx.translate(0, 60); pageAt(day); ctx.restore(); }
+  for (const rx of [-60, 0, 60]) circle(ctx, rx, -60, 9, P.ink);
+  ctx.restore();
+}
+// An oval mirror; draw(ctx) paints the reflection (already flipped left-right).
+export function mirrorFrame(ctx, x, y, rx, ry, draw) {
+  ctx.save(); ctx.translate(x, y);
+  ellipse(ctx, 0, 0, rx + 22, ry + 22, 0, P.ochre, P.ink, 5);
+  ellipse(ctx, 0, 0, rx, ry, 0, '#c9d6de');
+  ctx.save(); ctx.beginPath(); ctx.ellipse(0, 0, rx, ry, 0, 0, TAU); ctx.clip(); ctx.scale(-1, 1); if (draw) draw(ctx);
+  ctx.restore();
+  ctx.save(); ctx.globalAlpha = 0.35; ctx.beginPath(); ctx.ellipse(-rx * 0.35, -ry * 0.4, rx * 0.18, ry * 0.35, -0.5, 0, TAU); fill(ctx, '#fff'); ctx.restore();
+  ctx.restore();
+}
+
 // Card-stock texture (fibres, mottling, foxing spots) — multiply it on top.
 export function paperTexture(w, h, seed = 5) {
   const cv = createCanvas(w, h), ctx = cv.getContext('2d'), R = rng(seed);
