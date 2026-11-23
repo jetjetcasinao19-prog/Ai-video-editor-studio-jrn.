@@ -10,7 +10,7 @@ the next video, and help YouTube recommend the channel as a whole.
 | Accidental Inventions | Bubble Wrap · Post-it Notes · Super Soaker · Chocolate Chip Cookie · Play-Doh · Microwave |
 | Brand Origins | Nintendo · KFC · LEGO · Nike Swoosh · Mickey Mouse · Monopoly |
 | Words & Symbols | OK · Big Bang · Basketball · We Can Do It! · Taps · Navajo Code Talkers |
-| Ancient Origins | Marathon · Thermopylae · Gladiators |
+| Ancient Origins | Marathon · Thermopylae · Gladiators · Hannibal's Oath |
 | Landmarks | Hollywood Sign · Statue of Liberty · Great Wall of China · Terracotta Army |
 | Everyday Objects | Dog Tags |
 

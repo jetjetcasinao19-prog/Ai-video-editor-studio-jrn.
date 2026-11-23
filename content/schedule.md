@@ -137,6 +137,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-01-28 Thu | 8:00 PM | Fri Jan 29, 9:00 AM | TikTok | A drought. A well. A farmer's shovel. | content/posts/2026-11-23-terracotta-ottoman.md | ready |
 | 2027-01-29 Fri | 7:00 PM | Sat Jan 30, 8:00 AM | Instagram Reels | Under a farmer's field, an emperor's guard stood watch for 2,000 years. | content/posts/2026-11-23-terracotta-ottoman.md | ready |
 | 2027-01-29 Fri | 8:00 PM | Sat Jan 30, 9:00 AM | Facebook Reels | One of the world's greatest finds began with people looking for water. | content/posts/2026-11-23-terracotta-ottoman.md | ready |
+| 2027-01-30 Sat | 7:00 PM | Sun Jan 31, 8:00 AM | YouTube Shorts | A Boy's Oath Against Rome | content/posts/2026-11-23-hannibal-ottoman.md | ready |
+| 2027-01-30 Sat | 8:00 PM | Sun Jan 31, 9:00 AM | TikTok | Nine years old. A general's son. One promise. | content/posts/2026-11-23-hannibal-ottoman.md | ready |
+| 2027-01-31 Sun | 7:00 PM | Mon Feb 1, 8:00 AM | Instagram Reels | Before the Alps and the elephants, there was a boy in Carthage asking to go to war. | content/posts/2026-11-23-hannibal-ottoman.md | ready |
+| 2027-01-31 Sun | 8:00 PM | Mon Feb 1, 9:00 AM | Facebook Reels | Did you know Hannibal said his path began when he was nine? | content/posts/2026-11-23-hannibal-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the

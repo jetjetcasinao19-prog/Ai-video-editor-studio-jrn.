@@ -194,8 +194,8 @@ export const scenes = [
       k.snow(ctx, -300, -300, W + 600, 1800, S.t * 2, 260, 9);
       // the line thins: one by one, figures fade into the storm
       const lost = tween(u, ma - 0.2, cr + 0.4);
-      for (let i = 0; i < 12; i++) { const fade = clamp(lost * 2 - (i % 5) * 0.25); const a = i % 4 === 1 ? 1 - fade : 1; if (a <= 0.02) continue; ctx.save(); ctx.globalAlpha = a; const x = 80 + i * 86, y = 1000 - (i % 2) * 30; if (i % 4 === 3) elephant(ctx, S, x, y, 0.36, 1, S.t + i, { rider: false }); else k.figure(ctx, x, y, { ...PUNIC(i), s: 0.48, face: 1, mood: 'sad', walk: S.t * 3 + i, armF: [0.6, 1.4] }); ctx.restore(); }
-      k.label(ctx, 'BY THE NEXT SPRING, FEW ELEPHANTS WERE LEFT', W / 2, 300, 18, tween(u, cr, cr + 0.4));
+      for (let i = 0; i < 12; i++) { const fade = clamp(lost * 2 - (i % 5) * 0.25); const a = i % 4 === 1 ? 1 - fade : 1; /* only soldiers fade: most elephants got over the Alps */ if (a <= 0.02) continue; ctx.save(); ctx.globalAlpha = a; const x = 80 + i * 86, y = 1000 - (i % 2) * 30; if (i % 4 === 3) elephant(ctx, S, x, y, 0.36, 1, S.t + i, { rider: false }); else k.figure(ctx, x, y, { ...PUNIC(i), s: 0.48, face: 1, mood: 'sad', walk: S.t * 3 + i, armF: [0.6, 1.4] }); ctx.restore(); }
+      k.label(ctx, 'MOST ELEPHANTS MADE IT OVER · THE WINTER AFTER TOOK THEM', W / 2, 300, 15, tween(u, cr, cr + 0.4));
     },
   },
   { // 38.0 "Two years later, at Cannae, he crushes a Roman army about twice the size of his own,"
@@ -214,7 +214,7 @@ export const scenes = [
       for (let i = 0; i < n; i++) { const a = lerp(a0, a1, i / (n - 1)); const ux = cx + Math.cos(a) * 280, uy = cy + Math.sin(a) * 250; const fx = cx + Math.cos(a) * 380, fy = cy + 270; k.rect(ctx, lerp(fx, ux, wrap) - 13, lerp(fy, uy, wrap) - 11, 26, 22, '#5a2a5a', P.ink, 1); }
       // and the cavalry rides round to close the back
       for (const sx of [-1, 1]) { const x = cx + sx * lerp(460, 90, wrap) - 22, y = lerp(cy + 270, top - 70, wrap); for (let i = 0; i < 6; i++) k.circle(ctx, x + (i % 3) * 22, y + Math.floor(i / 3) * 26, 10, '#c9a227', P.ink, 1.2); }
-      ctx.save(); ctx.globalAlpha = tween(u, tw - 0.2, tw + 0.3); k.rect(ctx, 60, 980, 400, 40, '#9a2a1e', P.ink, 2); k.rect(ctx, 60, 1040, 200, 40, '#5a2a5a', P.ink, 2); ctx.fillStyle = P.ink; ctx.font = '700 28px Fell'; ctx.textAlign = 'left'; ctx.fillText('ROME', 480, 1010); ctx.fillText('HANNIBAL', 280, 1070); ctx.restore();
+      ctx.save(); ctx.globalAlpha = tween(u, tw - 0.2, tw + 0.3); k.rect(ctx, 60, 980, 430, 40, '#9a2a1e', P.ink, 2); k.rect(ctx, 60, 1040, 250, 40, '#5a2a5a', P.ink, 2); ctx.fillStyle = P.ink; ctx.font = '700 26px Fell'; ctx.textAlign = 'left'; ctx.fillText('ROME ~86,000', 506, 1010); ctx.fillText('HANNIBAL ~50,000', 326, 1070); ctx.restore();
       k.seal(ctx, 900, 1020, 70, ' CANNAE · 216 BC ·', '216 BC', tween(u, ca, ca + 0.4, ease.linear));
     },
   },
