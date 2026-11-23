@@ -242,3 +242,13 @@ test('acting: every gesture gives arm angles and blends from rest', async () => 
   for (const n of Object.keys(GESTURES)) { const a = act(n, 0.5, 1); assert.ok(Array.isArray(a.armF) && a.armF.every(Number.isFinite), n); }
   assert.deepEqual(act('cheer', 0, 0).armF, act('rest', 0, 1).armF, 'k = 0 is the resting pose');
 });
+
+test('subtitles: .srt lines match the on-screen caption lines and never overlap', async () => {
+  const { toSrt } = await import('../lib/srt.mjs');
+  const p = await loadProject(PROJECT), srt = toSrt(p.words, p.meta.captionChars || 30);
+  const blocks = srt.trim().split(/\n\n/), ts = s => { const [h, m, r] = s.split(':'); const [sec, ms] = r.split(','); return +h * 3600 + +m * 60 + +sec + +ms / 1000; };
+  assert.equal(blocks.length, groupLines(p.words, p.meta.captionChars || 30).length);
+  let last = 0;
+  for (const b of blocks) { const [n, time, text] = b.split('\n'); const [a, c] = time.split(' --> ').map(ts); assert.ok(a >= last - 1e-6 && c > a, `block ${n} timing`); assert.ok(text.length > 0); last = c; }
+  assert.equal(srt.replace(/^\d+\n.*\n/gm, '').replace(/\s+/g, ' ').trim(), p.words.map(w => w.w).join(' '), 'every word appears once, in order');
+});
