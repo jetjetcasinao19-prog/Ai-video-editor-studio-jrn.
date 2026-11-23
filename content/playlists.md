@@ -11,5 +11,6 @@ the next video, and help YouTube recommend the channel as a whole.
 | Brand Origins | Nintendo · KFC · LEGO · Nike Swoosh · Mickey Mouse · Monopoly |
 | Words & Symbols | OK · Big Bang · Basketball · We Can Do It! |
 | Landmarks | Hollywood Sign · Statue of Liberty |
+| Everyday Objects | Dog Tags |
 
 Long-form compilations go in a playlist of their own, "Origin Stories: Full Episodes".

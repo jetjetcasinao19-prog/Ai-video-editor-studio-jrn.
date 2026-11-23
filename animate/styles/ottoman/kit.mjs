@@ -503,6 +503,12 @@ function head(ctx, x, y, o) {
     for (const [dx, dy] of [[-10, -16], [0, -22], [10, -15], [-2, -10], [14, -24], [-14, -24]]) circle(ctx, dx, dy, 2, P.white, null);
     ellipse(ctx, -4, -30, 7, 5, -0.5, bc, P.ink, 1.2); ellipse(ctx, 8, -31, 7, 5, 0.5, bc, P.ink, 1.2);
     ctx.beginPath(); ctx.moveTo(-17, -2); ctx.quadraticCurveTo(-20, 6, -14, 10); stroke(ctx, o.hair || '#4a2a1a', 4);
+  } else if (hat === 'kepi') { // Civil War forage cap, tilted forward
+    ctx.beginPath(); ctx.moveTo(-18, -12); ctx.lineTo(-14, -40); ctx.quadraticCurveTo(4, -46, 16, -34); ctx.lineTo(20, -12); ctx.closePath(); fillStroke(ctx, o.hatColor || '#2a3a6a', P.ink, 1.6);
+    ctx.beginPath(); ctx.moveTo(4, -12); ctx.quadraticCurveTo(20, -12, 28, -6); stroke(ctx, P.ink, 4);
+  } else if (hat === 'campaignhat') { // 1916 broad-brimmed campaign hat with a pinched crown
+    ctx.beginPath(); ctx.ellipse(2, -14, 30, 7, 0, 0, TAU); fillStroke(ctx, o.hatColor || '#8a7a4a', P.ink, 1.6);
+    ctx.beginPath(); ctx.moveTo(-14, -14); ctx.lineTo(-6, -42); ctx.lineTo(2, -36); ctx.lineTo(10, -42); ctx.lineTo(18, -14); ctx.closePath(); fillStroke(ctx, o.hatColor || '#8a7a4a', P.ink, 1.6);
   } else if (hat === 'servicecap') { // 1914 British peaked service cap
     ctx.beginPath(); ctx.ellipse(2, -16, 20, 9, 0, 0, TAU); fillStroke(ctx, o.hatColor || '#7c6e44', P.ink, 1.6);
     ctx.beginPath(); ctx.moveTo(-18, -16); ctx.quadraticCurveTo(-14, -34, 4, -34); ctx.quadraticCurveTo(24, -34, 22, -16); ctx.closePath(); fillStroke(ctx, o.hatColor || '#7c6e44', P.ink, 1.6);
@@ -2128,6 +2134,33 @@ export function gramophone(ctx, x, base, s = 1, t = 0, playing = 1) {
 export function archiveDrawer(ctx, x, y, w, open = 0) {
   rect(ctx, x - w / 2, y - 140, w, 280, P.brown, P.ink, 3);
   for (let i = 0; i < 3; i++) { const oy = y - 130 + i * 90, out = i === 1 ? open * 60 : 0; rect(ctx, x - w / 2 + 12 - out * 0.3, oy + out * 0.4, w - 24 + out * 0.6, 80, P.brownLight, P.ink, 2); rect(ctx, x - 24, oy + 34 + out * 0.4, 48, 12, P.goldDark, P.ink, 1.5); }
+}
+
+// ---------- dog tags story ----------
+// shape: 'note' (a handwritten paper slip pinned on), 'disc' (the 1906 round tag), 'modern' (rounded rectangle)
+export function idTag(ctx, x, y, s = 1, o = {}) {
+  const shape = o.shape || 'modern', lines = o.lines || [], rot = o.rot || 0, k = o.k ?? 1;
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
+  if (shape === 'note') {
+    rect(ctx, -70, -40, 140, 80, '#f2ead2', P.ink, 1.8);
+    ctx.beginPath(); ctx.moveTo(-60, -42); ctx.lineTo(-40, -30); stroke(ctx, '#9aa4b0', 3); circle(ctx, -60, -42, 4, '#9aa4b0', P.ink, 1);
+    ctx.fillStyle = '#2a2a50'; ctx.font = '600 20px GaramondItalic'; ctx.textAlign = 'left';
+    lines.forEach((l, i) => ctx.fillText(l.slice(0, Math.ceil(l.length * clamp(k * lines.length - i))), -58, -10 + i * 24));
+  } else {
+    if (o.chain !== false) { ctx.beginPath(); ctx.moveTo(0, shape === 'disc' ? -48 : -58); ctx.quadraticCurveTo(-60, -160, 0, -220); stroke(ctx, '#8a8a8a', 3); }
+    if (shape === 'disc') { circle(ctx, 0, 0, 46, o.metal || '#c9cdd2', P.ink, 2.5); circle(ctx, 0, 0, 40, null, '#9aa4b0', 1.5); circle(ctx, 0, -38, 4, '#ffffff', P.ink, 1); }
+    else { ctx.beginPath(); ctx.moveTo(-40, -55); ctx.lineTo(40, -55); ctx.quadraticCurveTo(52, -55, 52, -40); ctx.lineTo(52, 40); ctx.quadraticCurveTo(52, 55, 40, 55); ctx.lineTo(-40, 55); ctx.quadraticCurveTo(-52, 55, -52, 40); ctx.lineTo(-52, -40); ctx.quadraticCurveTo(-52, -55, -40, -55); ctx.closePath(); fillStroke(ctx, o.metal || '#c9cdd2', P.ink, 2.5); circle(ctx, 0, -44, 4, '#ffffff', P.ink, 1); }
+    ctx.fillStyle = '#4a4f58'; ctx.font = `700 ${shape === 'disc' ? 11 : 12}px Deco`; ctx.textAlign = 'center';
+    lines.forEach((l, i) => ctx.fillText(l.slice(0, Math.ceil(l.length * clamp(k * lines.length - i))), 0, -14 + i * 15));
+  }
+  ctx.restore();
+}
+// a canvas A-tent of an army camp
+export function aTent(ctx, x, base, s = 1, color = '#efe6d0') {
+  ctx.save(); ctx.translate(x, base); ctx.scale(s, s);
+  poly(ctx, [[-60, 0], [0, -90], [60, 0]], color, P.ink, 2); poly(ctx, [[-14, 0], [0, -60], [14, 0]], '#3a2a20', P.ink, 1.5);
+  ctx.beginPath(); ctx.moveTo(0, -90); ctx.lineTo(0, -104); stroke(ctx, P.brown, 3);
+  ctx.restore();
 }
 
 // ---------- colour util ----------

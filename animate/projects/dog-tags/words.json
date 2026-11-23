@@ -1,0 +1,616 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "Before dog tags, soldiers had to make their own. 1860s, the American Civil War. Before big battles, many soldiers pin paper notes with their names to their coats, so they can be identified if they don't come home. Some buy metal ID badges from camp merchants with their own money. In 1862, a New Yorker offers to make ID discs for every soldier. The War Department says no. Finally, in 1906, the U.S. Army orders an aluminum disc about the size of a half dollar stamped with each soldier's details. In 1916, they add a second tag. One stays with the soldier, one goes to the records. A homemade paper note became a tradition every soldier wears. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "Before",
+   "start": 0.02,
+   "end": 0.42
+  },
+  {
+   "w": "dog",
+   "start": 0.42,
+   "end": 0.78
+  },
+  {
+   "w": "tags,",
+   "start": 0.78,
+   "end": 1.78
+  },
+  {
+   "w": "soldiers",
+   "start": 1.78,
+   "end": 1.9
+  },
+  {
+   "w": "had",
+   "start": 1.9,
+   "end": 2.16
+  },
+  {
+   "w": "to",
+   "start": 2.16,
+   "end": 2.3
+  },
+  {
+   "w": "make",
+   "start": 2.3,
+   "end": 2.52
+  },
+  {
+   "w": "their",
+   "start": 2.52,
+   "end": 2.7
+  },
+  {
+   "w": "own.",
+   "start": 2.7,
+   "end": 3.94
+  },
+  {
+   "w": "1860s,",
+   "start": 3.94,
+   "end": 5
+  },
+  {
+   "w": "the",
+   "start": 5,
+   "end": 5.58
+  },
+  {
+   "w": "American",
+   "start": 5.58,
+   "end": 6.1
+  },
+  {
+   "w": "Civil",
+   "start": 6.1,
+   "end": 6.56
+  },
+  {
+   "w": "War.",
+   "start": 6.56,
+   "end": 6.8
+  },
+  {
+   "w": "Before",
+   "start": 7.96,
+   "end": 8.22
+  },
+  {
+   "w": "big",
+   "start": 8.22,
+   "end": 8.5
+  },
+  {
+   "w": "battles,",
+   "start": 8.5,
+   "end": 9.26
+  },
+  {
+   "w": "many",
+   "start": 9.26,
+   "end": 9.44
+  },
+  {
+   "w": "soldiers",
+   "start": 9.44,
+   "end": 9.9
+  },
+  {
+   "w": "pin",
+   "start": 9.9,
+   "end": 10.24
+  },
+  {
+   "w": "paper",
+   "start": 10.24,
+   "end": 10.62
+  },
+  {
+   "w": "notes",
+   "start": 10.62,
+   "end": 10.96
+  },
+  {
+   "w": "with",
+   "start": 10.96,
+   "end": 11.2
+  },
+  {
+   "w": "their",
+   "start": 11.2,
+   "end": 11.38
+  },
+  {
+   "w": "names",
+   "start": 11.38,
+   "end": 11.78
+  },
+  {
+   "w": "to",
+   "start": 11.78,
+   "end": 12
+  },
+  {
+   "w": "their",
+   "start": 12,
+   "end": 12.14
+  },
+  {
+   "w": "coats,",
+   "start": 12.14,
+   "end": 13.04
+  },
+  {
+   "w": "so",
+   "start": 13.18,
+   "end": 13.3
+  },
+  {
+   "w": "they",
+   "start": 13.3,
+   "end": 13.44
+  },
+  {
+   "w": "can",
+   "start": 13.44,
+   "end": 13.56
+  },
+  {
+   "w": "be",
+   "start": 13.56,
+   "end": 13.68
+  },
+  {
+   "w": "identified",
+   "start": 13.68,
+   "end": 14.34
+  },
+  {
+   "w": "if",
+   "start": 14.34,
+   "end": 14.6
+  },
+  {
+   "w": "they",
+   "start": 14.6,
+   "end": 14.74
+  },
+  {
+   "w": "don't",
+   "start": 14.74,
+   "end": 14.96
+  },
+  {
+   "w": "come",
+   "start": 14.96,
+   "end": 15.18
+  },
+  {
+   "w": "home.",
+   "start": 15.18,
+   "end": 16.36
+  },
+  {
+   "w": "Some",
+   "start": 16.36,
+   "end": 16.52
+  },
+  {
+   "w": "buy",
+   "start": 16.52,
+   "end": 16.84
+  },
+  {
+   "w": "metal",
+   "start": 16.84,
+   "end": 17.26
+  },
+  {
+   "w": "ID",
+   "start": 17.26,
+   "end": 17.66
+  },
+  {
+   "w": "badges",
+   "start": 17.66,
+   "end": 18.06
+  },
+  {
+   "w": "from",
+   "start": 18.06,
+   "end": 18.36
+  },
+  {
+   "w": "camp",
+   "start": 18.36,
+   "end": 18.7
+  },
+  {
+   "w": "merchants",
+   "start": 18.7,
+   "end": 19.14
+  },
+  {
+   "w": "with",
+   "start": 18.96,
+   "end": 19.72
+  },
+  {
+   "w": "their",
+   "start": 19.72,
+   "end": 19.9
+  },
+  {
+   "w": "own",
+   "start": 19.9,
+   "end": 20.1
+  },
+  {
+   "w": "money.",
+   "start": 20.1,
+   "end": 21.44
+  },
+  {
+   "w": "In",
+   "start": 21.44,
+   "end": 21.54
+  },
+  {
+   "w": "1862,",
+   "start": 21.54,
+   "end": 22.84
+  },
+  {
+   "w": "a",
+   "start": 22.84,
+   "end": 23
+  },
+  {
+   "w": "New",
+   "start": 23,
+   "end": 23.18
+  },
+  {
+   "w": "Yorker",
+   "start": 23.18,
+   "end": 23.58
+  },
+  {
+   "w": "offers",
+   "start": 23.58,
+   "end": 23.88
+  },
+  {
+   "w": "to",
+   "start": 23.88,
+   "end": 24.04
+  },
+  {
+   "w": "make",
+   "start": 24.04,
+   "end": 24.26
+  },
+  {
+   "w": "ID",
+   "start": 24.26,
+   "end": 24.72
+  },
+  {
+   "w": "discs",
+   "start": 24.72,
+   "end": 25.06
+  },
+  {
+   "w": "for",
+   "start": 25.06,
+   "end": 25.3
+  },
+  {
+   "w": "every",
+   "start": 25.3,
+   "end": 25.78
+  },
+  {
+   "w": "soldier.",
+   "start": 25.78,
+   "end": 26.7
+  },
+  {
+   "w": "The",
+   "start": 27.04,
+   "end": 27.18
+  },
+  {
+   "w": "War",
+   "start": 27.18,
+   "end": 27.34
+  },
+  {
+   "w": "Department",
+   "start": 27.34,
+   "end": 27.68
+  },
+  {
+   "w": "says",
+   "start": 27.68,
+   "end": 28.28
+  },
+  {
+   "w": "no.",
+   "start": 28.28,
+   "end": 29.14
+  },
+  {
+   "w": "Finally,",
+   "start": 29.7,
+   "end": 30.36
+  },
+  {
+   "w": "in",
+   "start": 30.36,
+   "end": 30.46
+  },
+  {
+   "w": "1906,",
+   "start": 30.46,
+   "end": 31.38
+  },
+  {
+   "w": "the",
+   "start": 31.38,
+   "end": 32.08
+  },
+  {
+   "w": "U.S.",
+   "start": 32.08,
+   "end": 32.44
+  },
+  {
+   "w": "Army",
+   "start": 32.44,
+   "end": 32.76
+  },
+  {
+   "w": "orders",
+   "start": 32.76,
+   "end": 33.2
+  },
+  {
+   "w": "an",
+   "start": 33.2,
+   "end": 33.4
+  },
+  {
+   "w": "aluminum",
+   "start": 33.4,
+   "end": 33.88
+  },
+  {
+   "w": "disc",
+   "start": 33.88,
+   "end": 34.26
+  },
+  {
+   "w": "about",
+   "start": 34.26,
+   "end": 34.78
+  },
+  {
+   "w": "the",
+   "start": 34.78,
+   "end": 34.94
+  },
+  {
+   "w": "size",
+   "start": 34.94,
+   "end": 35.22
+  },
+  {
+   "w": "of",
+   "start": 35.22,
+   "end": 35.36
+  },
+  {
+   "w": "a",
+   "start": 35.36,
+   "end": 35.46
+  },
+  {
+   "w": "half",
+   "start": 35.46,
+   "end": 35.7
+  },
+  {
+   "w": "dollar",
+   "start": 35.7,
+   "end": 36
+  },
+  {
+   "w": "stamped",
+   "start": 35.84,
+   "end": 36.76
+  },
+  {
+   "w": "with",
+   "start": 36.76,
+   "end": 36.98
+  },
+  {
+   "w": "each",
+   "start": 36.98,
+   "end": 37.34
+  },
+  {
+   "w": "soldier's",
+   "start": 37.34,
+   "end": 37.96
+  },
+  {
+   "w": "details.",
+   "start": 37.96,
+   "end": 38.3
+  },
+  {
+   "w": "In",
+   "start": 39.32,
+   "end": 39.44
+  },
+  {
+   "w": "1916,",
+   "start": 39.44,
+   "end": 40.66
+  },
+  {
+   "w": "they",
+   "start": 40.66,
+   "end": 40.76
+  },
+  {
+   "w": "add",
+   "start": 40.76,
+   "end": 41
+  },
+  {
+   "w": "a",
+   "start": 41,
+   "end": 41.18
+  },
+  {
+   "w": "second",
+   "start": 41.18,
+   "end": 41.58
+  },
+  {
+   "w": "tag.",
+   "start": 41.58,
+   "end": 42.44
+  },
+  {
+   "w": "One",
+   "start": 42.6,
+   "end": 42.8
+  },
+  {
+   "w": "stays",
+   "start": 42.8,
+   "end": 43.14
+  },
+  {
+   "w": "with",
+   "start": 43.14,
+   "end": 43.32
+  },
+  {
+   "w": "the",
+   "start": 43.32,
+   "end": 43.4
+  },
+  {
+   "w": "soldier,",
+   "start": 43.4,
+   "end": 44.36
+  },
+  {
+   "w": "one",
+   "start": 44.36,
+   "end": 44.56
+  },
+  {
+   "w": "goes",
+   "start": 44.56,
+   "end": 44.9
+  },
+  {
+   "w": "to",
+   "start": 44.9,
+   "end": 45.04
+  },
+  {
+   "w": "the",
+   "start": 45.04,
+   "end": 45.14
+  },
+  {
+   "w": "records.",
+   "start": 45.14,
+   "end": 45.52
+  },
+  {
+   "w": "A",
+   "start": 46.46,
+   "end": 46.58
+  },
+  {
+   "w": "homemade",
+   "start": 46.58,
+   "end": 47.28
+  },
+  {
+   "w": "paper",
+   "start": 47.28,
+   "end": 47.78
+  },
+  {
+   "w": "note",
+   "start": 47.78,
+   "end": 48.1
+  },
+  {
+   "w": "became",
+   "start": 48.1,
+   "end": 48.78
+  },
+  {
+   "w": "a",
+   "start": 48.78,
+   "end": 48.96
+  },
+  {
+   "w": "tradition",
+   "start": 48.96,
+   "end": 49.36
+  },
+  {
+   "w": "every",
+   "start": 49.36,
+   "end": 50
+  },
+  {
+   "w": "soldier",
+   "start": 50,
+   "end": 50.48
+  },
+  {
+   "w": "wears.",
+   "start": 50.48,
+   "end": 51.46
+  },
+  {
+   "w": "Every",
+   "start": 52.28,
+   "end": 52.6
+  },
+  {
+   "w": "legend",
+   "start": 52.6,
+   "end": 53.08
+  },
+  {
+   "w": "has",
+   "start": 53.08,
+   "end": 53.58
+  },
+  {
+   "w": "a",
+   "start": 53.58,
+   "end": 53.66
+  },
+  {
+   "w": "beginning.",
+   "start": 53.66,
+   "end": 54.5
+  }
+ ]
+}
