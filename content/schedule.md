@@ -67,6 +67,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-12-16 Wed | 8:00 PM | Thu Dec 17, 9:00 AM | MindTrace | TikTok | If you ever need help in a crowd, don't yell "Somebody help!" | content/posts/2026-11-23-bystander-effect-inkblot.md | ready |
 | 2026-12-17 Thu | 7:00 PM | Fri Dec 18, 8:00 AM | MindTrace | Instagram Reels | Why nobody helps in a crowd (and how to fix it) | content/posts/2026-11-23-bystander-effect-inkblot.md | ready |
 | 2026-12-17 Thu | 8:00 PM | Fri Dec 18, 9:00 AM | MindTrace | Facebook Reels | If you ever need help in a crowd, don't yell "Somebody help!" | content/posts/2026-11-23-bystander-effect-inkblot.md | ready |
+| 2026-12-18 Fri | 7:00 PM | Sat Dec 19, 8:00 AM | MindTrace | YouTube Shorts | Why Manipulators Start With a Crazy Ask (Door in the Face) | content/posts/2026-11-23-door-in-the-face-inkblot.md | ready |
+| 2026-12-18 Fri | 8:00 PM | Sat Dec 19, 9:00 AM | MindTrace | TikTok | Manipulators don't start with what they want. | content/posts/2026-11-23-door-in-the-face-inkblot.md | ready |
+| 2026-12-19 Sat | 7:00 PM | Sun Dec 20, 8:00 AM | MindTrace | Instagram Reels | The crazy ask that makes you say yes to the small one | content/posts/2026-11-23-door-in-the-face-inkblot.md | ready |
+| 2026-12-19 Sat | 8:00 PM | Sun Dec 20, 9:00 AM | MindTrace | Facebook Reels | Manipulators don't start with what they want. | content/posts/2026-11-23-door-in-the-face-inkblot.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
