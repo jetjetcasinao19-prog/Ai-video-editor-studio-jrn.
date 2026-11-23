@@ -71,6 +71,7 @@ Everything lives in `animate/`:
 | `animate/projects/dog-tags/` | twenty-fourth short, `marvels` device on the `ledger` look (an army register); lesson from its first sheet: diagram scenes on plain paper look empty on a paper look — give every diagram a real setting (a desk, a velvet tray, a camp) |
 | `animate/projects/taps/` | twenty-fifth short: the motif is the call's official name — the camp's lanterns go out one by one as the real melody plays (`taps1`/`taps2`); score drops to `end` mood under the bugle; the signature brush shows as dark ink on night scenes, which is expected |
 | `animate/projects/code-talkers/` | twenty-sixth short, first `loom` device: a rug woven row by row opens and closes it; real Indigenous people shown with respect in correct uniforms, a generic rug pattern (never a copied tribal design), code words only by their documented English meanings, drawn as picture pairs (iron fish → submarine) |
+| `animate/projects/marathon/` | twenty-seventh short, `voyage` device on a painted map of Greece (each run is a dotted road; the map opens and closes the story); the famous death-run is drawn as a legend (the runner fades to a dotted outline with a question mark) because Herodotus never tells it; hoplite helmets (`greekhelm`), Persian caps (`tiara`) and a laurel (`wreath`) for figures; `aspis()` shield and a top-down `stadium()` for 1896, no Olympic rings |
 
 Follow CLAUDE.md: never say it works until you rendered and looked at it.
 

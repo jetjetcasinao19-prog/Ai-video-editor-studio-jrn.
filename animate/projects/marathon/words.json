@@ -1,0 +1,596 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "The marathon is named after a battle, and its famous story probably never happened. 490 BC, Greece. A huge Persian army lands at Marathon near Athens. Athens sends a runner, Pheidippides, to Sparta to ask for help. The Athenians win the battle. Centuries later, writers add a dramatic twist. A runner races from Marathon to Athens, announces the victory, and drops dead. The oldest account, by Herodotus, never mentions that run. In 1879, a poem makes the legend famous. Rejoice, we conquer! Then a French scholar, Michel Brial, suggests a race from Marathon to Athens for the first modern Olympics in 1896. A battle legend that became the most famous race on earth. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "The",
+   "start": 0,
+   "end": 0.2
+  },
+  {
+   "w": "marathon",
+   "start": 0.2,
+   "end": 0.54
+  },
+  {
+   "w": "is",
+   "start": 0.54,
+   "end": 0.82
+  },
+  {
+   "w": "named",
+   "start": 0.82,
+   "end": 1.16
+  },
+  {
+   "w": "after",
+   "start": 1.16,
+   "end": 1.5
+  },
+  {
+   "w": "a",
+   "start": 1.5,
+   "end": 1.7
+  },
+  {
+   "w": "battle,",
+   "start": 1.7,
+   "end": 2.84
+  },
+  {
+   "w": "and",
+   "start": 2.84,
+   "end": 2.94
+  },
+  {
+   "w": "its",
+   "start": 2.94,
+   "end": 3.1
+  },
+  {
+   "w": "famous",
+   "start": 3.1,
+   "end": 3.44
+  },
+  {
+   "w": "story",
+   "start": 3.44,
+   "end": 3.94
+  },
+  {
+   "w": "probably",
+   "start": 3.94,
+   "end": 4.58
+  },
+  {
+   "w": "never",
+   "start": 4.58,
+   "end": 5.04
+  },
+  {
+   "w": "happened.",
+   "start": 5.04,
+   "end": 5.98
+  },
+  {
+   "w": "490",
+   "start": 6.48,
+   "end": 6.98
+  },
+  {
+   "w": "BC,",
+   "start": 6.98,
+   "end": 8.08
+  },
+  {
+   "w": "Greece.",
+   "start": 8.08,
+   "end": 9.18
+  },
+  {
+   "w": "A",
+   "start": 9.18,
+   "end": 9.22
+  },
+  {
+   "w": "huge",
+   "start": 9.22,
+   "end": 9.72
+  },
+  {
+   "w": "Persian",
+   "start": 9.72,
+   "end": 10.2
+  },
+  {
+   "w": "army",
+   "start": 10.2,
+   "end": 10.58
+  },
+  {
+   "w": "lands",
+   "start": 10.58,
+   "end": 11.02
+  },
+  {
+   "w": "at",
+   "start": 11.02,
+   "end": 11.24
+  },
+  {
+   "w": "Marathon",
+   "start": 11.24,
+   "end": 11.72
+  },
+  {
+   "w": "near",
+   "start": 11.72,
+   "end": 12.12
+  },
+  {
+   "w": "Athens.",
+   "start": 12.12,
+   "end": 13.36
+  },
+  {
+   "w": "Athens",
+   "start": 13.36,
+   "end": 13.66
+  },
+  {
+   "w": "sends",
+   "start": 13.66,
+   "end": 14
+  },
+  {
+   "w": "a",
+   "start": 14,
+   "end": 14.18
+  },
+  {
+   "w": "runner,",
+   "start": 14.18,
+   "end": 14.82
+  },
+  {
+   "w": "Pheidippides,",
+   "start": 14.82,
+   "end": 15.52
+  },
+  {
+   "w": "to",
+   "start": 15.52,
+   "end": 15.64
+  },
+  {
+   "w": "Sparta",
+   "start": 15.64,
+   "end": 16.06
+  },
+  {
+   "w": "to",
+   "start": 16.06,
+   "end": 16.34
+  },
+  {
+   "w": "ask",
+   "start": 16.34,
+   "end": 16.62
+  },
+  {
+   "w": "for",
+   "start": 16.62,
+   "end": 16.76
+  },
+  {
+   "w": "help.",
+   "start": 16.76,
+   "end": 17.76
+  },
+  {
+   "w": "The",
+   "start": 17.76,
+   "end": 17.88
+  },
+  {
+   "w": "Athenians",
+   "start": 17.88,
+   "end": 18.38
+  },
+  {
+   "w": "win",
+   "start": 18.38,
+   "end": 18.8
+  },
+  {
+   "w": "the",
+   "start": 18.8,
+   "end": 18.92
+  },
+  {
+   "w": "battle.",
+   "start": 18.92,
+   "end": 20.26
+  },
+  {
+   "w": "Centuries",
+   "start": 20.26,
+   "end": 20.62
+  },
+  {
+   "w": "later,",
+   "start": 20.62,
+   "end": 21.54
+  },
+  {
+   "w": "writers",
+   "start": 21.4,
+   "end": 21.72
+  },
+  {
+   "w": "add",
+   "start": 21.72,
+   "end": 21.98
+  },
+  {
+   "w": "a",
+   "start": 21.98,
+   "end": 22.12
+  },
+  {
+   "w": "dramatic",
+   "start": 22.12,
+   "end": 22.64
+  },
+  {
+   "w": "twist.",
+   "start": 22.64,
+   "end": 23.68
+  },
+  {
+   "w": "A",
+   "start": 23.68,
+   "end": 23.88
+  },
+  {
+   "w": "runner",
+   "start": 23.88,
+   "end": 24.12
+  },
+  {
+   "w": "races",
+   "start": 24.12,
+   "end": 24.58
+  },
+  {
+   "w": "from",
+   "start": 24.58,
+   "end": 24.9
+  },
+  {
+   "w": "Marathon",
+   "start": 24.9,
+   "end": 25.32
+  },
+  {
+   "w": "to",
+   "start": 25.32,
+   "end": 25.66
+  },
+  {
+   "w": "Athens,",
+   "start": 25.66,
+   "end": 26.62
+  },
+  {
+   "w": "announces",
+   "start": 26.62,
+   "end": 26.94
+  },
+  {
+   "w": "the",
+   "start": 26.94,
+   "end": 27.12
+  },
+  {
+   "w": "victory,",
+   "start": 27.12,
+   "end": 28
+  },
+  {
+   "w": "and",
+   "start": 27.52,
+   "end": 28.34
+  },
+  {
+   "w": "drops",
+   "start": 28.34,
+   "end": 28.64
+  },
+  {
+   "w": "dead.",
+   "start": 28.64,
+   "end": 29.92
+  },
+  {
+   "w": "The",
+   "start": 29.92,
+   "end": 30
+  },
+  {
+   "w": "oldest",
+   "start": 30,
+   "end": 30.3
+  },
+  {
+   "w": "account,",
+   "start": 30.3,
+   "end": 30.94
+  },
+  {
+   "w": "by",
+   "start": 30.94,
+   "end": 31.08
+  },
+  {
+   "w": "Herodotus,",
+   "start": 31.08,
+   "end": 32.16
+  },
+  {
+   "w": "never",
+   "start": 32.16,
+   "end": 32.26
+  },
+  {
+   "w": "mentions",
+   "start": 32.26,
+   "end": 32.64
+  },
+  {
+   "w": "that",
+   "start": 32.64,
+   "end": 33.04
+  },
+  {
+   "w": "run.",
+   "start": 33.04,
+   "end": 34.22
+  },
+  {
+   "w": "In",
+   "start": 34.22,
+   "end": 34.32
+  },
+  {
+   "w": "1879,",
+   "start": 34.32,
+   "end": 35.82
+  },
+  {
+   "w": "a",
+   "start": 35.82,
+   "end": 35.84
+  },
+  {
+   "w": "poem",
+   "start": 35.84,
+   "end": 36.18
+  },
+  {
+   "w": "makes",
+   "start": 36.18,
+   "end": 36.66
+  },
+  {
+   "w": "the",
+   "start": 36.66,
+   "end": 36.8
+  },
+  {
+   "w": "legend",
+   "start": 36.76,
+   "end": 37.14
+  },
+  {
+   "w": "famous.",
+   "start": 37.14,
+   "end": 37.9
+  },
+  {
+   "w": "Rejoice,",
+   "start": 37.9,
+   "end": 39.28
+  },
+  {
+   "w": "we",
+   "start": 39.28,
+   "end": 39.46
+  },
+  {
+   "w": "conquer!",
+   "start": 39.46,
+   "end": 40.9
+  },
+  {
+   "w": "Then",
+   "start": 40.9,
+   "end": 41.2
+  },
+  {
+   "w": "a",
+   "start": 41.2,
+   "end": 41.34
+  },
+  {
+   "w": "French",
+   "start": 41.34,
+   "end": 41.7
+  },
+  {
+   "w": "scholar,",
+   "start": 41.7,
+   "end": 42.38
+  },
+  {
+   "w": "Michel",
+   "start": 42.38,
+   "end": 42.66
+  },
+  {
+   "w": "Br\u00e9al,",
+   "start": 42.66,
+   "end": 43.48
+  },
+  {
+   "w": "suggests",
+   "start": 43.48,
+   "end": 43.8
+  },
+  {
+   "w": "a",
+   "start": 43.8,
+   "end": 44.12
+  },
+  {
+   "w": "race",
+   "start": 44.12,
+   "end": 44.34
+  },
+  {
+   "w": "from",
+   "start": 44.34,
+   "end": 44.52
+  },
+  {
+   "w": "Marathon",
+   "start": 44.52,
+   "end": 45.02
+  },
+  {
+   "w": "to",
+   "start": 45.02,
+   "end": 45.22
+  },
+  {
+   "w": "Athens",
+   "start": 45.22,
+   "end": 45.64
+  },
+  {
+   "w": "for",
+   "start": 45.64,
+   "end": 45.88
+  },
+  {
+   "w": "the",
+   "start": 45.88,
+   "end": 46.02
+  },
+  {
+   "w": "first",
+   "start": 46.02,
+   "end": 46.36
+  },
+  {
+   "w": "modern",
+   "start": 46.36,
+   "end": 46.82
+  },
+  {
+   "w": "Olympics",
+   "start": 46.82,
+   "end": 47.32
+  },
+  {
+   "w": "in",
+   "start": 47.32,
+   "end": 47.58
+  },
+  {
+   "w": "1896.",
+   "start": 47.58,
+   "end": 49.48
+  },
+  {
+   "w": "A",
+   "start": 49.48,
+   "end": 49.62
+  },
+  {
+   "w": "battle",
+   "start": 49.62,
+   "end": 49.96
+  },
+  {
+   "w": "legend",
+   "start": 49.96,
+   "end": 50.28
+  },
+  {
+   "w": "that",
+   "start": 50.28,
+   "end": 51.02
+  },
+  {
+   "w": "became",
+   "start": 51.02,
+   "end": 51.36
+  },
+  {
+   "w": "the",
+   "start": 51.36,
+   "end": 51.64
+  },
+  {
+   "w": "most",
+   "start": 51.64,
+   "end": 51.86
+  },
+  {
+   "w": "famous",
+   "start": 51.64,
+   "end": 52.5
+  },
+  {
+   "w": "race",
+   "start": 52.5,
+   "end": 52.94
+  },
+  {
+   "w": "on",
+   "start": 52.94,
+   "end": 53.32
+  },
+  {
+   "w": "earth.",
+   "start": 53.32,
+   "end": 54.92
+  },
+  {
+   "w": "Every",
+   "start": 54.92,
+   "end": 55.22
+  },
+  {
+   "w": "legend",
+   "start": 55.22,
+   "end": 55.58
+  },
+  {
+   "w": "has",
+   "start": 55.58,
+   "end": 56.12
+  },
+  {
+   "w": "a",
+   "start": 56.12,
+   "end": 56.2
+  },
+  {
+   "w": "beginning.",
+   "start": 56.2,
+   "end": 56.48
+  }
+ ]
+}

@@ -117,6 +117,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-01-17 Sun | 8:00 PM | Mon Jan 18, 9:00 AM | TikTok | A secret code the enemy never broke was built from a language. | content/posts/2026-11-21-code-talkers-ottoman.md | ready |
 | 2027-01-18 Mon | 7:00 PM | Tue Jan 19, 8:00 AM | Instagram Reels | Their language was the code. | content/posts/2026-11-21-code-talkers-ottoman.md | ready |
 | 2027-01-18 Mon | 8:00 PM | Tue Jan 19, 9:00 AM | Facebook Reels | Did you know a World War II code that was never broken came from the Navajo language? | content/posts/2026-11-21-code-talkers-ottoman.md | ready |
+| 2027-01-20 Wed | 7:00 PM | Thu Jan 21, 8:00 AM | YouTube Shorts | The Famous Marathon Run Probably Never Happened | content/posts/2026-11-23-marathon-ottoman.md | ready |
+| 2027-01-20 Wed | 8:00 PM | Thu Jan 21, 9:00 AM | TikTok | Plot twist for runners: the story behind the marathon is probably a legend. | content/posts/2026-11-23-marathon-ottoman.md | ready |
+| 2027-01-21 Thu | 7:00 PM | Fri Jan 22, 8:00 AM | Instagram Reels | A battle legend became the most famous race on earth. | content/posts/2026-11-23-marathon-ottoman.md | ready |
+| 2027-01-21 Thu | 8:00 PM | Fri Jan 22, 9:00 AM | Facebook Reels | Did you know the famous story behind the marathon probably never happened? | content/posts/2026-11-23-marathon-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the

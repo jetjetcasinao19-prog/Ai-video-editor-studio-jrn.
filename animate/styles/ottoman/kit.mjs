@@ -557,6 +557,18 @@ function head(ctx, x, y, o) {
     rect(ctx, -14, -62, 32, 46, P.ink, P.ink, 1.5); rect(ctx, -22, -18, 48, 6, P.ink, P.ink, 1.5);
     ctx.beginPath(); ctx.moveTo(-14, -26); ctx.lineTo(18, -26); stroke(ctx, '#5a4a3a', 3);
     ctx.beginPath(); ctx.ellipse(2, -10, 17, 8, 0, Math.PI, TAU); fillStroke(ctx, o.hair || '#2a1c12', P.ink, 1);
+  } else if (hat === 'greekhelm') { // bronze Corinthian helmet, cheek guard and a horsehair crest
+    const hc = o.hatColor || '#c08a3a';
+    ctx.beginPath(); ctx.moveTo(-18, 10); ctx.quadraticCurveTo(-24, -30, 2, -32); ctx.quadraticCurveTo(26, -30, 20, -8); ctx.lineTo(16, -6); ctx.lineTo(14, 16); ctx.lineTo(6, 14); ctx.lineTo(8, -2); ctx.lineTo(-4, -6); ctx.lineTo(-8, 10); ctx.closePath(); fillStroke(ctx, hc, P.ink, 1.6);
+    ctx.beginPath(); ctx.moveTo(-22, -26); ctx.quadraticCurveTo(-2, -64, 26, -24); ctx.quadraticCurveTo(0, -42, -22, -26); fillStroke(ctx, o.crest || P.verm, P.ink, 1.3);
+    ctx.beginPath(); ctx.moveTo(-12, -18); ctx.quadraticCurveTo(4, -24, 16, -16); stroke(ctx, P.goldLight, 1.6);
+  } else if (hat === 'tiara') { // Persian soft felt cap with flaps over the ears and chin
+    const hc = o.hatColor || '#c9a227';
+    ctx.beginPath(); ctx.moveTo(-18, 14); ctx.quadraticCurveTo(-26, -30, 0, -34); ctx.quadraticCurveTo(10, -26, 20, -14); ctx.lineTo(14, -10); ctx.quadraticCurveTo(0, -18, -8, -6); ctx.lineTo(-8, 16); ctx.closePath(); fillStroke(ctx, hc, P.ink, 1.5);
+    ctx.beginPath(); ctx.moveTo(-14, -20); ctx.quadraticCurveTo(0, -26, 12, -16); stroke(ctx, P.ink, 0.8);
+  } else if (hat === 'wreath') { // short hair with a laurel crown
+    ctx.beginPath(); ctx.moveTo(-15, -2); ctx.quadraticCurveTo(-20, -24, 0, -22); ctx.quadraticCurveTo(22, -24, 18, -2); ctx.quadraticCurveTo(10, -14, -4, -12); ctx.quadraticCurveTo(-10, -10, -15, -2); ctx.closePath(); fillStroke(ctx, o.hair || '#3a2a20', P.ink, 1.2);
+    for (let i = 0; i < 9; i++) { const a = Math.PI * (1.05 + i * 0.1); ellipse(ctx, 2 + Math.cos(a) * 19, -8 + Math.sin(a) * 15, 6, 3, a + 1.2, P.green, P.ink, 0.9); }
   } else if (hat === 'crown') {
     ctx.beginPath(); ctx.ellipse(1, -22, 25, 17, 0, Math.PI * 0.95, Math.PI * 2.05); ctx.quadraticCurveTo(1, -6, -24, -18); fillStroke(ctx, P.white, P.ink, 1.8);
     poly(ctx, [[-12, -34], [-8, -54], [0, -40], [6, -58], [12, -40], [18, -52], [16, -32]], P.goldLight, P.ink, 1.5);
@@ -1969,7 +1981,13 @@ export function puppet(ctx, x, y, s = 1, o = {}) {
   circle(ctx, 16, -44, 3.6, P.ink, null); circle(ctx, 17, -45, 1.2, 'rgba(255,248,220,0.9)', null);
   if (o.beard) { ctx.beginPath(); ctx.moveTo(-4, -14); ctx.quadraticCurveTo(20, 10, 30, -18); ctx.quadraticCurveTo(14, -4, -4, -14); fillStroke(ctx, o.beard, P.ink, 1.5); }
   const hat = o.hat || 'cap', hc = o.hatColor || P.lapis;
-  if (hat === 'bun') { circle(ctx, -18, -54, 16, o.hair || '#5a3a2a', P.ink, 2); ctx.beginPath(); ctx.moveTo(-24, -40); ctx.quadraticCurveTo(-6, -78, 26, -56); ctx.lineTo(20, -48); ctx.quadraticCurveTo(0, -60, -24, -40); fillStroke(ctx, o.hair || '#5a3a2a', P.ink, 1.8); ctx.beginPath(); ctx.ellipse(0, -70, 30, 9, -0.1, 0, TAU); fillStroke(ctx, hc, P.ink, 2); flower(ctx, -14, -76, 7, P.pink); }
+  if (hat === 'greekhelm') { // bronze hoplite helmet with a horsehair crest
+    ctx.beginPath(); ctx.moveTo(-26, -20); ctx.quadraticCurveTo(-30, -70, 4, -72); ctx.quadraticCurveTo(34, -70, 32, -40); ctx.lineTo(26, -36); ctx.lineTo(22, -10); ctx.lineTo(10, -14); ctx.lineTo(12, -40); ctx.lineTo(-10, -40); ctx.lineTo(-14, -20); ctx.closePath(); fillStroke(ctx, hc === P.lapis ? '#c08a3a' : hc, P.ink, 2);
+    ctx.beginPath(); ctx.moveTo(-30, -66); ctx.quadraticCurveTo(0, -110, 34, -66); ctx.quadraticCurveTo(0, -88, -30, -66); fillStroke(ctx, o.crest || P.verm, P.ink, 1.5);
+  } else if (hat === 'tiara') { // a soft Persian cap with side flaps
+    ctx.beginPath(); ctx.moveTo(-26, -24); ctx.quadraticCurveTo(-24, -78, 6, -80); ctx.quadraticCurveTo(14, -62, 30, -46); ctx.lineTo(24, -30); ctx.closePath(); fillStroke(ctx, hc, P.ink, 2);
+    ctx.beginPath(); ctx.moveTo(-26, -24); ctx.lineTo(-30, 4); ctx.lineTo(-16, 4); ctx.lineTo(-16, -22); ctx.closePath(); fillStroke(ctx, hc, P.ink, 1.5);
+  } else if (hat === 'bun') { circle(ctx, -18, -54, 16, o.hair || '#5a3a2a', P.ink, 2); ctx.beginPath(); ctx.moveTo(-24, -40); ctx.quadraticCurveTo(-6, -78, 26, -56); ctx.lineTo(20, -48); ctx.quadraticCurveTo(0, -60, -24, -40); fillStroke(ctx, o.hair || '#5a3a2a', P.ink, 1.8); ctx.beginPath(); ctx.ellipse(0, -70, 30, 9, -0.1, 0, TAU); fillStroke(ctx, hc, P.ink, 2); flower(ctx, -14, -76, 7, P.pink); }
   else if (hat === 'fedora') { ctx.beginPath(); ctx.ellipse(4, -62, 38, 8, 0, 0, TAU); fillStroke(ctx, hc, P.ink, 2); ctx.beginPath(); ctx.moveTo(-18, -62); ctx.quadraticCurveTo(-16, -94, 6, -92); ctx.quadraticCurveTo(26, -94, 24, -62); ctx.closePath(); fillStroke(ctx, hc, P.ink, 2); rect(ctx, -18, -70, 42, 6, P.ink, null); }
   else if (hat === 'bowler') { ctx.beginPath(); ctx.ellipse(4, -62, 34, 7, 0, 0, TAU); fillStroke(ctx, hc, P.ink, 2); ctx.beginPath(); ctx.arc(4, -64, 22, Math.PI, 0); fillStroke(ctx, hc, P.ink, 2); }
   else if (hat === 'cap') { ctx.beginPath(); ctx.arc(2, -60, 26, Math.PI * 1.05, Math.PI * 1.95); ctx.lineTo(36, -58); ctx.closePath(); fillStroke(ctx, hc, P.ink, 2); }
@@ -2261,6 +2279,25 @@ export function loomRug(ctx, x, y, w, h, rows = 1, o = {}) {
   ctx.restore();
   ctx.strokeStyle = P.ink; ctx.lineWidth = 2; ctx.strokeRect(-w / 2, -h / 2, w, h);
   if (rows > 0 && rows < 1) { ctx.beginPath(); ctx.moveTo(-w / 2 - 10, h / 2 - done); ctx.lineTo(w / 2 + 10, h / 2 - done); stroke(ctx, P.goldDark, 6); }
+  ctx.restore();
+}
+
+// ---------- marathon story ----------
+// a round hoplite shield (aspis) and a spear, for puppets to hold
+export function aspis(ctx, x, y, r, color = '#c08a3a', emblem = P.verm) {
+  circle(ctx, x, y, r, color, P.ink, 2.5); circle(ctx, x, y, r * 0.86, null, P.ink, 1.5);
+  ctx.beginPath(); ctx.moveTo(x - r * 0.35, y + r * 0.3); ctx.lineTo(x, y - r * 0.4); ctx.lineTo(x + r * 0.35, y + r * 0.3); stroke(ctx, emblem, r * 0.12);
+}
+// a marble horseshoe stadium (the 1896 Panathenaic Stadium, simplified)
+export function stadium(ctx, x, base, w, h, t = 0, crowd = 1) {
+  // seen from above, as Matrakçı paints a city: a long U of marble seats open at the near end
+  ctx.save(); ctx.translate(x, base);
+  const R = rng(7), uPath = (inset) => { const hw = w / 2 - inset, top = -h + inset; ctx.beginPath(); ctx.moveTo(-hw, 0); ctx.lineTo(-hw, top + hw); ctx.arc(0, top + hw, hw, Math.PI, TAU); ctx.lineTo(hw, 0); };
+  uPath(0); ctx.lineTo(-w / 2, 0); fillStroke(ctx, '#ece6da', P.ink, 2.5);
+  for (let i = 1; i < 6; i++) { uPath(i * w * 0.045); stroke(ctx, i % 2 ? '#cfc6b4' : '#dcd4c4', 2); }
+  if (crowd > 0) for (let i = 0; i < 90 * crowd; i++) { const side = R(), d = w * (0.03 + R() * 0.2), hw = w / 2 - d; let px, py; if (side < 0.4) { px = -hw; py = -R() * (h - w / 2); } else if (side < 0.8) { px = hw; py = -R() * (h - w / 2); } else { const a = Math.PI + R() * Math.PI; px = Math.cos(a) * hw; py = -h + w / 2 + Math.sin(a) * hw; } circle(ctx, px, py + Math.sin(t * 8 + i) * 1.5, 4, [P.verm, P.lapis, P.ochre, P.white, P.green][i % 5], null); }
+  const tw = w / 2 - w * 0.27; ctx.beginPath(); ctx.moveTo(-tw, 0); ctx.lineTo(-tw, -h + w / 2); ctx.arc(0, -h + w / 2, tw, Math.PI, TAU); ctx.lineTo(tw, 0); ctx.closePath(); fillStroke(ctx, '#d2a868', P.ink, 2);
+  ctx.beginPath(); ctx.moveTo(-tw + 14, -10); ctx.lineTo(-tw + 14, -h + w / 2); ctx.arc(0, -h + w / 2, tw - 14, Math.PI, TAU); ctx.lineTo(tw - 14, -10); stroke(ctx, P.white, 2);
   ctx.restore();
 }
 
