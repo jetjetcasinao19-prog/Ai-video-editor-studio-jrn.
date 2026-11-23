@@ -220,7 +220,7 @@ export const scenes = [
       k.figure(ctx, 360, 1010, { ...YOU, s: 1.0, face: 1, look: [1, -0.2], mood: tk > 0.5 ? 'smile' : 'worry' });
       k.figure(ctx, 600, 1010, { hair: 'bun', skirt: true, s: 1.15, face: -1, look: [-1, 0.2], mood: 'smile', armL: [lerp(0.2, 1.4, tk), lerp(0.2, 0.9, tk)] });
       k.heart(ctx, 480, 600, 50, P.red, ease.outBack(tween(u, tl + 0.2, tl + 0.6)));
-      k.scrawl(ctx, 'someone you trust', W / 2, 700, 56, tween(u, tl + 0.3, tl + 0.8));
+      k.scrawl(ctx, 'someone you trust', W / 2, 520, 60, tween(u, tl + 0.3, tl + 0.8));
     },
   },
   { // 45.24 "Follow for more mind tricks." → the case-file cover
