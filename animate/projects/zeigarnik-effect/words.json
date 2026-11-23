@@ -1,0 +1,681 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "Your brain is keeping a to-do list. You never wrote. Berlin, the 1920s. The story goes, psychologist Kurt Lewin is in a café with his students. A waiter takes a huge order. No notepad. He remembers every single item. Then the bill is paid. They ask him again. He can't remember a thing. Lewin's student, Bluma Zeigarnik, can't let it go. So she tests it. People do small tasks. Puzzles, beads, clay. Some get stopped halfway. Later, they remember the interrupted tasks almost twice as well. An unfinished task stays open in your mind. Like a tab you can't close. That's why cliffhangers hook you, and why that unanswered text bugs you at night. It's called the Zeigarnik effect. So here's the trick. Can't start something? Just start it. Your brain will want to finish.",
+ "words": [
+  {
+   "w": "Your",
+   "start": 0.26,
+   "end": 0.38
+  },
+  {
+   "w": "brain",
+   "start": 0.38,
+   "end": 0.76
+  },
+  {
+   "w": "is",
+   "start": 0.76,
+   "end": 0.98
+  },
+  {
+   "w": "keeping",
+   "start": 0.98,
+   "end": 1.24
+  },
+  {
+   "w": "a",
+   "start": 1.24,
+   "end": 1.44
+  },
+  {
+   "w": "to-do",
+   "start": 1.44,
+   "end": 1.56
+  },
+  {
+   "w": "list.",
+   "start": 1.56,
+   "end": 2.34
+  },
+  {
+   "w": "You",
+   "start": 2.6,
+   "end": 2.72
+  },
+  {
+   "w": "never",
+   "start": 2.72,
+   "end": 2.96
+  },
+  {
+   "w": "wrote.",
+   "start": 2.96,
+   "end": 3.72
+  },
+  {
+   "w": "Berlin,",
+   "start": 4.02,
+   "end": 4.54
+  },
+  {
+   "w": "the",
+   "start": 4.54,
+   "end": 4.64
+  },
+  {
+   "w": "1920s.",
+   "start": 4.64,
+   "end": 5.46
+  },
+  {
+   "w": "The",
+   "start": 5.88,
+   "end": 5.96
+  },
+  {
+   "w": "story",
+   "start": 5.96,
+   "end": 6.2
+  },
+  {
+   "w": "goes,",
+   "start": 6.2,
+   "end": 6.96
+  },
+  {
+   "w": "psychologist",
+   "start": 6.96,
+   "end": 7.52
+  },
+  {
+   "w": "Kurt",
+   "start": 7.52,
+   "end": 7.98
+  },
+  {
+   "w": "Lewin",
+   "start": 7.98,
+   "end": 8.18
+  },
+  {
+   "w": "is",
+   "start": 8.18,
+   "end": 8.5
+  },
+  {
+   "w": "in",
+   "start": 8.5,
+   "end": 8.58
+  },
+  {
+   "w": "a",
+   "start": 8.58,
+   "end": 8.7
+  },
+  {
+   "w": "café",
+   "start": 8.7,
+   "end": 8.98
+  },
+  {
+   "w": "with",
+   "start": 8.98,
+   "end": 9.32
+  },
+  {
+   "w": "his",
+   "start": 9.32,
+   "end": 9.44
+  },
+  {
+   "w": "students.",
+   "start": 9.44,
+   "end": 10.26
+  },
+  {
+   "w": "A",
+   "start": 10.26,
+   "end": 10.42
+  },
+  {
+   "w": "waiter",
+   "start": 10.42,
+   "end": 10.68
+  },
+  {
+   "w": "takes",
+   "start": 10.68,
+   "end": 10.98
+  },
+  {
+   "w": "a",
+   "start": 10.98,
+   "end": 11.16
+  },
+  {
+   "w": "huge",
+   "start": 11.16,
+   "end": 11.4
+  },
+  {
+   "w": "order.",
+   "start": 11.4,
+   "end": 12.12
+  },
+  {
+   "w": "No",
+   "start": 12.12,
+   "end": 12.28
+  },
+  {
+   "w": "notepad.",
+   "start": 12.28,
+   "end": 13.16
+  },
+  {
+   "w": "He",
+   "start": 13.16,
+   "end": 13.26
+  },
+  {
+   "w": "remembers",
+   "start": 13.26,
+   "end": 13.68
+  },
+  {
+   "w": "every",
+   "start": 13.68,
+   "end": 14.08
+  },
+  {
+   "w": "single",
+   "start": 14.08,
+   "end": 14.44
+  },
+  {
+   "w": "item.",
+   "start": 14.44,
+   "end": 15.28
+  },
+  {
+   "w": "Then",
+   "start": 15.54,
+   "end": 15.68
+  },
+  {
+   "w": "the",
+   "start": 15.68,
+   "end": 15.8
+  },
+  {
+   "w": "bill",
+   "start": 15.8,
+   "end": 15.96
+  },
+  {
+   "w": "is",
+   "start": 15.96,
+   "end": 16.12
+  },
+  {
+   "w": "paid.",
+   "start": 16.12,
+   "end": 16.9
+  },
+  {
+   "w": "They",
+   "start": 16.86,
+   "end": 16.98
+  },
+  {
+   "w": "ask",
+   "start": 16.98,
+   "end": 17.3
+  },
+  {
+   "w": "him",
+   "start": 17.3,
+   "end": 17.42
+  },
+  {
+   "w": "again.",
+   "start": 17.42,
+   "end": 18.14
+  },
+  {
+   "w": "He",
+   "start": 18.14,
+   "end": 18.24
+  },
+  {
+   "w": "can't",
+   "start": 18.24,
+   "end": 18.5
+  },
+  {
+   "w": "remember",
+   "start": 18.5,
+   "end": 18.88
+  },
+  {
+   "w": "a",
+   "start": 18.88,
+   "end": 19.04
+  },
+  {
+   "w": "thing.",
+   "start": 19.04,
+   "end": 19.72
+  },
+  {
+   "w": "Lewin's",
+   "start": 20.04,
+   "end": 20.38
+  },
+  {
+   "w": "student,",
+   "start": 20.38,
+   "end": 20.9
+  },
+  {
+   "w": "Bluma",
+   "start": 20.9,
+   "end": 21.1
+  },
+  {
+   "w": "Zeigarnik,",
+   "start": 21.1,
+   "end": 21.72
+  },
+  {
+   "w": "can't",
+   "start": 21.72,
+   "end": 22.02
+  },
+  {
+   "w": "let",
+   "start": 22.02,
+   "end": 22.14
+  },
+  {
+   "w": "it",
+   "start": 22.14,
+   "end": 22.26
+  },
+  {
+   "w": "go.",
+   "start": 22.26,
+   "end": 23
+  },
+  {
+   "w": "So",
+   "start": 22.92,
+   "end": 23.08
+  },
+  {
+   "w": "she",
+   "start": 23.08,
+   "end": 23.18
+  },
+  {
+   "w": "tests",
+   "start": 23.18,
+   "end": 23.48
+  },
+  {
+   "w": "it.",
+   "start": 23.48,
+   "end": 24.22
+  },
+  {
+   "w": "People",
+   "start": 24.14,
+   "end": 24.4
+  },
+  {
+   "w": "do",
+   "start": 24.4,
+   "end": 24.56
+  },
+  {
+   "w": "small",
+   "start": 24.56,
+   "end": 24.78
+  },
+  {
+   "w": "tasks.",
+   "start": 24.78,
+   "end": 25.58
+  },
+  {
+   "w": "Puzzles,",
+   "start": 25.66,
+   "end": 26.08
+  },
+  {
+   "w": "beads,",
+   "start": 26.08,
+   "end": 26.48
+  },
+  {
+   "w": "clay.",
+   "start": 26.48,
+   "end": 27.16
+  },
+  {
+   "w": "Some",
+   "start": 27.14,
+   "end": 27.3
+  },
+  {
+   "w": "get",
+   "start": 27.3,
+   "end": 27.48
+  },
+  {
+   "w": "stopped",
+   "start": 27.48,
+   "end": 27.74
+  },
+  {
+   "w": "halfway.",
+   "start": 27.74,
+   "end": 28.58
+  },
+  {
+   "w": "Later,",
+   "start": 28.9,
+   "end": 29.3
+  },
+  {
+   "w": "they",
+   "start": 29.3,
+   "end": 29.48
+  },
+  {
+   "w": "remember",
+   "start": 29.48,
+   "end": 29.82
+  },
+  {
+   "w": "the",
+   "start": 29.82,
+   "end": 29.96
+  },
+  {
+   "w": "interrupted",
+   "start": 29.96,
+   "end": 30.48
+  },
+  {
+   "w": "tasks",
+   "start": 30.48,
+   "end": 30.98
+  },
+  {
+   "w": "almost",
+   "start": 30.98,
+   "end": 31.44
+  },
+  {
+   "w": "twice",
+   "start": 31.44,
+   "end": 31.82
+  },
+  {
+   "w": "as",
+   "start": 31.82,
+   "end": 32.06
+  },
+  {
+   "w": "well.",
+   "start": 32.06,
+   "end": 32.58
+  },
+  {
+   "w": "An",
+   "start": 32.86,
+   "end": 33.08
+  },
+  {
+   "w": "unfinished",
+   "start": 33.08,
+   "end": 33.52
+  },
+  {
+   "w": "task",
+   "start": 33.52,
+   "end": 33.92
+  },
+  {
+   "w": "stays",
+   "start": 33.92,
+   "end": 34.24
+  },
+  {
+   "w": "open",
+   "start": 34.24,
+   "end": 34.56
+  },
+  {
+   "w": "in",
+   "start": 34.56,
+   "end": 34.7
+  },
+  {
+   "w": "your",
+   "start": 34.7,
+   "end": 34.78
+  },
+  {
+   "w": "mind.",
+   "start": 34.78,
+   "end": 35.18
+  },
+  {
+   "w": "Like",
+   "start": 35.52,
+   "end": 35.92
+  },
+  {
+   "w": "a",
+   "start": 35.92,
+   "end": 36.04
+  },
+  {
+   "w": "tab",
+   "start": 36.04,
+   "end": 36.28
+  },
+  {
+   "w": "you",
+   "start": 36.28,
+   "end": 36.42
+  },
+  {
+   "w": "can't",
+   "start": 36.42,
+   "end": 36.62
+  },
+  {
+   "w": "close.",
+   "start": 36.62,
+   "end": 37.06
+  },
+  {
+   "w": "That's",
+   "start": 37.06,
+   "end": 37.7
+  },
+  {
+   "w": "why",
+   "start": 37.7,
+   "end": 37.88
+  },
+  {
+   "w": "cliffhangers",
+   "start": 37.88,
+   "end": 38.38
+  },
+  {
+   "w": "hook",
+   "start": 38.38,
+   "end": 38.58
+  },
+  {
+   "w": "you,",
+   "start": 38.58,
+   "end": 38.7
+  },
+  {
+   "w": "and",
+   "start": 38.7,
+   "end": 39.32
+  },
+  {
+   "w": "why",
+   "start": 39.32,
+   "end": 39.52
+  },
+  {
+   "w": "that",
+   "start": 39.52,
+   "end": 39.72
+  },
+  {
+   "w": "unanswered",
+   "start": 39.72,
+   "end": 40.3
+  },
+  {
+   "w": "text",
+   "start": 40.3,
+   "end": 40.6
+  },
+  {
+   "w": "bugs",
+   "start": 40.6,
+   "end": 40.82
+  },
+  {
+   "w": "you",
+   "start": 40.82,
+   "end": 40.98
+  },
+  {
+   "w": "at",
+   "start": 40.98,
+   "end": 41.08
+  },
+  {
+   "w": "night.",
+   "start": 41.08,
+   "end": 41.34
+  },
+  {
+   "w": "It's",
+   "start": 41.78,
+   "end": 42.18
+  },
+  {
+   "w": "called",
+   "start": 42.18,
+   "end": 42.42
+  },
+  {
+   "w": "the",
+   "start": 42.42,
+   "end": 42.58
+  },
+  {
+   "w": "Zeigarnik",
+   "start": 42.58,
+   "end": 42.98
+  },
+  {
+   "w": "effect.",
+   "start": 42.98,
+   "end": 43.44
+  },
+  {
+   "w": "So",
+   "start": 43.56,
+   "end": 43.96
+  },
+  {
+   "w": "here's",
+   "start": 43.96,
+   "end": 44.24
+  },
+  {
+   "w": "the",
+   "start": 44.24,
+   "end": 44.38
+  },
+  {
+   "w": "trick.",
+   "start": 44.38,
+   "end": 44.58
+  },
+  {
+   "w": "Can't",
+   "start": 44.66,
+   "end": 45.34
+  },
+  {
+   "w": "start",
+   "start": 45.34,
+   "end": 45.56
+  },
+  {
+   "w": "something?",
+   "start": 45.56,
+   "end": 46.08
+  },
+  {
+   "w": "Just",
+   "start": 46.08,
+   "end": 46.54
+  },
+  {
+   "w": "start",
+   "start": 46.54,
+   "end": 46.86
+  },
+  {
+   "w": "it.",
+   "start": 46.86,
+   "end": 47.14
+  },
+  {
+   "w": "Your",
+   "start": 47.2,
+   "end": 47.6
+  },
+  {
+   "w": "brain",
+   "start": 47.6,
+   "end": 47.98
+  },
+  {
+   "w": "will",
+   "start": 47.98,
+   "end": 48.16
+  },
+  {
+   "w": "want",
+   "start": 48.16,
+   "end": 48.36
+  },
+  {
+   "w": "to",
+   "start": 48.36,
+   "end": 48.5
+  },
+  {
+   "w": "finish.",
+   "start": 48.5,
+   "end": 49.08
+  }
+ ]
+}
