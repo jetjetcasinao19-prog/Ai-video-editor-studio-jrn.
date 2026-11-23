@@ -36,6 +36,7 @@ Everything lives in `animate/`:
 | `animate/setup.sh` | installs/checks the tools (Node 22+, FFmpeg + libx264, Python 3 + numpy, `@napi-rs/canvas`, fonts) |
 | `animate/transcribe.mjs` | voice → `words.json` (word timings; OmniRoute if `OMNIROUTE_URL` is set, else Groq Whisper) |
 | `animate/render.mjs` | CLI: contact sheet, stills, full render; `--look <name>` previews another look |
+| `animate/subtitles.mjs` | writes the `.srt` subtitle file for a project (`--all` for every one); full renders write it automatically |
 | `animate/lint-story.mjs` | craft check of a storyboard: labels that repeat the narration, too many stamps, scenes that don't change, flat camera, one backdrop everywhere (`--all` for every project) |
 | `animate/check-unique.mjs` | compares a project with every other one (page design, near-copy pictures, music, transitions, script formula); exit 1 = too similar |
 | `animate/compile.mjs` | several shorts → one 16:9 long-form video with intro, chapter cards, outro and a YouTube chapters list |
@@ -84,6 +85,20 @@ Read the printed transcript. Fix misheard names with `--fix "Heard=Right"`
 (check spellings of real people/brands with a quick search). If the owner
 also pasted the script, use its spelling. Note the word times — scenes
 are cut on them.
+
+## 2b. Check the script before drawing anything (5 minutes, saves hours)
+Before writing `story.mjs`, use the **researcher** agent on the transcript: check
+every name, date, number and "first/only/biggest" claim against 2 reputable
+sources. Then tell the owner in a few lines:
+- **Facts**: anything wrong or disputed, with the corrected wording and a source
+  (e.g. "the first microwave went on sale in 1947, not 1946"). If a line is wrong,
+  offer to wait for a re-recorded voice-over before animating.
+- **Three alternative opening lines** for the next script, each a different
+  shape (a question, a number, the twist first, a quote), never "X exists because…"
+  twice in a row. The owner decides; never change their voice-over yourself.
+- **Length**: if the voice runs over ~57.5 s, say so; the fallback is speeding it
+  up up to 5% (`ffmpeg -af atempo=1.05`, then re-transcribe), and say you did.
+Don't block on answers: if the facts are fine, carry on and mention it in the hand-off.
 
 ## 3. Plan the scenes (before writing code)
 Write a short beat list: one scene per sentence or idea, **2–4 s each**
@@ -285,6 +300,11 @@ grab frames at transitions with `ffmpeg -ss <t> -i out.mp4 -frames:v 1`, and
 measure loudness (`ffmpeg -i build/mix.wav -af ebur128 -f null -` → about −14 LUFS).
 You cannot hear the audio — say so, and ask the owner to listen.
 
+It also writes `out/<slug>.srt` (subtitles from the word timings; `node subtitles.mjs
+projects/<slug>` re-makes it). Send it with the MP4: the owner uploads it on YouTube
+(Subtitles → Upload file → With timing) so the captions are searchable and can be
+auto-translated.
+
 Then check that the video is its own piece:
 ```bash
 node check-unique.mjs projects/<slug>              # must print UNIQUE ENOUGH ✔ (exit 0)
@@ -316,6 +336,21 @@ script's opening formula — tell the owner if the hooks all start the same way)
 
 **Never post anything without the owner's explicit yes**, and never mark a
 row `posted` unless the owner says they posted it.
+
+## Learn from the channel's own numbers
+When the owner shares YouTube Studio data (a screenshot or numbers of the
+audience-retention graph, average view duration, swipe-away rate), map each drop to
+the scene and word at that second (`story.mjs` scene starts + `words.json`), and
+write what you learned to `content/analytics.md`: date, video, what held viewers,
+where they left, and one rule to try next time. Read that file before planning a
+new video and apply its rules; they beat the general rules above.
+
+## Series and playlists
+Every video belongs to one series, listed in `content/playlists.md`; the publisher
+puts the series name in the YouTube description and the owner adds the video to
+that playlist. Holiday stories go in "Holiday Origins", brands in "Brand Origins",
+inventions in "Accidental Inventions", words and symbols in "Words & Symbols",
+places and landmarks in "Landmarks". Add the new video's row there.
 
 ## YouTube monetization (what this skill does about it)
 Facts to tell the owner honestly (checked Nov 2026; re-check YouTube's help pages):

@@ -113,6 +113,7 @@ export async function render(dir, { out, build, workers = Math.max(1, os.cpus().
   fs.writeFileSync(path.join(build, 'cues.json'), JSON.stringify(cues, null, 1));
   run('python3', ['-I', path.join(HERE, 'audio.py'), path.join(build, 'cues.json')]);
   run('ffmpeg', ['-y', '-v', 'error', '-i', video, '-i', cues.out, '-map', '0:v', '-map', '1:a', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', out]);
+  if (!from && to == null) { const { writeSrt } = await import('./srt.mjs'); writeSrt(project.dir, meta, words, out.replace(/\.mp4$/, '.srt')); }
   log(`done in ${((Date.now() - t0) / 1000).toFixed(0)} s → ${out}`);
   return out;
 }

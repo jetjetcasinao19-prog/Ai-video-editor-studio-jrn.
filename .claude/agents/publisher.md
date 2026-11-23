@@ -34,6 +34,9 @@ For each finished video:
      content that could be mistaken for real people or events, not stylized
      cartoons.
    - For long-form compilations: add the chapter list exactly as given.
+   - Put the video's series from `content/playlists.md` on its own line in the
+     YouTube description ("Series: Holiday Origins"), and mention that the .srt
+     subtitle file in `animate/projects/<slug>/out/` should be uploaded with it.
 
 You cannot upload or post to social platforms; the owner posts manually.
 Never mark a video as "posted" unless the owner confirms it.
