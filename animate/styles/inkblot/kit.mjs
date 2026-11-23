@@ -387,6 +387,7 @@ export function figure(ctx, x, y, o = {}) {
   if (o.skirt) poly(ctx, [[-38, top], [38, top], [62, hip + (sit ? 10 : 70)], [-62, hip + (sit ? 10 : 70)]], c);
   else poly(ctx, [[-42, top], [42, top], [48, hip + (sit ? 0 : 40)], [-48, hip + (sit ? 0 : 40)]], c);
   ctx.beginPath(); ctx.ellipse(0, top + 6, 44, 18, 0, Math.PI, TAU); fill(ctx, c);
+  if (o.labcoat) { poly(ctx, [[-46, top], [46, top], [56, hip + 70], [-56, hip + 70]], P.paperLight, P.ink, 3); line(ctx, 0, top + 4, 0, hip + 70, P.ink, 2); poly(ctx, [[-14, top], [0, top + 60], [14, top]], c); rect(ctx, 20, top + 50, 18, 22, null, P.ink, 2); line(ctx, 26, top + 44, 26, top + 58, P.red, 3); }
   if (o.apron) { poly(ctx, [[-30, top + 60], [30, top + 60], [36, hip + 60], [-36, hip + 60]], P.paperLight); line(ctx, -30, top + 62, 30, top + 62, P.paperLight, 5); }
   if (o.shirt !== false && !o.skirt) poly(ctx, [[-10, top + 2], [10, top + 2], [0, top + 40]], P.paperLight);
   if (o.bowtie) { poly(ctx, [[0, top + 8], [-16, top], [-16, top + 16]], P.paperLight); poly(ctx, [[0, top + 8], [16, top], [16, top + 16]], P.paperLight); }
@@ -396,7 +397,8 @@ export function figure(ctx, x, y, o = {}) {
     const [sh, el] = ang || [0.15, 0.1];
     const ax = sgn * 40, ay = top + 14, a1 = sh * sgn, ex = ax + Math.sin(a1) * 70, ey = ay + Math.cos(a1) * 70, a2 = a1 + el * sgn;
     const hx = ex + Math.sin(a2) * 66, hy = ey + Math.cos(a2) * 66;
-    ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(ex, ey); ctx.lineTo(hx, hy); stroke(ctx, c, 18);
+    ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(ex, ey); ctx.lineTo(hx, hy); stroke(ctx, o.labcoat ? P.ink : c, o.labcoat ? 22 : 18);
+    if (o.labcoat) { ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(ex, ey); ctx.lineTo(ex + (hx - ex) * 0.8, ey + (hy - ey) * 0.8); stroke(ctx, P.paperLight, 15); }
     circle(ctx, hx, hy, 11, c);
     if (hold) { ctx.save(); ctx.translate(hx, hy); hold(ctx); ctx.restore(); }
   };

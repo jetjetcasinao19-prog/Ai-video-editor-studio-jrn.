@@ -1,0 +1,581 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "The closest thing to real mind control? A man in a lab coat. In 1961, Yale psychologist Stanley Milgram told volunteers to shock a stranger for every wrong answer. 15 volts, then 30, all the way to 450. He banged on the wall, then went silent. The man in the lab coat said, \"Please continue.\" Students predicted about 1% would go all the way. 65% did. The shocks were fake. The stranger was an actor. They didn't know. Here's the trick. Authority plus tiny steps. Each shock was just a little worse than the last. The antidote? When others refused, far fewer obeyed. So be the first to say no. Follow for more mind tricks.",
+ "words": [
+  {
+   "w": "The",
+   "start": 0,
+   "end": 0.2
+  },
+  {
+   "w": "closest",
+   "start": 0.2,
+   "end": 0.5
+  },
+  {
+   "w": "thing",
+   "start": 0.5,
+   "end": 0.82
+  },
+  {
+   "w": "to",
+   "start": 0.82,
+   "end": 1
+  },
+  {
+   "w": "real",
+   "start": 1,
+   "end": 1.46
+  },
+  {
+   "w": "mind",
+   "start": 1.46,
+   "end": 1.82
+  },
+  {
+   "w": "control?",
+   "start": 1.82,
+   "end": 2.72
+  },
+  {
+   "w": "A",
+   "start": 3.02,
+   "end": 3.16
+  },
+  {
+   "w": "man",
+   "start": 3.16,
+   "end": 3.5
+  },
+  {
+   "w": "in",
+   "start": 3.5,
+   "end": 3.72
+  },
+  {
+   "w": "a",
+   "start": 3.72,
+   "end": 3.84
+  },
+  {
+   "w": "lab",
+   "start": 3.84,
+   "end": 4.08
+  },
+  {
+   "w": "coat.",
+   "start": 4.08,
+   "end": 4.26
+  },
+  {
+   "w": "In",
+   "start": 5.22,
+   "end": 5.32
+  },
+  {
+   "w": "1961,",
+   "start": 5.32,
+   "end": 6.7
+  },
+  {
+   "w": "Yale",
+   "start": 6.7,
+   "end": 6.88
+  },
+  {
+   "w": "psychologist",
+   "start": 6.88,
+   "end": 7.56
+  },
+  {
+   "w": "Stanley",
+   "start": 7.56,
+   "end": 8.22
+  },
+  {
+   "w": "Milgram",
+   "start": 8.22,
+   "end": 8.62
+  },
+  {
+   "w": "told",
+   "start": 8.74,
+   "end": 9.14
+  },
+  {
+   "w": "volunteers",
+   "start": 9.14,
+   "end": 9.58
+  },
+  {
+   "w": "to",
+   "start": 9.58,
+   "end": 9.96
+  },
+  {
+   "w": "shock",
+   "start": 9.96,
+   "end": 10.24
+  },
+  {
+   "w": "a",
+   "start": 10.24,
+   "end": 10.4
+  },
+  {
+   "w": "stranger",
+   "start": 10.4,
+   "end": 10.86
+  },
+  {
+   "w": "for",
+   "start": 10.86,
+   "end": 11.04
+  },
+  {
+   "w": "every",
+   "start": 11.04,
+   "end": 11.42
+  },
+  {
+   "w": "wrong",
+   "start": 11.42,
+   "end": 11.84
+  },
+  {
+   "w": "answer.",
+   "start": 11.84,
+   "end": 12.82
+  },
+  {
+   "w": "15",
+   "start": 13.1,
+   "end": 13.5
+  },
+  {
+   "w": "volts,",
+   "start": 13.5,
+   "end": 14.44
+  },
+  {
+   "w": "then",
+   "start": 14.44,
+   "end": 14.62
+  },
+  {
+   "w": "30,",
+   "start": 14.62,
+   "end": 15.06
+  },
+  {
+   "w": "all",
+   "start": 15.06,
+   "end": 15.84
+  },
+  {
+   "w": "the",
+   "start": 15.84,
+   "end": 16.06
+  },
+  {
+   "w": "way",
+   "start": 16.06,
+   "end": 16.24
+  },
+  {
+   "w": "to",
+   "start": 16.24,
+   "end": 16.46
+  },
+  {
+   "w": "450.",
+   "start": 16.46,
+   "end": 17.24
+  },
+  {
+   "w": "He",
+   "start": 18.72,
+   "end": 18.84
+  },
+  {
+   "w": "banged",
+   "start": 18.84,
+   "end": 19.24
+  },
+  {
+   "w": "on",
+   "start": 19.24,
+   "end": 19.38
+  },
+  {
+   "w": "the",
+   "start": 19.38,
+   "end": 19.48
+  },
+  {
+   "w": "wall,",
+   "start": 19.48,
+   "end": 20.52
+  },
+  {
+   "w": "then",
+   "start": 20.52,
+   "end": 20.64
+  },
+  {
+   "w": "went",
+   "start": 20.64,
+   "end": 20.88
+  },
+  {
+   "w": "silent.",
+   "start": 20.88,
+   "end": 21.82
+  },
+  {
+   "w": "The",
+   "start": 22.24,
+   "end": 22.34
+  },
+  {
+   "w": "man",
+   "start": 22.34,
+   "end": 22.56
+  },
+  {
+   "w": "in",
+   "start": 22.56,
+   "end": 22.66
+  },
+  {
+   "w": "the",
+   "start": 22.66,
+   "end": 22.78
+  },
+  {
+   "w": "lab",
+   "start": 22.78,
+   "end": 22.98
+  },
+  {
+   "w": "coat",
+   "start": 22.98,
+   "end": 23.22
+  },
+  {
+   "w": "said,",
+   "start": 23.22,
+   "end": 23.98
+  },
+  {
+   "w": "\"Please",
+   "start": 24.16,
+   "end": 24.38
+  },
+  {
+   "w": "continue.\"",
+   "start": 24.38,
+   "end": 24.84
+  },
+  {
+   "w": "Students",
+   "start": 26.02,
+   "end": 26.32
+  },
+  {
+   "w": "predicted",
+   "start": 26.32,
+   "end": 26.72
+  },
+  {
+   "w": "about",
+   "start": 26.72,
+   "end": 27.02
+  },
+  {
+   "w": "1%",
+   "start": 27.02,
+   "end": 27.7
+  },
+  {
+   "w": "would",
+   "start": 27.7,
+   "end": 28.1
+  },
+  {
+   "w": "go",
+   "start": 28.1,
+   "end": 28.3
+  },
+  {
+   "w": "all",
+   "start": 28.3,
+   "end": 28.6
+  },
+  {
+   "w": "the",
+   "start": 28.6,
+   "end": 28.74
+  },
+  {
+   "w": "way.",
+   "start": 28.74,
+   "end": 29.42
+  },
+  {
+   "w": "65%",
+   "start": 29.8,
+   "end": 30.94
+  },
+  {
+   "w": "did.",
+   "start": 30.94,
+   "end": 31.44
+  },
+  {
+   "w": "The",
+   "start": 32.24,
+   "end": 32.42
+  },
+  {
+   "w": "shocks",
+   "start": 32.42,
+   "end": 32.66
+  },
+  {
+   "w": "were",
+   "start": 32.66,
+   "end": 32.86
+  },
+  {
+   "w": "fake.",
+   "start": 32.86,
+   "end": 33.2
+  },
+  {
+   "w": "The",
+   "start": 33.3,
+   "end": 33.7
+  },
+  {
+   "w": "stranger",
+   "start": 33.7,
+   "end": 34.06
+  },
+  {
+   "w": "was",
+   "start": 34.06,
+   "end": 34.28
+  },
+  {
+   "w": "an",
+   "start": 34.28,
+   "end": 34.4
+  },
+  {
+   "w": "actor.",
+   "start": 34.4,
+   "end": 34.68
+  },
+  {
+   "w": "They",
+   "start": 35.08,
+   "end": 35.48
+  },
+  {
+   "w": "didn't",
+   "start": 35.48,
+   "end": 35.76
+  },
+  {
+   "w": "know.",
+   "start": 35.76,
+   "end": 36.04
+  },
+  {
+   "w": "Here's",
+   "start": 36.84,
+   "end": 37.24
+  },
+  {
+   "w": "the",
+   "start": 37.24,
+   "end": 37.36
+  },
+  {
+   "w": "trick.",
+   "start": 37.36,
+   "end": 37.64
+  },
+  {
+   "w": "Authority",
+   "start": 38.16,
+   "end": 38.56
+  },
+  {
+   "w": "plus",
+   "start": 38.56,
+   "end": 39.66
+  },
+  {
+   "w": "tiny",
+   "start": 39.66,
+   "end": 40.22
+  },
+  {
+   "w": "steps.",
+   "start": 40.22,
+   "end": 40.7
+  },
+  {
+   "w": "Each",
+   "start": 41.36,
+   "end": 41.76
+  },
+  {
+   "w": "shock",
+   "start": 41.76,
+   "end": 42.14
+  },
+  {
+   "w": "was",
+   "start": 42.14,
+   "end": 42.38
+  },
+  {
+   "w": "just",
+   "start": 42.38,
+   "end": 42.66
+  },
+  {
+   "w": "a",
+   "start": 42.66,
+   "end": 42.88
+  },
+  {
+   "w": "little",
+   "start": 42.88,
+   "end": 43.22
+  },
+  {
+   "w": "worse",
+   "start": 43.22,
+   "end": 43.68
+  },
+  {
+   "w": "than",
+   "start": 43.68,
+   "end": 43.96
+  },
+  {
+   "w": "the",
+   "start": 43.96,
+   "end": 44.1
+  },
+  {
+   "w": "last.",
+   "start": 44.1,
+   "end": 44.46
+  },
+  {
+   "w": "The",
+   "start": 45.28,
+   "end": 45.5
+  },
+  {
+   "w": "antidote?",
+   "start": 45.5,
+   "end": 46.08
+  },
+  {
+   "w": "When",
+   "start": 46.72,
+   "end": 46.86
+  },
+  {
+   "w": "others",
+   "start": 46.86,
+   "end": 47.2
+  },
+  {
+   "w": "refused,",
+   "start": 47.2,
+   "end": 48.3
+  },
+  {
+   "w": "far",
+   "start": 48.3,
+   "end": 48.52
+  },
+  {
+   "w": "fewer",
+   "start": 48.52,
+   "end": 48.98
+  },
+  {
+   "w": "obeyed.",
+   "start": 48.98,
+   "end": 49.72
+  },
+  {
+   "w": "So",
+   "start": 50.5,
+   "end": 50.72
+  },
+  {
+   "w": "be",
+   "start": 50.72,
+   "end": 50.96
+  },
+  {
+   "w": "the",
+   "start": 50.96,
+   "end": 51.14
+  },
+  {
+   "w": "first",
+   "start": 51.14,
+   "end": 51.68
+  },
+  {
+   "w": "to",
+   "start": 51.68,
+   "end": 51.98
+  },
+  {
+   "w": "say",
+   "start": 51.98,
+   "end": 52.32
+  },
+  {
+   "w": "no.",
+   "start": 52.32,
+   "end": 52.72
+  },
+  {
+   "w": "Follow",
+   "start": 53.58,
+   "end": 53.98
+  },
+  {
+   "w": "for",
+   "start": 53.98,
+   "end": 54.26
+  },
+  {
+   "w": "more",
+   "start": 54.26,
+   "end": 54.44
+  },
+  {
+   "w": "mind",
+   "start": 54.44,
+   "end": 54.78
+  },
+  {
+   "w": "tricks.",
+   "start": 54.78,
+   "end": 55.06
+  }
+ ]
+}

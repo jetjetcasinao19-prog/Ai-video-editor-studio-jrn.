@@ -55,6 +55,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-12-10 Thu | 8:00 PM | Fri Dec 11, 9:00 AM | MindTrace | TikTok | You think everyone noticed. They didn't. | content/posts/2026-11-23-spotlight-effect-inkblot.md | ready |
 | 2026-12-11 Fri | 7:00 PM | Sat Dec 12, 8:00 AM | MindTrace | Instagram Reels | Why fewer people noticed than you think | content/posts/2026-11-23-spotlight-effect-inkblot.md | ready |
 | 2026-12-11 Fri | 8:00 PM | Sat Dec 12, 9:00 AM | MindTrace | Facebook Reels | You think everyone noticed. They didn't. | content/posts/2026-11-23-spotlight-effect-inkblot.md | ready |
+| 2026-12-12 Sat | 7:00 PM | Sun Dec 13, 8:00 AM | MindTrace | YouTube Shorts | The Closest Thing to Mind Control? A Man in a Lab Coat (The Milgram Experiment) | content/posts/2026-11-23-milgram-obedience-inkblot.md | ready |
+| 2026-12-12 Sat | 8:00 PM | Sun Dec 13, 9:00 AM | MindTrace | TikTok | The closest thing to real mind control? A man in a lab coat. | content/posts/2026-11-23-milgram-obedience-inkblot.md | ready |
+| 2026-12-13 Sun | 7:00 PM | Mon Dec 14, 8:00 AM | MindTrace | Instagram Reels | 1% was the prediction. 65% obeyed. | content/posts/2026-11-23-milgram-obedience-inkblot.md | ready |
+| 2026-12-13 Sun | 8:00 PM | Mon Dec 14, 9:00 AM | MindTrace | Facebook Reels | The closest thing to real mind control? A man in a lab coat. | content/posts/2026-11-23-milgram-obedience-inkblot.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
