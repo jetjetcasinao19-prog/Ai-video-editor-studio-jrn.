@@ -141,6 +141,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-01-30 Sat | 8:00 PM | Sun Jan 31, 9:00 AM | TikTok | Nine years old. A general's son. One promise. | content/posts/2026-11-23-hannibal-ottoman.md | ready |
 | 2027-01-31 Sun | 7:00 PM | Mon Feb 1, 8:00 AM | Instagram Reels | Before the Alps and the elephants, there was a boy in Carthage asking to go to war. | content/posts/2026-11-23-hannibal-ottoman.md | ready |
 | 2027-01-31 Sun | 8:00 PM | Mon Feb 1, 9:00 AM | Facebook Reels | Did you know Hannibal said his path began when he was nine? | content/posts/2026-11-23-hannibal-ottoman.md | ready |
+| 2027-02-01 Mon | 7:00 PM | Tue Feb 2, 8:00 AM | YouTube Shorts | The Man Who Dug Through Troy | content/posts/2026-11-23-troy-ottoman.md | ready |
+| 2027-02-01 Mon | 8:00 PM | Tue Feb 2, 9:00 AM | TikTok | Everyone says Schliemann found Troy. Fewer people say what his trench did to it. | content/posts/2026-11-23-troy-ottoman.md | ready |
+| 2027-02-02 Tue | 7:00 PM | Wed Feb 3, 8:00 AM | Instagram Reels | A hill in Turkey. Nine cities. One enormous trench. | content/posts/2026-11-23-troy-ottoman.md | ready |
+| 2027-02-02 Tue | 8:00 PM | Wed Feb 3, 9:00 AM | Facebook Reels | Did you know the man who made Troy famous also damaged it? | content/posts/2026-11-23-troy-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
