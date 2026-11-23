@@ -133,6 +133,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-01-26 Tue | 8:00 PM | Wed Jan 27, 9:00 AM | TikTok | Plot twist: there is no single Great Wall. | content/posts/2026-11-23-great-wall-ottoman.md | ready |
 | 2027-01-27 Wed | 7:00 PM | Thu Jan 28, 8:00 AM | Instagram Reels | Not one wall. Many. | content/posts/2026-11-23-great-wall-ottoman.md | ready |
 | 2027-01-27 Wed | 8:00 PM | Thu Jan 28, 9:00 AM | Facebook Reels | Think the Great Wall of China was built in one go by one emperor? Not quite. | content/posts/2026-11-23-great-wall-ottoman.md | ready |
+| 2027-01-28 Thu | 7:00 PM | Fri Jan 29, 8:00 AM | YouTube Shorts | The Army Under the Field | content/posts/2026-11-23-terracotta-ottoman.md | ready |
+| 2027-01-28 Thu | 8:00 PM | Fri Jan 29, 9:00 AM | TikTok | A drought. A well. A farmer's shovel. | content/posts/2026-11-23-terracotta-ottoman.md | ready |
+| 2027-01-29 Fri | 7:00 PM | Sat Jan 30, 8:00 AM | Instagram Reels | Under a farmer's field, an emperor's guard stood watch for 2,000 years. | content/posts/2026-11-23-terracotta-ottoman.md | ready |
+| 2027-01-29 Fri | 8:00 PM | Sat Jan 30, 9:00 AM | Facebook Reels | One of the world's greatest finds began with people looking for water. | content/posts/2026-11-23-terracotta-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
