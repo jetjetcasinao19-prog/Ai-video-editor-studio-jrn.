@@ -39,7 +39,7 @@ titles, descriptions, hashtags and comment replies. Edit freely.
 
 ## Descriptions
 - 1–3 short lines: what they will learn, then a call to action.
-- Calls to action to rotate: "Subscribe for more origin stories",
+- Calls to action to rotate: "Subscribe to trace your mind",
   "Whose beginning should we tell next? Comment below", "Every legend has a beginning."
 - Always state facts that can be checked; the researcher agent keeps sources.
 
