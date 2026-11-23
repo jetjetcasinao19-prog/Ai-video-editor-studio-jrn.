@@ -43,6 +43,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-12-04 Fri | 8:00 PM | Sat Dec 5, 9:00 AM | MindTrace | TikTok | A random number just changed your answer. You didn't even notice. | content/posts/2026-11-23-anchoring-effect-inkblot.md | ready |
 | 2026-12-05 Sat | 7:00 PM | Sun Dec 6, 8:00 AM | MindTrace | Instagram Reels | The first number you hear is already steering you | content/posts/2026-11-23-anchoring-effect-inkblot.md | ready |
 | 2026-12-05 Sat | 8:00 PM | Sun Dec 6, 9:00 AM | MindTrace | Facebook Reels | A random number just changed your answer. You didn't even notice. | content/posts/2026-11-23-anchoring-effect-inkblot.md | ready |
+| 2026-12-06 Sun | 7:00 PM | Mon Dec 7, 8:00 AM | MindTrace | YouTube Shorts | Want Them to Like You? Ask a Favor (The Ben Franklin Effect) | content/posts/2026-11-23-ben-franklin-effect-inkblot.md | ready |
+| 2026-12-06 Sun | 8:00 PM | Mon Dec 7, 9:00 AM | MindTrace | TikTok | Want your enemy to like you? Ask them for a favor. | content/posts/2026-11-23-ben-franklin-effect-inkblot.md | ready |
+| 2026-12-07 Mon | 7:00 PM | Tue Dec 8, 8:00 AM | MindTrace | Instagram Reels | The favor trick Ben Franklin used on a rival | content/posts/2026-11-23-ben-franklin-effect-inkblot.md | ready |
+| 2026-12-07 Mon | 8:00 PM | Tue Dec 8, 9:00 AM | MindTrace | Facebook Reels | Want your enemy to like you? Ask them for a favor. | content/posts/2026-11-23-ben-franklin-effect-inkblot.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
