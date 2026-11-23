@@ -66,7 +66,7 @@
   a close second, because it is set in 280 BC, but the payoff is the word, not the war. (Marathon is in Ancient
   Origins and also gave us a word, so it is a judgment call; move it if the channel prefers era over theme.)
   (e) Sources: Britannica, "Pyrrhus" (https://www.britannica.com/biography/Pyrrhus) and Plutarch, Life of
-  Pyrrhus, via LacusCurtius (https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Plutarch/Lives/Pyrrhus*.html).
+  Pyrrhus, via LacusCurtius; replaced in the YouTube Sources line by the Perseus passage, which was verified: https://cts.perseids.org/read/greekLit/tlg0007/tlg030/perseus-eng2/21.6-21.10.
   Both URLs came from WebSearch results (the Plutarch one in a lowercase form with a "*" in the name, which is
   how that site names it); open each once to confirm it loads and says what is cited, and that chapter 21
   holds the quote. Also seen but not cited: Merriam-Webster "Pyrrhic victory"
@@ -82,7 +82,7 @@
 Ever heard of a Pyrrhic victory? It is named after King Pyrrhus of Epirus, in Greece, who sailed to Italy in 280 BC to fight Rome and brought war elephants. He beat the Romans at Heraclea, and again at Asculum in 279 BC. But each win cost him thousands of his best soldiers and officers, and he could not replace them. After Asculum, Plutarch reports, Pyrrhus said that one more victory like that would ruin him. Rome kept sending armies, and a few years later he left Italy. His name became a word for winning that costs too much.
 Animated entirely in code in the style of Ottoman miniatures, told by a coffeehouse storyteller with a pair of scales.
 Series: Words & Symbols
-Sources: Britannica, "Pyrrhus" (https://www.britannica.com/biography/Pyrrhus); Plutarch, Life of Pyrrhus, LacusCurtius (https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Plutarch/Lives/Pyrrhus*.html). The exact wording of the quote varies by translation.
+Sources: Britannica, "Pyrrhus" (https://www.britannica.com/biography/Pyrrhus); Plutarch, Life of Pyrrhus 21, Perrin translation via Perseus (https://cts.perseids.org/read/greekLit/tlg0007/tlg030/perseus-eng2/21.6-21.10). The exact wording of the quote varies by translation.
 Subtitles: upload the .srt file from animate/projects/pyrrhic/out/pyrrhic-ottoman.srt with this video.
 Which word's beginning should we tell next? Comment below. Every legend has a beginning.
 **Hashtags:** #HowItStarted #EveryLegendHasABeginning #AncientHistory #WordOrigins #HistoryFacts #shorts
