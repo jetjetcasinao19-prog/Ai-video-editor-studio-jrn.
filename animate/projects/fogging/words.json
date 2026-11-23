@@ -1,0 +1,516 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "Someone's making fun of you? Don't fight back. Do this. Therapists call it fogging. It comes from a 1975 book, \"When I Say No, I Feel Guilty.\" Here's the trick. Calmly agree with any part that's true. \"Nice shoes, Grandpa.\" \"Yeah, they're comfy.\" \"You're always late.\" \"True, I was late today.\" No anger, no defending. Like fog, they throw punches and nothing lands. Why it works? A tease wants a reaction. Give it nothing and it has nothing to grab. One thing. This is for teasing. If it's bullying or it keeps happening, tell someone you trust. Follow for more mind tricks.",
+ "words": [
+  {
+   "w": "Someone's",
+   "start": 0.08,
+   "end": 0.46
+  },
+  {
+   "w": "making",
+   "start": 0.46,
+   "end": 0.7
+  },
+  {
+   "w": "fun",
+   "start": 0.7,
+   "end": 0.94
+  },
+  {
+   "w": "of",
+   "start": 0.94,
+   "end": 1.08
+  },
+  {
+   "w": "you?",
+   "start": 1.08,
+   "end": 1.8
+  },
+  {
+   "w": "Don't",
+   "start": 1.8,
+   "end": 1.98
+  },
+  {
+   "w": "fight",
+   "start": 1.98,
+   "end": 2.22
+  },
+  {
+   "w": "back.",
+   "start": 2.22,
+   "end": 3.08
+  },
+  {
+   "w": "Do",
+   "start": 3.08,
+   "end": 3.16
+  },
+  {
+   "w": "this.",
+   "start": 3.16,
+   "end": 4.06
+  },
+  {
+   "w": "Therapists",
+   "start": 4.42,
+   "end": 4.86
+  },
+  {
+   "w": "call",
+   "start": 4.86,
+   "end": 5.16
+  },
+  {
+   "w": "it",
+   "start": 5.16,
+   "end": 5.4
+  },
+  {
+   "w": "fogging.",
+   "start": 5.4,
+   "end": 6.74
+  },
+  {
+   "w": "It",
+   "start": 6.74,
+   "end": 6.82
+  },
+  {
+   "w": "comes",
+   "start": 6.82,
+   "end": 7.06
+  },
+  {
+   "w": "from",
+   "start": 7.06,
+   "end": 7.24
+  },
+  {
+   "w": "a",
+   "start": 7.24,
+   "end": 7.34
+  },
+  {
+   "w": "1975",
+   "start": 7.34,
+   "end": 7.9
+  },
+  {
+   "w": "book,",
+   "start": 7.9,
+   "end": 9.22
+  },
+  {
+   "w": "\"When",
+   "start": 9.22,
+   "end": 9.28
+  },
+  {
+   "w": "I",
+   "start": 9.28,
+   "end": 9.46
+  },
+  {
+   "w": "Say",
+   "start": 9.46,
+   "end": 9.68
+  },
+  {
+   "w": "No,",
+   "start": 9.68,
+   "end": 10.3
+  },
+  {
+   "w": "I",
+   "start": 10.3,
+   "end": 10.4
+  },
+  {
+   "w": "Feel",
+   "start": 10.4,
+   "end": 10.68
+  },
+  {
+   "w": "Guilty.\"",
+   "start": 10.68,
+   "end": 11.02
+  },
+  {
+   "w": "Here's",
+   "start": 11.94,
+   "end": 12.16
+  },
+  {
+   "w": "the",
+   "start": 12.16,
+   "end": 12.28
+  },
+  {
+   "w": "trick.",
+   "start": 12.28,
+   "end": 13.2
+  },
+  {
+   "w": "Calmly",
+   "start": 13.2,
+   "end": 13.62
+  },
+  {
+   "w": "agree",
+   "start": 13.62,
+   "end": 13.96
+  },
+  {
+   "w": "with",
+   "start": 13.96,
+   "end": 14.22
+  },
+  {
+   "w": "any",
+   "start": 14.22,
+   "end": 14.5
+  },
+  {
+   "w": "part",
+   "start": 14.5,
+   "end": 14.88
+  },
+  {
+   "w": "that's",
+   "start": 14.88,
+   "end": 15.24
+  },
+  {
+   "w": "true.",
+   "start": 15.24,
+   "end": 16.08
+  },
+  {
+   "w": "\"Nice",
+   "start": 16.48,
+   "end": 16.64
+  },
+  {
+   "w": "shoes,",
+   "start": 16.64,
+   "end": 17.1
+  },
+  {
+   "w": "Grandpa.\"",
+   "start": 17.1,
+   "end": 18
+  },
+  {
+   "w": "\"Yeah,",
+   "start": 18,
+   "end": 18.34
+  },
+  {
+   "w": "they're",
+   "start": 18.34,
+   "end": 18.86
+  },
+  {
+   "w": "comfy.\"",
+   "start": 18.86,
+   "end": 19.66
+  },
+  {
+   "w": "\"You're",
+   "start": 19.9,
+   "end": 20.08
+  },
+  {
+   "w": "always",
+   "start": 20.08,
+   "end": 20.6
+  },
+  {
+   "w": "late.\"",
+   "start": 20.6,
+   "end": 21.66
+  },
+  {
+   "w": "\"True,",
+   "start": 21.66,
+   "end": 22.1
+  },
+  {
+   "w": "I",
+   "start": 22.1,
+   "end": 22.46
+  },
+  {
+   "w": "was",
+   "start": 22.46,
+   "end": 22.68
+  },
+  {
+   "w": "late",
+   "start": 22.68,
+   "end": 22.88
+  },
+  {
+   "w": "today.\"",
+   "start": 22.88,
+   "end": 23.68
+  },
+  {
+   "w": "No",
+   "start": 24.08,
+   "end": 24.22
+  },
+  {
+   "w": "anger,",
+   "start": 24.22,
+   "end": 25.08
+  },
+  {
+   "w": "no",
+   "start": 25.08,
+   "end": 25.2
+  },
+  {
+   "w": "defending.",
+   "start": 25.2,
+   "end": 26.38
+  },
+  {
+   "w": "Like",
+   "start": 26.38,
+   "end": 26.56
+  },
+  {
+   "w": "fog,",
+   "start": 26.56,
+   "end": 27.54
+  },
+  {
+   "w": "they",
+   "start": 27.54,
+   "end": 27.64
+  },
+  {
+   "w": "throw",
+   "start": 27.64,
+   "end": 27.92
+  },
+  {
+   "w": "punches",
+   "start": 27.92,
+   "end": 28.4
+  },
+  {
+   "w": "and",
+   "start": 28.4,
+   "end": 28.88
+  },
+  {
+   "w": "nothing",
+   "start": 28.88,
+   "end": 29.3
+  },
+  {
+   "w": "lands.",
+   "start": 29.3,
+   "end": 29.98
+  },
+  {
+   "w": "Why",
+   "start": 30.9,
+   "end": 31.04
+  },
+  {
+   "w": "it",
+   "start": 31.04,
+   "end": 31.24
+  },
+  {
+   "w": "works?",
+   "start": 31.24,
+   "end": 32.32
+  },
+  {
+   "w": "A",
+   "start": 32.32,
+   "end": 32.44
+  },
+  {
+   "w": "tease",
+   "start": 32.44,
+   "end": 32.84
+  },
+  {
+   "w": "wants",
+   "start": 32.84,
+   "end": 33.42
+  },
+  {
+   "w": "a",
+   "start": 33.42,
+   "end": 33.66
+  },
+  {
+   "w": "reaction.",
+   "start": 33.66,
+   "end": 34.86
+  },
+  {
+   "w": "Give",
+   "start": 34.86,
+   "end": 34.96
+  },
+  {
+   "w": "it",
+   "start": 34.96,
+   "end": 35.12
+  },
+  {
+   "w": "nothing",
+   "start": 35.12,
+   "end": 35.46
+  },
+  {
+   "w": "and",
+   "start": 35.46,
+   "end": 35.98
+  },
+  {
+   "w": "it",
+   "start": 35.98,
+   "end": 36.1
+  },
+  {
+   "w": "has",
+   "start": 36.1,
+   "end": 36.26
+  },
+  {
+   "w": "nothing",
+   "start": 36.26,
+   "end": 36.54
+  },
+  {
+   "w": "to",
+   "start": 36.54,
+   "end": 36.8
+  },
+  {
+   "w": "grab.",
+   "start": 36.8,
+   "end": 37.58
+  },
+  {
+   "w": "One",
+   "start": 38.1,
+   "end": 38.26
+  },
+  {
+   "w": "thing.",
+   "start": 38.26,
+   "end": 39.12
+  },
+  {
+   "w": "This",
+   "start": 39.12,
+   "end": 39.34
+  },
+  {
+   "w": "is",
+   "start": 39.34,
+   "end": 39.6
+  },
+  {
+   "w": "for",
+   "start": 39.6,
+   "end": 39.76
+  },
+  {
+   "w": "teasing.",
+   "start": 39.76,
+   "end": 40.9
+  },
+  {
+   "w": "If",
+   "start": 40.9,
+   "end": 40.98
+  },
+  {
+   "w": "it's",
+   "start": 40.98,
+   "end": 41.16
+  },
+  {
+   "w": "bullying",
+   "start": 41.16,
+   "end": 41.54
+  },
+  {
+   "w": "or",
+   "start": 41.54,
+   "end": 41.94
+  },
+  {
+   "w": "it",
+   "start": 41.94,
+   "end": 42.08
+  },
+  {
+   "w": "keeps",
+   "start": 42.08,
+   "end": 42.36
+  },
+  {
+   "w": "happening,",
+   "start": 42.36,
+   "end": 43.3
+  },
+  {
+   "w": "tell",
+   "start": 43.3,
+   "end": 43.38
+  },
+  {
+   "w": "someone",
+   "start": 43.38,
+   "end": 43.68
+  },
+  {
+   "w": "you",
+   "start": 43.68,
+   "end": 43.82
+  },
+  {
+   "w": "trust.",
+   "start": 43.82,
+   "end": 44.72
+  },
+  {
+   "w": "Follow",
+   "start": 45.02,
+   "end": 45.24
+  },
+  {
+   "w": "for",
+   "start": 45.24,
+   "end": 45.48
+  },
+  {
+   "w": "more",
+   "start": 45.48,
+   "end": 45.68
+  },
+  {
+   "w": "mind",
+   "start": 45.68,
+   "end": 45.98
+  },
+  {
+   "w": "tricks.",
+   "start": 45.98,
+   "end": 46.76
+  }
+ ]
+}

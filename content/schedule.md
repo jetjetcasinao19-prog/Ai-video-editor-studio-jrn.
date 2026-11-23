@@ -59,6 +59,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-12-12 Sat | 8:00 PM | Sun Dec 13, 9:00 AM | MindTrace | TikTok | The closest thing to real mind control? A man in a lab coat. | content/posts/2026-11-23-milgram-obedience-inkblot.md | ready |
 | 2026-12-13 Sun | 7:00 PM | Mon Dec 14, 8:00 AM | MindTrace | Instagram Reels | 1% was the prediction. 65% obeyed. | content/posts/2026-11-23-milgram-obedience-inkblot.md | ready |
 | 2026-12-13 Sun | 8:00 PM | Mon Dec 14, 9:00 AM | MindTrace | Facebook Reels | The closest thing to real mind control? A man in a lab coat. | content/posts/2026-11-23-milgram-obedience-inkblot.md | ready |
+| 2026-12-14 Mon | 7:00 PM | Tue Dec 15, 8:00 AM | MindTrace | YouTube Shorts | Someone Teasing You? Don't Fight Back. Try Fogging | content/posts/2026-11-23-fogging-inkblot.md | ready |
+| 2026-12-14 Mon | 8:00 PM | Tue Dec 15, 9:00 AM | MindTrace | TikTok | Someone's making fun of you? Don't fight back. Do this. | content/posts/2026-11-23-fogging-inkblot.md | ready |
+| 2026-12-15 Tue | 7:00 PM | Wed Dec 16, 8:00 AM | MindTrace | Instagram Reels | The comeback that gives a tease nothing to grab | content/posts/2026-11-23-fogging-inkblot.md | ready |
+| 2026-12-15 Tue | 8:00 PM | Wed Dec 16, 9:00 AM | MindTrace | Facebook Reels | Someone's making fun of you? Don't fight back. Do this. | content/posts/2026-11-23-fogging-inkblot.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
