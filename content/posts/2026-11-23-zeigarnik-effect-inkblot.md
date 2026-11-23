@@ -1,7 +1,7 @@
 # Your Brain Is Keeping a To-Do List — The Zeigarnik Effect, INKBLOT short
 
 - **Video:** `animate/projects/zeigarnik-effect/out/zeigarnik-effect-inkblot.mp4`
-  (52 s, 9:16, 1080x1920, How it Started brand, AI narration voice, end card
+  (53 s, 9:16, 1080x1920, How it Started brand, AI narration voice, end card
   stamped "CASE: OPEN" and "Subscribe for more origin stories")
 - **Hook (first line of the video):** "Your brain is keeping a to-do list... you never wrote."
 - **Summary:** Berlin, the 1920s. The story goes that psychologist Kurt Lewin sat

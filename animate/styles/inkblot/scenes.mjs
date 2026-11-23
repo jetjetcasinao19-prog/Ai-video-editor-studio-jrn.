@@ -1,7 +1,8 @@
 // Ready-made backdrops for INKBLOT storyboards. Each takes (ctx, S, options)
 // and paints the whole plate (S.W × S.H = 940 × 1060).
+import { createCanvas } from '@napi-rs/canvas';
 import { clamp, lerp, rng, TAU, ease } from '../../lib/core.mjs';
-import { P, rect, line, circle, ellipse, poly, blot, mirror, bistroTable, cafeChair, moon, text, fill, stroke } from './kit.mjs';
+import { P, rect, line, circle, ellipse, poly, blot, mirror, bistroTable, cafeChair, moon, text, fill, stroke, stamp } from './kit.mjs';
 
 // A blank plate with a faint living blot behind everything.
 export function plate(ctx, S, o = {}) {
@@ -97,4 +98,76 @@ export function dream(ctx, S, o = {}) {
   ctx.fillStyle = o.ground || P.paperDark; ctx.fillRect(-300, hz, W + 600, H - hz + 300);
   ctx.save(); ctx.globalAlpha = 0.25; for (let i = 0; i < 14; i++) { const x = W / 2 + (i - 7) * 160; line(ctx, W / 2 + (x - W / 2) * 0.12, hz, x * 3 - W, H + 200, P.ink, 2); } ctx.restore();
   line(ctx, -300, hz, W + 300, hz, P.ink, 4);
+}
+
+// ---------- the closing brand card (outro template) ----------
+// INKBLOT's version of the Ottoman book cover: the case file closes on a
+// black cover with mirrored paper-ink corners, a living blot (with a red
+// heart) behind the channel logo, the tagline taped on, the handle, a red
+// stamp, and small ink moths rising like the Ottoman bubbles.
+// q = seconds since the cover appeared.
+// o: { tagline, handle, caseNo, stamp, seed }
+export function caseCover(ctx, S, q, o = {}) {
+  const { W, H } = S, t = S.t;
+  ctx.fillStyle = P.ink; ctx.fillRect(-10, -10, W + 20, H + 20);
+  const R = rng(o.seed || 61);
+  ctx.save(); ctx.globalAlpha = 0.06; for (let i = 0; i < 260; i++) circle(ctx, R() * W, R() * H, 0.6 + R() * 1.8, P.paperLight); ctx.restore();
+  rect(ctx, 30, 30, W - 60, H - 60, null, P.paperLight, 6);
+  rect(ctx, 48, 48, W - 96, H - 96, null, P.red, 2.5);
+  // corners: one blot, mirrored into all four (the fold, both ways)
+  for (const [sx, sy] of [[1, 1], [-1, 1], [1, -1], [-1, -1]]) {
+    ctx.save(); ctx.translate(W / 2, H / 2); ctx.scale(sx, sy); ctx.translate(-W / 2, -H / 2);
+    blot(ctx, 112, 108, 150, 120, { seed: (o.seed || 61) + 3, color: P.paperLight, res: 0.6, splatter: 3, alpha: 0.9 });
+    ctx.restore();
+  }
+  text(ctx, 'CASE FILE', W / 2, 98, 34, { color: P.paperLight });
+  text(ctx, 'No. ' + (o.caseNo || '0001'), W / 2, 140, 30, { color: P.red });
+  // the medallion: a white blot with a red heart, logo in the middle
+  const cy = 450, pulse = 1 + 0.025 * Math.sin(q * 3);
+  blot(ctx, W / 2, cy, 660, 500, { seed: (o.seed || 61) + 7, kind: 'moth', color: P.paperLight, live: 1, t, res: 0.3 });
+  blot(ctx, W / 2, cy + 10, 420, 360, { seed: (o.seed || 61) + 11, kind: 'mask', color: P.red, live: 1, t: t + 2, res: 0.35, splatter: 3 });
+  ctx.save(); ctx.translate(W / 2, cy); ctx.scale(pulse, pulse);
+  circle(ctx, 0, 0, 172, P.red); circle(ctx, 0, 0, 160, P.paperLight); circle(ctx, 0, 0, 150, P.ink);
+  if (S.logo) { ctx.save(); ctx.beginPath(); ctx.arc(0, 0, 150, 0, TAU); ctx.clip(); ctx.drawImage(S.logo, -150, -150, 300, 300); ctx.restore(); }
+  else text(ctx, (o.handle || 'MIND').replace(/^@/, '').slice(0, 4), 0, 0, 80, { font: 'display', color: P.paperLight });
+  ctx.restore();
+  // tagline, taped on like evidence
+  const tag = o.tagline || 'THE MIND FILES', tk = ease.outBack(clamp((q - 0.25) / 0.4));
+  if (tk > 0) {
+    ctx.save(); ctx.translate(W / 2, 820); ctx.rotate(-0.025); ctx.scale(tk, tk);
+    rect(ctx, -350, -62, 700, 124, P.paperLight, P.ink, 3);
+    for (const [x, y, a] of [[-350, -62, -0.6], [350, -62, 0.6], [-350, 62, 0.6], [350, 62, -0.6]]) { ctx.save(); ctx.translate(x, y); ctx.rotate(a); ctx.globalAlpha = 0.85; rect(ctx, -38, -14, 76, 28, P.red); ctx.restore(); }
+    text(ctx, tag, 0, 2, 54, { font: 'italic', max: 640 });
+    ctx.restore();
+  }
+  if (o.handle) {
+    const hk = ease.outCubic(clamp((q - 0.45) / 0.35));
+    ctx.save(); ctx.globalAlpha = hk; font_(ctx);
+    const w = ctx.measureText(o.handle).width + 70;
+    rect(ctx, W / 2 - w / 2, 925, w, 64, P.red, null, 0, 32);
+    text(ctx, o.handle, W / 2, 958, 34, { font: 'serif', color: P.paperLight });
+    ctx.restore();
+  }
+  if (o.stamp !== false) stamp(ctx, o.stamp || 'CASE: OPEN', W - 190, 205, 36, clamp((q - 0.7) / 0.2), 0.14, P.redLight);
+  // ink moths rising (the Ottoman bubbles, in ink)
+  for (let i = 0; i < 7; i++) {
+    const y = H + 60 - ((q * 120 + i * 170) % (H + 140)), x = 90 + (i * 137) % 760 + Math.sin(q * 1.5 + i) * 30;
+    ctx.save(); ctx.translate(x, y); ctx.globalAlpha = 0.55; ctx.scale(0.35 + 0.65 * Math.abs(Math.sin(t * 13 + i)), 1);
+    blot(ctx, 0, 0, 80, 56, { seed: 31, kind: 'moth', color: P.paperLight, res: 0.6, splatter: 0 });
+    ctx.restore();
+  }
+}
+function font_(ctx) { ctx.font = '700 34px Display'; }
+
+// Reveal anything (e.g. the cover) through a spreading ink blot.
+// k: 0 → nothing, 1 → fully shown. draw(c) paints onto the given context.
+export function inkReveal(ctx, S, k, draw, seed = 777) {
+  if (k <= 0) return;
+  if (k >= 1) { draw(ctx); return; }
+  const { W, H } = S, buf = createCanvas(W, H), b = buf.getContext('2d');
+  draw(b);
+  b.globalCompositeOperation = 'destination-in';
+  blot(b, W / 2, H / 2 - 60, W * lerp(0.3, 2.4, ease.inQuad(k)), H * lerp(0.3, 2.2, ease.inQuad(k)), { seed, grow: clamp(0.55 + k), res: 0.22, rough: 1.2, splatter: 0 });
+  ctx.drawImage(buf, 0, 0);
+  if (k > 0.75) { ctx.save(); ctx.globalAlpha = (k - 0.75) / 0.25; draw(ctx); ctx.restore(); }
 }

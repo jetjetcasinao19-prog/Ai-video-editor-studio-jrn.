@@ -1,20 +1,20 @@
 // "The Zeigarnik Effect" — an INKBLOT case file (psychology).
 // u = seconds since the scene started; S.at('word') = when that word is said.
 import { clamp, lerp, ease, tween, rng, TAU, shake, pop, noise1 } from '../../lib/core.mjs';
-import { plate, cafe, study, night, dream } from '../../styles/inkblot/scenes.mjs';
+import { plate, cafe, study, night, dream, caseCover, inkReveal } from '../../styles/inkblot/scenes.mjs';
 
 export const meta = {
   title: 'The Zeigarnik Effect',
   slug: 'zeigarnik-effect-inkblot',
   style: 'inkblot',
   width: 1080, height: 1920, fps: 30,
-  duration: 52.2,
+  duration: 53.2,
   voice: 'voice.mp3',
   seed: 27,
   captionChars: 24,
   caseLine: 'THE MIND FILES  ·  CASE No. 1927  ·  CONFIDENTIAL',
   brand: { handle: '@MINDTRACEOFFICIAL-YT', logo: '../../../brand/logo.png' },
-  outro: { at: 49.35, text: 'Subscribe for more origin stories' },
+  outro: { at: 49.5, text: 'Subscribe for more origin stories' },
 };
 
 // ---- the cast ----
@@ -469,13 +469,17 @@ export const scenes = [
     start: 47.08, title: 'Your Brain Wants to Finish', trans: 'blink',
     draw(ctx, u, S) {
       const { k, P, W, H } = S, fn = S.at('finish');
+      ctx.save();
       plate(ctx, S, { alpha: 0.12, seed: 111, w: 900, h: 760, y: 420 });
       S.cam(lerp(1.06, 1.0, tween(u, 0, 4)), W / 2, 540);
       k.profile(ctx, 400, 1000, 1.6, { blink: 1, inside: c => k.brain(c, 10, -205, 0.55, S.t, { fill: P.rose, glow: 0.6 + 0.4 * Math.sin(S.t * 5), spots: [[60, -60], [-50, -40]] }) });
-      // the loop pulls itself almost shut… and stops. (Case still open.)
-      const close = tween(u, 0.2, fn + 0.7, ease.inOut);
+      // the loop pulls itself almost shut… and stops.
+      const close = tween(u, 0.2, fn + 0.6, ease.inOut);
       k.loop(ctx, 410, 210, 130, lerp(1, 0.07, close), S.t, { lw: 22, pulse: true, glow: true });
-      k.stamp(ctx, 'CASE: OPEN', 720, 560, 46, tween(u, fn + 1.0, fn + 1.25), 0.12);
+      ctx.restore();
+      // outro: the case file closes on the channel's cover (still OPEN)
+      const rv = fn + 0.62;
+      inkReveal(ctx, S, tween(u, rv, rv + 0.7, ease.linear), c => caseCover(c, S, u - rv, { handle: meta.brand.handle, caseNo: '1927', tagline: meta.brand.tagline }));
     },
   },
 ];
@@ -553,8 +557,11 @@ export const sfx = [
   { t: 47.0, type: 'pop', gain: 0.5, pitch: 1.2 },
   { t: 47.1, type: 'blink', gain: 0.45 },
   { t: 47.3, type: 'stamp', gain: 0.6 },
-  { t: 49.6, type: 'snap', gain: 0.35 },
-  { t: 50.1, type: 'stamp', gain: 0.7 },
+  { t: 49.1, type: 'splat', gain: 0.8 },
+  { t: 49.4, type: 'fold', gain: 0.4 },
+  { t: 50.4, type: 'stamp', gain: 0.8 },
+  { t: 51.2, type: 'moth', gain: 0.35 },
+  { t: 52.2, type: 'bell', gain: 0.3 },
 ];
 
 // music: the 'mind' kit — music box, felt piano, low strings, ticking clock, heartbeat
@@ -567,6 +574,6 @@ export const music = {
     { from: 20.0, to: 32.7, mood: 'drive' },
     { from: 32.7, to: 41.6, mood: 'tense' },
     { from: 41.6, to: 47.1, mood: 'triumph' },
-    { from: 47.1, to: 52.2, mood: 'end' },
+    { from: 47.1, to: 53.2, mood: 'end' },
   ],
 };

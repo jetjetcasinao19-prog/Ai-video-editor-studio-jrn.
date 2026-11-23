@@ -36,6 +36,24 @@ cake, sausage, coffee, bread, wine, soup), `bill`, `notepad`, `puzzlePiece`,
 Backdrops (`scenes.mjs`): `plate` (blank card with a faint living blot),
 `cafe` (1920s Berlin), `study`, `night`, `dream` (a surreal plain under blot clouds).
 
+## Outro template (the closing brand card)
+Every INKBLOT short ends like the Ottoman ones end on the book cover: the last
+plate is swallowed by an ink blot that opens on the **case-file cover**. It has
+mirrored paper-ink corners, a living blot with a red heart behind the channel
+logo (`brand/logo.png`), the tagline taped on like evidence, the handle, a red
+"CASE: OPEN" stamp, and ink moths rising. Put it at the end of the last scene, right after the final word:
+```js
+import { caseCover, inkReveal } from '../../styles/inkblot/scenes.mjs';
+const rv = S.at('finish') + 0.6;   // the last spoken word
+inkReveal(ctx, S, tween(u, rv, rv + 0.7, ease.linear),
+  c => caseCover(c, S, u - rv, { handle: meta.brand.handle, caseNo: '1927', tagline: meta.brand.tagline }));
+```
+Options: `tagline` (default "THE MIND FILES"), `stamp` (text, or `false`),
+`caseNo`. Call it outside `S.cam(...)` (wrap the scene in `ctx.save()/restore()`).
+Leave about 3 s after the voice (`meta.duration`) and set `meta.outro.at` so the
+call to action types into the caption panel. Sfx: `splat` at the reveal, `stamp`
+about 1.2 s later, then `moth`.
+
 ## Transitions (`trans:` on a scene)
 - `fold` (default) — the card folds shut along the crease and opens on the next plate
 - `bleed` — ink floods the card, then drains away (use for a new chapter or a reveal)
