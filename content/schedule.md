@@ -181,6 +181,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-02-19 Fri | 8:00 PM | Sat Feb 20, 9:00 AM | TikTok | Doctors used to press an ear against your chest. One of them found that too awkward. | content/posts/2026-11-24-stethoscope-ottoman.md | ready |
 | 2027-02-20 Sat | 7:00 PM | Sun Feb 21, 8:00 AM | Instagram Reels | Paper, a tube, and a very awkward moment. | content/posts/2026-11-24-stethoscope-ottoman.md | ready |
 | 2027-02-20 Sat | 8:00 PM | Sun Feb 21, 9:00 AM | Facebook Reels | Did you know the stethoscope started with a doctor who felt awkward? | content/posts/2026-11-24-stethoscope-ottoman.md | ready |
+| 2027-02-21 Sun | 7:00 PM | Mon Feb 22, 8:00 AM | YouTube Shorts | The Wrong Part That Saved Hearts | content/posts/2026-11-24-pacemaker-ottoman.md | ready |
+| 2027-02-21 Sun | 8:00 PM | Mon Feb 22, 9:00 AM | TikTok | An engineer grabbed the wrong part. His circuit was supposed to record a heartbeat. Instead it made one. | content/posts/2026-11-24-pacemaker-ottoman.md | ready |
+| 2027-02-22 Mon | 7:00 PM | Tue Feb 23, 8:00 AM | Instagram Reels | One green line, one wrong resistor. | content/posts/2026-11-24-pacemaker-ottoman.md | ready |
+| 2027-02-22 Mon | 8:00 PM | Tue Feb 23, 9:00 AM | Facebook Reels | Did you know one of the first implantable pacemakers began with a wrong part? | content/posts/2026-11-24-pacemaker-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the

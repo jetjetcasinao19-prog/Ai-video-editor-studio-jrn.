@@ -128,7 +128,7 @@ export const scenes = [
       const beat = (S.t * 200 % 200) / 200;
       heart(ctx, S, W / 2, 940, 1.3, u > st ? beat * TAU : 0);
       if (u > st) { ctx.save(); ctx.globalAlpha = 0.6 * (1 - beat); k.circle(ctx, W / 2, 940, 80 + beat * 80, null, GREEN, 4); ctx.restore(); }
-      k.label(ctx, 'ABOUT ONCE A SECOND', W / 2, 1080, 18, tween(u, he, he + 0.4));
+      k.label(ctx, 'A BLIP, A PAUSE, A BLIP', W / 2, 1080, 18, tween(u, he, he + 0.4));
     },
   },
   { // 22.7 "He realizes this could keep a weak heart beating."
