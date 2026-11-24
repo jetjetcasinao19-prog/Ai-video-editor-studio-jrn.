@@ -75,6 +75,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-12-20 Sun | 8:00 PM | Mon Dec 21, 9:00 AM | MindTrace | TikTok | A group can make you deny what you see with your own eyes. | content/posts/2026-11-23-asch-conformity-inkblot.md | ready |
 | 2026-12-21 Mon | 7:00 PM | Tue Dec 22, 8:00 AM | MindTrace | Instagram Reels | Why 3 out of 4 people went along with the wrong answer | content/posts/2026-11-23-asch-conformity-inkblot.md | ready |
 | 2026-12-21 Mon | 8:00 PM | Tue Dec 22, 9:00 AM | MindTrace | Facebook Reels | A group can make you deny what you see with your own eyes. | content/posts/2026-11-23-asch-conformity-inkblot.md | ready |
+| 2026-12-22 Tue | 7:00 PM | Wed Dec 23, 8:00 AM | MindTrace | YouTube Shorts | Want People to Remember You Well? Fix the Ending (Peak-End Rule) | content/posts/2026-11-24-peak-end-rule-inkblot.md | ready |
+| 2026-12-22 Tue | 8:00 PM | Wed Dec 23, 9:00 AM | MindTrace | TikTok | Want people to remember you well? Fix the ending. | content/posts/2026-11-24-peak-end-rule-inkblot.md | ready |
+| 2026-12-23 Wed | 7:00 PM | Thu Dec 24, 8:00 AM | MindTrace | Instagram Reels | Why 69% chose MORE pain | content/posts/2026-11-24-peak-end-rule-inkblot.md | ready |
+| 2026-12-23 Wed | 8:00 PM | Thu Dec 24, 9:00 AM | MindTrace | Facebook Reels | Want people to remember you well? Fix the ending. | content/posts/2026-11-24-peak-end-rule-inkblot.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
