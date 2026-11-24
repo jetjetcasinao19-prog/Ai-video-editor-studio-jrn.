@@ -95,6 +95,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-12-30 Wed | 8:00 PM | Thu Dec 31, 9:00 AM | MindTrace | TikTok | Why do scammers always say "act now"? | content/posts/2026-11-24-good-samaritan-inkblot.md | ready |
 | 2026-12-31 Thu | 7:00 PM | Fri Jan 1, 2027, 8:00 AM | MindTrace | Instagram Reels | The experiment that explains why scammers rush you | content/posts/2026-11-24-good-samaritan-inkblot.md | ready |
 | 2026-12-31 Thu | 8:00 PM | Fri Jan 1, 2027, 9:00 AM | MindTrace | Facebook Reels | Why do scammers always say "act now"? | content/posts/2026-11-24-good-samaritan-inkblot.md | ready |
+| 2027-01-01 Fri | 7:00 PM | Sat Jan 2, 8:00 AM | MindTrace | YouTube Shorts | They Don't Force You. They Choose Your Default. (The Organ Donor Experiment) | content/posts/2026-11-24-default-effect-inkblot.md | ready |
+| 2027-01-01 Fri | 8:00 PM | Sat Jan 2, 9:00 AM | MindTrace | TikTok | Governments don't need to force you. They just choose your default. | content/posts/2026-11-24-default-effect-inkblot.md | ready |
+| 2027-01-02 Sat | 7:00 PM | Sun Jan 3, 8:00 AM | MindTrace | Instagram Reels | Why almost nobody changes the default | content/posts/2026-11-24-default-effect-inkblot.md | ready |
+| 2027-01-02 Sat | 8:00 PM | Sun Jan 3, 9:00 AM | MindTrace | Facebook Reels | They don't force you. They choose your default. | content/posts/2026-11-24-default-effect-inkblot.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the

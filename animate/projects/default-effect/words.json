@@ -1,0 +1,421 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "Governments don't need to force you. They just choose your default. Germany and Austria are next-door neighbors. Same language, similar culture. In the early 2000s, in Germany, you had to check a box to become an organ donor. Only 12% were. In Austria, you were a donor unless you checked a box to opt out. Almost 100% were. Here's the trick. Most people never change the default. Whoever picks it, picks for you. So read every pre-checked box. Follow for more dark psychology.",
+ "words": [
+  {
+   "w": "Governments",
+   "start": 0.1,
+   "end": 0.54
+  },
+  {
+   "w": "don't",
+   "start": 0.54,
+   "end": 0.82
+  },
+  {
+   "w": "need",
+   "start": 0.82,
+   "end": 1.16
+  },
+  {
+   "w": "to",
+   "start": 1.16,
+   "end": 1.4
+  },
+  {
+   "w": "force",
+   "start": 1.4,
+   "end": 1.72
+  },
+  {
+   "w": "you.",
+   "start": 1.72,
+   "end": 2.5
+  },
+  {
+   "w": "They",
+   "start": 2.5,
+   "end": 2.6
+  },
+  {
+   "w": "just",
+   "start": 2.6,
+   "end": 2.88
+  },
+  {
+   "w": "choose",
+   "start": 2.88,
+   "end": 3.3
+  },
+  {
+   "w": "your",
+   "start": 3.3,
+   "end": 3.58
+  },
+  {
+   "w": "default.",
+   "start": 3.58,
+   "end": 4.48
+  },
+  {
+   "w": "Germany",
+   "start": 5.1,
+   "end": 5.38
+  },
+  {
+   "w": "and",
+   "start": 5.38,
+   "end": 5.66
+  },
+  {
+   "w": "Austria",
+   "start": 5.66,
+   "end": 6.06
+  },
+  {
+   "w": "are",
+   "start": 6.06,
+   "end": 6.34
+  },
+  {
+   "w": "next-door",
+   "start": 6.34,
+   "end": 6.78
+  },
+  {
+   "w": "neighbors.",
+   "start": 6.78,
+   "end": 7.62
+  },
+  {
+   "w": "Same",
+   "start": 7.62,
+   "end": 7.8
+  },
+  {
+   "w": "language,",
+   "start": 7.8,
+   "end": 8.66
+  },
+  {
+   "w": "similar",
+   "start": 8.66,
+   "end": 8.96
+  },
+  {
+   "w": "culture.",
+   "start": 8.96,
+   "end": 9.84
+  },
+  {
+   "w": "In",
+   "start": 10.18,
+   "end": 10.24
+  },
+  {
+   "w": "the",
+   "start": 10.24,
+   "end": 10.38
+  },
+  {
+   "w": "early",
+   "start": 10.38,
+   "end": 10.64
+  },
+  {
+   "w": "2000s,",
+   "start": 10.64,
+   "end": 11.5
+  },
+  {
+   "w": "in",
+   "start": 11.5,
+   "end": 11.62
+  },
+  {
+   "w": "Germany,",
+   "start": 11.62,
+   "end": 12.08
+  },
+  {
+   "w": "you",
+   "start": 12.08,
+   "end": 12.4
+  },
+  {
+   "w": "had",
+   "start": 12.4,
+   "end": 12.52
+  },
+  {
+   "w": "to",
+   "start": 12.52,
+   "end": 12.7
+  },
+  {
+   "w": "check",
+   "start": 12.7,
+   "end": 12.86
+  },
+  {
+   "w": "a",
+   "start": 12.86,
+   "end": 13.02
+  },
+  {
+   "w": "box",
+   "start": 13.02,
+   "end": 13.34
+  },
+  {
+   "w": "to",
+   "start": 13.34,
+   "end": 13.52
+  },
+  {
+   "w": "become",
+   "start": 13.52,
+   "end": 13.76
+  },
+  {
+   "w": "an",
+   "start": 13.76,
+   "end": 13.96
+  },
+  {
+   "w": "organ",
+   "start": 13.96,
+   "end": 14.24
+  },
+  {
+   "w": "donor.",
+   "start": 14.24,
+   "end": 15.02
+  },
+  {
+   "w": "Only",
+   "start": 15.16,
+   "end": 15.44
+  },
+  {
+   "w": "12%",
+   "start": 15.44,
+   "end": 16.46
+  },
+  {
+   "w": "were.",
+   "start": 16.46,
+   "end": 17.28
+  },
+  {
+   "w": "In",
+   "start": 17.7,
+   "end": 17.82
+  },
+  {
+   "w": "Austria,",
+   "start": 17.82,
+   "end": 18.54
+  },
+  {
+   "w": "you",
+   "start": 18.54,
+   "end": 18.72
+  },
+  {
+   "w": "were",
+   "start": 18.72,
+   "end": 18.94
+  },
+  {
+   "w": "a",
+   "start": 18.94,
+   "end": 19.12
+  },
+  {
+   "w": "donor",
+   "start": 19.12,
+   "end": 19.4
+  },
+  {
+   "w": "unless",
+   "start": 19.4,
+   "end": 19.9
+  },
+  {
+   "w": "you",
+   "start": 19.9,
+   "end": 20.1
+  },
+  {
+   "w": "checked",
+   "start": 20.1,
+   "end": 20.34
+  },
+  {
+   "w": "a",
+   "start": 20.34,
+   "end": 20.5
+  },
+  {
+   "w": "box",
+   "start": 20.5,
+   "end": 20.78
+  },
+  {
+   "w": "to",
+   "start": 20.78,
+   "end": 20.98
+  },
+  {
+   "w": "opt",
+   "start": 20.98,
+   "end": 21.22
+  },
+  {
+   "w": "out.",
+   "start": 21.22,
+   "end": 22.06
+  },
+  {
+   "w": "Almost",
+   "start": 22.28,
+   "end": 22.66
+  },
+  {
+   "w": "100%",
+   "start": 22.66,
+   "end": 23.84
+  },
+  {
+   "w": "were.",
+   "start": 23.84,
+   "end": 24.18
+  },
+  {
+   "w": "Here's",
+   "start": 25.16,
+   "end": 25.4
+  },
+  {
+   "w": "the",
+   "start": 25.4,
+   "end": 25.54
+  },
+  {
+   "w": "trick.",
+   "start": 25.54,
+   "end": 26.42
+  },
+  {
+   "w": "Most",
+   "start": 26.42,
+   "end": 26.66
+  },
+  {
+   "w": "people",
+   "start": 26.66,
+   "end": 27.06
+  },
+  {
+   "w": "never",
+   "start": 27.06,
+   "end": 27.6
+  },
+  {
+   "w": "change",
+   "start": 27.6,
+   "end": 28.2
+  },
+  {
+   "w": "the",
+   "start": 28.2,
+   "end": 28.34
+  },
+  {
+   "w": "default.",
+   "start": 28.34,
+   "end": 29.18
+  },
+  {
+   "w": "Whoever",
+   "start": 29.48,
+   "end": 29.68
+  },
+  {
+   "w": "picks",
+   "start": 29.68,
+   "end": 29.98
+  },
+  {
+   "w": "it,",
+   "start": 29.98,
+   "end": 30.82
+  },
+  {
+   "w": "picks",
+   "start": 30.82,
+   "end": 30.94
+  },
+  {
+   "w": "for",
+   "start": 30.94,
+   "end": 31.26
+  },
+  {
+   "w": "you.",
+   "start": 31.26,
+   "end": 31.48
+  },
+  {
+   "w": "So",
+   "start": 32.34,
+   "end": 32.5
+  },
+  {
+   "w": "read",
+   "start": 32.5,
+   "end": 32.82
+  },
+  {
+   "w": "every",
+   "start": 32.82,
+   "end": 33.38
+  },
+  {
+   "w": "pre-checked",
+   "start": 33.38,
+   "end": 34.16
+  },
+  {
+   "w": "box.",
+   "start": 34.16,
+   "end": 34.48
+  },
+  {
+   "w": "Follow",
+   "start": 35.56,
+   "end": 35.82
+  },
+  {
+   "w": "for",
+   "start": 35.82,
+   "end": 36.14
+  },
+  {
+   "w": "more",
+   "start": 36.14,
+   "end": 36.44
+  },
+  {
+   "w": "dark",
+   "start": 36.44,
+   "end": 36.84
+  },
+  {
+   "w": "psychology.",
+   "start": 36.84,
+   "end": 37.32
+  }
+ ]
+}
