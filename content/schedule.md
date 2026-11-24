@@ -123,6 +123,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-01-13 Wed | 8:00 PM | Thu Jan 14, 9:00 AM | MindTrace | TikTok | Craving a snack? Eat it in your head. 30 times. | content/posts/2026-11-24-imagined-eating-inkblot.md | ready |
 | 2027-01-14 Thu | 7:00 PM | Fri Jan 15, 8:00 AM | MindTrace | Instagram Reels | The imagined-eating trick for cravings | content/posts/2026-11-24-imagined-eating-inkblot.md | ready |
 | 2027-01-14 Thu | 8:00 PM | Fri Jan 15, 9:00 AM | MindTrace | Facebook Reels | Craving a snack? Eat it in your head 30 times. | content/posts/2026-11-24-imagined-eating-inkblot.md | ready |
+| 2027-01-15 Fri | 7:00 PM | Sat Jan 16, 8:00 AM | MindTrace | YouTube Shorts | The Plan to Fake Attacks and Blame Cuba (Operation Northwoods) | content/posts/2026-11-24-northwoods-inkblot.md | ready |
+| 2027-01-15 Fri | 8:00 PM | Sat Jan 16, 9:00 AM | MindTrace | TikTok | In 1962, America's top generals approved a plan to fake attacks. | content/posts/2026-11-24-northwoods-inkblot.md | ready |
+| 2027-01-16 Sat | 7:00 PM | Sun Jan 17, 8:00 AM | MindTrace | Instagram Reels | Operation Northwoods: the plan Kennedy rejected | content/posts/2026-11-24-northwoods-inkblot.md | ready |
+| 2027-01-16 Sat | 8:00 PM | Sun Jan 17, 9:00 AM | MindTrace | Facebook Reels | The 1962 plan to fake attacks and blame Cuba | content/posts/2026-11-24-northwoods-inkblot.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
