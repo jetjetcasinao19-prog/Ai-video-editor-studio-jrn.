@@ -1,0 +1,396 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "Walked into a room and forgot why? Blame the door. In 2011, psychologists at the University of Notre Dame had people move objects from room to room. Walking through a doorway made them forget more than walking the same distance in one room. Here's the trick. Your brain treats a doorway like the end of a scene. It files the old one away. So, before you go, say it out loud. Scissors. Kitchen. Follow for more mind tricks.",
+ "words": [
+  {
+   "w": "Walked",
+   "start": 0.02,
+   "end": 0.42
+  },
+  {
+   "w": "into",
+   "start": 0.42,
+   "end": 0.54
+  },
+  {
+   "w": "a",
+   "start": 0.54,
+   "end": 0.76
+  },
+  {
+   "w": "room",
+   "start": 0.76,
+   "end": 1
+  },
+  {
+   "w": "and",
+   "start": 1,
+   "end": 1.32
+  },
+  {
+   "w": "forgot",
+   "start": 1.32,
+   "end": 1.66
+  },
+  {
+   "w": "why?",
+   "start": 1.66,
+   "end": 2.56
+  },
+  {
+   "w": "Blame",
+   "start": 2.7,
+   "end": 2.9
+  },
+  {
+   "w": "the",
+   "start": 2.9,
+   "end": 3.04
+  },
+  {
+   "w": "door.",
+   "start": 3.04,
+   "end": 3.7
+  },
+  {
+   "w": "In",
+   "start": 4.24,
+   "end": 4.34
+  },
+  {
+   "w": "2011,",
+   "start": 4.34,
+   "end": 5.09
+  },
+  {
+   "w": "psychologists",
+   "start": 5.26,
+   "end": 5.82
+  },
+  {
+   "w": "at",
+   "start": 5.82,
+   "end": 6.12
+  },
+  {
+   "w": "the",
+   "start": 6.12,
+   "end": 6.22
+  },
+  {
+   "w": "University",
+   "start": 6.22,
+   "end": 6.64
+  },
+  {
+   "w": "of",
+   "start": 6.64,
+   "end": 6.98
+  },
+  {
+   "w": "Notre",
+   "start": 6.98,
+   "end": 7.4
+  },
+  {
+   "w": "Dame",
+   "start": 7.4,
+   "end": 7.65
+  },
+  {
+   "w": "had",
+   "start": 7.94,
+   "end": 8.08
+  },
+  {
+   "w": "people",
+   "start": 8.08,
+   "end": 8.44
+  },
+  {
+   "w": "move",
+   "start": 8.44,
+   "end": 8.82
+  },
+  {
+   "w": "objects",
+   "start": 8.82,
+   "end": 9.3
+  },
+  {
+   "w": "from",
+   "start": 9.3,
+   "end": 9.64
+  },
+  {
+   "w": "room",
+   "start": 9.64,
+   "end": 9.92
+  },
+  {
+   "w": "to",
+   "start": 9.92,
+   "end": 10.12
+  },
+  {
+   "w": "room.",
+   "start": 10.12,
+   "end": 10.44
+  },
+  {
+   "w": "Walking",
+   "start": 11.2,
+   "end": 11.4
+  },
+  {
+   "w": "through",
+   "start": 11.4,
+   "end": 11.66
+  },
+  {
+   "w": "a",
+   "start": 11.66,
+   "end": 11.82
+  },
+  {
+   "w": "doorway",
+   "start": 11.82,
+   "end": 12.2
+  },
+  {
+   "w": "made",
+   "start": 12.2,
+   "end": 12.68
+  },
+  {
+   "w": "them",
+   "start": 12.68,
+   "end": 12.84
+  },
+  {
+   "w": "forget",
+   "start": 12.84,
+   "end": 13.14
+  },
+  {
+   "w": "more",
+   "start": 13.14,
+   "end": 13.54
+  },
+  {
+   "w": "than",
+   "start": 13.54,
+   "end": 13.84
+  },
+  {
+   "w": "walking",
+   "start": 13.84,
+   "end": 14.18
+  },
+  {
+   "w": "the",
+   "start": 14.18,
+   "end": 14.36
+  },
+  {
+   "w": "same",
+   "start": 14.36,
+   "end": 14.66
+  },
+  {
+   "w": "distance",
+   "start": 14.66,
+   "end": 15.18
+  },
+  {
+   "w": "in",
+   "start": 15.18,
+   "end": 15.4
+  },
+  {
+   "w": "one",
+   "start": 15.4,
+   "end": 15.7
+  },
+  {
+   "w": "room.",
+   "start": 15.7,
+   "end": 16.58
+  },
+  {
+   "w": "Here's",
+   "start": 16.92,
+   "end": 17.14
+  },
+  {
+   "w": "the",
+   "start": 17.14,
+   "end": 17.28
+  },
+  {
+   "w": "trick.",
+   "start": 17.28,
+   "end": 18.04
+  },
+  {
+   "w": "Your",
+   "start": 18.2,
+   "end": 18.3
+  },
+  {
+   "w": "brain",
+   "start": 18.3,
+   "end": 18.72
+  },
+  {
+   "w": "treats",
+   "start": 18.72,
+   "end": 19.08
+  },
+  {
+   "w": "a",
+   "start": 19.08,
+   "end": 19.26
+  },
+  {
+   "w": "doorway",
+   "start": 19.26,
+   "end": 19.58
+  },
+  {
+   "w": "like",
+   "start": 19.58,
+   "end": 19.9
+  },
+  {
+   "w": "the",
+   "start": 19.9,
+   "end": 20.08
+  },
+  {
+   "w": "end",
+   "start": 20.08,
+   "end": 20.46
+  },
+  {
+   "w": "of",
+   "start": 20.46,
+   "end": 20.7
+  },
+  {
+   "w": "a",
+   "start": 20.7,
+   "end": 20.88
+  },
+  {
+   "w": "scene.",
+   "start": 20.88,
+   "end": 21.74
+  },
+  {
+   "w": "It",
+   "start": 21.78,
+   "end": 21.92
+  },
+  {
+   "w": "files",
+   "start": 21.92,
+   "end": 22.32
+  },
+  {
+   "w": "the",
+   "start": 22.32,
+   "end": 22.52
+  },
+  {
+   "w": "old",
+   "start": 22.52,
+   "end": 22.74
+  },
+  {
+   "w": "one",
+   "start": 22.74,
+   "end": 22.9
+  },
+  {
+   "w": "away.",
+   "start": 22.9,
+   "end": 23.18
+  },
+  {
+   "w": "So,",
+   "start": 24.08,
+   "end": 24.28
+  },
+  {
+   "w": "before",
+   "start": 24.28,
+   "end": 24.64
+  },
+  {
+   "w": "you",
+   "start": 24.64,
+   "end": 24.82
+  },
+  {
+   "w": "go,",
+   "start": 24.82,
+   "end": 25.48
+  },
+  {
+   "w": "say",
+   "start": 25.48,
+   "end": 25.64
+  },
+  {
+   "w": "it",
+   "start": 25.64,
+   "end": 25.78
+  },
+  {
+   "w": "out",
+   "start": 25.78,
+   "end": 25.98
+  },
+  {
+   "w": "loud.",
+   "start": 25.98,
+   "end": 26.72
+  },
+  {
+   "w": "Scissors.",
+   "start": 26.88,
+   "end": 27.43
+  },
+  {
+   "w": "Kitchen.",
+   "start": 27.95,
+   "end": 28.34
+  },
+  {
+   "w": "Follow",
+   "start": 29.23,
+   "end": 29.44
+  },
+  {
+   "w": "for",
+   "start": 29.44,
+   "end": 29.66
+  },
+  {
+   "w": "more",
+   "start": 29.66,
+   "end": 29.88
+  },
+  {
+   "w": "mind",
+   "start": 29.88,
+   "end": 30.22
+  },
+  {
+   "w": "tricks.",
+   "start": 30.22,
+   "end": 30.46
+  }
+ ]
+}

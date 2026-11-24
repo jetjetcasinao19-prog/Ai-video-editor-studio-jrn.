@@ -115,6 +115,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-01-09 Sat | 8:00 PM | Sun Jan 10, 9:00 AM | MindTrace | TikTok | About to lose your temper? Picture yourself as a fly on the wall. | content/posts/2026-11-24-fly-on-the-wall-inkblot.md | ready |
 | 2027-01-10 Sun | 7:00 PM | Mon Jan 11, 8:00 AM | MindTrace | Instagram Reels | The fly-on-the-wall trick for anger | content/posts/2026-11-24-fly-on-the-wall-inkblot.md | ready |
 | 2027-01-10 Sun | 8:00 PM | Mon Jan 11, 9:00 AM | MindTrace | Facebook Reels | About to lose your temper? Be the fly on the wall. | content/posts/2026-11-24-fly-on-the-wall-inkblot.md | ready |
+| 2027-01-11 Mon | 7:00 PM | Tue Jan 12, 8:00 AM | MindTrace | YouTube Shorts | Walked Into a Room and Forgot Why? Blame the Door (The Doorway Effect) | content/posts/2026-11-24-doorway-effect-inkblot.md | ready |
+| 2027-01-11 Mon | 8:00 PM | Tue Jan 12, 9:00 AM | MindTrace | TikTok | Walked into a room and forgot why? Blame the door. | content/posts/2026-11-24-doorway-effect-inkblot.md | ready |
+| 2027-01-12 Tue | 7:00 PM | Wed Jan 13, 8:00 AM | MindTrace | Instagram Reels | Why doorways make you forget | content/posts/2026-11-24-doorway-effect-inkblot.md | ready |
+| 2027-01-12 Tue | 8:00 PM | Wed Jan 13, 9:00 AM | MindTrace | Facebook Reels | Walked into a room and forgot why? Blame the door. | content/posts/2026-11-24-doorway-effect-inkblot.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
