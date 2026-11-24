@@ -153,6 +153,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-02-05 Fri | 8:00 PM | Sat Feb 6, 9:00 AM | TikTok | You say "crossing the Rubicon" when there is no going back. Caesar's was a small river. | content/posts/2026-11-24-rubicon-ottoman.md | ready |
 | 2027-02-06 Sat | 7:00 PM | Sun Feb 7, 8:00 AM | Instagram Reels | One small river. One legion. And a general who could not turn back. | content/posts/2026-11-24-rubicon-ottoman.md | ready |
 | 2027-02-06 Sat | 8:00 PM | Sun Feb 7, 9:00 AM | Facebook Reels | Ever wonder what people mean when they say "crossing the Rubicon"? | content/posts/2026-11-24-rubicon-ottoman.md | ready |
+| 2027-02-07 Sun | 7:00 PM | Mon Feb 8, 8:00 AM | YouTube Shorts | What Decimate Really Meant | content/posts/2026-11-24-decimate-ottoman.md | ready |
+| 2027-02-07 Sun | 8:00 PM | Mon Feb 8, 9:00 AM | TikTok | Quick vocabulary check: "decimate" does not mean what you think it means. | content/posts/2026-11-24-decimate-ottoman.md | ready |
+| 2027-02-08 Mon | 7:00 PM | Tue Feb 9, 8:00 AM | Instagram Reels | Ten soldiers. One drawn lot. A word we still use every day. | content/posts/2026-11-24-decimate-ottoman.md | ready |
+| 2027-02-08 Mon | 8:00 PM | Tue Feb 9, 9:00 AM | Facebook Reels | Did you know "decimate" used to mean the opposite of what most of us use it for? | content/posts/2026-11-24-decimate-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
