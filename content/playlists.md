@@ -13,5 +13,6 @@ the next video, and help YouTube recommend the channel as a whole.
 | Ancient Origins | Marathon · Thermopylae · Gladiators · Hannibal's Oath |
 | Landmarks | Hollywood Sign · Statue of Liberty · Great Wall of China · Terracotta Army · Troy (Schliemann's Trench) |
 | Everyday Objects | Dog Tags |
+| Medicine Firsts | Insulin (Insulin Was Sold for One Dollar) |
 
 Long-form compilations go in a playlist of their own, "Origin Stories: Full Episodes".

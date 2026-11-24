@@ -189,6 +189,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-02-23 Tue | 8:00 PM | Wed Feb 24, 9:00 AM | TikTok | He left a dish of bacteria on his bench and went on vacation. When he got back, it was covered in mold. | content/posts/2026-11-24-penicillin-ottoman.md | ready |
 | 2027-02-24 Wed | 7:00 PM | Thu Feb 25, 8:00 AM | Instagram Reels | Tile by tile, a lab plate comes together. | content/posts/2026-11-24-penicillin-ottoman.md | ready |
 | 2027-02-24 Wed | 8:00 PM | Thu Feb 25, 9:00 AM | Facebook Reels | Ever wonder how penicillin got its start? It began on a messy lab bench. | content/posts/2026-11-24-penicillin-ottoman.md | ready |
+| 2027-02-25 Thu | 7:00 PM | Fri Feb 26, 8:00 AM | YouTube Shorts | Insulin Was Sold for One Dollar | content/posts/2026-11-24-insulin-ottoman.md | ready |
+| 2027-02-25 Thu | 8:00 PM | Fri Feb 26, 9:00 AM | TikTok | Think about this: the team behind insulin sold the patent for one dollar each. | content/posts/2026-11-24-insulin-ottoman.md | ready |
+| 2027-02-26 Fri | 7:00 PM | Sat Feb 27, 8:00 AM | Instagram Reels | One silver dollar, passed across a ledger page. | content/posts/2026-11-24-insulin-ottoman.md | ready |
+| 2027-02-26 Fri | 8:00 PM | Sat Feb 27, 9:00 AM | Facebook Reels | Did you know insulin's inventors sold their patent for a single dollar? | content/posts/2026-11-24-insulin-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the

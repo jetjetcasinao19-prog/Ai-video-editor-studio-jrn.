@@ -149,7 +149,7 @@ export const scenes = [
       // three coins, one for each name on the deed
       for (let i = 0; i < 3; i++) { const c = tween(u, on - 0.5 + i * 0.25, on + 0.1 + i * 0.25, ease.outCubic); if (c > 0) dollar(ctx, S, lerp(1200, 360 + i * 180, c), lerp(-100, 900, c), 60, (1 - c) * 10); }
       k.label(ctx, 'TO THE UNIVERSITY OF TORONTO · 1923', W / 2, 1060, 18, tween(u, un, un + 0.4));
-      k.label(ctx, '“INSULIN DOES NOT BELONG TO ME” — BANTING', W / 2, 220, 15, tween(u, ea, ea + 0.4));
+      k.label(ctx, 'BANTING, BEST & COLLIP · $1 EACH', W / 2, 220, 18, tween(u, ea, ea + 0.4));
     },
   },
   { // 38.6 "Every legend has a beginning."
