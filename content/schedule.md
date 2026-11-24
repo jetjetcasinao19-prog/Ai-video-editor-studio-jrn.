@@ -157,6 +157,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-02-07 Sun | 8:00 PM | Mon Feb 8, 9:00 AM | TikTok | Quick vocabulary check: "decimate" does not mean what you think it means. | content/posts/2026-11-24-decimate-ottoman.md | ready |
 | 2027-02-08 Mon | 7:00 PM | Tue Feb 9, 8:00 AM | Instagram Reels | Ten soldiers. One drawn lot. A word we still use every day. | content/posts/2026-11-24-decimate-ottoman.md | ready |
 | 2027-02-08 Mon | 8:00 PM | Tue Feb 9, 9:00 AM | Facebook Reels | Did you know "decimate" used to mean the opposite of what most of us use it for? | content/posts/2026-11-24-decimate-ottoman.md | ready |
+| 2027-02-09 Tue | 7:00 PM | Wed Feb 10, 8:00 AM | YouTube Shorts | The One-Word Reply That Gave Us "Laconic" | content/posts/2026-11-24-laconic-ottoman.md | ready |
+| 2027-02-09 Tue | 8:00 PM | Wed Feb 10, 9:00 AM | TikTok | If a king threatened your city, how many words would you need to answer? | content/posts/2026-11-24-laconic-ottoman.md | ready |
+| 2027-02-10 Wed | 7:00 PM | Thu Feb 11, 8:00 AM | Instagram Reels | One long scroll of threats. One tiny scrap in reply. | content/posts/2026-11-24-laconic-ottoman.md | ready |
+| 2027-02-10 Wed | 8:00 PM | Thu Feb 11, 9:00 AM | Facebook Reels | Did you know the word "laconic" is a place name? | content/posts/2026-11-24-laconic-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the

@@ -98,7 +98,7 @@ export const scenes = [
       ctx.save(); ctx.translate(lerp(560, 1000, ride), 820); k.rect(ctx, -40, -26, 80, 52, '#f3e6c4', P.ink, 2); k.circle(ctx, 0, 0, 12, P.vermDark, P.ink, 1.5); ctx.restore();
       k.label(ctx, 'PHILIP II OF MACEDON', 330, 540, 20, tween(u, ph, ph + 0.4));
       k.label(ctx, 'AS PLUTARCH TELLS IT', W / 2, 220, 18, tween(u, st, st + 0.4));
-      if (a > 0.5) k.label(ctx, 'YOUNG ALEXANDER', 140, 690, 14, a);
+      if (a > 0.5) k.label(ctx, 'HIS SON, ALEXANDER', 140, 690, 14, a);
     },
   },
   { // 19.2 "If I invade your land, I will destroy your city."
