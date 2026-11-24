@@ -169,6 +169,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-02-13 Sat | 8:00 PM | Sun Feb 14, 9:00 AM | TikTok | Plot twist for anyone with a side hustle: the first "freelancer" carried a lance. | content/posts/2026-11-24-freelancer-ottoman.md | ready |
 | 2027-02-14 Sun | 7:00 PM | Mon Feb 15, 8:00 AM | Instagram Reels | A laptop becomes a lance, and the lance becomes a pen. | content/posts/2026-11-24-freelancer-ottoman.md | ready |
 | 2027-02-14 Sun | 8:00 PM | Mon Feb 15, 9:00 AM | Facebook Reels | Did you know "freelancer" started with a knight for hire? | content/posts/2026-11-24-freelancer-ottoman.md | ready |
+| 2027-02-15 Mon | 7:00 PM | Tue Feb 16, 8:00 AM | YouTube Shorts | Velcro Came From a Dog Walk | content/posts/2026-11-24-velcro-ottoman.md | ready |
+| 2027-02-15 Mon | 8:00 PM | Tue Feb 16, 9:00 AM | TikTok | Next time you rip open a strap, thank a dog. | content/posts/2026-11-24-velcro-ottoman.md | ready |
+| 2027-02-16 Tue | 7:00 PM | Wed Feb 17, 8:00 AM | Instagram Reels | Rrrip. That sound has a backstory. | content/posts/2026-11-24-velcro-ottoman.md | ready |
+| 2027-02-16 Tue | 8:00 PM | Wed Feb 17, 9:00 AM | Facebook Reels | Did you know Velcro started with a dog walk? | content/posts/2026-11-24-velcro-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the

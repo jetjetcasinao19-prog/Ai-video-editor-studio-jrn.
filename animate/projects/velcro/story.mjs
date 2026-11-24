@@ -70,7 +70,7 @@ export const scenes = [
       k.figure(ctx, lerp(200, 640, go), 1000, { ...MESTRAL, s: 0.95, face: 1, walk: S.t * 5, armF: [0.6, 0.3], hold: c => k.rect(c, -3, -10, 6, 140, '#7a5a3a', P.ink, 1) });
       k.dog(ctx, lerp(340, 800, go), 1010, 0.9, 1, S.t, { color: DOG, walk: S.t * 10 });
       k.label(ctx, 'GEORGE DE MESTRAL · SWITZERLAND', W / 2, 260, 20, tween(u, ge, ge + 0.4));
-      k.seal(ctx, 900, 200, 60, ' THE YEAR · 1941 ·', '1941', tween(u, 0.1, 0.5, ease.linear));
+      k.seal(ctx, 900, 200, 60, ' THE 1940s · THE 1940s ·', '1940s', tween(u, 0.1, 0.5, ease.linear));
     },
   },
   { // 10.4 "They come home covered in burrs, sticky seed pods."
