@@ -1,0 +1,406 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "For 40 years, U.S. government doctors watched hundreds of Black men with syphilis and didn't treat them. It was the Tuskegee study, starting in 1932 in Alabama. The men were told they had bad blood. By the 1940s, penicillin was the cure. They still didn't get it. Here's the trick. Free meals, free rides, free burial insurance. Kindness kept them coming back. In 1972, a whistleblower went to the press. The study ended that year. Follow for more dark psychology.",
+ "words": [
+  {
+   "w": "For",
+   "start": 0.02,
+   "end": 0.18
+  },
+  {
+   "w": "40",
+   "start": 0.18,
+   "end": 0.62
+  },
+  {
+   "w": "years,",
+   "start": 0.62,
+   "end": 1.56
+  },
+  {
+   "w": "U.S.",
+   "start": 1.56,
+   "end": 1.78
+  },
+  {
+   "w": "government",
+   "start": 1.78,
+   "end": 2.12
+  },
+  {
+   "w": "doctors",
+   "start": 2.12,
+   "end": 2.6
+  },
+  {
+   "w": "watched",
+   "start": 2.6,
+   "end": 3.04
+  },
+  {
+   "w": "hundreds",
+   "start": 3.04,
+   "end": 3.54
+  },
+  {
+   "w": "of",
+   "start": 3.54,
+   "end": 3.84
+  },
+  {
+   "w": "Black",
+   "start": 3.84,
+   "end": 4.08
+  },
+  {
+   "w": "men",
+   "start": 4.08,
+   "end": 4.4
+  },
+  {
+   "w": "with",
+   "start": 4.4,
+   "end": 4.64
+  },
+  {
+   "w": "syphilis",
+   "start": 4.64,
+   "end": 5.14
+  },
+  {
+   "w": "and",
+   "start": 5.14,
+   "end": 5.9
+  },
+  {
+   "w": "didn't",
+   "start": 5.9,
+   "end": 6.18
+  },
+  {
+   "w": "treat",
+   "start": 6.18,
+   "end": 6.42
+  },
+  {
+   "w": "them.",
+   "start": 6.42,
+   "end": 6.64
+  },
+  {
+   "w": "It",
+   "start": 7.48,
+   "end": 7.58
+  },
+  {
+   "w": "was",
+   "start": 7.58,
+   "end": 7.76
+  },
+  {
+   "w": "the",
+   "start": 7.76,
+   "end": 7.92
+  },
+  {
+   "w": "Tuskegee",
+   "start": 7.92,
+   "end": 8.34
+  },
+  {
+   "w": "study,",
+   "start": 8.34,
+   "end": 9.14
+  },
+  {
+   "w": "starting",
+   "start": 9.14,
+   "end": 9.38
+  },
+  {
+   "w": "in",
+   "start": 9.38,
+   "end": 9.52
+  },
+  {
+   "w": "1932",
+   "start": 9.52,
+   "end": 10.4
+  },
+  {
+   "w": "in",
+   "start": 10.4,
+   "end": 10.76
+  },
+  {
+   "w": "Alabama.",
+   "start": 10.76,
+   "end": 11.64
+  },
+  {
+   "w": "The",
+   "start": 12.1,
+   "end": 12.22
+  },
+  {
+   "w": "men",
+   "start": 12.22,
+   "end": 12.34
+  },
+  {
+   "w": "were",
+   "start": 12.34,
+   "end": 12.46
+  },
+  {
+   "w": "told",
+   "start": 12.46,
+   "end": 12.7
+  },
+  {
+   "w": "they",
+   "start": 12.7,
+   "end": 12.86
+  },
+  {
+   "w": "had",
+   "start": 12.86,
+   "end": 13.14
+  },
+  {
+   "w": "bad",
+   "start": 13.14,
+   "end": 13.78
+  },
+  {
+   "w": "blood.",
+   "start": 13.78,
+   "end": 14.68
+  },
+  {
+   "w": "By",
+   "start": 15.12,
+   "end": 15.22
+  },
+  {
+   "w": "the",
+   "start": 15.22,
+   "end": 15.34
+  },
+  {
+   "w": "1940s,",
+   "start": 15.34,
+   "end": 16.52
+  },
+  {
+   "w": "penicillin",
+   "start": 16.52,
+   "end": 16.96
+  },
+  {
+   "w": "was",
+   "start": 16.96,
+   "end": 17.16
+  },
+  {
+   "w": "the",
+   "start": 17.16,
+   "end": 17.3
+  },
+  {
+   "w": "cure.",
+   "start": 17.3,
+   "end": 17.96
+  },
+  {
+   "w": "They",
+   "start": 18.34,
+   "end": 18.46
+  },
+  {
+   "w": "still",
+   "start": 18.46,
+   "end": 18.84
+  },
+  {
+   "w": "didn't",
+   "start": 18.84,
+   "end": 19.16
+  },
+  {
+   "w": "get",
+   "start": 19.16,
+   "end": 19.34
+  },
+  {
+   "w": "it.",
+   "start": 19.34,
+   "end": 19.54
+  },
+  {
+   "w": "Here's",
+   "start": 20.44,
+   "end": 20.68
+  },
+  {
+   "w": "the",
+   "start": 20.68,
+   "end": 20.82
+  },
+  {
+   "w": "trick.",
+   "start": 20.82,
+   "end": 21.54
+  },
+  {
+   "w": "Free",
+   "start": 21.74,
+   "end": 21.88
+  },
+  {
+   "w": "meals,",
+   "start": 21.88,
+   "end": 22.78
+  },
+  {
+   "w": "free",
+   "start": 22.78,
+   "end": 22.94
+  },
+  {
+   "w": "rides,",
+   "start": 22.94,
+   "end": 23.96
+  },
+  {
+   "w": "free",
+   "start": 23.96,
+   "end": 24.18
+  },
+  {
+   "w": "burial",
+   "start": 24.18,
+   "end": 24.74
+  },
+  {
+   "w": "insurance.",
+   "start": 24.74,
+   "end": 25.82
+  },
+  {
+   "w": "Kindness",
+   "start": 26.18,
+   "end": 26.76
+  },
+  {
+   "w": "kept",
+   "start": 26.76,
+   "end": 27.12
+  },
+  {
+   "w": "them",
+   "start": 27.12,
+   "end": 27.32
+  },
+  {
+   "w": "coming",
+   "start": 27.32,
+   "end": 27.58
+  },
+  {
+   "w": "back.",
+   "start": 27.58,
+   "end": 28.38
+  },
+  {
+   "w": "In",
+   "start": 28.82,
+   "end": 28.92
+  },
+  {
+   "w": "1972,",
+   "start": 28.92,
+   "end": 30.32
+  },
+  {
+   "w": "a",
+   "start": 30.32,
+   "end": 30.4
+  },
+  {
+   "w": "whistleblower",
+   "start": 30.4,
+   "end": 31
+  },
+  {
+   "w": "went",
+   "start": 31,
+   "end": 31.26
+  },
+  {
+   "w": "to",
+   "start": 31.26,
+   "end": 31.42
+  },
+  {
+   "w": "the",
+   "start": 31.42,
+   "end": 31.56
+  },
+  {
+   "w": "press.",
+   "start": 31.56,
+   "end": 32.34
+  },
+  {
+   "w": "The",
+   "start": 32.6,
+   "end": 32.68
+  },
+  {
+   "w": "study",
+   "start": 32.68,
+   "end": 32.94
+  },
+  {
+   "w": "ended",
+   "start": 32.94,
+   "end": 33.34
+  },
+  {
+   "w": "that",
+   "start": 33.34,
+   "end": 33.66
+  },
+  {
+   "w": "year.",
+   "start": 33.66,
+   "end": 33.96
+  },
+  {
+   "w": "Follow",
+   "start": 35.02,
+   "end": 35.24
+  },
+  {
+   "w": "for",
+   "start": 35.24,
+   "end": 35.48
+  },
+  {
+   "w": "more",
+   "start": 35.48,
+   "end": 35.82
+  },
+  {
+   "w": "dark",
+   "start": 35.82,
+   "end": 36.28
+  },
+  {
+   "w": "psychology.",
+   "start": 36.28,
+   "end": 37.34
+  }
+ ]
+}

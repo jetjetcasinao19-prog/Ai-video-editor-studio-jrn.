@@ -107,6 +107,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-01-05 Tue | 8:00 PM | Wed Jan 6, 9:00 AM | MindTrace | TikTok | The FBI once sent MLK an anonymous letter. | content/posts/2026-11-24-cointelpro-inkblot.md | ready |
 | 2027-01-06 Wed | 7:00 PM | Thu Jan 7, 8:00 AM | MindTrace | Instagram Reels | COINTELPRO: the attack that looked like it came from a friend | content/posts/2026-11-24-cointelpro-inkblot.md | ready |
 | 2027-01-06 Wed | 8:00 PM | Thu Jan 7, 9:00 AM | MindTrace | Facebook Reels | The FBI once sent Martin Luther King Jr. an anonymous letter. | content/posts/2026-11-24-cointelpro-inkblot.md | ready |
+| 2027-01-07 Thu | 7:00 PM | Fri Jan 8, 8:00 AM | MindTrace | YouTube Shorts | 40 Years Untreated: The Tuskegee Study | content/posts/2026-11-24-tuskegee-inkblot.md | ready |
+| 2027-01-07 Thu | 8:00 PM | Fri Jan 8, 9:00 AM | MindTrace | TikTok | For 40 years, U.S. government doctors watched and didn't treat them. | content/posts/2026-11-24-tuskegee-inkblot.md | ready |
+| 2027-01-08 Fri | 7:00 PM | Sat Jan 9, 8:00 AM | MindTrace | Instagram Reels | The Tuskegee study: 40 years untreated | content/posts/2026-11-24-tuskegee-inkblot.md | ready |
+| 2027-01-08 Fri | 8:00 PM | Sat Jan 9, 9:00 AM | MindTrace | Facebook Reels | For 40 years, U.S. government doctors didn't treat them. | content/posts/2026-11-24-tuskegee-inkblot.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
