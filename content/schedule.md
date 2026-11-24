@@ -165,6 +165,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-02-11 Thu | 8:00 PM | Fri Feb 12, 9:00 AM | TikTok | Quick one before your next due date: "deadline" did not start on a calendar. | content/posts/2026-11-24-deadline-ottoman.md | ready |
 | 2027-02-12 Fri | 7:00 PM | Sat Feb 13, 8:00 AM | Instagram Reels | One red thread. First a line under a date, then a railing, then a press. | content/posts/2026-11-24-deadline-ottoman.md | ready |
 | 2027-02-12 Fri | 8:00 PM | Sat Feb 13, 9:00 AM | Facebook Reels | Did you know the word "deadline" started as a place on the ground? | content/posts/2026-11-24-deadline-ottoman.md | ready |
+| 2027-02-13 Sat | 7:00 PM | Sun Feb 14, 8:00 AM | YouTube Shorts | "Freelancer" Started as a Soldier With a Lance | content/posts/2026-11-24-freelancer-ottoman.md | ready |
+| 2027-02-13 Sat | 8:00 PM | Sun Feb 14, 9:00 AM | TikTok | Plot twist for anyone with a side hustle: the first "freelancer" carried a lance. | content/posts/2026-11-24-freelancer-ottoman.md | ready |
+| 2027-02-14 Sun | 7:00 PM | Mon Feb 15, 8:00 AM | Instagram Reels | A laptop becomes a lance, and the lance becomes a pen. | content/posts/2026-11-24-freelancer-ottoman.md | ready |
+| 2027-02-14 Sun | 8:00 PM | Mon Feb 15, 9:00 AM | Facebook Reels | Did you know "freelancer" started with a knight for hire? | content/posts/2026-11-24-freelancer-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
