@@ -91,6 +91,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-12-28 Mon | 8:00 PM | Tue Dec 29, 9:00 AM | MindTrace | TikTok | Why can't you quit someone who treats you badly? Blame a pigeon. | content/posts/2026-11-24-intermittent-reinforcement-inkblot.md | ready |
 | 2026-12-29 Tue | 7:00 PM | Wed Dec 30, 8:00 AM | MindTrace | Instagram Reels | The pigeon experiment that explains toxic relationships | content/posts/2026-11-24-intermittent-reinforcement-inkblot.md | ready |
 | 2026-12-29 Tue | 8:00 PM | Wed Dec 30, 9:00 AM | MindTrace | Facebook Reels | Why can't you quit someone who treats you badly? | content/posts/2026-11-24-intermittent-reinforcement-inkblot.md | ready |
+| 2026-12-30 Wed | 7:00 PM | Thu Dec 31, 8:00 AM | MindTrace | YouTube Shorts | Why Scammers Always Say "Act Now" (The Good Samaritan Experiment) | content/posts/2026-11-24-good-samaritan-inkblot.md | ready |
+| 2026-12-30 Wed | 8:00 PM | Thu Dec 31, 9:00 AM | MindTrace | TikTok | Why do scammers always say "act now"? | content/posts/2026-11-24-good-samaritan-inkblot.md | ready |
+| 2026-12-31 Thu | 7:00 PM | Fri Jan 1, 2027, 8:00 AM | MindTrace | Instagram Reels | The experiment that explains why scammers rush you | content/posts/2026-11-24-good-samaritan-inkblot.md | ready |
+| 2026-12-31 Thu | 8:00 PM | Fri Jan 1, 2027, 9:00 AM | MindTrace | Facebook Reels | Why do scammers always say "act now"? | content/posts/2026-11-24-good-samaritan-inkblot.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the

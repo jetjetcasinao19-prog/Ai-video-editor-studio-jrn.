@@ -1,0 +1,391 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "Why do scammers always say, “act now”? A rush switches off your brain. In 1973, Princeton researchers sent seminary students across campus to give a talk. On the way, a man slumped in a doorway, groaning. Not rushed? 63% stopped to help. Rushed? Only 10%. Some were on their way to talk about the Good Samaritan. Here's the trick. Hurry shrinks your attention. Scammers count on it. Someone rushing you? Slow down. Follow for more dark psychology.",
+ "words": [
+  {
+   "w": "Why",
+   "start": 0,
+   "end": 0.26
+  },
+  {
+   "w": "do",
+   "start": 0.26,
+   "end": 0.46
+  },
+  {
+   "w": "scammers",
+   "start": 0.46,
+   "end": 0.9
+  },
+  {
+   "w": "always",
+   "start": 0.9,
+   "end": 1.46
+  },
+  {
+   "w": "say,",
+   "start": 1.46,
+   "end": 1.88
+  },
+  {
+   "w": "“act",
+   "start": 1.88,
+   "end": 2.32
+  },
+  {
+   "w": "now”?",
+   "start": 2.32,
+   "end": 3.34
+  },
+  {
+   "w": "A",
+   "start": 3.88,
+   "end": 4
+  },
+  {
+   "w": "rush",
+   "start": 4,
+   "end": 4.38
+  },
+  {
+   "w": "switches",
+   "start": 4.38,
+   "end": 4.86
+  },
+  {
+   "w": "off",
+   "start": 4.86,
+   "end": 5.14
+  },
+  {
+   "w": "your",
+   "start": 5.14,
+   "end": 5.28
+  },
+  {
+   "w": "brain.",
+   "start": 5.28,
+   "end": 6.14
+  },
+  {
+   "w": "In",
+   "start": 6.46,
+   "end": 6.56
+  },
+  {
+   "w": "1973,",
+   "start": 6.56,
+   "end": 7.82
+  },
+  {
+   "w": "Princeton",
+   "start": 7.82,
+   "end": 8.14
+  },
+  {
+   "w": "researchers",
+   "start": 8.14,
+   "end": 8.72
+  },
+  {
+   "w": "sent",
+   "start": 8.72,
+   "end": 9.06
+  },
+  {
+   "w": "seminary",
+   "start": 9.06,
+   "end": 9.58
+  },
+  {
+   "w": "students",
+   "start": 9.58,
+   "end": 9.98
+  },
+  {
+   "w": "across",
+   "start": 9.98,
+   "end": 10.3
+  },
+  {
+   "w": "campus",
+   "start": 10.3,
+   "end": 10.78
+  },
+  {
+   "w": "to",
+   "start": 10.78,
+   "end": 11
+  },
+  {
+   "w": "give",
+   "start": 11,
+   "end": 11.14
+  },
+  {
+   "w": "a",
+   "start": 11.14,
+   "end": 11.26
+  },
+  {
+   "w": "talk.",
+   "start": 11.26,
+   "end": 11.58
+  },
+  {
+   "w": "On",
+   "start": 12.38,
+   "end": 12.54
+  },
+  {
+   "w": "the",
+   "start": 12.54,
+   "end": 12.64
+  },
+  {
+   "w": "way,",
+   "start": 12.64,
+   "end": 13.4
+  },
+  {
+   "w": "a",
+   "start": 13.4,
+   "end": 13.54
+  },
+  {
+   "w": "man",
+   "start": 13.54,
+   "end": 13.84
+  },
+  {
+   "w": "slumped",
+   "start": 13.84,
+   "end": 14.38
+  },
+  {
+   "w": "in",
+   "start": 14.38,
+   "end": 14.48
+  },
+  {
+   "w": "a",
+   "start": 14.48,
+   "end": 14.62
+  },
+  {
+   "w": "doorway,",
+   "start": 14.62,
+   "end": 15.36
+  },
+  {
+   "w": "groaning.",
+   "start": 15.36,
+   "end": 15.68
+  },
+  {
+   "w": "Not",
+   "start": 16.58,
+   "end": 16.78
+  },
+  {
+   "w": "rushed?",
+   "start": 16.78,
+   "end": 17.58
+  },
+  {
+   "w": "63%",
+   "start": 17.86,
+   "end": 18.92
+  },
+  {
+   "w": "stopped",
+   "start": 18.92,
+   "end": 19.34
+  },
+  {
+   "w": "to",
+   "start": 19.34,
+   "end": 19.54
+  },
+  {
+   "w": "help.",
+   "start": 19.54,
+   "end": 20.34
+  },
+  {
+   "w": "Rushed?",
+   "start": 20.72,
+   "end": 21
+  },
+  {
+   "w": "Only",
+   "start": 21.6,
+   "end": 21.86
+  },
+  {
+   "w": "10%.",
+   "start": 21.86,
+   "end": 22.56
+  },
+  {
+   "w": "Some",
+   "start": 23.38,
+   "end": 23.68
+  },
+  {
+   "w": "were",
+   "start": 23.68,
+   "end": 23.84
+  },
+  {
+   "w": "on",
+   "start": 23.84,
+   "end": 23.98
+  },
+  {
+   "w": "their",
+   "start": 23.98,
+   "end": 24.12
+  },
+  {
+   "w": "way",
+   "start": 24.12,
+   "end": 24.26
+  },
+  {
+   "w": "to",
+   "start": 24.26,
+   "end": 24.42
+  },
+  {
+   "w": "talk",
+   "start": 24.42,
+   "end": 24.64
+  },
+  {
+   "w": "about",
+   "start": 24.64,
+   "end": 24.86
+  },
+  {
+   "w": "the",
+   "start": 24.86,
+   "end": 25.02
+  },
+  {
+   "w": "Good",
+   "start": 25.02,
+   "end": 25.22
+  },
+  {
+   "w": "Samaritan.",
+   "start": 25.22,
+   "end": 25.6
+  },
+  {
+   "w": "Here's",
+   "start": 26.66,
+   "end": 26.9
+  },
+  {
+   "w": "the",
+   "start": 26.9,
+   "end": 27.06
+  },
+  {
+   "w": "trick.",
+   "start": 27.06,
+   "end": 27.3
+  },
+  {
+   "w": "Hurry",
+   "start": 28,
+   "end": 28.32
+  },
+  {
+   "w": "shrinks",
+   "start": 28.32,
+   "end": 28.96
+  },
+  {
+   "w": "your",
+   "start": 28.96,
+   "end": 29.22
+  },
+  {
+   "w": "attention.",
+   "start": 29.22,
+   "end": 29.98
+  },
+  {
+   "w": "Scammers",
+   "start": 30.4,
+   "end": 30.72
+  },
+  {
+   "w": "count",
+   "start": 30.72,
+   "end": 31.06
+  },
+  {
+   "w": "on",
+   "start": 31.06,
+   "end": 31.28
+  },
+  {
+   "w": "it.",
+   "start": 31.28,
+   "end": 31.42
+  },
+  {
+   "w": "Someone",
+   "start": 32.07,
+   "end": 32.35
+  },
+  {
+   "w": "rushing",
+   "start": 32.35,
+   "end": 32.68
+  },
+  {
+   "w": "you?",
+   "start": 32.68,
+   "end": 32.94
+  },
+  {
+   "w": "Slow",
+   "start": 33.66,
+   "end": 33.98
+  },
+  {
+   "w": "down.",
+   "start": 33.98,
+   "end": 34.42
+  },
+  {
+   "w": "Follow",
+   "start": 35.29,
+   "end": 35.56
+  },
+  {
+   "w": "for",
+   "start": 35.56,
+   "end": 35.92
+  },
+  {
+   "w": "more",
+   "start": 35.92,
+   "end": 36.22
+  },
+  {
+   "w": "dark",
+   "start": 36.22,
+   "end": 36.66
+  },
+  {
+   "w": "psychology.",
+   "start": 36.66,
+   "end": 37.7
+  }
+ ]
+}
