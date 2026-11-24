@@ -1,8 +1,8 @@
 # Why You Can't Quit Them (Dark Psychology: Random Rewards)
 
 - Format: 9:16 (YouTube Shorts; also Reels / TikTok)
-- Target length: 25–40 s. About 33 seconds of voice (about 80 words), about
-  36 s with the 2.5 s brand outro.
+- Target length: 25–40 s. About 32 seconds of voice (about 80 words), about
+  35 s with the 2.5 s brand outro.
 - Platform(s): YouTube Shorts
 - Niche: psychology / mind tricks ("dark psychology" series)
 - Research file: content/research/2026-11-24-intermittent-reinforcement.md
@@ -19,17 +19,17 @@
 ## Full voice-over (read this)
 > Why can't you quit someone who treats you badly? Blame a pigeon.
 >
-> In the 1950s, psychologist B.F. Skinner trained pigeons to peck a button for food.
+> In the 1950s, B.F. Skinner trained pigeons to peck for food.
 >
-> When food came every time, they gave up fast once it stopped.
-> When it came at random... they kept pecking. And pecking.
+> Food every time? They quit fast when it stopped.
+> Food at random? They kept pecking. And pecking.
 >
 > **Here's the trick.**
 > Random rewards are the most addictive.
 > It's how slot machines work.
 > And it's how manipulators hook people: kind, cold, kind again.
 >
-> If you keep waiting for the "good days" to come back... that's the hook.
+> Still waiting for the "good days" to come back? That's the hook.
 >
 > Follow for more dark psychology.
 
@@ -37,11 +37,11 @@
 | # | Time | Visual | Voice-over | On-screen text |
 |---|---|---|---|---|
 | 1 | 0–3 s | Phone: unread messages, "seen 3h ago"; hard cut to a pigeon staring at camera | Why can't you quit someone who treats you badly? Blame a pigeon. | BLAME A PIGEON 🐦 |
-| 2 | 3–8 s | Black-and-white lab look; pigeon pecking a lit button (stock or stickman) | In the 1950s, psychologist B.F. Skinner trained pigeons to peck a button for food. | THE PIGEON TEST |
-| 3 | 8–12 s | Food every peck, then food stops, pigeon walks away | When food came every time, they gave up fast once it stopped. | EVERY TIME → QUIT FAST |
-| 4 | 12–16 s | Food comes at random; pigeon pecks faster and faster | When it came at random... they kept pecking. And pecking. | RANDOM → NEVER QUIT 🤯 |
+| 2 | 3–8 s | Black-and-white lab look; pigeon pecking a lit button (stock or stickman) | In the 1950s, B.F. Skinner trained pigeons to peck for food. | THE PIGEON TEST |
+| 3 | 8–12 s | Food every peck, then food stops, pigeon walks away | Food every time? They quit fast when it stopped. | EVERY TIME → QUIT FAST |
+| 4 | 12–16 s | Food comes at random; pigeon pecks faster and faster | Food at random? They kept pecking. And pecking. | RANDOM → NEVER QUIT 🤯 |
 | 5 | 16–26 s | Hard cut, black screen, red/yellow text; slot machine reels spin; then text bubbles: ❤️ / 🧊 / ❤️ | **Here's the trick.** Random rewards are the most addictive. It's how slot machines work. And it's how manipulators hook people: kind, cold, kind again. | HERE'S THE TRICK 🎰 · KIND → COLD → KIND |
-| 6 | 26–31 s | Person staring at phone, waiting; slow zoom out | If you keep waiting for the "good days" to come back... that's the hook. | THAT'S THE HOOK 🪝 |
+| 6 | 26–31 s | Person staring at phone, waiting; slow zoom out | Still waiting for the "good days" to come back? That's the hook. | THAT'S THE HOOK 🪝 |
 | 7 | 31–33.5 s | Logo / subscribe | Follow for more dark psychology. | FOLLOW FOR MORE |
 
 ## Call to action
@@ -80,7 +80,7 @@ Food every time?
 
 6
 00:00:10,000 --> 00:00:12,000
-They gave up fast when it stopped.
+They quit fast when it stopped.
 
 7
 00:00:12,000 --> 00:00:14,000
