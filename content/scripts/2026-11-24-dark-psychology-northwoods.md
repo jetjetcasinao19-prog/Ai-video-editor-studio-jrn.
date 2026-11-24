@@ -1,7 +1,7 @@
 # The Plan to Fake Attacks on America (Operation Northwoods)
 
 - Format: 9:16 (YouTube Shorts; also Reels / TikTok)
-- Target length: 25–40 s. About 31 seconds of voice (about 78 words), about
+- Target length: 25–40 s. About 29–31 seconds of voice (70 words), about
   33.5 s with the 2.5 s brand outro.
 - Platform(s): YouTube Shorts
 - Niche: psychology ("dark psychology" series, government angle)
