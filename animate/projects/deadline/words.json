@@ -1,0 +1,356 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "Your next deadline won't kill you, but the first ones could. 1860s, the American Civil War. In prison camps like Andersonville, Georgia, guards marked a line near the walls, usually a low fence. Cross it, and you could be shot. They called it the deadline. Later, printers and newspapers borrowed the word, until it meant a time limit. Now it just means, get it done. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "Your",
+   "start": 0.02,
+   "end": 0.2
+  },
+  {
+   "w": "next",
+   "start": 0.2,
+   "end": 0.5
+  },
+  {
+   "w": "deadline",
+   "start": 0.5,
+   "end": 0.92
+  },
+  {
+   "w": "won't",
+   "start": 0.92,
+   "end": 1.36
+  },
+  {
+   "w": "kill",
+   "start": 1.36,
+   "end": 1.64
+  },
+  {
+   "w": "you,",
+   "start": 1.64,
+   "end": 1.86
+  },
+  {
+   "w": "but",
+   "start": 1.86,
+   "end": 2.6
+  },
+  {
+   "w": "the",
+   "start": 2.6,
+   "end": 2.74
+  },
+  {
+   "w": "first",
+   "start": 2.74,
+   "end": 3.04
+  },
+  {
+   "w": "ones",
+   "start": 3.04,
+   "end": 3.42
+  },
+  {
+   "w": "could.",
+   "start": 3.42,
+   "end": 4.3
+  },
+  {
+   "w": "1860s,",
+   "start": 4.9,
+   "end": 5.96
+  },
+  {
+   "w": "the",
+   "start": 5.96,
+   "end": 6.46
+  },
+  {
+   "w": "American",
+   "start": 6.46,
+   "end": 6.98
+  },
+  {
+   "w": "Civil",
+   "start": 6.98,
+   "end": 7.24
+  },
+  {
+   "w": "War.",
+   "start": 7.24,
+   "end": 8.1
+  },
+  {
+   "w": "In",
+   "start": 8.7,
+   "end": 8.84
+  },
+  {
+   "w": "prison",
+   "start": 8.84,
+   "end": 9.14
+  },
+  {
+   "w": "camps",
+   "start": 9.14,
+   "end": 9.48
+  },
+  {
+   "w": "like",
+   "start": 9.48,
+   "end": 9.84
+  },
+  {
+   "w": "Andersonville,",
+   "start": 9.84,
+   "end": 10.72
+  },
+  {
+   "w": "Georgia,",
+   "start": 10.72,
+   "end": 11.76
+  },
+  {
+   "w": "guards",
+   "start": 11.76,
+   "end": 12.04
+  },
+  {
+   "w": "marked",
+   "start": 12.04,
+   "end": 12.4
+  },
+  {
+   "w": "a",
+   "start": 12.4,
+   "end": 12.56
+  },
+  {
+   "w": "line",
+   "start": 12.56,
+   "end": 12.88
+  },
+  {
+   "w": "near",
+   "start": 12.88,
+   "end": 13.12
+  },
+  {
+   "w": "the",
+   "start": 13.12,
+   "end": 13.26
+  },
+  {
+   "w": "walls,",
+   "start": 13.26,
+   "end": 14.18
+  },
+  {
+   "w": "usually",
+   "start": 14.4,
+   "end": 14.68
+  },
+  {
+   "w": "a",
+   "start": 14.68,
+   "end": 14.92
+  },
+  {
+   "w": "low",
+   "start": 14.92,
+   "end": 15.1
+  },
+  {
+   "w": "fence.",
+   "start": 15.1,
+   "end": 16
+  },
+  {
+   "w": "Cross",
+   "start": 16.32,
+   "end": 16.46
+  },
+  {
+   "w": "it,",
+   "start": 16.46,
+   "end": 16.74
+  },
+  {
+   "w": "and",
+   "start": 16.74,
+   "end": 17.46
+  },
+  {
+   "w": "you",
+   "start": 17.46,
+   "end": 17.56
+  },
+  {
+   "w": "could",
+   "start": 17.56,
+   "end": 17.7
+  },
+  {
+   "w": "be",
+   "start": 17.7,
+   "end": 17.82
+  },
+  {
+   "w": "shot.",
+   "start": 17.82,
+   "end": 18.64
+  },
+  {
+   "w": "They",
+   "start": 19.14,
+   "end": 19.28
+  },
+  {
+   "w": "called",
+   "start": 19.28,
+   "end": 19.54
+  },
+  {
+   "w": "it",
+   "start": 19.54,
+   "end": 19.78
+  },
+  {
+   "w": "the",
+   "start": 19.78,
+   "end": 20.08
+  },
+  {
+   "w": "deadline.",
+   "start": 20.08,
+   "end": 20.52
+  },
+  {
+   "w": "Later,",
+   "start": 21.64,
+   "end": 22.26
+  },
+  {
+   "w": "printers",
+   "start": 22.26,
+   "end": 22.46
+  },
+  {
+   "w": "and",
+   "start": 22.46,
+   "end": 22.76
+  },
+  {
+   "w": "newspapers",
+   "start": 22.76,
+   "end": 23.44
+  },
+  {
+   "w": "borrowed",
+   "start": 23.44,
+   "end": 23.84
+  },
+  {
+   "w": "the",
+   "start": 23.84,
+   "end": 24.02
+  },
+  {
+   "w": "word,",
+   "start": 24.02,
+   "end": 24.92
+  },
+  {
+   "w": "until",
+   "start": 24.92,
+   "end": 25.04
+  },
+  {
+   "w": "it",
+   "start": 25.04,
+   "end": 25.22
+  },
+  {
+   "w": "meant",
+   "start": 25.22,
+   "end": 25.46
+  },
+  {
+   "w": "a",
+   "start": 25.46,
+   "end": 25.68
+  },
+  {
+   "w": "time",
+   "start": 25.68,
+   "end": 25.98
+  },
+  {
+   "w": "limit.",
+   "start": 25.98,
+   "end": 26.18
+  },
+  {
+   "w": "Now",
+   "start": 27.08,
+   "end": 27.32
+  },
+  {
+   "w": "it",
+   "start": 27.32,
+   "end": 27.46
+  },
+  {
+   "w": "just",
+   "start": 27.46,
+   "end": 27.72
+  },
+  {
+   "w": "means,",
+   "start": 27.72,
+   "end": 28.62
+  },
+  {
+   "w": "get",
+   "start": 28.62,
+   "end": 28.76
+  },
+  {
+   "w": "it",
+   "start": 28.76,
+   "end": 28.9
+  },
+  {
+   "w": "done.",
+   "start": 28.9,
+   "end": 29.68
+  },
+  {
+   "w": "Every",
+   "start": 30.46,
+   "end": 30.68
+  },
+  {
+   "w": "legend",
+   "start": 30.68,
+   "end": 31.02
+  },
+  {
+   "w": "has",
+   "start": 31.02,
+   "end": 31.52
+  },
+  {
+   "w": "a",
+   "start": 31.52,
+   "end": 31.66
+  },
+  {
+   "w": "beginning.",
+   "start": 31.66,
+   "end": 31.96
+  }
+ ]
+}
