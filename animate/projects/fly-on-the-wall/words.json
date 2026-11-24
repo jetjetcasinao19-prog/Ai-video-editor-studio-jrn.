@@ -1,0 +1,431 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "About to lose your temper? Picture yourself as a fly on the wall. In a 2012 study, researchers had people insulted on purpose during a test. Then some replayed the moment through their own eyes. Others watched it like a fly on the wall. The fly on the wall group felt less angry and acted less aggressive. Here's the trick. Step out of your own head. You can even talk to yourself by name. Alex, breathe. Distance cools you down. Follow for more mind tricks.",
+ "words": [
+  {
+   "w": "About",
+   "start": 0.1,
+   "end": 0.28
+  },
+  {
+   "w": "to",
+   "start": 0.28,
+   "end": 0.52
+  },
+  {
+   "w": "lose",
+   "start": 0.52,
+   "end": 0.66
+  },
+  {
+   "w": "your",
+   "start": 0.66,
+   "end": 0.82
+  },
+  {
+   "w": "temper?",
+   "start": 0.82,
+   "end": 1.23
+  },
+  {
+   "w": "Picture",
+   "start": 1.95,
+   "end": 2.3
+  },
+  {
+   "w": "yourself",
+   "start": 2.3,
+   "end": 2.62
+  },
+  {
+   "w": "as",
+   "start": 2.62,
+   "end": 2.96
+  },
+  {
+   "w": "a",
+   "start": 2.96,
+   "end": 3.18
+  },
+  {
+   "w": "fly",
+   "start": 3.18,
+   "end": 3.42
+  },
+  {
+   "w": "on",
+   "start": 3.42,
+   "end": 3.66
+  },
+  {
+   "w": "the",
+   "start": 3.66,
+   "end": 3.78
+  },
+  {
+   "w": "wall.",
+   "start": 3.78,
+   "end": 4.64
+  },
+  {
+   "w": "In",
+   "start": 5.1,
+   "end": 5.18
+  },
+  {
+   "w": "a",
+   "start": 5.18,
+   "end": 5.3
+  },
+  {
+   "w": "2012",
+   "start": 5.3,
+   "end": 5.78
+  },
+  {
+   "w": "study,",
+   "start": 5.78,
+   "end": 6.58
+  },
+  {
+   "w": "researchers",
+   "start": 6.58,
+   "end": 7.08
+  },
+  {
+   "w": "had",
+   "start": 7.08,
+   "end": 7.3
+  },
+  {
+   "w": "people",
+   "start": 7.3,
+   "end": 7.64
+  },
+  {
+   "w": "insulted",
+   "start": 7.64,
+   "end": 8.16
+  },
+  {
+   "w": "on",
+   "start": 8.16,
+   "end": 8.56
+  },
+  {
+   "w": "purpose",
+   "start": 8.56,
+   "end": 9.02
+  },
+  {
+   "w": "during",
+   "start": 9.02,
+   "end": 9.46
+  },
+  {
+   "w": "a",
+   "start": 9.46,
+   "end": 9.64
+  },
+  {
+   "w": "test.",
+   "start": 9.64,
+   "end": 10.36
+  },
+  {
+   "w": "Then",
+   "start": 10.7,
+   "end": 10.98
+  },
+  {
+   "w": "some",
+   "start": 10.98,
+   "end": 11.46
+  },
+  {
+   "w": "replayed",
+   "start": 11.46,
+   "end": 12.14
+  },
+  {
+   "w": "the",
+   "start": 12.14,
+   "end": 12.22
+  },
+  {
+   "w": "moment",
+   "start": 12.22,
+   "end": 12.56
+  },
+  {
+   "w": "through",
+   "start": 12.56,
+   "end": 12.82
+  },
+  {
+   "w": "their",
+   "start": 12.82,
+   "end": 13
+  },
+  {
+   "w": "own",
+   "start": 13,
+   "end": 13.28
+  },
+  {
+   "w": "eyes.",
+   "start": 13.28,
+   "end": 14.28
+  },
+  {
+   "w": "Others",
+   "start": 14.28,
+   "end": 14.48
+  },
+  {
+   "w": "watched",
+   "start": 14.48,
+   "end": 14.86
+  },
+  {
+   "w": "it",
+   "start": 14.86,
+   "end": 15.06
+  },
+  {
+   "w": "like",
+   "start": 15.06,
+   "end": 15.4
+  },
+  {
+   "w": "a",
+   "start": 15.4,
+   "end": 15.52
+  },
+  {
+   "w": "fly",
+   "start": 15.52,
+   "end": 15.78
+  },
+  {
+   "w": "on",
+   "start": 15.78,
+   "end": 15.98
+  },
+  {
+   "w": "the",
+   "start": 15.98,
+   "end": 16.12
+  },
+  {
+   "w": "wall.",
+   "start": 16.12,
+   "end": 16.88
+  },
+  {
+   "w": "The",
+   "start": 17.34,
+   "end": 17.46
+  },
+  {
+   "w": "fly",
+   "start": 17.46,
+   "end": 17.8
+  },
+  {
+   "w": "on",
+   "start": 17.8,
+   "end": 17.92
+  },
+  {
+   "w": "the",
+   "start": 17.92,
+   "end": 18.1
+  },
+  {
+   "w": "wall",
+   "start": 18.1,
+   "end": 18.34
+  },
+  {
+   "w": "group",
+   "start": 18.34,
+   "end": 18.76
+  },
+  {
+   "w": "felt",
+   "start": 18.76,
+   "end": 19.14
+  },
+  {
+   "w": "less",
+   "start": 19.14,
+   "end": 19.5
+  },
+  {
+   "w": "angry",
+   "start": 19.5,
+   "end": 20.06
+  },
+  {
+   "w": "and",
+   "start": 20.06,
+   "end": 20.92
+  },
+  {
+   "w": "acted",
+   "start": 20.92,
+   "end": 21.44
+  },
+  {
+   "w": "less",
+   "start": 21.44,
+   "end": 21.78
+  },
+  {
+   "w": "aggressive.",
+   "start": 21.78,
+   "end": 22.2
+  },
+  {
+   "w": "Here's",
+   "start": 23.4,
+   "end": 23.62
+  },
+  {
+   "w": "the",
+   "start": 23.62,
+   "end": 23.76
+  },
+  {
+   "w": "trick.",
+   "start": 23.76,
+   "end": 24.62
+  },
+  {
+   "w": "Step",
+   "start": 24.62,
+   "end": 24.92
+  },
+  {
+   "w": "out",
+   "start": 24.92,
+   "end": 25.26
+  },
+  {
+   "w": "of",
+   "start": 25.26,
+   "end": 25.44
+  },
+  {
+   "w": "your",
+   "start": 25.44,
+   "end": 25.58
+  },
+  {
+   "w": "own",
+   "start": 25.58,
+   "end": 25.94
+  },
+  {
+   "w": "head.",
+   "start": 25.94,
+   "end": 27
+  },
+  {
+   "w": "You",
+   "start": 27,
+   "end": 27.12
+  },
+  {
+   "w": "can",
+   "start": 27.12,
+   "end": 27.16
+  },
+  {
+   "w": "even",
+   "start": 27.16,
+   "end": 27.38
+  },
+  {
+   "w": "talk",
+   "start": 27.38,
+   "end": 27.66
+  },
+  {
+   "w": "to",
+   "start": 27.66,
+   "end": 27.8
+  },
+  {
+   "w": "yourself",
+   "start": 27.8,
+   "end": 28.14
+  },
+  {
+   "w": "by",
+   "start": 28.14,
+   "end": 28.36
+  },
+  {
+   "w": "name.",
+   "start": 28.36,
+   "end": 29.22
+  },
+  {
+   "w": "Alex,",
+   "start": 29.38,
+   "end": 29.84
+  },
+  {
+   "w": "breathe.",
+   "start": 30.28,
+   "end": 30.91
+  },
+  {
+   "w": "Distance",
+   "start": 31.73,
+   "end": 32.26
+  },
+  {
+   "w": "cools",
+   "start": 32.26,
+   "end": 32.82
+  },
+  {
+   "w": "you",
+   "start": 32.82,
+   "end": 33.04
+  },
+  {
+   "w": "down.",
+   "start": 33.04,
+   "end": 33.46
+  },
+  {
+   "w": "Follow",
+   "start": 34.48,
+   "end": 34.66
+  },
+  {
+   "w": "for",
+   "start": 34.66,
+   "end": 34.88
+  },
+  {
+   "w": "more",
+   "start": 34.88,
+   "end": 35.1
+  },
+  {
+   "w": "mind",
+   "start": 35.1,
+   "end": 35.46
+  },
+  {
+   "w": "tricks.",
+   "start": 35.46,
+   "end": 35.72
+  }
+ ]
+}
