@@ -57,8 +57,8 @@ function italyMap(ctx, S, o = {}) {
   ctx.fillStyle = 'rgba(120,140,90,0.45)'; ctx.fillRect(-300, -300, W + 600, 380 + 300); // Gaul and the north: Caesar's province
   // the river at the line between province and Italy
   const rv = o.river ?? 1; if (rv > 0) { ctx.save(); ctx.globalAlpha = rv; ctx.beginPath(); ctx.moveTo(560, 120); ctx.quadraticCurveTo(620, 240, 700, 370); k.stroke(ctx, '#6fb0e0', 6 + 6 * (o.glow || 0)); ctx.restore(); }
-  for (const [name, x, y] of [['GAUL', 300, 160], ['ITALY', 640, 620], ['ROME', 690, 700], ['ARIMINUM', 780, 420]]) { ctx.fillStyle = P.ink; ctx.font = '700 28px Fell'; ctx.textAlign = 'center'; ctx.fillText(name, x, y); }
-  k.circle(ctx, 690, 670, 10, P.vermDark, P.ink, 2); k.circle(ctx, 750, 390, 7, P.ink, null);
+  for (const [name, x, y] of [['GAUL', 300, 160], ['ITALY', 640, 620], ['ROME', 690, 700], ['ARIMINUM', 590, 420]]) { ctx.fillStyle = P.ink; ctx.font = '700 28px Fell'; ctx.textAlign = 'center'; ctx.fillText(name, x, y); }
+  k.circle(ctx, 690, 670, 10, P.vermDark, P.ink, 2); k.circle(ctx, 698, 396, 7, P.ink, null);
 }
 
 export const scenes = [
