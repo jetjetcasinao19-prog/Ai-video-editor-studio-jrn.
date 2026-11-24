@@ -127,6 +127,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-01-15 Fri | 8:00 PM | Sat Jan 16, 9:00 AM | MindTrace | TikTok | In 1962, America's top generals approved a plan to fake attacks. | content/posts/2026-11-24-northwoods-inkblot.md | ready |
 | 2027-01-16 Sat | 7:00 PM | Sun Jan 17, 8:00 AM | MindTrace | Instagram Reels | Operation Northwoods: the plan Kennedy rejected | content/posts/2026-11-24-northwoods-inkblot.md | ready |
 | 2027-01-16 Sat | 8:00 PM | Sun Jan 17, 9:00 AM | MindTrace | Facebook Reels | The 1962 plan to fake attacks and blame Cuba | content/posts/2026-11-24-northwoods-inkblot.md | ready |
+| 2027-01-17 Sun | 7:00 PM | Mon Jan 18, 8:00 AM | MindTrace | YouTube Shorts | The U.S. Paid Psychics to Spy for 20 Years (Project Stargate) | content/posts/2026-11-24-stargate-inkblot.md | ready |
+| 2027-01-17 Sun | 8:00 PM | Mon Jan 18, 9:00 AM | MindTrace | TikTok | The U.S. government once paid psychics to spy for it. | content/posts/2026-11-24-stargate-inkblot.md | ready |
+| 2027-01-18 Mon | 7:00 PM | Tue Jan 19, 8:00 AM | MindTrace | Instagram Reels | Project Stargate: why vague feels accurate | content/posts/2026-11-24-stargate-inkblot.md | ready |
+| 2027-01-18 Mon | 8:00 PM | Tue Jan 19, 9:00 AM | MindTrace | Facebook Reels | The U.S. paid psychics to spy for 20 years. | content/posts/2026-11-24-stargate-inkblot.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
