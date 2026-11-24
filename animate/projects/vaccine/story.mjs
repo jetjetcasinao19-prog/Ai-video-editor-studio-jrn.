@@ -138,7 +138,7 @@ export const scenes = [
       const run = tween(u, si - 1.2, si + 1.0, ease.linear);
       k.figure(ctx, lerp(200, 780, run), 1000, { ...JAMES, s: 0.85, face: 1, walk: S.t * 9, mood: 'happy', armF: [1.0, 0.3] });
       k.circle(ctx, lerp(300, 880, run), 950, 60, null, '#7a5a3a', 6);
-      k.label(ctx, 'ABOUT SIX WEEKS LATER', W / 2, 280, 18, tween(u, we, we + 0.4));
+      k.label(ctx, 'ABOUT SEVEN WEEKS LATER · JULY 1796', W / 2, 280, 18, tween(u, we, we + 0.4));
     },
   },
   { // 30.5 "The Latin for cow is vacca. So we call it vaccination."
