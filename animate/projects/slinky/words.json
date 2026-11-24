@@ -1,6 +1,6 @@
 {
  "engine": "Groq whisper-large-v3",
- "text": "A falling spring became a classic American toy. 1943, Pennsylvania. Naval engineer Richard James is working with springs. As the story goes, one falls and keeps walking. He tells his wife, Betty, this could be a toy. Betty flips through a dictionary for a name. She picks slinky, sleek, and graceful. November 1945. Philadelphia's Gimbel's department store. They have 400 Slinkys. In 90 minutes, every one is sold. Every legend has a beginning.",
+ "text": "A falling spring became a classic American toy. 1943, Pennsylvania. Naval engineer Richard James is working with springs. As the story goes, one falls and keeps walking. He tells his wife, Betty, this could be a toy. Betty flips through a dictionary for a name. She picks slinky, sleek, and graceful. November 1945. Philadelphia's Gimbels department store. They have 400 Slinkys. In 90 minutes, every one is sold. Every legend has a beginning.",
  "words": [
   {
    "w": "A",
@@ -273,7 +273,7 @@
    "end": 29.56
   },
   {
-   "w": "Gimbel's",
+   "w": "Gimbels",
    "start": 29.56,
    "end": 30.08
   },

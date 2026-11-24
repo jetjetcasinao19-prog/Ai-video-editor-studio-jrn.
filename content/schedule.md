@@ -173,6 +173,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-02-15 Mon | 8:00 PM | Tue Feb 16, 9:00 AM | TikTok | Next time you rip open a strap, thank a dog. | content/posts/2026-11-24-velcro-ottoman.md | ready |
 | 2027-02-16 Tue | 7:00 PM | Wed Feb 17, 8:00 AM | Instagram Reels | Rrrip. That sound has a backstory. | content/posts/2026-11-24-velcro-ottoman.md | ready |
 | 2027-02-16 Tue | 8:00 PM | Wed Feb 17, 9:00 AM | Facebook Reels | Did you know Velcro started with a dog walk? | content/posts/2026-11-24-velcro-ottoman.md | ready |
+| 2027-02-17 Wed | 7:00 PM | Thu Feb 18, 8:00 AM | YouTube Shorts | The Spring That Walked | content/posts/2026-11-24-slinky-ottoman.md | ready |
+| 2027-02-17 Wed | 8:00 PM | Thu Feb 18, 9:00 AM | TikTok | A spring fell, and instead of landing, it walked. | content/posts/2026-11-24-slinky-ottoman.md | ready |
+| 2027-02-18 Thu | 7:00 PM | Fri Feb 19, 8:00 AM | Instagram Reels | Down the stairs, end over end. | content/posts/2026-11-24-slinky-ottoman.md | ready |
+| 2027-02-18 Thu | 8:00 PM | Fri Feb 19, 9:00 AM | Facebook Reels | Did you know a classic American toy started as a mistake? | content/posts/2026-11-24-slinky-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the

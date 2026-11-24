@@ -74,11 +74,11 @@ export const scenes = [
       S.cam(lerp(1.1, 1.0, tween(u, 0, 2.8, ease.inOut)), W / 2, 600);
       k.goldSky(ctx, -300, -300, W + 600, 800, S.t);
       ctx.save(); ctx.beginPath(); ctx.rect(-300, 700, W + 600, 900); ctx.clip(); k.waves(ctx, -300, 700, W + 600, 900, S.t, '#3a5a7a', '#5a7a9a', 14, 24); ctx.restore();
-      // the navy yard: a grey warship at the dock, cranes over it
+      // the shipyard: a grey warship at the dock, cranes over it
       ctx.save(); ctx.translate(560, 760); k.poly(ctx, [[-420, 0], [420, 0], [360, 90], [-380, 90]], '#7a8088', P.ink, 3); k.rect(ctx, -120, -110, 220, 110, '#8a9098', P.ink, 2.5); k.rect(ctx, -60, -190, 90, 80, '#8a9098', P.ink, 2); for (const gx of [-300, 220]) { k.rect(ctx, gx, -40, 90, 40, '#6a7078', P.ink, 2); ctx.beginPath(); ctx.moveTo(gx + 80, -20); ctx.lineTo(gx + 190, -40); k.stroke(ctx, '#5a6068', 10); } ctx.restore();
       for (const x of [140, 960]) { ctx.beginPath(); ctx.moveTo(x, 720); ctx.lineTo(x, 300); ctx.lineTo(x + (x < 500 ? 220 : -220), 300); k.stroke(ctx, '#5a4a3a', 12); ctx.beginPath(); ctx.moveTo(x + (x < 500 ? 200 : -200), 300); ctx.lineTo(x + (x < 500 ? 200 : -200), 460); k.stroke(ctx, P.ink, 3); }
       k.seal(ctx, 860, 160, 70, ' THE YEAR · 1943 ·', '1943', tween(u, 0.1, 0.5, ease.linear));
-      k.label(ctx, 'PHILADELPHIA NAVY YARD', W / 2, 1040, 20, tween(u, pe, pe + 0.4));
+      k.label(ctx, 'CRAMP SHIPYARD · PHILADELPHIA', W / 2, 1040, 20, tween(u, pe, pe + 0.4));
     },
   },
   { // 7.9 "Naval engineer Richard James is working with springs."
@@ -93,7 +93,7 @@ export const scenes = [
       const n = Math.floor(tween(u, wo - 0.2, sp + 0.4) * 4); for (let i = 0; i < n; i++) slinky(ctx, S, 780 + i * 44, 816, 800 + i * 44, 816, 0, 10, 16);
       k.figure(ctx, 300, 1000, { ...RICHARD, s: 1.1, face: 1, mood: 'calm', ...act('present', u, tween(u, wo, wo + 0.4)) });
       k.label(ctx, 'RICHARD JAMES', 300, 560, 22, tween(u, ri, ri + 0.4));
-      k.label(ctx, 'SPRINGS TO STEADY SHIP INSTRUMENTS', 680, 640, 15, tween(u, sp, sp + 0.4));
+      k.label(ctx, 'SPRINGS FOR SHIP INSTRUMENTS', 680, 640, 15, tween(u, sp, sp + 0.4));
     },
   },
   { // 11.7 "As the story goes, one falls and keeps walking."
@@ -140,7 +140,7 @@ export const scenes = [
   { // 26.4 "November 1945. Philadelphia's Gimbels department store."
     start: 26.2, title: 'Gimbels, 1945', trans: 'unroll',
     draw(ctx, u, S) {
-      const { k, P, W } = S, no = S.at('November'), gi = S.at("Gimbel's"), st = S.at('store.');
+      const { k, P, W } = S, no = S.at('November'), gi = S.at('Gimbels'), st = S.at('store.');
       S.cam(lerp(1.0, 1.15, tween(u, gi - 0.3, st + 0.8, ease.inOut)), W / 2, 640);
       k.nightSky(ctx, -300, -300, W + 600, 900, S.t); k.snow(ctx, -300, -300, W + 600, 1800, S.t, 80, 4);
       // a big store front, lit windows, wreaths for the holiday season
