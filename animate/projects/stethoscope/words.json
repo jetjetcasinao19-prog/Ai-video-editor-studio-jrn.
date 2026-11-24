@@ -1,0 +1,406 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "The stethoscope was invented because a doctor felt awkward. 1816, Paris. Dr. Ren\u00e9 Laennec has a young female patient with heart trouble. Back then, doctors listened by pressing an ear right against the chest. Laennec thinks that's improper, so he rolls a sheet of paper into a tube and listens through it. He can hear her heart better than ever. He builds a wooden version and calls it the stethoscope, Greek for chest and examine. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "The",
+   "start": 0,
+   "end": 0.24
+  },
+  {
+   "w": "stethoscope",
+   "start": 0.24,
+   "end": 0.62
+  },
+  {
+   "w": "was",
+   "start": 0.62,
+   "end": 0.92
+  },
+  {
+   "w": "invented",
+   "start": 0.92,
+   "end": 1.36
+  },
+  {
+   "w": "because",
+   "start": 1.36,
+   "end": 2.28
+  },
+  {
+   "w": "a",
+   "start": 2.28,
+   "end": 2.5
+  },
+  {
+   "w": "doctor",
+   "start": 2.5,
+   "end": 2.9
+  },
+  {
+   "w": "felt",
+   "start": 2.9,
+   "end": 3.42
+  },
+  {
+   "w": "awkward.",
+   "start": 3.42,
+   "end": 4.62
+  },
+  {
+   "w": "1816,",
+   "start": 5.38,
+   "end": 6.6
+  },
+  {
+   "w": "Paris.",
+   "start": 6.6,
+   "end": 7.38
+  },
+  {
+   "w": "Dr.",
+   "start": 7.86,
+   "end": 8.16
+  },
+  {
+   "w": "Ren\u00e9",
+   "start": 8.16,
+   "end": 8.48
+  },
+  {
+   "w": "Laennec",
+   "start": 8.48,
+   "end": 8.86
+  },
+  {
+   "w": "has",
+   "start": 8.86,
+   "end": 9.16
+  },
+  {
+   "w": "a",
+   "start": 9.16,
+   "end": 9.34
+  },
+  {
+   "w": "young",
+   "start": 9.34,
+   "end": 9.56
+  },
+  {
+   "w": "female",
+   "start": 9.56,
+   "end": 10.02
+  },
+  {
+   "w": "patient",
+   "start": 10.02,
+   "end": 10.38
+  },
+  {
+   "w": "with",
+   "start": 10.38,
+   "end": 10.72
+  },
+  {
+   "w": "heart",
+   "start": 10.72,
+   "end": 10.96
+  },
+  {
+   "w": "trouble.",
+   "start": 10.96,
+   "end": 11.78
+  },
+  {
+   "w": "Back",
+   "start": 12.02,
+   "end": 12.2
+  },
+  {
+   "w": "then,",
+   "start": 12.2,
+   "end": 12.8
+  },
+  {
+   "w": "doctors",
+   "start": 12.8,
+   "end": 13.18
+  },
+  {
+   "w": "listened",
+   "start": 13.18,
+   "end": 13.5
+  },
+  {
+   "w": "by",
+   "start": 13.5,
+   "end": 13.78
+  },
+  {
+   "w": "pressing",
+   "start": 13.78,
+   "end": 14.18
+  },
+  {
+   "w": "an",
+   "start": 14.18,
+   "end": 14.42
+  },
+  {
+   "w": "ear",
+   "start": 14.42,
+   "end": 14.7
+  },
+  {
+   "w": "right",
+   "start": 14.7,
+   "end": 15.06
+  },
+  {
+   "w": "against",
+   "start": 15.06,
+   "end": 15.42
+  },
+  {
+   "w": "the",
+   "start": 15.42,
+   "end": 15.58
+  },
+  {
+   "w": "chest.",
+   "start": 15.58,
+   "end": 16.46
+  },
+  {
+   "w": "Laennec",
+   "start": 16.74,
+   "end": 16.94
+  },
+  {
+   "w": "thinks",
+   "start": 16.94,
+   "end": 17.26
+  },
+  {
+   "w": "that's",
+   "start": 17.26,
+   "end": 17.6
+  },
+  {
+   "w": "improper,",
+   "start": 17.6,
+   "end": 18.82
+  },
+  {
+   "w": "so",
+   "start": 18.82,
+   "end": 18.84
+  },
+  {
+   "w": "he",
+   "start": 18.84,
+   "end": 18.98
+  },
+  {
+   "w": "rolls",
+   "start": 18.98,
+   "end": 19.26
+  },
+  {
+   "w": "a",
+   "start": 19.26,
+   "end": 19.44
+  },
+  {
+   "w": "sheet",
+   "start": 19.44,
+   "end": 19.62
+  },
+  {
+   "w": "of",
+   "start": 19.62,
+   "end": 19.78
+  },
+  {
+   "w": "paper",
+   "start": 19.78,
+   "end": 20.16
+  },
+  {
+   "w": "into",
+   "start": 20.16,
+   "end": 20.54
+  },
+  {
+   "w": "a",
+   "start": 20.54,
+   "end": 20.72
+  },
+  {
+   "w": "tube",
+   "start": 20.72,
+   "end": 21.24
+  },
+  {
+   "w": "and",
+   "start": 21.24,
+   "end": 21.84
+  },
+  {
+   "w": "listens",
+   "start": 21.84,
+   "end": 22.18
+  },
+  {
+   "w": "through",
+   "start": 22.18,
+   "end": 22.6
+  },
+  {
+   "w": "it.",
+   "start": 22.6,
+   "end": 22.86
+  },
+  {
+   "w": "He",
+   "start": 23.46,
+   "end": 23.56
+  },
+  {
+   "w": "can",
+   "start": 23.56,
+   "end": 23.72
+  },
+  {
+   "w": "hear",
+   "start": 23.72,
+   "end": 23.94
+  },
+  {
+   "w": "her",
+   "start": 23.94,
+   "end": 24.14
+  },
+  {
+   "w": "heart",
+   "start": 24.14,
+   "end": 24.54
+  },
+  {
+   "w": "better",
+   "start": 24.54,
+   "end": 24.98
+  },
+  {
+   "w": "than",
+   "start": 24.98,
+   "end": 25.2
+  },
+  {
+   "w": "ever.",
+   "start": 25.2,
+   "end": 25.88
+  },
+  {
+   "w": "He",
+   "start": 26.2,
+   "end": 26.26
+  },
+  {
+   "w": "builds",
+   "start": 26.26,
+   "end": 26.56
+  },
+  {
+   "w": "a",
+   "start": 26.56,
+   "end": 26.76
+  },
+  {
+   "w": "wooden",
+   "start": 26.76,
+   "end": 26.98
+  },
+  {
+   "w": "version",
+   "start": 26.98,
+   "end": 27.36
+  },
+  {
+   "w": "and",
+   "start": 27.36,
+   "end": 27.78
+  },
+  {
+   "w": "calls",
+   "start": 27.78,
+   "end": 28.06
+  },
+  {
+   "w": "it",
+   "start": 28.06,
+   "end": 28.3
+  },
+  {
+   "w": "the",
+   "start": 28.3,
+   "end": 28.64
+  },
+  {
+   "w": "stethoscope,",
+   "start": 28.64,
+   "end": 29.9
+  },
+  {
+   "w": "Greek",
+   "start": 29.9,
+   "end": 30.14
+  },
+  {
+   "w": "for",
+   "start": 30.14,
+   "end": 30.52
+  },
+  {
+   "w": "chest",
+   "start": 30.52,
+   "end": 30.9
+  },
+  {
+   "w": "and",
+   "start": 30.9,
+   "end": 31.5
+  },
+  {
+   "w": "examine.",
+   "start": 31.5,
+   "end": 32.56
+  },
+  {
+   "w": "Every",
+   "start": 33.1,
+   "end": 33.36
+  },
+  {
+   "w": "legend",
+   "start": 33.36,
+   "end": 33.78
+  },
+  {
+   "w": "has",
+   "start": 33.78,
+   "end": 34.22
+  },
+  {
+   "w": "a",
+   "start": 34.22,
+   "end": 34.3
+  },
+  {
+   "w": "beginning.",
+   "start": 34.3,
+   "end": 34.56
+  }
+ ]
+}
