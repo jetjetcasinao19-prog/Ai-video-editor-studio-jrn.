@@ -1,0 +1,351 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "Before 1846, surgery meant being awake for every second. October 16th, 1846. Boston, Massachusetts General Hospital. Dentist William Morton has a patient, Gilbert Abbott, breathe in ether. Surgeon John Collins Warren operates on a tumor in his neck while Abbott sleeps. Warren turns to the crowd. Gentlemen, this is no humbug. The room becomes known as the Ether Dome, the start of modern anesthesia. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "Before",
+   "start": 0.14,
+   "end": 0.5
+  },
+  {
+   "w": "1846,",
+   "start": 0.5,
+   "end": 2.72
+  },
+  {
+   "w": "surgery",
+   "start": 2.72,
+   "end": 2.74
+  },
+  {
+   "w": "meant",
+   "start": 2.74,
+   "end": 3.14
+  },
+  {
+   "w": "being",
+   "start": 3.14,
+   "end": 3.48
+  },
+  {
+   "w": "awake",
+   "start": 3.48,
+   "end": 4.04
+  },
+  {
+   "w": "for",
+   "start": 4.04,
+   "end": 4.72
+  },
+  {
+   "w": "every",
+   "start": 4.72,
+   "end": 5.12
+  },
+  {
+   "w": "second.",
+   "start": 5.12,
+   "end": 6.14
+  },
+  {
+   "w": "October",
+   "start": 6.86,
+   "end": 7.18
+  },
+  {
+   "w": "16th,",
+   "start": 7.18,
+   "end": 8.24
+  },
+  {
+   "w": "1846.",
+   "start": 8.24,
+   "end": 9.94
+  },
+  {
+   "w": "Boston,",
+   "start": 9.94,
+   "end": 10.88
+  },
+  {
+   "w": "Massachusetts",
+   "start": 10.88,
+   "end": 11.52
+  },
+  {
+   "w": "General",
+   "start": 11.52,
+   "end": 12.02
+  },
+  {
+   "w": "Hospital.",
+   "start": 12.02,
+   "end": 13.04
+  },
+  {
+   "w": "Dentist",
+   "start": 13.62,
+   "end": 13.92
+  },
+  {
+   "w": "William",
+   "start": 13.92,
+   "end": 14.28
+  },
+  {
+   "w": "Morton",
+   "start": 14.28,
+   "end": 14.72
+  },
+  {
+   "w": "has",
+   "start": 14.72,
+   "end": 14.92
+  },
+  {
+   "w": "a",
+   "start": 14.92,
+   "end": 15.06
+  },
+  {
+   "w": "patient,",
+   "start": 15.06,
+   "end": 15.86
+  },
+  {
+   "w": "Gilbert",
+   "start": 15.86,
+   "end": 16.18
+  },
+  {
+   "w": "Abbott,",
+   "start": 16.18,
+   "end": 17.02
+  },
+  {
+   "w": "breathe",
+   "start": 17.02,
+   "end": 17.36
+  },
+  {
+   "w": "in",
+   "start": 17.36,
+   "end": 17.62
+  },
+  {
+   "w": "ether.",
+   "start": 17.62,
+   "end": 18.4
+  },
+  {
+   "w": "Surgeon",
+   "start": 18.96,
+   "end": 19.18
+  },
+  {
+   "w": "John",
+   "start": 19.18,
+   "end": 19.54
+  },
+  {
+   "w": "Collins",
+   "start": 19.54,
+   "end": 20.02
+  },
+  {
+   "w": "Warren",
+   "start": 20.02,
+   "end": 20.38
+  },
+  {
+   "w": "operates",
+   "start": 20.38,
+   "end": 20.92
+  },
+  {
+   "w": "on",
+   "start": 20.92,
+   "end": 21.14
+  },
+  {
+   "w": "a",
+   "start": 21.14,
+   "end": 21.3
+  },
+  {
+   "w": "tumor",
+   "start": 21.3,
+   "end": 21.56
+  },
+  {
+   "w": "in",
+   "start": 21.56,
+   "end": 21.76
+  },
+  {
+   "w": "his",
+   "start": 21.76,
+   "end": 21.9
+  },
+  {
+   "w": "neck",
+   "start": 21.9,
+   "end": 22.3
+  },
+  {
+   "w": "while",
+   "start": 22.3,
+   "end": 22.86
+  },
+  {
+   "w": "Abbott",
+   "start": 22.86,
+   "end": 23.12
+  },
+  {
+   "w": "sleeps.",
+   "start": 23.12,
+   "end": 24.1
+  },
+  {
+   "w": "Warren",
+   "start": 24.5,
+   "end": 24.66
+  },
+  {
+   "w": "turns",
+   "start": 24.66,
+   "end": 24.98
+  },
+  {
+   "w": "to",
+   "start": 24.98,
+   "end": 25.16
+  },
+  {
+   "w": "the",
+   "start": 25.16,
+   "end": 25.3
+  },
+  {
+   "w": "crowd.",
+   "start": 25.3,
+   "end": 26.14
+  },
+  {
+   "w": "Gentlemen,",
+   "start": 26.36,
+   "end": 27.08
+  },
+  {
+   "w": "this",
+   "start": 27.08,
+   "end": 27.22
+  },
+  {
+   "w": "is",
+   "start": 27.22,
+   "end": 27.38
+  },
+  {
+   "w": "no",
+   "start": 27.38,
+   "end": 27.52
+  },
+  {
+   "w": "humbug.",
+   "start": 27.52,
+   "end": 28.48
+  },
+  {
+   "w": "The",
+   "start": 28.72,
+   "end": 28.78
+  },
+  {
+   "w": "room",
+   "start": 28.78,
+   "end": 29
+  },
+  {
+   "w": "becomes",
+   "start": 29,
+   "end": 29.42
+  },
+  {
+   "w": "known",
+   "start": 29.42,
+   "end": 29.76
+  },
+  {
+   "w": "as",
+   "start": 29.76,
+   "end": 30.16
+  },
+  {
+   "w": "the",
+   "start": 30.16,
+   "end": 30.58
+  },
+  {
+   "w": "Ether",
+   "start": 30.58,
+   "end": 31.165
+  },
+  {
+   "w": "Dome,",
+   "start": 31.165,
+   "end": 31.88
+  },
+  {
+   "w": "the",
+   "start": 31.88,
+   "end": 31.92
+  },
+  {
+   "w": "start",
+   "start": 31.92,
+   "end": 32.36
+  },
+  {
+   "w": "of",
+   "start": 32.36,
+   "end": 32.6
+  },
+  {
+   "w": "modern",
+   "start": 32.6,
+   "end": 33.1
+  },
+  {
+   "w": "anesthesia.",
+   "start": 33.1,
+   "end": 34.38
+  },
+  {
+   "w": "Every",
+   "start": 34.7,
+   "end": 34.9
+  },
+  {
+   "w": "legend",
+   "start": 34.9,
+   "end": 35.4
+  },
+  {
+   "w": "has",
+   "start": 35.4,
+   "end": 35.66
+  },
+  {
+   "w": "a",
+   "start": 35.66,
+   "end": 35.76
+  },
+  {
+   "w": "beginning.",
+   "start": 35.76,
+   "end": 36.58
+  }
+ ]
+}
