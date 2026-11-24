@@ -1,0 +1,391 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "Song stuck in your head? Grab a piece of gum. In 2015, psychologists at the University of Reading played people catchy pop songs. Then they asked them not to think about them. People chewing gum heard the song in their heads less often. Here's the trick. Replaying a song uses your inner voice, like silently singing. Chewing jams that system. Less room for the chorus. So, next time it's on repeat. Chew. Follow for more mind tricks.",
+ "words": [
+  {
+   "w": "Song",
+   "start": 0.02,
+   "end": 0.36
+  },
+  {
+   "w": "stuck",
+   "start": 0.36,
+   "end": 0.56
+  },
+  {
+   "w": "in",
+   "start": 0.56,
+   "end": 0.72
+  },
+  {
+   "w": "your",
+   "start": 0.72,
+   "end": 0.84
+  },
+  {
+   "w": "head?",
+   "start": 0.84,
+   "end": 1.56
+  },
+  {
+   "w": "Grab",
+   "start": 1.56,
+   "end": 1.68
+  },
+  {
+   "w": "a",
+   "start": 1.68,
+   "end": 1.86
+  },
+  {
+   "w": "piece",
+   "start": 1.86,
+   "end": 2.04
+  },
+  {
+   "w": "of",
+   "start": 2.04,
+   "end": 2.22
+  },
+  {
+   "w": "gum.",
+   "start": 2.22,
+   "end": 2.92
+  },
+  {
+   "w": "In",
+   "start": 3.24,
+   "end": 3.3
+  },
+  {
+   "w": "2015,",
+   "start": 3.3,
+   "end": 4.36
+  },
+  {
+   "w": "psychologists",
+   "start": 4.36,
+   "end": 4.74
+  },
+  {
+   "w": "at",
+   "start": 4.74,
+   "end": 5.16
+  },
+  {
+   "w": "the",
+   "start": 5.16,
+   "end": 5.28
+  },
+  {
+   "w": "University",
+   "start": 5.28,
+   "end": 5.72
+  },
+  {
+   "w": "of",
+   "start": 5.72,
+   "end": 6.06
+  },
+  {
+   "w": "Reading",
+   "start": 6.06,
+   "end": 6.32
+  },
+  {
+   "w": "played",
+   "start": 6.32,
+   "end": 6.76
+  },
+  {
+   "w": "people",
+   "start": 6.76,
+   "end": 7.18
+  },
+  {
+   "w": "catchy",
+   "start": 7.18,
+   "end": 7.68
+  },
+  {
+   "w": "pop",
+   "start": 7.68,
+   "end": 8.04
+  },
+  {
+   "w": "songs.",
+   "start": 8.04,
+   "end": 8.38
+  },
+  {
+   "w": "Then",
+   "start": 9.12,
+   "end": 9.36
+  },
+  {
+   "w": "they",
+   "start": 9.36,
+   "end": 9.58
+  },
+  {
+   "w": "asked",
+   "start": 9.58,
+   "end": 9.94
+  },
+  {
+   "w": "them",
+   "start": 9.94,
+   "end": 10.2
+  },
+  {
+   "w": "not",
+   "start": 10.2,
+   "end": 10.56
+  },
+  {
+   "w": "to",
+   "start": 10.56,
+   "end": 10.8
+  },
+  {
+   "w": "think",
+   "start": 10.8,
+   "end": 11.06
+  },
+  {
+   "w": "about",
+   "start": 11.06,
+   "end": 11.3
+  },
+  {
+   "w": "them.",
+   "start": 11.3,
+   "end": 11.52
+  },
+  {
+   "w": "People",
+   "start": 12.28,
+   "end": 12.46
+  },
+  {
+   "w": "chewing",
+   "start": 12.46,
+   "end": 12.84
+  },
+  {
+   "w": "gum",
+   "start": 12.84,
+   "end": 13.3
+  },
+  {
+   "w": "heard",
+   "start": 13.3,
+   "end": 13.74
+  },
+  {
+   "w": "the",
+   "start": 13.74,
+   "end": 13.9
+  },
+  {
+   "w": "song",
+   "start": 13.9,
+   "end": 14.16
+  },
+  {
+   "w": "in",
+   "start": 14.16,
+   "end": 14.28
+  },
+  {
+   "w": "their",
+   "start": 14.28,
+   "end": 14.46
+  },
+  {
+   "w": "heads",
+   "start": 14.46,
+   "end": 14.82
+  },
+  {
+   "w": "less",
+   "start": 14.82,
+   "end": 15.24
+  },
+  {
+   "w": "often.",
+   "start": 15.24,
+   "end": 15.5
+  },
+  {
+   "w": "Here's",
+   "start": 16.36,
+   "end": 16.6
+  },
+  {
+   "w": "the",
+   "start": 16.6,
+   "end": 16.74
+  },
+  {
+   "w": "trick.",
+   "start": 16.74,
+   "end": 17.48
+  },
+  {
+   "w": "Replaying",
+   "start": 17.64,
+   "end": 17.98
+  },
+  {
+   "w": "a",
+   "start": 17.98,
+   "end": 18.2
+  },
+  {
+   "w": "song",
+   "start": 18.2,
+   "end": 18.5
+  },
+  {
+   "w": "uses",
+   "start": 18.5,
+   "end": 18.96
+  },
+  {
+   "w": "your",
+   "start": 18.96,
+   "end": 19.18
+  },
+  {
+   "w": "inner",
+   "start": 19.18,
+   "end": 19.56
+  },
+  {
+   "w": "voice,",
+   "start": 19.56,
+   "end": 20.34
+  },
+  {
+   "w": "like",
+   "start": 20.34,
+   "end": 20.54
+  },
+  {
+   "w": "silently",
+   "start": 20.54,
+   "end": 21.1
+  },
+  {
+   "w": "singing.",
+   "start": 21.1,
+   "end": 22
+  },
+  {
+   "w": "Chewing",
+   "start": 22.24,
+   "end": 22.5
+  },
+  {
+   "w": "jams",
+   "start": 22.5,
+   "end": 23.02
+  },
+  {
+   "w": "that",
+   "start": 23.02,
+   "end": 23.26
+  },
+  {
+   "w": "system.",
+   "start": 23.26,
+   "end": 24.14
+  },
+  {
+   "w": "Less",
+   "start": 24.24,
+   "end": 24.44
+  },
+  {
+   "w": "room",
+   "start": 24.44,
+   "end": 24.7
+  },
+  {
+   "w": "for",
+   "start": 24.7,
+   "end": 24.86
+  },
+  {
+   "w": "the",
+   "start": 24.86,
+   "end": 24.94
+  },
+  {
+   "w": "chorus.",
+   "start": 24.94,
+   "end": 25.24
+  },
+  {
+   "w": "So,",
+   "start": 26,
+   "end": 26.36
+  },
+  {
+   "w": "next",
+   "start": 26.36,
+   "end": 26.66
+  },
+  {
+   "w": "time",
+   "start": 26.66,
+   "end": 26.9
+  },
+  {
+   "w": "it's",
+   "start": 26.9,
+   "end": 27.06
+  },
+  {
+   "w": "on",
+   "start": 27.06,
+   "end": 27.28
+  },
+  {
+   "w": "repeat.",
+   "start": 27.28,
+   "end": 28.04
+  },
+  {
+   "w": "Chew.",
+   "start": 28.28,
+   "end": 28.96
+  },
+  {
+   "w": "Follow",
+   "start": 29.5,
+   "end": 29.68
+  },
+  {
+   "w": "for",
+   "start": 29.68,
+   "end": 29.9
+  },
+  {
+   "w": "more",
+   "start": 29.9,
+   "end": 30.08
+  },
+  {
+   "w": "mind",
+   "start": 30.08,
+   "end": 30.42
+  },
+  {
+   "w": "tricks.",
+   "start": 30.42,
+   "end": 30.68
+  }
+ ]
+}

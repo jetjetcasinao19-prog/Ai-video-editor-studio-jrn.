@@ -83,6 +83,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-12-24 Thu | 8:00 PM | Fri Dec 25, 9:00 AM | MindTrace | TikTok | Can't fall asleep because your brain won't stop? Do this. | content/posts/2026-11-24-todo-list-sleep-inkblot.md | ready |
 | 2026-12-25 Fri | 7:00 PM | Sat Dec 26, 8:00 AM | MindTrace | Instagram Reels | The 5-minute list that helps you fall asleep faster | content/posts/2026-11-24-todo-list-sleep-inkblot.md | ready |
 | 2026-12-25 Fri | 8:00 PM | Sat Dec 26, 9:00 AM | MindTrace | Facebook Reels | Can't fall asleep because your brain won't stop? Do this. | content/posts/2026-11-24-todo-list-sleep-inkblot.md | ready |
+| 2026-12-26 Sat | 7:00 PM | Sun Dec 27, 8:00 AM | MindTrace | YouTube Shorts | Song Stuck in Your Head? Chew Gum (Here's Why It Works) | content/posts/2026-11-24-earworm-gum-inkblot.md | ready |
+| 2026-12-26 Sat | 8:00 PM | Sun Dec 27, 9:00 AM | MindTrace | TikTok | Song stuck in your head? Grab a piece of gum. | content/posts/2026-11-24-earworm-gum-inkblot.md | ready |
+| 2026-12-27 Sun | 7:00 PM | Mon Dec 28, 8:00 AM | MindTrace | Instagram Reels | Why gum kicks a song out of your head | content/posts/2026-11-24-earworm-gum-inkblot.md | ready |
+| 2026-12-27 Sun | 8:00 PM | Mon Dec 28, 9:00 AM | MindTrace | Facebook Reels | Song stuck in your head? Grab a piece of gum. | content/posts/2026-11-24-earworm-gum-inkblot.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
