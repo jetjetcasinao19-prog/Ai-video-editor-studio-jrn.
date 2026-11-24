@@ -1,0 +1,446 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "The CIA once ran a real mind control program. This isn't a theory. It was called MKUltra. Starting in 1953, the CIA tested LSD on people, often without telling them. In one operation, agents secretly dosed men in San Francisco and watched them through one-way mirrors. Here's the trick that almost worked. In 1973, the CIA ordered the files destroyed. But about 20,000 documents survived. They'd been stored in the wrong place. In 1977, they ended up in front of the US Senate. Follow for more dark psychology.",
+ "words": [
+  {
+   "w": "The",
+   "start": 0,
+   "end": 0.2
+  },
+  {
+   "w": "CIA",
+   "start": 0.2,
+   "end": 0.68
+  },
+  {
+   "w": "once",
+   "start": 0.68,
+   "end": 1.12
+  },
+  {
+   "w": "ran",
+   "start": 1.12,
+   "end": 1.42
+  },
+  {
+   "w": "a",
+   "start": 1.42,
+   "end": 1.74
+  },
+  {
+   "w": "real",
+   "start": 1.74,
+   "end": 2.06
+  },
+  {
+   "w": "mind",
+   "start": 2.06,
+   "end": 2.5
+  },
+  {
+   "w": "control",
+   "start": 2.5,
+   "end": 2.86
+  },
+  {
+   "w": "program.",
+   "start": 2.86,
+   "end": 3.88
+  },
+  {
+   "w": "This",
+   "start": 3.94,
+   "end": 4.08
+  },
+  {
+   "w": "isn't",
+   "start": 4.08,
+   "end": 4.32
+  },
+  {
+   "w": "a",
+   "start": 4.32,
+   "end": 4.46
+  },
+  {
+   "w": "theory.",
+   "start": 4.46,
+   "end": 5.22
+  },
+  {
+   "w": "It",
+   "start": 5.38,
+   "end": 5.46
+  },
+  {
+   "w": "was",
+   "start": 5.46,
+   "end": 5.6
+  },
+  {
+   "w": "called",
+   "start": 5.6,
+   "end": 5.98
+  },
+  {
+   "w": "MKUltra.",
+   "start": 5.98,
+   "end": 7.1
+  },
+  {
+   "w": "Starting",
+   "start": 7.92,
+   "end": 8.16
+  },
+  {
+   "w": "in",
+   "start": 8.16,
+   "end": 8.3
+  },
+  {
+   "w": "1953,",
+   "start": 8.3,
+   "end": 9.7
+  },
+  {
+   "w": "the",
+   "start": 9.7,
+   "end": 9.82
+  },
+  {
+   "w": "CIA",
+   "start": 9.82,
+   "end": 10.16
+  },
+  {
+   "w": "tested",
+   "start": 10.16,
+   "end": 10.72
+  },
+  {
+   "w": "LSD",
+   "start": 10.72,
+   "end": 11.22
+  },
+  {
+   "w": "on",
+   "start": 11.22,
+   "end": 11.4
+  },
+  {
+   "w": "people,",
+   "start": 11.4,
+   "end": 12.4
+  },
+  {
+   "w": "often",
+   "start": 12.4,
+   "end": 12.52
+  },
+  {
+   "w": "without",
+   "start": 12.52,
+   "end": 12.84
+  },
+  {
+   "w": "telling",
+   "start": 12.84,
+   "end": 13.18
+  },
+  {
+   "w": "them.",
+   "start": 13.18,
+   "end": 13.4
+  },
+  {
+   "w": "In",
+   "start": 14.1,
+   "end": 14.22
+  },
+  {
+   "w": "one",
+   "start": 14.22,
+   "end": 14.4
+  },
+  {
+   "w": "operation,",
+   "start": 14.4,
+   "end": 15.3
+  },
+  {
+   "w": "agents",
+   "start": 15.3,
+   "end": 15.66
+  },
+  {
+   "w": "secretly",
+   "start": 15.66,
+   "end": 16.22
+  },
+  {
+   "w": "dosed",
+   "start": 16.22,
+   "end": 16.64
+  },
+  {
+   "w": "men",
+   "start": 16.64,
+   "end": 16.96
+  },
+  {
+   "w": "in",
+   "start": 16.96,
+   "end": 17.14
+  },
+  {
+   "w": "San",
+   "start": 17.14,
+   "end": 17.38
+  },
+  {
+   "w": "Francisco",
+   "start": 17.38,
+   "end": 17.88
+  },
+  {
+   "w": "and",
+   "start": 17.88,
+   "end": 18.44
+  },
+  {
+   "w": "watched",
+   "start": 18.44,
+   "end": 18.76
+  },
+  {
+   "w": "them",
+   "start": 18.76,
+   "end": 18.96
+  },
+  {
+   "w": "through",
+   "start": 18.96,
+   "end": 19.2
+  },
+  {
+   "w": "one-way",
+   "start": 19.28,
+   "end": 19.68
+  },
+  {
+   "w": "mirrors.",
+   "start": 19.68,
+   "end": 20.02
+  },
+  {
+   "w": "Here's",
+   "start": 20.92,
+   "end": 21.14
+  },
+  {
+   "w": "the",
+   "start": 21.14,
+   "end": 21.3
+  },
+  {
+   "w": "trick",
+   "start": 21.3,
+   "end": 21.54
+  },
+  {
+   "w": "that",
+   "start": 21.54,
+   "end": 21.76
+  },
+  {
+   "w": "almost",
+   "start": 21.76,
+   "end": 22.34
+  },
+  {
+   "w": "worked.",
+   "start": 22.34,
+   "end": 23.28
+  },
+  {
+   "w": "In",
+   "start": 23.48,
+   "end": 23.52
+  },
+  {
+   "w": "1973,",
+   "start": 23.52,
+   "end": 24.96
+  },
+  {
+   "w": "the",
+   "start": 24.96,
+   "end": 25.04
+  },
+  {
+   "w": "CIA",
+   "start": 25.04,
+   "end": 25.44
+  },
+  {
+   "w": "ordered",
+   "start": 25.44,
+   "end": 25.9
+  },
+  {
+   "w": "the",
+   "start": 25.9,
+   "end": 26.08
+  },
+  {
+   "w": "files",
+   "start": 26.08,
+   "end": 26.44
+  },
+  {
+   "w": "destroyed.",
+   "start": 26.44,
+   "end": 26.92
+  },
+  {
+   "w": "But",
+   "start": 27.66,
+   "end": 27.78
+  },
+  {
+   "w": "about",
+   "start": 27.78,
+   "end": 28.02
+  },
+  {
+   "w": "20,000",
+   "start": 28.02,
+   "end": 28.92
+  },
+  {
+   "w": "documents",
+   "start": 28.92,
+   "end": 29.6
+  },
+  {
+   "w": "survived.",
+   "start": 29.6,
+   "end": 30.12
+  },
+  {
+   "w": "They'd",
+   "start": 30.62,
+   "end": 31.02
+  },
+  {
+   "w": "been",
+   "start": 31.02,
+   "end": 31.16
+  },
+  {
+   "w": "stored",
+   "start": 31.16,
+   "end": 31.56
+  },
+  {
+   "w": "in",
+   "start": 31.56,
+   "end": 31.74
+  },
+  {
+   "w": "the",
+   "start": 31.74,
+   "end": 31.86
+  },
+  {
+   "w": "wrong",
+   "start": 31.86,
+   "end": 32.06
+  },
+  {
+   "w": "place.",
+   "start": 32.06,
+   "end": 32.52
+  },
+  {
+   "w": "In",
+   "start": 33.14,
+   "end": 33.24
+  },
+  {
+   "w": "1977,",
+   "start": 33.24,
+   "end": 34.72
+  },
+  {
+   "w": "they",
+   "start": 34.72,
+   "end": 34.82
+  },
+  {
+   "w": "ended",
+   "start": 34.82,
+   "end": 35.06
+  },
+  {
+   "w": "up",
+   "start": 35.06,
+   "end": 35.26
+  },
+  {
+   "w": "in",
+   "start": 35.26,
+   "end": 35.52
+  },
+  {
+   "w": "front",
+   "start": 35.52,
+   "end": 35.7
+  },
+  {
+   "w": "of",
+   "start": 35.7,
+   "end": 35.9
+  },
+  {
+   "w": "the",
+   "start": 35.9,
+   "end": 36
+  },
+  {
+   "w": "US",
+   "start": 36,
+   "end": 36.38
+  },
+  {
+   "w": "Senate.",
+   "start": 36.38,
+   "end": 36.68
+  },
+  {
+   "w": "Follow",
+   "start": 37.5,
+   "end": 37.76
+  },
+  {
+   "w": "for",
+   "start": 37.76,
+   "end": 38.02
+  },
+  {
+   "w": "more",
+   "start": 38.02,
+   "end": 38.28
+  },
+  {
+   "w": "dark",
+   "start": 38.28,
+   "end": 38.7
+  },
+  {
+   "w": "psychology.",
+   "start": 38.7,
+   "end": 39.18
+  }
+ ]
+}
