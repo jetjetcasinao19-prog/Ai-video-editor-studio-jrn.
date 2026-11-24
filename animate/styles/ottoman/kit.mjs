@@ -2331,6 +2331,36 @@ export function stadium(ctx, x, base, w, h, t = 0, crowd = 1) {
   ctx.restore();
 }
 
+// ---------- velcro story ----------
+// a dog, side view; walk = phase or null; o.color, o.burrs (0..1) sticks burrs in its coat
+export function dog(ctx, x, y, s = 1, f = 1, t = 0, o = {}) {
+  const c = o.color || '#c9a878', dk = shade(c, -0.25), w = o.walk ?? null, R = rng(13);
+  ctx.save(); ctx.translate(x, y); ctx.scale(s * f, s);
+  for (const [lx, ph] of [[-44, 0], [-28, Math.PI], [30, Math.PI], [46, 0]]) { ctx.save(); ctx.translate(lx, -50); ctx.rotate(w != null ? Math.sin(w + ph) * 0.35 : 0); rect(ctx, -6, 0, 12, 50, ph ? dk : c, P.ink, 1.6); ctx.restore(); }
+  ellipse(ctx, 0, -64, 62, 26, 0, c, P.ink, 2.2);
+  ctx.beginPath(); ctx.moveTo(-58, -70); ctx.quadraticCurveTo(-86, -96 + Math.sin(t * 9) * 8, -80, -112); stroke(ctx, c, 8); // wagging tail
+  ellipse(ctx, 66, -98, 28, 22, 0.2, c, P.ink, 2); ellipse(ctx, 92, -90, 16, 11, 0.1, c, P.ink, 1.8); circle(ctx, 104, -92, 4, P.ink, null);
+  ellipse(ctx, 56, -108, 12, 22, 0.5, dk, P.ink, 1.5); circle(ctx, 74, -104, 3, P.ink, null);
+  if (o.burrs) for (let i = 0; i < Math.floor(o.burrs * 14); i++) burr(ctx, -50 + R() * 100, -84 + R() * 40, 6);
+  ctx.restore();
+}
+// a burdock burr: a ball of hooked spines
+export function burr(ctx, x, y, r = 10, color = '#8a6a3a') {
+  ctx.save(); ctx.translate(x, y);
+  for (let i = 0; i < 14; i++) { const a = i / 14 * TAU; ctx.beginPath(); ctx.moveTo(Math.cos(a) * r * 0.5, Math.sin(a) * r * 0.5); ctx.lineTo(Math.cos(a) * r * 1.3, Math.sin(a) * r * 1.3); ctx.arc(Math.cos(a) * r * 1.3 + Math.cos(a + 1.6) * r * 0.15, Math.sin(a) * r * 1.3 + Math.sin(a + 1.6) * r * 0.15, r * 0.15, a + Math.PI, a + Math.PI * 2.2); stroke(ctx, color, Math.max(1, r * 0.12)); }
+  circle(ctx, 0, 0, r * 0.6, color, P.ink, 1);
+  ctx.restore();
+}
+// a brass microscope
+export function microscope(ctx, x, base, s = 1) {
+  ctx.save(); ctx.translate(x, base); ctx.scale(s, s);
+  rect(ctx, -80, -20, 160, 20, '#2a2a2a', P.ink, 2); rect(ctx, -10, -150, 20, 130, '#2a2a2a', P.ink, 2);
+  rect(ctx, -60, -100, 120, 12, '#c9a227', P.ink, 2);
+  ctx.save(); ctx.translate(20, -170); ctx.rotate(-0.35); rect(ctx, -16, -120, 32, 150, '#c9a227', P.ink, 2); rect(ctx, -22, -140, 44, 24, '#8a6a14', P.ink, 2); ctx.restore();
+  circle(ctx, -26, -60, 14, '#c9a227', P.ink, 1.5);
+  ctx.restore();
+}
+
 // ---------- colour util ----------
 export function shade(hex, k) {
   if (!hex.startsWith('#')) return hex;
