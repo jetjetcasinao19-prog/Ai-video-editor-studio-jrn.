@@ -1,0 +1,371 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "A falling spring became a classic American toy. 1943, Pennsylvania. Naval engineer Richard James is working with springs. As the story goes, one falls and keeps walking. He tells his wife, Betty, this could be a toy. Betty flips through a dictionary for a name. She picks slinky, sleek, and graceful. November 1945. Philadelphia's Gimbel's department store. They have 400 Slinkys. In 90 minutes, every one is sold. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "A",
+   "start": 0,
+   "end": 0.24
+  },
+  {
+   "w": "falling",
+   "start": 0.24,
+   "end": 0.56
+  },
+  {
+   "w": "spring",
+   "start": 0.56,
+   "end": 1.08
+  },
+  {
+   "w": "became",
+   "start": 1.08,
+   "end": 1.98
+  },
+  {
+   "w": "a",
+   "start": 1.98,
+   "end": 2.26
+  },
+  {
+   "w": "classic",
+   "start": 2.26,
+   "end": 2.82
+  },
+  {
+   "w": "American",
+   "start": 2.82,
+   "end": 3.42
+  },
+  {
+   "w": "toy.",
+   "start": 3.42,
+   "end": 3.86
+  },
+  {
+   "w": "1943,",
+   "start": 4.9,
+   "end": 6.12
+  },
+  {
+   "w": "Pennsylvania.",
+   "start": 6.12,
+   "end": 6.78
+  },
+  {
+   "w": "Naval",
+   "start": 7.92,
+   "end": 8.1
+  },
+  {
+   "w": "engineer",
+   "start": 8.1,
+   "end": 8.58
+  },
+  {
+   "w": "Richard",
+   "start": 8.58,
+   "end": 9.08
+  },
+  {
+   "w": "James",
+   "start": 9.08,
+   "end": 9.52
+  },
+  {
+   "w": "is",
+   "start": 9.52,
+   "end": 9.82
+  },
+  {
+   "w": "working",
+   "start": 9.82,
+   "end": 10.18
+  },
+  {
+   "w": "with",
+   "start": 10.18,
+   "end": 10.5
+  },
+  {
+   "w": "springs.",
+   "start": 10.5,
+   "end": 10.84
+  },
+  {
+   "w": "As",
+   "start": 11.68,
+   "end": 11.8
+  },
+  {
+   "w": "the",
+   "start": 11.8,
+   "end": 11.94
+  },
+  {
+   "w": "story",
+   "start": 11.94,
+   "end": 12.24
+  },
+  {
+   "w": "goes,",
+   "start": 12.24,
+   "end": 13.08
+  },
+  {
+   "w": "one",
+   "start": 13.08,
+   "end": 13.24
+  },
+  {
+   "w": "falls",
+   "start": 13.24,
+   "end": 13.74
+  },
+  {
+   "w": "and",
+   "start": 13.74,
+   "end": 14.36
+  },
+  {
+   "w": "keeps",
+   "start": 14.36,
+   "end": 14.82
+  },
+  {
+   "w": "walking.",
+   "start": 14.82,
+   "end": 15.46
+  },
+  {
+   "w": "He",
+   "start": 16.42,
+   "end": 16.5
+  },
+  {
+   "w": "tells",
+   "start": 16.5,
+   "end": 16.76
+  },
+  {
+   "w": "his",
+   "start": 16.76,
+   "end": 16.9
+  },
+  {
+   "w": "wife,",
+   "start": 16.9,
+   "end": 17.3
+  },
+  {
+   "w": "Betty,",
+   "start": 17.3,
+   "end": 17.5
+  },
+  {
+   "w": "this",
+   "start": 17.5,
+   "end": 18.28
+  },
+  {
+   "w": "could",
+   "start": 18.28,
+   "end": 18.54
+  },
+  {
+   "w": "be",
+   "start": 18.54,
+   "end": 18.68
+  },
+  {
+   "w": "a",
+   "start": 18.68,
+   "end": 18.86
+  },
+  {
+   "w": "toy.",
+   "start": 18.86,
+   "end": 19.64
+  },
+  {
+   "w": "Betty",
+   "start": 20.04,
+   "end": 20.18
+  },
+  {
+   "w": "flips",
+   "start": 20.18,
+   "end": 20.5
+  },
+  {
+   "w": "through",
+   "start": 20.5,
+   "end": 20.7
+  },
+  {
+   "w": "a",
+   "start": 20.7,
+   "end": 20.82
+  },
+  {
+   "w": "dictionary",
+   "start": 20.82,
+   "end": 21.22
+  },
+  {
+   "w": "for",
+   "start": 21.22,
+   "end": 21.5
+  },
+  {
+   "w": "a",
+   "start": 21.5,
+   "end": 21.6
+  },
+  {
+   "w": "name.",
+   "start": 21.6,
+   "end": 22.32
+  },
+  {
+   "w": "She",
+   "start": 22.48,
+   "end": 22.58
+  },
+  {
+   "w": "picks",
+   "start": 22.58,
+   "end": 22.94
+  },
+  {
+   "w": "slinky,",
+   "start": 22.94,
+   "end": 24.24
+  },
+  {
+   "w": "sleek,",
+   "start": 24.24,
+   "end": 24.7
+  },
+  {
+   "w": "and",
+   "start": 24.7,
+   "end": 25.08
+  },
+  {
+   "w": "graceful.",
+   "start": 25.08,
+   "end": 26.12
+  },
+  {
+   "w": "November",
+   "start": 26.66,
+   "end": 26.92
+  },
+  {
+   "w": "1945.",
+   "start": 26.92,
+   "end": 27.82
+  },
+  {
+   "w": "Philadelphia's",
+   "start": 27.94,
+   "end": 29.56
+  },
+  {
+   "w": "Gimbel's",
+   "start": 29.56,
+   "end": 30.08
+  },
+  {
+   "w": "department",
+   "start": 30.08,
+   "end": 30.46
+  },
+  {
+   "w": "store.",
+   "start": 30.46,
+   "end": 30.84
+  },
+  {
+   "w": "They",
+   "start": 31.3,
+   "end": 31.64
+  },
+  {
+   "w": "have",
+   "start": 31.64,
+   "end": 31.84
+  },
+  {
+   "w": "400",
+   "start": 31.84,
+   "end": 32.62
+  },
+  {
+   "w": "Slinkys.",
+   "start": 32.62,
+   "end": 33.16
+  },
+  {
+   "w": "In",
+   "start": 33.6,
+   "end": 33.96
+  },
+  {
+   "w": "90",
+   "start": 33.96,
+   "end": 34.36
+  },
+  {
+   "w": "minutes,",
+   "start": 34.36,
+   "end": 35.28
+  },
+  {
+   "w": "every",
+   "start": 35.28,
+   "end": 35.76
+  },
+  {
+   "w": "one",
+   "start": 35.76,
+   "end": 35.88
+  },
+  {
+   "w": "is",
+   "start": 35.88,
+   "end": 36.24
+  },
+  {
+   "w": "sold.",
+   "start": 36.24,
+   "end": 36.58
+  },
+  {
+   "w": "Every",
+   "start": 37.68,
+   "end": 38.04
+  },
+  {
+   "w": "legend",
+   "start": 38.04,
+   "end": 38.36
+  },
+  {
+   "w": "has",
+   "start": 38.36,
+   "end": 38.92
+  },
+  {
+   "w": "a",
+   "start": 38.92,
+   "end": 39
+  },
+  {
+   "w": "beginning.",
+   "start": 39,
+   "end": 39.28
+  }
+ ]
+}
