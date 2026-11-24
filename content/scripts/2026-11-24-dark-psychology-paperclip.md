@@ -60,58 +60,62 @@ Follow for more dark psychology.
 ## Captions (SRT — import in the app: 04 — Captions → Import subtitles)
 ```
 1
-00:00:00,000 --> 00:00:03,000
-After WWII, the US hired Nazis.
+00:00:00,000 --> 00:00:01,500
+After WWII, the US secretly
 
 2
+00:00:01,500 --> 00:00:03,000
+hired Nazi scientists.
+
+3
 00:00:03,000 --> 00:00:05,500
 It was called Operation Paperclip.
 
-3
+4
 00:00:05,500 --> 00:00:09,000
 1,600+ came to America.
 
-4
+5
 00:00:09,000 --> 00:00:11,000
 Truman banned active Nazis.
 
-5
+6
 00:00:11,000 --> 00:00:13,500
 So officials cleaned up their files.
 
-6
+7
 00:00:13,500 --> 00:00:16,000
 Wernher von Braun. SS officer.
 
-7
+8
 00:00:16,000 --> 00:00:18,500
 His V-2 rockets were built by
 
-8
+9
 00:00:18,500 --> 00:00:20,500
 concentration camp prisoners.
 
-9
+10
 00:00:20,500 --> 00:00:22,500
 In 1969, his Saturn V
 
-10
+11
 00:00:22,500 --> 00:00:24,500
 took Apollo 11 to the Moon.
 
-11
+12
 00:00:24,500 --> 00:00:26,000
 Here's the trick.
 
-12
+13
 00:00:26,000 --> 00:00:29,000
 One big success makes people forget.
 
-13
+14
 00:00:29,000 --> 00:00:31,500
 It's called the halo effect.
 
-14
+15
 00:00:31,500 --> 00:00:34,000
 Follow for more dark psychology.
 ```
