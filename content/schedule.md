@@ -193,6 +193,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-02-25 Thu | 8:00 PM | Fri Feb 26, 9:00 AM | TikTok | Think about this: the team behind insulin sold the patent for one dollar each. | content/posts/2026-11-24-insulin-ottoman.md | ready |
 | 2027-02-26 Fri | 7:00 PM | Sat Feb 27, 8:00 AM | Instagram Reels | One silver dollar, passed across a ledger page. | content/posts/2026-11-24-insulin-ottoman.md | ready |
 | 2027-02-26 Fri | 8:00 PM | Sat Feb 27, 9:00 AM | Facebook Reels | Did you know insulin's inventors sold their patent for a single dollar? | content/posts/2026-11-24-insulin-ottoman.md | ready |
+| 2027-02-27 Sat | 7:00 PM | Sun Feb 28, 8:00 AM | YouTube Shorts | The Day Surgery Went Quiet | content/posts/2026-11-24-ether-dome-ottoman.md | ready |
+| 2027-02-27 Sat | 8:00 PM | Sun Feb 28, 9:00 AM | TikTok | Picture a hospital room in Boston in 1846. Surgery is about to happen, and everyone expects it to be awful. | content/posts/2026-11-24-ether-dome-ottoman.md | ready |
+| 2027-02-28 Sun | 7:00 PM | Mon Mar 1, 8:00 AM | Instagram Reels | Puppets behind a lit screen, and one very quiet operating room. | content/posts/2026-11-24-ether-dome-ottoman.md | ready |
+| 2027-02-28 Sun | 8:00 PM | Mon Mar 1, 9:00 AM | Facebook Reels | Did you know the room where ether anesthesia was first shown to the public is still standing? | content/posts/2026-11-24-ether-dome-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the

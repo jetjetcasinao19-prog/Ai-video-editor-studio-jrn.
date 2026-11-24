@@ -133,6 +133,7 @@ export const scenes = [
       const turn = tween(u, tu - 0.2, tu + 0.3);
       pup(ctx, k, W / 2, 1040, 1.2, { ...WARREN, t: S.t, face: turn > 0.5 ? -1 : 1, arm: lerp(0.3, 0.9, tween(u, ge - 0.2, ge + 0.3)), talk: tween(u, ge, hu + 0.2) });
       const b = tween(u, ge - 0.2, ge + 0.3, ease.outBack); if (b > 0) { ctx.save(); ctx.translate(W / 2, 380); ctx.scale(b, b); k.ellipse(ctx, 0, 0, 360, 90, 0, '#f6eed8', P.ink, 3); ctx.fillStyle = P.ink; ctx.font = 'italic 700 40px GaramondItalic'; ctx.textAlign = 'center'; const t = '“Gentlemen, this is no humbug.”', q = tween(u, ge, hu + 0.3, ease.linear); ctx.fillText(t.slice(0, Math.ceil(t.length * q)), 0, 14); ctx.restore(); }
+      k.label(ctx, 'AS IT WAS LATER REPORTED', W / 2, 490, 16, tween(u, hu, hu + 0.4));
     },
   },
   { // 28.9 "The room becomes known as the Ether Dome, the start of modern anesthesia."
