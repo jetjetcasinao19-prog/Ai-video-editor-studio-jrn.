@@ -1,8 +1,8 @@
 # The CIA's Real Mind-Control Program (MKUltra)
 
 - Format: 9:16 (YouTube Shorts; also Reels / TikTok)
-- Target length: 25–40 s. About 32 seconds of voice (about 80 words), about
-  35 s with the 2.5 s brand outro.
+- Target length: 25–40 s. About 35 seconds of voice (87 words), about
+  37.5 s with the 2.5 s brand outro.
 - Platform(s): YouTube Shorts
 - Niche: psychology ("dark psychology" series, government angle)
 - Research file: content/research/2026-11-24-mkultra.md
@@ -12,7 +12,7 @@
 2. This isn't a conspiracy theory
 3. 20,000 files they tried to destroy
 
-## Hook (0–3.5 s)
+## Hook (0–4 s)
 "The CIA once ran a real mind-control program. This isn't a theory."
 (On screen: stamped "TOP SECRET" folder slides in; text **"THIS IS REAL"**.)
 
@@ -35,13 +35,13 @@
 ## Scenes
 | # | Time | Visual | Voice-over | On-screen text |
 |---|---|---|---|---|
-| 1 | 0–3.5 s | "TOP SECRET" folder slides in; red light; punch zoom | The CIA once ran a real mind-control program. This isn't a theory. | THIS IS REAL ⚠️ |
-| 2 | 3.5–10 s | Typewriter types "MKULTRA"; 1950s lab, dropper over a glass | It was called MKUltra. Starting in 1953, the CIA tested LSD on people... often without telling them. | MKULTRA · 1953 💉 |
-| 3 | 10–16.5 s | 1950s San Francisco street at night; one-way mirror, silhouette watching | In one operation, agents secretly dosed men in San Francisco and watched them through one-way mirrors. | WATCHED THROUGH MIRRORS 🪞 |
-| 4 | 16.5–21 s | Hard cut, black screen, red/yellow text; papers going into a shredder / fire | **Here's the trick that almost worked.** In 1973, the CIA ordered the files destroyed. | HERE'S THE TRICK: DESTROY THE FILES 🔥 |
-| 5 | 21–26 s | Dusty boxes in a records warehouse; flashlight finds a box | But about 20,000 documents survived. They'd been stored in the wrong place. | 20,000 FILES SURVIVED 📦 |
-| 6 | 26–30 s | Old Senate hearing room look (generic), microphones | In 1977, they ended up in front of the US Senate. | 1977: US SENATE HEARING |
-| 7 | 30–32.5 s | Logo / subscribe | Follow for more dark psychology. | FOLLOW FOR MORE |
+| 1 | 0–4 s | "TOP SECRET" folder slides in; red light; punch zoom | The CIA once ran a real mind-control program. This isn't a theory. | THIS IS REAL ⚠️ |
+| 2 | 4–11 s | Typewriter types "MKULTRA"; 1950s lab, dropper over a glass | It was called MKUltra. Starting in 1953, the CIA tested LSD on people... often without telling them. | MKULTRA · 1953 💉 |
+| 3 | 11–18 s | 1950s San Francisco street at night; one-way mirror, silhouette watching | In one operation, agents secretly dosed men in San Francisco and watched them through one-way mirrors. | WATCHED THROUGH MIRRORS 🪞 |
+| 4 | 18–22.5 s | Hard cut, black screen, red/yellow text; papers going into a shredder / fire | **Here's the trick that almost worked.** In 1973, the CIA ordered the files destroyed. | HERE'S THE TRICK: DESTROY THE FILES 🔥 |
+| 5 | 22.5–28 s | Dusty boxes in a records warehouse; flashlight finds a box | But about 20,000 documents survived. They'd been stored in the wrong place. | 20,000 FILES SURVIVED 📦 |
+| 6 | 28–32.5 s | Old Senate hearing room look (generic), microphones | In 1977, they ended up in front of the US Senate. | 1977: US SENATE HEARING |
+| 7 | 32.5–35 s | Logo / subscribe | Follow for more dark psychology. | FOLLOW FOR MORE |
 
 Note: don't show the CIA seal or logo. Use generic "TOP SECRET" stamps.
 
@@ -63,55 +63,55 @@ Follow for more dark psychology.
 The CIA ran a real
 
 2
-00:00:02,000 --> 00:00:03,500
+00:00:02,000 --> 00:00:04,000
 mind-control program.
 
 3
-00:00:03,500 --> 00:00:05,500
+00:00:04,000 --> 00:00:06,000
 It was called MKUltra.
 
 4
-00:00:05,500 --> 00:00:08,000
+00:00:06,000 --> 00:00:08,500
 From 1953, they tested LSD on people
 
 5
-00:00:08,000 --> 00:00:10,000
+00:00:08,500 --> 00:00:11,000
 often without telling them.
 
 6
-00:00:10,000 --> 00:00:13,000
+00:00:11,000 --> 00:00:14,000
 Agents secretly dosed men
 
 7
-00:00:13,000 --> 00:00:16,500
+00:00:14,000 --> 00:00:18,000
 and watched through one-way mirrors.
 
 8
-00:00:16,500 --> 00:00:18,500
+00:00:18,000 --> 00:00:20,000
 Here's the trick that almost worked.
 
 9
-00:00:18,500 --> 00:00:21,000
+00:00:20,000 --> 00:00:22,500
 1973: "Destroy the files."
 
 10
-00:00:21,000 --> 00:00:23,500
+00:00:22,500 --> 00:00:25,500
 But 20,000 documents survived.
 
 11
-00:00:23,500 --> 00:00:26,000
+00:00:25,500 --> 00:00:28,000
 Stored in the wrong place.
 
 12
-00:00:26,000 --> 00:00:28,000
+00:00:28,000 --> 00:00:30,000
 In 1977, they reached
 
 13
-00:00:28,000 --> 00:00:30,000
+00:00:30,000 --> 00:00:32,500
 the US Senate.
 
 14
-00:00:30,000 --> 00:00:32,500
+00:00:32,500 --> 00:00:35,000
 Follow for more dark psychology.
 ```
 
