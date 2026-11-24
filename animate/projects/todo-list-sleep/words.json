@@ -1,0 +1,376 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "Can't fall asleep because your brain won't stop? Do this. In 2018, Baylor University researchers brought people into a sleep lab. Before bed, half wrote a to-do list for tomorrow. Half wrote what they'd already done. The to-do list group fell asleep about nine minutes faster. Here's the trick. Your brain keeps replaying unfinished tasks. Writing them down tells it it's handled. Five minutes. Pen and paper. Be specific. Follow for more mind tricks.",
+ "words": [
+  {
+   "w": "Can't",
+   "start": 0,
+   "end": 0.28
+  },
+  {
+   "w": "fall",
+   "start": 0.28,
+   "end": 0.48
+  },
+  {
+   "w": "asleep",
+   "start": 0.48,
+   "end": 0.74
+  },
+  {
+   "w": "because",
+   "start": 0.74,
+   "end": 1.04
+  },
+  {
+   "w": "your",
+   "start": 1.04,
+   "end": 1.22
+  },
+  {
+   "w": "brain",
+   "start": 1.22,
+   "end": 1.58
+  },
+  {
+   "w": "won't",
+   "start": 1.58,
+   "end": 1.84
+  },
+  {
+   "w": "stop?",
+   "start": 1.84,
+   "end": 2.7
+  },
+  {
+   "w": "Do",
+   "start": 2.78,
+   "end": 2.92
+  },
+  {
+   "w": "this.",
+   "start": 2.92,
+   "end": 3.26
+  },
+  {
+   "w": "In",
+   "start": 4.3,
+   "end": 4.38
+  },
+  {
+   "w": "2018,",
+   "start": 4.38,
+   "end": 5.6
+  },
+  {
+   "w": "Baylor",
+   "start": 5.6,
+   "end": 5.76
+  },
+  {
+   "w": "University",
+   "start": 5.76,
+   "end": 6.36
+  },
+  {
+   "w": "researchers",
+   "start": 6.36,
+   "end": 6.92
+  },
+  {
+   "w": "brought",
+   "start": 6.92,
+   "end": 7.24
+  },
+  {
+   "w": "people",
+   "start": 7.24,
+   "end": 7.64
+  },
+  {
+   "w": "into",
+   "start": 7.64,
+   "end": 7.94
+  },
+  {
+   "w": "a",
+   "start": 7.94,
+   "end": 8.12
+  },
+  {
+   "w": "sleep",
+   "start": 8.12,
+   "end": 8.42
+  },
+  {
+   "w": "lab.",
+   "start": 8.42,
+   "end": 9.12
+  },
+  {
+   "w": "Before",
+   "start": 9.34,
+   "end": 9.52
+  },
+  {
+   "w": "bed,",
+   "start": 9.52,
+   "end": 10.28
+  },
+  {
+   "w": "half",
+   "start": 10.28,
+   "end": 10.48
+  },
+  {
+   "w": "wrote",
+   "start": 10.48,
+   "end": 10.68
+  },
+  {
+   "w": "a",
+   "start": 10.68,
+   "end": 10.9
+  },
+  {
+   "w": "to-do",
+   "start": 10.9,
+   "end": 11.1
+  },
+  {
+   "w": "list",
+   "start": 11.1,
+   "end": 11.4
+  },
+  {
+   "w": "for",
+   "start": 11.4,
+   "end": 11.58
+  },
+  {
+   "w": "tomorrow.",
+   "start": 11.58,
+   "end": 12.44
+  },
+  {
+   "w": "Half",
+   "start": 12.58,
+   "end": 12.76
+  },
+  {
+   "w": "wrote",
+   "start": 12.76,
+   "end": 13
+  },
+  {
+   "w": "what",
+   "start": 13,
+   "end": 13.18
+  },
+  {
+   "w": "they'd",
+   "start": 13.18,
+   "end": 13.36
+  },
+  {
+   "w": "already",
+   "start": 13.36,
+   "end": 13.74
+  },
+  {
+   "w": "done.",
+   "start": 13.74,
+   "end": 14.54
+  },
+  {
+   "w": "The",
+   "start": 14.74,
+   "end": 14.86
+  },
+  {
+   "w": "to-do",
+   "start": 14.86,
+   "end": 15.12
+  },
+  {
+   "w": "list",
+   "start": 15.12,
+   "end": 15.42
+  },
+  {
+   "w": "group",
+   "start": 15.42,
+   "end": 15.72
+  },
+  {
+   "w": "fell",
+   "start": 15.72,
+   "end": 16.02
+  },
+  {
+   "w": "asleep",
+   "start": 16.02,
+   "end": 16.34
+  },
+  {
+   "w": "about",
+   "start": 16.34,
+   "end": 16.72
+  },
+  {
+   "w": "nine",
+   "start": 16.72,
+   "end": 17.18
+  },
+  {
+   "w": "minutes",
+   "start": 17.18,
+   "end": 17.58
+  },
+  {
+   "w": "faster.",
+   "start": 17.58,
+   "end": 18.52
+  },
+  {
+   "w": "Here's",
+   "start": 18.86,
+   "end": 19.08
+  },
+  {
+   "w": "the",
+   "start": 19.08,
+   "end": 19.22
+  },
+  {
+   "w": "trick.",
+   "start": 19.22,
+   "end": 19.94
+  },
+  {
+   "w": "Your",
+   "start": 20.06,
+   "end": 20.18
+  },
+  {
+   "w": "brain",
+   "start": 20.18,
+   "end": 20.56
+  },
+  {
+   "w": "keeps",
+   "start": 20.56,
+   "end": 21.04
+  },
+  {
+   "w": "replaying",
+   "start": 21.04,
+   "end": 21.8
+  },
+  {
+   "w": "unfinished",
+   "start": 21.8,
+   "end": 22.34
+  },
+  {
+   "w": "tasks.",
+   "start": 22.34,
+   "end": 23.54
+  },
+  {
+   "w": "Writing",
+   "start": 23.76,
+   "end": 23.92
+  },
+  {
+   "w": "them",
+   "start": 23.92,
+   "end": 24.12
+  },
+  {
+   "w": "down",
+   "start": 24.12,
+   "end": 24.5
+  },
+  {
+   "w": "tells",
+   "start": 24.5,
+   "end": 24.82
+  },
+  {
+   "w": "it",
+   "start": 24.82,
+   "end": 25.06
+  },
+  {
+   "w": "it's",
+   "start": 25.06,
+   "end": 25.52
+  },
+  {
+   "w": "handled.",
+   "start": 25.52,
+   "end": 26.28
+  },
+  {
+   "w": "Five",
+   "start": 26.7,
+   "end": 26.94
+  },
+  {
+   "w": "minutes.",
+   "start": 26.94,
+   "end": 27.78
+  },
+  {
+   "w": "Pen",
+   "start": 27.8,
+   "end": 28.02
+  },
+  {
+   "w": "and",
+   "start": 28.02,
+   "end": 28.36
+  },
+  {
+   "w": "paper.",
+   "start": 28.36,
+   "end": 29.18
+  },
+  {
+   "w": "Be",
+   "start": 29.22,
+   "end": 29.36
+  },
+  {
+   "w": "specific.",
+   "start": 29.36,
+   "end": 30.56
+  },
+  {
+   "w": "Follow",
+   "start": 31.04,
+   "end": 31.2
+  },
+  {
+   "w": "for",
+   "start": 31.2,
+   "end": 31.4
+  },
+  {
+   "w": "more",
+   "start": 31.4,
+   "end": 31.64
+  },
+  {
+   "w": "mind",
+   "start": 31.64,
+   "end": 32.04
+  },
+  {
+   "w": "tricks.",
+   "start": 32.04,
+   "end": 32.3
+  }
+ ]
+}

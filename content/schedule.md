@@ -79,6 +79,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-12-22 Tue | 8:00 PM | Wed Dec 23, 9:00 AM | MindTrace | TikTok | Want people to remember you well? Fix the ending. | content/posts/2026-11-24-peak-end-rule-inkblot.md | ready |
 | 2026-12-23 Wed | 7:00 PM | Thu Dec 24, 8:00 AM | MindTrace | Instagram Reels | Why 69% chose MORE pain | content/posts/2026-11-24-peak-end-rule-inkblot.md | ready |
 | 2026-12-23 Wed | 8:00 PM | Thu Dec 24, 9:00 AM | MindTrace | Facebook Reels | Want people to remember you well? Fix the ending. | content/posts/2026-11-24-peak-end-rule-inkblot.md | ready |
+| 2026-12-24 Thu | 7:00 PM | Fri Dec 25, 8:00 AM | MindTrace | YouTube Shorts | Can't Fall Asleep? Write This Before Bed (The To-Do List Trick) | content/posts/2026-11-24-todo-list-sleep-inkblot.md | ready |
+| 2026-12-24 Thu | 8:00 PM | Fri Dec 25, 9:00 AM | MindTrace | TikTok | Can't fall asleep because your brain won't stop? Do this. | content/posts/2026-11-24-todo-list-sleep-inkblot.md | ready |
+| 2026-12-25 Fri | 7:00 PM | Sat Dec 26, 8:00 AM | MindTrace | Instagram Reels | The 5-minute list that helps you fall asleep faster | content/posts/2026-11-24-todo-list-sleep-inkblot.md | ready |
+| 2026-12-25 Fri | 8:00 PM | Sat Dec 26, 9:00 AM | MindTrace | Facebook Reels | Can't fall asleep because your brain won't stop? Do this. | content/posts/2026-11-24-todo-list-sleep-inkblot.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
