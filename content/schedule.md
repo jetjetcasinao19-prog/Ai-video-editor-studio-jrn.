@@ -103,6 +103,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-01-03 Sun | 8:00 PM | Mon Jan 4, 9:00 AM | MindTrace | TikTok | The CIA once ran a real mind control program. This isn't a theory. | content/posts/2026-11-24-mkultra-inkblot.md | ready |
 | 2027-01-04 Mon | 7:00 PM | Tue Jan 5, 8:00 AM | MindTrace | Instagram Reels | MKUltra: the files the CIA tried to destroy | content/posts/2026-11-24-mkultra-inkblot.md | ready |
 | 2027-01-04 Mon | 8:00 PM | Tue Jan 5, 9:00 AM | MindTrace | Facebook Reels | The CIA once ran a real mind control program. | content/posts/2026-11-24-mkultra-inkblot.md | ready |
+| 2027-01-05 Tue | 7:00 PM | Wed Jan 6, 8:00 AM | MindTrace | YouTube Shorts | The FBI's Secret Program to Turn People Against Each Other (COINTELPRO) | content/posts/2026-11-24-cointelpro-inkblot.md | ready |
+| 2027-01-05 Tue | 8:00 PM | Wed Jan 6, 9:00 AM | MindTrace | TikTok | The FBI once sent MLK an anonymous letter. | content/posts/2026-11-24-cointelpro-inkblot.md | ready |
+| 2027-01-06 Wed | 7:00 PM | Thu Jan 7, 8:00 AM | MindTrace | Instagram Reels | COINTELPRO: the attack that looked like it came from a friend | content/posts/2026-11-24-cointelpro-inkblot.md | ready |
+| 2027-01-06 Wed | 8:00 PM | Thu Jan 7, 9:00 AM | MindTrace | Facebook Reels | The FBI once sent Martin Luther King Jr. an anonymous letter. | content/posts/2026-11-24-cointelpro-inkblot.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the

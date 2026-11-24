@@ -1,0 +1,446 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "The FBI once sent Martin Luther King Jr. an anonymous letter, urging him to kill himself. It was part of a secret program called COINTELPRO. The FBI wrote fake letters, spread rumors, and turned activists against each other. Here's the trick. Make the attack look like it came from a friend. Fear and doubt do the rest. It stayed hidden until 1971, when burglars broke into an FBI office, during the biggest boxing match of the year. They mailed the files to newspapers. Follow for more dark psychology.",
+ "words": [
+  {
+   "w": "The",
+   "start": 0,
+   "end": 0.18
+  },
+  {
+   "w": "FBI",
+   "start": 0.18,
+   "end": 0.64
+  },
+  {
+   "w": "once",
+   "start": 0.64,
+   "end": 1.1
+  },
+  {
+   "w": "sent",
+   "start": 1.1,
+   "end": 1.44
+  },
+  {
+   "w": "Martin",
+   "start": 1.44,
+   "end": 1.84
+  },
+  {
+   "w": "Luther",
+   "start": 1.84,
+   "end": 2.16
+  },
+  {
+   "w": "King",
+   "start": 2.16,
+   "end": 2.44
+  },
+  {
+   "w": "Jr.",
+   "start": 2.44,
+   "end": 2.76
+  },
+  {
+   "w": "an",
+   "start": 2.76,
+   "end": 3.16
+  },
+  {
+   "w": "anonymous",
+   "start": 3.16,
+   "end": 3.66
+  },
+  {
+   "w": "letter,",
+   "start": 3.66,
+   "end": 4.92
+  },
+  {
+   "w": "urging",
+   "start": 4.92,
+   "end": 5.18
+  },
+  {
+   "w": "him",
+   "start": 5.18,
+   "end": 5.46
+  },
+  {
+   "w": "to",
+   "start": 5.46,
+   "end": 5.74
+  },
+  {
+   "w": "kill",
+   "start": 5.74,
+   "end": 5.98
+  },
+  {
+   "w": "himself.",
+   "start": 5.98,
+   "end": 6.38
+  },
+  {
+   "w": "It",
+   "start": 7.5,
+   "end": 7.6
+  },
+  {
+   "w": "was",
+   "start": 7.6,
+   "end": 7.74
+  },
+  {
+   "w": "part",
+   "start": 7.74,
+   "end": 7.96
+  },
+  {
+   "w": "of",
+   "start": 7.96,
+   "end": 8.06
+  },
+  {
+   "w": "a",
+   "start": 8.06,
+   "end": 8.18
+  },
+  {
+   "w": "secret",
+   "start": 8.18,
+   "end": 8.54
+  },
+  {
+   "w": "program",
+   "start": 8.54,
+   "end": 9.08
+  },
+  {
+   "w": "called",
+   "start": 9.08,
+   "end": 9.54
+  },
+  {
+   "w": "COINTELPRO.",
+   "start": 9.54,
+   "end": 11.08
+  },
+  {
+   "w": "The",
+   "start": 11.44,
+   "end": 11.54
+  },
+  {
+   "w": "FBI",
+   "start": 11.54,
+   "end": 11.96
+  },
+  {
+   "w": "wrote",
+   "start": 11.96,
+   "end": 12.34
+  },
+  {
+   "w": "fake",
+   "start": 12.34,
+   "end": 12.72
+  },
+  {
+   "w": "letters,",
+   "start": 12.72,
+   "end": 13.56
+  },
+  {
+   "w": "spread",
+   "start": 13.56,
+   "end": 13.78
+  },
+  {
+   "w": "rumors,",
+   "start": 13.78,
+   "end": 14.58
+  },
+  {
+   "w": "and",
+   "start": 14.58,
+   "end": 14.72
+  },
+  {
+   "w": "turned",
+   "start": 14.72,
+   "end": 15
+  },
+  {
+   "w": "activists",
+   "start": 15,
+   "end": 15.62
+  },
+  {
+   "w": "against",
+   "start": 15.62,
+   "end": 16
+  },
+  {
+   "w": "each",
+   "start": 16,
+   "end": 16.32
+  },
+  {
+   "w": "other.",
+   "start": 16.32,
+   "end": 16.52
+  },
+  {
+   "w": "Here's",
+   "start": 17.32,
+   "end": 17.54
+  },
+  {
+   "w": "the",
+   "start": 17.54,
+   "end": 17.68
+  },
+  {
+   "w": "trick.",
+   "start": 17.68,
+   "end": 18.66
+  },
+  {
+   "w": "Make",
+   "start": 18.66,
+   "end": 18.84
+  },
+  {
+   "w": "the",
+   "start": 18.84,
+   "end": 19.04
+  },
+  {
+   "w": "attack",
+   "start": 19.04,
+   "end": 19.4
+  },
+  {
+   "w": "look",
+   "start": 19.4,
+   "end": 19.7
+  },
+  {
+   "w": "like",
+   "start": 19.7,
+   "end": 20
+  },
+  {
+   "w": "it",
+   "start": 20,
+   "end": 20.12
+  },
+  {
+   "w": "came",
+   "start": 20.12,
+   "end": 20.38
+  },
+  {
+   "w": "from",
+   "start": 20.38,
+   "end": 20.62
+  },
+  {
+   "w": "a",
+   "start": 20.62,
+   "end": 20.74
+  },
+  {
+   "w": "friend.",
+   "start": 20.74,
+   "end": 21.04
+  },
+  {
+   "w": "Fear",
+   "start": 22,
+   "end": 22.28
+  },
+  {
+   "w": "and",
+   "start": 22.28,
+   "end": 22.64
+  },
+  {
+   "w": "doubt",
+   "start": 22.64,
+   "end": 23.1
+  },
+  {
+   "w": "do",
+   "start": 23.1,
+   "end": 23.42
+  },
+  {
+   "w": "the",
+   "start": 23.42,
+   "end": 23.6
+  },
+  {
+   "w": "rest.",
+   "start": 23.6,
+   "end": 23.88
+  },
+  {
+   "w": "It",
+   "start": 24.74,
+   "end": 24.8
+  },
+  {
+   "w": "stayed",
+   "start": 24.8,
+   "end": 25.1
+  },
+  {
+   "w": "hidden",
+   "start": 25.1,
+   "end": 25.42
+  },
+  {
+   "w": "until",
+   "start": 25.42,
+   "end": 25.8
+  },
+  {
+   "w": "1971,",
+   "start": 25.8,
+   "end": 27.48
+  },
+  {
+   "w": "when",
+   "start": 27.48,
+   "end": 27.56
+  },
+  {
+   "w": "burglars",
+   "start": 27.56,
+   "end": 28.08
+  },
+  {
+   "w": "broke",
+   "start": 28.08,
+   "end": 28.44
+  },
+  {
+   "w": "into",
+   "start": 28.44,
+   "end": 28.66
+  },
+  {
+   "w": "an",
+   "start": 28.66,
+   "end": 28.86
+  },
+  {
+   "w": "FBI",
+   "start": 28.86,
+   "end": 29.24
+  },
+  {
+   "w": "office,",
+   "start": 29.24,
+   "end": 29.98
+  },
+  {
+   "w": "during",
+   "start": 30.28,
+   "end": 30.44
+  },
+  {
+   "w": "the",
+   "start": 30.44,
+   "end": 30.68
+  },
+  {
+   "w": "biggest",
+   "start": 30.68,
+   "end": 31.08
+  },
+  {
+   "w": "boxing",
+   "start": 31.08,
+   "end": 31.56
+  },
+  {
+   "w": "match",
+   "start": 31.56,
+   "end": 31.9
+  },
+  {
+   "w": "of",
+   "start": 31.9,
+   "end": 32.08
+  },
+  {
+   "w": "the",
+   "start": 32.08,
+   "end": 32.22
+  },
+  {
+   "w": "year.",
+   "start": 32.22,
+   "end": 32.96
+  },
+  {
+   "w": "They",
+   "start": 33.2,
+   "end": 33.32
+  },
+  {
+   "w": "mailed",
+   "start": 33.32,
+   "end": 33.62
+  },
+  {
+   "w": "the",
+   "start": 33.62,
+   "end": 33.86
+  },
+  {
+   "w": "files",
+   "start": 33.86,
+   "end": 34.22
+  },
+  {
+   "w": "to",
+   "start": 34.22,
+   "end": 34.5
+  },
+  {
+   "w": "newspapers.",
+   "start": 34.5,
+   "end": 35.06
+  },
+  {
+   "w": "Follow",
+   "start": 36.06,
+   "end": 36.28
+  },
+  {
+   "w": "for",
+   "start": 36.28,
+   "end": 36.52
+  },
+  {
+   "w": "more",
+   "start": 36.52,
+   "end": 36.84
+  },
+  {
+   "w": "dark",
+   "start": 36.84,
+   "end": 37.32
+  },
+  {
+   "w": "psychology.",
+   "start": 37.32,
+   "end": 38.4
+  }
+ ]
+}

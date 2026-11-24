@@ -167,7 +167,7 @@ export const scenes = [
         k.rect(ctx, -300, -150, 600, 300, P.paperLight, P.ink, 5, 10);
         for (let i = 0; i < 4; i++) k.line(ctx, -260, -40 + i * 40, 260, -40 + i * 40, P.redLight, 2);
         k.text(ctx, 'MY TALK:', -150, -100, 34, { font: 'type', color: P.inkSoft });
-        k.typeOn(ctx, 'The Good Samaritan', 0, 10, 50, tween(u, gs - 0.3, gs + 0.5), { font: 'hand', color: P.red });
+        k.typeOn(ctx, 'The Good Samaritan', 0, 10, 50, tween(u, gs - 0.3, gs + 0.5), { font: 'hand', color: P.red, align: 'center' });
         k.text(ctx, '(a parable about stopping to help)', 0, 90, 24, { color: P.inkSoft });
         ctx.restore(); }
       slumped(ctx, k, P, S, 260, 1040, 0.8, u);

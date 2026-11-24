@@ -94,7 +94,7 @@ export const scenes = [
       plate(ctx, S, { alpha: 0.08, seed: 6 });
       S.cam(lerp(1.0, 1.05, tween(u, 0, 2.5)), W / 2, 560);
       folder(ctx, k, P, W / 2, 600, 760, 760, { rot: -0.03, label: 'SUBPROJECT', draw: c => {
-        k.typeOn(c, 'MKULTRA', 0, -240, 96, tween(u, mk - 0.1, mk + 0.6), { font: 'type' });
+        k.typeOn(c, 'MKULTRA', 0, -240, 96, tween(u, mk - 0.1, mk + 0.6), { font: 'type', align: 'center' });
         redactions(c, k, P, -300, -90, 600, 7, tween(u, 0.2, 1.6), 4);
       } });
       k.stamp(ctx, 'CLASSIFIED', 700, 1000, 54, tween(u, mk + 0.5, mk + 0.7), -0.1);
