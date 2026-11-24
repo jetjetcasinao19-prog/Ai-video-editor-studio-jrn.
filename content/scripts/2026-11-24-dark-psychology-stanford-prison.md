@@ -60,7 +60,7 @@ Follow for more dark psychology.
 ```
 1
 00:00:00,000 --> 00:00:03,000
-The most famous experiment: partly staged.
+Famous experiment... partly staged.
 
 2
 00:00:03,000 --> 00:00:05,500
