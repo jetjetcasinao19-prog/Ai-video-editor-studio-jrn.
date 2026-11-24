@@ -149,6 +149,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-02-03 Wed | 8:00 PM | Thu Feb 4, 9:00 AM | TikTok | You've heard "that was a Pyrrhic victory." The king behind it won twice and was still in trouble. | content/posts/2026-11-23-pyrrhic-ottoman.md | ready |
 | 2027-02-04 Thu | 7:00 PM | Fri Feb 5, 8:00 AM | Instagram Reels | Two battles. Two wins. And a king who still left Italy. | content/posts/2026-11-23-pyrrhic-ottoman.md | ready |
 | 2027-02-04 Thu | 8:00 PM | Fri Feb 5, 9:00 AM | Facebook Reels | Did you know the phrase "Pyrrhic victory" comes from a real king? | content/posts/2026-11-23-pyrrhic-ottoman.md | ready |
+| 2027-02-05 Fri | 7:00 PM | Sat Feb 6, 8:00 AM | YouTube Shorts | A Small River, a Big Crime | content/posts/2026-11-24-rubicon-ottoman.md | ready |
+| 2027-02-05 Fri | 8:00 PM | Sat Feb 6, 9:00 AM | TikTok | You say "crossing the Rubicon" when there is no going back. Caesar's was a small river. | content/posts/2026-11-24-rubicon-ottoman.md | ready |
+| 2027-02-06 Sat | 7:00 PM | Sun Feb 7, 8:00 AM | Instagram Reels | One small river. One legion. And a general who could not turn back. | content/posts/2026-11-24-rubicon-ottoman.md | ready |
+| 2027-02-06 Sat | 8:00 PM | Sun Feb 7, 9:00 AM | Facebook Reels | Ever wonder what people mean when they say "crossing the Rubicon"? | content/posts/2026-11-24-rubicon-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
