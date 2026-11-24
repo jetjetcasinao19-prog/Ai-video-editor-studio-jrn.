@@ -1,0 +1,386 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "The Band-Aid was invented out of love. Around 1920, New Jersey, Earle Dickson works for Johnson & Johnson. His wife, Josephine, keeps cutting and burning her fingers in the kitchen. Regular bandages fall right off. So Earle puts small squares of gauze down a long strip of tape so she can cut one off and fix herself, even when he's not home. His boss loves it. In 1921, Band-Aids go on sale. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "The",
+   "start": 0.1,
+   "end": 0.28
+  },
+  {
+   "w": "Band-Aid",
+   "start": 0.28,
+   "end": 0.82
+  },
+  {
+   "w": "was",
+   "start": 0.82,
+   "end": 1.2
+  },
+  {
+   "w": "invented",
+   "start": 1.2,
+   "end": 1.74
+  },
+  {
+   "w": "out",
+   "start": 1.74,
+   "end": 2.94
+  },
+  {
+   "w": "of",
+   "start": 2.94,
+   "end": 3.16
+  },
+  {
+   "w": "love.",
+   "start": 3.16,
+   "end": 3.92
+  },
+  {
+   "w": "Around",
+   "start": 4.7,
+   "end": 4.96
+  },
+  {
+   "w": "1920,",
+   "start": 4.96,
+   "end": 6.22
+  },
+  {
+   "w": "New",
+   "start": 6.22,
+   "end": 6.36
+  },
+  {
+   "w": "Jersey,",
+   "start": 6.36,
+   "end": 7.44
+  },
+  {
+   "w": "Earle",
+   "start": 7.44,
+   "end": 7.64
+  },
+  {
+   "w": "Dickson",
+   "start": 7.64,
+   "end": 7.98
+  },
+  {
+   "w": "works",
+   "start": 7.98,
+   "end": 8.36
+  },
+  {
+   "w": "for",
+   "start": 8.36,
+   "end": 8.58
+  },
+  {
+   "w": "Johnson &",
+   "start": 8.58,
+   "end": 9.08
+  },
+  {
+   "w": "Johnson.",
+   "start": 9.08,
+   "end": 9.96
+  },
+  {
+   "w": "His",
+   "start": 10.12,
+   "end": 10.26
+  },
+  {
+   "w": "wife,",
+   "start": 10.26,
+   "end": 10.9
+  },
+  {
+   "w": "Josephine,",
+   "start": 10.9,
+   "end": 11.92
+  },
+  {
+   "w": "keeps",
+   "start": 11.92,
+   "end": 12.12
+  },
+  {
+   "w": "cutting",
+   "start": 12.12,
+   "end": 12.48
+  },
+  {
+   "w": "and",
+   "start": 12.48,
+   "end": 12.84
+  },
+  {
+   "w": "burning",
+   "start": 12.84,
+   "end": 13.24
+  },
+  {
+   "w": "her",
+   "start": 13.24,
+   "end": 13.42
+  },
+  {
+   "w": "fingers",
+   "start": 13.42,
+   "end": 13.82
+  },
+  {
+   "w": "in",
+   "start": 13.82,
+   "end": 14
+  },
+  {
+   "w": "the",
+   "start": 14,
+   "end": 14.1
+  },
+  {
+   "w": "kitchen.",
+   "start": 14.1,
+   "end": 14.92
+  },
+  {
+   "w": "Regular",
+   "start": 15.14,
+   "end": 15.4
+  },
+  {
+   "w": "bandages",
+   "start": 15.4,
+   "end": 15.92
+  },
+  {
+   "w": "fall",
+   "start": 15.92,
+   "end": 16.22
+  },
+  {
+   "w": "right",
+   "start": 16.22,
+   "end": 16.5
+  },
+  {
+   "w": "off.",
+   "start": 16.5,
+   "end": 17.3
+  },
+  {
+   "w": "So",
+   "start": 17.3,
+   "end": 17.5
+  },
+  {
+   "w": "Earle",
+   "start": 17.5,
+   "end": 17.74
+  },
+  {
+   "w": "puts",
+   "start": 17.74,
+   "end": 18.06
+  },
+  {
+   "w": "small",
+   "start": 18.06,
+   "end": 18.44
+  },
+  {
+   "w": "squares",
+   "start": 18.44,
+   "end": 18.86
+  },
+  {
+   "w": "of",
+   "start": 18.86,
+   "end": 19.06
+  },
+  {
+   "w": "gauze",
+   "start": 19.06,
+   "end": 19.46
+  },
+  {
+   "w": "down",
+   "start": 19.46,
+   "end": 19.72
+  },
+  {
+   "w": "a",
+   "start": 19.72,
+   "end": 19.84
+  },
+  {
+   "w": "long",
+   "start": 19.84,
+   "end": 20.26
+  },
+  {
+   "w": "strip",
+   "start": 20.26,
+   "end": 20.54
+  },
+  {
+   "w": "of",
+   "start": 20.54,
+   "end": 20.7
+  },
+  {
+   "w": "tape",
+   "start": 20.7,
+   "end": 21.06
+  },
+  {
+   "w": "so",
+   "start": 21.2,
+   "end": 21.6
+  },
+  {
+   "w": "she",
+   "start": 21.6,
+   "end": 21.72
+  },
+  {
+   "w": "can",
+   "start": 21.72,
+   "end": 21.88
+  },
+  {
+   "w": "cut",
+   "start": 21.88,
+   "end": 22.1
+  },
+  {
+   "w": "one",
+   "start": 22.1,
+   "end": 22.3
+  },
+  {
+   "w": "off",
+   "start": 22.3,
+   "end": 22.54
+  },
+  {
+   "w": "and",
+   "start": 22.54,
+   "end": 22.7
+  },
+  {
+   "w": "fix",
+   "start": 22.7,
+   "end": 22.94
+  },
+  {
+   "w": "herself,",
+   "start": 22.94,
+   "end": 23.34
+  },
+  {
+   "w": "even",
+   "start": 23.34,
+   "end": 23.84
+  },
+  {
+   "w": "when",
+   "start": 23.84,
+   "end": 24
+  },
+  {
+   "w": "he's",
+   "start": 24,
+   "end": 24.14
+  },
+  {
+   "w": "not",
+   "start": 24.14,
+   "end": 24.28
+  },
+  {
+   "w": "home.",
+   "start": 24.28,
+   "end": 24.66
+  },
+  {
+   "w": "His",
+   "start": 25.18,
+   "end": 25.34
+  },
+  {
+   "w": "boss",
+   "start": 25.34,
+   "end": 25.7
+  },
+  {
+   "w": "loves",
+   "start": 25.7,
+   "end": 26.1
+  },
+  {
+   "w": "it.",
+   "start": 26.1,
+   "end": 26.28
+  },
+  {
+   "w": "In",
+   "start": 26.94,
+   "end": 27.04
+  },
+  {
+   "w": "1921,",
+   "start": 27.04,
+   "end": 28.34
+  },
+  {
+   "w": "Band-Aids",
+   "start": 28.34,
+   "end": 28.88
+  },
+  {
+   "w": "go",
+   "start": 28.88,
+   "end": 29.14
+  },
+  {
+   "w": "on",
+   "start": 29.14,
+   "end": 29.4
+  },
+  {
+   "w": "sale.",
+   "start": 29.4,
+   "end": 29.98
+  },
+  {
+   "w": "Every",
+   "start": 30.26,
+   "end": 30.56
+  },
+  {
+   "w": "legend",
+   "start": 30.56,
+   "end": 30.98
+  },
+  {
+   "w": "has",
+   "start": 30.98,
+   "end": 31.38
+  },
+  {
+   "w": "a",
+   "start": 31.38,
+   "end": 31.5
+  },
+  {
+   "w": "beginning.",
+   "start": 31.5,
+   "end": 32.38
+  }
+ ]
+}
