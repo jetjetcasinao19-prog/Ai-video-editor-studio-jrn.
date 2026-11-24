@@ -1,0 +1,376 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "Decimate didn't always mean destroy almost everything. It meant something much darker. In ancient Rome, if an army unit disgraced itself, it could face decimatio. The soldiers were split into groups of ten. They drew lots. One in every ten was killed by the other nine. It was so harsh, Rome rarely used it. Today, decimate means wiping out most of something. Originally, it meant just one in ten. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "Decimate",
+   "start": 0.12,
+   "end": 0.6
+  },
+  {
+   "w": "didn't",
+   "start": 0.6,
+   "end": 1.24
+  },
+  {
+   "w": "always",
+   "start": 1.24,
+   "end": 1.72
+  },
+  {
+   "w": "mean",
+   "start": 1.72,
+   "end": 2.12
+  },
+  {
+   "w": "destroy",
+   "start": 2.12,
+   "end": 2.66
+  },
+  {
+   "w": "almost",
+   "start": 2.66,
+   "end": 3.34
+  },
+  {
+   "w": "everything.",
+   "start": 3.34,
+   "end": 4.66
+  },
+  {
+   "w": "It",
+   "start": 4.66,
+   "end": 4.68
+  },
+  {
+   "w": "meant",
+   "start": 4.68,
+   "end": 4.9
+  },
+  {
+   "w": "something",
+   "start": 4.9,
+   "end": 5.28
+  },
+  {
+   "w": "much",
+   "start": 5.28,
+   "end": 5.74
+  },
+  {
+   "w": "darker.",
+   "start": 5.74,
+   "end": 6.84
+  },
+  {
+   "w": "In",
+   "start": 7.42,
+   "end": 7.54
+  },
+  {
+   "w": "ancient",
+   "start": 7.54,
+   "end": 7.88
+  },
+  {
+   "w": "Rome,",
+   "start": 7.88,
+   "end": 8.56
+  },
+  {
+   "w": "if",
+   "start": 8.56,
+   "end": 8.68
+  },
+  {
+   "w": "an",
+   "start": 8.68,
+   "end": 8.82
+  },
+  {
+   "w": "army",
+   "start": 8.82,
+   "end": 9.1
+  },
+  {
+   "w": "unit",
+   "start": 9.1,
+   "end": 9.46
+  },
+  {
+   "w": "disgraced",
+   "start": 9.46,
+   "end": 10.02
+  },
+  {
+   "w": "itself,",
+   "start": 10.02,
+   "end": 10.92
+  },
+  {
+   "w": "it",
+   "start": 10.92,
+   "end": 11.02
+  },
+  {
+   "w": "could",
+   "start": 11.02,
+   "end": 11.16
+  },
+  {
+   "w": "face",
+   "start": 11.16,
+   "end": 11.52
+  },
+  {
+   "w": "decimatio.",
+   "start": 11.52,
+   "end": 13.14
+  },
+  {
+   "w": "The",
+   "start": 13.14,
+   "end": 13.44
+  },
+  {
+   "w": "soldiers",
+   "start": 13.44,
+   "end": 13.8
+  },
+  {
+   "w": "were",
+   "start": 13.8,
+   "end": 14.12
+  },
+  {
+   "w": "split",
+   "start": 14.12,
+   "end": 14.4
+  },
+  {
+   "w": "into",
+   "start": 14.4,
+   "end": 14.66
+  },
+  {
+   "w": "groups",
+   "start": 14.66,
+   "end": 14.98
+  },
+  {
+   "w": "of",
+   "start": 14.98,
+   "end": 15.16
+  },
+  {
+   "w": "ten.",
+   "start": 15.16,
+   "end": 16.1
+  },
+  {
+   "w": "They",
+   "start": 16.1,
+   "end": 16.22
+  },
+  {
+   "w": "drew",
+   "start": 16.22,
+   "end": 16.46
+  },
+  {
+   "w": "lots.",
+   "start": 16.46,
+   "end": 17.72
+  },
+  {
+   "w": "One",
+   "start": 17.72,
+   "end": 17.94
+  },
+  {
+   "w": "in",
+   "start": 17.94,
+   "end": 18.18
+  },
+  {
+   "w": "every",
+   "start": 18.18,
+   "end": 18.58
+  },
+  {
+   "w": "ten",
+   "start": 18.58,
+   "end": 18.86
+  },
+  {
+   "w": "was",
+   "start": 18.86,
+   "end": 19.14
+  },
+  {
+   "w": "killed",
+   "start": 19.14,
+   "end": 19.58
+  },
+  {
+   "w": "by",
+   "start": 19.58,
+   "end": 20.32
+  },
+  {
+   "w": "the",
+   "start": 20.32,
+   "end": 20.48
+  },
+  {
+   "w": "other",
+   "start": 20.48,
+   "end": 20.74
+  },
+  {
+   "w": "nine.",
+   "start": 20.74,
+   "end": 21.16
+  },
+  {
+   "w": "It",
+   "start": 22.24,
+   "end": 22.34
+  },
+  {
+   "w": "was",
+   "start": 22.34,
+   "end": 22.5
+  },
+  {
+   "w": "so",
+   "start": 22.5,
+   "end": 22.74
+  },
+  {
+   "w": "harsh,",
+   "start": 22.74,
+   "end": 23.4
+  },
+  {
+   "w": "Rome",
+   "start": 23.4,
+   "end": 23.7
+  },
+  {
+   "w": "rarely",
+   "start": 23.7,
+   "end": 24.14
+  },
+  {
+   "w": "used",
+   "start": 24.14,
+   "end": 24.5
+  },
+  {
+   "w": "it.",
+   "start": 24.5,
+   "end": 25.56
+  },
+  {
+   "w": "Today,",
+   "start": 25.56,
+   "end": 26.4
+  },
+  {
+   "w": "decimate",
+   "start": 26.4,
+   "end": 26.78
+  },
+  {
+   "w": "means",
+   "start": 26.78,
+   "end": 27.26
+  },
+  {
+   "w": "wiping",
+   "start": 27.26,
+   "end": 27.72
+  },
+  {
+   "w": "out",
+   "start": 27.72,
+   "end": 27.96
+  },
+  {
+   "w": "most",
+   "start": 27.96,
+   "end": 28.36
+  },
+  {
+   "w": "of",
+   "start": 28.36,
+   "end": 28.54
+  },
+  {
+   "w": "something.",
+   "start": 28.54,
+   "end": 29.34
+  },
+  {
+   "w": "Originally,",
+   "start": 29.68,
+   "end": 29.84
+  },
+  {
+   "w": "it",
+   "start": 29.84,
+   "end": 30.5
+  },
+  {
+   "w": "meant",
+   "start": 30.5,
+   "end": 30.76
+  },
+  {
+   "w": "just",
+   "start": 30.76,
+   "end": 31.14
+  },
+  {
+   "w": "one",
+   "start": 31.14,
+   "end": 31.58
+  },
+  {
+   "w": "in",
+   "start": 31.58,
+   "end": 31.96
+  },
+  {
+   "w": "ten.",
+   "start": 31.96,
+   "end": 32.82
+  },
+  {
+   "w": "Every",
+   "start": 34.18,
+   "end": 34.48
+  },
+  {
+   "w": "legend",
+   "start": 34.48,
+   "end": 34.8
+  },
+  {
+   "w": "has",
+   "start": 34.8,
+   "end": 35.42
+  },
+  {
+   "w": "a",
+   "start": 35.42,
+   "end": 35.54
+  },
+  {
+   "w": "beginning.",
+   "start": 35.54,
+   "end": 35.84
+  }
+ ]
+}
