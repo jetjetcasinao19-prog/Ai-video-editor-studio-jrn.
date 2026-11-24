@@ -87,6 +87,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2026-12-26 Sat | 8:00 PM | Sun Dec 27, 9:00 AM | MindTrace | TikTok | Song stuck in your head? Grab a piece of gum. | content/posts/2026-11-24-earworm-gum-inkblot.md | ready |
 | 2026-12-27 Sun | 7:00 PM | Mon Dec 28, 8:00 AM | MindTrace | Instagram Reels | Why gum kicks a song out of your head | content/posts/2026-11-24-earworm-gum-inkblot.md | ready |
 | 2026-12-27 Sun | 8:00 PM | Mon Dec 28, 9:00 AM | MindTrace | Facebook Reels | Song stuck in your head? Grab a piece of gum. | content/posts/2026-11-24-earworm-gum-inkblot.md | ready |
+| 2026-12-28 Mon | 7:00 PM | Tue Dec 29, 8:00 AM | MindTrace | YouTube Shorts | Why You Can't Quit Someone Who Treats You Badly (Skinner's Pigeons) | content/posts/2026-11-24-intermittent-reinforcement-inkblot.md | ready |
+| 2026-12-28 Mon | 8:00 PM | Tue Dec 29, 9:00 AM | MindTrace | TikTok | Why can't you quit someone who treats you badly? Blame a pigeon. | content/posts/2026-11-24-intermittent-reinforcement-inkblot.md | ready |
+| 2026-12-29 Tue | 7:00 PM | Wed Dec 30, 8:00 AM | MindTrace | Instagram Reels | The pigeon experiment that explains toxic relationships | content/posts/2026-11-24-intermittent-reinforcement-inkblot.md | ready |
+| 2026-12-29 Tue | 8:00 PM | Wed Dec 30, 9:00 AM | MindTrace | Facebook Reels | Why can't you quit someone who treats you badly? | content/posts/2026-11-24-intermittent-reinforcement-inkblot.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the

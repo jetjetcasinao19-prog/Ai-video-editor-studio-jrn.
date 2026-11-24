@@ -1,0 +1,406 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "Why can't you quit someone who treats you badly? Blame a pigeon. In the 1950s, B.F. Skinner trained pigeons to peck for food. Food every time? They quit fast when it stopped. Food at random? They kept pecking. And pecking. Here's the trick. Random rewards are the most addictive. It's how slot machines work. And it's how manipulators hook people. Kind, cold, kind again. Still waiting for the good days to come back? That's the hook. Follow for more dark psychology.",
+ "words": [
+  {
+   "w": "Why",
+   "start": 0.02,
+   "end": 0.24
+  },
+  {
+   "w": "can't",
+   "start": 0.24,
+   "end": 0.5
+  },
+  {
+   "w": "you",
+   "start": 0.5,
+   "end": 0.64
+  },
+  {
+   "w": "quit",
+   "start": 0.64,
+   "end": 0.98
+  },
+  {
+   "w": "someone",
+   "start": 0.98,
+   "end": 1.34
+  },
+  {
+   "w": "who",
+   "start": 1.34,
+   "end": 1.54
+  },
+  {
+   "w": "treats",
+   "start": 1.54,
+   "end": 1.82
+  },
+  {
+   "w": "you",
+   "start": 1.82,
+   "end": 1.98
+  },
+  {
+   "w": "badly?",
+   "start": 1.98,
+   "end": 2.42
+  },
+  {
+   "w": "Blame",
+   "start": 3.44,
+   "end": 3.64
+  },
+  {
+   "w": "a",
+   "start": 3.64,
+   "end": 3.8
+  },
+  {
+   "w": "pigeon.",
+   "start": 3.8,
+   "end": 4.46
+  },
+  {
+   "w": "In",
+   "start": 4.76,
+   "end": 4.84
+  },
+  {
+   "w": "the",
+   "start": 4.84,
+   "end": 4.94
+  },
+  {
+   "w": "1950s,",
+   "start": 4.94,
+   "end": 5.98
+  },
+  {
+   "w": "B.F. Skinner",
+   "start": 5.98,
+   "end": 6.62
+  },
+  {
+   "w": "trained",
+   "start": 6.62,
+   "end": 7.08
+  },
+  {
+   "w": "pigeons",
+   "start": 7.08,
+   "end": 7.44
+  },
+  {
+   "w": "to",
+   "start": 7.44,
+   "end": 7.8
+  },
+  {
+   "w": "peck",
+   "start": 7.8,
+   "end": 8.1
+  },
+  {
+   "w": "for",
+   "start": 8.1,
+   "end": 8.3
+  },
+  {
+   "w": "food.",
+   "start": 8.3,
+   "end": 8.64
+  },
+  {
+   "w": "Food",
+   "start": 9.32,
+   "end": 9.5
+  },
+  {
+   "w": "every",
+   "start": 9.5,
+   "end": 9.74
+  },
+  {
+   "w": "time?",
+   "start": 9.74,
+   "end": 10.4
+  },
+  {
+   "w": "They",
+   "start": 10.58,
+   "end": 10.7
+  },
+  {
+   "w": "quit",
+   "start": 10.7,
+   "end": 10.92
+  },
+  {
+   "w": "fast",
+   "start": 10.92,
+   "end": 11.32
+  },
+  {
+   "w": "when",
+   "start": 11.32,
+   "end": 11.48
+  },
+  {
+   "w": "it",
+   "start": 11.48,
+   "end": 11.64
+  },
+  {
+   "w": "stopped.",
+   "start": 11.64,
+   "end": 12.44
+  },
+  {
+   "w": "Food",
+   "start": 12.6,
+   "end": 12.8
+  },
+  {
+   "w": "at",
+   "start": 12.8,
+   "end": 12.94
+  },
+  {
+   "w": "random?",
+   "start": 12.94,
+   "end": 13.7
+  },
+  {
+   "w": "They",
+   "start": 13.86,
+   "end": 14
+  },
+  {
+   "w": "kept",
+   "start": 14,
+   "end": 14.28
+  },
+  {
+   "w": "pecking.",
+   "start": 14.28,
+   "end": 14.58
+  },
+  {
+   "w": "And",
+   "start": 15.3,
+   "end": 15.6
+  },
+  {
+   "w": "pecking.",
+   "start": 15.6,
+   "end": 15.94
+  },
+  {
+   "w": "Here's",
+   "start": 16.96,
+   "end": 17.16
+  },
+  {
+   "w": "the",
+   "start": 17.16,
+   "end": 17.3
+  },
+  {
+   "w": "trick.",
+   "start": 17.3,
+   "end": 18.02
+  },
+  {
+   "w": "Random",
+   "start": 18.26,
+   "end": 18.56
+  },
+  {
+   "w": "rewards",
+   "start": 18.56,
+   "end": 19.14
+  },
+  {
+   "w": "are",
+   "start": 19.14,
+   "end": 19.42
+  },
+  {
+   "w": "the",
+   "start": 19.42,
+   "end": 19.5
+  },
+  {
+   "w": "most",
+   "start": 19.5,
+   "end": 19.92
+  },
+  {
+   "w": "addictive.",
+   "start": 19.92,
+   "end": 20.84
+  },
+  {
+   "w": "It's",
+   "start": 21.14,
+   "end": 21.3
+  },
+  {
+   "w": "how",
+   "start": 21.3,
+   "end": 21.44
+  },
+  {
+   "w": "slot",
+   "start": 21.44,
+   "end": 21.7
+  },
+  {
+   "w": "machines",
+   "start": 21.7,
+   "end": 22
+  },
+  {
+   "w": "work.",
+   "start": 22,
+   "end": 22.84
+  },
+  {
+   "w": "And",
+   "start": 23,
+   "end": 23.2
+  },
+  {
+   "w": "it's",
+   "start": 23.2,
+   "end": 23.36
+  },
+  {
+   "w": "how",
+   "start": 23.36,
+   "end": 23.5
+  },
+  {
+   "w": "manipulators",
+   "start": 23.5,
+   "end": 24.22
+  },
+  {
+   "w": "hook",
+   "start": 24.22,
+   "end": 24.5
+  },
+  {
+   "w": "people.",
+   "start": 24.5,
+   "end": 25.36
+  },
+  {
+   "w": "Kind,",
+   "start": 25.56,
+   "end": 26.34
+  },
+  {
+   "w": "cold,",
+   "start": 26.34,
+   "end": 27.14
+  },
+  {
+   "w": "kind",
+   "start": 27.14,
+   "end": 27.4
+  },
+  {
+   "w": "again.",
+   "start": 27.4,
+   "end": 28.18
+  },
+  {
+   "w": "Still",
+   "start": 28.5,
+   "end": 28.66
+  },
+  {
+   "w": "waiting",
+   "start": 28.66,
+   "end": 28.94
+  },
+  {
+   "w": "for",
+   "start": 28.94,
+   "end": 29.12
+  },
+  {
+   "w": "the",
+   "start": 29.12,
+   "end": 29.24
+  },
+  {
+   "w": "good",
+   "start": 29.24,
+   "end": 29.46
+  },
+  {
+   "w": "days",
+   "start": 29.46,
+   "end": 29.76
+  },
+  {
+   "w": "to",
+   "start": 29.76,
+   "end": 29.92
+  },
+  {
+   "w": "come",
+   "start": 29.92,
+   "end": 30.12
+  },
+  {
+   "w": "back?",
+   "start": 30.12,
+   "end": 30.86
+  },
+  {
+   "w": "That's",
+   "start": 31.06,
+   "end": 31.4
+  },
+  {
+   "w": "the",
+   "start": 31.4,
+   "end": 31.52
+  },
+  {
+   "w": "hook.",
+   "start": 31.52,
+   "end": 31.78
+  },
+  {
+   "w": "Follow",
+   "start": 32.44,
+   "end": 32.64
+  },
+  {
+   "w": "for",
+   "start": 32.64,
+   "end": 32.9
+  },
+  {
+   "w": "more",
+   "start": 32.9,
+   "end": 33.16
+  },
+  {
+   "w": "dark",
+   "start": 33.16,
+   "end": 33.62
+  },
+  {
+   "w": "psychology.",
+   "start": 33.62,
+   "end": 34.66
+  }
+ ]
+}
