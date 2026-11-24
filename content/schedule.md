@@ -161,6 +161,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-02-09 Tue | 8:00 PM | Wed Feb 10, 9:00 AM | TikTok | If a king threatened your city, how many words would you need to answer? | content/posts/2026-11-24-laconic-ottoman.md | ready |
 | 2027-02-10 Wed | 7:00 PM | Thu Feb 11, 8:00 AM | Instagram Reels | One long scroll of threats. One tiny scrap in reply. | content/posts/2026-11-24-laconic-ottoman.md | ready |
 | 2027-02-10 Wed | 8:00 PM | Thu Feb 11, 9:00 AM | Facebook Reels | Did you know the word "laconic" is a place name? | content/posts/2026-11-24-laconic-ottoman.md | ready |
+| 2027-02-11 Thu | 7:00 PM | Fri Feb 12, 8:00 AM | YouTube Shorts | Where the Word "Deadline" Really Comes From | content/posts/2026-11-24-deadline-ottoman.md | ready |
+| 2027-02-11 Thu | 8:00 PM | Fri Feb 12, 9:00 AM | TikTok | Quick one before your next due date: "deadline" did not start on a calendar. | content/posts/2026-11-24-deadline-ottoman.md | ready |
+| 2027-02-12 Fri | 7:00 PM | Sat Feb 13, 8:00 AM | Instagram Reels | One red thread. First a line under a date, then a railing, then a press. | content/posts/2026-11-24-deadline-ottoman.md | ready |
+| 2027-02-12 Fri | 8:00 PM | Sat Feb 13, 9:00 AM | Facebook Reels | Did you know the word "deadline" started as a place on the ground? | content/posts/2026-11-24-deadline-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
