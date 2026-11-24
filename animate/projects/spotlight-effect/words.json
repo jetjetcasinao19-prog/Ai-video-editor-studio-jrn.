@@ -1,0 +1,496 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "You think everyone noticed. They didn't. In 2000, Cornell psychologists made students wear an embarrassing t-shirt with Barry Manilow's face on it. Then, each student walked late into a room full of people. Afterward, they guessed about half the room noticed the shirt. The real number? About a quarter. Here's the trick. It's called the spotlight effect. You're the main character in your head, but everyone else is the main character in theirs. They're too busy worrying about their own shirt. So that awkward thing you said? Fewer people noticed than you think. Follow for more mind tricks.",
+ "words": [
+  {
+   "w": "You",
+   "start": 0,
+   "end": 0.2
+  },
+  {
+   "w": "think",
+   "start": 0.2,
+   "end": 0.46
+  },
+  {
+   "w": "everyone",
+   "start": 0.46,
+   "end": 0.96
+  },
+  {
+   "w": "noticed.",
+   "start": 0.96,
+   "end": 2.12
+  },
+  {
+   "w": "They",
+   "start": 2.12,
+   "end": 2.2
+  },
+  {
+   "w": "didn't.",
+   "start": 2.2,
+   "end": 3.36
+  },
+  {
+   "w": "In",
+   "start": 3.36,
+   "end": 3.48
+  },
+  {
+   "w": "2000,",
+   "start": 3.48,
+   "end": 4.48
+  },
+  {
+   "w": "Cornell",
+   "start": 4.48,
+   "end": 4.74
+  },
+  {
+   "w": "psychologists",
+   "start": 4.74,
+   "end": 5.4
+  },
+  {
+   "w": "made",
+   "start": 5.4,
+   "end": 5.94
+  },
+  {
+   "w": "students",
+   "start": 5.94,
+   "end": 6.36
+  },
+  {
+   "w": "wear",
+   "start": 6.36,
+   "end": 6.68
+  },
+  {
+   "w": "an",
+   "start": 6.68,
+   "end": 6.88
+  },
+  {
+   "w": "embarrassing",
+   "start": 7.16,
+   "end": 7.56
+  },
+  {
+   "w": "t-shirt",
+   "start": 7.56,
+   "end": 8.2
+  },
+  {
+   "w": "with",
+   "start": 8.2,
+   "end": 8.9
+  },
+  {
+   "w": "Barry",
+   "start": 8.9,
+   "end": 9.42
+  },
+  {
+   "w": "Manilow's",
+   "start": 9.42,
+   "end": 9.96
+  },
+  {
+   "w": "face",
+   "start": 9.96,
+   "end": 10.36
+  },
+  {
+   "w": "on",
+   "start": 10.36,
+   "end": 10.54
+  },
+  {
+   "w": "it.",
+   "start": 10.54,
+   "end": 11.58
+  },
+  {
+   "w": "Then,",
+   "start": 11.58,
+   "end": 11.84
+  },
+  {
+   "w": "each",
+   "start": 11.84,
+   "end": 12.2
+  },
+  {
+   "w": "student",
+   "start": 12.2,
+   "end": 12.62
+  },
+  {
+   "w": "walked",
+   "start": 12.62,
+   "end": 13.02
+  },
+  {
+   "w": "late",
+   "start": 13.02,
+   "end": 13.44
+  },
+  {
+   "w": "into",
+   "start": 13.44,
+   "end": 13.68
+  },
+  {
+   "w": "a",
+   "start": 13.68,
+   "end": 13.88
+  },
+  {
+   "w": "room",
+   "start": 13.88,
+   "end": 14.12
+  },
+  {
+   "w": "full",
+   "start": 14.12,
+   "end": 14.52
+  },
+  {
+   "w": "of",
+   "start": 14.52,
+   "end": 14.66
+  },
+  {
+   "w": "people.",
+   "start": 14.66,
+   "end": 15.8
+  },
+  {
+   "w": "Afterward,",
+   "start": 15.8,
+   "end": 16.62
+  },
+  {
+   "w": "they",
+   "start": 16.62,
+   "end": 16.78
+  },
+  {
+   "w": "guessed",
+   "start": 16.78,
+   "end": 17
+  },
+  {
+   "w": "about",
+   "start": 17,
+   "end": 17.24
+  },
+  {
+   "w": "half",
+   "start": 17.24,
+   "end": 17.62
+  },
+  {
+   "w": "the",
+   "start": 17.62,
+   "end": 17.78
+  },
+  {
+   "w": "room",
+   "start": 17.78,
+   "end": 18.06
+  },
+  {
+   "w": "noticed",
+   "start": 18.06,
+   "end": 18.46
+  },
+  {
+   "w": "the",
+   "start": 18.46,
+   "end": 18.62
+  },
+  {
+   "w": "shirt.",
+   "start": 18.62,
+   "end": 19.62
+  },
+  {
+   "w": "The",
+   "start": 19.62,
+   "end": 19.72
+  },
+  {
+   "w": "real",
+   "start": 19.72,
+   "end": 19.98
+  },
+  {
+   "w": "number?",
+   "start": 19.98,
+   "end": 20.78
+  },
+  {
+   "w": "About",
+   "start": 20.96,
+   "end": 21.16
+  },
+  {
+   "w": "a",
+   "start": 21.16,
+   "end": 21.32
+  },
+  {
+   "w": "quarter.",
+   "start": 21.32,
+   "end": 22.56
+  },
+  {
+   "w": "Here's",
+   "start": 22.56,
+   "end": 22.82
+  },
+  {
+   "w": "the",
+   "start": 22.82,
+   "end": 22.96
+  },
+  {
+   "w": "trick.",
+   "start": 22.96,
+   "end": 23.82
+  },
+  {
+   "w": "It's",
+   "start": 23.82,
+   "end": 23.98
+  },
+  {
+   "w": "called",
+   "start": 23.98,
+   "end": 24.28
+  },
+  {
+   "w": "the",
+   "start": 24.28,
+   "end": 24.52
+  },
+  {
+   "w": "spotlight",
+   "start": 24.52,
+   "end": 25.06
+  },
+  {
+   "w": "effect.",
+   "start": 25.06,
+   "end": 26.26
+  },
+  {
+   "w": "You're",
+   "start": 26.26,
+   "end": 26.46
+  },
+  {
+   "w": "the",
+   "start": 26.46,
+   "end": 26.58
+  },
+  {
+   "w": "main",
+   "start": 26.58,
+   "end": 26.88
+  },
+  {
+   "w": "character",
+   "start": 26.88,
+   "end": 27.32
+  },
+  {
+   "w": "in",
+   "start": 27.38,
+   "end": 27.66
+  },
+  {
+   "w": "your",
+   "start": 27.66,
+   "end": 27.8
+  },
+  {
+   "w": "head,",
+   "start": 27.8,
+   "end": 28.68
+  },
+  {
+   "w": "but",
+   "start": 28.68,
+   "end": 28.76
+  },
+  {
+   "w": "everyone",
+   "start": 28.76,
+   "end": 29.06
+  },
+  {
+   "w": "else",
+   "start": 29.06,
+   "end": 29.52
+  },
+  {
+   "w": "is",
+   "start": 29.52,
+   "end": 29.82
+  },
+  {
+   "w": "the",
+   "start": 29.82,
+   "end": 29.96
+  },
+  {
+   "w": "main",
+   "start": 29.96,
+   "end": 30.18
+  },
+  {
+   "w": "character",
+   "start": 30.18,
+   "end": 30.62
+  },
+  {
+   "w": "in",
+   "start": 30.62,
+   "end": 30.96
+  },
+  {
+   "w": "theirs.",
+   "start": 30.96,
+   "end": 32.18
+  },
+  {
+   "w": "They're",
+   "start": 32.18,
+   "end": 32.3
+  },
+  {
+   "w": "too",
+   "start": 32.3,
+   "end": 32.48
+  },
+  {
+   "w": "busy",
+   "start": 32.48,
+   "end": 32.78
+  },
+  {
+   "w": "worrying",
+   "start": 32.78,
+   "end": 33.12
+  },
+  {
+   "w": "about",
+   "start": 33.12,
+   "end": 33.52
+  },
+  {
+   "w": "their",
+   "start": 33.52,
+   "end": 33.72
+  },
+  {
+   "w": "own",
+   "start": 33.72,
+   "end": 34
+  },
+  {
+   "w": "shirt.",
+   "start": 34,
+   "end": 34.98
+  },
+  {
+   "w": "So",
+   "start": 34.98,
+   "end": 35.16
+  },
+  {
+   "w": "that",
+   "start": 35.16,
+   "end": 35.36
+  },
+  {
+   "w": "awkward",
+   "start": 35.36,
+   "end": 35.8
+  },
+  {
+   "w": "thing",
+   "start": 35.8,
+   "end": 36.14
+  },
+  {
+   "w": "you",
+   "start": 36.14,
+   "end": 36.26
+  },
+  {
+   "w": "said?",
+   "start": 36.26,
+   "end": 37.26
+  },
+  {
+   "w": "Fewer",
+   "start": 37.26,
+   "end": 37.42
+  },
+  {
+   "w": "people",
+   "start": 37.42,
+   "end": 37.72
+  },
+  {
+   "w": "noticed",
+   "start": 37.72,
+   "end": 38.24
+  },
+  {
+   "w": "than",
+   "start": 38.24,
+   "end": 38.52
+  },
+  {
+   "w": "you",
+   "start": 38.52,
+   "end": 38.66
+  },
+  {
+   "w": "think.",
+   "start": 38.66,
+   "end": 39
+  },
+  {
+   "w": "Follow",
+   "start": 39.9,
+   "end": 40.12
+  },
+  {
+   "w": "for",
+   "start": 40.12,
+   "end": 40.38
+  },
+  {
+   "w": "more",
+   "start": 40.38,
+   "end": 40.6
+  },
+  {
+   "w": "mind",
+   "start": 40.6,
+   "end": 40.94
+  },
+  {
+   "w": "tricks.",
+   "start": 40.94,
+   "end": 41.2
+  }
+ ]
+}

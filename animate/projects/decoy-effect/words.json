@@ -1,0 +1,511 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "Nobody picked this option, and that's exactly why it worked. The Economist once offered three subscriptions. Web only, $59. Print only, $125. Print and web, also $125. Who'd pick print only? Nobody. A behavioral economist tested it on 100 MIT students. Zero chose print only. 84 chose the $125 combo. Then he removed the useless option. Now only 32 chose the combo. Most took the cheap one. Here's the trick. The middle option was a decoy. It made the combo look like a free upgrade. Next time you see three prices, ask which one is there just to push you. Follow for more mind tricks.",
+ "words": [
+  {
+   "w": "Nobody",
+   "start": 0.1,
+   "end": 0.44
+  },
+  {
+   "w": "picked",
+   "start": 0.44,
+   "end": 0.8
+  },
+  {
+   "w": "this",
+   "start": 0.8,
+   "end": 1.02
+  },
+  {
+   "w": "option,",
+   "start": 1.02,
+   "end": 1.4
+  },
+  {
+   "w": "and",
+   "start": 1.4,
+   "end": 2.08
+  },
+  {
+   "w": "that's",
+   "start": 2.08,
+   "end": 2.28
+  },
+  {
+   "w": "exactly",
+   "start": 2.28,
+   "end": 2.82
+  },
+  {
+   "w": "why",
+   "start": 2.82,
+   "end": 3.14
+  },
+  {
+   "w": "it",
+   "start": 3.14,
+   "end": 3.3
+  },
+  {
+   "w": "worked.",
+   "start": 3.3,
+   "end": 4.16
+  },
+  {
+   "w": "The",
+   "start": 4.62,
+   "end": 4.76
+  },
+  {
+   "w": "Economist",
+   "start": 4.76,
+   "end": 5.14
+  },
+  {
+   "w": "once",
+   "start": 5.14,
+   "end": 5.48
+  },
+  {
+   "w": "offered",
+   "start": 5.48,
+   "end": 5.8
+  },
+  {
+   "w": "three",
+   "start": 5.8,
+   "end": 6.16
+  },
+  {
+   "w": "subscriptions.",
+   "start": 6.16,
+   "end": 6.74
+  },
+  {
+   "w": "Web",
+   "start": 7.6,
+   "end": 7.74
+  },
+  {
+   "w": "only, $59.",
+   "start": 7.74,
+   "end": 9.42
+  },
+  {
+   "w": "Print",
+   "start": 9.9,
+   "end": 10.1
+  },
+  {
+   "w": "only, $125.",
+   "start": 10.1,
+   "end": 11.52
+  },
+  {
+   "w": "Print",
+   "start": 12.94,
+   "end": 13.22
+  },
+  {
+   "w": "and",
+   "start": 13.22,
+   "end": 13.64
+  },
+  {
+   "w": "web,",
+   "start": 13.64,
+   "end": 14.26
+  },
+  {
+   "w": "also $125.",
+   "start": 14.26,
+   "end": 15.46
+  },
+  {
+   "w": "Who'd",
+   "start": 17.04,
+   "end": 17.34
+  },
+  {
+   "w": "pick",
+   "start": 17.34,
+   "end": 17.62
+  },
+  {
+   "w": "print",
+   "start": 17.62,
+   "end": 18.02
+  },
+  {
+   "w": "only?",
+   "start": 18.02,
+   "end": 18.46
+  },
+  {
+   "w": "Nobody.",
+   "start": 19.24,
+   "end": 19.5
+  },
+  {
+   "w": "A",
+   "start": 20.06,
+   "end": 20.46
+  },
+  {
+   "w": "behavioral",
+   "start": 20.46,
+   "end": 20.94
+  },
+  {
+   "w": "economist",
+   "start": 20.94,
+   "end": 21.5
+  },
+  {
+   "w": "tested",
+   "start": 21.5,
+   "end": 21.96
+  },
+  {
+   "w": "it",
+   "start": 21.96,
+   "end": 22.12
+  },
+  {
+   "w": "on",
+   "start": 22.12,
+   "end": 22.26
+  },
+  {
+   "w": "100",
+   "start": 22.26,
+   "end": 22.9
+  },
+  {
+   "w": "MIT",
+   "start": 22.9,
+   "end": 23.4
+  },
+  {
+   "w": "students.",
+   "start": 23.4,
+   "end": 24.48
+  },
+  {
+   "w": "Zero",
+   "start": 24.74,
+   "end": 25.12
+  },
+  {
+   "w": "chose",
+   "start": 25.12,
+   "end": 25.64
+  },
+  {
+   "w": "print",
+   "start": 25.64,
+   "end": 25.98
+  },
+  {
+   "w": "only.",
+   "start": 25.98,
+   "end": 26.76
+  },
+  {
+   "w": "84",
+   "start": 26.86,
+   "end": 27.26
+  },
+  {
+   "w": "chose",
+   "start": 27.26,
+   "end": 27.84
+  },
+  {
+   "w": "the $125",
+   "start": 27.84,
+   "end": 29.06
+  },
+  {
+   "w": "combo.",
+   "start": 29.06,
+   "end": 30.36
+  },
+  {
+   "w": "Then",
+   "start": 30.7,
+   "end": 30.9
+  },
+  {
+   "w": "he",
+   "start": 30.9,
+   "end": 31.06
+  },
+  {
+   "w": "removed",
+   "start": 31.06,
+   "end": 31.54
+  },
+  {
+   "w": "the",
+   "start": 31.54,
+   "end": 31.78
+  },
+  {
+   "w": "useless",
+   "start": 31.78,
+   "end": 32.1
+  },
+  {
+   "w": "option.",
+   "start": 32.1,
+   "end": 33
+  },
+  {
+   "w": "Now",
+   "start": 33.12,
+   "end": 33.5
+  },
+  {
+   "w": "only",
+   "start": 33.5,
+   "end": 33.94
+  },
+  {
+   "w": "32",
+   "start": 33.94,
+   "end": 34.64
+  },
+  {
+   "w": "chose",
+   "start": 34.64,
+   "end": 35.2
+  },
+  {
+   "w": "the",
+   "start": 35.2,
+   "end": 35.4
+  },
+  {
+   "w": "combo.",
+   "start": 35.4,
+   "end": 36.24
+  },
+  {
+   "w": "Most",
+   "start": 36.4,
+   "end": 36.76
+  },
+  {
+   "w": "took",
+   "start": 36.76,
+   "end": 37.02
+  },
+  {
+   "w": "the",
+   "start": 37.02,
+   "end": 37.22
+  },
+  {
+   "w": "cheap",
+   "start": 37.22,
+   "end": 37.46
+  },
+  {
+   "w": "one.",
+   "start": 37.46,
+   "end": 38.1
+  },
+  {
+   "w": "Here's",
+   "start": 38.38,
+   "end": 38.66
+  },
+  {
+   "w": "the",
+   "start": 38.66,
+   "end": 38.8
+  },
+  {
+   "w": "trick.",
+   "start": 38.8,
+   "end": 39.48
+  },
+  {
+   "w": "The",
+   "start": 39.48,
+   "end": 39.66
+  },
+  {
+   "w": "middle",
+   "start": 39.66,
+   "end": 39.94
+  },
+  {
+   "w": "option",
+   "start": 39.94,
+   "end": 40.32
+  },
+  {
+   "w": "was",
+   "start": 40.32,
+   "end": 40.76
+  },
+  {
+   "w": "a",
+   "start": 40.76,
+   "end": 41.02
+  },
+  {
+   "w": "decoy.",
+   "start": 41.02,
+   "end": 41.88
+  },
+  {
+   "w": "It",
+   "start": 41.88,
+   "end": 42.14
+  },
+  {
+   "w": "made",
+   "start": 42.14,
+   "end": 42.36
+  },
+  {
+   "w": "the",
+   "start": 42.36,
+   "end": 42.5
+  },
+  {
+   "w": "combo",
+   "start": 42.5,
+   "end": 42.86
+  },
+  {
+   "w": "look",
+   "start": 42.86,
+   "end": 43.16
+  },
+  {
+   "w": "like",
+   "start": 43.16,
+   "end": 43.3
+  },
+  {
+   "w": "a",
+   "start": 43.3,
+   "end": 43.46
+  },
+  {
+   "w": "free",
+   "start": 43.46,
+   "end": 43.8
+  },
+  {
+   "w": "upgrade.",
+   "start": 43.8,
+   "end": 44.76
+  },
+  {
+   "w": "Next",
+   "start": 45.08,
+   "end": 45.34
+  },
+  {
+   "w": "time",
+   "start": 45.34,
+   "end": 45.6
+  },
+  {
+   "w": "you",
+   "start": 45.6,
+   "end": 45.74
+  },
+  {
+   "w": "see",
+   "start": 45.74,
+   "end": 46.02
+  },
+  {
+   "w": "three",
+   "start": 46.02,
+   "end": 46.34
+  },
+  {
+   "w": "prices,",
+   "start": 46.34,
+   "end": 47.66
+  },
+  {
+   "w": "ask",
+   "start": 47.66,
+   "end": 47.78
+  },
+  {
+   "w": "which",
+   "start": 47.78,
+   "end": 47.94
+  },
+  {
+   "w": "one",
+   "start": 47.94,
+   "end": 48.12
+  },
+  {
+   "w": "is",
+   "start": 48.12,
+   "end": 48.28
+  },
+  {
+   "w": "there",
+   "start": 48.28,
+   "end": 48.5
+  },
+  {
+   "w": "just",
+   "start": 48.5,
+   "end": 48.78
+  },
+  {
+   "w": "to",
+   "start": 48.78,
+   "end": 49
+  },
+  {
+   "w": "push",
+   "start": 49,
+   "end": 49.24
+  },
+  {
+   "w": "you.",
+   "start": 49.24,
+   "end": 49.98
+  },
+  {
+   "w": "Follow",
+   "start": 50.2,
+   "end": 50.48
+  },
+  {
+   "w": "for",
+   "start": 50.48,
+   "end": 50.72
+  },
+  {
+   "w": "more",
+   "start": 50.72,
+   "end": 50.94
+  },
+  {
+   "w": "mind",
+   "start": 50.94,
+   "end": 51.24
+  },
+  {
+   "w": "tricks.",
+   "start": 51.24,
+   "end": 52.02
+  }
+ ]
+}

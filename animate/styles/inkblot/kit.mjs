@@ -387,6 +387,7 @@ export function figure(ctx, x, y, o = {}) {
   if (o.skirt) poly(ctx, [[-38, top], [38, top], [62, hip + (sit ? 10 : 70)], [-62, hip + (sit ? 10 : 70)]], c);
   else poly(ctx, [[-42, top], [42, top], [48, hip + (sit ? 0 : 40)], [-48, hip + (sit ? 0 : 40)]], c);
   ctx.beginPath(); ctx.ellipse(0, top + 6, 44, 18, 0, Math.PI, TAU); fill(ctx, c);
+  if (o.labcoat) { poly(ctx, [[-46, top], [46, top], [56, hip + 70], [-56, hip + 70]], P.paperLight, P.ink, 3); line(ctx, 0, top + 4, 0, hip + 70, P.ink, 2); poly(ctx, [[-14, top], [0, top + 60], [14, top]], c); rect(ctx, 20, top + 50, 18, 22, null, P.ink, 2); line(ctx, 26, top + 44, 26, top + 58, P.red, 3); }
   if (o.apron) { poly(ctx, [[-30, top + 60], [30, top + 60], [36, hip + 60], [-36, hip + 60]], P.paperLight); line(ctx, -30, top + 62, 30, top + 62, P.paperLight, 5); }
   if (o.shirt !== false && !o.skirt) poly(ctx, [[-10, top + 2], [10, top + 2], [0, top + 40]], P.paperLight);
   if (o.bowtie) { poly(ctx, [[0, top + 8], [-16, top], [-16, top + 16]], P.paperLight); poly(ctx, [[0, top + 8], [16, top], [16, top + 16]], P.paperLight); }
@@ -396,7 +397,8 @@ export function figure(ctx, x, y, o = {}) {
     const [sh, el] = ang || [0.15, 0.1];
     const ax = sgn * 40, ay = top + 14, a1 = sh * sgn, ex = ax + Math.sin(a1) * 70, ey = ay + Math.cos(a1) * 70, a2 = a1 + el * sgn;
     const hx = ex + Math.sin(a2) * 66, hy = ey + Math.cos(a2) * 66;
-    ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(ex, ey); ctx.lineTo(hx, hy); stroke(ctx, c, 18);
+    ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(ex, ey); ctx.lineTo(hx, hy); stroke(ctx, o.labcoat ? P.ink : c, o.labcoat ? 22 : 18);
+    if (o.labcoat) { ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(ex, ey); ctx.lineTo(ex + (hx - ex) * 0.8, ey + (hy - ey) * 0.8); stroke(ctx, P.paperLight, 15); }
     circle(ctx, hx, hy, 11, c);
     if (hold) { ctx.save(); ctx.translate(hx, hy); hold(ctx); ctx.restore(); }
   };
@@ -409,6 +411,7 @@ export function figure(ctx, x, y, o = {}) {
   const hair = o.hair;
   if (hair === 'bob') { ctx.beginPath(); ctx.moveTo(-50, 22); ctx.bezierCurveTo(-62, -60, 62, -60, 50, 22); ctx.lineTo(36, 22); ctx.bezierCurveTo(34, -20, -34, -20, -36, 22); ctx.closePath(); fill(ctx, c); }
   if (hair === 'bun') circle(ctx, -face * 30, -44, 18, c);
+  if (hair === 'long') { for (const sx of [-1, 1]) { ctx.beginPath(); ctx.moveTo(sx * 40, -20); ctx.quadraticCurveTo(sx * 62, 20, sx * 54, 62); ctx.lineTo(sx * 36, 58); ctx.quadraticCurveTo(sx * 44, 20, sx * 30, -6); ctx.closePath(); fill(ctx, c); } }
   if (hair === 'slick') { ctx.beginPath(); ctx.ellipse(0, -18, 46, 34, 0, Math.PI, TAU); fill(ctx, c); line(ctx, -20, -44, 18, -40, P.inkSoft, 3); }
   // eyes (paper-white), brows by mood
   const look = o.look || [face * 0.4, 0], mood = o.mood || 'calm', bl = o.blink ?? 1;
@@ -426,6 +429,7 @@ export function figure(ctx, x, y, o = {}) {
   // hats
   if (o.hat === 'bowler') { ctx.beginPath(); ctx.ellipse(0, -30, 62, 10, 0, 0, TAU); fill(ctx, c); ctx.beginPath(); ctx.ellipse(0, -38, 40, 40, 0, Math.PI, TAU); fill(ctx, c); line(ctx, -40, -40, 40, -40, o.band || P.inkSoft, 6); }
   if (o.hat === 'cloche') { ctx.beginPath(); ctx.ellipse(0, -18, 50, 44, 0, Math.PI * 0.95, TAU + 0.05); fill(ctx, c); ctx.beginPath(); ctx.ellipse(-face * 12, -16, 56, 10, -face * 0.1, 0, TAU); fill(ctx, c); line(ctx, -46, -28, 46, -28, o.band || P.red, 6); }
+  if (o.hat === 'tricorn') { poly(ctx, [[-66, -26], [66, -26], [0, -84]], c); poly(ctx, [[-70, -22], [-40, -60], [-24, -24]], c); poly(ctx, [[70, -22], [40, -60], [24, -24]], c); line(ctx, -58, -28, 58, -28, o.band || P.paperDark, 4); }
   if (o.hat === 'cap') { ctx.beginPath(); ctx.ellipse(0, -32, 44, 22, 0, Math.PI, TAU); fill(ctx, c); ctx.beginPath(); ctx.ellipse(face * 30, -32, 34, 8, 0, 0, TAU); fill(ctx, c); }
   if (o.think) { ctx.save(); o.think(ctx); ctx.restore(); }
   ctx.restore();
@@ -778,6 +782,128 @@ export function mirrorFrame(ctx, x, y, rx, ry, draw) {
   ctx.restore();
   ctx.save(); ctx.globalAlpha = 0.35; ctx.beginPath(); ctx.ellipse(-rx * 0.35, -ry * 0.4, rx * 0.18, ry * 0.35, -0.5, 0, TAU); fill(ctx, '#fff'); ctx.restore();
   ctx.restore();
+}
+
+// ---------- more props (numbers & money) ----------
+// A wheel of fortune numbered 0–95 in steps of 5; `rot` in radians.
+// wheelAngleFor(n) gives the rotation that brings number n under the pointer.
+export const wheelAngleFor = n => -(n / 5) / 20 * TAU;
+export function wheel(ctx, x, y, r, rot = 0, o = {}) {
+  ctx.save(); ctx.translate(x, y);
+  circle(ctx, 0, 0, r + 18, P.ink);
+  ctx.save(); ctx.rotate(rot);
+  for (let i = 0; i < 20; i++) {
+    const a0 = -Math.PI / 2 + (i - 0.5) / 20 * TAU, a1 = a0 + TAU / 20;
+    ctx.beginPath(); ctx.moveTo(0, 0); ctx.arc(0, 0, r, a0, a1); ctx.closePath();
+    fill(ctx, [P.paperLight, P.red, P.paperDark, P.inkSoft][i % 4]); stroke(ctx, P.ink, 2);
+    ctx.save(); ctx.rotate(i / 20 * TAU); text(ctx, String(i * 5), 0, -r * 0.8, r * 0.11, { font: 'serif', color: i % 4 === 1 || i % 4 === 3 ? P.paperLight : P.ink }); ctx.restore();
+  }
+  ctx.restore();
+  circle(ctx, 0, 0, r * 0.14, P.ochre, P.ink, 4);
+  poly(ctx, [[-r * 0.09, -r - 40], [r * 0.09, -r - 40], [0, -r + 18]], o.pointer || P.red, P.ink, 4);  // pointer
+  ctx.restore();
+}
+// A ship's anchor hanging from (x, y) by a chain of `chain` px.
+export function anchor(ctx, x, y, s = 1, chain = 0, color = P.ink) {
+  ctx.save(); ctx.translate(x, y);
+  for (let i = 0; i < chain; i += 26) ellipse(ctx, 0, i + 13, 8, 14, 0, null, color, 5);
+  ctx.translate(0, chain); ctx.scale(s, s);
+  circle(ctx, 0, 14, 16, null, color, 8);
+  rect(ctx, -8, 28, 16, 170, color);
+  rect(ctx, -60, 60, 120, 16, color, null, 0, 8);
+  ctx.beginPath(); ctx.arc(0, 140, 90, 0.15, Math.PI - 0.15); stroke(ctx, color, 16);
+  for (const sx of [-1, 1]) poly(ctx, [[sx * 88, 152], [sx * 112, 118], [sx * 70, 128]], color);
+  ctx.restore();
+}
+// A shop price tag (hole + string). old = crossed-out price, price = new price; k strikes it.
+export function priceTag(ctx, x, y, s = 1, old = '$200', price = '$99', k = 1, rot = -0.1) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
+  poly(ctx, [[-160, -100], [150, -100], [220, 0], [150, 100], [-160, 100]], P.paperLight, P.ink, 6);
+  circle(ctx, 165, 0, 18, P.paperDark, P.ink, 4);
+  ctx.beginPath(); ctx.moveTo(183, 0); ctx.bezierCurveTo(260, -40, 280, -120, 240, -170); stroke(ctx, P.ink, 4);
+  text(ctx, old, -20, -40, 64, { font: 'display', color: P.grey });
+  penLine(ctx, [[-120, -30], [80, -50]], k, P.red, 10);
+  if (k > 0.6) text(ctx, price, -20, 45, 86, { font: 'display', color: P.red });
+  ctx.restore();
+}
+// A horizontal number line from a to b (values) over w px.
+export function numberLine(ctx, x, y, w, a = 0, b = 100, step = 10) {
+  line(ctx, x, y, x + w, y, P.ink, 6);
+  for (let v = a; v <= b; v += step) { const px = x + (v - a) / (b - a) * w; line(ctx, px, y - 16, px, y + 16, P.ink, 4); text(ctx, String(v), px, y + 44, 30, {}); }
+  return v => x + (v - a) / (b - a) * w;
+}
+
+// ---------- more props (letters & feelings) ----------
+// A closed book (o.open 0..1 opens the cover), o.glow lights it.
+export function book(ctx, x, y, s = 1, o = {}) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(o.rot || 0); ctx.scale(s, s);
+  if (o.glow) { const g = ctx.createRadialGradient(0, 0, 10, 0, 0, 200); g.addColorStop(0, `rgba(255,236,170,${0.8 * o.glow})`); g.addColorStop(1, 'rgba(255,236,170,0)'); ctx.fillStyle = g; ctx.fillRect(-210, -210, 420, 420); }
+  rect(ctx, -90, -120, 180, 240, P.paperLight, P.ink, 4, 4);
+  for (let i = 0; i < 6; i++) line(ctx, 80, -110 + i * 44, 88, -110 + i * 44, P.greyLight, 2);
+  const w = 190 * Math.cos(clamp(o.open || 0) * Math.PI * 0.85);
+  poly(ctx, [[-96, -126], [-96 + w, -126], [-96 + w, 126], [-96, 126]], o.color || P.redDark, P.ink, 5);
+  if (w > 80) { rect(ctx, -96 + w * 0.2, -60, w * 0.6, 50, null, P.ochre, 3); if (o.title) text(ctx, o.title, -96 + w / 2, -35, 22, { font: 'serif', color: P.ochre, max: w * 0.55 }); }
+  rect(ctx, -104, -126, 16, 252, P.ink, null, 0, 4);
+  ctx.restore();
+}
+// A folded letter / note with handwriting; k writes it on.
+export function letter(ctx, x, y, w, h, lines = [], k = 1, o = {}) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(o.rot || 0);
+  rect(ctx, -w / 2, -h / 2, w, h, o.fill || '#f3e6c4', P.ink, 4, 4);
+  line(ctx, -w / 2, -h / 6, w / 2, -h / 6, 'rgba(0,0,0,0.08)', 3); line(ctx, -w / 2, h / 6, w / 2, h / 6, 'rgba(0,0,0,0.08)', 3);
+  const size = o.size || h / (lines.length + 1.5) * 0.8;
+  lines.forEach((t, i) => scrawl(ctx, t, -w / 2 + 30, -h / 2 + (i + 1) * h / (lines.length + 1), size, clamp(k * lines.length - i), { align: 'left', color: o.color || P.ink, rot: 0 }));
+  if (o.seal) { circle(ctx, w / 2 - 50, h / 2 - 46, 30 * o.seal, P.red, P.redDark, 3); text(ctx, o.sealText || 'BF', w / 2 - 50, h / 2 - 44, 22 * o.seal, { font: 'serif', color: P.paperLight }); }
+  ctx.restore();
+}
+export function quill(ctx, x, y, s = 1, rot = -0.6) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
+  ctx.beginPath(); ctx.moveTo(0, 0); ctx.quadraticCurveTo(-30, -120, 10, -240); ctx.quadraticCurveTo(40, -120, 0, 0); fill(ctx, P.paperLight); stroke(ctx, P.ink, 3);
+  line(ctx, 0, 0, 8, -230, P.ink, 3);
+  for (let i = 0; i < 9; i++) line(ctx, 3 + i, -40 - i * 22, -18 + i * 1.5, -60 - i * 22, P.greyLight, 2);
+  ctx.restore();
+}
+// A heart (k pops it in).
+export function heart(ctx, x, y, r, color = P.red, k = 1) {
+  if (k <= 0) return;
+  ctx.save(); ctx.translate(x, y); ctx.scale(k * r / 30, k * r / 30);
+  ctx.beginPath(); ctx.moveTo(0, 26); ctx.bezierCurveTo(-46, -4, -26, -42, 0, -18); ctx.bezierCurveTo(26, -42, 46, -4, 0, 26); fill(ctx, color);
+  ctx.restore();
+}
+// An angry scribble cloud (a grudge) above a head; k 0..1 grows it.
+export function grudge(ctx, x, y, r, t = 0, k = 1, color = P.ink) {
+  if (k <= 0) return;
+  ctx.save(); ctx.translate(x, y); ctx.scale(k, k);
+  ctx.beginPath();
+  for (let i = 0; i <= 90; i++) { const a = i / 90 * TAU * 4, rr = r * (0.55 + 0.45 * Math.abs(Math.sin(i * 1.7 + t * 9))); i ? ctx.lineTo(Math.cos(a) * rr, Math.sin(a) * rr * 0.6) : ctx.moveTo(rr, 0); }
+  stroke(ctx, color, 4);
+  ctx.restore();
+}
+
+// ---------- more props (stage) ----------
+// A theatre spotlight: a lamp at (x, y) throwing a cone onto (tx, ty); k 0..1 = brightness.
+export function spotlight(ctx, x, y, tx, ty, w = 220, k = 1, o = {}) {
+  if (k <= 0) return;
+  const a = Math.atan2(ty - y, tx - x), d = Math.hypot(tx - x, ty - y), nx = -Math.sin(a), ny = Math.cos(a);
+  ctx.save();
+  const g = ctx.createLinearGradient(x, y, tx, ty); g.addColorStop(0, `rgba(255,246,205,${0.75 * k})`); g.addColorStop(1, `rgba(255,246,205,${0.4 * k})`);
+  ctx.beginPath(); ctx.moveTo(x + nx * 22, y + ny * 22); ctx.lineTo(tx + nx * w, ty + ny * w * 0.2); ctx.lineTo(tx - nx * w, ty - ny * w * 0.2); ctx.lineTo(x - nx * 22, y - ny * 22); ctx.closePath(); fill(ctx, g);
+  ellipse(ctx, tx, ty, w, w * 0.22, 0, `rgba(255,246,205,${0.8 * k})`);
+  ctx.restore();
+  if (o.lamp !== false) {
+    ctx.save(); ctx.translate(x, y); ctx.rotate(a - Math.PI / 2);
+    rect(ctx, -40, -80, 80, 90, P.ink, null, 0, 10); ellipse(ctx, 0, 12, 46, 12, 0, '#fff6cd', P.ink, 4);
+    line(ctx, 0, -80, 0, -140, P.ink, 8);
+    ctx.restore();
+  }
+}
+// A ring of watching eyes in the dark; closed: how many of n are shut (fractional ok).
+export function watchers(ctx, cx, cy, rx, ry, n, closed = 0, t = 0, look = null) {
+  for (let i = 0; i < n; i++) {
+    const a = i / n * TAU + 0.3, x = cx + Math.cos(a) * rx, y = cy + Math.sin(a) * ry;
+    const shut = clamp(closed - i);
+    eye(ctx, x, y, 26, { open: 1 - shut, look: look || [(cx - x) / rx * 0.8, (cy - y) / ry * 0.8], lashes: false, white: P.paperLight });
+  }
 }
 
 // Card-stock texture (fibres, mottling, foxing spots) — multiply it on top.

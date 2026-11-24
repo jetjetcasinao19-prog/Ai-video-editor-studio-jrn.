@@ -1,0 +1,581 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "A group can make you deny what you see with your own eyes. Here's proof. In the 1950s, psychologist Solomon Asch showed people three lines. Which one matches this one? Easy. Alone, people got it wrong less than 1% of the time. But everyone else in the room was an actor. One by one, they all gave the same wrong answer. Three out of four real people went along at least once. Here's the trick. Your brain hates standing out, but when just one other person gave the right answer, going along dropped sharply. So, if you know you're right, say it. And if someone stands alone, stand with them. Follow for more mind tricks.",
+ "words": [
+  {
+   "w": "A",
+   "start": 0,
+   "end": 0.18
+  },
+  {
+   "w": "group",
+   "start": 0.18,
+   "end": 0.36
+  },
+  {
+   "w": "can",
+   "start": 0.36,
+   "end": 0.6
+  },
+  {
+   "w": "make",
+   "start": 0.6,
+   "end": 0.82
+  },
+  {
+   "w": "you",
+   "start": 0.82,
+   "end": 0.96
+  },
+  {
+   "w": "deny",
+   "start": 0.96,
+   "end": 1.3
+  },
+  {
+   "w": "what",
+   "start": 1.3,
+   "end": 1.6
+  },
+  {
+   "w": "you",
+   "start": 1.6,
+   "end": 1.74
+  },
+  {
+   "w": "see",
+   "start": 1.74,
+   "end": 2.02
+  },
+  {
+   "w": "with",
+   "start": 2.02,
+   "end": 2.24
+  },
+  {
+   "w": "your",
+   "start": 2.24,
+   "end": 2.4
+  },
+  {
+   "w": "own",
+   "start": 2.4,
+   "end": 2.72
+  },
+  {
+   "w": "eyes.",
+   "start": 2.72,
+   "end": 3.66
+  },
+  {
+   "w": "Here's",
+   "start": 3.94,
+   "end": 4.16
+  },
+  {
+   "w": "proof.",
+   "start": 4.16,
+   "end": 4.98
+  },
+  {
+   "w": "In",
+   "start": 5.18,
+   "end": 5.26
+  },
+  {
+   "w": "the",
+   "start": 5.26,
+   "end": 5.38
+  },
+  {
+   "w": "1950s,",
+   "start": 5.38,
+   "end": 7
+  },
+  {
+   "w": "psychologist",
+   "start": 7,
+   "end": 7.12
+  },
+  {
+   "w": "Solomon",
+   "start": 7.12,
+   "end": 7.68
+  },
+  {
+   "w": "Asch",
+   "start": 7.68,
+   "end": 8.06
+  },
+  {
+   "w": "showed",
+   "start": 8.06,
+   "end": 8.46
+  },
+  {
+   "w": "people",
+   "start": 8.46,
+   "end": 8.8
+  },
+  {
+   "w": "three",
+   "start": 8.8,
+   "end": 9.14
+  },
+  {
+   "w": "lines.",
+   "start": 9.14,
+   "end": 9.58
+  },
+  {
+   "w": "Which",
+   "start": 10.42,
+   "end": 10.56
+  },
+  {
+   "w": "one",
+   "start": 10.56,
+   "end": 10.8
+  },
+  {
+   "w": "matches",
+   "start": 10.8,
+   "end": 11.08
+  },
+  {
+   "w": "this",
+   "start": 11.08,
+   "end": 11.36
+  },
+  {
+   "w": "one?",
+   "start": 11.36,
+   "end": 12.08
+  },
+  {
+   "w": "Easy.",
+   "start": 12.26,
+   "end": 13
+  },
+  {
+   "w": "Alone,",
+   "start": 13.42,
+   "end": 14
+  },
+  {
+   "w": "people",
+   "start": 14,
+   "end": 14.1
+  },
+  {
+   "w": "got",
+   "start": 14.1,
+   "end": 14.3
+  },
+  {
+   "w": "it",
+   "start": 14.3,
+   "end": 14.46
+  },
+  {
+   "w": "wrong",
+   "start": 14.46,
+   "end": 14.66
+  },
+  {
+   "w": "less",
+   "start": 14.66,
+   "end": 14.96
+  },
+  {
+   "w": "than",
+   "start": 14.96,
+   "end": 15.2
+  },
+  {
+   "w": "1%",
+   "start": 15.2,
+   "end": 15.8
+  },
+  {
+   "w": "of",
+   "start": 15.8,
+   "end": 16.08
+  },
+  {
+   "w": "the",
+   "start": 16.08,
+   "end": 16.2
+  },
+  {
+   "w": "time.",
+   "start": 16.2,
+   "end": 16.98
+  },
+  {
+   "w": "But",
+   "start": 17.16,
+   "end": 17.3
+  },
+  {
+   "w": "everyone",
+   "start": 17.3,
+   "end": 17.54
+  },
+  {
+   "w": "else",
+   "start": 17.54,
+   "end": 17.88
+  },
+  {
+   "w": "in",
+   "start": 17.88,
+   "end": 17.98
+  },
+  {
+   "w": "the",
+   "start": 17.98,
+   "end": 18.12
+  },
+  {
+   "w": "room",
+   "start": 18.12,
+   "end": 18.38
+  },
+  {
+   "w": "was",
+   "start": 18.38,
+   "end": 18.84
+  },
+  {
+   "w": "an",
+   "start": 18.84,
+   "end": 19
+  },
+  {
+   "w": "actor.",
+   "start": 19,
+   "end": 19.84
+  },
+  {
+   "w": "One",
+   "start": 20.2,
+   "end": 20.38
+  },
+  {
+   "w": "by",
+   "start": 20.38,
+   "end": 20.54
+  },
+  {
+   "w": "one,",
+   "start": 20.54,
+   "end": 21.26
+  },
+  {
+   "w": "they",
+   "start": 21.26,
+   "end": 21.36
+  },
+  {
+   "w": "all",
+   "start": 21.36,
+   "end": 21.74
+  },
+  {
+   "w": "gave",
+   "start": 21.74,
+   "end": 22.04
+  },
+  {
+   "w": "the",
+   "start": 22.04,
+   "end": 22.22
+  },
+  {
+   "w": "same",
+   "start": 22.22,
+   "end": 22.72
+  },
+  {
+   "w": "wrong",
+   "start": 22.72,
+   "end": 23.32
+  },
+  {
+   "w": "answer.",
+   "start": 23.32,
+   "end": 23.84
+  },
+  {
+   "w": "Three",
+   "start": 24.64,
+   "end": 24.84
+  },
+  {
+   "w": "out",
+   "start": 24.84,
+   "end": 25.02
+  },
+  {
+   "w": "of",
+   "start": 25.02,
+   "end": 25.22
+  },
+  {
+   "w": "four",
+   "start": 25.22,
+   "end": 25.48
+  },
+  {
+   "w": "real",
+   "start": 25.48,
+   "end": 25.88
+  },
+  {
+   "w": "people",
+   "start": 25.88,
+   "end": 26.24
+  },
+  {
+   "w": "went",
+   "start": 26.24,
+   "end": 26.54
+  },
+  {
+   "w": "along",
+   "start": 26.54,
+   "end": 26.82
+  },
+  {
+   "w": "at",
+   "start": 26.82,
+   "end": 27.02
+  },
+  {
+   "w": "least",
+   "start": 27.02,
+   "end": 27.28
+  },
+  {
+   "w": "once.",
+   "start": 27.28,
+   "end": 28.18
+  },
+  {
+   "w": "Here's",
+   "start": 28.66,
+   "end": 28.88
+  },
+  {
+   "w": "the",
+   "start": 28.88,
+   "end": 29
+  },
+  {
+   "w": "trick.",
+   "start": 29,
+   "end": 29.74
+  },
+  {
+   "w": "Your",
+   "start": 29.96,
+   "end": 30.06
+  },
+  {
+   "w": "brain",
+   "start": 30.06,
+   "end": 30.5
+  },
+  {
+   "w": "hates",
+   "start": 30.5,
+   "end": 31.1
+  },
+  {
+   "w": "standing",
+   "start": 31.1,
+   "end": 31.6
+  },
+  {
+   "w": "out,",
+   "start": 31.6,
+   "end": 32.54
+  },
+  {
+   "w": "but",
+   "start": 32.54,
+   "end": 32.64
+  },
+  {
+   "w": "when",
+   "start": 32.64,
+   "end": 32.8
+  },
+  {
+   "w": "just",
+   "start": 32.8,
+   "end": 33.12
+  },
+  {
+   "w": "one",
+   "start": 33.12,
+   "end": 33.54
+  },
+  {
+   "w": "other",
+   "start": 33.54,
+   "end": 33.84
+  },
+  {
+   "w": "person",
+   "start": 33.84,
+   "end": 34.26
+  },
+  {
+   "w": "gave",
+   "start": 34.26,
+   "end": 34.52
+  },
+  {
+   "w": "the",
+   "start": 34.52,
+   "end": 34.72
+  },
+  {
+   "w": "right",
+   "start": 34.72,
+   "end": 34.92
+  },
+  {
+   "w": "answer,",
+   "start": 34.92,
+   "end": 35.76
+  },
+  {
+   "w": "going",
+   "start": 35.82,
+   "end": 36
+  },
+  {
+   "w": "along",
+   "start": 36,
+   "end": 36.4
+  },
+  {
+   "w": "dropped",
+   "start": 36.4,
+   "end": 36.98
+  },
+  {
+   "w": "sharply.",
+   "start": 36.98,
+   "end": 38.3
+  },
+  {
+   "w": "So,",
+   "start": 38.3,
+   "end": 38.46
+  },
+  {
+   "w": "if",
+   "start": 38.46,
+   "end": 39.02
+  },
+  {
+   "w": "you",
+   "start": 39.02,
+   "end": 39.16
+  },
+  {
+   "w": "know",
+   "start": 39.16,
+   "end": 39.44
+  },
+  {
+   "w": "you're",
+   "start": 39.44,
+   "end": 39.64
+  },
+  {
+   "w": "right,",
+   "start": 39.64,
+   "end": 40.52
+  },
+  {
+   "w": "say",
+   "start": 40.52,
+   "end": 40.64
+  },
+  {
+   "w": "it.",
+   "start": 40.64,
+   "end": 40.9
+  },
+  {
+   "w": "And",
+   "start": 40.9,
+   "end": 41.68
+  },
+  {
+   "w": "if",
+   "start": 41.68,
+   "end": 41.76
+  },
+  {
+   "w": "someone",
+   "start": 41.76,
+   "end": 42.06
+  },
+  {
+   "w": "stands",
+   "start": 42.06,
+   "end": 42.42
+  },
+  {
+   "w": "alone,",
+   "start": 42.42,
+   "end": 43.3
+  },
+  {
+   "w": "stand",
+   "start": 43.56,
+   "end": 43.84
+  },
+  {
+   "w": "with",
+   "start": 43.84,
+   "end": 44.04
+  },
+  {
+   "w": "them.",
+   "start": 44.04,
+   "end": 45.14
+  },
+  {
+   "w": "Follow",
+   "start": 45.14,
+   "end": 45.4
+  },
+  {
+   "w": "for",
+   "start": 45.4,
+   "end": 45.68
+  },
+  {
+   "w": "more",
+   "start": 45.68,
+   "end": 45.9
+  },
+  {
+   "w": "mind",
+   "start": 45.9,
+   "end": 46.3
+  },
+  {
+   "w": "tricks.",
+   "start": 46.3,
+   "end": 46.52
+  }
+ ]
+}
