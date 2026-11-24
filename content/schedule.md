@@ -119,6 +119,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-01-11 Mon | 8:00 PM | Tue Jan 12, 9:00 AM | MindTrace | TikTok | Walked into a room and forgot why? Blame the door. | content/posts/2026-11-24-doorway-effect-inkblot.md | ready |
 | 2027-01-12 Tue | 7:00 PM | Wed Jan 13, 8:00 AM | MindTrace | Instagram Reels | Why doorways make you forget | content/posts/2026-11-24-doorway-effect-inkblot.md | ready |
 | 2027-01-12 Tue | 8:00 PM | Wed Jan 13, 9:00 AM | MindTrace | Facebook Reels | Walked into a room and forgot why? Blame the door. | content/posts/2026-11-24-doorway-effect-inkblot.md | ready |
+| 2027-01-13 Wed | 7:00 PM | Thu Jan 14, 8:00 AM | MindTrace | YouTube Shorts | Craving a Snack? Eat It in Your Head 30 Times (Psychology Trick) | content/posts/2026-11-24-imagined-eating-inkblot.md | ready |
+| 2027-01-13 Wed | 8:00 PM | Thu Jan 14, 9:00 AM | MindTrace | TikTok | Craving a snack? Eat it in your head. 30 times. | content/posts/2026-11-24-imagined-eating-inkblot.md | ready |
+| 2027-01-14 Thu | 7:00 PM | Fri Jan 15, 8:00 AM | MindTrace | Instagram Reels | The imagined-eating trick for cravings | content/posts/2026-11-24-imagined-eating-inkblot.md | ready |
+| 2027-01-14 Thu | 8:00 PM | Fri Jan 15, 9:00 AM | MindTrace | Facebook Reels | Craving a snack? Eat it in your head 30 times. | content/posts/2026-11-24-imagined-eating-inkblot.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the

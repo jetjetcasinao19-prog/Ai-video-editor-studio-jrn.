@@ -1,0 +1,366 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "Craving a snack? Eat it in your head. 30 times. In 2010, Carnegie Mellon researchers had people imagine eating M&M's, one by one. Then they got a real bowl. People who pictured eating 30 ate fewer real ones. Picturing just three? Didn't help. Here's the trick. Your brain gets tired of a food just by imagining it, bite after bite. So next craving, picture every bite, slowly. Follow for more mind tricks.",
+ "words": [
+  {
+   "w": "Craving",
+   "start": 0.1,
+   "end": 0.42
+  },
+  {
+   "w": "a",
+   "start": 0.42,
+   "end": 0.64
+  },
+  {
+   "w": "snack?",
+   "start": 0.64,
+   "end": 1.13
+  },
+  {
+   "w": "Eat",
+   "start": 1.53,
+   "end": 1.7
+  },
+  {
+   "w": "it",
+   "start": 1.66,
+   "end": 1.94
+  },
+  {
+   "w": "in",
+   "start": 1.94,
+   "end": 2.26
+  },
+  {
+   "w": "your",
+   "start": 2.26,
+   "end": 2.46
+  },
+  {
+   "w": "head.",
+   "start": 2.46,
+   "end": 2.8
+  },
+  {
+   "w": "30",
+   "start": 3.24,
+   "end": 3.58
+  },
+  {
+   "w": "times.",
+   "start": 3.58,
+   "end": 4.1
+  },
+  {
+   "w": "In",
+   "start": 4.94,
+   "end": 5.04
+  },
+  {
+   "w": "2010,",
+   "start": 5.04,
+   "end": 6.04
+  },
+  {
+   "w": "Carnegie",
+   "start": 6.04,
+   "end": 6.42
+  },
+  {
+   "w": "Mellon",
+   "start": 6.42,
+   "end": 6.76
+  },
+  {
+   "w": "researchers",
+   "start": 6.76,
+   "end": 7.28
+  },
+  {
+   "w": "had",
+   "start": 7.28,
+   "end": 7.64
+  },
+  {
+   "w": "people",
+   "start": 7.64,
+   "end": 7.9
+  },
+  {
+   "w": "imagine",
+   "start": 7.9,
+   "end": 8.34
+  },
+  {
+   "w": "eating",
+   "start": 8.34,
+   "end": 8.72
+  },
+  {
+   "w": "M&M's,",
+   "start": 8.72,
+   "end": 9.54
+  },
+  {
+   "w": "one",
+   "start": 9.54,
+   "end": 9.94
+  },
+  {
+   "w": "by",
+   "start": 9.94,
+   "end": 10.14
+  },
+  {
+   "w": "one.",
+   "start": 10.14,
+   "end": 10.5
+  },
+  {
+   "w": "Then",
+   "start": 11.1,
+   "end": 11.26
+  },
+  {
+   "w": "they",
+   "start": 11.26,
+   "end": 11.42
+  },
+  {
+   "w": "got",
+   "start": 11.42,
+   "end": 11.52
+  },
+  {
+   "w": "a",
+   "start": 11.52,
+   "end": 11.72
+  },
+  {
+   "w": "real",
+   "start": 11.72,
+   "end": 11.94
+  },
+  {
+   "w": "bowl.",
+   "start": 11.94,
+   "end": 12.74
+  },
+  {
+   "w": "People",
+   "start": 12.94,
+   "end": 13.1
+  },
+  {
+   "w": "who",
+   "start": 13.1,
+   "end": 13.24
+  },
+  {
+   "w": "pictured",
+   "start": 13.24,
+   "end": 13.56
+  },
+  {
+   "w": "eating",
+   "start": 13.56,
+   "end": 13.84
+  },
+  {
+   "w": "30",
+   "start": 13.84,
+   "end": 14.38
+  },
+  {
+   "w": "ate",
+   "start": 14.38,
+   "end": 14.74
+  },
+  {
+   "w": "fewer",
+   "start": 14.74,
+   "end": 15.12
+  },
+  {
+   "w": "real",
+   "start": 15.12,
+   "end": 15.46
+  },
+  {
+   "w": "ones.",
+   "start": 15.46,
+   "end": 16.34
+  },
+  {
+   "w": "Picturing",
+   "start": 16.48,
+   "end": 16.7
+  },
+  {
+   "w": "just",
+   "start": 16.7,
+   "end": 17.02
+  },
+  {
+   "w": "three?",
+   "start": 17.02,
+   "end": 17.74
+  },
+  {
+   "w": "Didn't",
+   "start": 17.82,
+   "end": 18.02
+  },
+  {
+   "w": "help.",
+   "start": 18.02,
+   "end": 18.82
+  },
+  {
+   "w": "Here's",
+   "start": 18.9,
+   "end": 19.1
+  },
+  {
+   "w": "the",
+   "start": 19.1,
+   "end": 19.22
+  },
+  {
+   "w": "trick.",
+   "start": 19.22,
+   "end": 19.96
+  },
+  {
+   "w": "Your",
+   "start": 20,
+   "end": 20.1
+  },
+  {
+   "w": "brain",
+   "start": 20.1,
+   "end": 20.42
+  },
+  {
+   "w": "gets",
+   "start": 20.42,
+   "end": 20.68
+  },
+  {
+   "w": "tired",
+   "start": 20.68,
+   "end": 21.08
+  },
+  {
+   "w": "of",
+   "start": 21.08,
+   "end": 21.26
+  },
+  {
+   "w": "a",
+   "start": 21.26,
+   "end": 21.34
+  },
+  {
+   "w": "food",
+   "start": 21.34,
+   "end": 21.62
+  },
+  {
+   "w": "just",
+   "start": 21.62,
+   "end": 21.9
+  },
+  {
+   "w": "by",
+   "start": 21.9,
+   "end": 22.1
+  },
+  {
+   "w": "imagining",
+   "start": 22.1,
+   "end": 22.66
+  },
+  {
+   "w": "it,",
+   "start": 22.66,
+   "end": 22.96
+  },
+  {
+   "w": "bite",
+   "start": 22.96,
+   "end": 23.48
+  },
+  {
+   "w": "after",
+   "start": 23.48,
+   "end": 23.82
+  },
+  {
+   "w": "bite.",
+   "start": 23.82,
+   "end": 24.64
+  },
+  {
+   "w": "So",
+   "start": 24.68,
+   "end": 24.82
+  },
+  {
+   "w": "next",
+   "start": 24.82,
+   "end": 25.06
+  },
+  {
+   "w": "craving,",
+   "start": 25.06,
+   "end": 26.08
+  },
+  {
+   "w": "picture",
+   "start": 26.08,
+   "end": 26.58
+  },
+  {
+   "w": "every",
+   "start": 26.58,
+   "end": 27.22
+  },
+  {
+   "w": "bite,",
+   "start": 27.22,
+   "end": 28.02
+  },
+  {
+   "w": "slowly.",
+   "start": 28.02,
+   "end": 28.42
+  },
+  {
+   "w": "Follow",
+   "start": 29,
+   "end": 29.3
+  },
+  {
+   "w": "for",
+   "start": 29.3,
+   "end": 29.56
+  },
+  {
+   "w": "more",
+   "start": 29.56,
+   "end": 29.84
+  },
+  {
+   "w": "mind",
+   "start": 29.84,
+   "end": 30.18
+  },
+  {
+   "w": "tricks.",
+   "start": 30.18,
+   "end": 30.52
+  }
+ ]
+}
