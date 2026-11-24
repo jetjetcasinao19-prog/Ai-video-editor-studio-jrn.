@@ -2007,7 +2007,11 @@ export function puppet(ctx, x, y, s = 1, o = {}) {
   circle(ctx, 16, -44, 3.6, P.ink, null); circle(ctx, 17, -45, 1.2, 'rgba(255,248,220,0.9)', null);
   if (o.beard) { ctx.beginPath(); ctx.moveTo(-4, -14); ctx.quadraticCurveTo(20, 10, 30, -18); ctx.quadraticCurveTo(14, -4, -4, -14); fillStroke(ctx, o.beard, P.ink, 1.5); }
   const hat = o.hat || 'cap', hc = o.hatColor || P.lapis;
-  if (hat === 'greekhelm') { // bronze hoplite helmet with a horsehair crest
+  if (hat === 'knighthelm') { // a medieval pot helm with an eye slit and a plume
+    ctx.beginPath(); ctx.moveTo(-26, -14); ctx.lineTo(-26, -66); ctx.quadraticCurveTo(2, -80, 32, -66); ctx.lineTo(32, -14); ctx.closePath(); fillStroke(ctx, hc === P.lapis ? '#9a9aa2' : hc, P.ink, 2);
+    rect(ctx, 0, -48, 30, 5, '#2a2a2a', null); for (let i = 0; i < 4; i++) circle(ctx, 22, -34 + i * 6, 1.6, '#2a2a2a', null);
+    ctx.beginPath(); ctx.moveTo(-6, -74); ctx.quadraticCurveTo(-30, -110, -50, -96); ctx.quadraticCurveTo(-30, -92, -6, -74); fillStroke(ctx, o.crest || P.verm, P.ink, 1.5);
+  } else if (hat === 'greekhelm') { // bronze hoplite helmet with a horsehair crest
     ctx.beginPath(); ctx.moveTo(-26, -20); ctx.quadraticCurveTo(-30, -70, 4, -72); ctx.quadraticCurveTo(34, -70, 32, -40); ctx.lineTo(26, -36); ctx.lineTo(22, -10); ctx.lineTo(10, -14); ctx.lineTo(12, -40); ctx.lineTo(-10, -40); ctx.lineTo(-14, -20); ctx.closePath(); fillStroke(ctx, hc === P.lapis ? '#c08a3a' : hc, P.ink, 2);
     ctx.beginPath(); ctx.moveTo(-30, -66); ctx.quadraticCurveTo(0, -110, 34, -66); ctx.quadraticCurveTo(0, -88, -30, -66); fillStroke(ctx, o.crest || P.verm, P.ink, 1.5);
   } else if (hat === 'tiara') { // a soft Persian cap with side flaps
