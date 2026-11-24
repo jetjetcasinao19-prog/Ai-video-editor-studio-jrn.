@@ -58,7 +58,7 @@ export const scenes = [
       journal(ctx, S, 340, 520, 380, -0.06, tween(u, pu - 0.4, pu + 0.3, ease.outBack));
       // three beagles, tails wagging, look up at it
       const d = tween(u, on - 0.3, dg + 0.3);
-      for (let i = 0; i < 3; i++) { const q = clamp(d * 3 - i); if (q > 0) { ctx.save(); ctx.globalAlpha = q; k.dog(ctx, 600 + i * 150, 1040 - (i % 2) * 20, 0.9, -1, S.t + i, { color: ['#c9a878', '#e8d8b8', '#a8784a'][i] }); ctx.restore(); } }
+      for (let i = 0; i < 4; i++) { const q = clamp(d * 4 - i); if (q > 0) { ctx.save(); ctx.globalAlpha = q; k.dog(ctx, 250 + i * 175, 1050 - (i % 2) * 24, 0.7, -1, S.t + i, { color: ['#c9a878', '#e8d8b8', '#a8784a', '#d8b890'][i] }); ctx.restore(); } }
       k.seal(ctx, 840, 240, 64, ' THE YEAR · 1974 ·', '1974', tween(u, 0.1, 0.5, ease.linear));
     },
   },
@@ -101,7 +101,7 @@ export const scenes = [
       if (help > 0 && ok < 1) { ctx.save(); ctx.globalAlpha = 1 - ok; k.figure(ctx, 420, 800, { robe: '#1a1a1a', inner: '#1a1a1a', sash: '#1a1a1a', hat: 'cap', hatColor: '#1a1a1a', skin: '#1a1a1a', s: 0.9, face: 1, armF: [1.5, 0.3] }); ctx.restore(); }
       ctx.restore();
       const np = tween(u, ne - 0.3, se + 0.4, ease.outBack); if (np > 0) { ctx.save(); ctx.translate(800, 960); ctx.scale(np, np); k.newspaper(ctx, 0, 0, 300, 0.08, 'SAVED!', 'THE EVENING PAPER'); ctx.restore(); }
-      k.label(ctx, 'WASHINGTON STATE · SUMMER 1974', W / 2, 1080, 16, tween(u, se, se + 0.4));
+      k.label(ctx, 'WASHINGTON STATE · JUNE 1974', W / 2, 1080, 16, tween(u, se, se + 0.4));
     },
   },
   { // 23.6 "Soon, people called it the Heimlich maneuver, a trick tested on dogs, now taught around the world."

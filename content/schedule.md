@@ -205,6 +205,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-03-03 Wed | 8:00 PM | Thu Mar 4, 9:00 AM | TikTok | Every box of bandages in your drawer traces back to one man who did not want his wife to keep hurting. | content/posts/2026-11-24-band-aid-ottoman.md | ready |
 | 2027-03-04 Thu | 7:00 PM | Fri Mar 5, 8:00 AM | Instagram Reels | One long strip of tape. Small squares of gauze. An idea from 1920. | content/posts/2026-11-24-band-aid-ottoman.md | ready |
 | 2027-03-04 Thu | 8:00 PM | Fri Mar 5, 9:00 AM | Facebook Reels | Did you know Band-Aid brand adhesive bandages began as a gift for a spouse? | content/posts/2026-11-24-band-aid-ottoman.md | ready |
+| 2027-03-05 Fri | 7:00 PM | Sat Mar 6, 8:00 AM | YouTube Shorts | A Trick Tested Only on Dogs Became the Heimlich Maneuver | content/posts/2026-11-24-heimlich-ottoman.md | ready |
+| 2027-03-05 Fri | 8:00 PM | Sat Mar 6, 9:00 AM | TikTok | The famous choking rescue you have heard of started as an essay that said "tested only on dogs." | content/posts/2026-11-24-heimlich-ottoman.md | ready |
+| 2027-03-06 Sat | 7:00 PM | Sun Mar 7, 8:00 AM | Instagram Reels | A journal page, a row of beagles, and a cork that pops. | content/posts/2026-11-24-heimlich-ottoman.md | ready |
+| 2027-03-06 Sat | 8:00 PM | Sun Mar 7, 9:00 AM | Facebook Reels | Did you know the name "Heimlich maneuver" started in a magazine essay? | content/posts/2026-11-24-heimlich-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
