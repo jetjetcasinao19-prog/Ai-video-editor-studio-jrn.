@@ -177,6 +177,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-02-17 Wed | 8:00 PM | Thu Feb 18, 9:00 AM | TikTok | A spring fell, and instead of landing, it walked. | content/posts/2026-11-24-slinky-ottoman.md | ready |
 | 2027-02-18 Thu | 7:00 PM | Fri Feb 19, 8:00 AM | Instagram Reels | Down the stairs, end over end. | content/posts/2026-11-24-slinky-ottoman.md | ready |
 | 2027-02-18 Thu | 8:00 PM | Fri Feb 19, 9:00 AM | Facebook Reels | Did you know a classic American toy started as a mistake? | content/posts/2026-11-24-slinky-ottoman.md | ready |
+| 2027-02-19 Fri | 7:00 PM | Sat Feb 20, 8:00 AM | YouTube Shorts | Why the Stethoscope Exists | content/posts/2026-11-24-stethoscope-ottoman.md | ready |
+| 2027-02-19 Fri | 8:00 PM | Sat Feb 20, 9:00 AM | TikTok | Doctors used to press an ear against your chest. One of them found that too awkward. | content/posts/2026-11-24-stethoscope-ottoman.md | ready |
+| 2027-02-20 Sat | 7:00 PM | Sun Feb 21, 8:00 AM | Instagram Reels | Paper, a tube, and a very awkward moment. | content/posts/2026-11-24-stethoscope-ottoman.md | ready |
+| 2027-02-20 Sat | 8:00 PM | Sun Feb 21, 9:00 AM | Facebook Reels | Did you know the stethoscope started with a doctor who felt awkward? | content/posts/2026-11-24-stethoscope-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
