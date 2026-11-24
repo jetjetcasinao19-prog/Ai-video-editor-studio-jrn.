@@ -131,6 +131,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-01-17 Sun | 8:00 PM | Mon Jan 18, 9:00 AM | MindTrace | TikTok | The U.S. government once paid psychics to spy for it. | content/posts/2026-11-24-stargate-inkblot.md | ready |
 | 2027-01-18 Mon | 7:00 PM | Tue Jan 19, 8:00 AM | MindTrace | Instagram Reels | Project Stargate: why vague feels accurate | content/posts/2026-11-24-stargate-inkblot.md | ready |
 | 2027-01-18 Mon | 8:00 PM | Tue Jan 19, 9:00 AM | MindTrace | Facebook Reels | The U.S. paid psychics to spy for 20 years. | content/posts/2026-11-24-stargate-inkblot.md | ready |
+| 2027-01-19 Tue | 7:00 PM | Wed Jan 20, 8:00 AM | MindTrace | YouTube Shorts | The Most Famous Psychology Experiment Was Partly Staged (Stanford Prison) | content/posts/2026-11-24-stanford-prison-inkblot.md | ready |
+| 2027-01-19 Tue | 8:00 PM | Wed Jan 20, 9:00 AM | MindTrace | TikTok | The most famous psychology experiment was partly staged. | content/posts/2026-11-24-stanford-prison-inkblot.md | ready |
+| 2027-01-20 Wed | 7:00 PM | Thu Jan 21, 8:00 AM | MindTrace | Instagram Reels | What really happened in the Stanford Prison Experiment | content/posts/2026-11-24-stanford-prison-inkblot.md | ready |
+| 2027-01-20 Wed | 8:00 PM | Thu Jan 21, 9:00 AM | MindTrace | Facebook Reels | The most famous psychology experiment was partly staged. | content/posts/2026-11-24-stanford-prison-inkblot.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
