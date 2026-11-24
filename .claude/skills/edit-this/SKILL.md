@@ -17,6 +17,28 @@ every step below without asking questions you can answer yourself. Ask only
 for things that are truly theirs to decide (see step 7). Follow CLAUDE.md
 (honesty: never say something worked unless you checked it).
 
+## Retention rules (read first)
+**Why:** YouTube Studio (Nov 2026) showed **85.1% of viewers swiping away**
+from the owner's Shorts; healthy Shorts keep 70%+. People decide in the
+first second, so every edit follows these rules:
+1. **The video starts on the hook**, the most surprising line or moment, at
+   0.0 s. Cut any "hi guys", setup or silence before it (the pipeline's pause
+   cutting handles gaps; trim the start of the source if the hook is later).
+   If the best line is in the middle, tell the owner and suggest re-recording
+   with it first.
+2. **No intro card in front of a Short.** An intro card delays the hook.
+   Put the hook words on screen *over* the first second instead: a text
+   pop-up at `"at": 0.05` (max ~20 characters), e.g. `"THIS GLUE FAILED"`.
+   Keep `--title` intro cards for long YouTube videos.
+3. **Name the thing in the first 2 s** (the product, person or idea).
+4. **25–45 s for Shorts/Reels** while the channel is growing
+   (`--max-length 45`); TikTok up to 60.
+5. **Something new every 2–3 s**: punch zoom, B-roll, pop-up or cut.
+6. **Captions: short lines** (the brand `creator` style, word highlight),
+   clear of the bottom 20% and right edge where the app's buttons are.
+7. **One channel, one promise**: origin stories → How it Started; psychology,
+   habits, the mind → MindTrace. Never post a psychology topic on How it Started.
+
 ## 1. Find the video
 In this order:
 1. A video file the owner attached or named in this conversation.
@@ -54,8 +76,8 @@ Read the owner's request: platform → format, any length or style wishes.
 - Format: Reels / TikTok / Shorts / Stories → `9:16` [default];
   YouTube → `16:9`; feed post → `1:1`.
 - Captions: from the brand kit [default `creator`, word highlight]; `box`, `classic`, `none` when asked.
-- `--max-length 60` for Shorts/Reels unless they asked otherwise; TikTok up to
-  `--max-length 90`; YouTube: no limit.
+- `--max-length 45` for Shorts/Reels unless they asked otherwise (retention
+  rule 4); TikTok up to `--max-length 60`; YouTube: no limit.
 - Language: the target audience is the US, so use `--language en` unless the
   owner says the video is in another language; `--language tl` for Tagalog. Leave it
   out if unsure (auto-detect).
@@ -64,7 +86,7 @@ Read the owner's request: platform → format, any length or style wishes.
 
 ## 5. First pass (no intro yet)
 ```bash
-node pipeline/edit.mjs "<video>" --out output/<slug> --format 9:16 --max-length 60
+node pipeline/edit.mjs "<video>" --out output/<slug> --format 9:16 --max-length 45
 ```
 Transcription uses OmniRoute first when `OMNIROUTE_URL` is set (the owner's
 own AI gateway; see docs/AI-WORKFLOW.md), then Groq (`whisper-large-v3-turbo`)
@@ -79,9 +101,9 @@ Read `output/<slug>/report.md` (transcript, what was cut). Then, as the
 - Check the transcript for mistakes (names, terms like "Zeigarnik"). If unsure,
   cross-check a phrase with a bigger Whisper model. Fix them for the burned-in
   captions with `--fix "wrong words=right words"` (repeatable) in the final pass.
-- Decide whether an intro card helps: skip it when the video already opens with
-  a strong spoken hook (an intro delays the hook); keep the total under 60 s for
-  Shorts/Reels.
+- Shorts/Reels/TikTok: **no intro card** (retention rule 2). Put the hook on
+  screen as a pop-up at `"at": 0.05` instead, and keep the total at 25–45 s.
+  An intro card (`--title`) is only for long 16:9 YouTube videos.
 
 ## 7. Plan the effects (zoom, B-roll, text pop-ups, sound, progress bar)
 Effects keep viewers watching. The brand kit (`brand.json` → `effects`) turns
@@ -114,8 +136,8 @@ after cuts — the same timeline the plan uses) and write
   Skip B-roll for animated videos (real photos clash with the art style).
 - **Check B-roll**: look at the downloaded image in the contact sheet; if it
   does not match the moment, change the query and render again.
-- **Text pop-ups**: 3–6 key words or numbers (max ~20 characters) placed
-  0.1–0.3 s before the word is spoken. They appear at the top, in the brand
+- **Text pop-ups**: the hook at `0.05` s (retention rule 2), then 3–6 key
+  words or numbers (max ~20 characters) placed 0.1–0.3 s before the word is spoken. They appear at the top, in the brand
   accent colour, with a pop sound.
 - **Sound effects** (`--sfx` / `--no-sfx`): whoosh on zoom moves and B-roll,
   pop on pop-ups. Made by the pipeline itself (no licence needed).
@@ -127,16 +149,17 @@ after cuts — the same timeline the plan uses) and write
 
 ## 8. Final pass with the HyperFrames intro card (and brand outro)
 ```bash
-node pipeline/edit.mjs "<video>" --out output/<slug> --format 9:16 --max-length 60 \
-  --title "<hook title>" --subtitle "<optional second line>" --fix "wrong=right" \
-  --plan output/<slug>/plan.json --zoom punch
+node pipeline/edit.mjs "<video>" --out output/<slug> --format 9:16 --max-length 45 \
+  --fix "wrong=right" --plan output/<slug>/plan.json --zoom punch
+# long 16:9 YouTube videos only: add --title "<hook title>" --subtitle "<second line>"
 ```
 Then **check the result yourself** before showing it:
 ```bash
 ffmpeg -loglevel error -y -i output/<slug>/final.mp4 \
   -vf "fps=1/2,scale=216:-1,tile=6x2:padding=4" -frames:v 1 output/<slug>/contact.png
 ```
-Look at `contact.png` and `thumbnail.jpg` with the Read tool: intro readable,
+Look at `contact.png` and `thumbnail.jpg` with the Read tool: the first frame
+shows the hook pop-up and the subject (would you stop scrolling?), intro readable,
 captions readable and not covering faces, watermark not covering anything
 important, outro shows the right @handle, picture framed well, pop-ups not
 covering faces, B-roll matching what is said, zoom not cutting off important

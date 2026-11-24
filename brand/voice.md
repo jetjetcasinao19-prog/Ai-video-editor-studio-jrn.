@@ -31,7 +31,10 @@ titles, descriptions, hashtags and comment replies. Edit freely.
 - Short sentences. One idea per sentence.
 - Use "you". Avoid jargon; explain any technical word in a few words.
 
-## Hook titles (intro card, max ~40 characters)
+## Hook titles (hook card / pop-up, max ~40 characters)
+- The hook is the **first spoken line** and the **3–7 big words on screen in
+  the first second**. 85% of viewers swiped away in Nov 2026 when videos opened
+  on dates, names or slow scenery. Name the thing and the surprise at once.
 - Lead with the surprising beginning: "He was rejected 30 times", "It started
   in a garage", "This snack was a mistake", "Why Monday starts the week".
 - Short, curiosity first, no spoilers of the ending. No clickbait the video

@@ -28,7 +28,10 @@ comment replies. Edit freely.
 - Short sentences. One idea per sentence.
 - Use "you". Explain any technical word in a few words.
 
-## Hook titles (intro card, max ~40 characters)
+## Hook titles (hook card / pop-up, max ~40 characters)
+- The hook is the **first spoken line** and the **3–7 big words on screen in
+  the first second**. 85% of viewers swiped away in Nov 2026 when videos opened
+  on dates, names or slow scenery. Name the thing and the surprise at once.
 - Lead with the surprising effect on *you*: "Your brain keeps a hidden list",
   "One word makes people say yes", "Why you remember the bad day".
 - Curiosity first, no spoilers. No clickbait the video doesn't deliver.

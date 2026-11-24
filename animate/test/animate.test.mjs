@@ -14,6 +14,8 @@ import { createCanvas } from '@napi-rs/canvas';
 import { blot } from '../styles/inkblot/kit.mjs';
 import { roman } from '../styles/inkblot/page.mjs';
 import { ebru, groupLines, LAYOUT } from '../styles/ottoman/page.mjs';
+import { retentionCheck, hookUntil, hookCard } from '../lib/retention.mjs';
+import { HOOK_THEME } from '../styles/ottoman/index.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT = path.join(HERE, '..', 'projects', 'bubble-wrap');
@@ -69,6 +71,50 @@ test('two channels: Ottoman shorts use How it Started, INKBLOT shorts use MindTr
     assert.ok(fs.existsSync(p.meta.brand.logo), path.basename(PROJ) + ' logo exists');
     assert.ok(p.meta.outro.text, path.basename(PROJ) + ' has an outro line');
   }
+});
+
+test('retention check: flags a missing hook, late voice, long video, slow first shot, date header', () => {
+  const words = [{ w: 'In', start: 0.9, end: 1.1 }, { w: '1906.', start: 1.1, end: 1.6 }, { w: 'end.', start: 47, end: 48 }];
+  const scenes = [{ start: 0, title: 'Congress · 1906' }, { start: 3.4, title: 'B' }, { start: 9, title: 'C' }];
+  const w = retentionCheck({ duration: 50, captionChars: 30 }, scenes, words).join('\n');
+  for (const re of [/no hook card/, /voice starts at 0\.90/, /runs 48\.0 s/, /first shot holds 3\.4/, /scene 1 "B" holds 5\.6/, /first header/, /captionChars 30/]) assert.match(w, re);
+  const good = retentionCheck({ duration: 30, hook: { text: 'This glue was a *FAILURE*' } }, [{ start: 0, title: 'Post-it Notes' }, { start: 2.2, title: 'B' }, { start: 4.5, title: 'C' }], [{ w: 'This', start: 0.1, end: 0.3 }, { w: 'glue.', start: 0.3, end: 0.8 }, { w: 'end.', start: 27, end: 28 }]);
+  assert.deepEqual(good, []);
+  assert.match(retentionCheck({ duration: 30, hook: { text: 'one two three four five six seven eight' } }, [{ start: 0, title: 'x' }], []).join(), /8 words/);
+});
+
+test('hook card: shows on frame 0, ends after the first sentence, then is gone', () => {
+  const words = [{ w: 'This', start: 0, end: 0.2 }, { w: 'failure.', start: 0.9, end: 1.5 }, { w: 'Now', start: 1.7, end: 1.9 }];
+  assert.equal(hookUntil({ text: 'x' }, words), 1.65);
+  assert.equal(hookUntil({ text: 'x', until: 2 }, words), 2);
+  const cv = createCanvas(1080, 1920), ctx = cv.getContext('2d');
+  const area = LAYOUT.paint, sum = () => { const d = ctx.getImageData(area.x, area.y, area.w, 400).data; let n = 0; for (let i = 0; i < d.length; i += 16) n += d[i] + d[i + 1] + d[i + 2]; return n; };
+  ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, 1080, 1920);
+  assert.equal(hookCard(ctx, { text: 'This glue was a *FAILURE*' }, 0, 1.65, area, HOOK_THEME), true);
+  const drawn = sum();
+  ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, 1080, 1920);
+  const blank = sum();
+  assert.ok(drawn < blank * 0.8, 'the dark band and words are painted at t = 0');
+  assert.equal(hookCard(ctx, { text: 'x' }, 1.7, 1.65, area, HOOK_THEME), false);
+  assert.equal(sum(), blank, 'nothing is drawn after the hook ends');
+});
+
+test('captions: a line that fits after shrinking is drawn on ONE row (no early wrap)', async () => {
+  const { registerFonts } = await import('../styles/ottoman/index.mjs');
+  const { fitSize, GAP } = await import('../lib/retention.mjs');
+  const { CAPTION_SAFE_W } = await import('../styles/ottoman/page.mjs');
+  registerFonts();
+  const ctx = createCanvas(10, 10).getContext('2d'), font = s => `900 ${s}px Display`;
+  for (const words of [['His', 'bookmarks', 'keep'], ['Spencer', 'Silver,'], ['Then', 'it', 'clicks.']]) {
+    const size = fitSize(ctx, words, font, CAPTION_SAFE_W, 88, 62);
+    const w = words.reduce((a, x) => a + ctx.measureText(x).width, 0) + size * GAP * (words.length - 1);
+    assert.ok(w <= CAPTION_SAFE_W + 0.5, words.join(' ') + ' fits at ' + size + 'px');
+  }
+});
+
+test('captions: one short line at a time (captionChars 18)', () => {
+  const words = 'A 3M scientist, Spencer Silver, tries to make a super strong glue.'.split(' ').map((w, i) => ({ w, start: i * 0.3, end: i * 0.3 + 0.25 }));
+  for (const line of groupLines(words, 18)) assert.ok(line.map(w => w.w).join(' ').length <= 18 || line.length === 1);
 });
 
 test('ebru marbling is deterministic', () => {
