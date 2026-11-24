@@ -201,6 +201,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-03-01 Mon | 8:00 PM | Tue Mar 2, 9:00 AM | TikTok | Quick word-origin check: "vaccine" has nothing to do with a lab. It comes from the Latin word for cow. | content/posts/2026-11-24-vaccine-ottoman.md | ready |
 | 2027-03-02 Tue | 7:00 PM | Wed Mar 3, 8:00 AM | Instagram Reels | A spotted cow, a village in Gloucestershire, and a pamphlet from 1798. | content/posts/2026-11-24-vaccine-ottoman.md | ready |
 | 2027-03-02 Tue | 8:00 PM | Wed Mar 3, 9:00 AM | Facebook Reels | Did you know the word "vaccine" comes from a cow? | content/posts/2026-11-24-vaccine-ottoman.md | ready |
+| 2027-03-03 Wed | 7:00 PM | Thu Mar 4, 8:00 AM | YouTube Shorts | The Band-Aid Was Invented Out of Love | content/posts/2026-11-24-band-aid-ottoman.md | ready |
+| 2027-03-03 Wed | 8:00 PM | Thu Mar 4, 9:00 AM | TikTok | Every box of bandages in your drawer traces back to one man who did not want his wife to keep hurting. | content/posts/2026-11-24-band-aid-ottoman.md | ready |
+| 2027-03-04 Thu | 7:00 PM | Fri Mar 5, 8:00 AM | Instagram Reels | One long strip of tape. Small squares of gauze. An idea from 1920. | content/posts/2026-11-24-band-aid-ottoman.md | ready |
+| 2027-03-04 Thu | 8:00 PM | Fri Mar 5, 9:00 AM | Facebook Reels | Did you know Band-Aid brand adhesive bandages began as a gift for a spouse? | content/posts/2026-11-24-band-aid-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
