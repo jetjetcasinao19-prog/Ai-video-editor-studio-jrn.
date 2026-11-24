@@ -24,6 +24,57 @@ below without asking questions you can answer yourself:
 - **Finish the whole job**: render → check → send the MP4 → publisher agent
   writes post copy + schedule rows (step 7) → commit and push.
 
+## Retention rules — read before writing anything
+**Why:** in November 2026 YouTube Studio showed **85.1% of viewers swiped
+away** from How it Started (only 14.9% stayed). People decide in the first
+second. Healthy Shorts keep 70%+. Every new short follows these rules, and
+`node render.mjs <project> --check` warns when one is broken (it also runs
+before every `--sheet` and render). A warning may stay only with a reason
+you can tell the owner.
+
+**The script (voice-over)**
+1. **Line 1 is the hook**, spoken in the first second: the familiar thing +
+   the surprise, 4–9 words. "This glue was a failure." / "One word makes
+   people say yes." Never open on a date, a name or "In 1906…" — dates
+   come after the hook.
+2. **Name the thing early.** Viewers must know what the story is about by
+   2 s (Post-it Notes, basketball, Taps, the Zeigarnik effect). Nobody swipes
+   to keep watching "Art Fry".
+3. **25–40 s of voice** (45 s max). Cut setup, side facts and repeated ideas;
+   keep: hook → humble start → problem → turning point → payoff.
+4. **An open question every ~8 s** ("But 3M had a problem…", "Then it clicked.")
+   so there is always a reason to keep watching.
+5. **The last line pays off the first** (and ideally loops into it), then the
+   call to action. No long goodbye.
+6. If the owner sends a voice-over that breaks 1–3, make the video anyway and
+   say in one line what would make the next one stronger. With `voice.mjs`
+   (script only) you write the script, so follow the rules.
+7. Trim silence so the **first word lands in the first 0.4 s**
+   (`ffmpeg -ss <s> -i voice.mp3 …`, then transcribe again).
+
+**The picture**
+8. **`meta.hook`** — the hook card, on screen from frame 0 until the first
+   sentence ends: `hook: { text: 'This glue was a *FAILURE*' }` (3–7 words,
+   `*word*` or `*several words*` = accent colour; optional `until` seconds,
+   `y` 0–1 position in the painting, `label`). Usually the spoken hook,
+   shortened. It must not give away the ending.
+9. **First scene title = the thing's name** ("POST-IT NOTES", "THE ZEIGARNIK
+   EFFECT"), never a date or a person. Dates go in later headers or stamps.
+10. **The first shot shows the subject BIG** (at least half the painting
+    width) and something moves in the first 0.3 s (a pop, a tip, a stamp,
+    a zoom). No slow establishing shots at the start.
+11. **Something new every 2–3 s**: a cut, a camera move, a stamp, a pop. No
+    scene holds more than 4.5 s (except the outro).
+12. **Captions**: `captionChars: 18` (one big bold line). They sit inside
+    the safe area (x 120–960, above y 1580), so YouTube's buttons and
+    title don't cover them. Don't move important things into the bottom
+    20% or the right 120 px of the frame.
+
+**The channel**
+13. One channel, one promise: origin stories → How it Started (OTTOMAN);
+    psychology / habits / the mind → MindTrace (INKBLOT). Never post a
+    psychology topic on How it Started.
+
 # Animated short from a voice-over — all code
 
 The owner records or generates a voice-over (often ElevenLabs) and wants a
@@ -78,7 +129,8 @@ also pasted the script, use its spelling. Note the word times — scenes
 are cut on them.
 
 ## 3. Plan the scenes (before writing code)
-Write a short beat list: one scene per sentence or idea, **2–4 s each**
+Check the script against the retention rules above first (hook in line 1,
+the thing named by 2 s, 25–40 s). Then write a short beat list: one scene per sentence or idea, **2–4 s each**
 (fast-cut reel pacing), cut ~0.1 s before the first word of the beat. For each
 scene pick: chapter title (header text), what is painted, what moves, which
 spoken word triggers the key moment, the transition, the sound effects.
@@ -95,6 +147,8 @@ Start from `projects/bubble-wrap/story.mjs`. It exports:
   Started, 'mindtrace' = MindTrace: logo, handle, tagline and outro text come
   from that kit), `outro: { at }` (when the call to action types into the
   caption panel; `text` only to override the kit's).
+- `hook` — the hook card (retention rule 8): `{ text: 'This glue was a *FAILURE*' }`.
+- `captionChars: 18` — one big caption line at a time (the default).
 - `scenes` — `{ start, title, trans, draw(ctx, u, S) }`. `u` = seconds into
   the scene. `S.at('word')` = when that word is spoken (sync moments to it).
   `S.cam(zoom, cx, cy)` = camera. `S.k` = the style kit, `S.P` = palette,
@@ -117,10 +171,14 @@ Use helpers from the kit before drawing by hand. Animation tools are in
 
 ## 5. Look, fix, repeat
 ```bash
+node render.mjs projects/<slug> --check            # retention warnings only
+node render.mjs projects/<slug> --stills 0,1        # the first second: hook card readable? subject big?
 node render.mjs projects/<slug> --sheet            # one frame per scene → build/sheet.png
 node render.mjs projects/<slug> --stills 3.2,14,41 # full-size PNGs → build/stills/
 ```
-Open the images (Read tool) and check: nothing important hidden behind the
+Open the images (Read tool) and check: **frame 0 makes you want to watch**
+(hook card readable at a glance, subject big, nothing important covered by
+the hook band), nothing important hidden behind the
 header/caption panels, text fits, figures readable at phone size, every
 scene different, the key moment lands on its word. Iterate until good.
 

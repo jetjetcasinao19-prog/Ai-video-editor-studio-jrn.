@@ -11,7 +11,9 @@ export const meta = {
   duration: 53.2,
   voice: 'voice.mp3',
   seed: 27,
-  captionChars: 24,
+  captionChars: 18, // one big caption line at a time
+  // hook card: big words on frame 0 (what people see before they decide to swipe)
+  hook: { text: "A to-do list *you never wrote*" },
   caseLine: 'THE MIND FILES  ·  CASE No. 1927  ·  CONFIDENTIAL',
   brandKit: 'mindtrace', // MindTrace (brand/mindtrace/): logo, handle, tagline, outro text
   outro: { at: 49.5 },

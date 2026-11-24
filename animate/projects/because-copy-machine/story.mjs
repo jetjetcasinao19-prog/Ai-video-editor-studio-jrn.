@@ -12,7 +12,9 @@ export const meta = {
   duration: 63.8,
   voice: 'voice.mp3',
   seed: 33,
-  captionChars: 24,
+  captionChars: 18, // one big caption line at a time
+  // hook card: big words on frame 0 (what people see before they decide to swipe)
+  hook: { text: "One word makes people say *YES*" },
   caseLine: 'THE MIND FILES  ·  CASE No. 1978  ·  CONFIDENTIAL',
   brandKit: 'mindtrace', // MindTrace (brand/mindtrace/): logo, handle, tagline, outro text
   outro: { at: 61.3 },

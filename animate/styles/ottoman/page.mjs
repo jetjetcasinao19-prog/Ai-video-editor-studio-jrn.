@@ -3,6 +3,7 @@
 // (cetvel), the caption panel and the footer band with the progress reed.
 import { createCanvas } from '@napi-rs/canvas';
 import { TAU, clamp, lerp, rng, ease } from '../../lib/core.mjs';
+import { fitSize, GAP } from '../../lib/retention.mjs';
 import { P, cartouche, circle, ellipse, stroke, fillStroke, shade, tulip, carnation } from './kit.mjs';
 
 export const LAYOUT = {
@@ -165,7 +166,7 @@ export function headerText(ctx, text, k = 1) {
   ctx.beginPath(); ctx.rect(cx - 320, cy - 50, 640, 100); ctx.clip();
   const e = ease.outCubic(clamp(k));
   ctx.globalAlpha = e; ctx.translate(cx, cy + (1 - e) * 30);
-  let size = 46; ctx.font = `900 ${size}px Deco`;
+  let size = 54; ctx.font = `900 ${size}px Deco`;
   while (ctx.measureText(text).width > 600 && size > 22) { size -= 2; ctx.font = `900 ${size}px Deco`; }
   ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
   ctx.fillStyle = P.verm; ctx.fillText(text, 0, 0);
@@ -179,31 +180,34 @@ export function progress(ctx, k) {
   circle(ctx, x1, y, 7, P.verm, P.goldDeep, 1.5);
 }
 
-// Word-by-word caption with the spoken word in vermilion.
+// Word-by-word caption with the spoken word in vermilion: ONE big bold line
+// (Playfair Display 900, shrinks to fit instead of wrapping), kept inside
+// x 120–960 so YouTube's like/comment buttons on the right never cover it.
+export const CAPTION_SAFE_W = 840;
 export function captions(ctx, lines, t) {
   const cp = LAYOUT.caption;
   const line = lines.findLast(l => t >= l[0].start - 0.15 && t < l[l.length - 1].end + 0.35) || null;
   if (!line) return false;
-  const size = 70; ctx.font = `700 ${size}px Garamond`;
-  const space = size * 0.36;
-  // wrap into rows that fit the panel
-  const rows = [[]]; let w = 0;
-  for (const word of line) { const ww = ctx.measureText(word.w).width; if (w + ww > cp.w - 90 && rows[rows.length - 1].length) { rows.push([]); w = 0; } rows[rows.length - 1].push({ ...word, ww }); w += ww + space; }
-  const lh = size * 1.12, y0 = cp.y + cp.h / 2 - (rows.length - 1) * lh / 2 + 4;
-  const fadeIn = clamp((t - (line[0].start - 0.15)) / 0.15);
+  const font = s => `900 ${s}px Display`;
+  const size = fitSize(ctx, line.map(w => w.w), font, CAPTION_SAFE_W, 88, 62);
+  const space = size * GAP;
+  const rows = [[]]; let w = 0; // still wraps if one row cannot fit at the minimum size
+  for (const word of line) { const ww = ctx.measureText(word.w).width; if (w + ww > CAPTION_SAFE_W + 0.5 && rows[rows.length - 1].length) { rows.push([]); w = 0; } rows[rows.length - 1].push({ ...word, ww }); w += ww + space; }
+  const lh = size * 1.08, y0 = cp.y + cp.h / 2 - (rows.length - 1) * lh / 2 - 4;
+  const fadeIn = clamp((t - (line[0].start - 0.15)) / 0.12);
   // only the newest word that has started is highlighted
   const cur = line.findLast(w => t >= w.start);
   ctx.save(); ctx.textBaseline = 'middle'; ctx.globalAlpha = fadeIn;
   rows.forEach((row, ri) => {
     const total = row.reduce((s, x) => s + x.ww, 0) + space * (row.length - 1);
-    let x = cp.x + cp.w / 2 - total / 2;
+    let x = LAYOUT.W / 2 - total / 2;
     for (const word of row) {
       const active = cur && word.start === cur.start && t < word.end + 0.3, said = t >= word.start;
-      const k = active ? ease.outBack(clamp((t - word.start) / 0.18)) : 0;
-      ctx.save(); ctx.translate(x + word.ww / 2, y0 + ri * lh - k * 6); ctx.scale(1 + k * 0.06, 1 + k * 0.06);
+      const k = active ? ease.outBack(clamp((t - word.start) / 0.16)) : 0;
+      ctx.save(); ctx.translate(x + word.ww / 2, y0 + ri * lh - k * 8); ctx.scale(1 + k * 0.06, 1 + k * 0.06);
       ctx.textAlign = 'center';
-      if (active) { ctx.beginPath(); ctx.moveTo(-word.ww / 2, size * 0.42); ctx.quadraticCurveTo(0, size * 0.58, word.ww / 2, size * 0.42); stroke(ctx, P.gold, 4); }
-      ctx.fillStyle = active ? P.verm : said ? P.ink : 'rgba(42,28,18,0.38)';
+      if (active) { ctx.beginPath(); ctx.moveTo(-word.ww / 2, size * 0.46); ctx.quadraticCurveTo(0, size * 0.62, word.ww / 2, size * 0.46); stroke(ctx, P.gold, 6); }
+      ctx.fillStyle = active ? P.verm : said ? P.ink : 'rgba(42,28,18,0.55)';
       ctx.fillText(word.w, 0, 0);
       ctx.restore();
       x += word.ww + space;

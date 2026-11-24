@@ -11,7 +11,9 @@ export const meta = {
   duration: 54.4,
   voice: 'voice.mp3',
   seed: 31,
-  captionChars: 30,
+  captionChars: 18, // one big caption line at a time
+  // hook card: big words on frame 0 (what people see before they decide to swipe)
+  hook: { text: 'This glue was a *FAILURE*' },
   brandKit: '', // How it Started (brand/): logo, handle, tagline, outro text
   outro: { at: 52.1 },
 };
@@ -77,7 +79,7 @@ function stall(ctx, u, S, flop) {
 
 export const scenes = [
   { // 0.0 "This glue was a failure."
-    start: 0, title: 'A Failed Glue',
+    start: 0, title: 'Post-it Notes',
     draw(ctx, u, S) {
       const { k, P, W } = S, fail = S.at('failure');
       S.cam(lerp(1.5, 1.05, tween(u, 0, 2.1, ease.inOut)), W / 2, lerp(520, 560, tween(u, 0, 2.1)));

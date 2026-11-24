@@ -7,6 +7,10 @@ import { GlobalFonts, loadImage } from '@napi-rs/canvas';
 import { TAU, clamp, ease, lerp } from '../../lib/core.mjs';
 import * as kit from './kit.mjs';
 import { LAYOUT, staticPage, paperTexture, headerText, captions, groupLines, progress, outroText } from './page.mjs';
+import { hookCard, hookUntil } from '../../lib/retention.mjs';
+
+// Hook card look: gold-on-lapis like the header plate, vermilion accent word.
+export const HOOK_THEME = { font: s => `900 ${s}px Display`, fill: '#f7eed6', accent: '#f2c94c', stroke: '#14213f', band: '#20408f', bandEdge: '#e2b84a', label: '#14213f' };
 
 const require = createRequire(import.meta.url);
 export function registerFonts() {
@@ -16,6 +20,7 @@ export function registerFonts() {
   f('@fontsource/cormorant-garamond', 'cormorant-garamond-latin-700-normal.woff2', 'Garamond');
   f('@fontsource/cormorant-garamond', 'cormorant-garamond-latin-600-italic.woff2', 'GaramondItalic');
   f('@fontsource/im-fell-english-sc', 'im-fell-english-sc-latin-400-normal.woff2', 'Fell');
+  f('@fontsource/playfair-display', 'playfair-display-latin-900-normal.woff2', 'Display'); // captions + hook card
 }
 
 const TRANS = 0.42; // seconds a transition takes
@@ -39,7 +44,8 @@ export async function createRenderer(project) {
   const page = staticPage({ seed: meta.seed || 11, handle: brand.handle, logo });
   const PA = LAYOUT.paint;
   const grain = paperTexture(PA.w, PA.h, 21);
-  const lines = groupLines(words, meta.captionChars || 30);
+  const lines = groupLines(words, meta.captionChars || 18);
+  const hookEnd = meta.hook ? hookUntil(meta.hook, words) : 0;
   const scenes = story.scenes.map((s, i, a) => ({ ...s, end: i + 1 < a.length ? a[i + 1].start : meta.duration }));
   const findWord = (re, after = 0) => { const w = words.find(x => x.start >= after - 0.05 && re.test(x.w)); return w ? w.start : null; };
 
@@ -93,6 +99,9 @@ export async function createRenderer(project) {
 
     // ---- chapter title, captions, progress ----
     headerText(ctx, sc.title, prev ? (t - sc.start) / 0.35 : 1);
+    // hook card over the top of the picture for the first second(s); the
+    // spoken captions keep running under it (sound-off viewers read both)
+    hookCard(ctx, meta.hook, t, hookEnd, PA, HOOK_THEME);
     const spoke = captions(ctx, lines, t);
     if (!spoke && meta.outro && t >= meta.outro.at) outroText(ctx, meta.outro.text, t - meta.outro.at);
     progress(ctx, t / meta.duration);

@@ -11,6 +11,10 @@ import { clamp, ease, lerp } from '../../lib/core.mjs';
 import { groupLines } from '../../lib/captions.mjs';
 import * as kit from './kit.mjs';
 import { LAYOUT, staticPage, headerText, captions, outroText, makePolygraph } from './page.mjs';
+import { hookCard, hookUntil } from '../../lib/retention.mjs';
+
+// Hook card look: a case-file label — ink band, paper text, red accent word.
+export const HOOK_THEME = { font: s => `900 ${s}px Display`, fill: '#f8f3e7', accent: '#ff5a5f', stroke: null, band: '#16141a', bandEdge: '#c61f2a', label: '#f8f3e7' };
 
 const require = createRequire(import.meta.url);
 export function registerFonts() {
@@ -33,7 +37,8 @@ export async function createRenderer(project) {
   const page = staticPage({ seed: meta.seed || 9, handle: brand.handle, logo, caseLine: meta.caseLine });
   const PA = LAYOUT.paint;
   const grain = kit.paperTexture(PA.w, PA.h, (meta.seed || 9) + 4);
-  const lines = groupLines(words, meta.captionChars || 26);
+  const lines = groupLines(words, meta.captionChars || 18);
+  const hookEnd = meta.hook ? hookUntil(meta.hook, words) : 0;
   const polygraph = makePolygraph(words, meta.duration);
   const scenes = story.scenes.map((s, i, a) => ({ ...s, i, end: i + 1 < a.length ? a[i + 1].start : meta.duration }));
   const findWord = (re, after = 0) => { const w = words.find(x => x.start >= after - 0.05 && re.test(x.w)); return w ? w.start : null; };
@@ -122,6 +127,7 @@ export async function createRenderer(project) {
     if (sc.over) { ctx.save(); ctx.translate(PA.x, PA.y); sc.over(ctx, t - sc.start, { W: PA.w, H: PA.h, k: kit, P: kit.P, t }); ctx.restore(); }
 
     headerText(ctx, sc.title, i + 1, prev ? (t - sc.start) / 0.5 : 1);
+    hookCard(ctx, meta.hook, t, hookEnd, PA, HOOK_THEME); // big words on frame 0
     const spoke = captions(ctx, lines, t);
     if (!spoke && meta.outro && t >= meta.outro.at) outroText(ctx, meta.outro.text, t - meta.outro.at);
     polygraph(ctx, t);

@@ -4,6 +4,7 @@
 // fold, typewriter captions and a polygraph strip whose pen ticks with the voice.
 import { createCanvas } from '@napi-rs/canvas';
 import { TAU, clamp, lerp, rng, ease, noise1 } from '../../lib/core.mjs';
+import { fitSize, GAP } from '../../lib/retention.mjs';
 import { P, rect, line, circle, text, font, blot, paperTexture, mirror, penLine } from './kit.mjs';
 
 export const LAYOUT = {
@@ -119,15 +120,20 @@ export function makePolygraph(words, duration) {
 }
 
 // Word-by-word typewriter captions: the spoken word in red with a marker swipe.
+// One big bold caption line (Playfair Display 900 — the typewriter face was
+// too thin to read at phone size), red marker on the spoken word, kept inside
+// x ≈ 150–960 so YouTube's buttons on the right never cover it.
+export const CAPTION_SAFE_W = 800;
 export function captions(ctx, lines, t) {
   const cp = LAYOUT.caption;
   const line_ = lines.findLast(l => t >= l[0].start - 0.15 && t < l[l.length - 1].end + 0.35) || null;
   if (!line_) return false;
-  const size = 66; font(ctx, size, 'type');
-  const space = size * 0.42;
+  const fnt = s => `900 ${s}px Display`;
+  const size = fitSize(ctx, line_.map(w => w.w), fnt, CAPTION_SAFE_W, 84, 60);
+  const space = size * GAP;
   const rows = [[]]; let w = 0;
-  for (const word of line_) { const ww = ctx.measureText(word.w).width; if (w + ww > cp.w - 130 && rows[rows.length - 1].length) { rows.push([]); w = 0; } rows[rows.length - 1].push({ ...word, ww }); w += ww + space; }
-  const lh = size * 1.18, y0 = cp.y + cp.h / 2 - (rows.length - 1) * lh / 2 + 4;
+  for (const word of line_) { const ww = ctx.measureText(word.w).width; if (w + ww > CAPTION_SAFE_W + 0.5 && rows[rows.length - 1].length) { rows.push([]); w = 0; } rows[rows.length - 1].push({ ...word, ww }); w += ww + space; }
+  const lh = size * 1.1, y0 = cp.y + cp.h / 2 - (rows.length - 1) * lh / 2 - 2;
   const fadeIn = clamp((t - (line_[0].start - 0.15)) / 0.12);
   const cur = line_.findLast(x => t >= x.start);
   ctx.save(); ctx.textBaseline = 'middle'; ctx.globalAlpha = fadeIn;
@@ -137,12 +143,12 @@ export function captions(ctx, lines, t) {
     for (const word of row) {
       const active = cur && word.start === cur.start && t < word.end + 0.3, said = t >= word.start;
       const k = active ? ease.outBack(clamp((t - word.start) / 0.16)) : 0;
-      ctx.save(); ctx.translate(x + word.ww / 2, y0 + ri * lh - k * 5); ctx.scale(1 + k * 0.07, 1 + k * 0.07);
+      ctx.save(); ctx.translate(x + word.ww / 2, y0 + ri * lh - k * 6); ctx.scale(1 + k * 0.06, 1 + k * 0.06);
       if (active) { // red marker swipe behind the word
-        ctx.save(); ctx.globalAlpha *= 0.22; rect(ctx, -word.ww / 2 - 10, -size * 0.42, (word.ww + 20) * clamp((t - word.start) / 0.14), size * 0.86, P.red, null, 0, 8); ctx.restore();
+        ctx.save(); ctx.globalAlpha *= 0.22; rect(ctx, -word.ww / 2 - 10, -size * 0.46, (word.ww + 20) * clamp((t - word.start) / 0.14), size * 0.92, P.red, null, 0, 8); ctx.restore();
       }
       ctx.textAlign = 'center';
-      ctx.fillStyle = active ? P.red : said ? P.ink : 'rgba(22,20,26,0.3)';
+      ctx.fillStyle = active ? P.red : said ? P.ink : 'rgba(22,20,26,0.5)';
       ctx.fillText(word.w, 0, 0);
       ctx.restore();
       x += word.ww + space;

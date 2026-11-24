@@ -8,6 +8,8 @@ import { spawn, spawnSync } from 'node:child_process';
 import { Worker } from 'node:worker_threads';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createCanvas } from '@napi-rs/canvas';
+import { retentionCheck } from './retention.mjs';
+export { retentionCheck };
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 export const ROOT = path.resolve(HERE, '..');
@@ -55,6 +57,14 @@ export function checkStory(meta, scenes, words) {
   return problems;
 }
 
+// Retention warnings (lib/retention.mjs): printed before a sheet or a render.
+export function logRetention(project, log = console.log) {
+  const warn = retentionCheck(project.meta, project.story.scenes, project.words);
+  if (warn.length) log('retention check — fix these or have a reason:\n  ⚠ ' + warn.join('\n  ⚠ '));
+  else log('retention check: ok');
+  return warn;
+}
+
 // ---------- stills / contact sheet ----------
 export async function stills(dir, times, outDir) {
   const project = await loadProject(dir);
@@ -70,6 +80,7 @@ export async function stills(dir, times, outDir) {
 }
 export async function contactSheet(dir, out, { cols = 5, scale = 0.25, times } = {}) {
   const project = await loadProject(dir);
+  logRetention(project);
   const fd = await makeFrameDrawer(project);
   const sc = project.story.scenes;
   times = times || sc.map((s, i) => { const end = i + 1 < sc.length ? sc[i + 1].start : project.meta.duration; return +(s.start + (end - s.start) * 0.6).toFixed(2); });
@@ -91,6 +102,7 @@ export async function render(dir, { out, build, workers = Math.max(1, os.cpus().
   const { meta, story, words } = project;
   const problems = checkStory(meta, story.scenes, words);
   if (problems.length) throw new Error('story problems:\n - ' + problems.join('\n - '));
+  logRetention(project, log);
   build = build || path.join(project.dir, 'build');
   fs.mkdirSync(build, { recursive: true });
   out = out || path.join(project.dir, 'out', (meta.slug || 'short') + '.mp4');
