@@ -1,0 +1,411 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "In 1950, the U.S. Navy sprayed bacteria over San Francisco. On purpose. It was called Operation Sea Spray. The test? How would a germ attack spread? The Army later estimated almost everyone in the city breathed it in. Soon after, a rare infection showed up at a local hospital. One patient, Edward Nevin, died. The Army denied any link. Here's the trick. Nobody complains about a test they don't know exists. It stayed secret until 1976. Follow for more dark psychology.",
+ "words": [
+  {
+   "w": "In",
+   "start": 0,
+   "end": 0.24
+  },
+  {
+   "w": "1950,",
+   "start": 0.24,
+   "end": 1.28
+  },
+  {
+   "w": "the",
+   "start": 1.44,
+   "end": 1.6
+  },
+  {
+   "w": "U.S.",
+   "start": 1.6,
+   "end": 1.94
+  },
+  {
+   "w": "Navy",
+   "start": 1.94,
+   "end": 2.32
+  },
+  {
+   "w": "sprayed",
+   "start": 2.32,
+   "end": 2.76
+  },
+  {
+   "w": "bacteria",
+   "start": 2.76,
+   "end": 3.5
+  },
+  {
+   "w": "over",
+   "start": 3.5,
+   "end": 3.76
+  },
+  {
+   "w": "San",
+   "start": 3.76,
+   "end": 4.02
+  },
+  {
+   "w": "Francisco.",
+   "start": 4.02,
+   "end": 4.76
+  },
+  {
+   "w": "On",
+   "start": 5.27,
+   "end": 5.4
+  },
+  {
+   "w": "purpose.",
+   "start": 5.4,
+   "end": 5.98
+  },
+  {
+   "w": "It",
+   "start": 6.49,
+   "end": 6.56
+  },
+  {
+   "w": "was",
+   "start": 6.56,
+   "end": 6.72
+  },
+  {
+   "w": "called",
+   "start": 6.72,
+   "end": 7.19
+  },
+  {
+   "w": "Operation",
+   "start": 7.41,
+   "end": 8.08
+  },
+  {
+   "w": "Sea",
+   "start": 8.08,
+   "end": 8.48
+  },
+  {
+   "w": "Spray.",
+   "start": 8.48,
+   "end": 8.9
+  },
+  {
+   "w": "The",
+   "start": 9.34,
+   "end": 9.46
+  },
+  {
+   "w": "test?",
+   "start": 9.46,
+   "end": 9.85
+  },
+  {
+   "w": "How",
+   "start": 10.32,
+   "end": 10.58
+  },
+  {
+   "w": "would",
+   "start": 10.58,
+   "end": 10.76
+  },
+  {
+   "w": "a",
+   "start": 10.76,
+   "end": 10.92
+  },
+  {
+   "w": "germ",
+   "start": 10.92,
+   "end": 11.24
+  },
+  {
+   "w": "attack",
+   "start": 11.24,
+   "end": 11.64
+  },
+  {
+   "w": "spread?",
+   "start": 11.64,
+   "end": 12.21
+  },
+  {
+   "w": "The",
+   "start": 12.97,
+   "end": 13.08
+  },
+  {
+   "w": "Army",
+   "start": 13.08,
+   "end": 13.3
+  },
+  {
+   "w": "later",
+   "start": 13.3,
+   "end": 13.6
+  },
+  {
+   "w": "estimated",
+   "start": 13.6,
+   "end": 14.12
+  },
+  {
+   "w": "almost",
+   "start": 14.12,
+   "end": 14.5
+  },
+  {
+   "w": "everyone",
+   "start": 14.5,
+   "end": 14.92
+  },
+  {
+   "w": "in",
+   "start": 14.92,
+   "end": 15.1
+  },
+  {
+   "w": "the",
+   "start": 15.1,
+   "end": 15.2
+  },
+  {
+   "w": "city",
+   "start": 15.2,
+   "end": 15.48
+  },
+  {
+   "w": "breathed",
+   "start": 15.48,
+   "end": 15.94
+  },
+  {
+   "w": "it",
+   "start": 15.94,
+   "end": 16.06
+  },
+  {
+   "w": "in.",
+   "start": 16.06,
+   "end": 16.35
+  },
+  {
+   "w": "Soon",
+   "start": 16.95,
+   "end": 17.16
+  },
+  {
+   "w": "after,",
+   "start": 17.16,
+   "end": 17.5
+  },
+  {
+   "w": "a",
+   "start": 17.5,
+   "end": 18.12
+  },
+  {
+   "w": "rare",
+   "start": 18.12,
+   "end": 18.4
+  },
+  {
+   "w": "infection",
+   "start": 18.4,
+   "end": 18.98
+  },
+  {
+   "w": "showed",
+   "start": 18.98,
+   "end": 19.3
+  },
+  {
+   "w": "up",
+   "start": 19.3,
+   "end": 19.52
+  },
+  {
+   "w": "at",
+   "start": 19.52,
+   "end": 19.62
+  },
+  {
+   "w": "a",
+   "start": 19.62,
+   "end": 19.7
+  },
+  {
+   "w": "local",
+   "start": 19.7,
+   "end": 19.94
+  },
+  {
+   "w": "hospital.",
+   "start": 19.94,
+   "end": 20.53
+  },
+  {
+   "w": "One",
+   "start": 20.98,
+   "end": 21.16
+  },
+  {
+   "w": "patient,",
+   "start": 21.16,
+   "end": 21.67
+  },
+  {
+   "w": "Edward",
+   "start": 21.94,
+   "end": 22.28
+  },
+  {
+   "w": "Nevin,",
+   "start": 22.28,
+   "end": 22.81
+  },
+  {
+   "w": "died.",
+   "start": 23,
+   "end": 23.52
+  },
+  {
+   "w": "The",
+   "start": 24.06,
+   "end": 24.16
+  },
+  {
+   "w": "Army",
+   "start": 24.16,
+   "end": 24.42
+  },
+  {
+   "w": "denied",
+   "start": 24.42,
+   "end": 24.86
+  },
+  {
+   "w": "any",
+   "start": 24.86,
+   "end": 25.12
+  },
+  {
+   "w": "link.",
+   "start": 25.12,
+   "end": 25.5
+  },
+  {
+   "w": "Here's",
+   "start": 26,
+   "end": 26.2
+  },
+  {
+   "w": "the",
+   "start": 26.2,
+   "end": 26.36
+  },
+  {
+   "w": "trick.",
+   "start": 26.36,
+   "end": 26.66
+  },
+  {
+   "w": "Nobody",
+   "start": 27.13,
+   "end": 27.44
+  },
+  {
+   "w": "complains",
+   "start": 27.44,
+   "end": 27.94
+  },
+  {
+   "w": "about",
+   "start": 27.94,
+   "end": 28.22
+  },
+  {
+   "w": "a",
+   "start": 28.22,
+   "end": 28.4
+  },
+  {
+   "w": "test",
+   "start": 28.4,
+   "end": 28.66
+  },
+  {
+   "w": "they",
+   "start": 28.66,
+   "end": 28.86
+  },
+  {
+   "w": "don't",
+   "start": 28.86,
+   "end": 29.1
+  },
+  {
+   "w": "know",
+   "start": 29.1,
+   "end": 29.28
+  },
+  {
+   "w": "exists.",
+   "start": 29.28,
+   "end": 30.06
+  },
+  {
+   "w": "It",
+   "start": 30.45,
+   "end": 30.56
+  },
+  {
+   "w": "stayed",
+   "start": 30.56,
+   "end": 30.86
+  },
+  {
+   "w": "secret",
+   "start": 30.86,
+   "end": 31.26
+  },
+  {
+   "w": "until",
+   "start": 31.26,
+   "end": 31.66
+  },
+  {
+   "w": "1976.",
+   "start": 31.66,
+   "end": 33.02
+  },
+  {
+   "w": "Follow",
+   "start": 33.46,
+   "end": 33.76
+  },
+  {
+   "w": "for",
+   "start": 33.76,
+   "end": 34
+  },
+  {
+   "w": "more",
+   "start": 34,
+   "end": 34.22
+  },
+  {
+   "w": "dark",
+   "start": 34.22,
+   "end": 34.6
+  },
+  {
+   "w": "psychology.",
+   "start": 34.6,
+   "end": 35.37
+  }
+ ]
+}

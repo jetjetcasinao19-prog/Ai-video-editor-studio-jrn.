@@ -143,6 +143,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-01-23 Sat | 8:00 PM | Sun Jan 24, 9:00 AM | MindTrace | TikTok | The US Army tried to scare enemy soldiers with ghosts. | content/posts/2026-11-25-wandering-soul-inkblot.md | ready |
 | 2027-01-24 Sun | 7:00 PM | Mon Jan 25, 8:00 AM | MindTrace | Instagram Reels | Operation Wandering Soul: the ghost tape | content/posts/2026-11-25-wandering-soul-inkblot.md | ready |
 | 2027-01-24 Sun | 8:00 PM | Mon Jan 25, 9:00 AM | MindTrace | Facebook Reels | The Army tried to scare soldiers with ghosts. | content/posts/2026-11-25-wandering-soul-inkblot.md | ready |
+| 2027-01-25 Mon | 7:00 PM | Tue Jan 26, 8:00 AM | MindTrace | YouTube Shorts | The Navy Sprayed Bacteria Over San Francisco (Operation Sea-Spray) | content/posts/2026-11-25-sea-spray-inkblot.md | ready |
+| 2027-01-25 Mon | 8:00 PM | Tue Jan 26, 9:00 AM | MindTrace | TikTok | In 1950, the U.S. Navy sprayed bacteria over San Francisco. | content/posts/2026-11-25-sea-spray-inkblot.md | ready |
+| 2027-01-26 Tue | 7:00 PM | Wed Jan 27, 8:00 AM | MindTrace | Instagram Reels | Operation Sea-Spray: the secret germ test | content/posts/2026-11-25-sea-spray-inkblot.md | ready |
+| 2027-01-26 Tue | 8:00 PM | Wed Jan 27, 9:00 AM | MindTrace | Facebook Reels | The Navy sprayed bacteria over San Francisco. On purpose. | content/posts/2026-11-25-sea-spray-inkblot.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
