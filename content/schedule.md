@@ -147,6 +147,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-01-25 Mon | 8:00 PM | Tue Jan 26, 9:00 AM | MindTrace | TikTok | In 1950, the U.S. Navy sprayed bacteria over San Francisco. | content/posts/2026-11-25-sea-spray-inkblot.md | ready |
 | 2027-01-26 Tue | 7:00 PM | Wed Jan 27, 8:00 AM | MindTrace | Instagram Reels | Operation Sea-Spray: the secret germ test | content/posts/2026-11-25-sea-spray-inkblot.md | ready |
 | 2027-01-26 Tue | 8:00 PM | Wed Jan 27, 9:00 AM | MindTrace | Facebook Reels | The Navy sprayed bacteria over San Francisco. On purpose. | content/posts/2026-11-25-sea-spray-inkblot.md | ready |
+| 2027-01-27 Wed | 7:00 PM | Thu Jan 28, 8:00 AM | MindTrace | YouTube Shorts | The CIA's Secret Psychological Warfare Manual (1984) | content/posts/2026-11-25-cia-manual-inkblot.md | ready |
+| 2027-01-27 Wed | 8:00 PM | Thu Jan 28, 9:00 AM | MindTrace | TikTok | In 1984, a secret CIA manual leaked. | content/posts/2026-11-25-cia-manual-inkblot.md | ready |
+| 2027-01-28 Thu | 7:00 PM | Fri Jan 29, 8:00 AM | MindTrace | Instagram Reels | The CIA manual that planned martyrs | content/posts/2026-11-25-cia-manual-inkblot.md | ready |
+| 2027-01-28 Thu | 8:00 PM | Fri Jan 29, 9:00 AM | MindTrace | Facebook Reels | In 1984, a secret CIA manual leaked. | content/posts/2026-11-25-cia-manual-inkblot.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the

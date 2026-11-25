@@ -1,0 +1,356 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "In 1984, a secret CIA manual leaked. It was a guide to psychological warfare. It was written for the Contras, rebels fighting Nicaragua's government. It talked about neutralizing officials, like judges and police. The darkest part? Push protesters into clashes with police, so someone dies and becomes a martyr. Here's the trick. A death sparks more anger than any speech. It became a national scandal. Follow for more dark psychology.",
+ "words": [
+  {
+   "w": "In",
+   "start": 0.04,
+   "end": 0.2
+  },
+  {
+   "w": "1984,",
+   "start": 0.2,
+   "end": 1.52
+  },
+  {
+   "w": "a",
+   "start": 1.74,
+   "end": 1.86
+  },
+  {
+   "w": "secret",
+   "start": 1.86,
+   "end": 2.36
+  },
+  {
+   "w": "CIA",
+   "start": 2.36,
+   "end": 2.96
+  },
+  {
+   "w": "manual",
+   "start": 2.96,
+   "end": 3.42
+  },
+  {
+   "w": "leaked.",
+   "start": 3.42,
+   "end": 4.01
+  },
+  {
+   "w": "It",
+   "start": 4.64,
+   "end": 4.74
+  },
+  {
+   "w": "was",
+   "start": 4.74,
+   "end": 4.86
+  },
+  {
+   "w": "a",
+   "start": 4.86,
+   "end": 5
+  },
+  {
+   "w": "guide",
+   "start": 5,
+   "end": 5.26
+  },
+  {
+   "w": "to",
+   "start": 5.26,
+   "end": 5.5
+  },
+  {
+   "w": "psychological",
+   "start": 5.5,
+   "end": 6.14
+  },
+  {
+   "w": "warfare.",
+   "start": 6.14,
+   "end": 6.97
+  },
+  {
+   "w": "It",
+   "start": 7.5,
+   "end": 7.6
+  },
+  {
+   "w": "was",
+   "start": 7.6,
+   "end": 7.74
+  },
+  {
+   "w": "written",
+   "start": 7.74,
+   "end": 8
+  },
+  {
+   "w": "for",
+   "start": 8,
+   "end": 8.24
+  },
+  {
+   "w": "the",
+   "start": 8.24,
+   "end": 8.4
+  },
+  {
+   "w": "Contras,",
+   "start": 8.4,
+   "end": 9.13
+  },
+  {
+   "w": "rebels",
+   "start": 9.38,
+   "end": 9.74
+  },
+  {
+   "w": "fighting",
+   "start": 9.74,
+   "end": 10.3
+  },
+  {
+   "w": "Nicaragua's",
+   "start": 10.3,
+   "end": 11.02
+  },
+  {
+   "w": "government.",
+   "start": 11.02,
+   "end": 11.56
+  },
+  {
+   "w": "It",
+   "start": 12.25,
+   "end": 12.36
+  },
+  {
+   "w": "talked",
+   "start": 12.36,
+   "end": 12.58
+  },
+  {
+   "w": "about",
+   "start": 12.58,
+   "end": 12.93
+  },
+  {
+   "w": "neutralizing",
+   "start": 13.28,
+   "end": 14.18
+  },
+  {
+   "w": "officials,",
+   "start": 14.18,
+   "end": 15.16
+  },
+  {
+   "w": "like",
+   "start": 15.16,
+   "end": 15.34
+  },
+  {
+   "w": "judges",
+   "start": 15.34,
+   "end": 15.74
+  },
+  {
+   "w": "and",
+   "start": 15.74,
+   "end": 16.1
+  },
+  {
+   "w": "police.",
+   "start": 16.1,
+   "end": 16.67
+  },
+  {
+   "w": "The",
+   "start": 17.33,
+   "end": 17.42
+  },
+  {
+   "w": "darkest",
+   "start": 17.42,
+   "end": 17.86
+  },
+  {
+   "w": "part?",
+   "start": 17.86,
+   "end": 18.22
+  },
+  {
+   "w": "Push",
+   "start": 18.89,
+   "end": 19.12
+  },
+  {
+   "w": "protesters",
+   "start": 19.12,
+   "end": 19.84
+  },
+  {
+   "w": "into",
+   "start": 19.84,
+   "end": 20.12
+  },
+  {
+   "w": "clashes",
+   "start": 20.12,
+   "end": 20.58
+  },
+  {
+   "w": "with",
+   "start": 20.58,
+   "end": 20.84
+  },
+  {
+   "w": "police,",
+   "start": 20.84,
+   "end": 21.37
+  },
+  {
+   "w": "so",
+   "start": 21.7,
+   "end": 21.82
+  },
+  {
+   "w": "someone",
+   "start": 21.82,
+   "end": 22.16
+  },
+  {
+   "w": "dies",
+   "start": 22.16,
+   "end": 22.64
+  },
+  {
+   "w": "and",
+   "start": 22.64,
+   "end": 22.88
+  },
+  {
+   "w": "becomes",
+   "start": 22.88,
+   "end": 23.18
+  },
+  {
+   "w": "a",
+   "start": 23.18,
+   "end": 23.32
+  },
+  {
+   "w": "martyr.",
+   "start": 23.32,
+   "end": 23.83
+  },
+  {
+   "w": "Here's",
+   "start": 24.55,
+   "end": 24.74
+  },
+  {
+   "w": "the",
+   "start": 24.74,
+   "end": 24.86
+  },
+  {
+   "w": "trick.",
+   "start": 24.86,
+   "end": 25.23
+  },
+  {
+   "w": "A",
+   "start": 25.82,
+   "end": 26.04
+  },
+  {
+   "w": "death",
+   "start": 26.04,
+   "end": 26.42
+  },
+  {
+   "w": "sparks",
+   "start": 26.42,
+   "end": 26.88
+  },
+  {
+   "w": "more",
+   "start": 26.88,
+   "end": 27.2
+  },
+  {
+   "w": "anger",
+   "start": 27.2,
+   "end": 27.68
+  },
+  {
+   "w": "than",
+   "start": 27.68,
+   "end": 27.9
+  },
+  {
+   "w": "any",
+   "start": 27.9,
+   "end": 28.12
+  },
+  {
+   "w": "speech.",
+   "start": 28.12,
+   "end": 28.7
+  },
+  {
+   "w": "It",
+   "start": 29.22,
+   "end": 29.28
+  },
+  {
+   "w": "became",
+   "start": 29.28,
+   "end": 29.52
+  },
+  {
+   "w": "a",
+   "start": 29.52,
+   "end": 29.7
+  },
+  {
+   "w": "national",
+   "start": 29.7,
+   "end": 30.14
+  },
+  {
+   "w": "scandal.",
+   "start": 30.14,
+   "end": 30.7
+  },
+  {
+   "w": "Follow",
+   "start": 31.36,
+   "end": 31.66
+  },
+  {
+   "w": "for",
+   "start": 31.66,
+   "end": 31.86
+  },
+  {
+   "w": "more",
+   "start": 31.86,
+   "end": 32.06
+  },
+  {
+   "w": "dark",
+   "start": 32.06,
+   "end": 32.4
+  },
+  {
+   "w": "psychology.",
+   "start": 32.4,
+   "end": 33.3
+  }
+ ]
+}
