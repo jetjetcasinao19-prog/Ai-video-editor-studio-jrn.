@@ -13,13 +13,13 @@ export const meta = {
   slug: 'stanford-prison-inkblot',
   style: 'inkblot',
   width: 1080, height: 1920, fps: 30,
-  duration: 40.0,
+  duration: 39.4,
   voice: 'voice.mp3',
   seed: 263,
   captionChars: 24,
   caseLine: 'THE MIND FILES  ·  CASE No. 1971  ·  CONFIDENTIAL',
   brandKit: 'mindtrace', // MindTrace (brand/mindtrace/): logo, handle, tagline, outro text
-  outro: { at: 37.8 },
+  outro: { at: 37.2 },
 };
 
 const GUARD = { hat: 'cap', glasses: true, tie: '#16141a', color: '#3e4a5c' };
@@ -84,7 +84,7 @@ export const scenes = [
     },
   },
   { // 4.87 "1971, Stanford, funded by the U.S. Navy."
-    start: 4.75, title: 'Stanford, 1971', trans: 'bleed',
+    start: 4.8, title: 'Stanford, 1971', trans: 'bleed',
     draw(ctx, u, S) {
       const { k, P, W } = S, yr = S.at('1971'), sf = S.at('Stanford'), nv = S.at('Navy');
       plate(ctx, S, { alpha: 0.08, seed: 5 });
@@ -101,7 +101,7 @@ export const scenes = [
     },
   },
   { // 9.67 "College students played guards and prisoners in a fake prison."
-    start: 9.55, title: 'Guards and Prisoners', trans: 'fold',
+    start: 9.65, title: 'Guards and Prisoners', trans: 'fold',
     draw(ctx, u, S) {
       const { k, P, W } = S, cs = S.at('College'), gd = S.at('guards'), pr = S.at('prisoners'), fk = S.at('fake');
       plate(ctx, S, { alpha: 0.08, seed: 9 });
@@ -118,7 +118,7 @@ export const scenes = [
     },
   },
   { // 13.66 "The guards turned cruel, stopped after six days."
-    start: 13.55, title: 'Six Days', trans: 'cut',
+    start: 13.65, title: 'Six Days', trans: 'cut',
     draw(ctx, u, S) {
       const { k, P, W } = S, cr = S.at('cruel'), stp = S.at('stopped'), sx = S.at('six');
       plate(ctx, S, { alpha: 0.1, seed: 13 });
@@ -134,7 +134,7 @@ export const scenes = [
     },
   },
   { // 17.63 "The lesson? Put good people in a bad role and they turn evil."
-    start: 17.55, title: 'The Famous Lesson', trans: 'bleed',
+    start: 17.45, title: 'The Famous Lesson', trans: 'bleed',
     draw(ctx, u, S) {
       const { k, P, W } = S, ls = S.at('lesson'), gp = S.at('good'), bd = S.at('bad'), ev = S.at('evil');
       plate(ctx, S, { alpha: 0.08, seed: 17 });
@@ -152,7 +152,7 @@ export const scenes = [
     },
   },
   { // 22.7 "But later recordings showed staff coaching the guards to be tough."
-    start: 22.65, title: 'On Tape', trans: 'blink',
+    start: 22.0, title: 'On Tape', trans: 'blink',
     draw(ctx, u, S) {
       const { k, P, W } = S, rc = S.at('recordings'), co = S.at('coaching'), tg = S.at('tough');
       plate(ctx, S, { alpha: 0.08, seed: 22 });
@@ -166,7 +166,7 @@ export const scenes = [
     },
   },
   { // 26.75 "And one famous breakdown, the prisoner said he faked it."
-    start: 26.7, title: 'The Breakdown', trans: 'fold',
+    start: 25.95, title: 'The Breakdown', trans: 'fold',
     draw(ctx, u, S) {
       const { k, P, W } = S, br = S.at('breakdown'), sd = S.at('said'), fk = S.at('faked');
       plate(ctx, S, { alpha: 0.1, seed: 26 });
@@ -182,7 +182,7 @@ export const scenes = [
     },
   },
   { // 30.95 "Here's the trick. Tell people what you expect and they'll give it to you."
-    start: 30.9, title: 'Tell Them What You Expect', trans: 'bleed',
+    start: 30.05, title: 'Tell Them What You Expect', trans: 'bleed',
     draw(ctx, u, S) {
       const { k, P, W } = S, ex = S.at('expect'), gv = S.at('give');
       plate(ctx, S, { alpha: 0.08, seed: 31 });
@@ -199,7 +199,7 @@ export const scenes = [
     },
   },
   { // 35.73 "Follow for more dark psychology." → the case-file cover
-    start: 35.55, title: 'More Dark Psychology', trans: 'cut',
+    start: 34.85, title: 'More Dark Psychology', trans: 'cut',
     draw(ctx, u, S) {
       ctx.save(); plate(ctx, S, { alpha: 0.1, seed: 31 }); ctx.restore();
       inkReveal(ctx, S, tween(u, 0.1, 0.8, ease.linear), c => caseCover(c, S, u - 0.1, { handle: meta.brand.handle, caseNo: '1971', tagline: meta.brand.tagline }));
@@ -211,51 +211,51 @@ export const sfx = [
   { t: 0.15, type: 'slide', gain: 0.4 },
   { t: 0.5, type: 'clank', gain: 0.4 },
   { t: 3.7, type: 'stamp', gain: 0.8 },
-  { t: 4.75, type: 'splat', gain: 0.5 },
-  { t: 4.9, type: 'stamp', gain: 0.7 },
-  { t: 6.6, type: 'pen', gain: 0.4 },
-  { t: 8.3, type: 'pop', gain: 0.45 },
-  { t: 8.7, type: 'bell', gain: 0.3 },
-  { t: 9.55, type: 'fold', gain: 0.45 },
-  { t: 9.8, type: 'coins', gain: 0.4 },
-  { t: 10.7, type: 'pop', gain: 0.4 }, { t: 11.4, type: 'pop', gain: 0.4, pitch: 0.9 },
-  { t: 12.3, type: 'stamp', gain: 0.6 },
-  { t: 13.55, type: 'clank', gain: 0.55 },
-  { t: 14.6, type: 'thud', gain: 0.5 },
-  { t: 15.0, type: 'pen', gain: 0.4 },
-  { t: 16.3, type: 'stamp', gain: 0.75 },
-  { t: 17.55, type: 'splat', gain: 0.5 },
-  { t: 17.8, type: 'paper', gain: 0.4 },
-  { t: 20.0, type: 'pen', gain: 0.4 },
-  { t: 21.5, type: 'stamp', gain: 0.7 },
-  { t: 22.65, type: 'blink', gain: 0.45 },
-  { t: 23.1, type: 'click', gain: 0.6 },
-  { t: 24.4, type: 'pop', gain: 0.5 },
-  { t: 25.6, type: 'stamp', gain: 0.75 },
-  { t: 26.7, type: 'fold', gain: 0.45 },
-  { t: 27.4, type: 'heartbeat', gain: 0.45 },
-  { t: 29.5, type: 'pop', gain: 0.5 },
-  { t: 29.9, type: 'whoosh', gain: 0.4 },
-  { t: 30.2, type: 'stamp', gain: 0.75 },
-  { t: 30.9, type: 'splat', gain: 0.5 },
-  { t: 31.0, type: 'stamp', gain: 0.45 },
-  { t: 32.8, type: 'paper', gain: 0.45 },
-  { t: 34.3, type: 'thud', gain: 0.4 },
-  { t: 34.6, type: 'pen', gain: 0.4 },
-  { t: 35.6, type: 'splat', gain: 0.75 },
-  { t: 36.0, type: 'fold', gain: 0.4 },
-  { t: 36.8, type: 'stamp', gain: 0.75 },
-  { t: 37.8, type: 'moth', gain: 0.3 },
-  { t: 39.4, type: 'bell', gain: 0.25 },
+  { t: 4.8, type: 'splat', gain: 0.5 },
+  { t: 4.95, type: 'stamp', gain: 0.7 },
+  { t: 6.65, type: 'pen', gain: 0.4 },
+  { t: 8.35, type: 'pop', gain: 0.45 },
+  { t: 8.75, type: 'bell', gain: 0.3 },
+  { t: 9.65, type: 'fold', gain: 0.45 },
+  { t: 9.9, type: 'coins', gain: 0.4 },
+  { t: 10.8, type: 'pop', gain: 0.4 }, { t: 11.5, type: 'pop', gain: 0.4, pitch: 0.9 },
+  { t: 12.4, type: 'stamp', gain: 0.6 },
+  { t: 13.65, type: 'clank', gain: 0.55 },
+  { t: 14.7, type: 'thud', gain: 0.5 },
+  { t: 15.1, type: 'pen', gain: 0.4 },
+  { t: 16.4, type: 'stamp', gain: 0.75 },
+  { t: 17.45, type: 'splat', gain: 0.5 },
+  { t: 17.7, type: 'paper', gain: 0.4 },
+  { t: 19.9, type: 'pen', gain: 0.4 },
+  { t: 21.4, type: 'stamp', gain: 0.7 },
+  { t: 22.0, type: 'blink', gain: 0.45 },
+  { t: 22.45, type: 'click', gain: 0.6 },
+  { t: 23.75, type: 'pop', gain: 0.5 },
+  { t: 24.95, type: 'stamp', gain: 0.75 },
+  { t: 25.95, type: 'fold', gain: 0.45 },
+  { t: 26.65, type: 'heartbeat', gain: 0.45 },
+  { t: 28.75, type: 'pop', gain: 0.5 },
+  { t: 29.15, type: 'whoosh', gain: 0.4 },
+  { t: 29.45, type: 'stamp', gain: 0.75 },
+  { t: 30.05, type: 'splat', gain: 0.5 },
+  { t: 30.15, type: 'stamp', gain: 0.45 },
+  { t: 31.95, type: 'paper', gain: 0.45 },
+  { t: 33.45, type: 'thud', gain: 0.4 },
+  { t: 33.75, type: 'pen', gain: 0.4 },
+  { t: 34.9, type: 'splat', gain: 0.75 },
+  { t: 35.3, type: 'fold', gain: 0.4 },
+  { t: 36.1, type: 'stamp', gain: 0.75 },
+  { t: 37.1, type: 'moth', gain: 0.3 },
+  { t: 38.7, type: 'bell', gain: 0.25 },
 ];
 
 export const music = {
   kit: 'mind', bpm: 88, root: 'D', scale: 'harmonic', gain: 0.3,
   sections: [
-    { from: 0, to: 9.55, mood: 'intro' },
-    { from: 9.55, to: 17.55, mood: 'tense' },
-    { from: 17.55, to: 22.65, mood: 'groove' },
-    { from: 22.65, to: 35.55, mood: 'drive' },
-    { from: 35.55, to: 40.0, mood: 'end' },
+    { from: 0.0, to: 9.65, mood: 'intro' },
+    { from: 9.65, to: 17.45, mood: 'tense' },
+    { from: 17.45, to: 22.0, mood: 'groove' },
+    { from: 22.0, to: 34.85, mood: 'drive' },
+    { from: 34.85, to: 39.4, mood: 'end' },
   ],
 };

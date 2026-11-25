@@ -1,436 +1,436 @@
 {
  "engine": "Groq whisper-large-v3",
- "text": "The most famous psychology experiment was partly staged. 1971, Stanford, funded by the U.S. Navy. College students played guards and prisoners in a fake prison. The guards turned cruel, stopped after six days. The lesson? Put good people in a bad role and they turn evil. But later recordings showed staff coaching the guards to be tough. And one famous breakdown, the prisoner said he faked it. Here's the trick. Tell people what you expect and they'll give it to you. Follow for more dark psychology.",
+ "text": "The most famous psychology experiment was partly staged. 1971, Stanford. Funded by the U.S. Navy, college students played guards and prisoners in a fake prison. The guards turned cruel, stopped after six days. The lesson? Put good people in a bad role and they turn evil. But later recordings showed staff coaching the guards to be tough. And one famous breakdown? The prisoner said he faked it. Here's the trick. Tell people what you expect, and they'll give it to you. Follow for more dark psychology.",
  "words": [
   {
    "w": "The",
-   "start": 0.22,
-   "end": 0.34
+   "start": 0.02,
+   "end": 0.28
   },
   {
    "w": "most",
-   "start": 0.34,
+   "start": 0.28,
    "end": 0.56
   },
   {
    "w": "famous",
    "start": 0.56,
-   "end": 1.14
+   "end": 1.06
   },
   {
    "w": "psychology",
-   "start": 1.14,
-   "end": 1.82
+   "start": 1.06,
+   "end": 1.74
   },
   {
    "w": "experiment",
-   "start": 1.82,
+   "start": 1.74,
    "end": 2.42
   },
   {
    "w": "was",
    "start": 2.42,
-   "end": 3.12
+   "end": 3.2
   },
   {
    "w": "partly",
-   "start": 3.12,
-   "end": 3.58
+   "start": 3.2,
+   "end": 3.62
   },
   {
    "w": "staged.",
-   "start": 3.58,
-   "end": 4.28
+   "start": 3.62,
+   "end": 4.31
   },
   {
    "w": "1971,",
-   "start": 4.87,
-   "end": 6.15
+   "start": 4.95,
+   "end": 6.17
   },
   {
-   "w": "Stanford,",
-   "start": 6.58,
-   "end": 7.2
+   "w": "Stanford.",
+   "start": 6.57,
+   "end": 7.21
   },
   {
-   "w": "funded",
-   "start": 7.62,
-   "end": 7.92
+   "w": "Funded",
+   "start": 7.7,
+   "end": 8.08
   },
   {
    "w": "by",
-   "start": 7.92,
-   "end": 8.14
+   "start": 8.08,
+   "end": 8.26
   },
   {
    "w": "the",
-   "start": 8.14,
-   "end": 8.28
+   "start": 8.26,
+   "end": 8.42
   },
   {
    "w": "U.S.",
-   "start": 8.28,
-   "end": 8.6
+   "start": 8.42,
+   "end": 8.74
   },
   {
-   "w": "Navy.",
-   "start": 8.6,
-   "end": 9.08
+   "w": "Navy,",
+   "start": 8.74,
+   "end": 9.26
   },
   {
-   "w": "College",
-   "start": 9.67,
-   "end": 10
+   "w": "college",
+   "start": 9.77,
+   "end": 10.04
   },
   {
    "w": "students",
-   "start": 10,
-   "end": 10.42
+   "start": 10.04,
+   "end": 10.52
   },
   {
    "w": "played",
-   "start": 10.42,
-   "end": 10.76
+   "start": 10.52,
+   "end": 10.88
   },
   {
    "w": "guards",
-   "start": 10.76,
-   "end": 11.24
+   "start": 10.88,
+   "end": 11.28
   },
   {
    "w": "and",
-   "start": 11.24,
-   "end": 11.48
+   "start": 11.28,
+   "end": 11.6
   },
   {
    "w": "prisoners",
-   "start": 11.48,
-   "end": 11.94
+   "start": 11.6,
+   "end": 12.04
   },
   {
    "w": "in",
-   "start": 11.94,
-   "end": 12.18
+   "start": 12.04,
+   "end": 12.32
   },
   {
    "w": "a",
-   "start": 12.18,
-   "end": 12.26
+   "start": 12.32,
+   "end": 12.42
   },
   {
    "w": "fake",
-   "start": 12.26,
-   "end": 12.54
+   "start": 12.42,
+   "end": 12.68
   },
   {
    "w": "prison.",
-   "start": 12.54,
-   "end": 13.05
+   "start": 12.68,
+   "end": 13.17
   },
   {
    "w": "The",
-   "start": 13.66,
-   "end": 13.72
+   "start": 13.76,
+   "end": 13.88
   },
   {
    "w": "guards",
-   "start": 13.72,
-   "end": 14.16
+   "start": 13.88,
+   "end": 14.26
   },
   {
    "w": "turned",
-   "start": 14.16,
-   "end": 14.56
+   "start": 14.26,
+   "end": 14.64
   },
   {
    "w": "cruel,",
-   "start": 14.56,
-   "end": 15.17
+   "start": 14.64,
+   "end": 15.23
   },
   {
    "w": "stopped",
-   "start": 15.55,
-   "end": 15.94
+   "start": 15.58,
+   "end": 15.96
   },
   {
    "w": "after",
-   "start": 15.94,
+   "start": 15.96,
    "end": 16.26
   },
   {
    "w": "six",
    "start": 16.26,
-   "end": 16.56
+   "end": 16.54
   },
   {
    "w": "days.",
-   "start": 16.56,
-   "end": 17.12
+   "start": 16.54,
+   "end": 17.05
   },
   {
    "w": "The",
-   "start": 17.63,
-   "end": 17.72
+   "start": 17.56,
+   "end": 17.68
   },
   {
    "w": "lesson?",
-   "start": 17.72,
-   "end": 18.13
+   "start": 17.68,
+   "end": 18.07
   },
   {
    "w": "Put",
-   "start": 18.63,
-   "end": 18.78
+   "start": 18.52,
+   "end": 18.66
   },
   {
    "w": "good",
-   "start": 18.78,
-   "end": 19.04
+   "start": 18.66,
+   "end": 18.94
   },
   {
    "w": "people",
-   "start": 19.04,
-   "end": 19.48
+   "start": 18.94,
+   "end": 19.32
   },
   {
    "w": "in",
-   "start": 19.48,
-   "end": 19.76
+   "start": 19.32,
+   "end": 19.48
   },
   {
    "w": "a",
-   "start": 19.76,
-   "end": 19.88
+   "start": 19.48,
+   "end": 19.62
   },
   {
    "w": "bad",
-   "start": 19.88,
-   "end": 20.24
+   "start": 19.62,
+   "end": 19.92
   },
   {
    "w": "role",
-   "start": 20.24,
-   "end": 20.62
+   "start": 19.92,
+   "end": 20.34
   },
   {
    "w": "and",
-   "start": 20.62,
-   "end": 21.06
+   "start": 20.34,
+   "end": 20.68
   },
   {
    "w": "they",
-   "start": 21.06,
-   "end": 21.18
+   "start": 20.68,
+   "end": 20.8
   },
   {
    "w": "turn",
-   "start": 21.18,
-   "end": 21.5
+   "start": 20.8,
+   "end": 21.1
   },
   {
    "w": "evil.",
-   "start": 21.5,
-   "end": 22.02
+   "start": 21.1,
+   "end": 21.52
   },
   {
    "w": "But",
-   "start": 22.7,
-   "end": 22.82
+   "start": 22.1,
+   "end": 22.3
   },
   {
    "w": "later",
-   "start": 22.82,
-   "end": 23.06
+   "start": 22.3,
+   "end": 22.56
   },
   {
    "w": "recordings",
-   "start": 23.06,
-   "end": 23.6
+   "start": 22.56,
+   "end": 23.12
   },
   {
    "w": "showed",
-   "start": 23.6,
-   "end": 23.94
+   "start": 23.12,
+   "end": 23.4
   },
   {
    "w": "staff",
-   "start": 23.94,
-   "end": 24.38
+   "start": 23.4,
+   "end": 23.86
   },
   {
    "w": "coaching",
-   "start": 24.38,
-   "end": 24.8
+   "start": 23.86,
+   "end": 24.24
   },
   {
    "w": "the",
-   "start": 24.8,
-   "end": 24.98
+   "start": 24.24,
+   "end": 24.42
   },
   {
    "w": "guards",
-   "start": 24.98,
-   "end": 25.32
+   "start": 24.42,
+   "end": 24.76
   },
   {
    "w": "to",
-   "start": 25.32,
-   "end": 25.5
+   "start": 24.76,
+   "end": 24.94
   },
   {
    "w": "be",
-   "start": 25.5,
-   "end": 25.6
+   "start": 24.94,
+   "end": 25.04
   },
   {
    "w": "tough.",
-   "start": 25.6,
-   "end": 26.26
+   "start": 25.04,
+   "end": 25.53
   },
   {
    "w": "And",
-   "start": 26.75,
-   "end": 26.86
+   "start": 26.08,
+   "end": 26.24
   },
   {
    "w": "one",
-   "start": 26.86,
-   "end": 27.06
+   "start": 26.24,
+   "end": 26.4
   },
   {
    "w": "famous",
-   "start": 27.06,
-   "end": 27.56
+   "start": 26.4,
+   "end": 26.94
   },
   {
-   "w": "breakdown,",
-   "start": 27.56,
-   "end": 28.54
+   "w": "breakdown?",
+   "start": 26.94,
+   "end": 27.84
   },
   {
-   "w": "the",
-   "start": 29.11,
-   "end": 29.26
+   "w": "The",
+   "start": 28.32,
+   "end": 28.4
   },
   {
    "w": "prisoner",
-   "start": 29.26,
-   "end": 29.5
+   "start": 28.4,
+   "end": 28.74
   },
   {
    "w": "said",
-   "start": 29.5,
-   "end": 29.76
+   "start": 28.74,
+   "end": 29
   },
   {
    "w": "he",
-   "start": 29.76,
-   "end": 29.86
+   "start": 29,
+   "end": 29.12
   },
   {
    "w": "faked",
-   "start": 29.86,
-   "end": 30.2
+   "start": 29.12,
+   "end": 29.42
   },
   {
    "w": "it.",
-   "start": 30.2,
-   "end": 30.45
+   "start": 29.42,
+   "end": 29.67
   },
   {
    "w": "Here's",
-   "start": 30.95,
-   "end": 31.18
+   "start": 30.17,
+   "end": 30.4
   },
   {
    "w": "the",
-   "start": 31.18,
-   "end": 31.32
+   "start": 30.4,
+   "end": 30.52
   },
   {
    "w": "trick.",
-   "start": 31.32,
-   "end": 31.71
+   "start": 30.52,
+   "end": 30.92
   },
   {
    "w": "Tell",
-   "start": 32.11,
-   "end": 32.4
+   "start": 31.5,
+   "end": 31.72
   },
   {
    "w": "people",
-   "start": 32.4,
-   "end": 32.76
+   "start": 31.72,
+   "end": 32.06
   },
   {
    "w": "what",
-   "start": 32.76,
-   "end": 32.96
+   "start": 32.06,
+   "end": 32.24
   },
   {
    "w": "you",
-   "start": 32.96,
-   "end": 33.1
+   "start": 32.24,
+   "end": 32.4
   },
   {
-   "w": "expect",
-   "start": 33.1,
-   "end": 33.6
+   "w": "expect,",
+   "start": 32.4,
+   "end": 33.44
   },
   {
    "w": "and",
-   "start": 33.6,
-   "end": 33.97
+   "start": 33.44,
+   "end": 33.54
   },
   {
    "w": "they'll",
-   "start": 34.22,
-   "end": 34.46
+   "start": 33.54,
+   "end": 33.72
   },
   {
    "w": "give",
-   "start": 34.46,
-   "end": 34.64
+   "start": 33.72,
+   "end": 33.86
   },
   {
    "w": "it",
-   "start": 34.64,
-   "end": 34.74
+   "start": 33.86,
+   "end": 34
   },
   {
    "w": "to",
-   "start": 34.74,
-   "end": 34.9
+   "start": 34,
+   "end": 34.18
   },
   {
    "w": "you.",
-   "start": 34.9,
-   "end": 35.08
+   "start": 34.18,
+   "end": 34.37
   },
   {
    "w": "Follow",
-   "start": 35.73,
-   "end": 36.02
+   "start": 35.01,
+   "end": 35.28
   },
   {
    "w": "for",
-   "start": 36.02,
-   "end": 36.24
+   "start": 35.28,
+   "end": 35.5
   },
   {
    "w": "more",
-   "start": 36.24,
-   "end": 36.44
+   "start": 35.5,
+   "end": 35.74
   },
   {
    "w": "dark",
-   "start": 36.44,
-   "end": 36.78
+   "start": 35.74,
+   "end": 36.14
   },
   {
    "w": "psychology.",
-   "start": 36.78,
-   "end": 37.56
+   "start": 36.14,
+   "end": 37
   }
  ]
 }

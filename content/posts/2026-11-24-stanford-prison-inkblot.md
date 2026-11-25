@@ -2,9 +2,9 @@
 
 - **Channel:** MindTrace (@MINDTRACEOFFICIAL-YT) — brand kit `brand/mindtrace/`
 - **Video:** `animate/projects/stanford-prison/out/stanford-prison-inkblot.mp4`
-  (40 s, 9:16, 1080x1920, voice-over by the owner (Cartesia voice "Griffin", British
+  (39 s, 9:16, 1080x1920, voice-over by the owner (Cartesia voice "Griffin", British
   English), end card: MindTrace case-file cover (Case No. 1971), stamped "CASE: OPEN" and
-  "Subscribe to trace your mind"). 40 s is fine for all four platforms.
+  "Subscribe to trace your mind"). 39 s is fine for all four platforms.
 - **Hook (first line of the video):** "The most famous psychology experiment was partly staged."
 - **Summary:** 1971, Stanford, funded by the U.S. Navy. College students played guards and
   prisoners in a fake prison. The guards turned cruel, and it was stopped after six days.
@@ -55,7 +55,7 @@
 **Title:** The Most Famous Psychology Experiment Was Partly Staged (Stanford Prison) #shorts
 **Description:**
 1971, Stanford, funded by the U.S. Navy. College students played guards and prisoners in a fake prison. The guards turned cruel, and it was stopped after six days. The lesson? Put good people in a bad role and they turn evil.
-But later recordings showed staff coaching the guards to be tough. And in one famous breakdown, the prisoner said he faked it. Tell people what you expect, and they'll give it to you.
+But later recordings showed staff coaching the guards to be tough. And one famous breakdown? The prisoner said he faked it. Tell people what you expect, and they'll give it to you.
 Sources: Le Texier (2019), American Psychologist; Haney, Banks & Zimbardo (1973). Animated in code in an ink blot case-file style.
 Subscribe to trace your mind.
 **Hashtags:** #MindTrace #Psychology #DarkPsychology #StanfordPrisonExperiment #History #shorts
@@ -70,7 +70,7 @@ Follow for more dark psychology 👇
 **Caption:**
 The most famous psychology experiment was partly staged. 🧠
 1971, Stanford, funded by the U.S. Navy. College students played guards and prisoners in a fake prison. The guards turned cruel; it was stopped after six days. The lesson? Put good people in a bad role and they turn evil.
-But later recordings showed staff coaching the guards to be tough. And in one famous breakdown, the prisoner said he faked it.
+But later recordings showed staff coaching the guards to be tough. And one famous breakdown? The prisoner said he faked it.
 Here's the trick: tell people what you expect and they'll give it to you.
 Sources: Le Texier (2019); Haney, Banks & Zimbardo (1973). Animated in code in an ink blot case-file style. Subscribe to trace your mind.
 **Hashtags:** #MindTrace #Psychology #DarkPsychology #StanfordPrisonExperiment #Animation
