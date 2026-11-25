@@ -169,13 +169,13 @@ export const scenes = [
       door(ctx, S, 300, 760, 170, 300, 'FIRST CLINIC', '#6a3a2a');
       door(ctx, S, 780, 760, 170, 300, 'SECOND CLINIC', '#3a5a6a');
       for (let i = 0; i < 2; i++) k.figure(ctx, 180 + i * 230, 1010, { ...DOCTOR(i), s: 0.78, face: i ? -1 : 1, mood: 'calm', armF: [0.3, 0.2] });
-      for (let i = 0; i < 2; i++) { ctx.save(); ctx.globalAlpha = tween(u, mi - 0.5, mi); k.figure(ctx, 660 + i * 230, 1010, { ...MIDWIFE(i), s: 0.78, face: i ? -1 : 1, mood: 'calm', armF: [0.3, 0.2] }); ctx.restore(); }
+      for (let i = 0; i < 2; i++) { ctx.save(); ctx.globalAlpha = tween(u, mi - 0.5, mi); k.figure(ctx, 640 + i * 205, 1010, { ...MIDWIFE(i), s: 0.78, face: i ? -1 : 1, mood: 'calm', armF: [0.3, 0.2] }); ctx.restore(); }
       k.label(ctx, 'RUN BY DOCTORS', 290, 1060, 16, tween(u, dc, dc + 0.4));
       k.label(ctx, 'RUN BY MIDWIVES', 790, 1060, 16, tween(u, mi, mi + 0.4));
       // two candles under each door: the left one burns far shorter — a quiet stand-in for the toll
       const g = tween(u, fe - 0.2, mi + 0.6);
       ctx.save(); ctx.globalAlpha = g; k.rect(ctx, 180, 270, 220, 64, '#efe6cf', P.ink, 2.5); k.rect(ctx, 680, 270, 220, 64, '#efe6cf', P.ink, 2.5);
-      ctx.fillStyle = P.vermDark; ctx.font = '900 30px Deco'; ctx.textAlign = 'center'; ctx.fillText('≈ 1 IN 10', 290, 313); ctx.fillStyle = P.ink; ctx.fillText('≈ 1 IN 25', 790, 313); ctx.restore();
+      ctx.fillStyle = P.vermDark; ctx.font = '900 30px Deco'; ctx.textAlign = 'center'; ctx.fillText('≈ 10 IN 100', 290, 313); ctx.fillStyle = P.ink; ctx.fillText('< 4 IN 100', 790, 313); ctx.restore();
       k.label(ctx, 'MOTHERS LOST TO CHILDBED FEVER · 1841–46', W / 2, 225, 16, tween(u, mi + 0.3, mi + 0.8));
     },
   },
@@ -219,8 +219,7 @@ export const scenes = [
       ctx.fillStyle = '#5a3a24'; ctx.fillRect(-300, -300, W + 600, 1800);
       ledger(ctx, S, W / 2, 660, 760, 720, [
         { l: '1846', v: 11.4, t: '11.4%', c: P.verm, k: tween(u, 0, de) },
-        { l: '1847', v: 5.0, t: '5.0%', c: P.ochre, k: tween(u, de, dr + 0.2) },
-        { l: '1848', v: 1.3, t: '1.3%', c: P.green, k: tween(u, dr + 0.1, sh + 0.2) },
+        { l: '1848', v: 1.3, t: '1.3%', c: P.green, k: tween(u, de, sh + 0.2) },
       ], 0, 'FIRST CLINIC · MOTHERS LOST');
       basin(ctx, S, 880, 1120, 0.45, 1, S.t);
     },

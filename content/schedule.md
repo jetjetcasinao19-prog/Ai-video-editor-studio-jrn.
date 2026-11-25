@@ -209,6 +209,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-03-05 Fri | 8:00 PM | Sat Mar 6, 9:00 AM | TikTok | The famous choking rescue you have heard of started as an essay that said "tested only on dogs." | content/posts/2026-11-24-heimlich-ottoman.md | ready |
 | 2027-03-06 Sat | 7:00 PM | Sun Mar 7, 8:00 AM | Instagram Reels | A journal page, a row of beagles, and a cork that pops. | content/posts/2026-11-24-heimlich-ottoman.md | ready |
 | 2027-03-06 Sat | 8:00 PM | Sun Mar 7, 9:00 AM | Facebook Reels | Did you know the name "Heimlich maneuver" started in a magazine essay? | content/posts/2026-11-24-heimlich-ottoman.md | ready |
+| 2027-03-07 Sun | 7:00 PM | Mon Mar 8, 8:00 AM | YouTube Shorts | The Doctor Who Said "Wash Your Hands" Was Rejected | content/posts/2026-11-25-semmelweis-ottoman.md | ready |
+| 2027-03-07 Sun | 8:00 PM | Mon Mar 8, 9:00 AM | TikTok | Vienna, 1847: new mothers were dying, and one doctor noticed a pattern. | content/posts/2026-11-25-semmelweis-ottoman.md | ready |
+| 2027-03-08 Mon | 7:00 PM | Tue Mar 9, 8:00 AM | Instagram Reels | A ledger, two doors, and a jar of chlorine. | content/posts/2026-11-25-semmelweis-ottoman.md | ready |
+| 2027-03-08 Mon | 8:00 PM | Tue Mar 9, 9:00 AM | Facebook Reels | Did you know the doctor who pushed hospital handwashing was rejected in his own lifetime? | content/posts/2026-11-25-semmelweis-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
