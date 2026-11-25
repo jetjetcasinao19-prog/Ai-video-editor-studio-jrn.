@@ -1,0 +1,401 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "Aspirin started as tree bark. Around 400 BC, the Greek doctor Hippocrates described willow bark as a medicine for pain and fever. In 1828, a German professor pulls the key ingredient out of willow. He calls it salicin. 1897. At the Bayer Company in Germany, chemists, including Felix Hoffmann and his boss Arthur Eichengrün make a gentler version. In 1899, it's sold under a new name, Aspirin. Who really deserves credit? Historians still argue. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "Aspirin",
+   "start": 0.1,
+   "end": 0.66
+  },
+  {
+   "w": "started",
+   "start": 0.66,
+   "end": 1.18
+  },
+  {
+   "w": "as",
+   "start": 1.18,
+   "end": 2.02
+  },
+  {
+   "w": "tree",
+   "start": 2.02,
+   "end": 2.5
+  },
+  {
+   "w": "bark.",
+   "start": 2.5,
+   "end": 3.76
+  },
+  {
+   "w": "Around",
+   "start": 3.76,
+   "end": 3.9
+  },
+  {
+   "w": "400",
+   "start": 3.9,
+   "end": 4.4
+  },
+  {
+   "w": "BC,",
+   "start": 4.4,
+   "end": 5.42
+  },
+  {
+   "w": "the",
+   "start": 5.42,
+   "end": 5.54
+  },
+  {
+   "w": "Greek",
+   "start": 5.54,
+   "end": 5.76
+  },
+  {
+   "w": "doctor",
+   "start": 5.76,
+   "end": 6.14
+  },
+  {
+   "w": "Hippocrates",
+   "start": 6.14,
+   "end": 6.8
+  },
+  {
+   "w": "described",
+   "start": 6.8,
+   "end": 7.58
+  },
+  {
+   "w": "willow",
+   "start": 7.58,
+   "end": 7.98
+  },
+  {
+   "w": "bark",
+   "start": 7.98,
+   "end": 8.36
+  },
+  {
+   "w": "as",
+   "start": 8.36,
+   "end": 8.94
+  },
+  {
+   "w": "a",
+   "start": 8.94,
+   "end": 9.06
+  },
+  {
+   "w": "medicine",
+   "start": 9.06,
+   "end": 9.6
+  },
+  {
+   "w": "for",
+   "start": 9.6,
+   "end": 9.84
+  },
+  {
+   "w": "pain",
+   "start": 9.84,
+   "end": 10.32
+  },
+  {
+   "w": "and",
+   "start": 10.32,
+   "end": 10.56
+  },
+  {
+   "w": "fever.",
+   "start": 10.56,
+   "end": 11.76
+  },
+  {
+   "w": "In",
+   "start": 11.76,
+   "end": 11.84
+  },
+  {
+   "w": "1828,",
+   "start": 11.84,
+   "end": 12.58
+  },
+  {
+   "w": "a",
+   "start": 12.58,
+   "end": 13.12
+  },
+  {
+   "w": "German",
+   "start": 13.12,
+   "end": 13.44
+  },
+  {
+   "w": "professor",
+   "start": 13.44,
+   "end": 13.9
+  },
+  {
+   "w": "pulls",
+   "start": 13.9,
+   "end": 14.3
+  },
+  {
+   "w": "the",
+   "start": 14.3,
+   "end": 14.5
+  },
+  {
+   "w": "key",
+   "start": 14.5,
+   "end": 14.78
+  },
+  {
+   "w": "ingredient",
+   "start": 14.78,
+   "end": 15.24
+  },
+  {
+   "w": "out",
+   "start": 15.24,
+   "end": 15.62
+  },
+  {
+   "w": "of",
+   "start": 15.48,
+   "end": 15.9
+  },
+  {
+   "w": "willow.",
+   "start": 15.9,
+   "end": 16.58
+  },
+  {
+   "w": "He",
+   "start": 16.58,
+   "end": 16.7
+  },
+  {
+   "w": "calls",
+   "start": 16.7,
+   "end": 16.94
+  },
+  {
+   "w": "it",
+   "start": 16.94,
+   "end": 17.24
+  },
+  {
+   "w": "salicin.",
+   "start": 17.24,
+   "end": 18.6
+  },
+  {
+   "w": "1897.",
+   "start": 18.6,
+   "end": 20.24
+  },
+  {
+   "w": "At",
+   "start": 20.24,
+   "end": 20.34
+  },
+  {
+   "w": "the",
+   "start": 20.34,
+   "end": 20.56
+  },
+  {
+   "w": "Bayer",
+   "start": 20.56,
+   "end": 20.74
+  },
+  {
+   "w": "Company",
+   "start": 20.74,
+   "end": 21.06
+  },
+  {
+   "w": "in",
+   "start": 21.06,
+   "end": 21.26
+  },
+  {
+   "w": "Germany,",
+   "start": 21.26,
+   "end": 22.24
+  },
+  {
+   "w": "chemists,",
+   "start": 22.24,
+   "end": 22.58
+  },
+  {
+   "w": "including",
+   "start": 22.58,
+   "end": 23.12
+  },
+  {
+   "w": "Felix",
+   "start": 23.12,
+   "end": 23.54
+  },
+  {
+   "w": "Hoffmann",
+   "start": 23.6,
+   "end": 24.04
+  },
+  {
+   "w": "and",
+   "start": 24.04,
+   "end": 24.3
+  },
+  {
+   "w": "his",
+   "start": 24.3,
+   "end": 24.42
+  },
+  {
+   "w": "boss",
+   "start": 24.42,
+   "end": 24.78
+  },
+  {
+   "w": "Arthur",
+   "start": 24.78,
+   "end": 25.16
+  },
+  {
+   "w": "Eichengrün",
+   "start": 25.16,
+   "end": 25.76
+  },
+  {
+   "w": "make",
+   "start": 25.76,
+   "end": 26.32
+  },
+  {
+   "w": "a",
+   "start": 26.32,
+   "end": 26.5
+  },
+  {
+   "w": "gentler",
+   "start": 26.5,
+   "end": 26.92
+  },
+  {
+   "w": "version.",
+   "start": 26.92,
+   "end": 28.06
+  },
+  {
+   "w": "In",
+   "start": 28.06,
+   "end": 28.16
+  },
+  {
+   "w": "1899,",
+   "start": 28.16,
+   "end": 29.46
+  },
+  {
+   "w": "it's",
+   "start": 29.46,
+   "end": 29.6
+  },
+  {
+   "w": "sold",
+   "start": 29.6,
+   "end": 29.84
+  },
+  {
+   "w": "under",
+   "start": 29.84,
+   "end": 30.1
+  },
+  {
+   "w": "a",
+   "start": 30.1,
+   "end": 30.26
+  },
+  {
+   "w": "new",
+   "start": 30.26,
+   "end": 30.46
+  },
+  {
+   "w": "name,",
+   "start": 30.46,
+   "end": 31.3
+  },
+  {
+   "w": "Aspirin.",
+   "start": 31.3,
+   "end": 32.42
+  },
+  {
+   "w": "Who",
+   "start": 32.42,
+   "end": 32.54
+  },
+  {
+   "w": "really",
+   "start": 32.54,
+   "end": 32.96
+  },
+  {
+   "w": "deserves",
+   "start": 32.96,
+   "end": 33.42
+  },
+  {
+   "w": "credit?",
+   "start": 33.42,
+   "end": 34.56
+  },
+  {
+   "w": "Historians",
+   "start": 34.56,
+   "end": 34.98
+  },
+  {
+   "w": "still",
+   "start": 34.98,
+   "end": 35.26
+  },
+  {
+   "w": "argue.",
+   "start": 35.26,
+   "end": 35.76
+  },
+  {
+   "w": "Every",
+   "start": 35.76,
+   "end": 36.6
+  },
+  {
+   "w": "legend",
+   "start": 36.6,
+   "end": 37.08
+  },
+  {
+   "w": "has",
+   "start": 37.08,
+   "end": 37.46
+  },
+  {
+   "w": "a",
+   "start": 37.46,
+   "end": 37.54
+  },
+  {
+   "w": "beginning.",
+   "start": 37.54,
+   "end": 37.86
+  }
+ ]
+}
