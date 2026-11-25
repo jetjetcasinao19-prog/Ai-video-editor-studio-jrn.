@@ -131,7 +131,7 @@ export const scenes = [
       const bx = lerp(420, 620, tween(u, bu - 0.3, bu + 0.4, ease.inOut)), by = lerp(650, 520, tween(u, bu - 0.3, bu + 0.4, ease.inOut));
       if (u < bu + 0.4) { k.circle(ctx, bx, by, 12, '#e8f6ff', P.ink, 2); ctx.save(); ctx.globalAlpha = 0.5 + 0.5 * Math.sin(S.t * 8); ctx.beginPath(); ctx.moveTo(bx - 20, by); ctx.lineTo(bx + 20, by); ctx.moveTo(bx, by - 20); ctx.lineTo(bx, by + 20); k.stroke(ctx, '#ffffff', 3); ctx.restore(); }
       const sp = tween(u, bu - 0.2, bu + 0.4, ease.outBack); if (sp > 0) scope(ctx, S, 620, 570, 1.1 * sp, -0.08);
-      k.label(ctx, 'ONE TINY LENS · ABOUT 2 INCHES TALL', 620, 870, 15, tween(u, mi, mi + 0.4));
+      k.label(ctx, 'ONE TINY LENS · ABOUT 2 INCHES LONG', 620, 870, 15, tween(u, mi, mi + 0.4));
     },
   },
   { // 16.3 "In water, he sees tiny moving creatures. He calls them animalcules, little animals."
@@ -190,7 +190,7 @@ export const scenes = [
       const { k, P, W } = S, beg = S.at('beginning.');
       ctx.save(); S.cam(lerp(1.0, 1.35, tween(u, 0, beg)), W / 2, 640);
       ctx.fillStyle = '#5a3a24'; ctx.fillRect(-300, -300, W + 600, 1800);
-      k.letter(ctx, 420, 640, 420, 540, ['Honoured Sirs,', 'In water I saw', 'little animals…'], 1, -0.05);
+      k.letter(ctx, 420, 640, 420, 540, ['To the Royal Society,', 'London', '— from Delft'], 1, -0.05);
       scope(ctx, S, 760, 600, 1.0, 0.1); k.quill(ctx, 300, 820, 1.0, -0.4);
       ctx.restore();
       const open = tween(u, beg - 0.1, beg + 0.55, ease.inOut);

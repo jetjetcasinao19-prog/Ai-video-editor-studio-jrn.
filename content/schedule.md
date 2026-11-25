@@ -221,6 +221,12 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-03-11 Thu | 8:00 PM | Fri Mar 12, 9:00 AM | TikTok | You use it every day, and you could not name who made it. | content/posts/2026-11-25-eyeglasses-ottoman.md | ready |
 | 2027-03-12 Fri | 7:00 PM | Sat Mar 13, 8:00 AM | Instagram Reels | A shadow puppet with a question mark for a face. | content/posts/2026-11-25-eyeglasses-ottoman.md | ready |
 | 2027-03-12 Fri | 8:00 PM | Sat Mar 13, 9:00 AM | Facebook Reels | Ever wonder who invented eyeglasses? Nobody knows. | content/posts/2026-11-25-eyeglasses-ottoman.md | ready |
+| 2027-03-13 Sat | 7:00 PM | Sun Mar 14, 8:00 AM | YouTube Shorts | The First Person to See Bacteria Sold Cloth | content/posts/2026-11-25-leeuwenhoek-ottoman.md | ready |
+| 2027-03-13 Sat | 8:00 PM | Sun Mar 14, 9:00 AM | TikTok | Picture a cloth shop in the 1670s. The owner points a tiny lens at a drop of water. | content/posts/2026-11-25-leeuwenhoek-ottoman.md | ready |
+| 2027-03-14 Sun | 7:00 PM | Mon Mar 15, 7:00 AM | Instagram Reels | A brass microscope smaller than your hand. | content/posts/2026-11-25-leeuwenhoek-ottoman.md | ready |
+| 2027-03-14 Sun | 8:00 PM | Mon Mar 15, 8:00 AM | Facebook Reels | Ever wonder who first saw the tiny living things all around us? | content/posts/2026-11-25-leeuwenhoek-ottoman.md | ready |
+
+Note: US daylight saving time begins at 2:00 AM on Sun Mar 14, 2027. From Mar 14, PHT = ET + 12 h (it was + 13 h before), so the Mar 14 rows above show +12 h.
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the

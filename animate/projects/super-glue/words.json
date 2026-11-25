@@ -1,0 +1,386 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "Superglue was a failure at first. 1942. World War II. Chemist Harry Coover at Kodak is trying to make clear plastic for gun sights. One material sticks to everything it touches. Too sticky. It gets tossed aside. Years later, his team tests it again, and it glues expensive lab equipment together. That's when Coover realizes this isn't a failure. It's a superglue. In 1958, it goes on sale as Eastman 910. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "Superglue",
+   "start": 0.2,
+   "end": 0.74
+  },
+  {
+   "w": "was",
+   "start": 0.74,
+   "end": 1.02
+  },
+  {
+   "w": "a",
+   "start": 1.02,
+   "end": 1.16
+  },
+  {
+   "w": "failure",
+   "start": 1.16,
+   "end": 1.64
+  },
+  {
+   "w": "at",
+   "start": 1.64,
+   "end": 2.38
+  },
+  {
+   "w": "first.",
+   "start": 2.38,
+   "end": 2.9
+  },
+  {
+   "w": "1942.",
+   "start": 3.54,
+   "end": 5.4
+  },
+  {
+   "w": "World",
+   "start": 5.4,
+   "end": 5.44
+  },
+  {
+   "w": "War",
+   "start": 5.44,
+   "end": 5.76
+  },
+  {
+   "w": "II.",
+   "start": 5.76,
+   "end": 6.58
+  },
+  {
+   "w": "Chemist",
+   "start": 6.96,
+   "end": 7.28
+  },
+  {
+   "w": "Harry",
+   "start": 7.28,
+   "end": 7.66
+  },
+  {
+   "w": "Coover",
+   "start": 7.66,
+   "end": 7.94
+  },
+  {
+   "w": "at",
+   "start": 7.94,
+   "end": 8.16
+  },
+  {
+   "w": "Kodak",
+   "start": 8.16,
+   "end": 8.58
+  },
+  {
+   "w": "is",
+   "start": 8.58,
+   "end": 8.86
+  },
+  {
+   "w": "trying",
+   "start": 8.86,
+   "end": 9.06
+  },
+  {
+   "w": "to",
+   "start": 9.06,
+   "end": 9.2
+  },
+  {
+   "w": "make",
+   "start": 9.2,
+   "end": 9.36
+  },
+  {
+   "w": "clear",
+   "start": 9.36,
+   "end": 9.68
+  },
+  {
+   "w": "plastic",
+   "start": 9.68,
+   "end": 10.2
+  },
+  {
+   "w": "for",
+   "start": 10.2,
+   "end": 10.44
+  },
+  {
+   "w": "gun",
+   "start": 10.44,
+   "end": 10.8
+  },
+  {
+   "w": "sights.",
+   "start": 10.8,
+   "end": 11.04
+  },
+  {
+   "w": "One",
+   "start": 11.76,
+   "end": 11.92
+  },
+  {
+   "w": "material",
+   "start": 11.92,
+   "end": 12.52
+  },
+  {
+   "w": "sticks",
+   "start": 12.52,
+   "end": 12.82
+  },
+  {
+   "w": "to",
+   "start": 12.82,
+   "end": 12.98
+  },
+  {
+   "w": "everything",
+   "start": 12.98,
+   "end": 13.42
+  },
+  {
+   "w": "it",
+   "start": 13.42,
+   "end": 13.56
+  },
+  {
+   "w": "touches.",
+   "start": 13.56,
+   "end": 14.38
+  },
+  {
+   "w": "Too",
+   "start": 14.58,
+   "end": 14.72
+  },
+  {
+   "w": "sticky.",
+   "start": 14.72,
+   "end": 15.46
+  },
+  {
+   "w": "It",
+   "start": 15.46,
+   "end": 15.5
+  },
+  {
+   "w": "gets",
+   "start": 15.5,
+   "end": 15.72
+  },
+  {
+   "w": "tossed",
+   "start": 15.72,
+   "end": 16
+  },
+  {
+   "w": "aside.",
+   "start": 16,
+   "end": 16.96
+  },
+  {
+   "w": "Years",
+   "start": 17.24,
+   "end": 17.46
+  },
+  {
+   "w": "later,",
+   "start": 17.46,
+   "end": 17.84
+  },
+  {
+   "w": "his",
+   "start": 17.84,
+   "end": 18.32
+  },
+  {
+   "w": "team",
+   "start": 18.32,
+   "end": 18.62
+  },
+  {
+   "w": "tests",
+   "start": 18.62,
+   "end": 19.02
+  },
+  {
+   "w": "it",
+   "start": 19.02,
+   "end": 19.12
+  },
+  {
+   "w": "again,",
+   "start": 19.12,
+   "end": 20.04
+  },
+  {
+   "w": "and",
+   "start": 20.04,
+   "end": 20.06
+  },
+  {
+   "w": "it",
+   "start": 20.06,
+   "end": 20.22
+  },
+  {
+   "w": "glues",
+   "start": 20.22,
+   "end": 20.48
+  },
+  {
+   "w": "expensive",
+   "start": 20.48,
+   "end": 21.1
+  },
+  {
+   "w": "lab",
+   "start": 21.1,
+   "end": 21.4
+  },
+  {
+   "w": "equipment",
+   "start": 21.4,
+   "end": 21.76
+  },
+  {
+   "w": "together.",
+   "start": 21.76,
+   "end": 22.14
+  },
+  {
+   "w": "That's",
+   "start": 22.96,
+   "end": 23.2
+  },
+  {
+   "w": "when",
+   "start": 23.2,
+   "end": 23.34
+  },
+  {
+   "w": "Coover",
+   "start": 23.34,
+   "end": 23.68
+  },
+  {
+   "w": "realizes",
+   "start": 23.68,
+   "end": 24.26
+  },
+  {
+   "w": "this",
+   "start": 24.26,
+   "end": 25.02
+  },
+  {
+   "w": "isn't",
+   "start": 25.02,
+   "end": 25.44
+  },
+  {
+   "w": "a",
+   "start": 25.44,
+   "end": 25.54
+  },
+  {
+   "w": "failure.",
+   "start": 25.54,
+   "end": 25.88
+  },
+  {
+   "w": "It's",
+   "start": 26.54,
+   "end": 26.74
+  },
+  {
+   "w": "a",
+   "start": 26.74,
+   "end": 26.94
+  },
+  {
+   "w": "superglue.",
+   "start": 26.94,
+   "end": 28.1
+  },
+  {
+   "w": "In",
+   "start": 28.04,
+   "end": 28.14
+  },
+  {
+   "w": "1958,",
+   "start": 28.14,
+   "end": 29.52
+  },
+  {
+   "w": "it",
+   "start": 29.52,
+   "end": 29.6
+  },
+  {
+   "w": "goes",
+   "start": 29.6,
+   "end": 29.8
+  },
+  {
+   "w": "on",
+   "start": 29.8,
+   "end": 30.08
+  },
+  {
+   "w": "sale",
+   "start": 30.08,
+   "end": 30.46
+  },
+  {
+   "w": "as",
+   "start": 30.46,
+   "end": 30.9
+  },
+  {
+   "w": "Eastman",
+   "start": 30.9,
+   "end": 31.82
+  },
+  {
+   "w": "910.",
+   "start": 31.82,
+   "end": 32.88
+  },
+  {
+   "w": "Every",
+   "start": 33.96,
+   "end": 34.26
+  },
+  {
+   "w": "legend",
+   "start": 34.26,
+   "end": 34.72
+  },
+  {
+   "w": "has",
+   "start": 34.72,
+   "end": 35.18
+  },
+  {
+   "w": "a",
+   "start": 35.18,
+   "end": 35.3
+  },
+  {
+   "w": "beginning.",
+   "start": 35.3,
+   "end": 36.1
+  }
+ ]
+}
