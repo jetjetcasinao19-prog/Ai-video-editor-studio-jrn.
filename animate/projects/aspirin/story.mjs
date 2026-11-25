@@ -122,7 +122,7 @@ export const scenes = [
       k.rect(ctx, 60, 300, 960, 50, '#efe6cf', P.ink, 2.5); k.poly(ctx, [[40, 300], [540, 170], [1040, 300]], '#efe6cf', P.ink, 2.5);
       for (let i = 0; i < 6; i++) { const x = 120 + i * 170; k.rect(ctx, x - 26, 350, 52, 550, '#f6f0e2', P.ink, 2); for (let j = 1; j < 4; j++) { ctx.beginPath(); ctx.moveTo(x - 26 + j * 13, 360); ctx.lineTo(x - 26 + j * 13, 890); k.stroke(ctx, 'rgba(60,40,20,0.2)', 2); } }
       k.figure(ctx, 330, 1010, { ...HIPPO, s: 1.1, face: 1, mood: 'calm', ...act(u > me ? 'present' : 'think', u, tween(u, hi - 0.2, hi + 0.4)) });
-      k.label(ctx, 'HIPPOCRATES', 330, 1080, 18, tween(u, hi, hi + 0.4));
+      k.label(ctx, 'HIPPOCRATES · AS TRADITION TELLS IT', 400, 1080, 16, tween(u, hi, hi + 0.4));
       // a bowl of willow bark tea, steaming
       k.bowl(ctx, 600, 980, 0.9, S.t, '#c9a46a', true);
       for (let i = 0; i < 4; i++) { const q = tween(u, wi - 0.3 + i * 0.12, wi + 0.2 + i * 0.12, ease.outBack); if (q > 0) { ctx.save(); ctx.translate(560 + i * 26, 930 - i * 4); ctx.scale(q, q); k.rect(ctx, -10, -26, 20, 52, '#7a5a3a', P.ink, 1.5); ctx.restore(); } }

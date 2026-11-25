@@ -213,6 +213,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-03-07 Sun | 8:00 PM | Mon Mar 8, 9:00 AM | TikTok | Vienna, 1847: new mothers were dying, and one doctor noticed a pattern. | content/posts/2026-11-25-semmelweis-ottoman.md | ready |
 | 2027-03-08 Mon | 7:00 PM | Tue Mar 9, 8:00 AM | Instagram Reels | A ledger, two doors, and a jar of chlorine. | content/posts/2026-11-25-semmelweis-ottoman.md | ready |
 | 2027-03-08 Mon | 8:00 PM | Tue Mar 9, 9:00 AM | Facebook Reels | Did you know the doctor who pushed hospital handwashing was rejected in his own lifetime? | content/posts/2026-11-25-semmelweis-ottoman.md | ready |
+| 2027-03-09 Tue | 7:00 PM | Wed Mar 10, 8:00 AM | YouTube Shorts | Aspirin Started as Tree Bark | content/posts/2026-11-25-aspirin-ottoman.md | ready |
+| 2027-03-09 Tue | 8:00 PM | Wed Mar 10, 9:00 AM | TikTok | Your medicine cabinet has a 2,000-year-old backstory. | content/posts/2026-11-25-aspirin-ottoman.md | ready |
+| 2027-03-10 Wed | 7:00 PM | Thu Mar 11, 8:00 AM | Instagram Reels | A willow bowl, a map, and a scale with a question mark. | content/posts/2026-11-25-aspirin-ottoman.md | ready |
+| 2027-03-10 Wed | 8:00 PM | Thu Mar 11, 9:00 AM | Facebook Reels | Ever wonder how Aspirin got its name? | content/posts/2026-11-25-aspirin-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the

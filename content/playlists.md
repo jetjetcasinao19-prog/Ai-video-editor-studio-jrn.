@@ -13,6 +13,6 @@ the next video, and help YouTube recommend the channel as a whole.
 | Ancient Origins | Marathon · Thermopylae · Gladiators · Hannibal's Oath |
 | Landmarks | Hollywood Sign · Statue of Liberty · Great Wall of China · Terracotta Army · Troy (Schliemann's Trench) |
 | Everyday Objects | Dog Tags |
-| Medicine Firsts | Insulin (Insulin Was Sold for One Dollar) · Ether Dome (The Day Surgery Went Quiet) · Vaccine (The Word "Vaccine" Comes From a Cow) · Heimlich Maneuver (A Trick Tested Only on Dogs Became the Heimlich Maneuver) · Semmelweis (The Doctor Who Said "Wash Your Hands" Was Rejected) |
+| Medicine Firsts | Insulin (Insulin Was Sold for One Dollar) · Ether Dome (The Day Surgery Went Quiet) · Vaccine (The Word "Vaccine" Comes From a Cow) · Heimlich Maneuver (A Trick Tested Only on Dogs Became the Heimlich Maneuver) · Semmelweis (The Doctor Who Said "Wash Your Hands" Was Rejected) · Aspirin (Aspirin Started as Tree Bark) |
 
 Long-form compilations go in a playlist of their own, "Origin Stories: Full Episodes".
