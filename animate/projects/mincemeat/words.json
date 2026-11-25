@@ -1,0 +1,431 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "In 1943, British spies fooled Hitler with a dead man. They dressed a body as a Royal Marines officer, Major William Martin. In his briefcase, fake secret letters saying the Allies would invade Greece, not Sicily. In his pockets, love letters, a photo of his fiancée, theatre tickets. They let him wash up in Spain. The Germans got copies. Hitler sent troops to Greece. Here's the trick. The small details made the big lie believable. It was called Operation Mincemeat. Follow for more dark psychology.",
+ "words": [
+  {
+   "w": "In",
+   "start": 0.02,
+   "end": 0.22
+  },
+  {
+   "w": "1943,",
+   "start": 0.22,
+   "end": 1.58
+  },
+  {
+   "w": "British",
+   "start": 1.87,
+   "end": 2.22
+  },
+  {
+   "w": "spies",
+   "start": 2.22,
+   "end": 2.86
+  },
+  {
+   "w": "fooled",
+   "start": 2.86,
+   "end": 3.5
+  },
+  {
+   "w": "Hitler",
+   "start": 3.5,
+   "end": 4.04
+  },
+  {
+   "w": "with",
+   "start": 4.66,
+   "end": 4.74
+  },
+  {
+   "w": "a",
+   "start": 4.74,
+   "end": 4.96
+  },
+  {
+   "w": "dead",
+   "start": 4.96,
+   "end": 5.26
+  },
+  {
+   "w": "man.",
+   "start": 5.26,
+   "end": 5.66
+  },
+  {
+   "w": "They",
+   "start": 6.25,
+   "end": 6.38
+  },
+  {
+   "w": "dressed",
+   "start": 6.38,
+   "end": 6.68
+  },
+  {
+   "w": "a",
+   "start": 6.68,
+   "end": 6.84
+  },
+  {
+   "w": "body",
+   "start": 6.84,
+   "end": 7.1
+  },
+  {
+   "w": "as",
+   "start": 7.1,
+   "end": 7.32
+  },
+  {
+   "w": "a",
+   "start": 7.32,
+   "end": 7.48
+  },
+  {
+   "w": "Royal",
+   "start": 7.48,
+   "end": 7.8
+  },
+  {
+   "w": "Marines",
+   "start": 7.8,
+   "end": 8.14
+  },
+  {
+   "w": "officer,",
+   "start": 8.14,
+   "end": 8.74
+  },
+  {
+   "w": "Major",
+   "start": 9.12,
+   "end": 9.52
+  },
+  {
+   "w": "William",
+   "start": 9.52,
+   "end": 10.08
+  },
+  {
+   "w": "Martin.",
+   "start": 10.08,
+   "end": 10.65
+  },
+  {
+   "w": "In",
+   "start": 11.2,
+   "end": 11.32
+  },
+  {
+   "w": "his",
+   "start": 11.32,
+   "end": 11.48
+  },
+  {
+   "w": "briefcase,",
+   "start": 11.48,
+   "end": 12.26
+  },
+  {
+   "w": "fake",
+   "start": 12.41,
+   "end": 12.84
+  },
+  {
+   "w": "secret",
+   "start": 12.84,
+   "end": 13.3
+  },
+  {
+   "w": "letters",
+   "start": 13.3,
+   "end": 13.66
+  },
+  {
+   "w": "saying",
+   "start": 13.66,
+   "end": 14.08
+  },
+  {
+   "w": "the",
+   "start": 14.08,
+   "end": 14.28
+  },
+  {
+   "w": "Allies",
+   "start": 14.28,
+   "end": 14.64
+  },
+  {
+   "w": "would",
+   "start": 14.64,
+   "end": 14.96
+  },
+  {
+   "w": "invade",
+   "start": 14.96,
+   "end": 15.42
+  },
+  {
+   "w": "Greece,",
+   "start": 15.42,
+   "end": 16.08
+  },
+  {
+   "w": "not",
+   "start": 16.25,
+   "end": 16.44
+  },
+  {
+   "w": "Sicily.",
+   "start": 16.44,
+   "end": 16.98
+  },
+  {
+   "w": "In",
+   "start": 17.54,
+   "end": 17.66
+  },
+  {
+   "w": "his",
+   "start": 17.66,
+   "end": 17.8
+  },
+  {
+   "w": "pockets,",
+   "start": 17.8,
+   "end": 18.39
+  },
+  {
+   "w": "love",
+   "start": 18.67,
+   "end": 18.94
+  },
+  {
+   "w": "letters,",
+   "start": 18.94,
+   "end": 19.49
+  },
+  {
+   "w": "a",
+   "start": 19.74,
+   "end": 19.84
+  },
+  {
+   "w": "photo",
+   "start": 19.84,
+   "end": 20.18
+  },
+  {
+   "w": "of",
+   "start": 20.18,
+   "end": 20.36
+  },
+  {
+   "w": "his",
+   "start": 20.36,
+   "end": 20.48
+  },
+  {
+   "w": "fiancée,",
+   "start": 20.48,
+   "end": 21.34
+  },
+  {
+   "w": "theatre",
+   "start": 21.52,
+   "end": 21.86
+  },
+  {
+   "w": "tickets.",
+   "start": 21.86,
+   "end": 22.46
+  },
+  {
+   "w": "They",
+   "start": 23.07,
+   "end": 23.18
+  },
+  {
+   "w": "let",
+   "start": 23.18,
+   "end": 23.3
+  },
+  {
+   "w": "him",
+   "start": 23.3,
+   "end": 23.44
+  },
+  {
+   "w": "wash",
+   "start": 23.44,
+   "end": 23.72
+  },
+  {
+   "w": "up",
+   "start": 23.72,
+   "end": 23.9
+  },
+  {
+   "w": "in",
+   "start": 23.9,
+   "end": 24.02
+  },
+  {
+   "w": "Spain.",
+   "start": 24.02,
+   "end": 24.55
+  },
+  {
+   "w": "The",
+   "start": 24.93,
+   "end": 25.02
+  },
+  {
+   "w": "Germans",
+   "start": 25.02,
+   "end": 25.4
+  },
+  {
+   "w": "got",
+   "start": 25.4,
+   "end": 25.64
+  },
+  {
+   "w": "copies.",
+   "start": 25.64,
+   "end": 26.2
+  },
+  {
+   "w": "Hitler",
+   "start": 26.59,
+   "end": 26.9
+  },
+  {
+   "w": "sent",
+   "start": 26.9,
+   "end": 27.26
+  },
+  {
+   "w": "troops",
+   "start": 27.26,
+   "end": 27.64
+  },
+  {
+   "w": "to",
+   "start": 27.64,
+   "end": 27.84
+  },
+  {
+   "w": "Greece.",
+   "start": 27.84,
+   "end": 28.35
+  },
+  {
+   "w": "Here's",
+   "start": 28.96,
+   "end": 29.16
+  },
+  {
+   "w": "the",
+   "start": 29.16,
+   "end": 29.28
+  },
+  {
+   "w": "trick.",
+   "start": 29.28,
+   "end": 29.59
+  },
+  {
+   "w": "The",
+   "start": 29.9,
+   "end": 29.98
+  },
+  {
+   "w": "small",
+   "start": 29.98,
+   "end": 30.28
+  },
+  {
+   "w": "details",
+   "start": 30.28,
+   "end": 30.82
+  },
+  {
+   "w": "made",
+   "start": 30.82,
+   "end": 31.14
+  },
+  {
+   "w": "the",
+   "start": 31.14,
+   "end": 31.32
+  },
+  {
+   "w": "big",
+   "start": 31.32,
+   "end": 31.6
+  },
+  {
+   "w": "lie",
+   "start": 31.6,
+   "end": 31.76
+  },
+  {
+   "w": "believable.",
+   "start": 31.76,
+   "end": 32.55
+  },
+  {
+   "w": "It",
+   "start": 32.79,
+   "end": 32.98
+  },
+  {
+   "w": "was",
+   "start": 32.98,
+   "end": 33.04
+  },
+  {
+   "w": "called",
+   "start": 33.04,
+   "end": 33.36
+  },
+  {
+   "w": "Operation",
+   "start": 33.36,
+   "end": 34.22
+  },
+  {
+   "w": "Mincemeat.",
+   "start": 34.22,
+   "end": 34.96
+  },
+  {
+   "w": "Follow",
+   "start": 35.4,
+   "end": 35.74
+  },
+  {
+   "w": "for",
+   "start": 35.74,
+   "end": 36.02
+  },
+  {
+   "w": "more",
+   "start": 36.02,
+   "end": 36.26
+  },
+  {
+   "w": "dark",
+   "start": 36.26,
+   "end": 36.64
+  },
+  {
+   "w": "psychology.",
+   "start": 36.64,
+   "end": 37.34
+  }
+ ]
+}

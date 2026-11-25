@@ -151,6 +151,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-01-27 Wed | 8:00 PM | Thu Jan 28, 9:00 AM | MindTrace | TikTok | In 1984, a secret CIA manual leaked. | content/posts/2026-11-25-cia-manual-inkblot.md | ready |
 | 2027-01-28 Thu | 7:00 PM | Fri Jan 29, 8:00 AM | MindTrace | Instagram Reels | The CIA manual that planned martyrs | content/posts/2026-11-25-cia-manual-inkblot.md | ready |
 | 2027-01-28 Thu | 8:00 PM | Fri Jan 29, 9:00 AM | MindTrace | Facebook Reels | In 1984, a secret CIA manual leaked. | content/posts/2026-11-25-cia-manual-inkblot.md | ready |
+| 2027-01-29 Fri | 7:00 PM | Sat Jan 30, 8:00 AM | MindTrace | YouTube Shorts | British Spies Fooled Hitler With a Dead Man (Operation Mincemeat) | content/posts/2026-11-25-mincemeat-inkblot.md | ready |
+| 2027-01-29 Fri | 8:00 PM | Sat Jan 30, 9:00 AM | MindTrace | TikTok | In 1943, British spies fooled Hitler with a dead man. | content/posts/2026-11-25-mincemeat-inkblot.md | ready |
+| 2027-01-30 Sat | 7:00 PM | Sun Jan 31, 8:00 AM | MindTrace | Instagram Reels | Operation Mincemeat: the man who never was | content/posts/2026-11-25-mincemeat-inkblot.md | ready |
+| 2027-01-30 Sat | 8:00 PM | Sun Jan 31, 9:00 AM | MindTrace | Facebook Reels | British spies fooled Hitler with a dead man. | content/posts/2026-11-25-mincemeat-inkblot.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
