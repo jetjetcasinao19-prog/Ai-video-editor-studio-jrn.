@@ -1,0 +1,396 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "Teflon was discovered inside a tank that seemed empty. April 6th, 1938, New Jersey. DuPont chemist Roy Plunkett is working on a new gas for refrigerators. He opens a tank of it. Nothing comes out. But the tank still weighs as much as a full one, so they cut it open. Inside, a slippery white waxy powder. The gas had turned into a brand new plastic. By 1941, it has a name. Teflon. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "Teflon",
+   "start": 0.14,
+   "end": 0.7
+  },
+  {
+   "w": "was",
+   "start": 0.7,
+   "end": 0.94
+  },
+  {
+   "w": "discovered",
+   "start": 0.94,
+   "end": 1.56
+  },
+  {
+   "w": "inside",
+   "start": 1.56,
+   "end": 2.44
+  },
+  {
+   "w": "a",
+   "start": 2.44,
+   "end": 2.7
+  },
+  {
+   "w": "tank",
+   "start": 2.7,
+   "end": 3.16
+  },
+  {
+   "w": "that",
+   "start": 3.16,
+   "end": 3.4
+  },
+  {
+   "w": "seemed",
+   "start": 3.4,
+   "end": 3.72
+  },
+  {
+   "w": "empty.",
+   "start": 3.72,
+   "end": 4.72
+  },
+  {
+   "w": "April",
+   "start": 5.48,
+   "end": 5.74
+  },
+  {
+   "w": "6th,",
+   "start": 5.74,
+   "end": 6.46
+  },
+  {
+   "w": "1938,",
+   "start": 6.46,
+   "end": 7.96
+  },
+  {
+   "w": "New",
+   "start": 7.96,
+   "end": 8.12
+  },
+  {
+   "w": "Jersey.",
+   "start": 8.12,
+   "end": 9.02
+  },
+  {
+   "w": "DuPont",
+   "start": 9.36,
+   "end": 9.68
+  },
+  {
+   "w": "chemist",
+   "start": 9.68,
+   "end": 10.18
+  },
+  {
+   "w": "Roy",
+   "start": 10.18,
+   "end": 10.5
+  },
+  {
+   "w": "Plunkett",
+   "start": 10.5,
+   "end": 10.9
+  },
+  {
+   "w": "is",
+   "start": 10.9,
+   "end": 11.14
+  },
+  {
+   "w": "working",
+   "start": 11.14,
+   "end": 11.42
+  },
+  {
+   "w": "on",
+   "start": 11.42,
+   "end": 11.62
+  },
+  {
+   "w": "a",
+   "start": 11.62,
+   "end": 11.74
+  },
+  {
+   "w": "new",
+   "start": 11.74,
+   "end": 11.88
+  },
+  {
+   "w": "gas",
+   "start": 11.88,
+   "end": 12.3
+  },
+  {
+   "w": "for",
+   "start": 12.3,
+   "end": 12.46
+  },
+  {
+   "w": "refrigerators.",
+   "start": 12.46,
+   "end": 13.14
+  },
+  {
+   "w": "He",
+   "start": 12.74,
+   "end": 13.9
+  },
+  {
+   "w": "opens",
+   "start": 13.9,
+   "end": 14.18
+  },
+  {
+   "w": "a",
+   "start": 14.18,
+   "end": 14.34
+  },
+  {
+   "w": "tank",
+   "start": 14.34,
+   "end": 14.58
+  },
+  {
+   "w": "of",
+   "start": 14.58,
+   "end": 14.72
+  },
+  {
+   "w": "it.",
+   "start": 14.72,
+   "end": 15.3
+  },
+  {
+   "w": "Nothing",
+   "start": 15.3,
+   "end": 15.44
+  },
+  {
+   "w": "comes",
+   "start": 15.44,
+   "end": 15.8
+  },
+  {
+   "w": "out.",
+   "start": 15.8,
+   "end": 16.12
+  },
+  {
+   "w": "But",
+   "start": 16.72,
+   "end": 16.82
+  },
+  {
+   "w": "the",
+   "start": 16.82,
+   "end": 16.98
+  },
+  {
+   "w": "tank",
+   "start": 16.98,
+   "end": 17.24
+  },
+  {
+   "w": "still",
+   "start": 17.24,
+   "end": 17.5
+  },
+  {
+   "w": "weighs",
+   "start": 17.5,
+   "end": 17.92
+  },
+  {
+   "w": "as",
+   "start": 17.92,
+   "end": 18.14
+  },
+  {
+   "w": "much",
+   "start": 18.14,
+   "end": 18.3
+  },
+  {
+   "w": "as",
+   "start": 18.3,
+   "end": 18.42
+  },
+  {
+   "w": "a",
+   "start": 18.42,
+   "end": 18.56
+  },
+  {
+   "w": "full",
+   "start": 18.56,
+   "end": 18.72
+  },
+  {
+   "w": "one,",
+   "start": 18.72,
+   "end": 19.56
+  },
+  {
+   "w": "so",
+   "start": 19.56,
+   "end": 19.66
+  },
+  {
+   "w": "they",
+   "start": 19.66,
+   "end": 19.8
+  },
+  {
+   "w": "cut",
+   "start": 19.8,
+   "end": 20
+  },
+  {
+   "w": "it",
+   "start": 20,
+   "end": 20.12
+  },
+  {
+   "w": "open.",
+   "start": 20.12,
+   "end": 20.38
+  },
+  {
+   "w": "Inside,",
+   "start": 21.18,
+   "end": 21.78
+  },
+  {
+   "w": "a",
+   "start": 21.78,
+   "end": 22.32
+  },
+  {
+   "w": "slippery",
+   "start": 22.32,
+   "end": 22.82
+  },
+  {
+   "w": "white",
+   "start": 22.82,
+   "end": 23.4
+  },
+  {
+   "w": "waxy",
+   "start": 23.4,
+   "end": 24
+  },
+  {
+   "w": "powder.",
+   "start": 24,
+   "end": 24.92
+  },
+  {
+   "w": "The",
+   "start": 25.24,
+   "end": 25.26
+  },
+  {
+   "w": "gas",
+   "start": 25.26,
+   "end": 25.6
+  },
+  {
+   "w": "had",
+   "start": 25.6,
+   "end": 25.76
+  },
+  {
+   "w": "turned",
+   "start": 25.76,
+   "end": 26.02
+  },
+  {
+   "w": "into",
+   "start": 26.02,
+   "end": 26.24
+  },
+  {
+   "w": "a",
+   "start": 26.24,
+   "end": 26.42
+  },
+  {
+   "w": "brand",
+   "start": 26.42,
+   "end": 26.7
+  },
+  {
+   "w": "new",
+   "start": 26.7,
+   "end": 26.82
+  },
+  {
+   "w": "plastic.",
+   "start": 26.82,
+   "end": 27.76
+  },
+  {
+   "w": "By",
+   "start": 28.02,
+   "end": 28.1
+  },
+  {
+   "w": "1941,",
+   "start": 28.1,
+   "end": 29.52
+  },
+  {
+   "w": "it",
+   "start": 29.52,
+   "end": 29.6
+  },
+  {
+   "w": "has",
+   "start": 29.6,
+   "end": 29.78
+  },
+  {
+   "w": "a",
+   "start": 29.78,
+   "end": 29.92
+  },
+  {
+   "w": "name.",
+   "start": 29.92,
+   "end": 30.84
+  },
+  {
+   "w": "Teflon.",
+   "start": 30.84,
+   "end": 32.12
+  },
+  {
+   "w": "Every",
+   "start": 32.12,
+   "end": 32.22
+  },
+  {
+   "w": "legend",
+   "start": 32.22,
+   "end": 32.68
+  },
+  {
+   "w": "has",
+   "start": 32.68,
+   "end": 33.06
+  },
+  {
+   "w": "a",
+   "start": 33.06,
+   "end": 33.18
+  },
+  {
+   "w": "beginning.",
+   "start": 33.18,
+   "end": 33.98
+  }
+ ]
+}

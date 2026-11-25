@@ -225,6 +225,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-03-13 Sat | 8:00 PM | Sun Mar 14, 9:00 AM | TikTok | Picture a cloth shop in the 1670s. The owner points a tiny lens at a drop of water. | content/posts/2026-11-25-leeuwenhoek-ottoman.md | ready |
 | 2027-03-14 Sun | 7:00 PM | Mon Mar 15, 7:00 AM | Instagram Reels | A brass microscope smaller than your hand. | content/posts/2026-11-25-leeuwenhoek-ottoman.md | ready |
 | 2027-03-14 Sun | 8:00 PM | Mon Mar 15, 8:00 AM | Facebook Reels | Ever wonder who first saw the tiny living things all around us? | content/posts/2026-11-25-leeuwenhoek-ottoman.md | ready |
+| 2027-03-15 Mon | 7:00 PM | Tue Mar 16, 7:00 AM | YouTube Shorts | Superglue Was a Failure at First | content/posts/2026-11-25-super-glue-ottoman.md | ready |
+| 2027-03-15 Mon | 8:00 PM | Tue Mar 16, 8:00 AM | TikTok | Imagine your big idea gets tossed in a box because it is too sticky. | content/posts/2026-11-25-super-glue-ottoman.md | ready |
+| 2027-03-16 Tue | 7:00 PM | Wed Mar 17, 7:00 AM | Instagram Reels | A lab report stamped FAILED, and one glue drop that holds it all. | content/posts/2026-11-25-super-glue-ottoman.md | ready |
+| 2027-03-16 Tue | 8:00 PM | Wed Mar 17, 8:00 AM | Facebook Reels | Ever wonder how one of the stickiest things in your junk drawer got started? | content/posts/2026-11-25-super-glue-ottoman.md | ready |
 
 Note: US daylight saving time begins at 2:00 AM on Sun Mar 14, 2027. From Mar 14, PHT = ET + 12 h (it was + 13 h before), so the Mar 14 rows above show +12 h.
 

@@ -162,7 +162,7 @@ export const scenes = [
       k.figure(ctx, 250, 1010, { ...JOYNER, s: 0.95, face: 1, mood: stuck > 0.5 ? 'wow' : 'calm', ...act(stuck > 0.5 ? 'surprise' : 'present', u, tween(u, te - 0.2, te + 0.3)) });
       k.figure(ctx, 850, 1010, { ...COOVER, s: 0.9, face: -1, mood: 'calm', armF: [0.4, 0.3] });
       k.seal(ctx, 860, 260, 66, ' YEARS LATER · 1951 ·', '1951', tween(u, 0, 0.6, ease.linear));
-      callout(ctx, S, 'A REFRACTOMETER’S PRISMS, GLUED SHUT', 640, 480, 560, 330, tween(u, eq - 0.1, eq + 0.4), 15);
+      callout(ctx, S, 'COSTLY LAB GLASS, GLUED SHUT', 640, 480, 560, 330, tween(u, eq - 0.1, eq + 0.4), 15);
       k.label(ctx, 'FRED JOYNER, HIS TEAMMATE', 250, 1080, 15, tween(u, te + 0.2, te + 0.6));
     },
   },
