@@ -1,0 +1,416 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "During the Vietnam War, the US Army tried to scare enemy soldiers with ghosts. It was called Operation Wandering Soul. In Vietnamese tradition, if you die far from home without proper burial, your soul can wander forever. So the Army recorded eerie voices, dead soldiers begging their friends to go home, then played them from speakers at night. Here's the trick. Use what people already fear. It didn't always work. Sometimes they just shot at the speakers. Follow for more dark psychology.",
+ "words": [
+  {
+   "w": "During",
+   "start": 0.14,
+   "end": 0.38
+  },
+  {
+   "w": "the",
+   "start": 0.38,
+   "end": 0.56
+  },
+  {
+   "w": "Vietnam",
+   "start": 0.56,
+   "end": 1.04
+  },
+  {
+   "w": "War,",
+   "start": 1.04,
+   "end": 1.8
+  },
+  {
+   "w": "the",
+   "start": 1.8,
+   "end": 1.92
+  },
+  {
+   "w": "US",
+   "start": 1.92,
+   "end": 2.22
+  },
+  {
+   "w": "Army",
+   "start": 2.22,
+   "end": 2.52
+  },
+  {
+   "w": "tried",
+   "start": 2.52,
+   "end": 2.82
+  },
+  {
+   "w": "to",
+   "start": 2.82,
+   "end": 2.98
+  },
+  {
+   "w": "scare",
+   "start": 2.98,
+   "end": 3.44
+  },
+  {
+   "w": "enemy",
+   "start": 3.44,
+   "end": 3.82
+  },
+  {
+   "w": "soldiers",
+   "start": 3.82,
+   "end": 4.74
+  },
+  {
+   "w": "with",
+   "start": 5.02,
+   "end": 5.16
+  },
+  {
+   "w": "ghosts.",
+   "start": 5.16,
+   "end": 5.9
+  },
+  {
+   "w": "It",
+   "start": 6.55,
+   "end": 6.64
+  },
+  {
+   "w": "was",
+   "start": 6.64,
+   "end": 6.8
+  },
+  {
+   "w": "called",
+   "start": 6.8,
+   "end": 7.16
+  },
+  {
+   "w": "Operation",
+   "start": 7.16,
+   "end": 7.98
+  },
+  {
+   "w": "Wandering",
+   "start": 7.98,
+   "end": 8.64
+  },
+  {
+   "w": "Soul.",
+   "start": 8.64,
+   "end": 9.26
+  },
+  {
+   "w": "In",
+   "start": 9.92,
+   "end": 10.02
+  },
+  {
+   "w": "Vietnamese",
+   "start": 10.02,
+   "end": 10.58
+  },
+  {
+   "w": "tradition,",
+   "start": 10.58,
+   "end": 11.44
+  },
+  {
+   "w": "if",
+   "start": 11.44,
+   "end": 11.52
+  },
+  {
+   "w": "you",
+   "start": 11.52,
+   "end": 11.66
+  },
+  {
+   "w": "die",
+   "start": 11.66,
+   "end": 11.92
+  },
+  {
+   "w": "far",
+   "start": 11.92,
+   "end": 12.26
+  },
+  {
+   "w": "from",
+   "start": 12.26,
+   "end": 12.5
+  },
+  {
+   "w": "home",
+   "start": 12.5,
+   "end": 12.82
+  },
+  {
+   "w": "without",
+   "start": 12.82,
+   "end": 13.12
+  },
+  {
+   "w": "proper",
+   "start": 13.12,
+   "end": 13.54
+  },
+  {
+   "w": "burial,",
+   "start": 13.54,
+   "end": 14.23
+  },
+  {
+   "w": "your",
+   "start": 14.52,
+   "end": 14.62
+  },
+  {
+   "w": "soul",
+   "start": 14.62,
+   "end": 15.06
+  },
+  {
+   "w": "can",
+   "start": 15.06,
+   "end": 15.34
+  },
+  {
+   "w": "wander",
+   "start": 15.34,
+   "end": 15.7
+  },
+  {
+   "w": "forever.",
+   "start": 15.7,
+   "end": 16.29
+  },
+  {
+   "w": "So",
+   "start": 16.91,
+   "end": 17.04
+  },
+  {
+   "w": "the",
+   "start": 17.04,
+   "end": 17.18
+  },
+  {
+   "w": "Army",
+   "start": 17.18,
+   "end": 17.46
+  },
+  {
+   "w": "recorded",
+   "start": 17.46,
+   "end": 18.02
+  },
+  {
+   "w": "eerie",
+   "start": 18.02,
+   "end": 18.5
+  },
+  {
+   "w": "voices,",
+   "start": 18.5,
+   "end": 19.78
+  },
+  {
+   "w": "dead",
+   "start": 19.78,
+   "end": 20.08
+  },
+  {
+   "w": "soldiers",
+   "start": 20.08,
+   "end": 21
+  },
+  {
+   "w": "begging",
+   "start": 21,
+   "end": 21.7
+  },
+  {
+   "w": "their",
+   "start": 21.7,
+   "end": 21.92
+  },
+  {
+   "w": "friends",
+   "start": 21.92,
+   "end": 22.3
+  },
+  {
+   "w": "to",
+   "start": 22.3,
+   "end": 22.5
+  },
+  {
+   "w": "go",
+   "start": 22.5,
+   "end": 22.64
+  },
+  {
+   "w": "home,",
+   "start": 22.64,
+   "end": 23.11
+  },
+  {
+   "w": "then",
+   "start": 23.66,
+   "end": 23.84
+  },
+  {
+   "w": "played",
+   "start": 23.84,
+   "end": 24.16
+  },
+  {
+   "w": "them",
+   "start": 24.16,
+   "end": 24.38
+  },
+  {
+   "w": "from",
+   "start": 24.38,
+   "end": 24.6
+  },
+  {
+   "w": "speakers",
+   "start": 24.6,
+   "end": 25.06
+  },
+  {
+   "w": "at",
+   "start": 25.06,
+   "end": 25.24
+  },
+  {
+   "w": "night.",
+   "start": 25.24,
+   "end": 25.51
+  },
+  {
+   "w": "Here's",
+   "start": 26.12,
+   "end": 26.3
+  },
+  {
+   "w": "the",
+   "start": 26.3,
+   "end": 26.44
+  },
+  {
+   "w": "trick.",
+   "start": 26.44,
+   "end": 26.74
+  },
+  {
+   "w": "Use",
+   "start": 27.31,
+   "end": 27.6
+  },
+  {
+   "w": "what",
+   "start": 27.6,
+   "end": 27.92
+  },
+  {
+   "w": "people",
+   "start": 27.92,
+   "end": 28.3
+  },
+  {
+   "w": "already",
+   "start": 28.3,
+   "end": 28.92
+  },
+  {
+   "w": "fear.",
+   "start": 28.92,
+   "end": 29.45
+  },
+  {
+   "w": "It",
+   "start": 29.94,
+   "end": 30
+  },
+  {
+   "w": "didn't",
+   "start": 30,
+   "end": 30.26
+  },
+  {
+   "w": "always",
+   "start": 30.26,
+   "end": 30.6
+  },
+  {
+   "w": "work.",
+   "start": 30.6,
+   "end": 31.03
+  },
+  {
+   "w": "Sometimes",
+   "start": 31.5,
+   "end": 31.78
+  },
+  {
+   "w": "they",
+   "start": 31.78,
+   "end": 32.12
+  },
+  {
+   "w": "just",
+   "start": 32.12,
+   "end": 32.34
+  },
+  {
+   "w": "shot",
+   "start": 32.34,
+   "end": 32.62
+  },
+  {
+   "w": "at",
+   "start": 32.62,
+   "end": 32.74
+  },
+  {
+   "w": "the",
+   "start": 32.74,
+   "end": 32.88
+  },
+  {
+   "w": "speakers.",
+   "start": 32.88,
+   "end": 33.35
+  },
+  {
+   "w": "Follow",
+   "start": 33.91,
+   "end": 34.18
+  },
+  {
+   "w": "for",
+   "start": 34.18,
+   "end": 34.38
+  },
+  {
+   "w": "more",
+   "start": 34.38,
+   "end": 34.6
+  },
+  {
+   "w": "dark",
+   "start": 34.6,
+   "end": 34.98
+  },
+  {
+   "w": "psychology.",
+   "start": 34.98,
+   "end": 35.75
+  }
+ ]
+}

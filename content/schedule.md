@@ -139,6 +139,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-01-21 Thu | 8:00 PM | Fri Jan 22, 9:00 AM | MindTrace | TikTok | After World War II, the US secretly hired Nazi scientists. | content/posts/2026-11-25-operation-paperclip-inkblot.md | ready |
 | 2027-01-22 Fri | 7:00 PM | Sat Jan 23, 8:00 AM | MindTrace | Instagram Reels | Operation Paperclip and the halo effect | content/posts/2026-11-25-operation-paperclip-inkblot.md | ready |
 | 2027-01-22 Fri | 8:00 PM | Sat Jan 23, 9:00 AM | MindTrace | Facebook Reels | After World War II, the US secretly hired Nazi scientists. | content/posts/2026-11-25-operation-paperclip-inkblot.md | ready |
+| 2027-01-23 Sat | 7:00 PM | Sun Jan 24, 8:00 AM | MindTrace | YouTube Shorts | The Army Tried to Scare Soldiers With Ghosts (Operation Wandering Soul) | content/posts/2026-11-25-wandering-soul-inkblot.md | ready |
+| 2027-01-23 Sat | 8:00 PM | Sun Jan 24, 9:00 AM | MindTrace | TikTok | The US Army tried to scare enemy soldiers with ghosts. | content/posts/2026-11-25-wandering-soul-inkblot.md | ready |
+| 2027-01-24 Sun | 7:00 PM | Mon Jan 25, 8:00 AM | MindTrace | Instagram Reels | Operation Wandering Soul: the ghost tape | content/posts/2026-11-25-wandering-soul-inkblot.md | ready |
+| 2027-01-24 Sun | 8:00 PM | Mon Jan 25, 9:00 AM | MindTrace | Facebook Reels | The Army tried to scare soldiers with ghosts. | content/posts/2026-11-25-wandering-soul-inkblot.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the
