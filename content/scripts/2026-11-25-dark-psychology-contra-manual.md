@@ -1,8 +1,8 @@
 # The CIA's Secret Psychological Warfare Manual (Nicaragua, 1984)
 
 - Format: 9:16 (YouTube Shorts; also Reels / TikTok)
-- Target length: 25–40 s. About 33 seconds of voice (about 82 words), about
-  35.5 s with the 2.5 s brand outro.
+- Target length: 25–40 s. About 30–32 seconds of voice (70 words, read slowly), about
+  34 s with the 2.5 s brand outro.
 - Platform(s): YouTube Shorts
 - Niche: psychology ("dark psychology" series, government angle)
 - Research file: content/research/2026-11-25-cia-contra-manual.md
