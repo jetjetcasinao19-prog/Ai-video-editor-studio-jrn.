@@ -455,6 +455,153 @@ def sfx_signal(kind, pitch=1.0):
         return n * (0.4 + 0.6 * np.abs(np.sin(2 * np.pi * 7 * tt))) * np.sin(np.pi * tt / tt[-1]) * 0.35
     if kind == 'moth':  # fluttering wings
         tt = t(1.0); return bandnoise(len(tt), 150, 900) * (0.5 + 0.5 * np.sin(2 * np.pi * 24 * tt)) * np.sin(np.pi * tt / tt[-1]) * 0.6
+    # --- cinematic + story effects (both kits) ---
+    if kind == 'boom':  # cinematic impact: sub drop + body + air
+        tt = t(2.2); f = 30 + 70 * np.exp(-tt * 9)
+        sub = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-tt * 1.8)
+        body = lowpass(RNG.standard_normal(len(tt)), 400) * np.exp(-tt * 6) * 2.5
+        return (sub * 1.1 + body + bandnoise(len(tt), 2000, 9000) * np.exp(-tt * 18) * 0.4) * 0.8
+    if kind == 'hit':  # trailer hit: boom + metallic ring
+        tt = t(1.8); s = sfx_signal('boom')[:len(tt)] * 0.8
+        s += sum(g * np.sin(2 * np.pi * f * tt) for f, g in ((311, 1), (467, 0.7), (933, 0.4), (1490, 0.25))) * np.exp(-tt * 3.5) * 0.25
+        return s
+    if kind == 'slam':  # a heavy door / book slammed shut
+        tt = t(0.6); return drum_dum(0.6) * 1.1 + bandnoise(len(tt), 150, 3500) * np.exp(-tt * 28) * 0.9
+    if kind == 'reverse':  # reverse cymbal swelling INTO the next moment (place it ~1 s early)
+        tt = t(1.1); c = bandnoise(len(tt), 3000, 14000) * np.exp(-tt * 3.2)
+        return c[::-1] * 0.7
+    if kind == 'scratch':  # record scratch ("wait, what?") — for freeze frames
+        tt = t(0.5); out = np.zeros(len(tt))
+        for a, b, d in ((0, 0.18, 1), (0.2, 0.42, -1)):
+            i, j = int(a * SR), int(b * SR); u = np.arange(j - i) / SR
+            f = (600 + 2200 * (u / u[-1] if d > 0 else 1 - u / u[-1]))
+            out[i:j] += (bandnoise(j - i, 800, 5000) * 0.6 + np.sin(2 * np.pi * np.cumsum(f) / SR) * 0.4) * np.sin(np.pi * u / u[-1])
+        return out * 0.7
+    if kind == 'ding':  # right answer / a small win
+        tt = t(1.2); return sum(g * np.sin(2 * np.pi * f * pitch * tt) for f, g in ((1568, 1), (3136, 0.25), (2349, 0.4))) * np.exp(-tt * 4) * np.clip(tt / 0.003, 0, 1) * 0.5
+    if kind == 'buzzer':  # wrong answer
+        tt = t(0.7); s = np.sign(np.sin(2 * np.pi * 110 * tt)) * 0.4 + np.sign(np.sin(2 * np.pi * 116 * tt)) * 0.4
+        return lowpass(s, 2500) * np.clip(tt / 0.01, 0, 1) * np.clip((0.7 - tt) / 0.05, 0, 1) * 0.55
+    if kind == 'sparkle':  # magic shimmer: a run of high bell tones
+        out = np.zeros(int(1.4 * SR)); g = np.random.default_rng(13)
+        for i in range(12):
+            f = 2000 + g.uniform(0, 3500); j = int(i * 0.06 * SR); tt = t(0.6)
+            k = np.sin(2 * np.pi * f * pitch * tt) * np.exp(-tt * 9) * 0.25
+            out[j:j + len(k)] += k[:len(out) - j]
+        return out
+    if kind == 'zoom':  # whoosh that rises into a zoom
+        tt = t(0.55); f = 300 + 3000 * (tt / tt[-1]) ** 2
+        n = bandnoise(len(tt), 500, 7000) * (tt / tt[-1]) ** 1.5
+        return (n * 0.6 + np.sin(2 * np.pi * np.cumsum(f) / SR) * 0.12 * (tt / tt[-1])) * np.clip((tt[-1] - tt) / 0.04, 0, 1)
+    if kind == 'shutter':  # camera shutter: two mechanical clicks
+        out = np.zeros(int(0.3 * SR))
+        for at, g in ((0, 1.0), (0.09, 0.7)):
+            n = int(0.03 * SR); tt = np.arange(n) / SR; j = int(at * SR)
+            out[j:j + n] += (bandnoise(n, 1500, 9000) + np.sin(2 * np.pi * 2400 * tt) * 0.5) * np.exp(-tt * 200) * g
+        return out
+    if kind == 'glitch':  # digital stutter: chopped noise and blips
+        out = np.zeros(int(0.45 * SR)); g = np.random.default_rng(17)
+        for i in range(10):
+            j = int(g.uniform(0, 0.4) * SR); n = int(g.uniform(0.008, 0.04) * SR); tt = np.arange(n) / SR
+            k = np.sign(np.sin(2 * np.pi * g.uniform(200, 3000) * tt)) * 0.3 if g.random() < 0.5 else bandnoise(n, 1000, 12000) * 0.5
+            out[j:j + n] += k[:len(out) - j]
+        return out * 0.8
+    if kind == 'static':  # radio / TV static
+        tt = t(1.0); return bandnoise(len(tt), 800, 12000) * (0.6 + 0.4 * (RNG.random(len(tt)) < 0.3)) * np.sin(np.pi * tt / tt[-1]) * 0.4
+    if kind == 'rip':  # paper tearing
+        tt = t(0.55); g = np.random.default_rng(23)
+        crackle = (g.random(len(tt)) < 0.08) * g.uniform(-1, 1, len(tt))
+        return (bandnoise(len(tt), 1200, 8000) * 0.5 + lowpass(crackle, 5000) * 2) * np.clip(tt / 0.03, 0, 1) * np.exp(-tt * 2.5) * 0.7
+    if kind == 'page':  # a page turning
+        tt = t(0.6); sw = bandnoise(len(tt), 800, 7000) * np.sin(np.pi * tt / tt[-1]) ** 2 * 0.4
+        flick = bandnoise(int(0.05 * SR), 2000, 9000) * np.exp(-np.arange(int(0.05 * SR)) / SR * 80) * 0.6
+        sw[int(0.42 * SR):int(0.42 * SR) + len(flick)] += flick[:len(sw) - int(0.42 * SR)]
+        return sw
+    if kind == 'fire':  # fire catching: a whump, a roar, crackles
+        tt = t(1.4); g = np.random.default_rng(29)
+        roar = lowpass(RNG.standard_normal(len(tt)), 600) * 2.2 * np.clip(tt / 0.15, 0, 1) * np.exp(-tt * 1.8)
+        cr = (g.random(len(tt)) < 0.004) * g.uniform(-1, 1, len(tt))
+        cr = np.convolve(cr, np.exp(-np.arange(80) / 10), mode='same') * 0.9
+        k = kick(0.3); out = roar + cr; out[:len(k)] += k * 0.3
+        return out * 0.6
+    if kind == 'drip':  # one fat ink drop: a bloop that rises
+        tt = t(0.35); f = 400 * pitch + 900 * pitch * (tt / tt[-1]) ** 0.5
+        return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-tt * 14) * 0.6
+    if kind == 'bubble':
+        out = np.zeros(int(0.8 * SR)); g = np.random.default_rng(31)
+        for i in range(6):
+            j = int(g.uniform(0, 0.6) * SR); k = sfx_signal('drip', g.uniform(0.8, 1.6)) * 0.5
+            out[j:j + len(k)] += k[:len(out) - j]
+        return out
+    if kind == 'clack':  # tiles clacking over in a wave
+        out = np.zeros(int(0.9 * SR)); g = np.random.default_rng(37)
+        for i in range(9):
+            j = int((i * 0.07 + g.uniform(0, 0.02)) * SR); n = int(0.04 * SR); tt = np.arange(n) / SR
+            f = g.uniform(1400, 2400)
+            out[j:j + n] += (np.sin(2 * np.pi * f * tt) * 0.6 + bandnoise(n, 1500, 6000) * 0.5) * np.exp(-tt * 120) * 0.6
+        return out
+    if kind == 'door':  # heavy wooden door: creak, then a thud
+        tt = t(1.0); f = 180 + 60 * np.sin(2 * np.pi * 3 * tt) + 40 * tt
+        creak = np.sign(np.sin(2 * np.pi * np.cumsum(f) / SR)) * 0.15 * np.clip((0.45 - tt) / 0.1, 0, 1) * np.clip(tt / 0.05, 0, 1)
+        creak = lowpass(creak, 1800)
+        th = drum_dum(0.5); out = creak; j = int(0.45 * SR); out[j:j + len(th)] += th[:len(out) - j] * 0.9
+        return out
+    if kind == 'knock':  # three knocks on wood
+        out = np.zeros(int(0.8 * SR))
+        for i in range(3):
+            n = int(0.08 * SR); tt = np.arange(n) / SR; j = int(i * 0.2 * SR)
+            out[j:j + n] += (np.sin(2 * np.pi * 180 * tt) + bandnoise(n, 300, 2500) * 0.6) * np.exp(-tt * 45)
+        return out * 0.8
+    if kind == 'footsteps':  # four steps on stone
+        out = np.zeros(int(1.6 * SR))
+        for i in range(4):
+            n = int(0.12 * SR); tt = np.arange(n) / SR; j = int(i * 0.38 * SR)
+            out[j:j + n] += (bandnoise(n, 150, 1800) * 0.8 + np.sin(2 * np.pi * 90 * tt) * 0.5) * np.exp(-tt * 40) * (0.8 + 0.2 * (i % 2))
+        return out * 0.8
+    if kind == 'glass':  # glass shattering
+        tt = t(1.2); g = np.random.default_rng(41); out = bandnoise(len(tt), 3000, 14000) * np.exp(-tt * 9) * 0.5
+        for i in range(18):
+            j = int(g.uniform(0, 0.7) * SR); u = t(0.2); f = g.uniform(3000, 9000)
+            k = np.sin(2 * np.pi * f * u) * np.exp(-u * 30) * 0.2
+            out[j:j + len(k)] += k[:len(out) - j]
+        return out
+    if kind == 'rumble':  # earthquake / dread
+        tt = t(2.5); return lowpass(RNG.standard_normal(len(tt)), 90) * 6 * np.sin(np.pi * tt / tt[-1]) * (0.7 + 0.3 * np.sin(2 * np.pi * 7 * tt))
+    if kind == 'crowd':  # a murmuring crowd / bazaar
+        tt = t(2.5); out = np.zeros(len(tt)); g = np.random.default_rng(43)
+        for i in range(14):  # many voices = noise through moving vowel formants
+            f1 = g.uniform(300, 800); f2 = g.uniform(900, 2400); rate = g.uniform(2, 5)
+            v = bandnoise(len(tt), f1 * 0.8, f1 * 1.2) + bandnoise(len(tt), f2 * 0.85, f2 * 1.15) * 0.6
+            out += v * (0.5 + 0.5 * np.sin(2 * np.pi * rate * tt + g.uniform(0, 6))) ** 2
+        return out / 14 * np.sin(np.pi * tt / tt[-1]) ** 0.5 * 1.4
+    if kind == 'applause':
+        tt = t(2.2); out = np.zeros(len(tt)); g = np.random.default_rng(47)
+        for i in range(260):
+            j = int(g.uniform(0, 2.0) * SR); n = int(0.012 * SR); u = np.arange(n) / SR
+            out[j:j + n] += bandnoise(n, 800, 6000) * np.exp(-u * 300) * g.uniform(0.3, 1)
+        return out * np.clip((2.2 - tt) / 0.8, 0, 1) * 0.6
+    if kind == 'cannon':
+        tt = t(2.5); s = sfx_signal('boom')[:len(tt)]; s = np.concatenate([s, np.zeros(len(tt) - len(s))])
+        return (s + bandnoise(len(tt), 200, 6000) * np.exp(-tt * 12) * 0.8) * 0.9
+    if kind == 'sword':  # blade drawn from its sheath: a scrape into a ring
+        tt = t(1.0); sc = bandnoise(len(tt), 3000, 10000) * np.clip(tt / 0.25, 0, 1) * np.clip((0.35 - tt) / 0.05, 0, 1) * 0.4
+        ring = sum(g * np.sin(2 * np.pi * f * tt) for f, g in ((2960, 1), (4430, 0.5), (6100, 0.3))) * np.exp(-(tt - 0.3).clip(0) * 4) * (tt > 0.3) * 0.25
+        return sc + ring
+    if kind == 'hooves':  # horses galloping (da-da-dum)
+        out = np.zeros(int(2.0 * SR))
+        for bar in range(5):
+            for k, off in enumerate((0, 0.09, 0.18)):
+                n = int(0.08 * SR); u = np.arange(n) / SR; j = int((bar * 0.38 + off) * SR)
+                out[j:j + n] += (np.sin(2 * np.pi * 120 * u) * 0.7 + bandnoise(n, 200, 2500) * 0.6) * np.exp(-u * 50) * (1 if k == 2 else 0.7)
+        return out * np.linspace(0.5, 1, len(out)) * 0.8
+    if kind == 'strum':  # an oud strum: four strings, fast down-stroke
+        out = np.zeros(int(2.0 * SR))
+        for i, deg in enumerate((0, 4, 7, 12)):
+            k = ks_string(146.83 * pitch * 2 ** (deg / 12), 1.8, 0.6, 0.996); j = int(i * 0.025 * SR)
+            out[j:j + len(k)] += k[:len(out) - j] * 0.5
+        return out
+    if kind == 'zil':  # finger cymbals
+        tt = t(1.6); return sum(g * np.sin(2 * np.pi * f * pitch * tt) for f, g in ((3520, 1), (5280, 0.6), (7900, 0.3))) * np.exp(-tt * 3) * 0.35
     raise ValueError('unknown sfx ' + kind)
 
 

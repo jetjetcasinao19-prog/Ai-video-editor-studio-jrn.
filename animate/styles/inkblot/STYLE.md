@@ -64,6 +64,11 @@ about 1.2 s later, then `moth`.
 - `bleed` — ink floods the card, then drains away (use for a new chapter or a reveal)
 - `blink` — eyelids close and open (going "inside the head", or night)
 - `wipe` (red pen), `flash` (memory / camera), `cut` (fast beats)
+- shared ones, drawn in ink and red: `page`, `burn`, `tear`, `drip` (made for
+  this style), `shutter`, `whip`, `zoom`, `spin`, `glitch` (a memory glitch),
+  `marble`, `tiles`, `doors` — see "Effects" in the skill. Each brings its own
+  sound, and loud impacts shake the plate by themselves.
+- a freeze frame (`meta.freezes`) turns the plate into an old case photo with a label.
 
 ## The finish (automatic)
 `lib/finish.mjs` makes every plate look inked on card: the lines boil (re-traced

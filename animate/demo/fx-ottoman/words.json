@@ -1,0 +1,144 @@
+{
+ "words": [
+  {
+   "w": "Shake",
+   "start": 0.05,
+   "end": 0.33
+  },
+  {
+   "w": "and",
+   "start": 0.35,
+   "end": 0.63
+  },
+  {
+   "w": "impact.",
+   "start": 0.65,
+   "end": 1.95
+  },
+  {
+   "w": "Page",
+   "start": 2.65,
+   "end": 2.93
+  },
+  {
+   "w": "turn.",
+   "start": 2.95,
+   "end": 4.55
+  },
+  {
+   "w": "Burn.",
+   "start": 5.05,
+   "end": 6.95
+  },
+  {
+   "w": "Paper",
+   "start": 7.45,
+   "end": 7.73
+  },
+  {
+   "w": "tear.",
+   "start": 7.75,
+   "end": 9.35
+  },
+  {
+   "w": "Ink",
+   "start": 9.85,
+   "end": 10.13
+  },
+  {
+   "w": "drip.",
+   "start": 10.15,
+   "end": 11.75
+  },
+  {
+   "w": "Camera",
+   "start": 12.25,
+   "end": 12.53
+  },
+  {
+   "w": "shutter.",
+   "start": 12.55,
+   "end": 14.15
+  },
+  {
+   "w": "Whip",
+   "start": 14.65,
+   "end": 14.93
+  },
+  {
+   "w": "pan.",
+   "start": 14.95,
+   "end": 16.55
+  },
+  {
+   "w": "Zoom",
+   "start": 17.05,
+   "end": 17.33
+  },
+  {
+   "w": "through.",
+   "start": 17.35,
+   "end": 18.95
+  },
+  {
+   "w": "Spin.",
+   "start": 19.45,
+   "end": 21.35
+  },
+  {
+   "w": "Glitch.",
+   "start": 21.85,
+   "end": 23.75
+  },
+  {
+   "w": "Ebru",
+   "start": 24.25,
+   "end": 24.53
+  },
+  {
+   "w": "marble.",
+   "start": 24.55,
+   "end": 26.15
+  },
+  {
+   "w": "Tile",
+   "start": 26.65,
+   "end": 26.93
+  },
+  {
+   "w": "flip.",
+   "start": 26.95,
+   "end": 28.55
+  },
+  {
+   "w": "Palace",
+   "start": 29.05,
+   "end": 29.33
+  },
+  {
+   "w": "doors.",
+   "start": 29.35,
+   "end": 30.95
+  },
+  {
+   "w": "Freeze",
+   "start": 31.45,
+   "end": 31.73
+  },
+  {
+   "w": "frame.",
+   "start": 31.75,
+   "end": 33.35
+  },
+  {
+   "w": "Light",
+   "start": 33.85,
+   "end": 34.13
+  },
+  {
+   "w": "rays.",
+   "start": 34.15,
+   "end": 35.75
+  }
+ ]
+}

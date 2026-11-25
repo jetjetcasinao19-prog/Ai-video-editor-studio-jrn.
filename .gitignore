@@ -4,6 +4,8 @@ inbox/*
 animate/node_modules/
 animate/projects/*/build/
 animate/projects/*/out/
+animate/demo/*/out/
+animate/demo/*/build/
 __pycache__/
 animate/.voice/
 animate/.voice-tmp-*/

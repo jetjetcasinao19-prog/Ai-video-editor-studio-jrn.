@@ -155,6 +155,8 @@ Everything lives in `animate/`:
 | `animate/transcribe.mjs` | voice → `words.json` (word timings; OmniRoute if `OMNIROUTE_URL` is set, else Groq Whisper; repairs out-of-order word times) |
 | `animate/render.mjs` | CLI: contact sheet, stills, full render |
 | `animate/lib/engine.mjs` | parallel frame workers → FFmpeg, then soundtrack + mux |
+| `animate/lib/transitions.mjs`, `lib/fx.mjs`, `lib/stage.mjs` | 12 shared transitions, the `S.fx` in-scene effects, freeze frames, automatic transition sounds and impact shakes (see Effects below) |
+| `animate/demo/fx-inkblot`, `animate/demo/fx-ottoman` | effect reels: every transition, effect and new sound, each scene captioned with its name — not for posting |
 | `animate/lib/finish.mjs` | the hand-made finish on every frame: line boil, on-twos timing, ink bleed, paper, lamp light, gold-leaf sheen, rostrum push-in, film grain (see Craft rules) |
 | `animate/lib/audio.py` | synthesised scores — `kit: 'ottoman'` (maqam scales, oud/kanun, ney, def/darbuka) or `kit: 'mind'` (music box, felt piano, low strings, ticking clock, heartbeat) — + 32 sound effects + voice ducking + stereo hall/room reverb, humanised notes, an analog bed, voice clean-up + −14 LUFS |
 | `animate/styles/ottoman/` | the Ottoman miniature style: `kit.mjs` (figures, turbans, cloud bands, spongy rocks, cypresses, tulips, waves, galley, tughra, seals, stamps…), `page.mjs` (ebru marbled margins, illuminated header, gold-ruled frame, captions, progress reed), `scenes.mjs` (ready backdrops: `land`, `interior`, `lamp`, `compassRose`, `bookCover` for the closing brand card), `index.mjs` (transitions) |
@@ -216,8 +218,10 @@ Start from `projects/bubble-wrap/story.mjs`. It exports:
 - `scenes` — `{ start, title, trans, still, draw(ctx, u, S) }` (`still: true` = no rostrum push-in). `u` = seconds into
   the scene. `S.at('word')` = when that word is spoken (sync moments to it).
   `S.cam(zoom, cx, cy)` = camera. `S.k` = the style kit, `S.P` = palette,
-  `S.W/S.H` = painting size (940×1060). Transitions: `iris` (scalloped gold
-  circle), `wipe`, `unroll` (scroll), `flash` (gold), `cut`.
+  `S.W/S.H` = painting size (940×1060). Ottoman's own transitions: `iris`
+  (scalloped gold circle, default), `wipe`, `unroll` (scroll), `flash` (gold),
+  `cut`. **Both styles** also have the shared ones (table below). `transDur`
+  on a scene overrides a transition's length.
 - `sfx` — `{ t, type, gain, pitch }`; types: pop, whoosh, paper, chime, stamp,
   thud, pluck, slide, sizzle, wind, rain, waves, crickets, flop, riser, gong,
   clank, alarm, thunder, crack, coins.
@@ -228,6 +232,75 @@ Start from `projects/bubble-wrap/story.mjs`. It exports:
   comeback → drive, revelation → tense, payoff → triumph).
 - INKBLOT sfx extras: tick, heartbeat, splat, fold, blink, typewriter, bell,
   click, snap, buzz, pen, moth.
+- **More sfx (both kits)** — impacts: `boom` (cinematic sub drop), `hit`
+  (trailer hit), `slam`, `cannon`, `knock`; build-ups: `reverse` (reverse
+  cymbal — place it ~1 s before the hit), `riser`, `zoom`; reactions: `ding`
+  (right), `buzzer` (wrong), `scratch` (record scratch), `sparkle` (magic),
+  `applause`, `crowd` (murmur / bazaar); world: `footsteps`, `door` (creak +
+  thud), `glass`, `fire`, `rumble`, `static`, `glitch`, `shutter`, `rip`,
+  `page`, `drip`, `bubble`, `clack`; Ottoman colour: `sword` (blade drawn),
+  `hooves` (gallop), `strum` (oud strum; `pitch` changes the chord), `zil`
+  (finger cymbals).
+
+### Effects (`lib/transitions.mjs`, `lib/fx.mjs`, `lib/stage.mjs`)
+**Shared transitions** (`trans:` on a scene, both styles, in each style's colours):
+
+| `trans` | Looks like | Use it for | Sound (added by itself) |
+|---|---|---|---|
+| `page` | the page turns over, old ink shows through its back | the next chapter, "meanwhile" | page |
+| `burn` | the picture burns from the bottom, glowing edge, embers | destruction, "it all went up in smoke", the end of an era | fire |
+| `tear` | the paper rips and the halves fly apart | a break-up, a split, a shock | rip |
+| `drip` | ink runs down, covers it, slides off | dark turn, the subconscious | drip |
+| `shutter` | six camera blades close and open | a photo, a memory, "snap" | shutter |
+| `whip` | whip pan with motion blur | fast cut to a new place, "meanwhile across town" | whoosh |
+| `zoom` | zoom through into the next picture | going deeper, a closer look | zoom |
+| `spin` | spins away, next spins in | confusion, a twist, time passing | whoosh |
+| `glitch` | slices slip, colour splits, scanlines | a memory glitch, a lie, tech | glitch |
+| `marble` | ebru colour drops bloom, then open | Ottoman chapter change (gorgeous), a dream | drip |
+| `tiles` | flips over tile by tile in a wave | a reveal, a list, before/after | clack |
+| `doors` | two doors swing shut and open again (palace doors in OTTOMAN) | a new place, behind closed doors, a big reveal | door |
+
+**Sounds added by themselves** (`meta.autoSfx`, on by default): every
+transition gets its matching sound (table above; INKBLOT fold → fold,
+bleed → splat, blink → blink, wipe → pen, flash → shutter; Ottoman iris →
+soft whoosh, wipe → slide, unroll → paper, flash → sparkle), but never when
+the story already has a sound within 0.25 s of the cut. Every freeze frame
+gets a record scratch.
+
+**Impacts shake the picture by themselves** (`meta.autoShake`, on by
+default): a `stamp`, `thud`, `boom`, `hit`, `slam`, `cannon`, `door`, `gong`,
+`thunder`, `alarm` or `knock` sfx with gain ≥ 0.5 shakes the painting at that
+moment, harder for bigger sounds.
+
+**Freeze frame** (`meta.freezes = [{ t, dur, label, y }]`): at `t` the painting
+stops dead, turns into an old photo and a tilted label slaps on ("YEP. THAT
+WAS HIM."); the voice keeps going; a record scratch plays. Use it once per
+video at most, on the funniest or most surprising line.
+
+**In-scene effects** — `S.fx.*` in any `draw(ctx, u, S)`:
+- `S.fx.shake(ctx, u, at, amp, dur)` / `S.fx.punch(ctx, u, at, amt, dur, x, y)`
+  — camera shake / quick zoom punch-in; call them **first**, before drawing.
+- `S.fx.burst(ctx, u, at, x, y, { kind, n, speed, size, colors })` — particles:
+  `dust`, `sparks`, `confetti`, `ink`, `petals`, `paper`, `smoke`, `stars`,
+  `coins`, `hearts`.
+- `S.fx.impact(ctx, u, at, x, y, { r, color })` — manga hit lines + shock ring.
+- `S.fx.speedLines(ctx, u, from, to, { dir, color })` — motion streaks.
+- `S.fx.rays(ctx, x, y, u, { color, alpha })` — turning light rays behind something.
+- `S.fx.rings(ctx, u, at, x, y, { color, r })` — ripples (a sound, an idea landing).
+- `S.fx.flash(ctx, u, at, { color })` — a flash of light.
+- `S.fx.spotlight(ctx, u, from, x, y, r)` — everything goes dark but one circle.
+- `S.fx.squash(ctx, u, at, x, y, amt)` — squash & stretch on landing (before drawing the thing).
+- `S.fx.wobble(u, seed, amp)` → `[dx, dy]` idle drift for floating things.
+
+Pair every effect with a sound on the same frame (`impact` + `hit`/`stamp`,
+`burst coins` + `coins`, `confetti` + `ding`/`applause`, `spotlight` +
+`reverse` → `hit`). Don't decorate every plate: an effect is a punctuation
+mark, so one strong one per beat at most.
+
+**See them all:** `animate/demo/fx-inkblot` and `animate/demo/fx-ottoman` are
+reels with every transition and effect, each scene captioned with its name —
+copy the code you need. Render one with `node render.mjs demo/fx-inkblot`
+(after editing a reel's `LABELS`, run `node demo/make-captions.mjs demo/fx-inkblot`).
 
 Use helpers from the kit before drawing by hand. Animation tools are in
 `lib/core.mjs`: `tween`, `ease.*`, `pop`, `shake`, `rng` (seeded — never
