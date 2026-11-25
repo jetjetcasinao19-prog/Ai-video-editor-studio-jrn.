@@ -12,6 +12,11 @@ cues.json (written by lib/engine.mjs):
 Scores: music.kit = 'ottoman' (default) or 'mind' (INKBLOT: music box, felt
 piano, low strings, ticking clock, heartbeat; music.scale = minor | dorian |
 harmonic | major | lydian).
+Space (both kits): the score sits in a synthetic stereo hall/room, effects in
+a lighter room, the voice stays dry but gets a rumble filter + gentle
+compression, notes are humanised (timing/velocity), and a faint analog bed
+(tape hiss / room tone) runs under everything. Optional cues.space =
+{reverb, wet, sfxWet, bed, polish}.
 Ottoman kit: — ney drone, plucked oud and kanun (Karplus-Strong
 strings), def/darbuka (düm / tek / ka) in a maqsum rhythm; moods: intro,
 groove, sad, drive, triumph, end. Needs numpy and ffmpeg.
@@ -21,6 +26,7 @@ import numpy as np
 
 SR = 44100
 RNG = np.random.default_rng(7)
+HUM = np.random.default_rng(11)  # timing / velocity humanizer
 
 
 def load_voice(path, dur):
@@ -124,6 +130,8 @@ def score(cfg, dur):
     cache = {}
 
     def add(sig, t, g=1.0, pan=0.0):
+        # a player is never sample-exact: a few ms early/late, a little louder/softer
+        t = t + HUM.normal(0, 0.006); g = g * (1 + HUM.normal(0, 0.09))
         i = int(t * SR)
         if i < 0 or i >= len(left): return
         s = sig[:len(left) - i] * g
@@ -201,25 +209,39 @@ def musicbox(freq, dur=1.6):
 
 
 def piano(freq, dur=2.0, soft=0.6):
+    """Felt piano: 3 slightly detuned strings per note (they beat, like a real
+    unison), stretched partials, upper partials die first, a soft hammer thump."""
     t = np.arange(int(dur * SR)) / SR
     s = np.zeros_like(t)
-    for k in range(1, 7):
-        s += (1 / k ** 1.4) * np.sin(2 * np.pi * freq * k * (1 + 0.0004 * k * k) * t) * np.exp(-t * (1.6 + k * soft))
-    s *= np.clip(t / 0.008, 0, 1)
-    n = min(len(t), int(0.03 * SR))
-    s[:n] += bandnoise(n, 200, 2500) * np.exp(-t[:n] * 200) * 0.15
-    return s * 0.5
+    for k in range(1, 9):
+        fk = freq * k * (1 + 0.0004 * k * k)
+        if fk > 9000: break
+        amp = (1 / k ** 1.5) * (0.55 if k == 1 else 1)
+        dec = 1.2 + k * soft * 0.9
+        for det, ph in ((-0.0009, 0.0), (0.0, 1.3), (0.0011, 2.1)):
+            s += amp / 3 * np.sin(2 * np.pi * fk * (1 + det) * t + ph) * np.exp(-t * dec)
+    # two-stage decay: a quick drop after the strike, then the long ring
+    s *= (0.6 + 0.4 * np.exp(-t * 6)) * np.clip(t / 0.004, 0, 1)
+    n = min(len(t), int(0.05 * SR))
+    s[:n] += (bandnoise(n, 60, 900) * 0.5 + bandnoise(n, 900, 4000) * 0.15) * np.exp(-t[:n] * 120) * 0.25
+    return s * 0.55
 
 
 def strings(freq, dur):
+    """A small bowed ensemble: 5 players slightly out of tune with each other,
+    each with their own slow vibrato, a soft bow attack and a dark tone."""
     t = np.arange(int(dur * SR)) / SR
     s = np.zeros_like(t)
-    for det in (-0.004, 0, 0.0035):
-        for k in range(1, 7):
-            s += (1 / k) * np.sin(2 * np.pi * freq * (1 + det) * k * t + k * det * 400)
-    vib = 1 + 0.15 * np.sin(2 * np.pi * 4.8 * t)
-    e = np.clip(t / 0.8, 0, 1) * np.clip((dur - t) / 0.6, 0, 1)
-    return s * e * vib * 0.12
+    g = np.random.default_rng(int(freq * 10) % 9973)
+    for det in (-0.006, -0.0025, 0.0, 0.003, 0.0055):
+        rate, depth, ph0 = g.uniform(4.6, 5.6), g.uniform(0.0018, 0.003), g.uniform(0, 6.28)
+        vib = 1 + depth * np.sin(2 * np.pi * rate * t + ph0) * np.clip((t - 0.25) / 0.6, 0, 1)
+        ph = 2 * np.pi * freq * (1 + det) * np.cumsum(vib) / SR
+        for k in range(1, 8):
+            s += (1 / k ** 1.6) * np.sin(k * ph + g.uniform(0, 6.28))
+    e = np.clip(t / 0.9, 0, 1) ** 1.5 * np.clip((dur - t) / 0.7, 0, 1)
+    bow = bandnoise(len(t), freq * 1.5, freq * 6) * 0.05
+    return (s * 0.2 + bow) * e * 0.12
 
 
 def tick(high=True):
@@ -255,6 +277,8 @@ def score_mind(cfg, dur):
     cache = {}
 
     def add(sig, t, g=1.0, pan=0.0):
+        # a player is never sample-exact: a few ms early/late, a little louder/softer
+        t = t + HUM.normal(0, 0.006); g = g * (1 + HUM.normal(0, 0.09))
         i = int(t * SR)
         if i < 0 or i >= len(left): return
         s = sig[:len(left) - i] * g
@@ -321,9 +345,14 @@ def sfx_signal(kind, pitch=1.0):
     if kind == 'pop':
         tt = t(0.09); f = 900 * pitch * np.exp(-tt * 25) + 300
         return np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-tt * 60) + bandnoise(len(tt), 2000, 9000) * np.exp(-tt * 120) * 0.6
-    if kind == 'whoosh':
-        tt = t(0.45); n = bandnoise(len(tt), 300, 4000)
-        return n * np.sin(np.pi * tt / tt[-1]) ** 2 * 0.6
+    if kind == 'whoosh':  # air rushing past: the noise band sweeps up then down
+        tt = t(0.5); n = len(tt); out = np.zeros(n); seg = n // 10
+        for k in range(10):
+            c = 500 + 2600 * np.sin(np.pi * (k + 0.5) / 10) * pitch
+            b = bandnoise(seg * 2, c * 0.5, c * 1.6)
+            w = np.hanning(seg * 2); a = k * seg
+            out[a:a + seg * 2] += (b * w)[:n - a]
+        return out * np.sin(np.pi * tt / tt[-1]) ** 1.5 * 0.55
     if kind == 'paper':
         tt = t(0.6); n = bandnoise(len(tt), 1500, 9000)
         crackle = (RNG.random(len(tt)) < 0.02) * RNG.uniform(-1, 1, len(tt))
@@ -429,13 +458,78 @@ def sfx_signal(kind, pitch=1.0):
     raise ValueError('unknown sfx ' + kind)
 
 
+# ---------- space: stereo reverb, a room bed, voice polish ----------
+def _fftconv(x, ir):
+    n = 1 << int(np.ceil(np.log2(len(x) + len(ir))))
+    y = np.fft.irfft(np.fft.rfft(x, n) * np.fft.rfft(ir, n), n)
+    return y[:len(x)]
+
+
+def impulse(seconds, seed, damp=0.5, pre=0.018):
+    """Synthetic room: early reflections, then a dense tail whose highs die
+    sooner than its lows (like a real hall)."""
+    g = np.random.default_rng(seed)
+    n = int(seconds * SR); t = np.arange(n) / SR
+    lo = bandnoise(n, 40, 1500) * np.exp(-t * 6.9 / seconds)
+    hi = bandnoise(n, 1500, 9000) * np.exp(-t * 6.9 / (seconds * (1 - damp * 0.75))) * 0.6
+    ir = (lo + hi) * np.clip(t / 0.03, 0, 1)
+    for k in range(9):  # early reflections off near walls
+        j = int((0.006 + g.uniform(0, 0.06)) * SR)
+        if j < n: ir[j] += g.uniform(0.3, 0.8) * (1 if g.random() < 0.5 else -1) * 3
+    ir = np.concatenate([np.zeros(int(pre * SR)), ir])
+    return ir / np.sqrt(np.sum(ir ** 2))
+
+
+def reverb(L, R, seconds=1.8, wet=0.25, damp=0.5, seed=21):
+    if wet <= 0: return L, R
+    il, ir = impulse(seconds, seed, damp), impulse(seconds, seed + 1, damp)
+    mono = (L + R) / 2
+    wl = _fftconv(L * 0.7 + mono * 0.3, il); wr = _fftconv(R * 0.7 + mono * 0.3, ir)
+    k = np.sqrt(np.mean(L ** 2 + R ** 2) / max(1e-12, np.mean(wl ** 2 + wr ** 2)))
+    return L * (1 - wet * 0.5) + wl * k * wet, R * (1 - wet * 0.5) + wr * k * wet
+
+
+def room_bed(n, kind):
+    """A faint analog bed under the whole film — dead digital silence between
+    lines sounds 'generated'. mind: tape hiss + soft vinyl crackle; ottoman:
+    a warm room tone."""
+    g = np.random.default_rng(5)
+    bed = bandnoise(n, 60, 400) * 0.6 + bandnoise(n, 2000, 10000) * (0.16 if kind == 'mind' else 0.06)
+    if kind == 'mind':
+        pops = (g.random(n) < 7 / SR) * g.uniform(-1, 1, n)
+        bed += np.convolve(pops, np.exp(-np.arange(60) / 8), mode='same') * 2
+    return bed * 0.012
+
+
+def polish_voice(v):
+    """Rumble filter (below 70 Hz) and gentle 2.5:1 compression, so the voice
+    sits clear and even on top of the score."""
+    if not np.any(v): return v
+    n = len(v); spec = np.fft.rfft(v); f = np.fft.rfftfreq(n, 1 / SR)
+    spec *= np.clip((f - 40) / 40, 0, 1)
+    v = np.fft.irfft(spec, n)
+    win = int(0.03 * SR)
+    rms = np.sqrt(np.convolve(v ** 2, np.ones(win) / win, mode='same') + 1e-12)
+    thr = np.percentile(rms[rms > 1e-4], 60) if np.any(rms > 1e-4) else 0.05
+    gain = np.where(rms > thr, (thr / rms) ** (1 - 1 / 2.5), 1.0)
+    gain = np.convolve(gain, np.ones(int(0.01 * SR)) / int(0.01 * SR), mode='same')
+    return v * gain
+
+
+
 def main(path):
     cue = json.load(open(path))
     dur = float(cue['duration'])
     voice = load_voice(cue['voice'], dur)
-    L = R = np.zeros(int(dur * SR))
+    mind = (cue.get('music') or {}).get('kit') == 'mind'
+    space = cue.get('space') or {}  # optional: {reverb: seconds, wet, sfxWet, bed}
+    if space.get('polish', True): voice = polish_voice(voice)
+    n = int(dur * SR)
+    L = np.zeros(n); R = np.zeros(n)
     if cue.get('music'):
-        ml, mr = (score_mind if cue['music'].get('kit') == 'mind' else score)(cue['music'], dur)
+        ml, mr = (score_mind if mind else score)(cue['music'], dur)
+        # the score lives in a room: an intimate one for the mind kit, a hall for Ottoman
+        ml, mr = reverb(ml, mr, space.get('reverb', 1.5 if mind else 2.3), space.get('wet', 0.28 if mind else 0.33), 0.55 if mind else 0.4, 21)
         # duck the score under the voice
         win = int(0.02 * SR)
         rms = np.sqrt(np.convolve(voice ** 2, np.ones(win) / win, mode='same'))
@@ -447,14 +541,20 @@ def main(path):
         duck = 1 - 0.6 * np.clip(env / 0.05, 0, 1)
         g = cue['music'].get('gain', 0.3)
         L = ml * duck * g; R = mr * duck * g
-    L = L + voice; R = R + voice
+    # sound effects get their own lighter room, so they sit in the same space
+    SL = np.zeros(n); SR_ = np.zeros(n)
     for s in cue.get('sfx', []):
         sig = sfx_signal(s['type'], s.get('pitch', 1.0)) * s.get('gain', 0.5) * 0.6
         i = int(s['t'] * SR)
-        if i >= len(L) or i < 0: continue
-        n = min(len(sig), len(L) - i)
+        if i >= n or i < 0: continue
+        k = min(len(sig), n - i)
         pan = RNG.uniform(-0.25, 0.25)
-        L[i:i + n] += sig[:n] * (1 - max(0, pan)); R[i:i + n] += sig[:n] * (1 + min(0, pan))
+        SL[i:i + k] += sig[:k] * (1 - max(0, pan)); SR_[i:i + k] += sig[:k] * (1 + min(0, pan))
+    if cue.get('sfx'): SL, SR_ = reverb(SL, SR_, 1.2 if mind else 1.6, space.get('sfxWet', 0.16), 0.6, 31)
+    L = L + SL + voice; R = R + SR_ + voice
+    if space.get('bed', True):
+        bl, br = room_bed(n, 'mind' if mind else 'ottoman'), room_bed(n, 'mind' if mind else 'ottoman')[::-1]
+        L = L + bl; R = R + br
     a, b = int(cue.get('start', 0) * SR), int(cue.get('end', dur) * SR)
     st = np.stack([L[a:b], R[a:b]], axis=1)
     st = st / max(1.0, np.abs(st).max() / 0.95)

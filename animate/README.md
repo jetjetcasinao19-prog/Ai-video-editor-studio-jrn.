@@ -21,5 +21,8 @@ kaftans and turbans, tughra, seals) and `styles/inkblot/` (a psychology
 case file: living mirror-symmetric Rorschach blots, numbered plates, silhouette
 people with paper-white eyes, red-pen notes, typewriter captions, an EEG
 polygraph progress line; music-box/felt-piano score — see its `STYLE.md`).
+Every frame gets a hand-made finish (`lib/finish.mjs`: line boil, animation
+on twos, ink bleed, real paper, gold-leaf sheen, rostrum push-in, film grain)
+and the soundtrack plays in a synthetic room with humanised notes.
 Full workflow:
 `.claude/skills/animated-short/SKILL.md`.

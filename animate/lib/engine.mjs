@@ -134,7 +134,7 @@ export async function render(dir, { out, build, workers = Math.max(1, os.cpus().
   const cues = {
     voice: path.join(project.dir, meta.voice), duration: meta.duration,
     start: from, end: to ?? meta.duration,
-    music: story.music || null, sfx: story.sfx || [], out: path.join(build, 'mix.wav'),
+    music: story.music || null, sfx: story.sfx || [], space: story.space || meta.space || null, out: path.join(build, 'mix.wav'),
   };
   fs.writeFileSync(path.join(build, 'cues.json'), JSON.stringify(cues, null, 1));
   run('python3', ['-I', path.join(HERE, 'audio.py'), path.join(build, 'cues.json')]);

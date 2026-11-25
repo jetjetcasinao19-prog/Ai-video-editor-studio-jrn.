@@ -27,7 +27,12 @@ other channel, and it stays readable on a phone (high contrast, three inks).
 | **Red pen** | the narrator's notes | `scrawl`, `penCircle`, `penLine`, `arrow` |
 | **Typewriter** | case notes, data | `typeOn(ctx, text, x, y, size, k)` |
 
-People: `figure(ctx, x, y, {s, face, hat: 'bowler'|'cloche'|'cap', hair:
+People are brush-inked noir silhouettes: tapered limbs (`limb`), mitten
+hands with a thumb (`hand`), a nose and an ear that show which way they face
+(`face: 1 | -1`), a relaxed upper lid when calm, catch-lights in the eyes and a
+paper-white **rim light** on the lamp side that gives them volume (`rim: false`
+turns it off; it is only drawn on black-ink figures).
+`figure(ctx, x, y, {s, face, hat: 'bowler'|'cloche'|'cap', hair:
 'slick'|'bob'|'bun', glasses, apron, bowtie, tie, skirt, sit, walk, armL, armR,
 mood: 'calm'|'smile'|'worry'|'shock', look, blink, holdR})`.
 Props: `cafeChair`, `bistroTable`, `cup`, `plate`, `FOOD.*` (pretzel, beer,
@@ -60,6 +65,14 @@ about 1.2 s later, then `moth`.
 - `blink` — eyelids close and open (going "inside the head", or night)
 - `wipe` (red pen), `flash` (memory / camera), `cut` (fast beats)
 
+## The finish (automatic)
+`lib/finish.mjs` makes every plate look inked on card: the lines boil (re-traced
+10×/s), the plate moves on twos, ink bleeds into the paper, the card has fibres
+and foxing, a lamp lights the middle, film grain + a faint flicker run over
+everything and each shot slowly pushes in. The mind-kit score plays in a small
+room with tape hiss and soft crackle underneath. See the Craft rules in
+`.claude/skills/animated-short/SKILL.md`.
+
 ## Rules of the style
 1. Three inks: `P.ink`, `P.red`, paper. Pastels (`rose`, `sky`, `ochre`,
    `sage`, `lilac`) only for small props, like the late colour plates.
@@ -68,7 +81,9 @@ about 1.2 s later, then `moth`.
    loop; a cliffhanger is a real cliff; a worry is a moth (a blot that flaps).
 4. Red-pen labels for names, numbers and the punchline. Short notes in US English.
 5. Facts on screen must be in the script or checked (the brand is "dramatic but true").
-6. Sound: `music.kit: 'mind'`; sfx `fold` on fold cuts, `splat` on bleeds,
+6. No generic psychology clip art (glowing brains, gears, lightbulbs) unless the
+   script names it — draw the specific case: the door, the card, the waiter.
+7. Sound: `music.kit: 'mind'`; sfx `fold` on fold cuts, `splat` on bleeds,
    `blink` on blinks, `stamp` on stamps, `pen` on red-pen notes, `typewriter` on typing.
 
 Template: `animate/projects/zeigarnik-effect/story.mjs`.

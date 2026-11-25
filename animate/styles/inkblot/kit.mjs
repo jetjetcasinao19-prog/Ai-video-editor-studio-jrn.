@@ -365,66 +365,127 @@ export function profile(ctx, x, y, s = 1, o = {}) {
 // (0 = hanging), walk (phase, 0 = standing), sit, lean, blink, look [x,y],
 // mood ('calm'|'shock'|'smile'|'worry'), holdR/holdL(ctx) drawn at the hand,
 // color, bob (bounce), think (draw at the head).
+// A tapered brush stroke through points (wide → narrow), with round joints —
+// limbs drawn like an ink brush, not a constant-width vector line.
+export function limb(ctx, pts, widths, c = P.ink) {
+  ctx.fillStyle = c;
+  for (let i = 0; i < pts.length - 1; i++) {
+    const [x0, y0] = pts[i], [x1, y1] = pts[i + 1], w0 = widths[i] / 2, w1 = widths[i + 1] / 2;
+    const a = Math.atan2(y1 - y0, x1 - x0), nx = -Math.sin(a), ny = Math.cos(a);
+    // a slight belly in the middle of each segment (muscle / sleeve)
+    const mx = (x0 + x1) / 2, my = (y0 + y1) / 2, wm = (w0 + w1) / 2 * 1.08;
+    ctx.beginPath();
+    ctx.moveTo(x0 + nx * w0, y0 + ny * w0);
+    ctx.quadraticCurveTo(mx + nx * wm * 1.05, my + ny * wm * 1.05, x1 + nx * w1, y1 + ny * w1);
+    ctx.lineTo(x1 - nx * w1, y1 - ny * w1);
+    ctx.quadraticCurveTo(mx - nx * wm, my - ny * wm, x0 - nx * w0, y0 - ny * w0);
+    ctx.closePath(); ctx.fill();
+    ctx.beginPath(); ctx.arc(x1, y1, w1, 0, TAU); ctx.fill();
+  }
+  ctx.beginPath(); ctx.arc(pts[0][0], pts[0][1], widths[0] / 2, 0, TAU); ctx.fill();
+}
+// A mitten hand with a thumb, pointing along angle `a` (0 = down).
+export function hand(ctx, x, y, a, c = P.ink, side = 1, r = 12) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(-a); ctx.fillStyle = c;
+  ctx.beginPath(); ctx.ellipse(0, r * 0.55, r * 0.78, r * 1.05, 0, 0, TAU); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(side * r * 0.7, r * 0.2, r * 0.32, r * 0.62, side * -0.7, 0, TAU); ctx.fill();
+  ctx.restore();
+}
 export function figure(ctx, x, y, o = {}) {
   const s = o.s || 1, c = o.color || P.ink, face = o.face || 1;
+  // rim light: a thin paper-white edge on the side facing the lamp (upper left
+  // of the plate) — noir film lighting, it gives the flat silhouette volume
+  const rim = o.rim !== false && c === P.ink, rimC = 'rgba(248,243,231,0.85)', L = -1;
   ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
-  if (o.shadow !== false) { ctx.save(); ctx.globalAlpha = 0.18; ellipse(ctx, 0, 2, 60, 9, 0, P.ink); ctx.restore(); }
+  if (o.shadow !== false) {
+    ctx.save(); const g = ctx.createRadialGradient(8, 2, 4, 8, 2, 70); g.addColorStop(0, 'rgba(22,20,26,0.32)'); g.addColorStop(1, 'rgba(22,20,26,0)');
+    ctx.fillStyle = g; ctx.scale(1, 0.16); ctx.beginPath(); ctx.arc(8, 12, 70, 0, TAU); ctx.fill(); ctx.restore();
+  }
   const wph = o.walk || 0, step = Math.sin(wph * TAU), bob = Math.abs(Math.cos(wph * TAU)) * (o.walk ? 6 : 0) + (o.bob || 0);
   const sit = o.sit ? 1 : 0, hip = sit ? -95 : -170;
   ctx.translate(0, -bob);
   ctx.rotate((o.lean || 0));
-  // legs
+  // legs: tapered trousers, shoes with a heel and a toe that points forward
+  const shoe = (fx, fy) => {
+    ctx.fillStyle = c; ctx.beginPath();
+    ctx.moveTo(fx - face * 14, fy); ctx.lineTo(fx - face * 14, fy - 12); ctx.quadraticCurveTo(fx + face * 4, fy - 16, fx + face * 22, fy - 10);
+    ctx.quadraticCurveTo(fx + face * 34, fy - 6, fx + face * 34, fy); ctx.closePath(); ctx.fill();
+  };
   const leg = (sgn) => {
-    if (sit) { ctx.beginPath(); ctx.moveTo(sgn * 12, hip); ctx.lineTo(sgn * 12 + face * 70, hip + 4); ctx.lineTo(sgn * 12 + face * 72, 0); stroke(ctx, c, 22); ellipse(ctx, sgn * 12 + face * 84, -4, 20, 8, 0, c); return; }
+    if (sit) { limb(ctx, [[sgn * 12, hip], [sgn * 12 + face * 70, hip + 4], [sgn * 12 + face * 72, -4]], [30, 22, 18], c); shoe(sgn * 12 + face * 72, 0); return; }
     const a = step * 0.38 * sgn;
     const kx = Math.sin(a) * 85, ky = hip + Math.cos(a) * 85, fx = kx + Math.sin(a - Math.max(0, -step * sgn) * 0.5) * 85, fy = Math.min(0, ky + 85);
-    ctx.beginPath(); ctx.moveTo(sgn * 12, hip); ctx.lineTo(kx + sgn * 8, ky); ctx.lineTo(fx + sgn * 8, fy); stroke(ctx, c, 22);
-    ellipse(ctx, fx + sgn * 8 + face * 12, fy - 5, 22, 9, 0, c);
+    limb(ctx, [[sgn * 12, hip], [kx + sgn * 8, ky], [fx + sgn * 8, fy - 6]], [30, 21, 17], c);
+    shoe(fx + sgn * 8, fy);
   };
   leg(-1); leg(1);
-  // torso: a long coat or a dress
-  const top = hip - 140;
-  if (o.skirt) poly(ctx, [[-38, top], [38, top], [62, hip + (sit ? 10 : 70)], [-62, hip + (sit ? 10 : 70)]], c);
-  else poly(ctx, [[-42, top], [42, top], [48, hip + (sit ? 0 : 40)], [-48, hip + (sit ? 0 : 40)]], c);
-  ctx.beginPath(); ctx.ellipse(0, top + 6, 44, 18, 0, Math.PI, TAU); fill(ctx, c);
+  // torso: a coat with rounded shoulders, or a dress that flares
+  const top = hip - 140, hem = hip + (o.skirt ? (sit ? 10 : 70) : (sit ? 0 : 40));
+  const hw = o.skirt ? 62 : 48;
+  const torso = () => {
+    ctx.beginPath(); ctx.moveTo(-40, top + 4);
+    ctx.quadraticCurveTo(-46, top - 8, -28, top - 10); ctx.lineTo(28, top - 10); ctx.quadraticCurveTo(46, top - 8, 40, top + 4);
+    ctx.quadraticCurveTo(o.skirt ? 36 : 46, (top + hem) / 2, hw, hem);
+    ctx.quadraticCurveTo(0, hem + 6, -hw, hem);
+    ctx.quadraticCurveTo(o.skirt ? -36 : -46, (top + hem) / 2, -40, top + 4); ctx.closePath();
+  };
+  torso(); fill(ctx, c);
+  if (rim) { ctx.save(); torso(); ctx.clip(); ctx.beginPath(); ctx.moveTo(L * 41, top + 2); ctx.quadraticCurveTo(L * 47, (top + hem) / 2, L * hw, hem); stroke(ctx, rimC, 3.5); ctx.restore(); }
+  if (!o.skirt && !sit) { line(ctx, face * 3, top + 44, face * 3, hem - 2, P.inkSoft, 2.5); } // coat opening
   if (o.apron) { poly(ctx, [[-30, top + 60], [30, top + 60], [36, hip + 60], [-36, hip + 60]], P.paperLight); line(ctx, -30, top + 62, 30, top + 62, P.paperLight, 5); }
-  if (o.shirt !== false && !o.skirt) poly(ctx, [[-10, top + 2], [10, top + 2], [0, top + 40]], P.paperLight);
-  if (o.bowtie) { poly(ctx, [[0, top + 8], [-16, top], [-16, top + 16]], P.paperLight); poly(ctx, [[0, top + 8], [16, top], [16, top + 16]], P.paperLight); }
-  if (o.tie) poly(ctx, [[0, top + 6], [-5, top + 12], [0, top + 46], [5, top + 12]], o.tie);
-  // arms (shoulder angle, elbow angle), hands drawn as small discs
+  if (o.shirt !== false && !o.skirt) {
+    poly(ctx, [[-11, top - 6], [11, top - 6], [0, top + 40]], P.paperLight);
+    // lapels
+    for (const sg of [-1, 1]) poly(ctx, [[sg * 11, top - 6], [sg * 2, top + 40], [sg * 22, top + 16]], P.inkSoft);
+  }
+  if (o.bowtie) { poly(ctx, [[0, top + 2], [-16, top - 6], [-16, top + 10]], P.paperLight); poly(ctx, [[0, top + 2], [16, top - 6], [16, top + 10]], P.paperLight); }
+  if (o.tie) poly(ctx, [[0, top], [-5, top + 6], [0, top + 40], [5, top + 6]], o.tie);
+  // arms: tapered sleeves (shoulder angle, elbow angle) and mitten hands
   const arm = (sgn, ang, hold) => {
     const [sh, el] = ang || [0.15, 0.1];
-    const ax = sgn * 40, ay = top + 14, a1 = sh * sgn, ex = ax + Math.sin(a1) * 70, ey = ay + Math.cos(a1) * 70, a2 = a1 + el * sgn;
-    const hx = ex + Math.sin(a2) * 66, hy = ey + Math.cos(a2) * 66;
-    ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(ex, ey); ctx.lineTo(hx, hy); stroke(ctx, c, 18);
-    circle(ctx, hx, hy, 11, c);
-    if (hold) { ctx.save(); ctx.translate(hx, hy); hold(ctx); ctx.restore(); }
+    const ax = sgn * 38, ay = top + 10, a1 = sh * sgn, ex = ax + Math.sin(a1) * 70, ey = ay + Math.cos(a1) * 70, a2 = a1 + el * sgn;
+    const hx = ex + Math.sin(a2) * 62, hy = ey + Math.cos(a2) * 62;
+    limb(ctx, [[ax, ay], [ex, ey], [hx, hy]], [26, 19, 15], c);
+    if (rim && sgn === L) { ctx.beginPath(); ctx.moveTo(ax - 10, ay + 4); ctx.quadraticCurveTo(ex - 11, ey, hx - 6, hy - 4); stroke(ctx, rimC, 2.5); }
+    const tx = hx + Math.sin(a2) * 4, ty = hy + Math.cos(a2) * 4;
+    hand(ctx, tx, ty, a2, c, face * (sgn === face ? 1 : -1));
+    if (hold) { ctx.save(); ctx.translate(hx + Math.sin(a2) * 4, hy + Math.cos(a2) * 4); hold(ctx); ctx.restore(); }
   };
   arm(-1, o.armL, o.holdL); arm(1, o.armR, o.holdR);
-  // head
+  // head: an egg (wider at the cranium), a nose on the facing side, an ear
   const hy = top - 58;
   ctx.save(); ctx.translate(0, hy); ctx.rotate(o.tilt || 0);
-  poly(ctx, [[-10, 30], [10, 30], [12, 52], [-12, 52]], c);
-  ellipse(ctx, 0, 0, 44, 50, 0, c);
+  poly(ctx, [[-11, 30], [11, 30], [13, 52], [-13, 52]], c);
+  const headPath = () => { ctx.beginPath(); ctx.moveTo(0, -50); ctx.bezierCurveTo(30, -50, 46, -26, 44, 6); ctx.bezierCurveTo(42, 34, 22, 50, 0, 50); ctx.bezierCurveTo(-22, 50, -42, 34, -44, 6); ctx.bezierCurveTo(-46, -26, -30, -50, 0, -50); ctx.closePath(); };
+  headPath(); fill(ctx, c);
+  ctx.beginPath(); ctx.ellipse(face * 43, 8, 8, 10, face * 0.3, 0, TAU); fill(ctx, c); // nose
+  ctx.beginPath(); ctx.ellipse(-face * 42, 4, 7, 11, 0, 0, TAU); fill(ctx, c); // ear
+  if (rim) { ctx.save(); headPath(); ctx.clip(); ctx.beginPath(); ctx.ellipse(L * -5 + 1, 2, 46, 52, 0, 0, TAU); ctx.lineWidth = 5; ctx.strokeStyle = rimC; ctx.stroke(); ctx.restore(); }
   const hair = o.hair;
-  if (hair === 'bob') { ctx.beginPath(); ctx.moveTo(-50, 22); ctx.bezierCurveTo(-62, -60, 62, -60, 50, 22); ctx.lineTo(36, 22); ctx.bezierCurveTo(34, -20, -34, -20, -36, 22); ctx.closePath(); fill(ctx, c); }
-  if (hair === 'bun') circle(ctx, -face * 30, -44, 18, c);
-  if (hair === 'slick') { ctx.beginPath(); ctx.ellipse(0, -18, 46, 34, 0, Math.PI, TAU); fill(ctx, c); line(ctx, -20, -44, 18, -40, P.inkSoft, 3); }
-  // eyes (paper-white), brows by mood
+  if (hair === 'bob') { ctx.beginPath(); ctx.moveTo(-50, 22); ctx.bezierCurveTo(-62, -64, 62, -64, 50, 22); ctx.lineTo(36, 22); ctx.bezierCurveTo(34, -20, -34, -20, -36, 22); ctx.closePath(); fill(ctx, c); }
+  if (hair === 'bun') { circle(ctx, -face * 30, -46, 18, c); line(ctx, -face * 22, -50, -face * 40, -38, P.inkSoft, 2); }
+  if (hair === 'slick') { ctx.beginPath(); ctx.ellipse(0, -18, 47, 36, 0, Math.PI, TAU); fill(ctx, c); for (const k of [0, 1, 2]) line(ctx, -26 + k * 10, -44 + k * 2, 14 + k * 8, -40 + k * 4, P.inkSoft, 2.5); }
+  // eyes (paper-white), lids and brows by mood
   const look = o.look || [face * 0.4, 0], mood = o.mood || 'calm', bl = o.blink ?? 1;
   const ey0 = -4, er = mood === 'shock' ? 13 : 10;
   for (const ex of [-17, 17]) {
-    ellipse(ctx, ex + look[0] * 5, ey0, er, er * (mood === 'worry' ? 0.8 : 1) * clamp(bl, 0.08, 1), 0, P.paperLight);
-    if (bl > 0.3) circle(ctx, ex + look[0] * 9, ey0 + look[1] * 5, er * 0.45, c);
+    const ox = ex + face * 4;
+    ellipse(ctx, ox + look[0] * 5, ey0, er, er * (mood === 'worry' ? 0.8 : 1) * clamp(bl, 0.08, 1), 0, P.paperLight);
+    if (bl > 0.3) {
+      circle(ctx, ox + look[0] * 9, ey0 + look[1] * 5, er * 0.45, c);
+      circle(ctx, ox + look[0] * 9 - 2, ey0 + look[1] * 5 - 2.5, 1.8, P.paperLight); // catch light
+      if (mood === 'calm') { ctx.beginPath(); ctx.ellipse(ox + look[0] * 5, ey0, er + 1, er + 1, 0, Math.PI * 1.2, Math.PI * 1.8); ctx.closePath(); fill(ctx, c); } // relaxed upper lid
+    }
   }
   const brow = { calm: 0, shock: -8, smile: -2, worry: 4 }[mood] ?? 0;
-  if (mood === 'worry') { line(ctx, -28, -20, -8, -24 + brow, P.paperLight, 4); line(ctx, 28, -20, 8, -24 + brow, P.paperLight, 4); }
-  if (mood === 'shock') { line(ctx, -27, -24 + brow, -8, -26 + brow, P.paperLight, 4); line(ctx, 27, -24 + brow, 8, -26 + brow, P.paperLight, 4); ellipse(ctx, look[0] * 4, 24, 7, 10, 0, P.paperLight); }
-  if (mood === 'smile') { ctx.beginPath(); ctx.arc(look[0] * 4, 16, 12, 0.2, Math.PI - 0.2); stroke(ctx, P.paperLight, 4); }
-  if (o.glasses) { for (const ex of [-17, 17]) circle(ctx, ex + look[0] * 4, ey0, 16, null, P.paperLight, 3.5); line(ctx, -2, ey0, 2, ey0, P.paperLight, 3); }
-  if (o.mustache) { ctx.beginPath(); ctx.ellipse(look[0] * 4, 20, 16, 5, 0, 0, TAU); fill(ctx, P.inkSoft); }
+  const fx = face * 4;
+  if (mood === 'worry') { line(ctx, fx - 28, -20, fx - 8, -24 + brow, P.paperLight, 4); line(ctx, fx + 28, -20, fx + 8, -24 + brow, P.paperLight, 4); ctx.beginPath(); ctx.moveTo(fx + look[0] * 4 - 9, 24); ctx.quadraticCurveTo(fx + look[0] * 4, 18, fx + look[0] * 4 + 9, 24); stroke(ctx, P.paperLight, 3.5); }
+  if (mood === 'shock') { line(ctx, fx - 27, -24 + brow, fx - 8, -26 + brow, P.paperLight, 4); line(ctx, fx + 27, -24 + brow, fx + 8, -26 + brow, P.paperLight, 4); ellipse(ctx, fx + look[0] * 4, 24, 7, 10, 0, P.paperLight); }
+  if (mood === 'smile') { ctx.beginPath(); ctx.arc(fx + look[0] * 4, 14, 12, 0.25, Math.PI - 0.25); stroke(ctx, P.paperLight, 4); }
+  if (o.glasses) { for (const ex of [-17, 17]) circle(ctx, ex + fx + look[0] * 4, ey0, 16, null, P.paperLight, 3.5); line(ctx, fx - 2, ey0, fx + 2, ey0, P.paperLight, 3); }
+  if (o.mustache) { ctx.beginPath(); ctx.ellipse(fx + look[0] * 4, 20, 16, 5, 0, 0, TAU); fill(ctx, P.inkSoft); }
   // hats
-  if (o.hat === 'bowler') { ctx.beginPath(); ctx.ellipse(0, -30, 62, 10, 0, 0, TAU); fill(ctx, c); ctx.beginPath(); ctx.ellipse(0, -38, 40, 40, 0, Math.PI, TAU); fill(ctx, c); line(ctx, -40, -40, 40, -40, o.band || P.inkSoft, 6); }
+  if (o.hat === 'bowler') { ctx.beginPath(); ctx.ellipse(0, -30, 62, 10, 0, 0, TAU); fill(ctx, c); ctx.beginPath(); ctx.ellipse(0, -38, 40, 40, 0, Math.PI, TAU); fill(ctx, c); line(ctx, -40, -40, 40, -40, o.band || P.inkSoft, 6); if (rim) { ctx.beginPath(); ctx.ellipse(0, -38, 36, 36, 0, Math.PI * 1.1, Math.PI * 1.45); stroke(ctx, rimC, 3); } }
   if (o.hat === 'cloche') { ctx.beginPath(); ctx.ellipse(0, -18, 50, 44, 0, Math.PI * 0.95, TAU + 0.05); fill(ctx, c); ctx.beginPath(); ctx.ellipse(-face * 12, -16, 56, 10, -face * 0.1, 0, TAU); fill(ctx, c); line(ctx, -46, -28, 46, -28, o.band || P.red, 6); }
   if (o.hat === 'cap') { ctx.beginPath(); ctx.ellipse(0, -32, 44, 22, 0, Math.PI, TAU); fill(ctx, c); ctx.beginPath(); ctx.ellipse(face * 30, -32, 34, 8, 0, 0, TAU); fill(ctx, c); }
   if (o.think) { ctx.save(); o.think(ctx); ctx.restore(); }

@@ -12,6 +12,7 @@ import { groupLines } from '../../lib/captions.mjs';
 import * as kit from './kit.mjs';
 import { LAYOUT, staticPage, headerText, captions, outroText, makePolygraph } from './page.mjs';
 import { hookCard, hookUntil } from '../../lib/retention.mjs';
+import { createFinish } from '../../lib/finish.mjs';
 
 // Hook card look: a case-file label — ink band, paper text, red accent word.
 export const HOOK_THEME = { font: s => `900 ${s}px Display`, fill: '#f8f3e7', accent: '#ff5a5f', stroke: null, band: '#16141a', bandEdge: '#c61f2a', label: '#f8f3e7' };
@@ -43,6 +44,9 @@ export async function createRenderer(project) {
   const scenes = story.scenes.map((s, i, a) => ({ ...s, i, end: i + 1 < a.length ? a[i + 1].start : meta.duration }));
   const findWord = (re, after = 0) => { const w = words.find(x => x.start >= after - 0.05 && re.test(x.w)); return w ? w.start : null; };
   const bufA = createCanvas(PA.w, PA.h), bufB = createCanvas(PA.w, PA.h);
+  // the hand-made finish (lib/finish.mjs): line boil, ink bleed, paper, grain, on twos
+  const finish = createFinish(meta, PA.w, PA.h, meta.width, meta.height);
+  const paint = finish ? createCanvas(PA.w, PA.h) : null;
 
   function drawScene(ctx, sc, t) {
     const u = t - sc.start;
@@ -53,6 +57,7 @@ export async function createRenderer(project) {
     };
     ctx.save();
     ctx.fillStyle = kit.P.card; ctx.fillRect(0, 0, PA.w, PA.h);
+    if (finish && !sc.still) finish.breathe(ctx, u, S.d);
     sc.draw(ctx, u, S);
     ctx.restore();
   }
@@ -107,29 +112,37 @@ export async function createRenderer(project) {
 
   return function frame(ctx, t) {
     ctx.drawImage(page, 0, 0);
-    const i = Math.max(0, scenes.findLastIndex(s => t >= s.start));
+    const pt = finish ? finish.time(t) : t; // the painting moves on twos
+    const i = Math.max(0, scenes.findLastIndex(s => pt >= s.start));
     const sc = scenes[i], prev = scenes[i - 1];
     const type = sc.trans || 'fold', dur = TRANS[type] || 0.45;
-    const kTrans = prev ? (t - sc.start) / dur : 1;
+    const kTrans = prev ? (pt - sc.start) / dur : 1;
 
+    // the plate is painted on its own card, finished, then laid on the page
+    const pc = paint ? paint.getContext('2d') : ctx;
+    pc.save();
+    if (paint) pc.clearRect(0, 0, PA.w, PA.h);
+    else { pc.translate(PA.x, PA.y); pc.beginPath(); pc.rect(0, 0, PA.w, PA.h); pc.clip(); }
+    if (kTrans < 1 && prev && type !== 'cut') transition(pc, prev, sc, pt, type, clamp(kTrans));
+    else drawScene(pc, sc, pt);
+    pc.restore();
     ctx.save(); ctx.translate(PA.x, PA.y);
-    ctx.beginPath(); ctx.rect(0, 0, PA.w, PA.h); ctx.clip();
-    if (kTrans < 1 && prev && type !== 'cut') transition(ctx, prev, sc, t, type, clamp(kTrans));
-    else drawScene(ctx, sc, t);
-    // card grain + the centre fold crease on every plate
-    ctx.globalCompositeOperation = 'multiply'; ctx.globalAlpha = 0.5; ctx.drawImage(grain, 0, 0); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+    if (paint) { finish.painting(paint, t); ctx.drawImage(paint, 0, 0); }
+    else { ctx.globalCompositeOperation = 'multiply'; ctx.globalAlpha = 0.5; ctx.drawImage(grain, 0, 0); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over'; }
+    // the centre fold crease on every plate
     const cg = ctx.createLinearGradient(PA.w / 2 - 14, 0, PA.w / 2 + 14, 0);
     cg.addColorStop(0, 'rgba(60,40,20,0)'); cg.addColorStop(0.5, 'rgba(60,40,20,0.13)'); cg.addColorStop(0.52, 'rgba(255,255,255,0.18)'); cg.addColorStop(1, 'rgba(60,40,20,0)');
     ctx.fillStyle = cg; ctx.fillRect(PA.w / 2 - 14, 0, 28, PA.h);
     ctx.restore();
     kit.rect(ctx, PA.x, PA.y, PA.w, PA.h, null, kit.P.ink, 5);
     // things that break out of the card
-    if (sc.over) { ctx.save(); ctx.translate(PA.x, PA.y); sc.over(ctx, t - sc.start, { W: PA.w, H: PA.h, k: kit, P: kit.P, t }); ctx.restore(); }
+    if (sc.over) { ctx.save(); ctx.translate(PA.x, PA.y); sc.over(ctx, pt - sc.start, { W: PA.w, H: PA.h, k: kit, P: kit.P, t: pt }); ctx.restore(); }
 
     headerText(ctx, sc.title, i + 1, prev ? (t - sc.start) / 0.5 : 1);
     hookCard(ctx, meta.hook, t, hookEnd, PA, HOOK_THEME); // big words on frame 0
     const spoke = captions(ctx, lines, t);
     if (!spoke && meta.outro && t >= meta.outro.at) outroText(ctx, meta.outro.text, t - meta.outro.at);
     polygraph(ctx, t);
+    if (finish) finish.frame(ctx, t);
   };
 }

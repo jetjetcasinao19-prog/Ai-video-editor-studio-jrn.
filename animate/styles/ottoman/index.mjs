@@ -3,11 +3,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
-import { GlobalFonts, loadImage } from '@napi-rs/canvas';
+import { GlobalFonts, loadImage, createCanvas } from '@napi-rs/canvas';
 import { TAU, clamp, ease, lerp } from '../../lib/core.mjs';
 import * as kit from './kit.mjs';
 import { LAYOUT, staticPage, paperTexture, headerText, captions, groupLines, progress, outroText } from './page.mjs';
 import { hookCard, hookUntil } from '../../lib/retention.mjs';
+import { createFinish } from '../../lib/finish.mjs';
 
 // Hook card look: gold-on-lapis like the header plate, vermilion accent word.
 export const HOOK_THEME = { font: s => `900 ${s}px Display`, fill: '#f7eed6', accent: '#f2c94c', stroke: '#14213f', band: '#20408f', bandEdge: '#e2b84a', label: '#14213f' };
@@ -48,6 +49,9 @@ export async function createRenderer(project) {
   const hookEnd = meta.hook ? hookUntil(meta.hook, words) : 0;
   const scenes = story.scenes.map((s, i, a) => ({ ...s, end: i + 1 < a.length ? a[i + 1].start : meta.duration }));
   const findWord = (re, after = 0) => { const w = words.find(x => x.start >= after - 0.05 && re.test(x.w)); return w ? w.start : null; };
+  // the hand-made finish (lib/finish.mjs): line boil, gold-leaf sheen, paper, grain, on twos
+  const finish = createFinish(meta, PA.w, PA.h, meta.width, meta.height);
+  const paintCv = finish ? createCanvas(PA.w, PA.h) : null;
 
   function drawScene(ctx, sc, t) {
     const u = t - sc.start;
@@ -57,18 +61,20 @@ export async function createRenderer(project) {
       at: w => { const g = findWord(w instanceof RegExp ? w : new RegExp('^' + w, 'i'), sc.start); return g == null ? 0 : g - sc.start; },
       cam(z = 1, cx = PA.w / 2, cy = PA.h / 2, rot = 0) { ctx.translate(PA.w / 2, PA.h / 2); ctx.rotate(rot); ctx.scale(z, z); ctx.translate(-cx, -cy); },
     };
-    ctx.save(); sc.draw(ctx, u, S); ctx.restore();
+    ctx.save(); if (finish && !sc.still) finish.breathe(ctx, u, S.d); sc.draw(ctx, u, S); ctx.restore();
   }
 
-  return function frame(ctx, t) {
-    ctx.drawImage(page, 0, 0);
+  return function frame(main, t) {
+    main.drawImage(page, 0, 0);
+    const rt = t; t = finish ? finish.time(t) : t; // the painting moves on twos
     const i = Math.max(0, scenes.findLastIndex(s => t >= s.start));
     const sc = scenes[i], prev = scenes[i - 1];
     const kTrans = prev ? (t - sc.start) / TRANS : 1;
 
-    // ---- the painting ----
-    ctx.save(); ctx.translate(PA.x, PA.y);
-    ctx.beginPath(); ctx.rect(0, 0, PA.w, PA.h); ctx.clip();
+    // ---- the painting (on its own sheet when finished, else straight on the page) ----
+    let ctx = main;
+    if (paintCv) { ctx = paintCv.getContext('2d'); ctx.save(); ctx.clearRect(0, 0, PA.w, PA.h); }
+    else { ctx.save(); ctx.translate(PA.x, PA.y); ctx.beginPath(); ctx.rect(0, 0, PA.w, PA.h); ctx.clip(); }
     if (kTrans < 1 && prev && sc.trans !== 'cut') {
       drawScene(ctx, prev, t);
       const e = ease.inOut(clamp(kTrans));
@@ -90,14 +96,15 @@ export async function createRenderer(project) {
       ctx.restore();
     } else drawScene(ctx, sc, t);
     // paper grain + worn pigment
-    ctx.globalCompositeOperation = 'multiply'; ctx.globalAlpha = 0.55; ctx.drawImage(grain, 0, 0); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
-    ctx.restore();
+    if (paintCv) { ctx.restore(); finish.painting(paintCv, rt); ctx = main; ctx.drawImage(paintCv, PA.x, PA.y); }
+    else { ctx.globalCompositeOperation = 'multiply'; ctx.globalAlpha = 0.55; ctx.drawImage(grain, 0, 0); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over'; ctx.restore(); }
     // re-draw the frame rules on top so the picture sits inside them
     for (const [o, c, lw] of [[-11, kit.P.gold, 5], [-1, kit.P.verm, 1.5]]) { ctx.strokeStyle = c; ctx.lineWidth = lw; ctx.strokeRect(PA.x + o, PA.y + o, PA.w - 2 * o, PA.h - 2 * o); }
     // things that break out of the frame (a miniature tradition)
     if (sc.over) { ctx.save(); ctx.translate(PA.x, PA.y); sc.over(ctx, t - sc.start, { W: PA.w, H: PA.h, k: kit, P: kit.P }); ctx.restore(); }
 
     // ---- chapter title, captions, progress ----
+    t = rt; // captions and titles stay smooth
     headerText(ctx, sc.title, prev ? (t - sc.start) / 0.35 : 1);
     // hook card over the top of the picture for the first second(s); the
     // spoken captions keep running under it (sound-off viewers read both)
@@ -105,5 +112,6 @@ export async function createRenderer(project) {
     const spoke = captions(ctx, lines, t);
     if (!spoke && meta.outro && t >= meta.outro.at) outroText(ctx, meta.outro.text, t - meta.outro.at);
     progress(ctx, t / meta.duration);
+    if (finish) finish.frame(ctx, t);
   };
 }

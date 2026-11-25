@@ -187,6 +187,28 @@ test('renders a 1-second INKBLOT MP4 through a fold transition', { skip: process
   assert.match(probe, /audio/);
 });
 
+test('hand-made finish: lines boil, the painting moves on twos, frames repeat exactly', async () => {
+  const { createFinish, finishOptions } = await import('../lib/finish.mjs');
+  for (const PROJ of [PROJECT, INKBLOT]) {
+    const p = await loadProject(PROJ);
+    assert.ok(finishOptions(p.meta), path.basename(PROJ) + ' is finished by default');
+    const fd = await makeFrameDrawer(p);
+    // only the painting (captions and the progress line stay smooth on purpose)
+    const grab = t => Buffer.from(fd.frame(t).getContext('2d').getImageData(70, 268, 940, 1060).data);
+    const a = grab(6.0), a2 = grab(6.0);
+    assert.ok(a.equals(a2), 'the same time draws the same frame (parallel workers stay in sync)');
+    assert.ok(a.equals(grab(6.0 + 1 / 30)), 'two frames inside one drawing are identical (on twos)');
+    let diff = 0; const b = grab(6.0 + 0.1);
+    for (let i = 0; i < a.length; i += 4) if (Math.abs(a[i] - b[i]) > 24) diff++;
+    assert.ok(diff > 500, 'a tenth of a second later the line boil has moved the ink');
+  }
+  // the old clean look is still there for anyone who asks for it
+  const f = createFinish({ style: 'inkblot', finish: false }, 100, 100, 100, 100);
+  assert.equal(f, null);
+  const g = createFinish({ style: 'ottoman', finish: { twos: false, boil: 0, grain: 0 } }, 120, 120, 120, 120);
+  assert.equal(g.time(1.0333), 1.0333, 'twos can be switched off');
+});
+
 test('skill trigger "edit this in 2D(OTTOMAN)" points at an existing style', () => {
   const root = path.join(HERE, '..', '..');
   const skill = fs.readFileSync(path.join(root, '.claude', 'skills', 'animated-short', 'SKILL.md'), 'utf8');

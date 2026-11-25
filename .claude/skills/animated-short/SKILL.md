@@ -75,6 +75,69 @@ you can tell the owner.
     psychology / habits / the mind → MindTrace (INKBLOT). Never post a
     psychology topic on How it Started.
 
+## Craft rules — hand-made, never AI slop
+**Why:** viewers swipe away from anything that looks generated: perfect
+vector lines, flat fills, everything gliding at 30 fps, stock symbols
+(lightbulbs, gears, glowing brains), dead-silent gaps, a robotic score. The
+owner asked for videos that look made by an artist. The engine now does the
+material part for you; the storyboard has to do the rest.
+
+**What the engine does on every frame (`lib/finish.mjs`, on by default)**
+- **Line boil**: every line wobbles slightly and is "re-traced" 10× a second, like
+  hand-drawn animation. **On twos**: the painting gets a new drawing every
+  2nd frame (15/s), like cel and cut-out animation; captions stay smooth.
+- **Ink bleed** (soft halo where ink meets paper), **real paper** (fibres,
+  cloudy pulp, pigment grit, foxing), **lamp light** (soft falloff), **film
+  grain + faint flicker** over the whole frame.
+- **Gold leaf** (OTTOMAN): gilded areas catch a slow sheen and a few glints.
+- **Rostrum camera**: every shot slowly pushes in (~2%), so no plate is a
+  frozen slide. Set `still: true` on a scene that must not move (a chart
+  being read, the outro card if it looks better still).
+- Tune with `meta.finish = { boil, twos, bleed, gold, grain, flicker, breathe, light }`
+  (0/false turns one part off). `meta.finish = false` is the old clean look —
+  never ship that.
+- **Sound** (`lib/audio.py`): the score plays in a synthetic stereo hall
+  (OTTOMAN) or an intimate room (INKBLOT); sound effects sit in a lighter room;
+  notes are humanised (a few ms early/late, louder/softer); a faint analog bed
+  (room tone / tape hiss + soft crackle) means there is never digital silence;
+  the voice gets a rumble filter and gentle compression and stays dry and in
+  front. Optional `export const space = { reverb, wet, sfxWet, bed, polish }`.
+
+**What the storyboard must do**
+14. **Specific, never generic.** Draw the exact thing from this story (the
+    "BE A SAFE DRIVER" card, Spencer Silver's alembic, the waiter's notepad),
+    not a symbol any channel could use. Banned unless the script literally
+    says it: lightbulb for "idea", gears for "process", rocket for "growth",
+    trophy, thumbs-up, money rain, floating question marks, a glowing brain as
+    filler, a world globe for "everywhere".
+15. **One focal point per plate.** The eye must know where to look in 0.2 s:
+    the subject is the biggest, highest-contrast thing; everything else is
+    quieter. One accent colour per plate (red in INKBLOT, vermilion or gold in
+    OTTOMAN) on the thing that matters.
+16. **Vary the shot.** Wide → medium → close-up → insert (a hand, an eye, an
+    object). Never three plates in a row at the same size. Use `S.cam` to
+    punch in on the key word.
+17. **Act, don't slide.** Figures move like people: *anticipation* (a small
+    move the other way before a big one), *overshoot and settle*
+    (`ease.outBack`, `pop`), *follow-through*. Change a pose at least once per
+    plate (`armL/armR`, `mood`, `look`, `tilt`). Eyes look at what matters
+    (`look`), people blink every 2–4 s (`blink`). Nothing appears by just
+    fading in.
+18. **Stagger, then hold.** Elements arrive 0.08–0.15 s apart, never all at
+    once. When the key image lands, hold it ~0.5 s before cutting.
+19. **Depth in three layers.** Something in the foreground (often cut by the
+    frame edge), the action in the middle, a quiet background. Overlap things.
+20. **Words belong in captions.** Text inside the painting is at most 3
+    hand-lettered words (red pen, stamp, cartouche) — never a sentence.
+21. **Every impact has a sound, and silence is a tool.** Pops, stamps, folds
+    and splats get an sfx; drop the music to `sad`/`tense` (or near silence)
+    one beat before the reveal so the payoff hits. No more than two sfx
+    within 0.3 s.
+22. **The slop test** (do it on the contact sheet before rendering): Would a
+    human illustrator have drawn this plate? Is any plate a generic icon? Are
+    two neighbours the same shot size? Is any plate mostly empty or mostly
+    text? Fix it, then render.
+
 # Animated short from a voice-over — all code
 
 The owner records or generates a voice-over (often ElevenLabs) and wants a
@@ -92,7 +155,8 @@ Everything lives in `animate/`:
 | `animate/transcribe.mjs` | voice → `words.json` (word timings; OmniRoute if `OMNIROUTE_URL` is set, else Groq Whisper; repairs out-of-order word times) |
 | `animate/render.mjs` | CLI: contact sheet, stills, full render |
 | `animate/lib/engine.mjs` | parallel frame workers → FFmpeg, then soundtrack + mux |
-| `animate/lib/audio.py` | synthesised scores — `kit: 'ottoman'` (maqam scales, oud/kanun, ney, def/darbuka) or `kit: 'mind'` (music box, felt piano, low strings, ticking clock, heartbeat) — + 32 sound effects + voice ducking + −14 LUFS |
+| `animate/lib/finish.mjs` | the hand-made finish on every frame: line boil, on-twos timing, ink bleed, paper, lamp light, gold-leaf sheen, rostrum push-in, film grain (see Craft rules) |
+| `animate/lib/audio.py` | synthesised scores — `kit: 'ottoman'` (maqam scales, oud/kanun, ney, def/darbuka) or `kit: 'mind'` (music box, felt piano, low strings, ticking clock, heartbeat) — + 32 sound effects + voice ducking + stereo hall/room reverb, humanised notes, an analog bed, voice clean-up + −14 LUFS |
 | `animate/styles/ottoman/` | the Ottoman miniature style: `kit.mjs` (figures, turbans, cloud bands, spongy rocks, cypresses, tulips, waves, galley, tughra, seals, stamps…), `page.mjs` (ebru marbled margins, illuminated header, gold-ruled frame, captions, progress reed), `scenes.mjs` (ready backdrops: `land`, `interior`, `lamp`, `compassRose`, `bookCover` for the closing brand card), `index.mjs` (transitions) |
 | `animate/styles/inkblot/` | the INKBLOT psychology style — read its `STYLE.md` first: `kit.mjs` (living mirror-symmetric ink blots, profile head with opening skull, brain, eye, open loop, silhouette people, café props, food icons, bill, notepad, tabs, phone, bed, cliff, bar chart, Rubin's vase, stamps, typewriter + red-pen notes), `page.mjs` (case-file page: plate numerals I–XXII, typewriter captions, EEG polygraph progress), `scenes.mjs` (`plate`, `cafe`, `study`, `night`, `dream`, and the outro template `caseCover` + `inkReveal`: the closing case-file brand card, INKBLOT's version of Ottoman's `bookCover`), `index.mjs` (transitions `fold`, `bleed`, `blink`, `wipe`, `flash`, `cut`) |
 | `animate/projects/zeigarnik-effect/` | the first INKBLOT short (22 plates) — **copy it as the INKBLOT template** |
@@ -149,7 +213,7 @@ Start from `projects/bubble-wrap/story.mjs`. It exports:
   caption panel; `text` only to override the kit's).
 - `hook` — the hook card (retention rule 8): `{ text: 'This glue was a *FAILURE*' }`.
 - `captionChars: 18` — one big caption line at a time (the default).
-- `scenes` — `{ start, title, trans, draw(ctx, u, S) }`. `u` = seconds into
+- `scenes` — `{ start, title, trans, still, draw(ctx, u, S) }` (`still: true` = no rostrum push-in). `u` = seconds into
   the scene. `S.at('word')` = when that word is spoken (sync moments to it).
   `S.cam(zoom, cx, cy)` = camera. `S.k` = the style kit, `S.P` = palette,
   `S.W/S.H` = painting size (940×1060). Transitions: `iris` (scalloped gold
@@ -176,7 +240,7 @@ node render.mjs projects/<slug> --stills 0,1        # the first second: hook car
 node render.mjs projects/<slug> --sheet            # one frame per scene → build/sheet.png
 node render.mjs projects/<slug> --stills 3.2,14,41 # full-size PNGs → build/stills/
 ```
-Open the images (Read tool) and check: **frame 0 makes you want to watch**
+Open the images (Read tool) and run the **slop test** (craft rule 22). Check: **frame 0 makes you want to watch**
 (hook card readable at a glance, subject big, nothing important covered by
 the hook band), nothing important hidden behind the
 header/caption panels, text fits, figures readable at phone size, every
