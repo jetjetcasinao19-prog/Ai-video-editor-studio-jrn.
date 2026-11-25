@@ -217,6 +217,10 @@ owner's Philippine time (PHT) is shown next to them. PHT = ET + 13 h
 | 2027-03-09 Tue | 8:00 PM | Wed Mar 10, 9:00 AM | TikTok | Your medicine cabinet has a 2,000-year-old backstory. | content/posts/2026-11-25-aspirin-ottoman.md | ready |
 | 2027-03-10 Wed | 7:00 PM | Thu Mar 11, 8:00 AM | Instagram Reels | A willow bowl, a map, and a scale with a question mark. | content/posts/2026-11-25-aspirin-ottoman.md | ready |
 | 2027-03-10 Wed | 8:00 PM | Thu Mar 11, 9:00 AM | Facebook Reels | Ever wonder how Aspirin got its name? | content/posts/2026-11-25-aspirin-ottoman.md | ready |
+| 2027-03-11 Thu | 7:00 PM | Fri Mar 12, 8:00 AM | YouTube Shorts | The Most Useful Invention With No Known Inventor | content/posts/2026-11-25-eyeglasses-ottoman.md | ready |
+| 2027-03-11 Thu | 8:00 PM | Fri Mar 12, 9:00 AM | TikTok | You use it every day, and you could not name who made it. | content/posts/2026-11-25-eyeglasses-ottoman.md | ready |
+| 2027-03-12 Fri | 7:00 PM | Sat Mar 13, 8:00 AM | Instagram Reels | A shadow puppet with a question mark for a face. | content/posts/2026-11-25-eyeglasses-ottoman.md | ready |
+| 2027-03-12 Fri | 8:00 PM | Sat Mar 13, 9:00 AM | Facebook Reels | Ever wonder who invented eyeglasses? Nobody knows. | content/posts/2026-11-25-eyeglasses-ottoman.md | ready |
 
 Times are general guidance for US viewers (evenings ET are the busiest), not
 based on the channel's own analytics. Once the channel has data, use the

@@ -119,8 +119,8 @@ export const scenes = [
       // a scroll unrolls with the gist of his words
       const sc = tween(u, gl - 0.3, ag + 0.2, ease.inOut);
       if (sc > 0) { const w = 640 * sc; k.rect(ctx, W / 2 - w / 2, 230, w, 220, '#fbf4e2', P.ink, 3); k.rect(ctx, W / 2 - w / 2 - 20, 220, 22, 240, '#8a5a2a', P.ink, 2); k.rect(ctx, W / 2 + w / 2 - 2, 220, 22, 240, '#8a5a2a', P.ink, 2);
-        ctx.save(); ctx.beginPath(); ctx.rect(W / 2 - w / 2, 230, w, 220); ctx.clip(); ctx.fillStyle = P.ink; ctx.font = '900 46px Deco'; ctx.textAlign = 'center'; ctx.fillText('“NOT YET', W / 2, 315); ctx.fillText('TWENTY YEARS…”', W / 2, 380); ctx.restore(); }
-      k.label(ctx, 'HIS SERMON, AS WRITTEN DOWN', W / 2, 500, 15, tween(u, ag - 0.2, ag + 0.3));
+        ctx.save(); ctx.beginPath(); ctx.rect(W / 2 - w / 2, 230, w, 220); ctx.clip(); ctx.fillStyle = P.ink; ctx.font = '900 46px Deco'; ctx.textAlign = 'center'; ctx.fillText('NOT YET', W / 2, 315); ctx.fillText('TWENTY YEARS', W / 2, 380); ctx.restore(); }
+      k.label(ctx, 'HIS SERMON, IN SHORT', W / 2, 500, 15, tween(u, ag - 0.2, ag + 0.3));
       // the friar meets the maker; they clasp hands over the spectacles
       const meet = tween(u, me - 0.6, me + 0.3, ease.inOut);
       pup(ctx, k, lerp(160, 380, meet), 1000, 1.0, { ...FRIAR, t: S.t, face: 1, arm: lerp(0.2, 0.55, meet), walk: meet > 0 && meet < 1 ? 1 : 0 });
