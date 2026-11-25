@@ -1,0 +1,396 @@
+{
+ "engine": "Groq whisper-large-v3",
+ "text": "Nobody knows who invented eyeglasses, but we know roughly when. Around 1306, an Italian friar named Giordano gives a sermon in Florence. He says glasses were invented less than 20 years ago, and that he met the man who made them. He never tells us his name. So the first glasses came from Italy, around the 1280s, probably in Pisa or Florence. The person who helped millions see clearly is still a mystery. Every legend has a beginning.",
+ "words": [
+  {
+   "w": "Nobody",
+   "start": 0.1,
+   "end": 0.46
+  },
+  {
+   "w": "knows",
+   "start": 0.46,
+   "end": 0.94
+  },
+  {
+   "w": "who",
+   "start": 0.94,
+   "end": 1.2
+  },
+  {
+   "w": "invented",
+   "start": 1.2,
+   "end": 1.68
+  },
+  {
+   "w": "eyeglasses,",
+   "start": 1.68,
+   "end": 3.04
+  },
+  {
+   "w": "but",
+   "start": 3.04,
+   "end": 3.08
+  },
+  {
+   "w": "we",
+   "start": 3.08,
+   "end": 3.24
+  },
+  {
+   "w": "know",
+   "start": 3.24,
+   "end": 3.42
+  },
+  {
+   "w": "roughly",
+   "start": 3.42,
+   "end": 3.8
+  },
+  {
+   "w": "when.",
+   "start": 3.8,
+   "end": 4.72
+  },
+  {
+   "w": "Around",
+   "start": 5.12,
+   "end": 5.4
+  },
+  {
+   "w": "1306,",
+   "start": 5.4,
+   "end": 6.44
+  },
+  {
+   "w": "an",
+   "start": 6.44,
+   "end": 7.08
+  },
+  {
+   "w": "Italian",
+   "start": 7.08,
+   "end": 7.6
+  },
+  {
+   "w": "friar",
+   "start": 7.6,
+   "end": 8.02
+  },
+  {
+   "w": "named",
+   "start": 8.02,
+   "end": 8.46
+  },
+  {
+   "w": "Giordano",
+   "start": 8.46,
+   "end": 9.1
+  },
+  {
+   "w": "gives",
+   "start": 9.1,
+   "end": 9.42
+  },
+  {
+   "w": "a",
+   "start": 9.42,
+   "end": 9.58
+  },
+  {
+   "w": "sermon",
+   "start": 9.58,
+   "end": 9.92
+  },
+  {
+   "w": "in",
+   "start": 9.92,
+   "end": 10.12
+  },
+  {
+   "w": "Florence.",
+   "start": 10.12,
+   "end": 10.44
+  },
+  {
+   "w": "He",
+   "start": 11.28,
+   "end": 11.38
+  },
+  {
+   "w": "says",
+   "start": 11.38,
+   "end": 11.6
+  },
+  {
+   "w": "glasses",
+   "start": 11.6,
+   "end": 12.02
+  },
+  {
+   "w": "were",
+   "start": 12.02,
+   "end": 12.24
+  },
+  {
+   "w": "invented",
+   "start": 12.24,
+   "end": 12.68
+  },
+  {
+   "w": "less",
+   "start": 12.68,
+   "end": 12.96
+  },
+  {
+   "w": "than",
+   "start": 12.96,
+   "end": 13.18
+  },
+  {
+   "w": "20",
+   "start": 13.18,
+   "end": 13.56
+  },
+  {
+   "w": "years",
+   "start": 13.56,
+   "end": 13.88
+  },
+  {
+   "w": "ago,",
+   "start": 13.88,
+   "end": 14.84
+  },
+  {
+   "w": "and",
+   "start": 14.84,
+   "end": 14.92
+  },
+  {
+   "w": "that",
+   "start": 14.92,
+   "end": 15.08
+  },
+  {
+   "w": "he",
+   "start": 15.08,
+   "end": 15.16
+  },
+  {
+   "w": "met",
+   "start": 15.16,
+   "end": 15.42
+  },
+  {
+   "w": "the",
+   "start": 15.42,
+   "end": 15.58
+  },
+  {
+   "w": "man",
+   "start": 15.58,
+   "end": 15.82
+  },
+  {
+   "w": "who",
+   "start": 15.82,
+   "end": 15.96
+  },
+  {
+   "w": "made",
+   "start": 15.96,
+   "end": 16.16
+  },
+  {
+   "w": "them.",
+   "start": 16.16,
+   "end": 16.42
+  },
+  {
+   "w": "He",
+   "start": 17.16,
+   "end": 17.26
+  },
+  {
+   "w": "never",
+   "start": 17.26,
+   "end": 17.42
+  },
+  {
+   "w": "tells",
+   "start": 17.42,
+   "end": 17.7
+  },
+  {
+   "w": "us",
+   "start": 17.7,
+   "end": 17.9
+  },
+  {
+   "w": "his",
+   "start": 17.9,
+   "end": 18.04
+  },
+  {
+   "w": "name.",
+   "start": 18.04,
+   "end": 18.36
+  },
+  {
+   "w": "So",
+   "start": 19.16,
+   "end": 19.28
+  },
+  {
+   "w": "the",
+   "start": 19.28,
+   "end": 19.4
+  },
+  {
+   "w": "first",
+   "start": 19.4,
+   "end": 19.66
+  },
+  {
+   "w": "glasses",
+   "start": 19.66,
+   "end": 20.1
+  },
+  {
+   "w": "came",
+   "start": 20.1,
+   "end": 20.38
+  },
+  {
+   "w": "from",
+   "start": 20.38,
+   "end": 20.58
+  },
+  {
+   "w": "Italy,",
+   "start": 20.58,
+   "end": 21.34
+  },
+  {
+   "w": "around",
+   "start": 21.34,
+   "end": 21.54
+  },
+  {
+   "w": "the",
+   "start": 21.54,
+   "end": 21.72
+  },
+  {
+   "w": "1280s,",
+   "start": 21.72,
+   "end": 22.48
+  },
+  {
+   "w": "probably",
+   "start": 22.48,
+   "end": 23.28
+  },
+  {
+   "w": "in",
+   "start": 23.28,
+   "end": 23.52
+  },
+  {
+   "w": "Pisa",
+   "start": 23.52,
+   "end": 23.88
+  },
+  {
+   "w": "or",
+   "start": 23.88,
+   "end": 24.14
+  },
+  {
+   "w": "Florence.",
+   "start": 24.14,
+   "end": 24.52
+  },
+  {
+   "w": "The",
+   "start": 25.34,
+   "end": 25.42
+  },
+  {
+   "w": "person",
+   "start": 25.42,
+   "end": 25.76
+  },
+  {
+   "w": "who",
+   "start": 25.76,
+   "end": 25.94
+  },
+  {
+   "w": "helped",
+   "start": 25.94,
+   "end": 26.2
+  },
+  {
+   "w": "millions",
+   "start": 26.2,
+   "end": 26.96
+  },
+  {
+   "w": "see",
+   "start": 26.96,
+   "end": 27.34
+  },
+  {
+   "w": "clearly",
+   "start": 27.34,
+   "end": 27.76
+  },
+  {
+   "w": "is",
+   "start": 27.76,
+   "end": 28.5
+  },
+  {
+   "w": "still",
+   "start": 28.5,
+   "end": 28.78
+  },
+  {
+   "w": "a",
+   "start": 28.78,
+   "end": 28.94
+  },
+  {
+   "w": "mystery.",
+   "start": 28.94,
+   "end": 29.82
+  },
+  {
+   "w": "Every",
+   "start": 30.08,
+   "end": 30.4
+  },
+  {
+   "w": "legend",
+   "start": 30.4,
+   "end": 30.78
+  },
+  {
+   "w": "has",
+   "start": 30.78,
+   "end": 31.22
+  },
+  {
+   "w": "a",
+   "start": 31.22,
+   "end": 31.32
+  },
+  {
+   "w": "beginning.",
+   "start": 31.32,
+   "end": 32.2
+  }
+ ]
+}
