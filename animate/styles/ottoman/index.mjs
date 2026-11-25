@@ -3,11 +3,15 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
-import { GlobalFonts, loadImage } from '@napi-rs/canvas';
+import { GlobalFonts, loadImage, createCanvas } from '@napi-rs/canvas';
 import { TAU, clamp, ease, lerp } from '../../lib/core.mjs';
 import * as kit from './kit.mjs';
 import { LAYOUT, staticPage, paperTexture, headerText, captions, groupLines, progress, outroText } from './page.mjs';
 import { hookCard, hookUntil } from '../../lib/retention.mjs';
+import { createFinish } from '../../lib/finish.mjs';
+import { TRANSITIONS } from '../../lib/transitions.mjs';
+import { makeFx } from '../../lib/fx.mjs';
+import { freezeAt, impacts, applyShake, freezeLabel, FREEZE_FILTER } from '../../lib/stage.mjs';
 
 // Hook card look: gold-on-lapis like the header plate, vermilion accent word.
 export const HOOK_THEME = { font: s => `900 ${s}px Display`, fill: '#f7eed6', accent: '#f2c94c', stroke: '#14213f', band: '#20408f', bandEdge: '#e2b84a', label: '#14213f' };
@@ -23,7 +27,24 @@ export function registerFonts() {
   f('@fontsource/playfair-display', 'playfair-display-latin-900-normal.woff2', 'Display'); // captions + hook card
 }
 
-const TRANS = 0.42; // seconds a transition takes
+const TRANS = 0.42; // seconds one of the style's own transitions takes
+const OWN = ['iris', 'wipe', 'unroll', 'flash'];
+// The sound the engine adds on each of the style's own transitions (shared
+// ones — page, burn, tear, drip, shutter, whip, zoom, spin, glitch, marble,
+// tiles, doors — bring their own, see lib/transitions.mjs).
+export const DEFAULT_TRANS = 'iris';
+export const TRANS_SFX = { iris: { type: 'whoosh', gain: 0.3, lead: 0.1, pitch: 0.7 }, wipe: { type: 'slide', gain: 0.4 }, unroll: { type: 'paper', gain: 0.5 }, flash: { type: 'sparkle', gain: 0.5 } };
+
+// A palace door for the 'doors' transition: lapis panels, gold frame, the
+// imperial cintamani pattern and a gold knocker.
+function palaceDoor(ctx, x, y, w, h, side) {
+  ctx.fillStyle = kit.P.lapisDeep; ctx.fillRect(x, y, w, h);
+  ctx.save(); ctx.fillStyle = kit.pattern(ctx, 'cintamani', kit.P.lapis, kit.P.goldLight, 46); ctx.translate(x, y); ctx.fillRect(w * 0.1, h * 0.06, w * 0.8, h * 0.4); ctx.fillRect(w * 0.1, h * 0.52, w * 0.8, h * 0.42); ctx.restore();
+  ctx.strokeStyle = kit.P.gold; ctx.lineWidth = 8; ctx.strokeRect(x + w * 0.1, y + h * 0.06, w * 0.8, h * 0.4); ctx.strokeRect(x + w * 0.1, y + h * 0.52, w * 0.8, h * 0.42);
+  ctx.strokeStyle = kit.P.ink; ctx.lineWidth = 2; ctx.strokeRect(x + 3, y + 3, w - 6, h - 6);
+  const kx = side < 0 ? x + w - 46 : x + 46;
+  kit.circle(ctx, kx, y + h * 0.49, 22, null, kit.P.gold, 6); kit.circle(ctx, kx, y + h * 0.49 - 22, 7, kit.P.goldLight, kit.P.ink, 1.5);
+}
 
 // Lobed (scalloped) circle — the reveal shape for the "iris" transition.
 function lobedCircle(ctx, cx, cy, r, lobes = 12) {
@@ -48,32 +69,46 @@ export async function createRenderer(project) {
   const hookEnd = meta.hook ? hookUntil(meta.hook, words) : 0;
   const scenes = story.scenes.map((s, i, a) => ({ ...s, end: i + 1 < a.length ? a[i + 1].start : meta.duration }));
   const findWord = (re, after = 0) => { const w = words.find(x => x.start >= after - 0.05 && re.test(x.w)); return w ? w.start : null; };
+  // the hand-made finish (lib/finish.mjs): line boil, gold-leaf sheen, paper, grain, on twos
+  const finish = createFinish(meta, PA.w, PA.h, meta.width, meta.height);
+  const paintCv = finish ? createCanvas(PA.w, PA.h) : null;
+  const bufA = createCanvas(PA.w, PA.h), bufB = createCanvas(PA.w, PA.h);
+  // in-scene effects (S.fx), impact shakes and transition colours for this style
+  const fx = makeFx({ ink: kit.P.ink, paper: kit.P.paperLight, accent: kit.P.verm, gold: kit.P.gold, light: '#fff3c4', colors: [kit.P.verm, kit.P.lapis, kit.P.gold, kit.P.turq, kit.P.green, kit.P.rose] }, PA.w, PA.h);
+  const shakes = impacts(meta, story.sfx);
+  const TO = { ink: kit.P.ink, paper: kit.P.paperLight, accent: kit.P.verm, gold: kit.P.gold, colors: [kit.P.lapis, kit.P.gold, kit.P.verm, kit.P.turq, kit.P.paper, kit.P.lapisDeep], doorFill: palaceDoor, tileBack: 'rgba(32,64,143,0.85)', dripColor: kit.P.lapisDeep, flashColor: kit.P.goldLight, bladeEdge: 'rgba(236,213,122,0.7)', seed: meta.seed || 11 };
 
   function drawScene(ctx, sc, t) {
     const u = t - sc.start;
     const S = {
-      W: PA.w, H: PA.h, t, u, d: sc.end - sc.start, k: kit, P: kit.P, logo,
+      W: PA.w, H: PA.h, t, u, d: sc.end - sc.start, k: kit, P: kit.P, logo, fx,
       // local time of a spoken word inside this scene (regex or string)
       at: w => { const g = findWord(w instanceof RegExp ? w : new RegExp('^' + w, 'i'), sc.start); return g == null ? 0 : g - sc.start; },
       cam(z = 1, cx = PA.w / 2, cy = PA.h / 2, rot = 0) { ctx.translate(PA.w / 2, PA.h / 2); ctx.rotate(rot); ctx.scale(z, z); ctx.translate(-cx, -cy); },
     };
-    ctx.save(); sc.draw(ctx, u, S); ctx.restore();
+    ctx.save(); if (finish && !sc.still) finish.breathe(ctx, u, S.d); sc.draw(ctx, u, S); ctx.restore();
   }
+  const into = (buf, sc, t) => { const c = buf.getContext('2d'); c.save(); c.clearRect(0, 0, PA.w, PA.h); drawScene(c, sc, t); c.restore(); return buf; };
 
-  return function frame(ctx, t) {
-    ctx.drawImage(page, 0, 0);
+  return function frame(main, t) {
+    main.drawImage(page, 0, 0);
+    const rt = t, fz = freezeAt(meta, t); // a freeze frame holds the painting
+    t = fz ? fz.t : finish ? finish.time(t) : t; // the painting moves on twos
     const i = Math.max(0, scenes.findLastIndex(s => t >= s.start));
     const sc = scenes[i], prev = scenes[i - 1];
-    const kTrans = prev ? (t - sc.start) / TRANS : 1;
+    const type = sc.trans || DEFAULT_TRANS, shared = !OWN.includes(type) && TRANSITIONS[type];
+    const kTrans = prev ? (t - sc.start) / (sc.transDur || (shared ? shared.dur : TRANS)) : 1;
 
-    // ---- the painting ----
-    ctx.save(); ctx.translate(PA.x, PA.y);
-    ctx.beginPath(); ctx.rect(0, 0, PA.w, PA.h); ctx.clip();
-    if (kTrans < 1 && prev && sc.trans !== 'cut') {
+    // ---- the painting (on its own sheet when finished, else straight on the page) ----
+    let ctx = main;
+    if (paintCv) { ctx = paintCv.getContext('2d'); ctx.save(); ctx.clearRect(0, 0, PA.w, PA.h); }
+    else { ctx.save(); ctx.translate(PA.x, PA.y); ctx.beginPath(); ctx.rect(0, 0, PA.w, PA.h); ctx.clip(); }
+    applyShake(ctx, shakes, t, PA.w, PA.h); // loud impacts shake the painting
+    if (kTrans < 1 && prev && shared) shared.draw(ctx, into(bufA, prev, t), into(bufB, sc, t), clamp(kTrans), PA.w, PA.h, { ...TO, t });
+    else if (kTrans < 1 && prev && sc.trans !== 'cut') {
       drawScene(ctx, prev, t);
       const e = ease.inOut(clamp(kTrans));
       ctx.save();
-      const type = sc.trans || 'iris';
       if (type === 'iris') { lobedCircle(ctx, PA.w / 2, PA.h / 2, e * PA.h * 0.82); ctx.clip(); }
       else if (type === 'wipe') { ctx.beginPath(); ctx.rect(0, 0, PA.w * e, PA.h); ctx.clip(); }
       else if (type === 'unroll') { ctx.beginPath(); ctx.rect(0, 0, PA.w, PA.h * e); ctx.clip(); }
@@ -90,14 +125,16 @@ export async function createRenderer(project) {
       ctx.restore();
     } else drawScene(ctx, sc, t);
     // paper grain + worn pigment
-    ctx.globalCompositeOperation = 'multiply'; ctx.globalAlpha = 0.55; ctx.drawImage(grain, 0, 0); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
-    ctx.restore();
+    if (paintCv) { ctx.restore(); finish.painting(paintCv, fz ? fz.t : rt); ctx = main; if (fz) ctx.filter = FREEZE_FILTER; ctx.drawImage(paintCv, PA.x, PA.y); ctx.filter = 'none'; }
+    else { ctx.globalCompositeOperation = 'multiply'; ctx.globalAlpha = 0.55; ctx.drawImage(grain, 0, 0); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over'; ctx.restore(); }
     // re-draw the frame rules on top so the picture sits inside them
     for (const [o, c, lw] of [[-11, kit.P.gold, 5], [-1, kit.P.verm, 1.5]]) { ctx.strokeStyle = c; ctx.lineWidth = lw; ctx.strokeRect(PA.x + o, PA.y + o, PA.w - 2 * o, PA.h - 2 * o); }
     // things that break out of the frame (a miniature tradition)
     if (sc.over) { ctx.save(); ctx.translate(PA.x, PA.y); sc.over(ctx, t - sc.start, { W: PA.w, H: PA.h, k: kit, P: kit.P }); ctx.restore(); }
 
     // ---- chapter title, captions, progress ----
+    t = rt; // captions and titles stay smooth
+    if (fz) freezeLabel(ctx, PA, fz, t, HOOK_THEME);
     headerText(ctx, sc.title, prev ? (t - sc.start) / 0.35 : 1);
     // hook card over the top of the picture for the first second(s); the
     // spoken captions keep running under it (sound-off viewers read both)
@@ -105,5 +142,6 @@ export async function createRenderer(project) {
     const spoke = captions(ctx, lines, t);
     if (!spoke && meta.outro && t >= meta.outro.at) outroText(ctx, meta.outro.text, t - meta.outro.at);
     progress(ctx, t / meta.duration);
+    if (finish) finish.frame(ctx, t);
   };
 }

@@ -21,5 +21,15 @@ kaftans and turbans, tughra, seals) and `styles/inkblot/` (a psychology
 case file: living mirror-symmetric Rorschach blots, numbered plates, silhouette
 people with paper-white eyes, red-pen notes, typewriter captions, an EEG
 polygraph progress line; music-box/felt-piano score — see its `STYLE.md`).
+Every frame gets a hand-made finish (`lib/finish.mjs`: line boil, animation
+on twos, ink bleed, real paper, gold-leaf sheen, rostrum push-in, film grain)
+and the soundtrack plays in a synthetic room with humanised notes.
+Effects: 12 shared transitions (`lib/transitions.mjs`: page, burn, tear,
+drip, shutter, whip, zoom, spin, glitch, marble, tiles, doors), in-scene
+effects (`lib/fx.mjs` → `S.fx`: shake, punch, particle bursts, impact lines,
+speed lines, rays, rings, flash, spotlight, squash), freeze frames and
+automatic transition sounds + impact shakes (`lib/stage.mjs`), and ~60
+synthesised sound effects (`lib/audio.py`). See them all in
+`demo/fx-inkblot` and `demo/fx-ottoman`.
 Full workflow:
 `.claude/skills/animated-short/SKILL.md`.

@@ -423,7 +423,21 @@ export function figure(ctx, x, y, o = {}) {
   };
   ctx.beginPath(); robeBody(ctx); ctx.fillStyle = robe; ctx.fill();
   if (o.robeP) { ctx.save(); ctx.clip(); ctx.fillStyle = pattern(ctx, o.robeP, robe, o.robePc || P.goldLight, 22); ctx.fillRect(-120, top, 240, 280); ctx.restore(); }
+  // drapery: darker fold valleys falling from the sash, a gold-embroidered hem
+  ctx.save(); ctx.beginPath(); robeBody(ctx); ctx.clip();
+  const fold = shade(robe, -0.18);
+  for (const [fx, sw] of [[-0.55, 1], [-0.2, 0.8], [0.62, 0.9]]) {
+    ctx.beginPath(); ctx.moveTo(fx * 26, waist + 10); ctx.quadraticCurveTo(fx * hw * 0.9 + sw * 4, (waist + hem) / 2, fx * hw * 0.95, hem + 2);
+    ctx.lineTo(fx * hw * 0.95 + 7, hem + 2); ctx.quadraticCurveTo(fx * hw * 0.9 + sw * 6, (waist + hem) / 2, fx * 26 + 3, waist + 10); ctx.closePath();
+    ctx.globalAlpha = 0.5; ctx.fillStyle = fold; ctx.fill(); ctx.globalAlpha = 1;
+    ctx.beginPath(); ctx.moveTo(fx * 26, waist + 10); ctx.quadraticCurveTo(fx * hw * 0.9 + sw * 4, (waist + hem) / 2, fx * hw * 0.95, hem + 2); stroke(ctx, shade(robe, -0.35), 1.1);
+  }
+  ctx.beginPath(); ctx.moveTo(-hw - 4, hem - 5); ctx.quadraticCurveTo(0, hem + (kneel ? 2 : 7), hw + 4, hem - 5); stroke(ctx, P.goldLight, 5);
+  ctx.beginPath(); ctx.moveTo(-hw - 4, hem - 5); ctx.quadraticCurveTo(0, hem + (kneel ? 2 : 7), hw + 4, hem - 5); ctx.setLineDash([2, 6]); stroke(ctx, P.goldDark, 2.2); ctx.setLineDash([]);
+  ctx.restore();
   ctx.beginPath(); robeBody(ctx); stroke(ctx, P.ink, 2.2);
+  // collar
+  ctx.beginPath(); ctx.moveTo(-20, top + 4); ctx.quadraticCurveTo(-2, top + 22, 16, top + 4); stroke(ctx, P.goldLight, 3.5);
   // inner robe visible at the front opening
   ctx.beginPath(); ctx.moveTo(6, top + 6); ctx.quadraticCurveTo(14, waist, 24, hem + 4); ctx.lineTo(44, hem + 2); ctx.quadraticCurveTo(26, waist, 16, top + 6); ctx.closePath();
   fillStroke(ctx, inner, P.ink, 1.6);
@@ -442,11 +456,25 @@ function arm(ctx, sx, sy, [a1, a2], robe, robeP, s, hold, kneel) {
   const L1 = 52, L2 = 46;
   const ex = sx + Math.sin(a1) * L1, ey = sy + Math.cos(a1) * L1;
   const hx = ex + Math.sin(a1 + a2) * L2, hy = ey + Math.cos(a1 + a2) * L2;
-  ctx.beginPath(); ctx.moveTo(sx, sy); ctx.lineTo(ex, ey); ctx.lineTo(hx, hy);
-  ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-  ctx.strokeStyle = P.ink; ctx.lineWidth = 22; ctx.stroke();
-  ctx.strokeStyle = shade(robe, 0.12); ctx.lineWidth = 17.5; ctx.stroke();
-  circle(ctx, hx, hy, 7, P.skin, P.ink, 1.5);
+  // a tapered kaftan sleeve: wide at the shoulder, narrow at the wrist
+  const seg = (x0, y0, x1, y1, w0, w1) => {
+    const a = Math.atan2(y1 - y0, x1 - x0), nx = -Math.sin(a), ny = Math.cos(a);
+    return [[x0 + nx * w0, y0 + ny * w0], [x1 + nx * w1, y1 + ny * w1], [x1 - nx * w1, y1 - ny * w1], [x0 - nx * w0, y0 - ny * w0]];
+  };
+  const sleeve = shade(robe, 0.1);
+  circle(ctx, ex, ey, 10.4, sleeve, P.ink, 2); // elbow, outlined underneath
+  for (const [q, lw] of [[seg(sx, sy, ex, ey, 12.5, 10), 2], [seg(ex, ey, hx, hy, 10, 8), 2]]) {
+    ctx.beginPath(); q.forEach(([x, y], i) => (i ? ctx.lineTo(x, y) : ctx.moveTo(x, y))); ctx.closePath(); fillStroke(ctx, sleeve, P.ink, lw);
+  }
+  circle(ctx, ex, ey, 9, sleeve, null); // hide the seam between the two halves
+  // gold cuff at the wrist
+  const wa = Math.atan2(hy - ey, hx - ex), cx = hx - Math.cos(wa) * 5, cy = hy - Math.sin(wa) * 5;
+  ctx.beginPath(); ctx.moveTo(cx - Math.sin(wa) * 9, cy + Math.cos(wa) * 9); ctx.lineTo(cx + Math.sin(wa) * 9, cy - Math.cos(wa) * 9); stroke(ctx, P.goldLight, 6);
+  // the hand: palm + thumb, pointing along the forearm
+  ctx.save(); ctx.translate(hx + Math.cos(wa) * 4, hy + Math.sin(wa) * 4); ctx.rotate(wa - Math.PI / 2);
+  ctx.beginPath(); ctx.ellipse(0, 4, 6.5, 8.5, 0, 0, TAU); fillStroke(ctx, P.skin, P.ink, 1.3);
+  ctx.beginPath(); ctx.ellipse(-5.5, 1, 2.6, 5, 0.6, 0, TAU); fillStroke(ctx, P.skin, P.ink, 1.1);
+  ctx.restore();
   if (hold) { ctx.save(); ctx.translate(hx, hy); hold(ctx, a1 + a2); ctx.restore(); }
 }
 function head(ctx, x, y, o) {
@@ -456,7 +484,9 @@ function head(ctx, x, y, o) {
   // neck
   rect(ctx, -6, 10, 12, 10, P.skin, P.ink, 1.2);
   // face: three-quarter oval
+  ellipse(ctx, -12, 1, 4, 6, 0, P.skinShade, P.ink, 1.2); // ear (far side)
   ellipse(ctx, 2, 0, 15, 19, 0, P.skin, P.ink, 1.8);
+  ctx.save(); ctx.globalAlpha = 0.35; ellipse(ctx, 9, 6, 5, 3.2, 0, P.rose, null); ellipse(ctx, -6, 6, 3.5, 2.6, 0, P.rose, null); ctx.restore(); // rosy cheeks
   // beard
   if (o.beard && o.beard !== 'none') {
     const L = o.beard === 'long' ? 34 : 18;
@@ -465,7 +495,8 @@ function head(ctx, x, y, o) {
   }
   // almond eyes + arched brows
   for (const ex of [-3, 9]) {
-    ctx.beginPath(); ctx.moveTo(ex - 4, -3); ctx.quadraticCurveTo(ex, -6, ex + 4, -3); ctx.quadraticCurveTo(ex, -1, ex - 4, -3); fillStroke(ctx, P.ink, P.ink, 0.8);
+    ctx.beginPath(); ctx.moveTo(ex - 4.5, -3); ctx.quadraticCurveTo(ex, -6.5, ex + 4.5, -3); ctx.quadraticCurveTo(ex, -0.5, ex - 4.5, -3); fillStroke(ctx, P.white, P.ink, 0.9);
+    circle(ctx, ex + 1.2, -3.2, 1.9, P.ink, null);
     ctx.beginPath(); ctx.moveTo(ex - 5, -8); ctx.quadraticCurveTo(ex, -11, ex + 5, -8); stroke(ctx, P.ink, 1.2);
   }
   // nose (towards the facing side) + mouth
@@ -481,7 +512,13 @@ function head(ctx, x, y, o) {
   if (hat === 'turban') {
     if (o.hatColor) { ctx.beginPath(); ctx.moveTo(-10, -26); ctx.quadraticCurveTo(2, -72, 14, -26); fillStroke(ctx, o.hatColor, P.ink, 1.5); }
     ctx.beginPath(); ctx.ellipse(1, -22, 25, 17, 0, Math.PI * 0.95, Math.PI * 2.05); ctx.quadraticCurveTo(1, -6, -24, -18); fillStroke(ctx, P.white, P.ink, 1.8);
-    ctx.globalAlpha = 0.6; for (let k = 0; k < 4; k++) { ctx.beginPath(); ctx.moveTo(-20 + k * 9, -36); ctx.quadraticCurveTo(-12 + k * 9, -24, -18 + k * 12, -10); stroke(ctx, P.grey, 1.2); } ctx.globalAlpha = 1;
+    ctx.save(); ctx.beginPath(); ctx.ellipse(1, -22, 25, 17, 0, Math.PI * 0.95, Math.PI * 2.05); ctx.quadraticCurveTo(1, -6, -24, -18); ctx.clip();
+    for (let k = 0; k < 5; k++) { // the cloth wraps: a soft shadow under each fold, a thin line on top
+      ctx.beginPath(); ctx.moveTo(-26 + k * 9, -38); ctx.quadraticCurveTo(-14 + k * 9, -24, -20 + k * 12, -6); ctx.lineTo(-16 + k * 12, -6); ctx.quadraticCurveTo(-10 + k * 9, -24, -22 + k * 9, -38); ctx.closePath();
+      ctx.fillStyle = 'rgba(150,140,120,0.15)'; ctx.fill();
+      ctx.beginPath(); ctx.moveTo(-26 + k * 9, -38); ctx.quadraticCurveTo(-14 + k * 9, -24, -20 + k * 12, -6); stroke(ctx, 'rgba(110,100,90,0.45)', 1);
+    }
+    ctx.restore();
     if (o.plume) { ctx.beginPath(); ctx.moveTo(8, -36); ctx.quadraticCurveTo(22, -60, 14, -78); ctx.quadraticCurveTo(10, -58, 4, -38); fillStroke(ctx, o.plume, P.ink, 1.2); circle(ctx, 7, -36, 4, P.goldLight, P.ink, 1); }
   } else if (hat === 'fez') {
     poly(ctx, [[-14, -14], [-11, -40], [13, -40], [16, -14]], o.hatColor || P.verm, P.ink, 1.6);

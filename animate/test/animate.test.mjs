@@ -187,6 +187,79 @@ test('renders a 1-second INKBLOT MP4 through a fold transition', { skip: process
   assert.match(probe, /audio/);
 });
 
+test('hand-made finish: lines boil, the painting moves on twos, frames repeat exactly', async () => {
+  const { createFinish, finishOptions } = await import('../lib/finish.mjs');
+  for (const PROJ of [PROJECT, INKBLOT]) {
+    const p = await loadProject(PROJ);
+    assert.ok(finishOptions(p.meta), path.basename(PROJ) + ' is finished by default');
+    const fd = await makeFrameDrawer(p);
+    // only the painting (captions and the progress line stay smooth on purpose)
+    const grab = t => Buffer.from(fd.frame(t).getContext('2d').getImageData(70, 268, 940, 1060).data);
+    const a = grab(6.0), a2 = grab(6.0);
+    assert.ok(a.equals(a2), 'the same time draws the same frame (parallel workers stay in sync)');
+    assert.ok(a.equals(grab(6.0 + 1 / 30)), 'two frames inside one drawing are identical (on twos)');
+    let diff = 0; const b = grab(6.0 + 0.1);
+    for (let i = 0; i < a.length; i += 4) if (Math.abs(a[i] - b[i]) > 24) diff++;
+    assert.ok(diff > 500, 'a tenth of a second later the line boil has moved the ink');
+  }
+  // the old clean look is still there for anyone who asks for it
+  const f = createFinish({ style: 'inkblot', finish: false }, 100, 100, 100, 100);
+  assert.equal(f, null);
+  const g = createFinish({ style: 'ottoman', finish: { twos: false, boil: 0, grain: 0 } }, 120, 120, 120, 120);
+  assert.equal(g.time(1.0333), 1.0333, 'twos can be switched off');
+});
+
+test('effects: every shared transition draws between two pictures, the same way every time', async () => {
+  const { TRANSITIONS } = await import('../lib/transitions.mjs');
+  const W = 188, H = 212, solid = c => { const cv = createCanvas(W, H), x = cv.getContext('2d'); x.fillStyle = c; x.fillRect(0, 0, W, H); return cv; };
+  const A = solid('#d02020'), B = solid('#2040d0'), o = { ink: '#111111', paper: '#f4eee0', accent: '#c61f2a', gold: '#c9a227', t: 1, seed: 3 };
+  assert.ok(Object.keys(TRANSITIONS).length >= 12);
+  for (const [name, tr] of Object.entries(TRANSITIONS)) {
+    assert.ok(tr.dur > 0 && tr.sfx?.type, name + ' has a length and a sound');
+    const draw = e => { const cv = createCanvas(W, H), x = cv.getContext('2d'); tr.draw(x, A, B, e, W, H, o); return Buffer.from(x.getImageData(0, 0, W, H).data); };
+    assert.ok(draw(0.3).equals(draw(0.3)), name + ' is deterministic');
+    const end = draw(0.999); let blue = 0;
+    for (let i = 0; i < end.length; i += 4) if (end[i + 2] > 150 && end[i] < 100) blue++;
+    assert.ok(blue > W * H * 0.8, name + ' ends on the new picture');
+  }
+});
+
+test('effects: sounds are added on transitions and freezes, never on top of the story\'s own', async () => {
+  const { autoSfx } = await import('../lib/stage.mjs');
+  const scenes = [{ start: 0 }, { start: 2, trans: 'burn' }, { start: 4, trans: 'page' }, { start: 6, trans: 'cut' }, { start: 8 }];
+  const own = [{ t: 4.1, type: 'paper' }];
+  const add = autoSfx({ freezes: [{ t: 9, dur: 1 }] }, scenes, own, { fold: { type: 'fold', gain: 0.4 } }, 'fold');
+  assert.deepEqual(add.map(x => x.type), ['fire', 'fold', 'scratch'], 'burn → fire, page skipped (story has one), cut → none, default fold → fold, freeze → scratch');
+  assert.equal(autoSfx({ autoSfx: false }, scenes, []).length, 0);
+});
+
+test('effects: every sound effect the styles and transitions use is synthesised', async () => {
+  const { TRANSITIONS } = await import('../lib/transitions.mjs');
+  const ink = await import('../styles/inkblot/index.mjs'), ott = await import('../styles/ottoman/index.mjs');
+  const kinds = new Set(['scratch', ...Object.values(TRANSITIONS).map(t => t.sfx.type), ...Object.values(ink.TRANS_SFX).map(t => t.type), ...Object.values(ott.TRANS_SFX).map(t => t.type),
+    ...'boom hit slam reverse ding buzzer sparkle zoom shutter glitch static rip page fire drip bubble clack door knock footsteps glass rumble crowd applause cannon sword hooves strum zil'.split(' ')]);
+  const r = spawnSync('python3', ['-I', '-c', `
+import sys; sys.path.insert(0, ${JSON.stringify(path.join(HERE, '..', 'lib'))})
+import audio, numpy as np
+for k in sys.argv[1].split(','):
+    s = audio.sfx_signal(k)
+    assert len(s) > 100 and np.abs(s).max() > 0.01 and not np.isnan(s).any(), k
+print('ok')
+`, [...kinds].join(',')], { encoding: 'utf8' });
+  assert.equal(r.status, 0, r.stderr);
+});
+
+test('effects: a freeze frame holds the painting; the FX reels load', async () => {
+  for (const d of ['fx-inkblot', 'fx-ottoman']) {
+    const p = await loadProject(path.join(HERE, '..', 'demo', d));
+    assert.ok(checkStory(p.meta, p.story.scenes, p.words).length === 0, d + ' story is valid');
+    p.meta.finish = { grain: 0, flicker: 0 }; // film grain keeps running during a freeze, on purpose
+    const fd = await makeFrameDrawer(p), f = p.meta.freezes[0];
+    const top = t => Buffer.from(fd.frame(t).getContext('2d').getImageData(70, 268, 940, 500).data);
+    assert.ok(top(f.t + 0.3).equals(top(f.t + 0.9)), d + ': the painting does not move during the freeze');
+  }
+});
+
 test('skill trigger "edit this in 2D(OTTOMAN)" points at an existing style', () => {
   const root = path.join(HERE, '..', '..');
   const skill = fs.readFileSync(path.join(root, '.claude', 'skills', 'animated-short', 'SKILL.md'), 'utf8');

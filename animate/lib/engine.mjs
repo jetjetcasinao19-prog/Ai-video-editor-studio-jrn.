@@ -9,6 +9,7 @@ import { Worker } from 'node:worker_threads';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createCanvas } from '@napi-rs/canvas';
 import { retentionCheck } from './retention.mjs';
+import { autoSfx } from './stage.mjs';
 export { retentionCheck };
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -134,13 +135,20 @@ export async function render(dir, { out, build, workers = Math.max(1, os.cpus().
   const cues = {
     voice: path.join(project.dir, meta.voice), duration: meta.duration,
     start: from, end: to ?? meta.duration,
-    music: story.music || null, sfx: story.sfx || [], out: path.join(build, 'mix.wav'),
+    music: story.music || null, sfx: allSfx(project), space: story.space || meta.space || null, out: path.join(build, 'mix.wav'),
   };
   fs.writeFileSync(path.join(build, 'cues.json'), JSON.stringify(cues, null, 1));
   run('python3', ['-I', path.join(HERE, 'audio.py'), path.join(build, 'cues.json')]);
   run('ffmpeg', ['-y', '-v', 'error', '-i', video, '-i', cues.out, '-map', '0:v', '-map', '1:a', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', out]);
   log(`done in ${((Date.now() - t0) / 1000).toFixed(0)} s → ${out}`);
   return out;
+}
+
+// The story's own sound effects + the ones added by themselves (a sound on
+// every transition, a record scratch on every freeze frame — lib/stage.mjs).
+export function allSfx(project) {
+  const { story, meta, style } = project, own = story.sfx || [];
+  return [...own, ...autoSfx(meta, story.scenes, own, style.TRANS_SFX || {}, style.DEFAULT_TRANS || 'cut')].sort((a, b) => a.t - b.t);
 }
 
 export function run(cmd, args) {
